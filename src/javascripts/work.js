@@ -6,6 +6,10 @@ let isAnimating = false;
 document.addEventListener("wheel", function (e) {
   if (isAnimating) return; // Prevent overlapping animations
   isAnimating = true;
+  if ((window.scrollY === 0 && event.deltaY < 0) || // Scrolling up at the top
+        (window.innerHeight + window.scrollY >= document.body.offsetHeight && event.deltaY > 0)) { // Scrolling down at the bottom
+        event.preventDefault();
+    }
 
   const direction = e.deltaY > 0 ? 1 : -1; // Determine scroll direction (down = 1, up = -1)
   const nextSlide = (currentSlide + direction + slides.length) % slides.length; // Calculate next slide dynamically
@@ -231,7 +235,7 @@ document.addEventListener("wheel", function (e) {
       }, "a")
   }
 
-});
+}, { passive: false });
 
 const projects = [
   "https://a.storyblok.com/f/133769/2409x3000/c155d3e27e/amaterasu-hero.jpg/m/2400x2990/filters:quality(80)",
@@ -251,41 +255,79 @@ const projects = [
 //for rendering all projects as list
 document.querySelector("#allproject").addEventListener("click", async function () {
   if (isAnimating) return
+  document.querySelectorAll(".project").forEach(p => p.remove())
   const filterProject = projects.filter((p, i) => i !== currentSlide)
-  document.querySelectorAll(".project").forEach(p=> p.remove())
-  
-  //creating card for each project and second card for current project
-  filterProject.forEach(function (project, index) {
-    const div = document.createElement("div")
-    const emptyDiv = document.createElement("div")
-    emptyDiv.classList.add("project")
-    const currentImg = document.createElement("img")
-    currentImg.src = projects[currentSlide]
-    currentImg.style.objectPosition = "50% 0%"
-    emptyDiv.appendChild(currentImg)
-    div.classList.add("project")
-    div.classList.add("animate")
-    const img = document.createElement("img")
-    img.src = project
 
-    div.appendChild(img)
-    if (index == 0) {
-      document.querySelector("#list").appendChild(div)
-      document.querySelector("#list").appendChild(emptyDiv)
-    } else {
-      document.querySelector("#list").appendChild(div)
-    }
-  })
+ // Helper function to create a video element with the specified properties
+function createVideoElement(src) {
+  const video = document.createElement("video");
+  video.autoplay = true;
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.src = src;
+  return video;
+}
+
+//creating card for each project and second card for current project
+filterProject.forEach(async function (project, index) {
+  // Create a document fragment to minimize reflow and improve performance
+  const fragment = document.createDocumentFragment();
+
+  // Create the main anchor element
+  const div = document.createElement("a");
+  div.href = "/work/detail";
+  div.classList.add("project", "animate");
+
+  // Create and append the main image element
+  const img = document.createElement("img");
+  img.src = project;
+  div.appendChild(img);
+
+  // Create and append the video element for the main div
+  const video = createVideoElement("https://download-video-ak.vimeocdn.com/v3-1/playback/be1179ab-5aaa-4f63-a9a7-f40c70ae895e/96953878?__token__=st=1733133641~exp=1733148041~acl=%2Fv3-1%2Fplayback%2Fbe1179ab-5aaa-4f63-a9a7-f40c70ae895e%2F96953878%2A~hmac=b8559cc5bf566e60f350a09823c494a82161d7212eef5c4adf6b1f00686ba024&r=dXMtZWFzdDE%3D");
+  div.appendChild(video);
+
+  if (index === 0) {
+    // Create the empty div for the first project with an image and video
+    const emptyDiv = document.createElement("a");
+    emptyDiv.classList.add("project");
+
+    // Create and configure the current image element
+    const currentImg = document.createElement("img");
+    currentImg.src = projects[currentSlide];
+    currentImg.style.objectPosition = "50% 0%";
+    emptyDiv.appendChild(currentImg);
+
+    // Create and append a separate video element for the empty div
+    const videoEmpty = createVideoElement("https://download-video-ak.vimeocdn.com/v3-1/playback/be1179ab-5aaa-4f63-a9a7-f40c70ae895e/96953878?__token__=st=1733133641~exp=1733148041~acl=%2Fv3-1%2Fplayback%2Fbe1179ab-5aaa-4f63-a9a7-f40c70ae895e%2F96953878%2A~hmac=b8559cc5bf566e60f350a09823c494a82161d7212eef5c4adf6b1f00686ba024&r=dXMtZWFzdDE%3D");
+    emptyDiv.appendChild(videoEmpty);
+
+    // Append elements to the fragment
+    fragment.appendChild(div);
+    fragment.appendChild(emptyDiv);
+  } else {
+    // Append only the main div for other projects
+    fragment.appendChild(div);
+  }
+
+  // Append the fragment to the list in a single operation
+  document.querySelector("#list").appendChild(fragment);
+});
+
+
+
   isAnimating = true
+
   const allp = document.querySelectorAll(".animate")
-  gsap.to(slides[currentSlide].querySelector("img"),{
-    scale:1.5,
-    rotate:"-5deg",
-    duration:.3,
+  gsap.to(slides[currentSlide].querySelector("img"), {
+    scale: 1.5,
+    rotate: "-5deg",
+    duration: .3,
   })
   gsap.to("#list", {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-    duration:.5,
+    duration: .5,
   })
   gsap.set(allp, {
     y: 200,
@@ -295,7 +337,7 @@ document.querySelector("#allproject").addEventListener("click", async function (
     stagger: {
       amount: 0.3,
     },
-    duration:.5,
+    duration: .5,
     onComplete: () => {
       gsap.set("#inner-container", {
         zIndex: -1
@@ -305,52 +347,50 @@ document.querySelector("#allproject").addEventListener("click", async function (
 
 })
 
-
-
 document.querySelector("#close-btn").addEventListener("click", function () {
   const allc = document.querySelectorAll(".animate")
   var tl = gsap.timeline()
   tl
-  .to("#list",{
-    scrollTo: {
-      y: 0,
-      x: 0,
-      duration: 1
-    },
-    ease: "power2.inOut"
-  })
-  .to("#list", {
-    clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-    duration:.5,
-    onComplete: () => {
-      gsap.set("#list", {
-        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)"
-      })
-    }
-  },"s")
-  .to(allc, {
-    y: -200,
-    stagger: {
-      amount: 0.3,
-    },
-    duration:.5,
-    onComplete: () => {
-      gsap.set(allc, {
-        y: 200
-      })
-    }
-  },"s")
-  .to(slides[currentSlide].querySelector("img"),{
-    scale:1,
-    rotate:"0deg",
-    duration:.5,
-  },"s")
+    .to("#list", {
+      scrollTo: {
+        y: 0,
+        x: 0,
+        duration: 1
+      },
+      ease: "power2.inOut"
+    })
+    .to("#list", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+      duration: .5,
+      onComplete: () => {
+        gsap.set("#list", {
+          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)"
+        })
+      }
+    }, "s")
+    .to(allc, {
+      y: -200,
+      stagger: {
+        amount: 0.3,
+      },
+      duration: .5,
+      onComplete: () => {
+        gsap.set(allc, {
+          y: 200
+        })
+      }
+    }, "s")
+    .to(slides[currentSlide].querySelector("img"), {
+      scale: 1,
+      rotate: "0deg",
+      duration: .5,
+    }, "s")
 
   gsap.set("#inner-container", {
     zIndex: 3,
-    delay:.5
+    delay: .5
   })
-  
+
   isAnimating = false
 })
 

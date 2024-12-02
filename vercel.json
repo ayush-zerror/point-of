@@ -5,6 +5,10 @@
         "dest": "/work.html"
       },
       {
+        "src": "/work-detail",
+        "dest": "/work-detail.html"
+      },
+      {
         "src": "/",
         "dest": "/index.html"
       }
