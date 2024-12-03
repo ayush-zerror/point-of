@@ -139,6 +139,8 @@ function darkMode() {
     }
 
     document.querySelector("#mode").addEventListener("click", function () {
+        console.log("click");
+        
         if (!mode) {
             root.style.setProperty('--primary', '#000');
             root.style.setProperty('--secondary', '#fff');

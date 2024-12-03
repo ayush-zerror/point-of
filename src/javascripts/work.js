@@ -238,8 +238,8 @@ document.addEventListener("wheel", function (e) {
 }, { passive: false });
 
 const projects = [
-  "https://a.storyblok.com/f/133769/2409x3000/c155d3e27e/amaterasu-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/61c001bac1/columbia-pictures-hero.jpg/m/2400x2990/filters:quality(80)",
+  "https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png",
+  "https://mir-s3-cdn-cf.behance.net/project_modules/fs/8bf51c209757845.67053c2f6afcf.png",
   "https://a.storyblok.com/f/133769/2409x3000/cfd16e1a58/cambium-carbon-hero.jpg/m/2400x2990/filters:quality(80)",
   "https://a.storyblok.com/f/133769/2400x2990/20d07e6f0c/pixelflakes-hero.jpg/m/2400x2990/filters:quality(80)",
   "https://a.storyblok.com/f/133769/2400x2990/8f08135741/studio-d-hero.jpg/m/2400x2990/filters:quality(80)",
@@ -276,7 +276,7 @@ filterProject.forEach(async function (project, index) {
 
   // Create the main anchor element
   const div = document.createElement("a");
-  div.href = "/work/detail";
+  div.href = "/work-detail";
   div.classList.add("project", "animate");
 
   // Create and append the main image element
@@ -396,3 +396,50 @@ document.querySelector("#close-btn").addEventListener("click", function () {
 
 
 
+
+// document.querySelector("#mode").addEventListener("click", function(){
+//   console.log("hey");
+  
+// })
+
+function darkMode() {
+  // Initialize mode based on localStorage or default to false
+  var mode = localStorage.getItem("mode") === "true";
+
+  // Apply initial mode
+  const root = document.documentElement;
+  if (mode) {
+      root.style.setProperty('--primary', '#000');
+      root.style.setProperty('--secondary', '#fff');
+      document.querySelector("#mode").classList.remove("ri-sun-line");
+      document.querySelector("#mode").classList.add("ri-moon-line");
+
+  } else {
+      root.style.setProperty('--primary', '#F2F2EE');
+      root.style.setProperty('--secondary', '#000');
+      document.querySelector("#mode").classList.remove("ri-moon-line");
+      document.querySelector("#mode").classList.add("ri-sun-line");
+  }
+
+  document.querySelector("#mode").addEventListener("click", function () {
+      console.log("click");
+      
+      if (!mode) {
+          root.style.setProperty('--primary', '#000');
+          root.style.setProperty('--secondary', '#fff');
+          document.querySelector("#mode").classList.remove("ri-sun-line");
+          document.querySelector("#mode").classList.add("ri-moon-line");
+          mode = true;
+      } else {
+          root.style.setProperty('--primary', '#F2F2EE');
+          root.style.setProperty('--secondary', '#000');
+          document.querySelector("#mode").classList.remove("ri-moon-line");
+          document.querySelector("#mode").classList.add("ri-sun-line");
+          mode = false;
+      }
+
+      // Save mode in localStorage
+      localStorage.setItem("mode", mode);
+  });
+}
+darkMode();

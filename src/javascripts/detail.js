@@ -19,11 +19,7 @@ function loader() {
       duration: 1.5,
       ease: "power1.out",
     }, "l")
-    .to("#navbar", {
-      transform: "translateY(0%)",
-      duration: 1.5,
-      ease: "power1.out",
-    }, "l")
+    
     .to("#loading", {
       opacity: 0,
       duration: .3,
@@ -49,7 +45,12 @@ function loader() {
       duration: .5,
       delay: -.2,
       ease: "power1.out",
-    })
+    },"p")
+    .to("#navbar", {
+      transform: "translateY(0%)",
+      duration: .5,
+      ease: "power1.out",
+    }, "p")
 }
 loader()
 
@@ -103,15 +104,14 @@ function scrollForView() {
     })
     .to("#fullView-container", {
       paddingTop: "15vw",
-      duration: .8,
+      duration: .6,
       opacity: 0,
-      ease: "power1.out",
     }, "a")
     .to("#overView-container", {
+      paddingTop:"10vw",
       opacity: 1,
-      duration: 1,
+      duration: .6,
       delay: .2,
-      ease: "power1.out",
       onStart: () => {
         document.querySelector("#overView-container").style.display = "flex";
         document.querySelector("#fullView-container").style.display = "none";
@@ -132,16 +132,15 @@ function scrollForFullView() {
       ease: "power1.out",
     })
     .to("#overView-container", {
+      paddingTop:"20vw",
       opacity: 0,
-      duration: .8,
-      ease: "power1.out",
+      duration: .6,
     }, "a")
     .to("#fullView-container", {
       paddingTop: "10vw",
-      duration: .8,
+      duration: .6,
       delay: .2,
       opacity: 1,
-      ease: "power1.out",
       onStart: () => {
         document.querySelector("#overView-container").style.display = "none";
         document.querySelector("#fullView-container").style.display = "flex";

@@ -44,6 +44,9 @@
   --primary: #f2f2ee;
   --secondary: #000;
 }
+::-webkit-scrollbar{
+  display: none;
+}
 
 * {
   margin: 0;
@@ -226,18 +229,97 @@ h6 {
 }
 
 #page2 #text-con {
-  width: 60%;
+  width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   margin-top: 4vw;
 }
 
-#page2 h5 {
-  width: 65%;
+#page2 #text-para {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-#page2 h6 {
+
+
+#viewMore {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  cursor: pointer;
+  width: fit-content;
+  text-decoration: none;
+}
+#viewMore i {
+  transition: all ease 0.2s;
+  color: var(--secondary);
+  font-family: para3;
+  font-weight: 500;
+  font-size: 1vw;
+}
+
+#viewMore:hover i {
+  transform: scale(0);
+  opacity: 0;
+}
+#viewMore h3::before {
+  content: "";
+  position: absolute;
+  top: 28%;
+  left: -1.2vw;
+  width: 0.5vw;
+  height: 0.5vw;
+  border: 1px solid var(--secondary);
+  border-radius: 50px;
+  transform: scale(0);
+  opacity: 0;
+  transition: all ease 0.2s;
+}
+#viewMore:hover h3::before {
+  transform: scale(1);
+  opacity: 1;
+  color: var(--secondary);
+}
+#viewMore h3 {
+  position: relative;
+  font-family: para3;
+  font-weight: 500;
+  font-size: 1vw;
+  color: var(--secondary);
+}
+
+#page2 #service{
+  width: 45%;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2vw;
+}
+
+#page2 #service .ser{
   width: 25%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-bottom: 1vw;
+  text-transform: capitalize;
+}
+#page2 #service .ser h5{
+  font-size: 1.1vw;
+  font-family: para3;
+  font-weight: 300;
+}
+
+#page2 #service .ser h3{
+  font-size: 1.2vw;
+  font-family: para3;
+  font-weight: 400;
+  color: var(--secondary);
 }
 
 #page3 {
@@ -403,6 +485,7 @@ h6 {
   font-family: heading2;
   text-transform: uppercase;
   font-size: 1.2vw;
+  color: var(--secondary);
 }
 #next-projects{
   height: 100%;
