@@ -292,6 +292,7 @@ filterProject.forEach(async function (project, index) {
     // Create the empty div for the first project with an image and video
     const emptyDiv = document.createElement("a");
     emptyDiv.classList.add("project");
+    emptyDiv.href = "/work-detail";
 
     // Create and configure the current image element
     const currentImg = document.createElement("img");
@@ -394,13 +395,6 @@ document.querySelector("#close-btn").addEventListener("click", function () {
   isAnimating = false
 })
 
-
-
-
-// document.querySelector("#mode").addEventListener("click", function(){
-//   console.log("hey");
-  
-// })
 
 function darkMode() {
   // Initialize mode based on localStorage or default to false
