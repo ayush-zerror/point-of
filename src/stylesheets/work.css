@@ -120,10 +120,11 @@ body {
 }
 .slide {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  height: 105vh;
+  width: 105vw;
   overflow: hidden;
 }
 .slide img {
@@ -383,10 +384,42 @@ body {
   font-weight: 500;
   font-size: 1vw;
 }
-#bottom h5 span {
+
+#bottom span {
   font-family: para3;
   font-weight: 500;
-  opacity: 0.6;
+  font-size: 1vw;
+  opacity: 0.7;
+}
+
+#project-count{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#count-wraper{
+  width: 2vw;
+  height: 2vw;
+  position: relative;
+  overflow: hidden;
+}
+
+#count-wraper span{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 100%;
+}
+#count-wraper span:nth-child(1){
+  top: 0;
+}
+
+
+#count-wraper span{
+  top: "-200%";
 }
 
 #allproject {
@@ -449,7 +482,12 @@ body {
   width: 22.5vw;
   height: 57vh;
   margin-bottom: 21.5vh;
+  transform-origin: center;
+  overflow: hidden;
 }
+
+
+
 #list .project img{
   position: absolute;
   top: 0;
@@ -457,19 +495,19 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  object-position: 50% 0;
   transition: all ease .3s;
   opacity: 1;
 
 }
 #list .project video{
-  
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 #list .project:hover img{
-  opacity: 0;
+  opacity: 1;
 }
 
 #close{
@@ -481,7 +519,7 @@ body {
   padding-bottom: 3vw;
   display: flex;
   justify-content: space-between;
-  z-index: 9999;
+  z-index: 9;
   pointer-events: none;
   color: var(--secondary);
 }

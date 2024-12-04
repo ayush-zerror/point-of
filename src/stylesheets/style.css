@@ -54,6 +54,7 @@ html,
 body {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 #cursor{
   width: 1.2vw;
@@ -158,14 +159,148 @@ h5,h6{
   background-color: var(--primary);
 }
 
-#page1{
+
+#page1 {
   height: 100vh;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#page1 h1 {
+  font-family: heading5;
+  font-size: 9vw;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+#page2 {
   position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 4000px;
+  overflow: hidden;
+}
+#page2 h1 {
+  font-family: heading5;
+  font-size: 9vw;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+#video-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1) rotateY(0deg) rotateX(0deg);
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+#video-container video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
-#page2{
+#page2 #img-over{
+    width: 100%;
+    height: 300vh;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+#page2 .img-wrapper{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+#img-over .ig1{
+    position: absolute;
+    object-fit:contain;
+    width: 28%;
+    left: 5%;
+    top: 10%;
+}
+#img-over .ig2{
+    position: absolute;
+    object-fit:contain;
+    width: 25%;
+    right: 5%;
+    bottom: 5%;
+}
+
+#img-over .ig3{
+    position: absolute;
+    object-fit:contain;
+    width: 17%;
+    left: 15%;
+    top: 0%;
+}
+#img-over .ig4{
+    position: absolute;
+    object-fit:contain;
+    width: 25%;
+    right: 0%;
+    bottom: 0%;
+}
+#img-over .ig5{
+    position: absolute;
+    object-fit:contain;
+    width: 17%;
+    left: 5%;
+    top: 10%;
+}
+#img-over .ig6{
+    position: absolute;
+    object-fit:contain;
+    width: 15%;
+    right: 5%;
+    bottom: 5%;
+}
+
+#page3{
   height: 100vh;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  perspective: 2000px;
+  overflow: hidden;
+}
+
+#page3 h4{
+  font-size: 3.5vw;
+  text-align: center;
+  font-family: heading2;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: capitalize;
+  margin-left: 15vw;
+  position: relative;
+  transform:rotateY(0deg) rotateX(0deg) scale(1) translateX(0%);
+  will-change: transform;
+  backface-visibility: hidden;
+  color: var(--secondary);
+}
+
+#page3 h1{
+  position: absolute;
+  top: 50%;
+  left: 26%;
+  font-size: 10vw;
+  text-transform: uppercase;
+  font-weight: 500;
+  transform-origin: right;
+  transform:rotateY(0deg) rotateX(0deg) scale(1) translateX(0%);
+  will-change: transform;
+  backface-visibility: hidden;
+  color: var(--secondary);
+  font-family: heading3;
+  font-weight: 500;
 }

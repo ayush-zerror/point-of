@@ -1,15 +1,18 @@
 const slides = document.querySelectorAll(".slide");
 const innerSlides = document.querySelectorAll(".inner-slide");
+const counts = document.querySelectorAll("#count-wraper span")
 let currentSlide = 0;
 let isAnimating = false;
+
+
 
 document.addEventListener("wheel", function (e) {
   if (isAnimating) return; // Prevent overlapping animations
   isAnimating = true;
   if ((window.scrollY === 0 && event.deltaY < 0) || // Scrolling up at the top
-        (window.innerHeight + window.scrollY >= document.body.offsetHeight && event.deltaY > 0)) { // Scrolling down at the bottom
-        event.preventDefault();
-    }
+    (window.innerHeight + window.scrollY >= document.body.offsetHeight && event.deltaY > 0)) { // Scrolling down at the bottom
+    event.preventDefault();
+  }
 
   const direction = e.deltaY > 0 ? 1 : -1; // Determine scroll direction (down = 1, up = -1)
   const nextSlide = (currentSlide + direction + slides.length) % slides.length; // Calculate next slide dynamically
@@ -29,6 +32,10 @@ document.addEventListener("wheel", function (e) {
     gsap.set(slides[nextSlide].querySelector("img"), {
       objectPosition: "50% -20%",
       scale: 1.5,
+    })
+    gsap.set(counts[nextSlide], {
+      top: "100%",
+      opacity: 0,
     })
     //for inner slides
     gsap.set(innerSlides[nextSlide], {
@@ -68,6 +75,26 @@ document.addEventListener("wheel", function (e) {
           gsap.set(this._targets[0], {
             transform: "rotate(5deg) translateY(100%)"
           }, "a")
+        }
+      }, "a")
+      .to(counts[currentSlide], {
+        top: "-100%",
+        duration: .8,
+        opacity: 0,
+        onComplete: () => {
+          gsap.set(counts[currentSlide], {
+            top: "100%",
+            opacity: 1,
+          })
+        }
+      }, "a")
+      .to(counts[nextSlide], {
+        top: "0%",
+        duration: .8,
+        opacity: .7,
+        onStart: () => {
+          console.log(nextSlide);
+
         }
       }, "a")
 
@@ -138,6 +165,10 @@ document.addEventListener("wheel", function (e) {
       objectPosition: "50% 20%",
       scale: 1.5,
     })
+    gsap.set(counts[nextSlide], {
+      top: "-100%",
+      opacity: 0,
+    })
     //for inner slides
     gsap.set(innerSlides[nextSlide], {
       clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
@@ -177,6 +208,22 @@ document.addEventListener("wheel", function (e) {
             transform: "rotate(-5deg) translateY(-100%)"
           }, "a")
         }
+      }, "a")
+      .to(counts[currentSlide], {
+        top: "100%",
+        duration: .8,
+        opacity: 0,
+        onComplete: () => {
+          gsap.set(counts[currentSlide], {
+            top: "-100%",
+            opacity: 1,
+          })
+        }
+      }, "a")
+      .to(counts[nextSlide], {
+        top: "0%",
+        duration: .8,
+        opacity: .7,
       }, "a")
 
       //for inner slides
@@ -237,20 +284,59 @@ document.addEventListener("wheel", function (e) {
 
 }, { passive: false });
 
+
 const projects = [
-  "https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png",
-  "https://mir-s3-cdn-cf.behance.net/project_modules/fs/8bf51c209757845.67053c2f6afcf.png",
-  "https://a.storyblok.com/f/133769/2409x3000/cfd16e1a58/cambium-carbon-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/20d07e6f0c/pixelflakes-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/8f08135741/studio-d-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/fab67b71d9/plugged-live-shows-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/13b1c95334/ali-ali-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/dd4fa8bc81/stock-dutch-design-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/e4828e1c81/st-regis-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/b66359da25/rino-pelle-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/3e8f8d08f7/aebele-interiors-hero.jpg/m/2400x2990/filters:quality(80)",
-  "https://a.storyblok.com/f/133769/2400x2990/0afea0107c/ottografie-hero.jpg/m/2400x2990/filters:quality(80)",
+  {
+    image: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png",
+    route: "/work-contigo"
+  },
+  {
+    image: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/8bf51c209757845.67053c2f6afcf.png",
+    route: "/work-typcaste"
+  },
+  {
+    image: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/c4be78168579017.670cc5493709c.png",
+    route: "/work-label-ritu-kumar"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/20d07e6f0c/pixelflakes-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-pixel-flakes"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/8f08135741/studio-d-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-studio-d"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/fab67b71d9/plugged-live-shows-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-plugged-live-show"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/13b1c95334/ali-ali-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-ali-ali"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/dd4fa8bc81/stock-dutch-design-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-stock-dutch-design"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/e4828e1c81/st-regis-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-the-st-regis-venice"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/b66359da25/rino-pelle-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-rino-&-pelle"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/3e8f8d08f7/aebele-interiors-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-aebele-interiors"
+  },
+  {
+    image: "https://a.storyblok.com/f/133769/2400x2990/0afea0107c/ottografie-hero.jpg/m/2400x2990/filters:quality(80)",
+    route: "/work-ottografie"
+  }
 ]
+
+
 
 //for rendering all projects as list
 document.querySelector("#allproject").addEventListener("click", async function () {
@@ -258,80 +344,88 @@ document.querySelector("#allproject").addEventListener("click", async function (
   document.querySelectorAll(".project").forEach(p => p.remove())
   const filterProject = projects.filter((p, i) => i !== currentSlide)
 
- // Helper function to create a video element with the specified properties
-function createVideoElement(src) {
-  const video = document.createElement("video");
-  video.autoplay = true;
-  video.muted = true;
-  video.loop = true;
-  video.playsInline = true;
-  video.src = src;
-  return video;
-}
-
-//creating card for each project and second card for current project
-filterProject.forEach(async function (project, index) {
-  // Create a document fragment to minimize reflow and improve performance
-  const fragment = document.createDocumentFragment();
-
-  // Create the main anchor element
-  const div = document.createElement("a");
-  div.href = "/work-detail";
-  div.classList.add("project", "animate");
-
-  // Create and append the main image element
-  const img = document.createElement("img");
-  img.src = project;
-  div.appendChild(img);
-
-  // Create and append the video element for the main div
-  const video = createVideoElement("https://download-video-ak.vimeocdn.com/v3-1/playback/be1179ab-5aaa-4f63-a9a7-f40c70ae895e/96953878?__token__=st=1733133641~exp=1733148041~acl=%2Fv3-1%2Fplayback%2Fbe1179ab-5aaa-4f63-a9a7-f40c70ae895e%2F96953878%2A~hmac=b8559cc5bf566e60f350a09823c494a82161d7212eef5c4adf6b1f00686ba024&r=dXMtZWFzdDE%3D");
-  div.appendChild(video);
-
-  if (index === 0) {
-    // Create the empty div for the first project with an image and video
-    const emptyDiv = document.createElement("a");
-    emptyDiv.classList.add("project");
-    emptyDiv.href = "/work-detail";
-
-    // Create and configure the current image element
-    const currentImg = document.createElement("img");
-    currentImg.src = projects[currentSlide];
-    currentImg.style.objectPosition = "50% 0%";
-    emptyDiv.appendChild(currentImg);
-
-    // Create and append a separate video element for the empty div
-    const videoEmpty = createVideoElement("https://download-video-ak.vimeocdn.com/v3-1/playback/be1179ab-5aaa-4f63-a9a7-f40c70ae895e/96953878?__token__=st=1733133641~exp=1733148041~acl=%2Fv3-1%2Fplayback%2Fbe1179ab-5aaa-4f63-a9a7-f40c70ae895e%2F96953878%2A~hmac=b8559cc5bf566e60f350a09823c494a82161d7212eef5c4adf6b1f00686ba024&r=dXMtZWFzdDE%3D");
-    emptyDiv.appendChild(videoEmpty);
-
-    // Append elements to the fragment
-    fragment.appendChild(div);
-    fragment.appendChild(emptyDiv);
-  } else {
-    // Append only the main div for other projects
-    fragment.appendChild(div);
+  // Helper function to create a video element with the specified properties
+  function createVideoElement(src) {
+    const video = document.createElement("video");
+    Object.assign(video, {
+      autoplay: true,
+      muted: true,
+      loop: true,
+      playsInline: true,
+      src: src,
+    });
+    return video;
   }
 
-  // Append the fragment to the list in a single operation
-  document.querySelector("#list").appendChild(fragment);
-});
+  // Utility function to create an element with optional attributes and children
+  function createElement(tag, options = {}, ...children) {
+    const element = document.createElement(tag);
+    if (options.classes) element.classList.add(...options.classes);
+    if (options.attributes) {
+      for (const key in options.attributes) {
+        element.setAttribute(key, options.attributes[key]);
+      }
+    }
+    if (options.style) Object.assign(element.style, options.style);
+    children.forEach(child => element.appendChild(child));
+    return element;
+  }
 
+  // Main rendering logic
+  (function renderProjects() {
+    const fragment = document.createDocumentFragment(); // Create one fragment for all projects
+    const container = document.querySelector("#list"); // Cache the container reference
+
+    filterProject.forEach((project, index) => {
+      // Create the main project div
+      const div = createElement(
+        "div",
+        {
+          classes: ["project", "animate"],
+          attributes: { "data-url": project.route },
+        },
+        createElement("img", { attributes: { src: project.image } }),
+        createVideoElement("/vid.mp4")
+      );
+
+      fragment.appendChild(div);
+
+      // Handle special case for the first project
+      if (index === 0) {
+        const emptyDiv = createElement(
+          "div",
+          {
+            classes: ["project"],
+            attributes: { "data-url": projects[currentSlide].route },
+          },
+          createElement("img", {
+            attributes: { src: projects[currentSlide].image },
+            style: { objectPosition: "50% 0%" },
+          }),
+          createVideoElement("/vid.mp4")
+        );
+
+        fragment.appendChild(emptyDiv);
+      }
+    });
+
+    // Append all elements to the container at once
+    container.appendChild(fragment);
+  })();
 
 
   isAnimating = true
-
   const allp = document.querySelectorAll(".animate")
+  gsap.set(allp, {
+    y: 200,
+  })
   gsap.to(slides[currentSlide].querySelector("img"), {
-    scale: 1.5,
-    rotate: "-5deg",
+    scale: 1.3,
     duration: .3,
   })
   gsap.to("#list", {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
     duration: .5,
-  })
-  gsap.set(allp, {
-    y: 200,
   })
   gsap.to(allp, {
     y: 0,
@@ -345,6 +439,57 @@ filterProject.forEach(async function (project, index) {
       })
     }
   })
+  document.querySelectorAll(".project").forEach(function (project) {
+    project.addEventListener("click", function (event) {
+      const route = project.getAttribute("data-url")
+      console.log(route);
+
+      gsap.to(document.querySelector("#navbar"), {
+        opacity: 0,
+        top: "-10%",
+        duration: .8,
+        ease: "expo.out",
+      })
+
+      // Get the click position relative to the viewport
+      const clickX = event.clientX;
+      const clickY = event.clientY;
+
+      // Get the position of the project element relative to the document
+      const rect = project.getBoundingClientRect();
+      const offsetX = clickX - rect.left;
+      const offsetY = clickY - rect.top;
+
+      // Set the initial position of the element based on the click within the element
+      gsap.set(project, {
+        position: "fixed", // Use absolute positioning to start from the click point
+        top: `${rect.top + window.scrollY}px`, // Offset from the top of the page
+        left: `${rect.left + window.scrollX}px`, // Offset from the left of the page
+        width: rect.width + "px",
+        height: rect.height + "px",
+        objectPosition: "50% 0",
+        zIndex: 99,
+        transformOrigin: `${offsetX}px ${offsetY}px`, // Center the scaling on the click point
+      });
+
+      // Animate the project element to expand and move to the top-left corner
+      gsap.to(project, {
+        width: "100vw",
+        height: "100vh",
+        top: 0,
+        left: 0,
+        duration: 1.6,
+        ease: "expo.out",
+        onComplete: () => {
+          setTimeout(() => {
+            window.location.href = route;
+          }, 200)
+        },
+      });
+    });
+  });
+
+
 
 })
 
@@ -383,8 +528,7 @@ document.querySelector("#close-btn").addEventListener("click", function () {
     }, "s")
     .to(slides[currentSlide].querySelector("img"), {
       scale: 1,
-      rotate: "0deg",
-      duration: .5,
+      duration: .3,
     }, "s")
 
   gsap.set("#inner-container", {
@@ -403,37 +547,39 @@ function darkMode() {
   // Apply initial mode
   const root = document.documentElement;
   if (mode) {
+    root.style.setProperty('--primary', '#000');
+    root.style.setProperty('--secondary', '#fff');
+    document.querySelector("#mode").classList.remove("ri-sun-line");
+    document.querySelector("#mode").classList.add("ri-moon-line");
+
+  } else {
+    root.style.setProperty('--primary', '#F2F2EE');
+    root.style.setProperty('--secondary', '#000');
+    document.querySelector("#mode").classList.remove("ri-moon-line");
+    document.querySelector("#mode").classList.add("ri-sun-line");
+  }
+
+  document.querySelector("#mode").addEventListener("click", function () {
+    console.log("click");
+
+    if (!mode) {
       root.style.setProperty('--primary', '#000');
       root.style.setProperty('--secondary', '#fff');
       document.querySelector("#mode").classList.remove("ri-sun-line");
       document.querySelector("#mode").classList.add("ri-moon-line");
-
-  } else {
+      mode = true;
+    } else {
       root.style.setProperty('--primary', '#F2F2EE');
       root.style.setProperty('--secondary', '#000');
       document.querySelector("#mode").classList.remove("ri-moon-line");
       document.querySelector("#mode").classList.add("ri-sun-line");
-  }
+      mode = false;
+    }
 
-  document.querySelector("#mode").addEventListener("click", function () {
-      console.log("click");
-      
-      if (!mode) {
-          root.style.setProperty('--primary', '#000');
-          root.style.setProperty('--secondary', '#fff');
-          document.querySelector("#mode").classList.remove("ri-sun-line");
-          document.querySelector("#mode").classList.add("ri-moon-line");
-          mode = true;
-      } else {
-          root.style.setProperty('--primary', '#F2F2EE');
-          root.style.setProperty('--secondary', '#000');
-          document.querySelector("#mode").classList.remove("ri-moon-line");
-          document.querySelector("#mode").classList.add("ri-sun-line");
-          mode = false;
-      }
-
-      // Save mode in localStorage
-      localStorage.setItem("mode", mode);
+    // Save mode in localStorage
+    localStorage.setItem("mode", mode);
   });
 }
 darkMode();
+
+

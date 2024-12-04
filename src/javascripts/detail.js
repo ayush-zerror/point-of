@@ -14,41 +14,16 @@ function loader() {
   var ltl = gsap.timeline()
 
   ltl
-    .to("#loading", {
-      transform: "translate(-50%,-50%) scale(1.3)",
-      duration: 1.5,
-      ease: "power1.out",
-    }, "l")
-    
-    .to("#loading", {
-      opacity: 0,
-      duration: .3,
-      ease: "power1.out",
-    }, "a")
-    .to("#page1", {
-      opacity: 1,
-      duration: 0,
-      ease: "power1.out",
-    }, "a")
-    .to("#page1", {
-      maskSize: "200%",
-      duration: 1.6,
-      ease: "power1.out",
-      onComplete: () => {
-        gsap.set("#page1", {
-          mask: "none"
-        })
-      }
-    })
     .to("#hero-img", {
       transform: "translateY(40vh)",
-      duration: .5,
-      delay: -.2,
+      duration: 1,
+      delay:.3,
       ease: "power1.out",
     },"p")
     .to("#navbar", {
       transform: "translateY(0%)",
       duration: .5,
+      delay:.3,
       ease: "power1.out",
     }, "p")
 }
@@ -72,24 +47,6 @@ function text() {
   })
 }
 text()
-function zoom() {
-  document.querySelectorAll(".zoom").forEach(function (card) {
-    gsap.fromTo(card.querySelector("img"), {
-      scale: 1,
-    }, {
-      scale: 1.2,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: card,
-        scroller: "body",
-        start: "top 10%",
-        end: "top -50%",
-        scrub: 1,
-      }
-    })
-  })
-}
-// zoom()
 
 const fullView = document.querySelector("#full-view")
 const overView = document.querySelector("#over-view")

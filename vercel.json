@@ -5,8 +5,52 @@
         "dest": "/work.html"
       },
       {
-        "src": "/work-detail",
-        "dest": "/work-detail.html"
+        "src": "/work-contigo",
+        "dest": "/work-contigo.html"
+      },
+      {
+        "src": "/work-typcaste",
+        "dest": "/work-typcaste.html"
+      },
+      {
+        "src": "/work-label-ritu-kumar",
+        "dest": "/work-label-ritu-kumar.html"
+      },
+      {
+        "src": "/work-pixel-flakes",
+        "dest": "/work-pixel-flakes.html"
+      },
+      {
+        "src": "/work-studio-d",
+        "dest": "/work-studio-d.html"
+      },
+      {
+        "src": "/work-plugged-live-show",
+        "dest": "/work-plugged-live-show.html"
+      },
+      {
+        "src": "/work-ali-ali",
+        "dest": "/work-ali-ali.html"
+      },
+      {
+        "src": "/work-stock-dutch-design",
+        "dest": "/work-stock-dutch-design.html"
+      },
+      {
+        "src": "/work-the-st-regis-venice",
+        "dest": "/work-the-st-regis-venice.html"
+      },
+      {
+        "src": "/work-rino-&-pelle",
+        "dest": "/work-rino-&-pelle.html"
+      },
+      {
+        "src": "/work-aebele-interiors",
+        "dest": "/work-aebele-interiors.html"
+      },
+      {
+        "src": "/work-ottografie",
+        "dest": "/work-ottografie.html"
       },
       {
         "src": "/",
