@@ -4,7 +4,12 @@ const counts = document.querySelectorAll("#count-wraper span")
 let currentSlide = 0;
 let isAnimating = false;
 
-
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem('reloadPrevious') === 'true') {
+    sessionStorage.removeItem('reloadPrevious'); // Remove the flag after reloading
+    window.location.reload(); // Reload the page
+  }
+});
 
 document.addEventListener("wheel", function (e) {
   if (isAnimating) return; // Prevent overlapping animations
@@ -473,9 +478,10 @@ document.querySelector("#allproject").addEventListener("click", async function (
         left: `${rect.left + window.scrollX}px`, // Offset from the left of the page
         width: rect.width + "px",
         height: rect.height + "px",
-        objectPosition: "50% 0",
+        // objectPosition: "50% 0",
         zIndex: 99,
         transformOrigin: `${offsetX}px ${offsetY}px`, // Center the scaling on the click point
+         willChange: "width, height, top, left, transform"
       });
 
       // Animate the project element to expand and move to the top-left corner
@@ -484,20 +490,17 @@ document.querySelector("#allproject").addEventListener("click", async function (
         height: "100vh",
         top: 0,
         left: 0,
-        duration: 1.5,
+        duration: 1,
         ease: "power4.inOut",
-        onUpdate: function () {
-          // This ensures that browser optimizations for smoother transitions are applied.
-          gsap.set(project, {
-            willChange: "width, height, top, left, transform"
-          });
-        },
         onComplete: () => {
+          sessionStorage.setItem('reloadPrevious', 'true');
+
           setTimeout(() => {
             window.location.href = route;
           }, 50);
         },
       });
+
     });
   });
 
@@ -602,7 +605,7 @@ document.querySelector("#inner-container").addEventListener("click", function ()
   gsap.to("#inner-container", {
     width: "100vw",
     height: "100vh",
-    duration: 1.5,
+    duration: 1,
     ease: "power4.inOut",
     onUpdate: function () {
       // This ensures that browser optimizations for smoother transitions are applied.
@@ -611,6 +614,8 @@ document.querySelector("#inner-container").addEventListener("click", function ()
       });
     },
     onComplete: () => {
+      sessionStorage.setItem('reloadPrevious', 'true');
+
       setTimeout(() => {
         window.location.href = projects[currentSlide].route;
       }, 50);

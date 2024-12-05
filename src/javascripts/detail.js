@@ -16,13 +16,13 @@ function loader() {
   ltl
     .to("#hero-img", {
       transform: "translateY(40vh)",
-      duration: 1.6,
+      duration: .8,
       delay:.3,
      eease: "expo.in",
     },"p")
     .to("#navbar", {
       transform: "translateY(0%)",
-      duration: 1.2,
+      duration: 1,
       delay:.4,
      eease: "expo.in",
     }, "p")
