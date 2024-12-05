@@ -9,9 +9,22 @@ let isAnimating = false;
 document.addEventListener("wheel", function (e) {
   if (isAnimating) return; // Prevent overlapping animations
   isAnimating = true;
-  if ((window.scrollY === 0 && event.deltaY < 0) || // Scrolling up at the top
-    (window.innerHeight + window.scrollY >= document.body.offsetHeight && event.deltaY > 0)) { // Scrolling down at the bottom
-    event.preventDefault();
+  //TO STOP macOS BOUNCE AND PULL EFFECT
+  const scrollTop = window.scrollY;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  // Prevent default scrolling behavior
+  e.preventDefault();
+
+  // Detect the scroll direction and prevent overscroll
+  if (e.deltaY > 0 && scrollTop >= maxScroll) {
+    // Scrolling down and already at the bottom of the page
+    window.scrollTo(0, maxScroll);
+  } else if (e.deltaY < 0 && scrollTop <= 0) {
+    // Scrolling up and already at the top of the page
+    window.scrollTo(0, 0);
+  } else {
+    // Normal scrolling behavior
+    window.scrollBy(0, e.deltaY);
   }
 
   const direction = e.deltaY > 0 ? 1 : -1; // Determine scroll direction (down = 1, up = -1)
@@ -92,10 +105,6 @@ document.addEventListener("wheel", function (e) {
         top: "0%",
         duration: .8,
         opacity: .7,
-        onStart: () => {
-          console.log(nextSlide);
-
-        }
       }, "a")
 
       //for inner slides
@@ -385,7 +394,6 @@ document.querySelector("#allproject").addEventListener("click", async function (
           attributes: { "data-url": project.route },
         },
         createElement("img", { attributes: { src: project.image } }),
-        createVideoElement("/vid.mp4")
       );
 
       fragment.appendChild(div);
@@ -402,7 +410,6 @@ document.querySelector("#allproject").addEventListener("click", async function (
             attributes: { src: projects[currentSlide].image },
             style: { objectPosition: "50% 0%" },
           }),
-          createVideoElement("/vid.mp4")
         );
 
         fragment.appendChild(emptyDiv);
@@ -439,12 +446,11 @@ document.querySelector("#allproject").addEventListener("click", async function (
       })
     }
   })
+
   document.querySelectorAll(".project").forEach(function (project) {
     project.addEventListener("click", function (event) {
       const route = project.getAttribute("data-url")
-      console.log(route);
-
-      gsap.to(document.querySelector("#navbar"), {
+      gsap.to(document.querySelector(".navbar2"), {
         opacity: 0,
         top: "-10%",
         duration: .8,
@@ -478,12 +484,18 @@ document.querySelector("#allproject").addEventListener("click", async function (
         height: "100vh",
         top: 0,
         left: 0,
-        duration: 1.6,
-        ease: "expo.out",
+        duration: 1.5,
+        ease: "power4.inOut",
+        onUpdate: function () {
+          // This ensures that browser optimizations for smoother transitions are applied.
+          gsap.set(project, {
+            willChange: "width, height, top, left, transform"
+          });
+        },
         onComplete: () => {
           setTimeout(() => {
             window.location.href = route;
-          }, 200)
+          }, 50);
         },
       });
     });
@@ -560,8 +572,6 @@ function darkMode() {
   }
 
   document.querySelector("#mode").addEventListener("click", function () {
-    console.log("click");
-
     if (!mode) {
       root.style.setProperty('--primary', '#000');
       root.style.setProperty('--secondary', '#fff');
@@ -582,4 +592,29 @@ function darkMode() {
 }
 darkMode();
 
+
+document.querySelector("#inner-container").addEventListener("click", function () {
+  isAnimating = true
+  gsap.set("#inner-container", {
+    objectPosition: "50% 0",
+  });
+
+  gsap.to("#inner-container", {
+    width: "100vw",
+    height: "100vh",
+    duration: 1.5,
+    ease: "power4.inOut",
+    onUpdate: function () {
+      // This ensures that browser optimizations for smoother transitions are applied.
+      gsap.set("#inner-container", {
+        willChange: "width, height, top, left, transform"
+      });
+    },
+    onComplete: () => {
+      setTimeout(() => {
+        window.location.href = projects[currentSlide].route;
+      }, 50);
+    },
+  });
+})
 

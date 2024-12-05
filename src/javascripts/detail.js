@@ -16,15 +16,15 @@ function loader() {
   ltl
     .to("#hero-img", {
       transform: "translateY(40vh)",
-      duration: 1,
+      duration: 1.6,
       delay:.3,
-      ease: "power1.out",
+     eease: "expo.in",
     },"p")
     .to("#navbar", {
       transform: "translateY(0%)",
-      duration: .5,
-      delay:.3,
-      ease: "power1.out",
+      duration: 1.2,
+      delay:.4,
+     eease: "expo.in",
     }, "p")
 }
 loader()

@@ -48,13 +48,13 @@ const tl3 = gsap.timeline({
    })
   
    tl3
-   .to("#page3 h1",{
-    transform:" rotateY(10deg) rotateX(2deg) scale(8) translateX(30%)",
-    duration: 1.8, // Slightly increased
-    ease: "expo.out", // Smooth easing for buttery feel
+   .to("#page3 svg",{
+    transform:" rotateY(8deg) rotateX(2deg) scale(6) translateX(30%)",
+    duration: 1.8,
+    ease: "expo.out",
    },"a")
    .to("#page3 h4",{
     transform:" rotateY(8deg) rotateX(2deg) scale(2) translateX(-10%)",
-    duration: 1.8, // Slightly increased
-    ease: "expo.out", // Smooth easing for buttery feel
+    duration: 1.8,
+    ease: "expo.out",
    },"a")

@@ -289,18 +289,14 @@ h5,h6{
   color: var(--secondary);
 }
 
-#page3 h1{
+#page3 svg{
   position: absolute;
-  top: 50%;
+  top: 53%;
   left: 26%;
-  font-size: 10vw;
-  text-transform: uppercase;
-  font-weight: 500;
+  width: 36vw;
+  height: auto;
   transform-origin: right;
   transform:rotateY(0deg) rotateX(0deg) scale(1) translateX(0%);
   will-change: transform;
   backface-visibility: hidden;
-  color: var(--secondary);
-  font-family: heading3;
-  font-weight: 500;
 }

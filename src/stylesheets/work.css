@@ -53,6 +53,8 @@ html,
 body {
   width: 100%;
   height: 100%;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
 }
 
 #navbar{
@@ -66,7 +68,6 @@ body {
   align-items: center;
   justify-content: space-between;
   padding:2.3vw 2vw;
-  color: var(--secondary);
   pointer-events: none;
 }
 #navbar #mode{
@@ -94,6 +95,52 @@ body {
   pointer-events: all;
 }
 
+.navbar1{
+  color: white;
+  width: 100%;
+  height: 5vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: end !important;
+  padding:2.3vw 2vw;
+  pointer-events: none;
+  
+}
+.navbar1 #logo{
+  width: fit-content;
+  font-family: para2;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 1.6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  pointer-events: all;
+}
+.navbar2{
+  color: var(--secondary) !important;
+}
+.navbar1 #logo{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.navbar1 #menu{
+  height: 1.3vw;
+  width: 1.3vw;
+  border-radius: 50%;
+  background-color: white;
+  color: white;
+  pointer-events: all;
+}
+
 #navbar #logo span{
   display: inline-block;
 }
@@ -116,7 +163,8 @@ body {
   position: relative;
   height: 100vh;
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
 }
 .slide {
   position: absolute;
@@ -126,6 +174,7 @@ body {
   height: 105vh;
   width: 105vw;
   overflow: hidden;
+  will-change: clip-path, scale, object-position;
 }
 .slide img {
   height: 100%;
@@ -227,7 +276,6 @@ body {
   width: 22.5vw;
   height: 57vh;
   z-index: 3;
-  pointer-events: none;
 }
 
 .inner-slide {
@@ -347,6 +395,7 @@ body {
   transform-origin: left;
 }
 .slide-text .title {
+  height: 4vw;
   overflow: hidden;
   margin-bottom: 0.3vw;
 }
@@ -468,11 +517,13 @@ body {
   overflow-x: hidden;
   padding: 21.5vh 8vw;
   padding-bottom: 0;
-  display:flex;
-  flex-wrap: wrap;
+  display: flex;
+  align-items: start;
   justify-content: space-between;
+  flex-wrap: wrap;
   overflow-y: auto;
   clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  z-index: 2;
 }
 #list::-webkit-scrollbar{
   display: none;
@@ -484,6 +535,7 @@ body {
   margin-bottom: 21.5vh;
   transform-origin: center;
   overflow: hidden;
+  will-change: width, height, top, left, transform;
 }
 
 
@@ -496,19 +548,14 @@ body {
   width: 100%;
   object-fit: cover;
   object-position: 50% 0;
-  transition: all ease .3s;
   opacity: 1;
-
 }
-#list .project video{
+/* #list .project video{
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
+} */
 
-#list .project:hover img{
-  opacity: 1;
-}
 
 #close{
   position: fixed;
