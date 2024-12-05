@@ -49,7 +49,7 @@ const tl3 = gsap.timeline({
   
    tl3
    .to("#page3 svg",{
-    transform:" rotateY(8deg) rotateX(2deg) scale(6) translateX(30%)",
+    transform:" rotateY(8deg) rotateX(2deg) scale(8) translateX(30%)",
     duration: 1.8,
     ease: "expo.out",
    },"a")
