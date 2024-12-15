@@ -7,7 +7,7 @@ lenis.on('scroll', ScrollTrigger.update);
 // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
 // This ensures Lenis's smooth scroll animation updates on each GSAP tick
 gsap.ticker.add((time) => {
-  lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+    lenis.raf(time * 1000); // Convert time from seconds to milliseconds
 });
 
 // Disable lag smoothing in GSAP to prevent any delay in scroll animations
@@ -58,7 +58,7 @@ function logo() {
             ease: "power1.out"
         }, "a")
         .to("#p", {
-            x: point.offsetWidth / 2 + (point.offsetWidth / 2) / 2.7,
+            x: point.offsetWidth / 2 + (point.offsetWidth / 2) / 1.8,
             duration: .4,
             delay: .2
         }, "a")
@@ -85,6 +85,7 @@ function darkMode() {
     if (mode) {
         root.style.setProperty('--primary', '#000');
         root.style.setProperty('--secondary', '#fff');
+        root.style.setProperty('--invert-filter', 'invert(1)');
         document.querySelector("#mode").classList.remove("ri-sun-line");
         document.querySelector("#mode").classList.add("ri-moon-line");
         document.querySelector("#navbar").style.background = `
@@ -112,6 +113,7 @@ function darkMode() {
     } else {
         root.style.setProperty('--primary', '#F2F2EE');
         root.style.setProperty('--secondary', '#000');
+        root.style.setProperty('--invert-filter', 'invert(0)');
         document.querySelector("#mode").classList.remove("ri-moon-line");
         document.querySelector("#mode").classList.add("ri-sun-line");
         document.querySelector("#navbar").style.background = `
@@ -140,10 +142,11 @@ function darkMode() {
 
     document.querySelector("#mode").addEventListener("click", function () {
         console.log("click");
-        
+
         if (!mode) {
             root.style.setProperty('--primary', '#000');
             root.style.setProperty('--secondary', '#fff');
+            root.style.setProperty('--invert-filter', 'invert(1)');
             document.querySelector("#mode").classList.remove("ri-sun-line");
             document.querySelector("#mode").classList.add("ri-moon-line");
             document.querySelector("#navbar").style.background = `
@@ -172,6 +175,7 @@ function darkMode() {
         } else {
             root.style.setProperty('--primary', '#F2F2EE');
             root.style.setProperty('--secondary', '#000');
+            root.style.setProperty('--invert-filter', 'invert(0)');
             document.querySelector("#mode").classList.remove("ri-moon-line");
             document.querySelector("#mode").classList.add("ri-sun-line");
             document.querySelector("#navbar").style.background = `
@@ -205,3 +209,87 @@ function darkMode() {
     });
 }
 darkMode();
+
+
+function menuOpen() {
+    var menu = false
+    document.querySelector("#menu-c").addEventListener("click", function () {
+      if (!menu) {
+        gsap.to("#navigation", {
+          top: 0,
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          duration: 1.5,
+          ease: "power4.out"
+        })
+        menu = true
+      } else {
+        gsap.to("#navigation", {
+          top: "-100%",
+          clipPath: "polygon(0 0, 100% 0, 100% 97%, 0 89%)",
+          duration: 1.5,
+          ease: "power4.out"
+        })
+        menu = false
+      }
+    })
+  
+    let shapes = document.querySelectorAll(".shape")
+    let link = document.querySelectorAll("#shape-select a")
+  
+    link.forEach(function (l) {
+      l.addEventListener("mouseenter", function () {
+        for (var i = 0; i <= link.length; i++) {
+          if (link[i] !== l) {
+            gsap.to(link[i], {
+              filter: "blur(3px)",
+              duration: .4
+            })
+          }
+          else {
+            gsap.to(l, {
+              filter: "blur(0px)",
+              duration: .4
+            })
+          }
+        }
+        if (l.getAttribute("data-index") !== 0) {
+          gsap.to(shapes[0], {
+            transform: "rotate(40deg) scale(0)",
+            opacity: 0,
+            duration: .5,
+            ease: "power4.out",
+          })
+          gsap.to(shapes[l.getAttribute("data-index")], {
+            transform: "rotate(0deg) scale(1)",
+            opacity: 1,
+            duration: .5,
+            ease: "power4.out",
+          })
+        }
+  
+      })
+    })
+  
+    link.forEach(function (l, idx) {
+      l.addEventListener("mouseleave", function () {
+        gsap.to(link, {
+          filter: "blur(0px)",
+          duration: .4
+        })
+        gsap.to(shapes[l.getAttribute("data-index")], {
+          transform: "rotate(40deg) scale(0)",
+          opacity: 0,
+          duration: .5,
+          ease: "power4.out",
+        })
+        gsap.to(shapes[0], {
+          transform: "rotate(0deg) scale(1)",
+          opacity: 1,
+          duration: .5,
+          ease: "power4.out",
+        })
+      })
+    })
+  }
+  menuOpen()
+  

@@ -43,6 +43,8 @@
 :root {
   --primary: #f2f2ee;
   --secondary: #000;
+  --back:#f2f2ee83;
+  --invert-filter: invert(0);
 }
 * {
   margin: 0;
@@ -94,6 +96,18 @@ body {
   color: var(--secondary);
   pointer-events: all;
 }
+#navbar #logo img{
+  height: 1.2vw;
+}
+.navbar1 #logo img{
+  height: 1.2vw;
+  filter: invert(1) !important;
+}
+
+.navbar2 #logo img{
+  height: 1.2vw;
+  filter: var(--invert-filter);
+}
 
 .navbar1{
   color: white;
@@ -124,7 +138,26 @@ body {
   pointer-events: all;
 }
 .navbar2{
-  color: var(--secondary) !important;
+  background: linear-gradient(
+    180deg,
+    #f2f2ee 0,
+    hsla(0, 0%, 95%, 0.987) 11%,
+    hsla(0, 0%, 95%, 0.951) 20.8%,
+    hsla(0, 0%, 95%, 0.896) 29.6%,
+    hsla(0, 0%, 95%, 0.825) 37.5%,
+    hsla(0, 0%, 95%, 0.741) 44.6%,
+    hsla(0, 0%, 95%, 0.648) 51%,
+    hsla(0, 0%, 95%, 0.55) 57%,
+    hsla(0, 0%, 95%, 0.45) 62.5%,
+    hsla(0, 0%, 95%, 0.352) 67.7%,
+    hsla(0, 0%, 95%, 0.259) 72.7%,
+    hsla(0, 0%, 95%, 0.175) 77.8%,
+    hsla(0, 0%, 95%, 0.104) 82.9%,
+    hsla(0, 0%, 95%, 0.049) 88.2%,
+    hsla(0, 0%, 95%, 0.013) 93.9%,
+    hsla(0, 0%, 95%, 0)
+  );
+  color: var(--secondary);
 }
 .navbar1 #logo{
   position: absolute;
@@ -412,7 +445,7 @@ body {
 #bottom {
   width: 100%;
   padding: 2vw;
-  padding-bottom: 3vw;
+  height: 8vw;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -424,20 +457,20 @@ body {
 #bottom h3 {
   position: relative;
   font-family: para3;
-  font-weight: 500;
-  font-size: 1vw;
+  font-size: 1.2vw;
+  font-weight: 400;
 }
 
 #bottom h5 {
   font-family: para3;
-  font-weight: 500;
-  font-size: 1vw;
+  font-size: 1.2vw;
+  font-weight: 400;
 }
 
 #bottom span {
   font-family: para3;
-  font-weight: 500;
-  font-size: 1vw;
+  font-size: 1.2vw;
+  font-weight: 400;
   opacity: 0.7;
 }
 
@@ -477,6 +510,7 @@ body {
   gap: 0.5vw;
   cursor: pointer;
   width: fit-content;
+  
 }
 #allproject svg {
   width: 0.8vw;
@@ -550,12 +584,6 @@ body {
   object-position: 50% 0;
   opacity: 1;
 }
-/* #list .project video{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-
 
 #close{
   position: fixed;
@@ -563,36 +591,145 @@ body {
   left: 0;
   width: 100%;
   padding: 2vw;
-  padding-bottom: 3vw;
+  height: 8vw;
   display: flex;
   justify-content: space-between;
-  z-index: 9;
+  z-index: 8;
   pointer-events: none;
   color: var(--secondary);
 }
 
-#close-btn{
+
+#close-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  cursor: pointer;
+  width: fit-content;
+  pointer-events: all;
+}
+#close-btn svg {
+  width: 0.8vw;
+  height: 0.8vw;
+  transition: all ease 0.2s;
+}
+
+#close-btn:hover svg {
+  transform: scale(0);
+  opacity: 0;
+}
+#close-btn h3::before {
+  content: "";
+  position: absolute;
+  top: 28%;
+  left: -1.2vw;
+  width: 0.5vw;
+  height: 0.5vw;
+  border: 1px solid var(--secondary);
+  border-radius: 50px;
+  transform: scale(0);
+  opacity: 0;
+  transition: all ease 0.2s;
+}
+#close-btn:hover h3::before {
+  transform: scale(1);
+  opacity: 1;
+}
+#close h3 {
+  position: relative;
+  font-family: para3;
+  font-size: 1.2vw;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+#filter-btn{
+  position: relative;
   pointer-events: all;
   display: flex;
   align-items: center; 
+  justify-content: center;
   gap: .5vw;
   cursor: pointer;
   user-select: none;
 }
 
-#close-btn svg{
-  width: .9vw;
-  height: .9vw;
-  transition: all ease .2s ;
+#filter-btn .cirr {
+  width: .6vw;
+  height: .6vw;
+  border: 1px solid var(--secondary);
+  border-radius: 50px;
+  transition: all ease .3s;
+
 }
 
-#close-btn:hover svg{
-  transform: rotate(90deg);
-}
-
-#close h3 {
-  position: relative;
+#filter-btn:hover .cirr{
+  width: 2.5vw;
+  height: 2.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary);
+} 
+#filter-btn .cirr i{
+  color: var(--primary);
   font-family: para3;
   font-weight: 500;
   font-size: 1vw;
+  display: none;
+}
+
+#filter-btn:hover .cirr i{
+  display: block;
+}
+
+#filter-btn h3{
+  position: relative;
+  transition: all ease .3s;
+  margin-right: 1vw;
+}
+#filter-btn:hover h3{
+  margin-right: 0;
+}
+
+#filter-btn h3::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  background-color: var(--secondary);
+  height: .1vw;
+  transition: all ease .3s;
+}
+#filter-btn:hover h3::after{
+  width: 0;
+}
+
+#filterl{
+  position: fixed;
+  top: 100%;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--back);
+  backdrop-filter: blur(5px);
+  z-index: 9;
+  display: flex;
+  align-items: end;
+  opacity: 0;
+}
+#filter-content{
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  background-color: var(--primary);
+}
+#cross{
+  position: absolute;
+  top: 2vw;
+  right: 2vw;
+  color: var(--secondary);
+  font-size: 1.3vw;
+  cursor: pointer;
 }

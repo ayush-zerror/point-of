@@ -43,6 +43,7 @@
 :root {
   --primary: #f2f2ee;
   --secondary: #000;
+  --invert-filter: invert(0);
 }
 
 * {
@@ -56,7 +57,7 @@ body {
   height: 100%;
   overflow: hidden;
 }
-#cursor{
+#cursor {
   width: 1.2vw;
   height: 1.2vw;
   border-radius: 50%;
@@ -66,7 +67,7 @@ body {
   pointer-events: none;
   opacity: 0;
 }
-#navbar{
+#navbar {
   width: 100%;
   height: 5vh;
   position: fixed;
@@ -76,7 +77,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding:2.3vw 2vw;
+  padding: 2.3vw 2vw;
   background: linear-gradient(
     180deg,
     #f2f2ee 0,
@@ -99,17 +100,17 @@ body {
   color: var(--secondary);
   pointer-events: none;
 }
-#navbar #mode{
+#navbar #mode {
   cursor: pointer;
   font-size: 1.2vw;
   pointer-events: all;
 }
 
-#dot{
+#dot {
   opacity: 0;
 }
 
-#navbar #logo{
+#navbar #logo {
   width: fit-content;
   font-family: para2;
   font-weight: 600;
@@ -123,42 +124,285 @@ body {
   pointer-events: all;
 }
 
-#navbar #logo span{
+#navbar #logo span {
   display: inline-block;
 }
+#navbar #logo img{
+  height: 1.2vw;
+  filter: var(--invert-filter);
+}
 
-#navbar #menu{
+#navbar #menu {
   height: 1.3vw;
   width: 1.3vw;
   border-radius: 50%;
   background-color: var(--secondary);
   color: var(--secondary);
-  pointer-events: all;
 }
-h2{
+#menu-c {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  pointer-events: all;
+  cursor: pointer;
+}
+#menu-c h5 {
+  font-family: para3;
+  font-size: 1.1vw;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--secondary);
+}
+
+#navigation {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--primary);
+  clip-path: polygon(0 0, 100% 0, 100% 97%, 0 89%);
+  position: fixed;
+  top: -100%;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  padding: 2.3vw 2vw;
+}
+#leftm {
+  position: relative;
+  width: 58%;
+  height: 100%;
+  display: flex;
+  align-items: end;
+}
+#rightm {
+  width: 42%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 10vh;
+  padding-bottom: 8vw;
+}
+#rightm h5,
+#rightm h2,
+#leftm h5 {
+  cursor: pointer;
+  width: fit-content;
+}
+
+#shape-select a{
+  font-family: heading2;
+  font-weight: 100;
+  line-height: 1.3;
+  font-size: 3vw;
+  color: var(--secondary);
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+}
+
+#social-l {
+  margin-top: 4vh;
+}
+#social-l a{
+  font-family: para3;
+  font-size: 1.2vw;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--secondary);
+  text-decoration: none;
+  display: block;
+}
+#shape-c {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18vw;
+  height: 18vw;
+}
+#shape1 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: var(--secondary);
+  transform-origin: center;
+}
+#shape2 {
+  position: absolute;
+  opacity: 0;
+  transform: rotate(40deg) scale(0.9);
+  height: 100%;
+  width: 100%;
+  background-color: var(--secondary);
+  transform-origin: center;
+}
+#shape2-in {
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  background-color: var(--primary);
+  clip-path: circle(50% at 50% 50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#shape3 {
+  position: absolute;
+  opacity: 0;
+  transform: rotate(40deg) scale(0.9);
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary);
+  clip-path: circle(40% at 50% 50%);
+}
+#shape4 {
+  position: absolute;
+  opacity: 0;
+  transform: rotate(40deg) scale(0.9);
+  height: 100%;
+  width: 100%;
+  background-color: var(--secondary);
+}
+#shape4-in {
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  background-color: var(--primary);
+  clip-path: polygon(
+    30% 0%,
+    70% 0%,
+    100% 30%,
+    100% 70%,
+    70% 100%,
+    30% 100%,
+    0% 70%,
+    0% 30%
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#shape5 {
+  position: absolute;
+  opacity: 0;
+  transform: rotate(40deg) scale(0.9);
+  height: 100%;
+  width: 100%;
+  background-color: var(--secondary);
+}
+
+#nav-btm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 8vw;
+  padding: 2vw;
+}
+#nav-lef{
+  width: 42%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+#hire-btn{
+  pointer-events: all;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  gap: .5vw;
+  cursor: pointer;
+  user-select: none;
+}
+
+#hire-btn .cirr {
+  width: .6vw;
+  height: .6vw;
+  border: 1px solid var(--secondary);
+  border-radius: 50px;
+  transition: all ease .3s;
+
+}
+
+#hire-btn:hover .cirr{
+  width: 2.5vw;
+  height: 2.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary);
+} 
+#hire-btn .cirr i{
+  color: var(--primary);
+  font-family: para3;
+  font-weight: 500;
+  font-size: 1vw;
+  display: none;
+}
+
+#hire-btn:hover .cirr i{
+  display: block;
+}
+
+#hire-btn h3{
+  position: relative;
+  transition: all ease .3s;
+  margin-right: 1vw;
+  font-family: para3;
+  font-size: 1.2vw;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--secondary);
+}
+#hire-btn:hover h3{
+  margin-right: 0;
+}
+
+#hire-btn h3::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom:0%;
+  background-color: var(--secondary);
+  height: .1vw;
+  transition: all ease .3s;
+}
+#hire-btn:hover h3::after{
+  width: 0;
+}
+
+h2 {
   font-family: heading2;
   font-weight: 100;
   line-height: 1.3;
   font-size: 3vw;
   color: var(--secondary);
 }
-h2 span{
+h2 span {
   font-family: heading2;
   font-weight: 100;
   font-size: 3vw;
 }
-h5,h6{
+h5,
+h6 {
   font-family: para3;
   font-size: 1.2vw;
   line-height: 1.4;
   font-weight: 400;
   color: var(--secondary);
 }
-#main{
+#main {
   width: 100%;
   background-color: var(--primary);
 }
-
 
 #page1 {
   height: 100vh;
@@ -206,64 +450,64 @@ h5,h6{
   object-fit: cover;
 }
 
-#page2 #img-over{
-    width: 100%;
-    height: 300vh;
-    position: absolute;
-    top: 100%;
-    left: 0;
+#page2 #img-over {
+  width: 100%;
+  height: 300vh;
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
 
-#page2 .img-wrapper{
-    height: 100vh;
-    width: 100%;
-    position: relative;
+#page2 .img-wrapper {
+  height: 100vh;
+  width: 100%;
+  position: relative;
 }
-#img-over .ig1{
-    position: absolute;
-    object-fit:contain;
-    width: 28%;
-    left: 5%;
-    top: 10%;
+#img-over .ig1 {
+  position: absolute;
+  object-fit: contain;
+  width: 28%;
+  left: 5%;
+  top: 10%;
 }
-#img-over .ig2{
-    position: absolute;
-    object-fit:contain;
-    width: 25%;
-    right: 5%;
-    bottom: 5%;
-}
-
-#img-over .ig3{
-    position: absolute;
-    object-fit:contain;
-    width: 17%;
-    left: 15%;
-    top: 0%;
-}
-#img-over .ig4{
-    position: absolute;
-    object-fit:contain;
-    width: 25%;
-    right: 0%;
-    bottom: 0%;
-}
-#img-over .ig5{
-    position: absolute;
-    object-fit:contain;
-    width: 17%;
-    left: 5%;
-    top: 10%;
-}
-#img-over .ig6{
-    position: absolute;
-    object-fit:contain;
-    width: 15%;
-    right: 5%;
-    bottom: 5%;
+#img-over .ig2 {
+  position: absolute;
+  object-fit: contain;
+  width: 25%;
+  right: 5%;
+  bottom: 5%;
 }
 
-#page3{
+#img-over .ig3 {
+  position: absolute;
+  object-fit: contain;
+  width: 17%;
+  left: 15%;
+  top: 0%;
+}
+#img-over .ig4 {
+  position: absolute;
+  object-fit: contain;
+  width: 25%;
+  right: 0%;
+  bottom: 0%;
+}
+#img-over .ig5 {
+  position: absolute;
+  object-fit: contain;
+  width: 17%;
+  left: 5%;
+  top: 10%;
+}
+#img-over .ig6 {
+  position: absolute;
+  object-fit: contain;
+  width: 15%;
+  right: 5%;
+  bottom: 5%;
+}
+
+#page3 {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -274,7 +518,7 @@ h5,h6{
   overflow: hidden;
 }
 
-#page3 h4{
+#page3 h4 {
   font-size: 3.5vw;
   text-align: center;
   font-family: heading2;
@@ -283,20 +527,20 @@ h5,h6{
   text-transform: capitalize;
   margin-left: 15vw;
   position: relative;
-  transform:rotateY(0deg) rotateX(0deg) scale(1) translateX(0%);
+  transform: rotateY(0deg) rotateX(0deg) scale(1) translateX(0%);
   will-change: transform;
   backface-visibility: hidden;
   color: var(--secondary);
 }
 
-#page3 svg{
+#page3 svg {
   position: absolute;
   top: 53%;
   left: 26%;
   width: 36vw;
   height: auto;
   transform-origin: right;
-  transform:rotateY(0deg) rotateX(0deg) scale(1) translateX(0%);
+  transform: rotateY(0deg) rotateX(0deg) scale(1) translateX(0%);
   will-change: transform;
   backface-visibility: hidden;
 }

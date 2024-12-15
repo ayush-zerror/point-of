@@ -481,7 +481,7 @@ document.querySelector("#allproject").addEventListener("click", async function (
         // objectPosition: "50% 0",
         zIndex: 99,
         transformOrigin: `${offsetX}px ${offsetY}px`, // Center the scaling on the click point
-         willChange: "width, height, top, left, transform"
+        willChange: "width, height, top, left, transform"
       });
 
       // Animate the project element to expand and move to the top-left corner
@@ -564,28 +564,121 @@ function darkMode() {
   if (mode) {
     root.style.setProperty('--primary', '#000');
     root.style.setProperty('--secondary', '#fff');
+    root.style.setProperty('--invert-filter', 'invert(1)');
     document.querySelector("#mode").classList.remove("ri-sun-line");
     document.querySelector("#mode").classList.add("ri-moon-line");
+    document.querySelector(".navbar2").style.background = `
+linear-gradient(
+  180deg,
+  #000000 0,
+  hsla(0, 0%, 0%, .987) 11%,  
+  hsla(0, 0%, 0%, .951) 20.8%, 
+  hsla(0, 0%, 0%, .896) 29.6%, 
+  hsla(0, 0%, 0%, .825) 37.5%, 
+  hsla(0, 0%, 0%, .741) 44.6%, 
+  hsla(0, 0%, 0%, .648) 51%,   
+  hsla(0, 0%, 0%, .55) 57%,    
+  hsla(0, 0%, 0%, .45) 62.5%,  
+  hsla(0, 0%, 0%, .352) 67.7%,  
+  hsla(0, 0%, 0%, .259) 72.7%,
+  hsla(0, 0%, 0%, .175) 77.8%,  
+  hsla(0, 0%, 0%, .104) 82.9%,  
+  hsla(0, 0%, 0%, .049) 88.2%,  
+  hsla(0, 0%, 0%, .013) 93.9%,  
+  hsla(0, 0%, 0%, 0)
+)
+`;
 
   } else {
     root.style.setProperty('--primary', '#F2F2EE');
     root.style.setProperty('--secondary', '#000');
+    root.style.setProperty('--invert-filter', 'invert(0)');
     document.querySelector("#mode").classList.remove("ri-moon-line");
     document.querySelector("#mode").classList.add("ri-sun-line");
+    document.querySelector(".navbar2").style.background = `
+linear-gradient(
+  180deg,
+  #F2F2EE 0,
+  hsla(0, 0%, 94.1%, .987) 11%,  
+  hsla(0, 0%, 94.1%, .951) 20.8%, 
+  hsla(0, 0%, 94.1%, .896) 29.6%, 
+  hsla(0, 0%, 94.1%, .825) 37.5%, 
+  hsla(0, 0%, 94.1%, .741) 44.6%, 
+  hsla(0, 0%, 94.1%, .648) 51%,   
+  hsla(0, 0%, 94.1%, .55) 57%,    
+  hsla(0, 0%, 94.1%, .45) 62.5%,  
+  hsla(0, 0%, 94.1%, .352) 67.7%,  
+  hsla(0, 0%, 94.1%, .259) 72.7%,
+  hsla(0, 0%, 94.1%, .175) 77.8%,  
+  hsla(0, 0%, 94.1%, .104) 82.9%,  
+  hsla(0, 0%, 94.1%, .049) 88.2%,  
+  hsla(0, 0%, 94.1%, .013) 93.9%,  
+  hsla(0, 0%, 94.1%, 0)
+)
+`;
+
   }
 
   document.querySelector("#mode").addEventListener("click", function () {
+
     if (!mode) {
       root.style.setProperty('--primary', '#000');
       root.style.setProperty('--secondary', '#fff');
+      root.style.setProperty('--invert-filter', 'invert(1)');
       document.querySelector("#mode").classList.remove("ri-sun-line");
       document.querySelector("#mode").classList.add("ri-moon-line");
+      document.querySelector(".navbar2").style.background = `
+linear-gradient(
+  180deg,
+  #000000 0,
+  hsla(0, 0%, 0%, .987) 11%,  
+  hsla(0, 0%, 0%, .951) 20.8%, 
+  hsla(0, 0%, 0%, .896) 29.6%, 
+  hsla(0, 0%, 0%, .825) 37.5%, 
+  hsla(0, 0%, 0%, .741) 44.6%, 
+  hsla(0, 0%, 0%, .648) 51%,   
+  hsla(0, 0%, 0%, .55) 57%,    
+  hsla(0, 0%, 0%, .45) 62.5%,  
+  hsla(0, 0%, 0%, .352) 67.7%,  
+  hsla(0, 0%, 0%, .259) 72.7%,
+  hsla(0, 0%, 0%, .175) 77.8%,  
+  hsla(0, 0%, 0%, .104) 82.9%,  
+  hsla(0, 0%, 0%, .049) 88.2%,  
+  hsla(0, 0%, 0%, .013) 93.9%,  
+  hsla(0, 0%, 0%, 0)
+)
+`;
+
       mode = true;
     } else {
       root.style.setProperty('--primary', '#F2F2EE');
       root.style.setProperty('--secondary', '#000');
+      root.style.setProperty('--invert-filter', 'invert(0)');
       document.querySelector("#mode").classList.remove("ri-moon-line");
       document.querySelector("#mode").classList.add("ri-sun-line");
+      document.querySelector(".navbar2").style.background = `
+linear-gradient(
+  180deg,
+  #F2F2EE 0,
+  hsla(0, 0%, 94.1%, .987) 11%,  
+  hsla(0, 0%, 94.1%, .951) 20.8%, 
+  hsla(0, 0%, 94.1%, .896) 29.6%, 
+  hsla(0, 0%, 94.1%, .825) 37.5%, 
+  hsla(0, 0%, 94.1%, .741) 44.6%, 
+  hsla(0, 0%, 94.1%, .648) 51%,   
+  hsla(0, 0%, 94.1%, .55) 57%,    
+  hsla(0, 0%, 94.1%, .45) 62.5%,  
+  hsla(0, 0%, 94.1%, .352) 67.7%,  
+  hsla(0, 0%, 94.1%, .259) 72.7%,
+  hsla(0, 0%, 94.1%, .175) 77.8%,  
+  hsla(0, 0%, 94.1%, .104) 82.9%,  
+  hsla(0, 0%, 94.1%, .049) 88.2%,  
+  hsla(0, 0%, 94.1%, .013) 93.9%,  
+  hsla(0, 0%, 94.1%, 0)
+)
+`;
+
+
       mode = false;
     }
 
@@ -623,3 +716,83 @@ document.querySelector("#inner-container").addEventListener("click", function ()
   });
 })
 
+
+function logo() {
+
+  const point = document.querySelector("#point")
+  const f = document.querySelector("#f")
+
+  var tl = gsap.timeline({
+      scrollTrigger: {
+          trigger: "#list",
+          scroller: "#list",
+          start: "top top",
+          end: "top -5%",
+          scrub: 1,
+      }
+  })
+
+  tl
+      .to(".navbar2 #point", {
+          opacity: 0,
+          x: 2,
+          duration: .2,
+          ease: "power1.out",
+      }, "a")
+      .to(".navbar2 #f", {
+          opacity: 0,
+          x: 2,
+          duration: .2,
+          ease: "power1.out"
+      }, "a")
+      .to(".navbar2 #p", {
+          x: point.offsetWidth / 2 + (point.offsetWidth / 2) / 1.8,
+          duration: .4,
+          delay: .2
+      }, "a")
+      .to(".navbar2 #dot", {
+          opacity: 1,
+          x: -f.offsetWidth * 3,
+          duration: .4,
+          delay: .2
+      }, "a")
+      .to(".navbar2 #o", {
+          x: -f.offsetWidth * 2,
+          duration: .4,
+          delay: .2
+      }, "a")
+}
+logo()
+
+
+document.querySelector("#filter-btn").addEventListener("click",function(){
+  gsap.set("#filterl",{
+    top:"0%"
+  })
+  gsap.to("#filterl",{
+    opacity:1,
+    duration:.3
+  })
+  gsap.fromTo("#filter-content",{
+    y:"100%",
+  },{
+    y:"0%",
+    duration:.5
+  })
+})
+
+document.querySelector("#cross").addEventListener("click",function(){
+  gsap.to("#filterl",{
+    opacity:0,
+    duration:.3
+  })
+  gsap.to("#filter-content",{
+    y:"100%",
+    duration:.5,
+    onComplete:function(){
+      gsap.set("#filterl",{
+        top:"-100%"
+      })
+    }
+  })
+})
