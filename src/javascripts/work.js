@@ -564,6 +564,7 @@ function darkMode() {
   if (mode) {
     root.style.setProperty('--primary', '#000');
     root.style.setProperty('--secondary', '#fff');
+    root.style.setProperty('--back', '#00000086');
     root.style.setProperty('--invert-filter', 'invert(1)');
     document.querySelector("#mode").classList.remove("ri-sun-line");
     document.querySelector("#mode").classList.add("ri-moon-line");
@@ -592,6 +593,7 @@ linear-gradient(
   } else {
     root.style.setProperty('--primary', '#F2F2EE');
     root.style.setProperty('--secondary', '#000');
+    root.style.setProperty('--back', '#f2f2ee83');
     root.style.setProperty('--invert-filter', 'invert(0)');
     document.querySelector("#mode").classList.remove("ri-moon-line");
     document.querySelector("#mode").classList.add("ri-sun-line");
@@ -624,6 +626,7 @@ linear-gradient(
     if (!mode) {
       root.style.setProperty('--primary', '#000');
       root.style.setProperty('--secondary', '#fff');
+      root.style.setProperty('--back', '#00000086');
       root.style.setProperty('--invert-filter', 'invert(1)');
       document.querySelector("#mode").classList.remove("ri-sun-line");
       document.querySelector("#mode").classList.add("ri-moon-line");
@@ -653,6 +656,7 @@ linear-gradient(
     } else {
       root.style.setProperty('--primary', '#F2F2EE');
       root.style.setProperty('--secondary', '#000');
+      root.style.setProperty('--back', '#f2f2ee83');
       root.style.setProperty('--invert-filter', 'invert(0)');
       document.querySelector("#mode").classList.remove("ri-moon-line");
       document.querySelector("#mode").classList.add("ri-sun-line");
@@ -723,75 +727,75 @@ function logo() {
   const f = document.querySelector("#f")
 
   var tl = gsap.timeline({
-      scrollTrigger: {
-          trigger: "#list",
-          scroller: "#list",
-          start: "top top",
-          end: "top -5%",
-          scrub: 1,
-      }
+    scrollTrigger: {
+      trigger: "#list",
+      scroller: "#list",
+      start: "top top",
+      end: "top -5%",
+      scrub: 1,
+    }
   })
 
   tl
-      .to(".navbar2 #point", {
-          opacity: 0,
-          x: 2,
-          duration: .2,
-          ease: "power1.out",
-      }, "a")
-      .to(".navbar2 #f", {
-          opacity: 0,
-          x: 2,
-          duration: .2,
-          ease: "power1.out"
-      }, "a")
-      .to(".navbar2 #p", {
-          x: point.offsetWidth / 2 + (point.offsetWidth / 2) / 1.8,
-          duration: .4,
-          delay: .2
-      }, "a")
-      .to(".navbar2 #dot", {
-          opacity: 1,
-          x: -f.offsetWidth * 3,
-          duration: .4,
-          delay: .2
-      }, "a")
-      .to(".navbar2 #o", {
-          x: -f.offsetWidth * 2,
-          duration: .4,
-          delay: .2
-      }, "a")
+    .to(".navbar2 #point", {
+      opacity: 0,
+      x: 2,
+      duration: .2,
+      ease: "power1.out",
+    }, "a")
+    .to(".navbar2 #f", {
+      opacity: 0,
+      x: 2,
+      duration: .2,
+      ease: "power1.out"
+    }, "a")
+    .to(".navbar2 #p", {
+      x: point.offsetWidth / 2 + (point.offsetWidth / 2) / 1.8,
+      duration: .4,
+      delay: .2
+    }, "a")
+    .to(".navbar2 #dot", {
+      opacity: 1,
+      x: -f.offsetWidth * 3,
+      duration: .4,
+      delay: .2
+    }, "a")
+    .to(".navbar2 #o", {
+      x: -f.offsetWidth * 2,
+      duration: .4,
+      delay: .2
+    }, "a")
 }
 logo()
 
 
-document.querySelector("#filter-btn").addEventListener("click",function(){
-  gsap.set("#filterl",{
-    top:"0%"
+document.querySelector("#filter-btn").addEventListener("click", function () {
+  gsap.set("#filterl", {
+    top: "0%"
   })
-  gsap.to("#filterl",{
-    opacity:1,
-    duration:.3
+  gsap.to("#filterl", {
+    opacity: 1,
+    duration: .3
   })
-  gsap.fromTo("#filter-content",{
-    y:"100%",
-  },{
-    y:"0%",
-    duration:.5
+  gsap.fromTo("#filter-content", {
+    y: "100%",
+  }, {
+    y: "0%",
+    duration: .5
   })
 })
 
-document.querySelector("#cross").addEventListener("click",function(){
-  gsap.to("#filterl",{
-    opacity:0,
-    duration:.3
+document.querySelector("#cross").addEventListener("click", function () {
+  gsap.to("#filterl", {
+    opacity: 0,
+    duration: .3
   })
-  gsap.to("#filter-content",{
-    y:"100%",
-    duration:.5,
-    onComplete:function(){
-      gsap.set("#filterl",{
-        top:"-100%"
+  gsap.to("#filter-content", {
+    y: "100%",
+    duration: .5,
+    onComplete: function () {
+      gsap.set("#filterl", {
+        top: "-100%"
       })
     }
   })
