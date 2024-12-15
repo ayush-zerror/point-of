@@ -53,6 +53,10 @@
         "dest": "/work-ottografie.html"
       },
       {
+        "src": "/expertise",
+        "dest": "/expertise.html"
+      },
+      {
         "src": "/",
         "dest": "/index.html"
       }
