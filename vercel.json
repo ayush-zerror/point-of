@@ -57,6 +57,10 @@
         "dest": "/expertise.html"
       },
       {
+        "src": "/brand",
+        "dest": "/brand.html"
+      },
+      {
         "src": "/",
         "dest": "/index.html"
       }
