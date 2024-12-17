@@ -111,6 +111,10 @@ body {
 }
 
 #navbar #logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
   width: fit-content;
   font-family: para2;
   font-weight: 600;

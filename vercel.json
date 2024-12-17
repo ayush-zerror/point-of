@@ -61,6 +61,18 @@
         "dest": "/brand.html"
       },
       {
+        "src": "/brand-expertise",
+        "dest": "/brand-expertise.html"
+      },
+      {
+        "src": "/websites-expertise",
+        "dest": "/websites-expertise.html"
+      },
+      {
+        "src": "/campaigns-expertise",
+        "dest": "/campaigns-expertise.html"
+      },
+      {
         "src": "/",
         "dest": "/index.html"
       }
