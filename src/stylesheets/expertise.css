@@ -489,6 +489,9 @@ h6 {
   font-weight: 500;
   margin-bottom: .6vw;
 }
+#rts .service h5{
+  width: fit-content;
+}
 
 #more-btn {
   width: fit-content;
