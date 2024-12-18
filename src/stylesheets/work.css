@@ -479,6 +479,10 @@ body {
   align-items: center;
   justify-content: space-between;
 }
+#project-count h5,#project-count span{
+  font-size: 1vw;
+  font-weight: 400;
+}
 #count-wraper{
   width: 2vw;
   height: 2vw;
@@ -521,6 +525,10 @@ body {
 #allproject:hover svg {
   transform: scale(0);
   opacity: 0;
+}
+#allproject h3{
+  font-size: 1vw;
+  font-weight: 400;
 }
 #allproject h3::before {
   content: "";
@@ -600,7 +608,7 @@ body {
 }
 
 
-#close-btn {
+#close-btn,#filter-btn {
   display: flex;
   align-items: center;
   gap: 0.5vw;
@@ -618,7 +626,21 @@ body {
   transform: scale(0);
   opacity: 0;
 }
-#close-btn h3::before {
+
+#filter-btn i {
+  font-size: 1;
+  transition: all ease 0.2s;
+}
+
+
+#filter-btn:hover i {
+  transform: scale(0);
+  opacity: 0;
+}
+#close-btn h3 , #filter-btn h3{
+  font-weight: 500;
+}
+#close-btn h3::before ,#filter-btn h3::before {
   content: "";
   position: absolute;
   top: 28%;
@@ -631,79 +653,16 @@ body {
   opacity: 0;
   transition: all ease 0.2s;
 }
-#close-btn:hover h3::before {
+#close-btn:hover h3::before , #filter-btn:hover h3::before {
   transform: scale(1);
   opacity: 1;
 }
 #close h3 {
   position: relative;
   font-family: para3;
-  font-size: 1.2vw;
-  line-height: 1.4;
-  font-weight: 400;
-}
-
-#filter-btn{
-  position: relative;
-  pointer-events: all;
-  display: flex;
-  align-items: center; 
-  justify-content: center;
-  gap: .5vw;
-  cursor: pointer;
-  user-select: none;
-}
-
-#filter-btn .cirr {
-  width: .6vw;
-  height: .6vw;
-  border: 1px solid var(--secondary);
-  border-radius: 50px;
-  transition: all ease .3s;
-
-}
-
-#filter-btn:hover .cirr{
-  width: 2.5vw;
-  height: 2.5vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--secondary);
-} 
-#filter-btn .cirr i{
-  color: var(--primary);
-  font-family: para3;
-  font-weight: 500;
   font-size: 1vw;
-  display: none;
-}
-
-#filter-btn:hover .cirr i{
-  display: block;
-}
-
-#filter-btn h3{
-  position: relative;
-  transition: all ease .3s;
-  margin-right: 1vw;
-}
-#filter-btn:hover h3{
-  margin-right: 0;
-}
-
-#filter-btn h3::after{
-  content: "";
-  position: absolute;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  background-color: var(--secondary);
-  height: .1vw;
-  transition: all ease .3s;
-}
-#filter-btn:hover h3::after{
-  width: 0;
+  line-height: 1.4;
+  font-weight: 500;
 }
 
 #filterl{

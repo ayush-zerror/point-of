@@ -235,19 +235,22 @@ function menuOpen() {
   
     let shapes = document.querySelectorAll(".shape")
     let link = document.querySelectorAll("#shape-select a")
+    let socialLink = document.querySelectorAll("#social-l a")
   
     link.forEach(function (l) {
       l.addEventListener("mouseenter", function () {
         for (var i = 0; i <= link.length; i++) {
           if (link[i] !== l) {
             gsap.to(link[i], {
-              filter: "blur(3px)",
+              filter: "blur(4px)",
+              opacity:.4,
               duration: .4
             })
           }
           else {
             gsap.to(l, {
               filter: "blur(0px)",
+              opacity: 1,
               duration: .4
             })
           }
@@ -274,6 +277,7 @@ function menuOpen() {
       l.addEventListener("mouseleave", function () {
         gsap.to(link, {
           filter: "blur(0px)",
+          opacity:1,
           duration: .4
         })
         gsap.to(shapes[l.getAttribute("data-index")], {
@@ -287,6 +291,37 @@ function menuOpen() {
           opacity: 1,
           duration: .5,
           ease: "power4.out",
+        })
+      })
+    })
+
+    socialLink.forEach(function (l) {
+      l.addEventListener("mouseenter", function () {
+        for (var i = 0; i <= socialLink.length; i++) {
+          if (socialLink[i] !== l) {
+            gsap.to(socialLink[i], {
+              filter: "blur(2px)",
+              opacity:.5,
+              duration: .4
+            })
+          }
+          else {
+            gsap.to(l, {
+              filter: "blur(0px)",
+              opacity: 1,
+              duration: .4
+            })
+          }
+        }
+      })
+    })
+  
+    socialLink.forEach(function (l, idx) {
+      l.addEventListener("mouseleave", function () {
+        gsap.to(socialLink, {
+          filter: "blur(0px)",
+          opacity:1,
+          duration: .4
         })
       })
     })

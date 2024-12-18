@@ -210,12 +210,13 @@ body {
 }
 #social-l a{
   font-family: para3;
-  font-size: 1.2vw;
+  font-size: 1vw;
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--secondary);
   text-decoration: none;
   display: block;
+  width: fit-content;
 }
 #shape-c {
   position: absolute;
@@ -360,9 +361,9 @@ body {
   transition: all ease .3s;
   margin-right: 1vw;
   font-family: para3;
-  font-size: 1.2vw;
+  font-size: 1vw;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--secondary);
 }
 #hire-btn:hover h3{
@@ -376,7 +377,7 @@ body {
   right: 0;
   bottom:0%;
   background-color: var(--secondary);
-  height: .1vw;
+  height: .01vw;
   transition: all ease .3s;
 }
 #hire-btn:hover h3::after{

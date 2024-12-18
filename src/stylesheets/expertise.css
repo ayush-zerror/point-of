@@ -213,12 +213,13 @@ a{
 }
 #social-l a {
   font-family: para3;
-  font-size: 1.2vw;
+  font-size: 1vw;
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--secondary);
   text-decoration: none;
   display: block;
+  width: fit-content;
 }
 #shape-c {
   position: absolute;
@@ -361,9 +362,9 @@ a{
   transition: all ease 0.3s;
   margin-right: 1vw;
   font-family: para3;
-  font-size: 1.2vw;
+  font-size: 1vw;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--secondary);
 }
 #hire-btn:hover h3 {
@@ -377,7 +378,7 @@ a{
   right: 0;
   bottom: 0%;
   background-color: var(--secondary);
-  height: 0.1vw;
+  height: 0.01vw;
   transition: all ease 0.3s;
 }
 #hire-btn:hover h3::after {
@@ -442,7 +443,7 @@ h6 {
   height: 110vh;
   width: 100%;
   padding: 2.3vw 2vw;
-  padding-bottom: 6vw;
+  padding-bottom: 4vw;
   display: flex;
   align-items: end;
   justify-content: center;
@@ -474,11 +475,18 @@ h6 {
 #rts .service{
   width: 30%;
   margin-bottom: 4vw;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+
+
 #rts .service h2{
+  font-family: heading6;
   font-size: 1.3vw;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: .6vw;
 }
 
@@ -492,6 +500,7 @@ h6 {
   gap: 0.5vw;
   cursor: pointer;
   user-select: none;
+  margin-left: -1.1vw;
 }
 
 #more-btn .cirr {
@@ -527,9 +536,9 @@ h6 {
   transition: all ease 0.3s;
   margin-right: 1vw;
   font-family: para3;
-  font-size: 1.2vw;
+  font-size: 1vw;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--secondary);
 }
 #more-btn:hover h3 {
@@ -543,7 +552,7 @@ h6 {
   right: 0;
   bottom: 0%;
   background-color: var(--secondary);
-  height: 0.1vw;
+  height: .01vw;
   transition: all ease 0.3s;
 }
 #more-btn:hover h3::after {
