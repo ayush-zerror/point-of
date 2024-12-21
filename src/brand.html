@@ -33,7 +33,8 @@
                     <a data-index="1" href="/work">Work</a>
                     <a data-index="2" href="/expertise">Expertise</a>
                     <a data-index="3" href="/brand">Brands</a>
-                    <a data-index="4" href="/">Contact</a>
+                    <a data-index="2" href="/contact">Contact</a>
+                    <a data-index="1" href="/career">Career</a>
                 </div>
                 <div id="social-l">
                     <a href="/">Behance</a>
@@ -47,32 +48,27 @@
                     <div class="cirr"><i class="ri-play-mini-fill"></i></div>
                     <h3>Play Reel</h3>
                 </div>
-               <div id="nav-lef">
-                <div id="hire-btn">
-                    <div class="cirr"><i class="ri-arrow-right-line"></i></div>
-                    <h3>Our Story</h3>
+                <div id="nav-lef">
+                    <div id="hire-btn">
+                        <div class="cirr"><i class="ri-arrow-right-line"></i></div>
+                        <h3>Our Story</h3>
+                    </div>
+                    <div id="hire-btn">
+                        <div class="cirr"><i class="ri-arrow-right-line"></i></div>
+                        <h3>Now Hiring!</h3>
+                    </div>
                 </div>
-                <div id="hire-btn">
-                    <div class="cirr"><i class="ri-arrow-right-line"></i></div>
-                    <h3>Now Hiring!</h3>
-                </div>
-               </div>
             </div>
         </div>
     </div>
     <nav id="navbar">
         <i id="mode" class="ri-sun-line"></i>
-        <!-- <a href="/" id="logo">
-            <span id="p">P</span><span id="point">oint&nbsp;</span><span id="o">O</span><span id="f">f</span><span
-                id="dot">.</span>
-        </a> -->
         <a href="/" id="logo">
             <span id="p"><img src="/p.png" alt=""></span><span id="point"><img src="/point.png" alt=""></span><span
                 id="o"><img src="/o.png" alt=""></span><span id="f"><img src="/f.png" alt=""></span><span
                 id="dot">.</span>
         </a>
         <div id="menu-c">
-            
             <div id="menu"></div>
         </div>
     </nav>
@@ -210,31 +206,41 @@
         <div id="page4">
             <div id="project-showcase">
             </div>
-           <div id="top-wrapper">
-            <div id="top">
-                <h2>Brands</h2>
-                <h5>Collections</h5>
-            </div>
-            <div id="filter-brands">
-                <div data-container="#brands-service" class="capsule active">
-                    <h5>Services</h5>
+            <div id="top-wrapper">
+                <div id="top">
+                    <h2>Brands</h2>
                 </div>
-                <div id="rt">
-                    <div data-container="#brands-industry" class="capsule capsule-l">
-                        <h5>Industry</h5>
+                <div id="filter-brands">
+                    <div id="rt">
+                        <div data-container="#brands-name" class="capsule active">
+                            <h5>Name</h5>
+                            <h6>Click to reset</h6>
+                        </div>
+                        <div id="y-wrap">
+                            <div data-container="#brands-service" class="capsule">
+                                <h5>Service</h5>
+                                <h6>Click to filter</h6>
+                            </div>
+                        </div>
                     </div>
-                    <div id="y-wrap">
-                        <div data-container="#brands-year" class="capsule">
-                            <h5>Year</h5>
+                    <div id="rt">
+                        <div data-container="#brands-industry" class="capsule">
+                            <h5>Industry</h5>
+                            <h6>Click to filter</h6>
+                        </div>
+                        <div id="y-wrap">
+                            <div data-container="#brands-year" class="capsule">
+                                <h5>Year</h5>
+                                <h6>Click to filter</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-           </div>
+            <div id="brands-name"></div>
             <div id="brands-service"></div>
             <div id="brands-industry"></div>
-            <div id="brands-year">
-            </div>
+            <div id="brands-year"></div>
         </div>
     </main>
 

@@ -73,6 +73,14 @@
         "dest": "/campaigns-expertise.html"
       },
       {
+        "src": "/contact",
+        "dest": "/contact.html"
+      },
+      {
+        "src": "/career",
+        "dest": "/career.html"
+      },
+      {
         "src": "/",
         "dest": "/index.html"
       }

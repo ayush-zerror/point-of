@@ -777,10 +777,8 @@ document.querySelector("#filter-btn").addEventListener("click", function () {
     opacity: 1,
     duration: .3
   })
-  gsap.fromTo("#filter-content", {
-    y: "100%",
-  }, {
-    y: "0%",
+  gsap.to("#filter-content",{
+    bottom: "0%",
     duration: .5
   })
 })
@@ -791,12 +789,165 @@ document.querySelector("#cross").addEventListener("click", function () {
     duration: .3
   })
   gsap.to("#filter-content", {
-    y: "100%",
-    duration: .5,
+    bottom: "-100%",
+    duration: .6,
     onComplete: function () {
       gsap.set("#filterl", {
-        top: "-100%"
+        top: "100%"
       })
     }
   })
 })
+
+
+function menuOpen() {
+  var menu = false
+  var menu2 = false
+  document.querySelector("#menu-c").addEventListener("click", function () {
+    if (!menu) {
+      gsap.set(".navbar1", { mixBlendMode: "difference" })
+      gsap.to(".navigation1", {
+        top: 0,
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        duration: 1.5,
+        ease: "power4.out"
+      })
+      menu = true
+    } else {
+      gsap.to(".navigation1", {
+        top: "-100%",
+        clipPath: "polygon(0 0, 100% 0, 100% 97%, 0 89%)",
+        duration: 1.5,
+        ease: "power4.out",
+        onStart: function () {
+         setTimeout(function(){
+          gsap.set(".navbar1", { mixBlendMode: "normal"})
+         },500)
+        }
+      })
+      menu = false
+    }
+  })
+
+  document.querySelector(".list-menu").addEventListener("click", function () {
+    console.log("hey");
+
+    if (!menu2) {
+      console.log("hey2");
+
+      gsap.to(".navigation2", {
+        top: 0,
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        duration: 1.5,
+        ease: "power4.out"
+      })
+      menu2 = true
+    } else {
+      gsap.to(".navigation2", {
+        top: "-100%",
+        clipPath: "polygon(0 0, 100% 0, 100% 97%, 0 89%)",
+        duration: 1.5,
+        ease: "power4.out"
+      })
+      menu2 = false
+    }
+  })
+
+  let shapes = document.querySelectorAll(".shape")
+  let link = document.querySelectorAll("#shape-select a")
+  let socialLink = document.querySelectorAll("#social-l a")
+
+  link.forEach(function (l) {
+    l.addEventListener("mouseenter", function () {
+      for (var i = 0; i <= link.length; i++) {
+        if (link[i] !== l) {
+          gsap.to(link[i], {
+            filter: "blur(4px)",
+            opacity: .4,
+            duration: .4
+          })
+        }
+        else {
+          gsap.to(l, {
+            filter: "blur(0px)",
+            opacity: 1,
+            duration: .4
+          })
+        }
+      }
+      if (l.getAttribute("data-index") !== 0) {
+        gsap.to(shapes[0], {
+          transform: "rotate(40deg) scale(0)",
+          opacity: 0,
+          duration: .5,
+          ease: "power4.out",
+        })
+        gsap.to(shapes[l.getAttribute("data-index")], {
+          transform: "rotate(0deg) scale(1)",
+          opacity: 1,
+          duration: .5,
+          ease: "power4.out",
+        })
+      }
+
+    })
+  })
+
+  link.forEach(function (l, idx) {
+    l.addEventListener("mouseleave", function () {
+      gsap.to(link, {
+        filter: "blur(0px)",
+        opacity: 1,
+        duration: .4
+      })
+      gsap.to(shapes[l.getAttribute("data-index")], {
+        transform: "rotate(40deg) scale(0)",
+        opacity: 0,
+        duration: .5,
+        ease: "power4.out",
+      })
+      gsap.to(shapes[0], {
+        transform: "rotate(0deg) scale(1)",
+        opacity: 1,
+        duration: .5,
+        ease: "power4.out",
+      })
+    })
+  })
+
+  socialLink.forEach(function (l) {
+    l.addEventListener("mouseenter", function () {
+      for (var i = 0; i <= socialLink.length; i++) {
+        if (socialLink[i] !== l) {
+          gsap.to(socialLink[i], {
+            filter: "blur(2px)",
+            opacity: .5,
+            duration: .4
+          })
+        }
+        else {
+          gsap.to(l, {
+            filter: "blur(0px)",
+            opacity: 1,
+            duration: .4
+          })
+        }
+      }
+    })
+  })
+
+  socialLink.forEach(function (l, idx) {
+    l.addEventListener("mouseleave", function () {
+      gsap.to(socialLink, {
+        filter: "blur(0px)",
+        opacity: 1,
+        duration: .4
+      })
+    })
+  })
+}
+menuOpen()
+
+
+
+

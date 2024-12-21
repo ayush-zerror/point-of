@@ -1,0 +1,414 @@
+@font-face {
+    font-family: heading1;
+    src: url("/fonts/TWKLausanne-100.woff2");
+  }
+  @font-face {
+    font-family: heading2;
+    src: url("/fonts/TWKLausanne-200.woff2");
+  }
+  @font-face {
+    font-family: heading3;
+    src: url("/fonts/TWKLausanne-300.woff2");
+  }
+  @font-face {
+    font-family: heading4;
+    src: url("/fonts/TWKLausanne-400.woff2");
+  }
+  @font-face {
+    font-family: heading5;
+    src: url("/fonts/TWKLausanne-500.woff2");
+  }
+  @font-face {
+    font-family: heading6;
+    src: url("/fonts/TWKLausanne-600.woff2");
+  }
+  
+  @font-face {
+    font-family: para1;
+    src: url("/fonts/Satoshi-Medium.woff2");
+  }
+  @font-face {
+    font-family: para2;
+    src: url("/fonts/Satoshi-Regular.woff2");
+  }
+  @font-face {
+    font-family: para3;
+    src: url("/fonts/Satoshi-Variable.woff2");
+  }
+  @font-face {
+    font-family: para4;
+    src: url("/fonts/Satoshi-Light.woff2");
+  }
+  
+  :root {
+    --primary: #f2f2ee;
+    --secondary: #000;
+    --invert-filter: invert(0);
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  #cursor {
+    width: 1.2vw;
+    height: 1.2vw;
+    border-radius: 50%;
+    position: fixed;
+    background-color: var(--secondary);
+    z-index: 9;
+    pointer-events: none;
+    opacity: 0;
+  }
+  #navbar {
+    width: 100%;
+    height: 5vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.3vw 2vw;
+    background: linear-gradient(
+      180deg,
+      #f2f2ee 0,
+      hsla(0, 0%, 95%, 0.987) 11%,
+      hsla(0, 0%, 95%, 0.951) 20.8%,
+      hsla(0, 0%, 95%, 0.896) 29.6%,
+      hsla(0, 0%, 95%, 0.825) 37.5%,
+      hsla(0, 0%, 95%, 0.741) 44.6%,
+      hsla(0, 0%, 95%, 0.648) 51%,
+      hsla(0, 0%, 95%, 0.55) 57%,
+      hsla(0, 0%, 95%, 0.45) 62.5%,
+      hsla(0, 0%, 95%, 0.352) 67.7%,
+      hsla(0, 0%, 95%, 0.259) 72.7%,
+      hsla(0, 0%, 95%, 0.175) 77.8%,
+      hsla(0, 0%, 95%, 0.104) 82.9%,
+      hsla(0, 0%, 95%, 0.049) 88.2%,
+      hsla(0, 0%, 95%, 0.013) 93.9%,
+      hsla(0, 0%, 95%, 0)
+    );
+    color: var(--secondary);
+    pointer-events: none;
+  }
+  #navbar #mode {
+    cursor: pointer;
+    font-size: 1.2vw;
+    pointer-events: all;
+  }
+  
+  #dot {
+    opacity: 0;
+  }
+  
+  #navbar #logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: fit-content;
+    font-family: para2;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 1.6vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--secondary);
+    pointer-events: all;
+  }
+  
+  #navbar #logo span {
+    display: inline-block;
+  }
+  #navbar #logo img{
+    height: 1.2vw;
+    filter: var(--invert-filter);
+  }
+  
+  #navbar #menu {
+    height: 1.3vw;
+    width: 1.3vw;
+    border-radius: 50%;
+    background-color: var(--secondary);
+    color: var(--secondary);
+  }
+  #menu-c {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    pointer-events: all;
+    cursor: pointer;
+  }
+  #menu-c h5 {
+    font-family: para3;
+    font-size: 1.1vw;
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--secondary);
+  }
+  
+  #navigation {
+    height: 100vh;
+    width: 100%;
+    background-color: var(--primary);
+    clip-path: polygon(0 0, 100% 0, 100% 97%, 0 89%);
+    position: fixed;
+    top: -100%;
+    left: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    padding: 2.3vw 2vw;
+  }
+  #leftm {
+    position: relative;
+    width: 58%;
+    height: 100%;
+    display: flex;
+    align-items: end;
+  }
+  #rightm {
+    width: 42%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 10vh;
+    padding-bottom: 8vw;
+  }
+  #rightm h5,
+  #rightm h2,
+  #leftm h5 {
+    cursor: pointer;
+    width: fit-content;
+  }
+  
+  #shape-select a{
+    font-family: heading2;
+    font-weight: 100;
+    line-height: 1.3;
+    font-size: 3vw;
+    color: var(--secondary);
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+  }
+  
+  #social-l {
+    margin-top: 4vh;
+  }
+  #social-l a{
+    font-family: para3;
+    font-size: 1vw;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--secondary);
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+  }
+  #shape-c {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18vw;
+    height: 18vw;
+  }
+  #shape1 {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--secondary);
+    transform-origin: center;
+  }
+  #shape2 {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(40deg) scale(0.9);
+    height: 100%;
+    width: 100%;
+    background-color: var(--secondary);
+    transform-origin: center;
+  }
+  #shape2-in {
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    background-color: var(--primary);
+    clip-path: circle(50% at 50% 50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #shape3 {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(40deg) scale(0.9);
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary);
+    clip-path: circle(40% at 50% 50%);
+  }
+  #shape4 {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(40deg) scale(0.9);
+    height: 100%;
+    width: 100%;
+    background-color: var(--secondary);
+  }
+  #shape4-in {
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    background-color: var(--primary);
+    clip-path: polygon(
+      30% 0%,
+      70% 0%,
+      100% 30%,
+      100% 70%,
+      70% 100%,
+      30% 100%,
+      0% 70%,
+      0% 30%
+    );
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  #shape5 {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(40deg) scale(0.9);
+    height: 100%;
+    width: 100%;
+    background-color: var(--secondary);
+  }
+  
+  #nav-btm {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 8vw;
+    padding: 2vw;
+  }
+  #nav-lef{
+    width: 42%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  
+  #hire-btn{
+    pointer-events: all;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: .5vw;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  #hire-btn .cirr {
+    width: .6vw;
+    height: .6vw;
+    border: 1px solid var(--secondary);
+    border-radius: 50px;
+    transition: all ease .3s;
+  
+  }
+  
+  #hire-btn:hover .cirr{
+    width: 2.5vw;
+    height: 2.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary);
+  } 
+  #hire-btn .cirr i{
+    color: var(--primary);
+    font-family: para3;
+    font-weight: 500;
+    font-size: 1vw;
+    display: none;
+  }
+  
+  #hire-btn:hover .cirr i{
+    display: block;
+  }
+  
+  #hire-btn h3{
+    position: relative;
+    transition: all ease .3s;
+    margin-right: 1vw;
+    font-family: para3;
+    font-size: 1vw;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--secondary);
+  }
+  #hire-btn:hover h3{
+    margin-right: 0;
+  }
+  
+  #hire-btn h3::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    right: 0;
+    bottom:0%;
+    background-color: var(--secondary);
+    height: .01vw;
+    transition: all ease .3s;
+  }
+  #hire-btn:hover h3::after{
+    width: 0;
+  }
+  
+  h2 {
+    font-family: heading2;
+    font-weight: 100;
+    line-height: 1.3;
+    font-size: 3vw;
+    color: var(--secondary);
+  }
+  h2 span {
+    font-family: heading2;
+    font-weight: 100;
+    font-size: 3vw;
+  }
+  h5,
+  h6 {
+    font-family: para3;
+    font-size: 1.2vw;
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--secondary);
+  }
+  #main {
+    width: 100%;
+    background-color: var(--primary);
+  }
+  #page1{
+    height: 100vh;
+    width: 100%;
+  }
