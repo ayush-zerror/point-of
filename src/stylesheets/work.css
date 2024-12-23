@@ -46,6 +46,9 @@
   --back: #f2f2ee83;
   --invert-filter: invert(0);
 }
+::-webkit-scrollbar{
+  display: none;
+}
 * {
   margin: 0;
   padding: 0;

@@ -415,6 +415,7 @@ h6 {
 #main {
   width: 100%;
   background-color: var(--primary);
+  overflow: hidden;
 }
 
 #page1 {

@@ -412,3 +412,77 @@
     height: 100vh;
     width: 100%;
   }
+
+  
+#mobile-logo {
+  display: none;
+}
+#mobile-logo img {
+  width: 40%;
+}
+
+@media (max-width: 600px) {
+  #navbar {
+    padding: 10vw 7vw;
+  }
+  #navbar #menu {
+    height: 5.5vw;
+    width: 5.5vw;
+    background-color: var(--secondary);
+  }
+  #navbar #logo {
+    display: none;
+  }
+  #logo {
+    display: none;
+  }
+  #mobile-logo {
+    display: block;
+  }
+  #mode {
+    display: none;
+  }
+
+  #navigation {
+    padding: 4vw 7vw;
+}
+
+  #leftm {
+    display: none;
+  }
+
+  #rightm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10vh;
+    padding-bottom: 8vw;
+  }
+
+  #shape-select a {
+    font-family: heading3;
+    font-size: 12vw;
+  }
+
+  #social-l a {
+    font-family: para3;
+    font-size: 4.5vw;
+  }
+
+  #nav-lef {
+    width: 65%;
+  }
+
+  #hire-btn h3 {
+    margin-right: 1vw;
+    font-size: 4.5vw;
+    white-space: nowrap;
+  }
+  #nav-btm {
+    height: auto;
+    padding:6vw 7vw;
+  }
+  
+}
