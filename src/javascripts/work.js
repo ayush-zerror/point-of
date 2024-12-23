@@ -898,7 +898,9 @@ function menuOpen() {
   var menu2 = false
   document.querySelector("#menu-c").addEventListener("click", function () {
     if (!menu) {
+     if(window.innerWidth > 600){
       gsap.set(".navbar1", { mixBlendMode: "difference" })
+     }
       gsap.to(".navigation1", {
         top: 0,
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
@@ -914,7 +916,9 @@ function menuOpen() {
         ease: "power4.out",
         onStart: function () {
           setTimeout(function () {
-            gsap.set(".navbar1", { mixBlendMode: "normal" })
+            if(window.innerWidth > 600){
+              gsap.set(".navbar1", { mixBlendMode: "normal" })
+            }
           }, 500)
         }
       })
@@ -923,11 +927,7 @@ function menuOpen() {
   })
 
   document.querySelector(".list-menu").addEventListener("click", function () {
-    console.log("hey");
-
     if (!menu2) {
-      console.log("hey2");
-
       gsap.to(".navigation2", {
         top: 0,
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",

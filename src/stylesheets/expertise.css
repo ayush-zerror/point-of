@@ -407,8 +407,11 @@ h6 {
 #main {
   width: 100%;
   background-color: var(--primary);
+  overflow: hidden;
 }
-
+::-webkit-scrollbar {
+  display: none;
+}
 #page1 {
   position: relative;
   height: 100vh;
@@ -579,7 +582,7 @@ h6 {
 #mobile-logo {
   display: none;
 }
-#mobile-logo img{
+#mobile-logo img {
   width: 40%;
 }
 
@@ -595,7 +598,7 @@ h6 {
   #navbar #logo {
     display: none;
   }
-  #logo{
+  #logo {
     display: none;
   }
   #mobile-logo {
@@ -605,6 +608,43 @@ h6 {
     display: none;
   }
 
+  #leftm {
+    display: none;
+  }
+
+  #rightm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10vh;
+    padding-bottom: 8vw;
+  }
+
+  #shape-select a {
+    font-family: heading3;
+    font-size: 12vw;
+  }
+
+  #social-l a {
+    font-family: para3;
+    font-size: 4.5vw;
+  }
+
+  #nav-lef {
+    width: 63%;
+  }
+
+  #hire-btn h3 {
+    margin-right: 1vw;
+    font-size: 4.5vw;
+    white-space: nowrap;
+  }
+  #nav-btm {
+    height: auto;
+    padding:6vw 4vw;
+  }
   #page2 {
     height: auto;
     width: 100%;
