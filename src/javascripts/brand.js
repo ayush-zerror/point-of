@@ -364,6 +364,48 @@ const yearData = [
 ];
 
 
+
+var tl = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#page2",
+        scroller:"body",
+        start: "top 70%",
+        end: "top 55%",
+        scrub:1,
+        // markers:true
+    }
+})
+
+tl
+.to(".numbers4",{
+    y:"-400%"
+},"a")
+
+.to(".numbers33",{
+    y:"-1200%"
+},"a")
+
+.to(".numbers3",{
+    y:"-100%"
+},"a")
+.to(".numbers2",{
+    y:"-500%"
+},"a")
+.to(".numbers22",{
+    y:"-1200%"
+},"a")
+.to(".numbers222",{
+    y:"-2000%"
+},"a")
+.to(".numbers1",{
+    y:"-400%"
+},"a")
+.to(".numbers11",{
+    y:"-1000%"
+},"a")
+
+
+
 //for rendering data of name data
 data.forEach((d, index) => {
     // Create brand div

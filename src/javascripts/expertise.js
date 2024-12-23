@@ -55,66 +55,118 @@ serviceBlurAnime(service6)
 function page3svgAnimation() {
     gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
-    const pathScroller = document.querySelector("#page3");
-    const panel = pathScroller.querySelector("#svg-container");
-    const circle = document.querySelector(".theCircle");
-    const circleShadow = document.querySelector(".theCircleShadow");
-    const path = document.querySelector(".theLine");
-    const circleGroup = [circle, circleShadow];
-    const textElements = panel.querySelectorAll("text");
+    if (window.innerWidth > 600) {
 
-    gsap.set(textElements, { opacity: 0.2 });
-    gsap.set(textElements[0], { opacity: 1 });
+        const pathScroller = document.querySelector("#page3");
+        const panel = pathScroller.querySelector("#svg-container");
+        const circle = document.querySelector(".theCircle");
+        const circleShadow = document.querySelector(".theCircleShadow");
+        const path = document.querySelector(".theLine");
+        const circleGroup = [circle, circleShadow];
+        const textElements = panel.querySelectorAll("text");
 
-    var tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: pathScroller,
-            scroller: "body",
-            // markers: true,
-            start: "top 0%",
-            end: "top -350%",
-            scrub: 1,
-            pin: true,
-        },
-    });
+        gsap.set(textElements, { opacity: 0.2 });
+        gsap.set(textElements[0], { opacity: 1 });
 
-    tl.to(circleGroup, {
-        motionPath: {
-            path: path,
-            align: path,
-            alignOrigin: [0.5, 0.5],
-            start: 0,
-            end: 1,
-        },
-        duration:4,
-        ease: "none",
-        onUpdate: () => {
-            let circleX =
-                circle.getBoundingClientRect().left +
-                circle.getBoundingClientRect().width / 2;
-            textElements.forEach((text) => {
-                let textX =
-                    text.getBoundingClientRect().left +
-                    text.getBoundingClientRect().width / 2;
-                let distanceX = Math.abs(circleX - textX);
-                let opacity = Math.max(
-                    0.2,
-                    1 - distanceX / (window.innerWidth / 2.2)
-                );
-                gsap.to(text, { opacity: opacity, immediateRender: false });
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: pathScroller,
+                scroller: "body",
+                // markers: true,
+                start: "top 0%",
+                end: "top -350%",
+                scrub: 1,
+                pin: true,
+            },
+        });
+
+        tl.to(circleGroup, {
+            motionPath: {
+                path: path,
+                align: path,
+                alignOrigin: [0.5, 0.5],
+                start: 0,
+                end: 1,
+            },
+            duration: 4,
+            ease: "none",
+            onUpdate: () => {
+                let circleX =
+                    circle.getBoundingClientRect().left +
+                    circle.getBoundingClientRect().width / 2;
+                textElements.forEach((text) => {
+                    let textX =
+                        text.getBoundingClientRect().left +
+                        text.getBoundingClientRect().width / 2;
+                    let distanceX = Math.abs(circleX - textX);
+                    let opacity = Math.max(
+                        0.2,
+                        1 - distanceX / (window.innerWidth / 2.2)
+                    );
+                    gsap.to(text, { opacity: opacity, immediateRender: false });
+                });
+            },
+        }, "a")
+            .to(panel, {
+                x: "-100vw",
+                duration: 3,
+            }, "a")
+            .to(panel, {
+                y: "-100vh",
+                duration: 1.5,
+                delay: 2.5
+            }, "a")
+    } else {
+
+        const pathScrollerMobile = document.querySelector("#page3-mobile");
+        const circleMobile = document.querySelector("#page3-mobile .theCircle");
+        const circleShadowMobile = document.querySelector("#page3-mobile .theCircleShadow");
+        const pathMobile = document.querySelector("#page3-mobile .theLine");
+        const circleGroupMobile = [circleMobile, circleShadowMobile];
+        const textElementsMobile = document.querySelectorAll("#svg-mobile text");
+        gsap.set(textElementsMobile, { opacity: 0.2 });
+        gsap.set(textElementsMobile[0], { opacity: 1 });
+
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: pathScrollerMobile,
+                scroller: "body",
+                markers: true,
+                start: "top 20%",
+                end: "top -50%",
+                scrub: 1,
+                markers: false
+            },
+        });
+
+        tl
+            .to(circleGroupMobile, {
+                motionPath: {
+                    path: pathMobile,
+                    align: pathMobile,
+                    alignOrigin: [0.5, 0.5],
+                    start: 0,
+                    end: 1,
+                    onUpdate: (self) => {
+                        let circleX =
+                            circleMobile.getBoundingClientRect().top +
+                            circleMobile.getBoundingClientRect().height / 2;
+                        textElementsMobile.forEach((text) => {
+                            let textX =
+                                text.getBoundingClientRect().top +
+                                text.getBoundingClientRect().height / 2;
+                            let distanceX = Math.abs(circleX - textX);
+                            let opacity = Math.max(
+                                0.2,
+                                1 - distanceX / (window.innerHeight / 2.2)
+                            );
+                            gsap.set(text, { opacity: opacity, immediateRender: !1 });
+                        });
+                    }
+                }
             });
-        },
-    },"a")
-    .to(panel,{
-        x:"-100vw",
-        duration:3,
-    },"a")
-    .to(panel,{
-        y:"-100vh",
-        duration:1.5,
-        delay:2.5
-    },"a")
-   
+    }
+
 }
 page3svgAnimation();
 
@@ -208,41 +260,41 @@ page3svgAnimation();
 //         });
 
 //         //mobile
-//         //   totalHeight = panelMobile.offsetHeight;
-//         //   gsap.to(circleGroupMobile, {
-//         //     motionPath: {
-//         //       path: pathMobile,
-//         //       align: pathMobile,
-//         //       alignOrigin: [0.5, 0.5],
-//         //       start: 0,
-//         //       end: 1,
-//         //     },
-//         //     ease: "none",
-//         //     scrollTrigger: {
-//         //       trigger: pathScrollerMobile,
-//         //       start: "top 20%",
-//         //       end: () => "${totalHeight * 0.7} 70vw",
-//         //       scrub: 1.2,
-//         //       onUpdate: (self) => {
-//         //         let circleX =
-//         //           circleMobile.getBoundingClientRect().top +
-//         //           circleMobile.getBoundingClientRect().height / 2;
-//         //         textElementsMobile.forEach((text) => {
-//         //           let textX =
-//         //             text.getBoundingClientRect().top +
-//         //             text.getBoundingClientRect().height / 2;
-//         //           let distanceX = Math.abs(circleX - textX);
-//         //           let opacity = Math.max(
-//         //             0.2,
-//         //             1 - distanceX / (window.innerHeight / 2.2)
-//         //           );
-//         //           gsap.to(text, { opacity: opacity, immediateRender: !1 });
-//         //         });
-//         //       },
-//         //       markers: !1,
-//         //     },
-//         //   });
-//     }
+//   totalHeight = panelMobile.offsetHeight;
+//   gsap.to(circleGroupMobile, {
+//     motionPath: {
+//       path: pathMobile,
+//       align: pathMobile,
+//       alignOrigin: [0.5, 0.5],
+//       start: 0,
+//       end: 1,
+//     },
+//     ease: "none",
+//     scrollTrigger: {
+//       trigger: pathScrollerMobile,
+//       start: "top 20%",
+//       end: () => "${totalHeight * 0.7} 70vw",
+//       scrub: 1.2,
+//       onUpdate: (self) => {
+//         let circleX =
+//           circleMobile.getBoundingClientRect().top +
+//           circleMobile.getBoundingClientRect().height / 2;
+//         textElementsMobile.forEach((text) => {
+//           let textX =
+//             text.getBoundingClientRect().top +
+//             text.getBoundingClientRect().height / 2;
+//           let distanceX = Math.abs(circleX - textX);
+//           let opacity = Math.max(
+//             0.2,
+//             1 - distanceX / (window.innerHeight / 2.2)
+//           );
+//           gsap.to(text, { opacity: opacity, immediateRender: !1 });
+//         });
+//       },
+//       markers: !1,
+//     },
+//   });
+//    }
 //     function reinit() {
 //         gsap.set([pathScroller, panel, pathScrollerMobile, panelMobile], {
 //             clearProps: "all",

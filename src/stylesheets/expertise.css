@@ -57,7 +57,7 @@ body {
   height: 100%;
   overflow: hidden;
 }
-a{
+a {
   text-decoration: none;
 }
 #cursor {
@@ -117,7 +117,7 @@ a{
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: fit-content;
   font-family: para2;
   font-weight: 600;
@@ -411,33 +411,33 @@ h6 {
 }
 
 #page1 {
-    position: relative;
+  position: relative;
   height: 100vh;
   width: 100%;
 }
-#page1 video{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+#page1 video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
-#page1 #overlay{
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    padding: 2.3vw 2vw;
-    display: flex;
-    align-items: end;
-    background: linear-gradient(to bottom, transparent,rgba(0, 0, 0, 0.718));
+#page1 #overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 2.3vw 2vw;
+  display: flex;
+  align-items: end;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.718));
 }
-#page1 #overlay h2{
-    font-family: heading5;
-    color: rgba(255, 255, 255, 0.701);
-    text-transform: uppercase;
-    font-size: 3.8vw;
-    line-height: 1;
+#page1 #overlay h2 {
+  font-family: heading5;
+  color: rgba(255, 255, 255, 0.701);
+  text-transform: uppercase;
+  font-size: 3.8vw;
+  line-height: 1;
 }
 #page2 {
   height: 110vh;
@@ -449,30 +449,30 @@ h6 {
   justify-content: center;
 }
 
-#page2 #wrp{
+#page2 #wrp {
   width: 100%;
   display: flex;
   align-items: start;
   justify-content: space-between;
 }
-#lfs{
+#lfs {
   width: 35%;
 }
-#lfs h2{
-  line-height: .8;
+#lfs h2 {
+  line-height: 0.8;
 }
-#lfs h5{
+#lfs h5 {
   width: 65%;
   margin-top: 1vw;
 }
-#rts{
+#rts {
   width: 60%;
   display: flex;
   justify-content: space-between;
   align-items: start;
   flex-wrap: wrap;
 }
-#rts .service{
+#rts .service {
   width: 30%;
   margin-bottom: 4vw;
   height: 30vh;
@@ -481,15 +481,13 @@ h6 {
   justify-content: space-between;
 }
 
-
-
-#rts .service h2{
+#rts .service h2 {
   font-family: heading6;
   font-size: 1.3vw;
   font-weight: 500;
-  margin-bottom: .6vw;
+  margin-bottom: 0.6vw;
 }
-#rts .service h5{
+#rts .service h5 {
   width: fit-content;
 }
 
@@ -555,34 +553,125 @@ h6 {
   right: 0;
   bottom: 0%;
   background-color: var(--secondary);
-  height: .01vw;
+  height: 0.01vw;
   transition: all ease 0.3s;
 }
 #more-btn:hover h3::after {
   width: 0;
 }
 
-
-#page3{
+#page3 {
   height: 110vh;
   padding-top: 10vh;
   width: 100vw;
   overflow: hidden;
 }
-#page3 #svg-container{
+#page3 #svg-container {
   width: 200vw;
   height: 200vh;
 }
 
+#page3-mobile {
+  width: 100%;
+  height: auto;
+  display: none;
+}
 
-/* 
-#page3{
-  padding-top: 10vh;
-  width: 210vw;
-  min-width: 1500px;
-  overflow: hidden;
+#mobile-logo {
+  display: none;
 }
-#page3 #svg-container{
-  width: 180vw;
+#mobile-logo img{
+  width: 40%;
 }
- */
+
+@media (max-width: 600px) {
+  #navbar {
+    padding: 10vw 4vw;
+  }
+  #navbar #menu {
+    height: 5.5vw;
+    width: 5.5vw;
+    background-color: var(--secondary);
+  }
+  #navbar #logo {
+    display: none;
+  }
+  #logo{
+    display: none;
+  }
+  #mobile-logo {
+    display: block;
+  }
+  #mode {
+    display: none;
+  }
+
+  #page2 {
+    height: auto;
+    width: 100%;
+    padding: 15vw 4vw;
+  }
+  #page2 #wrp {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 8vw;
+  }
+  #lfs {
+    width: 100%;
+  }
+  #lfs h2 {
+    font-size: 8vw;
+    font-family: heading3;
+  }
+  #lfs h5 {
+    width: 85%;
+    line-height: 1.2;
+    font-size: 4.5vw;
+    margin-top: 6vw;
+  }
+
+  #rts {
+    width: 100%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+  }
+  #rts .service {
+    width: 100%;
+    margin-bottom: 10vw;
+    height: auto;
+    gap: 5vw;
+  }
+  #rts .service h2 {
+    font-family: heading5;
+    font-size: 5vw;
+    margin-bottom: 3vw;
+  }
+  #rts .service h5 {
+    font-size: 4.5vw;
+    width: fit-content;
+  }
+
+  #more-btn {
+    margin: 0;
+  }
+  #more-btn h3 {
+    margin-right: 1vw;
+    font-size: 3.8vw;
+    color: var(--secondary);
+  }
+  #more-btn h3::after {
+    height: 0.2vw;
+  }
+  #more-btn .cirr {
+    display: none;
+  }
+  #page3 {
+    display: none;
+  }
+  #page3-mobile {
+    display: block;
+  }
+}

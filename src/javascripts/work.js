@@ -1,8 +1,10 @@
 const slides = document.querySelectorAll(".slide");
 const innerSlides = document.querySelectorAll(".inner-slide");
 const counts = document.querySelectorAll("#count-wraper span")
+const filterCount = document.querySelector("#filter-count")
 let currentSlide = 0;
 let isAnimating = false;
+var projectByFilter = null;
 
 window.addEventListener('load', () => {
   if (sessionStorage.getItem('reloadPrevious') === 'true') {
@@ -11,6 +13,7 @@ window.addEventListener('load', () => {
   }
 });
 
+//scroll animation for gallery view
 document.addEventListener("wheel", function (e) {
   if (isAnimating) return; // Prevent overlapping animations
   isAnimating = true;
@@ -133,7 +136,6 @@ document.addEventListener("wheel", function (e) {
           })
         }
       }, "a")
-
 
 
 
@@ -302,163 +304,231 @@ document.addEventListener("wheel", function (e) {
 const projects = [
   {
     image: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png",
-    route: "/work-contigo"
+    route: "/work-contigo",
+    service: "Web Design",
+    industry: "E-commerce",
+    year: 2023,
+    name: "Contigo"
   },
   {
     image: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/8bf51c209757845.67053c2f6afcf.png",
-    route: "/work-typcaste"
+    route: "/work-typcaste",
+    service: "Branding",
+    industry: "Education",
+    year: 2022,
+    name: "Typcaste"
   },
   {
     image: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/c4be78168579017.670cc5493709c.png",
-    route: "/work-label-ritu-kumar"
+    route: "/work-label-ritu-kumar",
+    service: "Fashion Design",
+    industry: "Fashion",
+    year: 2021,
+    name: "Ritu Kumar Label"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/20d07e6f0c/pixelflakes-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-pixel-flakes"
+    route: "/work-pixel-flakes",
+    service: "Web Development",
+    industry: "Technology",
+    year: 2023,
+    name: "Pixel Flakes"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/8f08135741/studio-d-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-studio-d"
+    route: "/work-studio-d",
+    service: "Interior Design",
+    industry: "Architecture",
+    year: 2024,
+    name: "Studio D"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/fab67b71d9/plugged-live-shows-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-plugged-live-show"
+    route: "/work-plugged-live-show",
+    service: "Branding",
+    industry: "Entertainment",
+    year: 2024,
+    name: "Plugged Live Shows"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/13b1c95334/ali-ali-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-ali-ali"
+    route: "/work-ali-ali",
+    service: "Web Design",
+    industry: "E-commerce",
+    year: 2022,
+    name: "Ali Ali"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/dd4fa8bc81/stock-dutch-design-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-stock-dutch-design"
+    route: "/work-stock-dutch-design",
+    service: "Branding",
+    industry: "Interior Design",
+    year: 2021,
+    name: "Stock Dutch Design"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/e4828e1c81/st-regis-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-the-st-regis-venice"
+    route: "/work-the-st-regis-venice",
+    service: "Web Design",
+    industry: "Architecture",
+    year: 2020,
+    name: "St. Regis Venice"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/b66359da25/rino-pelle-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-rino-&-pelle"
+    route: "/work-rino-&-pelle",
+    service: "Fashion Design",
+    industry: "Fashion",
+    year: 2022,
+    name: "Rino & Pelle"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/3e8f8d08f7/aebele-interiors-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-aebele-interiors"
+    route: "/work-aebele-interiors",
+    service: "Interior Design",
+    industry: "Architecture",
+    year: 2021,
+    name: "Aebele Interiors"
   },
   {
     image: "https://a.storyblok.com/f/133769/2400x2990/0afea0107c/ottografie-hero.jpg/m/2400x2990/filters:quality(80)",
-    route: "/work-ottografie"
+    route: "/work-ottografie",
+    service: "Web Development",
+    industry: "Technology",
+    year: 2020,
+    name: "Ottografie"
   }
-]
+];
 
+filterCount.textContent = projects.length
 
+//rendering project in mobile view
+if(window.innerWidth <= 600){
+  document.querySelector("#page1-mobile").innerHTML = ""
+  var clutter = ""
+  projects.forEach(function(project){
+    clutter += ` <a href=${project.route} class="project-m">
+                <div class="project-showcase">
+                    <img src=${project.image} alt="">
+                </div>
+                <h4>${project.name}</h4>
+                <p>Frontier Health Innovation</p>
+            </a>`
+  })
 
-//for rendering all projects as list
-document.querySelector("#allproject").addEventListener("click", async function () {
-  if (isAnimating) return
-  document.querySelectorAll(".project").forEach(p => p.remove())
-  const filterProject = projects.filter((p, i) => i !== currentSlide)
+  document.querySelector("#page1-mobile").innerHTML = clutter
+}
 
-  // Helper function to create a video element with the specified properties
-  function createVideoElement(src) {
-    const video = document.createElement("video");
-    Object.assign(video, {
-      autoplay: true,
-      muted: true,
-      loop: true,
-      playsInline: true,
-      src: src,
-    });
-    return video;
-  }
-
-  // Utility function to create an element with optional attributes and children
-  function createElement(tag, options = {}, ...children) {
-    const element = document.createElement(tag);
-    if (options.classes) element.classList.add(...options.classes);
-    if (options.attributes) {
-      for (const key in options.attributes) {
-        element.setAttribute(key, options.attributes[key]);
-      }
+// Utility function to create an element with optional attributes and children
+function createElement(tag, options = {}, ...children) {
+  const element = document.createElement(tag);
+  if (options.classes) element.classList.add(...options.classes);
+  if (options.attributes) {
+    for (const key in options.attributes) {
+      element.setAttribute(key, options.attributes[key]);
     }
-    if (options.style) Object.assign(element.style, options.style);
-    children.forEach(child => element.appendChild(child));
-    return element;
   }
+  if (options.style) Object.assign(element.style, options.style);
+  children.forEach(child => element.appendChild(child));
+  return element;
+}
 
-  // Main rendering logic
-  (function renderProjects() {
-    const fragment = document.createDocumentFragment(); // Create one fragment for all projects
-    const container = document.querySelector("#list"); // Cache the container reference
+// Main rendering logic for list cards
+function renderProjects(filteredData, centerDiv = true) {
+  const fragment = document.createDocumentFragment(); // Create one fragment for all projects
+  const container = document.querySelector("#list-content"); // Cache the container reference
+  container.innerHTML = ""
 
-    filterProject.forEach((project, index) => {
-      // Create the main project div
-      const div = createElement(
-        "div",
-        {
-          classes: ["project", "animate"],
-          attributes: { "data-url": project.route },
-        },
-        createElement("img", { attributes: { src: project.image } }),
-      );
+  filteredData.forEach((project, index) => {
+    // Create the parentProject div
+    const parentProject = createElement("div");
+    parentProject.classList.add("project-parent", "project", "animate");
+    parentProject.setAttribute("data-url", project.route)
 
-      fragment.appendChild(div);
+    // Create the textWrapper div with an h5 inside
+    const textWrapper = createElement(
+      "div", // The textWrapper div
+      {
+        classes: ["text-wrapper"],
+      }, // No specific options for this div
+      createElement("h5", {}, document.createTextNode(project.name)) // h5 with text inside
+    );
 
-      // Handle special case for the first project
+    // Create the project div with an image inside
+    const projectDiv = createElement(
+      "div",
+      {
+        classes: ["project-child"], // Add classes
+      },
+      createElement("img", {
+        attributes: { src: project.image }, // Image attributes
+      })
+    );
+
+    // Append the textWrapper and projectDiv to parentProject
+    parentProject.appendChild(textWrapper);
+    parentProject.appendChild(projectDiv);
+
+    fragment.appendChild(parentProject);
+
+    // Handle special case for the first project
+    if (centerDiv) {
       if (index === 0) {
+        // Create the parent div for emptyDiv
+        const parentEmptyDiv = createElement("div");
+        parentEmptyDiv.classList.add("project-parent", "project");
+        parentEmptyDiv.setAttribute("data-url", projects[currentSlide].route)
+
+
+
+        // Create the textWrapper div with an h5 inside for emptyDiv
+        const textWrapperEmpty = createElement(
+          "div",
+          {
+            classes: ["text-wrapper"],
+          }, // No specific options for this div
+          createElement("h5", {}, document.createTextNode(projects[currentSlide].name)) // h5 with text inside
+        );
+
+        // Create the emptyDiv with an image inside
         const emptyDiv = createElement(
           "div",
           {
-            classes: ["project"],
-            attributes: { "data-url": projects[currentSlide].route },
+            classes: ["project-child"], // Add classes
           },
           createElement("img", {
-            attributes: { src: projects[currentSlide].image },
-            style: { objectPosition: "50% 0%" },
-          }),
+            attributes: { src: projects[currentSlide].image }, // Image attributes
+            style: { objectPosition: "50% 0%" }, // Apply style directly
+          })
         );
 
-        fragment.appendChild(emptyDiv);
+        // Append the textWrapper and emptyDiv to parentEmptyDiv
+        parentEmptyDiv.appendChild(textWrapperEmpty);
+        parentEmptyDiv.appendChild(emptyDiv);
+
+        fragment.appendChild(parentEmptyDiv);
       }
-    });
-
-    // Append all elements to the container at once
-    container.appendChild(fragment);
-  })();
-
-
-  isAnimating = true
-  const allp = document.querySelectorAll(".animate")
-  gsap.set(allp, {
-    y: 200,
-  })
-  gsap.to(slides[currentSlide].querySelector("img"), {
-    scale: 1.3,
-    duration: .3,
-  })
-  gsap.to("#list", {
-    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-    duration: .5,
-  })
-  gsap.to(allp, {
-    y: 0,
-    stagger: {
-      amount: 0.3,
-    },
-    duration: .5,
-    onComplete: () => {
-      gsap.set("#inner-container", {
-        zIndex: -1
-      })
     }
-  })
+  });
 
-  document.querySelectorAll(".project").forEach(function (project) {
+  // Append all elements to the container at once
+  container.appendChild(fragment);
+}
+
+//lists cards click animation
+function listClickAnimation() {
+  document.querySelectorAll(".project-parent").forEach(function (project) {
     project.addEventListener("click", function (event) {
       const route = project.getAttribute("data-url")
       gsap.to(document.querySelector(".navbar2"), {
         opacity: 0,
         top: "-10%",
         duration: .8,
+        ease: "expo.out",
+      })
+      gsap.to(project.querySelector("h5"), {
+        opacity: 0,
+        duration: .2,
         ease: "expo.out",
       })
 
@@ -487,8 +557,8 @@ document.querySelector("#allproject").addEventListener("click", async function (
       // Animate the project element to expand and move to the top-left corner
       gsap.to(project, {
         width: "100vw",
-        height: "100vh",
-        top: 0,
+        height: `103.5vh`,
+        top: "-3.6vh",
         left: 0,
         duration: 1,
         ease: "power4.inOut",
@@ -503,11 +573,58 @@ document.querySelector("#allproject").addEventListener("click", async function (
 
     });
   });
+}
 
+
+//for rendering all projects as list
+document.querySelector("#allproject").addEventListener("click", async function () {
+  if (isAnimating) return
+  isAnimating = true
+  // var filterProject;
+  // if (projectByFilter?.length > 0) {
+  //   filterProject = projectByFilter
+  //   renderProjects(filterProject , false)
+  // } else {
+  //   filterProject = projects.filter((p, i) => i !== currentSlide)
+  //   renderProjects(filterProject)
+
+  // }
+  const filterProject = projects.filter((p, i) => i !== currentSlide)
+  renderProjects(filterProject)
+  listClickAnimation()
+
+  function listOpeningAnimation() {
+    const allp = document.querySelectorAll(".animate")
+    gsap.set(allp, {
+      y: 200,
+    })
+    gsap.to(slides[currentSlide].querySelector("img"), {
+      scale: 1.3,
+      duration: .3,
+    })
+    gsap.to("#list", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      duration: .5,
+    })
+    gsap.to(allp, {
+      y: 0,
+      stagger: {
+        amount: 0.3,
+      },
+      duration: .5,
+      onComplete: () => {
+        gsap.set("#inner-container", {
+          zIndex: -1
+        })
+      }
+    })
+  }
+  listOpeningAnimation()
 
 
 })
 
+//for closing grid view
 document.querySelector("#close-btn").addEventListener("click", function () {
   const allc = document.querySelectorAll(".animate")
   var tl = gsap.timeline()
@@ -550,11 +667,11 @@ document.querySelector("#close-btn").addEventListener("click", function () {
     zIndex: 3,
     delay: .5
   })
-
+  resetFilter()
   isAnimating = false
 })
 
-
+//dark mode
 function darkMode() {
   // Initialize mode based on localStorage or default to false
   var mode = localStorage.getItem("mode") === "true";
@@ -693,8 +810,15 @@ linear-gradient(
 darkMode();
 
 
+//gallery view click animation
 document.querySelector("#inner-container").addEventListener("click", function () {
   isAnimating = true
+  gsap.to(document.querySelector(".navbar1"), {
+    opacity: 0,
+    top: "-10%",
+    duration: .8,
+    ease: "expo.out",
+  })
   gsap.set("#inner-container", {
     objectPosition: "50% 0",
   });
@@ -720,7 +844,7 @@ document.querySelector("#inner-container").addEventListener("click", function ()
   });
 })
 
-
+//logo animation on scroll
 function logo() {
 
   const point = document.querySelector("#point")
@@ -768,38 +892,7 @@ function logo() {
 }
 logo()
 
-
-document.querySelector("#filter-btn").addEventListener("click", function () {
-  gsap.set("#filterl", {
-    top: "0%"
-  })
-  gsap.to("#filterl", {
-    opacity: 1,
-    duration: .3
-  })
-  gsap.to("#filter-content",{
-    bottom: "0%",
-    duration: .5
-  })
-})
-
-document.querySelector("#cross").addEventListener("click", function () {
-  gsap.to("#filterl", {
-    opacity: 0,
-    duration: .3
-  })
-  gsap.to("#filter-content", {
-    bottom: "-100%",
-    duration: .6,
-    onComplete: function () {
-      gsap.set("#filterl", {
-        top: "100%"
-      })
-    }
-  })
-})
-
-
+// menu open close
 function menuOpen() {
   var menu = false
   var menu2 = false
@@ -820,9 +913,9 @@ function menuOpen() {
         duration: 1.5,
         ease: "power4.out",
         onStart: function () {
-         setTimeout(function(){
-          gsap.set(".navbar1", { mixBlendMode: "normal"})
-         },500)
+          setTimeout(function () {
+            gsap.set(".navbar1", { mixBlendMode: "normal" })
+          }, 500)
         }
       })
       menu = false
@@ -948,6 +1041,160 @@ function menuOpen() {
 }
 menuOpen()
 
+//filter open btn
+document.querySelector("#filter-btn").addEventListener("click", function () {
+  gsap.set("#filterl", {
+    top: "0%"
+  })
+  gsap.to("#filterl", {
+    opacity: 1,
+    duration: .3
+  })
+  gsap.to("#filter-content", {
+    bottom: "0%",
+    duration: .5
+  })
+})
 
+//filter close btn
+document.querySelector("#cross").addEventListener("click", function () {
+  if (projectByFilter.length === 0) {
+    const filterProject = projects.filter((p, i) => i !== currentSlide)
+    renderProjects(filterProject)
+    listClickAnimation()
+  }
+  gsap.to("#filterl", {
+    opacity: 0,
+    duration: .3
+  })
+  gsap.to("#filter-content", {
+    bottom: "-100%",
+    duration: .6,
+    onComplete: function () {
+      gsap.set("#filterl", {
+        top: "100%"
+      })
+    }
+  })
+})
 
+const serviceFls = document.querySelectorAll(".fl-service h5")
+const industryFls = document.querySelectorAll(".fl-industry h5")
+const yearFls = document.querySelectorAll(".fl-year h5")
+const resetbtn = document.querySelector("#reset-btn")
+var service = null
+var industry = null
+var year = null
 
+// for selecting filter
+function toActiveFilter(services) {
+  services.forEach(function (l) {
+    l.addEventListener("click", async function () {
+      for (var i = 0; i < services.length; i++) {
+        if (services[i] !== l) {
+          services[i].classList.remove("active");
+          services[i].style.opacity = .4;
+        }
+        else {
+          l.classList.add("active");
+          l.style.opacity = 1;
+        }
+      }
+      await checkForFilter()
+      console.log(service, industry, year);
+
+      projectByFilter = [];
+      projectByFilter = projects.filter(project => {
+        const matchesService = service ? project.service === service : true;
+        const matchesIndustry = industry ? project.industry === industry : true;
+        const matchesYear = year ? project.year === year : true;
+        // Return true if all filters (non-null values) match
+        return matchesService && matchesIndustry && matchesYear;
+      });
+      if (projectByFilter.length > 0) {
+        filterCount.textContent = projectByFilter.length
+        document.querySelector("#filter-view").style.display = "block";
+        document.querySelector("#notFound").style.display = "none"
+      } else {
+        document.querySelector("#filter-view").style.display = "none";
+        document.querySelector("#notFound").style.display = "block"
+      }
+
+      resetbtn.style.display = "block";
+    })
+  })
+
+}
+toActiveFilter(serviceFls)
+toActiveFilter(industryFls)
+toActiveFilter(yearFls)
+
+// reset filter
+document.querySelector("#reset-btn").addEventListener("click", function () {
+  document.querySelectorAll(".filter-by h5").forEach(function (item) {
+    resetFilter()
+  })
+})
+
+function resetFilter(){
+  document.querySelectorAll(".filter-by h5").forEach(function (item) {
+    item.classList.remove("active");
+    item.style.opacity = 1;
+    resetbtn.style.display = "none";
+    filterCount.textContent = projects.length
+    service = null
+    industry = null
+    year = null
+    projectByFilter = []
+  })
+}
+
+//view filtered projects
+document.querySelector("#filter-view").addEventListener("click", function (e) {
+  if (projectByFilter && projectByFilter.length > 0) {
+    if (projectByFilter.length === 1) {
+      document.querySelector("#list-content").style.justifyContent = "center"
+    }
+    else {
+      document.querySelector("#list-content").style.justifyContent = "start"
+    }
+    renderProjects(projectByFilter, false)
+    listClickAnimation()
+  } else {
+    const filterProject = projects.filter((p, i) => i !== currentSlide)
+    renderProjects(filterProject)
+    listClickAnimation()
+  }
+  gsap.to("#filterl", {
+    opacity: 0,
+    duration: .3
+  })
+  gsap.to("#filter-content", {
+    bottom: "-100%",
+    duration: .6,
+    onComplete: function () {
+      gsap.set("#filterl", {
+        top: "100%"
+      })
+    }
+  })
+})
+
+//provide selected filter option
+async function checkForFilter() {
+  serviceFls.forEach(function (s) {
+    if (s.classList.contains("active")) {
+      service = s.textContent.trim()
+    }
+  })
+  industryFls.forEach(function (i) {
+    if (i.classList.contains("active")) {
+      industry = i.textContent.trim()
+    }
+  })
+  yearFls.forEach(function (y) {
+    if (y.classList.contains("active")) {
+      year = Number(y.textContent.trim())
+    }
+  })
+}
