@@ -166,7 +166,7 @@ a {
   background-color: var(--primary);
   clip-path: polygon(0 0, 100% 0, 100% 97%, 0 89%);
   position: fixed;
-  top: -100%;
+  top: -130%;
   left: 0;
   z-index: 5;
   display: flex;
