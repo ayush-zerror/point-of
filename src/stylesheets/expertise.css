@@ -577,6 +577,7 @@ h6 {
   width: 100%;
   height: auto;
   display: none;
+  padding: 2vw 7vw;
 }
 
 #mobile-logo {
@@ -588,7 +589,7 @@ h6 {
 
 @media (max-width: 600px) {
   #navbar {
-    padding: 10vw 4vw;
+    padding: 10vw 7vw;
   }
   #navbar #menu {
     height: 5.5vw;
@@ -607,6 +608,10 @@ h6 {
   #mode {
     display: none;
   }
+
+  #navigation {
+    padding: 4vw 7vw;
+}
 
   #leftm {
     display: none;
@@ -633,7 +638,7 @@ h6 {
   }
 
   #nav-lef {
-    width: 63%;
+    width: 65%;
   }
 
   #hire-btn h3 {
@@ -643,12 +648,12 @@ h6 {
   }
   #nav-btm {
     height: auto;
-    padding:6vw 4vw;
+    padding:6vw 7vw;
   }
   #page2 {
     height: auto;
     width: 100%;
-    padding: 15vw 4vw;
+    padding: 15vw 7vw;
   }
   #page2 #wrp {
     width: 100%;

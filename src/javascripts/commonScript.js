@@ -238,7 +238,7 @@ function menuOpen() {
       menu = true
     } else {
       gsap.to("#navigation", {
-        top: "-100%",
+        top: "-130%",
         clipPath: "polygon(0 0, 100% 0, 100% 97%, 0 89%)",
         duration: 1.5,
         ease: "power4.out"
