@@ -844,11 +844,11 @@ h6 {
     font-size: 14vw;
   }
   #page2 {
-    height: 170vh;
+    min-height: 190vh !important;
     padding: 10vw 7vw;
   }
   #page2 #space {
-    height: 80vh;
+    height: 60vh;
   }
   #page2 #text-con {
     width: 100%;
@@ -906,6 +906,9 @@ h6 {
   h6 {
     font-size: 4.5vw;
     width: 100%;
+  }
+  #page3 .showcase .elem.elemtxt{
+    height: fit-content !important;
   }
   #fullView-container {
     padding: 0 7vw;
