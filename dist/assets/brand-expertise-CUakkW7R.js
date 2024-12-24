@@ -1,0 +1,2 @@
+document.querySelector(".explore-btn").addEventListener("click",function(){let e=document.querySelector("#page1").offsetHeight;gsap.to(window,{scrollTo:{y:e,duration:1.5},ease:"power2.inOut"})});const s=document.querySelectorAll(".accordion");s.forEach(e=>{e.addEventListener("click",()=>{for(var t=0;t<s.length;t++)s[t]!==e?s[t].classList.remove("active"):e.classList.contains("active")?e.classList.remove("active"):e.classList.add("active")})});
+//# sourceMappingURL=brand-expertise-CUakkW7R.js.map
