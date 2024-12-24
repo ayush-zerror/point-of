@@ -297,7 +297,19 @@ body {
   height: 100%;
   width: 100%;
   background-color: var(--secondary);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
+
+#shape6{
+  position: absolute;
+  opacity: 0;
+  transform: rotate(40deg) scale(0.9);
+  height: 100%;
+  width: 100%;
+  background-color: var(--secondary);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
 
 #nav-btm {
   position: absolute;

@@ -1,7 +1,9 @@
 const nameContainer = document.querySelector("#brands-name")
+const defaultContainer = document.querySelector("#brands-default")
 const serviceContainer = document.querySelector("#brands-service")
 const industryContainer = document.querySelector("#brands-industry")
 const yearContainer = document.querySelector("#brands-year")
+const brandMobileyearContainer = document.querySelector("#brand-container")
 const showcaseConatiner = document.querySelector("#project-showcase")
 const data = [
     { projectName: "NovaSphere", service: "Web Development", industry: "Information Technology", year: 2021, image: "https://images.unsplash.com/photo-1726824766948-422e1e34a2e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDM5fENEd3V3WEpBYkV3fHxlbnwwfHx8fHw%3D" },
@@ -368,41 +370,41 @@ const yearData = [
 var tl = gsap.timeline({
     scrollTrigger: {
         trigger: "#page2",
-        scroller:"body",
+        scroller: "body",
         start: "top 70%",
         end: "top 55%",
-        scrub:1,
+        scrub: 1,
         // markers:true
     }
 })
 
 tl
-.to(".numbers4",{
-    y:"-400%"
-},"a")
+    .to(".numbers4", {
+        y: "-400%"
+    }, "a")
 
-.to(".numbers33",{
-    y:"-1200%"
-},"a")
+    .to(".numbers33", {
+        y: "-1200%"
+    }, "a")
 
-.to(".numbers3",{
-    y:"-100%"
-},"a")
-.to(".numbers2",{
-    y:"-500%"
-},"a")
-.to(".numbers22",{
-    y:"-1200%"
-},"a")
-.to(".numbers222",{
-    y:"-2000%"
-},"a")
-.to(".numbers1",{
-    y:"-400%"
-},"a")
-.to(".numbers11",{
-    y:"-1000%"
-},"a")
+    .to(".numbers3", {
+        y: "-100%"
+    }, "a")
+    .to(".numbers2", {
+        y: "-500%"
+    }, "a")
+    .to(".numbers22", {
+        y: "-1200%"
+    }, "a")
+    .to(".numbers222", {
+        y: "-2000%"
+    }, "a")
+    .to(".numbers1", {
+        y: "-400%"
+    }, "a")
+    .to(".numbers11", {
+        y: "-1000%"
+    }, "a")
 
 
 
@@ -464,8 +466,55 @@ data.forEach((d, index) => {
     showcaseConatiner.appendChild(showDiv);
 });
 
-//for rendering data of services data
+//for rendering default data
+data.forEach((d, index) => {
+    // Create brand div
+    const brandDiv = document.createElement("div");
+    brandDiv.classList.add('brand', 'brand-hover');
+    brandDiv.setAttribute("data-index", index);
 
+    // Create service div
+    const serviceDiv = document.createElement("div");
+    serviceDiv.className = "serv";
+    const projectName = document.createElement("h5");
+    const serviceHeading = document.createElement("h5");
+    projectName.textContent = d.projectName;
+    serviceHeading.textContent = d.service;
+    serviceDiv.appendChild(projectName);
+    serviceDiv.appendChild(serviceHeading);
+
+    // Create rit div
+    const ritDiv = document.createElement("div");
+    ritDiv.className = "rit";
+
+    // Create industry div
+    const industryDiv = document.createElement("div");
+    industryDiv.className = "industry";
+    const industryHeading = document.createElement("h5");
+    industryHeading.textContent = d.industry;
+    industryDiv.appendChild(industryHeading);
+
+    // Create year div
+    const yearDiv = document.createElement("div");
+    yearDiv.className = "year";
+    const yearHeading = document.createElement("h5");
+    yearHeading.textContent = d.year;
+    yearDiv.appendChild(yearHeading);
+
+    // Append industry and year to rit div
+    ritDiv.appendChild(industryDiv);
+    ritDiv.appendChild(yearDiv);
+
+    // Append service and rit to brand div
+    brandDiv.appendChild(serviceDiv);
+    brandDiv.appendChild(ritDiv);
+
+    // Add brand div to container
+    defaultContainer.appendChild(brandDiv);
+});
+
+
+//for rendering data of services data
 serviceData.forEach(function (y, index) {
     // Create the main container for the year
     var brandYearDiv = document.createElement('div');
@@ -648,6 +697,22 @@ yearData.reverse().forEach(function (y, index) {
     yearContainer.appendChild(brandYearDiv);
 });
 
+//for rendering data in mobile
+var clutterm = ""
+data.forEach(function (data) {
+    clutterm += `
+     <div class="brand-m">
+                <div class="location">
+                    <h5>${data.service}</h5>
+                    <h5>${data.year}</h5>
+                </div>
+                <h4>${data.projectName}</h4>
+            </div>
+    `
+})
+
+brandMobileyearContainer.innerHTML = clutterm
+
 
 function brandHoverAnimation() {
     document.querySelectorAll(".brand-hover").forEach(function (b) {
@@ -691,23 +756,37 @@ function filtering() {
             // Initialize previousCategory to null for each click
             let previousCategory = null;
             let currentCategory = null;
+            currentCategory = c.dataset.container;
 
             // Loop through all capsules to find the active one
             for (var i = 0; i < capsule.length; i++) {
-                if (capsule[i].classList.contains("active")) {
+                if (c.classList.contains("active")) {
+                    previousCategory = c.dataset.container;
+                    c.classList.remove("active");
+                    c.querySelector("h6").textContent = 'Click to filter'
+                    currentCategory = "#brands-default";
+                    break
+                }
+                else if (capsule[i].classList.contains("active")) {
                     previousCategory = capsule[i].dataset.container;
                     capsule[i].classList.remove("active");
                     capsule[i].querySelector("h6").textContent = 'Click to filter'
                 }
             }
 
-            currentCategory = c.dataset.container;
+            if (previousCategory === null) {
+                previousCategory = "#brands-default";
+            }
+
+
             // Now that previousCategory has been set, determine categoryToRemove
             let divToRemove = document.querySelector(previousCategory)
             let divToAdd = document.querySelector(currentCategory)
             // Add the active class to the clicked capsule
-            c.classList.add("active");
-            c.querySelector("h6").textContent = 'Click to reset' 
+            if (currentCategory !== "#brands-default") {
+                c.classList.add("active");
+                c.querySelector("h6").textContent = 'Click to reset'
+            }
 
             // Scroll animation using GSAP
             var tl = gsap.timeline();

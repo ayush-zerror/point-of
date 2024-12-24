@@ -269,20 +269,22 @@ function menuOpen() {
           })
         }
       }
-      if (l.getAttribute("data-index") !== 0) {
-        gsap.to(shapes[0], {
-          transform: "rotate(40deg) scale(0)",
-          opacity: 0,
-          duration: .5,
-          ease: "power4.out",
-        })
-        gsap.to(shapes[l.getAttribute("data-index")], {
-          transform: "rotate(0deg) scale(1)",
-          opacity: 1,
-          duration: .5,
-          ease: "power4.out",
-        })
+
+      if (l.getAttribute("data-index") === "0") {
+        return;
       }
+      gsap.to(shapes[0], {
+        transform: "rotate(40deg) scale(0)",
+        opacity: 0,
+        duration: .5,
+        ease: "power4.out",
+      })
+      gsap.to(shapes[l.getAttribute("data-index")], {
+        transform: "rotate(0deg) scale(1)",
+        opacity: 1,
+        duration: .5,
+        ease: "power4.out",
+      })
 
     })
   })
@@ -294,6 +296,9 @@ function menuOpen() {
         opacity: 1,
         duration: .4
       })
+      if (l.getAttribute("data-index") === "0") {
+        return;
+      }
       gsap.to(shapes[l.getAttribute("data-index")], {
         transform: "rotate(40deg) scale(0)",
         opacity: 0,

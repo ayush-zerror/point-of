@@ -362,7 +362,7 @@ const projects = [
     image: "https://a.storyblok.com/f/133769/2400x2990/dd4fa8bc81/stock-dutch-design-hero.jpg/m/2400x2990/filters:quality(80)",
     route: "/work-stock-dutch-design",
     service: "Branding",
-    industry: "Interior Design",
+    industry: "Architecture",
     year: 2021,
     name: "Stock Dutch Design"
   },
@@ -968,7 +968,10 @@ function menuOpen() {
           })
         }
       }
-      if (l.getAttribute("data-index") !== 0) {
+      if (l.getAttribute("data-index") === "0") {
+        return;
+      }
+     
         gsap.to(shapes[0], {
           transform: "rotate(40deg) scale(0)",
           opacity: 0,
@@ -981,7 +984,7 @@ function menuOpen() {
           duration: .5,
           ease: "power4.out",
         })
-      }
+      
 
     })
   })
@@ -993,6 +996,9 @@ function menuOpen() {
         opacity: 1,
         duration: .4
       })
+      if (l.getAttribute("data-index") === "0") {
+        return;
+      }
       gsap.to(shapes[l.getAttribute("data-index")], {
         transform: "rotate(40deg) scale(0)",
         opacity: 0,
@@ -1038,6 +1044,73 @@ function menuOpen() {
       })
     })
   })
+
+  let shapes2 = document.querySelectorAll(".navigation2 .shape")
+  let link2 = document.querySelectorAll(".navigation2 #shape-select a")
+
+  link2.forEach(function (l) {
+    l.addEventListener("mouseenter", function () {
+      for (var i = 0; i <= link2.length; i++) {
+        if (link2[i] !== l) {
+          gsap.to(link2[i], {
+            filter: "blur(4px)",
+            opacity: .4,
+            duration: .4
+          })
+        }
+        else {
+          gsap.to(l, {
+            filter: "blur(0px)",
+            opacity: 1,
+            duration: .4
+          })
+        }
+      }
+      if (l.getAttribute("data-index") === "0") {
+        return;
+      }
+     
+        gsap.to(shapes2[0], {
+          transform: "rotate(40deg) scale(0)",
+          opacity: 0,
+          duration: .5,
+          ease: "power4.out",
+        })
+        gsap.to(shapes2[l.getAttribute("data-index")], {
+          transform: "rotate(0deg) scale(1)",
+          opacity: 1,
+          duration: .5,
+          ease: "power4.out",
+        })
+      
+
+    })
+  })
+  link2.forEach(function (l, idx) {
+    l.addEventListener("mouseleave", function () {
+      gsap.to(link2, {
+        filter: "blur(0px)",
+        opacity: 1,
+        duration: .4
+      })
+      if (l.getAttribute("data-index") === "0") {
+        return;
+      }
+      gsap.to(shapes2[l.getAttribute("data-index")], {
+        transform: "rotate(40deg) scale(0)",
+        opacity: 0,
+        duration: .5,
+        ease: "power4.out",
+      })
+      gsap.to(shapes2[0], {
+        transform: "rotate(0deg) scale(1)",
+        opacity: 1,
+        duration: .5,
+        ease: "power4.out",
+      })
+    })
+  })
+
 }
 menuOpen()
 
@@ -1082,35 +1155,47 @@ const serviceFls = document.querySelectorAll(".fl-service h5")
 const industryFls = document.querySelectorAll(".fl-industry h5")
 const yearFls = document.querySelectorAll(".fl-year h5")
 const resetbtn = document.querySelector("#reset-btn")
-var service = null
-var industry = null
-var year = null
+let service = []
+let industry = []
+let year = []
 
 // for selecting filter
 function toActiveFilter(services) {
+
   services.forEach(function (l) {
     l.addEventListener("click", async function () {
+      l.classList.add("active");
+      l.style.opacity = 1;
       for (var i = 0; i < services.length; i++) {
-        if (services[i] !== l) {
-          services[i].classList.remove("active");
+        if (!services[i].classList.contains("active")) {
           services[i].style.opacity = .4;
-        }
-        else {
-          l.classList.add("active");
-          l.style.opacity = 1;
+        }else{
+          services[i].style.opacity = 1;
         }
       }
       await checkForFilter()
-      console.log(service, industry, year);
+      // console.log(service, industry, year);
 
-      projectByFilter = [];
       projectByFilter = projects.filter(project => {
-        const matchesService = service ? project.service === service : true;
-        const matchesIndustry = industry ? project.industry === industry : true;
-        const matchesYear = year ? project.year === year : true;
-        // Return true if all filters (non-null values) match
+        const matchesService = service.length > 0 
+          ? service.includes(project.service) 
+          : true;
+      
+        const matchesIndustry = industry.length > 0 
+          ? industry.includes(project.industry) 
+          : true;
+      
+        const matchesYear = year.length > 0 
+          ? year.includes(project.year) 
+          : true;
+      
         return matchesService && matchesIndustry && matchesYear;
       });
+
+      console.log(projectByFilter);
+      
+      
+      
       if (projectByFilter.length > 0) {
         filterCount.textContent = projectByFilter.length
         document.querySelector("#filter-view").style.display = "block";
@@ -1142,9 +1227,9 @@ function resetFilter(){
     item.style.opacity = 1;
     resetbtn.style.display = "none";
     filterCount.textContent = projects.length
-    service = null
-    industry = null
-    year = null
+    service = []
+    industry = []
+    year = []
     projectByFilter = []
   })
 }
@@ -1182,19 +1267,25 @@ document.querySelector("#filter-view").addEventListener("click", function (e) {
 
 //provide selected filter option
 async function checkForFilter() {
-  serviceFls.forEach(function (s) {
+  serviceFls?.forEach(function (s) {
     if (s.classList.contains("active")) {
-      service = s.textContent.trim()
+      if(!service?.includes(s.textContent.trim())){
+        service.push(s.textContent.trim())
+      }
     }
   })
-  industryFls.forEach(function (i) {
+  industryFls?.forEach(function (i) {
     if (i.classList.contains("active")) {
-      industry = i.textContent.trim()
+      if(!industry?.includes(i.textContent.trim())){
+        industry.push(i.textContent.trim()) 
+      }
     }
   })
-  yearFls.forEach(function (y) {
+  yearFls?.forEach(function (y) {
     if (y.classList.contains("active")) {
-      year = Number(y.textContent.trim())
+      if(!year?.includes(Number(y.textContent.trim()))){
+        year.push(Number(y.textContent.trim()))
+      }
     }
   })
 }
