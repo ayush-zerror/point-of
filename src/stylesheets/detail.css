@@ -844,8 +844,9 @@ h6 {
     font-size: 14vw;
   }
   #page2 {
-    min-height: 190vh !important;
+    min-height: 170vh !important;
     padding: 10vw 7vw;
+    padding-bottom: 0vw;
   }
   #page2 #space {
     height: 60vh;
