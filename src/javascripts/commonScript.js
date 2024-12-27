@@ -99,6 +99,7 @@ function darkMode() {
   if (mode) {
     root.style.setProperty('--primary', '#000');
     root.style.setProperty('--secondary', '#fff');
+    root.style.setProperty('--back', 'rgba(255, 255, 255, 0.473)');
     root.style.setProperty('--invert-filter', 'invert(1)');
     document.querySelector("#mode").classList.remove("ri-sun-line");
     document.querySelector("#mode").classList.add("ri-moon-line");
@@ -127,6 +128,7 @@ function darkMode() {
   } else {
     root.style.setProperty('--primary', '#F2F2EE');
     root.style.setProperty('--secondary', '#000');
+    root.style.setProperty('--back', 'rgba(0, 0, 0, 0.473)');
     root.style.setProperty('--invert-filter', 'invert(0)');
     document.querySelector("#mode").classList.remove("ri-moon-line");
     document.querySelector("#mode").classList.add("ri-sun-line");
@@ -160,6 +162,7 @@ function darkMode() {
     if (!mode) {
       root.style.setProperty('--primary', '#000');
       root.style.setProperty('--secondary', '#fff');
+      root.style.setProperty('--back', 'rgba(255, 255, 255, 0.473)');
       root.style.setProperty('--invert-filter', 'invert(1)');
       document.querySelector("#mode").classList.remove("ri-sun-line");
       document.querySelector("#mode").classList.add("ri-moon-line");
@@ -189,6 +192,7 @@ function darkMode() {
     } else {
       root.style.setProperty('--primary', '#F2F2EE');
       root.style.setProperty('--secondary', '#000');
+      root.style.setProperty('--back', 'rgba(0, 0, 0, 0.473)');
       root.style.setProperty('--invert-filter', 'invert(0)');
       document.querySelector("#mode").classList.remove("ri-moon-line");
       document.querySelector("#mode").classList.add("ri-sun-line");
@@ -274,13 +278,13 @@ function menuOpen() {
         return;
       }
       gsap.to(shapes[0], {
-        transform: "rotate(40deg) scale(0)",
+        transform: "scale(0)",
         opacity: 0,
         duration: .5,
         ease: "power4.out",
       })
       gsap.to(shapes[l.getAttribute("data-index")], {
-        transform: "rotate(0deg) scale(1)",
+        transform: "scale(1)",
         opacity: 1,
         duration: .5,
         ease: "power4.out",
@@ -300,13 +304,13 @@ function menuOpen() {
         return;
       }
       gsap.to(shapes[l.getAttribute("data-index")], {
-        transform: "rotate(40deg) scale(0)",
+        transform: "scale(0)",
         opacity: 0,
         duration: .5,
         ease: "power4.out",
       })
       gsap.to(shapes[0], {
-        transform: "rotate(0deg) scale(1)",
+        transform: "scale(1)",
         opacity: 1,
         duration: .5,
         ease: "power4.out",

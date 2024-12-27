@@ -29,6 +29,9 @@ function loader() {
 }
 loader()
 
+
+
+
 function text() {
   document.querySelectorAll(".text-splite").forEach(function (t) {
     gsap.from(t.querySelectorAll("span"), {
@@ -75,9 +78,11 @@ function scrollForView() {
       },
       onComplete: () => {
         text()
-        // zoom()
       }
+
     }, "a")
+
+    
 }
 
 function scrollForFullView() {
@@ -101,10 +106,10 @@ function scrollForFullView() {
       onStart: () => {
         document.querySelector("#overView-container").style.display = "none";
         document.querySelector("#fullView-container").style.display = "flex";
+
       },
       onComplete: () => {
         text()
-        // zoom()
       }
     }, "a")
 
