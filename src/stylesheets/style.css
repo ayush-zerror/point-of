@@ -727,6 +727,10 @@ h6 {
   animation-timing-function: linear;
   animation-duration: 20s;
 }
+#page7 a{
+  text-decoration: none;
+  color: var(--secondary);
+}
 
 .marquee-wrap img{
   height: 5vw;
@@ -841,7 +845,8 @@ h6 {
   left: 0;
   width: 0%;
   height: 0.01vw;
-  background-color: var(--primary);
+  background-color: white;
+  mix-blend-mode: difference;
   transition: all ease 0.3s;
 }
 .lineUnder:hover:before{
