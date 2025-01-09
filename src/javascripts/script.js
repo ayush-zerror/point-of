@@ -49,7 +49,7 @@ function page4Animation() {
     scrollTrigger: {
       trigger: "#page4",
       scroller: "body",
-      markers: true,
+      // markers: true,
       start: "top top",
       end: "top -200%",
       scrub: 1,
