@@ -241,7 +241,6 @@ const serviceData = [
     },
 ];
 
-
 const yearData = [
     {
         year: 2017,

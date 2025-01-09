@@ -11,7 +11,7 @@ document.querySelector(".explore-btn").addEventListener("click", function(){
 
 const accordions = document.querySelectorAll(".accordion")
 accordions.forEach(accordion => {
-    accordion.querySelector(".plus").addEventListener("click", () => {
+    accordion.querySelector(".accordion-title").addEventListener("click", () => {
         for (var i = 0; i < accordions.length; i++) {
             if (accordions[i] !== accordion) {
                 accordions[i].classList.remove("active");

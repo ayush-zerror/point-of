@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Point Of | Contact</title>
+    <title>Point Of  — Contact</title>
+    <link rel="shortcut icon" href="/favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.17/dist/lenis.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="/stylesheets/contact.css">
@@ -69,9 +70,8 @@
             <img src="/logo.png" alt="">
         </a>
         <a href="/" id="logo">
-            <span id="p"><img src="/p.png" alt=""></span><span id="point"><img src="/point.png" alt=""></span><span
-                id="o"><img src="/o.png" alt=""></span><span id="f"><img src="/f.png" alt=""></span><span
-                id="dot">.</span>
+            <span id="p"><img src="/p.png" alt=""><span id="dot">.</span></span><span id="point"><img src="/point.png"
+                    alt=""></span><span id="o"><img src="/o.png" alt=""></span><span id="f"><img src="/f.png" alt="">
         </a>
         <div id="menu-c">
             <div id="menu"></div>
@@ -79,69 +79,109 @@
     </nav>
     <div id="popup-apply">
         <div id="apply-form">
-            <i id="cross"  class="ri-close-fill popup-close"></i>
+            <i id="cross" class="ri-close-fill popup-close"></i>
             <div id="from-left">
                 <h5>Apply as a</h5>
                 <h2>Symfony Developer</h2>
             </div>
             <div id="from-right">
                 <form action="">
-                    <input type="text" placeholder="name">
-                    <input type="text" placeholder="email">
-                    <input type="text" placeholder="link to your cv">
+                    <div class="pop-input lineanime">
+                        <div class="linei"></div>
+                        <h6>NAME*</h6>
+                        <input type="text">
+                    </div>
+                    <div class="pop-input lineanime">
+                        <div class="linei"></div>
+                        <h6>EMAIL*</h6>
+                        <input type="text">
+                    </div>
+                    <div class="pop-input lineanime">
+                        <div class="linei"></div>
+                        <h6>LINK TO YOUR CV*</h6>
+                        <input type="text">
+                    </div>
                     <div id="Uplaod">
                         <i class="ri-upload-2-line"></i>
                         <h5>Uplaod a CV</h5>
+                        <div id="file">
+                            <input type="file">
+                        </div>
                     </div>
-                    <p><span>By clicking the Submit button you agree to our</span> <a href="">Privacy Policy</a> <span>terms</span></p>
+                    <p><span>By clicking the Submit button you agree to our</span> <a href="">Privacy Policy</a>
+                        <span>terms</span></p>
                 </form>
             </div>
         </div>
     </div>
+    <section id="page1">
+        <div id="form">
+            <div id="left">
+                <h2>Contact</h2>
+            </div>
+            <div id="right">
+                <form action="">
+                    <div class="input lineanime">
+                        <input type="text">
+                        <h6>NAME*</h6>
+                        <div class="linei"></div>
+                    </div>
+                    <div class="input lineanime">
+                        <input type="text">
+                        <h6>EMAIL*</h6>
+                        <div class="linei"></div>
+                    </div>
+                    <div class="input lineanime">
+                        <input type="text">
+                        <h6>TOPICS*</h6>
+                        <div class="linei"></div>
+                    </div>
+                    <div class="input lineanime">
+                        <input type="text">
+                        <h6>PHONE NUMBER*</h6>
+                        <div class="linei"></div>
+                    </div>
+                    <div class="textarea lineanime">
+                        <h6>MESSGAE*</h6>
+                        <div class="linei"></div>
+                        <textarea name="" id=""></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="address">
+            <div class="elem elem-lf">
+                <h5>We believe in the power of digital, and we love collaborating with brands that feel the same.
+                    Let's connect.</h5>
+            </div>
+            <div class="elem">
+                <div class="add">
+                    <h6>Business enquiries</h6>
+                    <h5>hello@dashdigital.io</h5>
+                    <h5>+27 72 611 3343</h5>
+                </div>
+                <div class="add">
+                    <h6>Open Positions</h6>
+                    <h5>careers@dashdigital.io</h5>
+                </div>
+            </div>
+        </div>
+    </section>
     <main id="main">
-        <section id="page1">
-            <div id="form">
-                <div id="left">
-                    <h2>Contact</h2>
-                </div>
-                <div id="right">
-                    <form action="">
-                        <input type="text" placeholder="Name">
-                        <input type="text" placeholder="Email">
-                        <input type="text" placeholder="Topics">
-                        <input type="text" placeholder="Phone number">
-                        <textarea name="" id="" placeholder="message"></textarea>
-                    </form>
-                </div>
-            </div>
-            <div id="address">
-                <div class="elem elem-lf">
-                    <h5>We believe in the power of digital, and we love collaborating with brands that feel the same.
-                        Let's connect.</h5>
-                </div>
-                <div class="elem">
-                    <div class="add">
-                        <h6>Business enquiries</h6>
-                        <h5>hello@dashdigital.io</h5>
-                        <h5>+27 72 611 3343</h5>
-                    </div>
-                    <div class="add">
-                        <h6>Open Positions</h6>
-                        <h5>careers@dashdigital.io</h5>
-                    </div>
-                </div>
-            </div>
-            <div id="career">
-                <h2>Career</h2>
-                <div id="career-btm">
-                    <h2>Join our team <br> and create great products</h2>
-                    <h5>Delivering great work is the heart of what we do at Vide Infra. We push a bar higher with every project to create new challenges to stay on top of our craft. We value trust, freedom, passion, and warm and friendly relationships and enjoy our time together. If this resonates with your vision, let's chat about how we can work together. Get in touch today!</h5>
-                </div>
+        <section id="pageOver"></section>
+        <section id="career">
+            <h2>Career</h2>
+            <div id="career-btm">
+                <h2>Join our team <br> and create great products</h2>
+                <h5>Delivering great work is the heart of what we do at Vide Infra. We push a bar higher with every
+                    project to create new challenges to stay on top of our craft. We value trust, freedom, passion, and
+                    warm and friendly relationships and enjoy our time together. If this resonates with your vision,
+                    let's chat about how we can work together. Get in touch today!</h5>
             </div>
         </section>
         <section id="page3">
             <div id="slide1">
-                <h2>Vacancies <br> Remote</h2>
+                <h2>Curret <br> Vacancies</h2>
             </div>
             <div id="slide2">
                 <div class="accordion">
@@ -169,8 +209,12 @@
                                 <h5>JavaScript, ES6, HTML, SASS/SCSS, jQuery, GIT</h5>
                             </div>
                         </div>
-                        <h5>A clear brand positioning or brand purpose is the foundation success is built on. Through our tailor-made immersion we get to really know you. We ask questions, run audits, lead workshops, discover what makes you and your audience tick, and use all our insight and experience to align thinking and help generate both internal direction and a customer-centric voice.</h5>
-                        <h6 class="skill-head">Skill requirements</h6> 
+                        <h5>A clear brand positioning or brand purpose is the foundation success is built on. Through
+                            our tailor-made immersion we get to really know you. We ask questions, run audits, lead
+                            workshops, discover what makes you and your audience tick, and use all our insight and
+                            experience to align thinking and help generate both internal direction and a
+                            customer-centric voice.</h5>
+                        <h6 class="skill-head">Skill requirements</h6>
                         <div class="row2">
                             <div class="skill-d">
                                 <div class="count-l">
@@ -184,7 +228,8 @@
                                 <div class="count-l">
                                     <h6>B</h6>
                                 </div>
-                                <h5>Previous experience with jQuery library. Bonus: jQuery plugin development experience</h5>
+                                <h5>Previous experience with jQuery library. Bonus: jQuery plugin development experience
+                                </h5>
                             </div>
                         </div>
                         <div class="row2">
@@ -211,8 +256,7 @@
                                 <h5>Understanding of project bundling with Gulp</h5>
                             </div>
                         </div>
-                        <div id="hire-btn" class="apply-job">
-                            <div class="cirr"><i class="ri-arrow-right-line"></i></div>
+                        <div class="apply-job">
                             <h3>Apply now</h3>
                         </div>
                     </div>
@@ -242,8 +286,12 @@
                                 <h5>JavaScript, ES6, HTML, SASS/SCSS, jQuery, GIT</h5>
                             </div>
                         </div>
-                        <h5>A clear brand positioning or brand purpose is the foundation success is built on. Through our tailor-made immersion we get to really know you. We ask questions, run audits, lead workshops, discover what makes you and your audience tick, and use all our insight and experience to align thinking and help generate both internal direction and a customer-centric voice.</h5>
-                        <h6 class="skill-head">Skill requirements</h6> 
+                        <h5>A clear brand positioning or brand purpose is the foundation success is built on. Through
+                            our tailor-made immersion we get to really know you. We ask questions, run audits, lead
+                            workshops, discover what makes you and your audience tick, and use all our insight and
+                            experience to align thinking and help generate both internal direction and a
+                            customer-centric voice.</h5>
+                        <h6 class="skill-head">Skill requirements</h6>
                         <div class="row2">
                             <div class="skill-d">
                                 <div class="count-l">
@@ -257,7 +305,8 @@
                                 <div class="count-l">
                                     <h6>B</h6>
                                 </div>
-                                <h5>Previous experience with jQuery library. Bonus: jQuery plugin development experience</h5>
+                                <h5>Previous experience with jQuery library. Bonus: jQuery plugin development experience
+                                </h5>
                             </div>
                         </div>
                         <div class="row2">
@@ -284,8 +333,7 @@
                                 <h5>Understanding of project bundling with Gulp</h5>
                             </div>
                         </div>
-                        <div id="hire-btn" class="apply-job">
-                            <div class="cirr"><i class="ri-arrow-right-line"></i></div>
+                        <div class="apply-job">
                             <h3>Apply now</h3>
                         </div>
                     </div>
@@ -315,8 +363,12 @@
                                 <h5>JavaScript, ES6, HTML, SASS/SCSS, jQuery, GIT</h5>
                             </div>
                         </div>
-                        <h5>A clear brand positioning or brand purpose is the foundation success is built on. Through our tailor-made immersion we get to really know you. We ask questions, run audits, lead workshops, discover what makes you and your audience tick, and use all our insight and experience to align thinking and help generate both internal direction and a customer-centric voice.</h5>
-                        <h6 class="skill-head">Skill requirements</h6> 
+                        <h5>A clear brand positioning or brand purpose is the foundation success is built on. Through
+                            our tailor-made immersion we get to really know you. We ask questions, run audits, lead
+                            workshops, discover what makes you and your audience tick, and use all our insight and
+                            experience to align thinking and help generate both internal direction and a
+                            customer-centric voice.</h5>
+                        <h6 class="skill-head">Skill requirements</h6>
                         <div class="row2">
                             <div class="skill-d">
                                 <div class="count-l">
@@ -330,7 +382,8 @@
                                 <div class="count-l">
                                     <h6>B</h6>
                                 </div>
-                                <h5>Previous experience with jQuery library. Bonus: jQuery plugin development experience</h5>
+                                <h5>Previous experience with jQuery library. Bonus: jQuery plugin development experience
+                                </h5>
                             </div>
                         </div>
                         <div class="row2">
@@ -357,8 +410,7 @@
                                 <h5>Understanding of project bundling with Gulp</h5>
                             </div>
                         </div>
-                        <div id="hire-btn" class="apply-job">
-                            <div class="cirr"><i class="ri-arrow-right-line"></i></div>
+                        <div class="apply-job">
                             <h3>Apply now</h3>
                         </div>
                     </div>
@@ -388,8 +440,12 @@
                                 <h5>JavaScript, ES6, HTML, SASS/SCSS, jQuery, GIT</h5>
                             </div>
                         </div>
-                        <h5>A clear brand positioning or brand purpose is the foundation success is built on. Through our tailor-made immersion we get to really know you. We ask questions, run audits, lead workshops, discover what makes you and your audience tick, and use all our insight and experience to align thinking and help generate both internal direction and a customer-centric voice.</h5>
-                        <h6 class="skill-head">Skill requirements</h6> 
+                        <h5>A clear brand positioning or brand purpose is the foundation success is built on. Through
+                            our tailor-made immersion we get to really know you. We ask questions, run audits, lead
+                            workshops, discover what makes you and your audience tick, and use all our insight and
+                            experience to align thinking and help generate both internal direction and a
+                            customer-centric voice.</h5>
+                        <h6 class="skill-head">Skill requirements</h6>
                         <div class="row2">
                             <div class="skill-d">
                                 <div class="count-l">
@@ -403,7 +459,8 @@
                                 <div class="count-l">
                                     <h6>B</h6>
                                 </div>
-                                <h5>Previous experience with jQuery library. Bonus: jQuery plugin development experience</h5>
+                                <h5>Previous experience with jQuery library. Bonus: jQuery plugin development experience
+                                </h5>
                             </div>
                         </div>
                         <div class="row2">
@@ -430,8 +487,7 @@
                                 <h5>Understanding of project bundling with Gulp</h5>
                             </div>
                         </div>
-                        <div id="hire-btn" class="apply-job">
-                            <div class="cirr"><i class="ri-arrow-right-line"></i></div>
+                        <div class="apply-job">
                             <h3>Apply now</h3>
                         </div>
                     </div>

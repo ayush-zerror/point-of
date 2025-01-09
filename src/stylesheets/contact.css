@@ -78,7 +78,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2.3vw 2vw;
+  padding: 3vw 2vw;
   background: linear-gradient(
     180deg,
     #f2f2ee 0,
@@ -105,11 +105,13 @@ body {
   cursor: pointer;
   font-size: 1.2vw;
   pointer-events: all;
+  transition:  all ease 0.3s;
 }
 
-#dot {
-  opacity: 0;
+#navbar #mode:hover{
+  transform: rotate(-15deg);
 }
+
 
 #navbar #logo {
   position: absolute;
@@ -128,6 +130,15 @@ body {
   color: var(--secondary);
   pointer-events: all;
 }
+#p{
+  position: relative;
+}
+#dot{
+  position: absolute;
+  left: -6%;
+  bottom: -.5vw;
+  opacity: 0;
+}
 
 #navbar #logo span {
   display: inline-block;
@@ -143,6 +154,10 @@ body {
   border-radius: 50%;
   background-color: var(--secondary);
   color: var(--secondary);
+  transition: all ease .3s;
+}
+#navbar #menu:hover{
+  transform: scale(1.15);
 }
 #menu-c {
   display: flex;
@@ -415,11 +430,15 @@ h6 {
   color: var(--secondary);
 }
 #main {
+  position: relative;
   width: 100%;
-  background-color: var(--primary);
+  pointer-events: none;
 }
 #page1 {
-  min-height: 100vh;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  height: 100vh;
   width: 100%;
   padding: 8vw 2vw;
   padding-bottom: 2.3vw;
@@ -428,6 +447,7 @@ h6 {
   justify-content: space-between;
   position: relative;
   overflow: hidden;
+  background-color: var(--primary);
 }
 #form {
   display: flex;
@@ -452,21 +472,66 @@ h6 {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+#right form .input{
+  width: 49%;
+  margin-bottom: 2vw;
+  position: relative;
+}
+.linei {
+  width: 100%;
+  height: 0.08vw;
+  background-color: black;
+  position: absolute;
+  bottom: 0%;
+  left: 0;
+  transform-origin: left; /* Scale starts from the left initially */
+  transform: scaleX(0);
+}
+
+
+#right form .input.active h6{
+  top: 0%;
+  font-size: .7vw;
+  opacity: .8;
+}
+#right form .input h6 , #right form .textarea h6{
+  font-size: .9vw;
+  font-weight: 400;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--secondary);
+  transition: all ease .3s;
+}
+#right form .textarea h6{
+  top: 15%;
+}
+#right form .textarea.active h6{
+  top: 0%;
+  font-size: .7vw;
+  opacity: .8;
+}
 #right form input {
   flex-shrink: 0;
-  width: 49%;
+  width: 100%;
   padding: 1vw 0;
-  margin-bottom: 2vw;
   background-color: transparent;
   border: none;
+  color: var(--secondary);
   outline: none;
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
+}
+#right form .textarea{
+  width: 100%;
+  position: relative;
+  height: 20vh;
 }
 #right form textarea {
   padding: 1vw 0;
   flex-shrink: 0;
   width: 100%;
-  height: 20vh;
+  height: 100%;
   resize: none;
   background-color: transparent;
   border: none;
@@ -510,6 +575,11 @@ h6 {
   width: 40%;
 }
 
+#pageOver{
+  height: 100vh;
+  width: 100%;
+}
+
 #career h2,
 #career h5,
 #career h6 {
@@ -520,9 +590,6 @@ h6 {
   height: 100vh;
   width: 100%;
   background-color: var(--secondary) !important;
-  position: absolute;
-  top: 100%;
-  left: 0;
   padding: 2.3vw 2vw;
   display: flex;
   flex-direction: column;
@@ -550,15 +617,17 @@ h6 {
   padding-bottom: 5vw;
   display: flex;
   justify-content: space-between;
+  background-color: var(--secondary);
+  pointer-events: auto;
 }
+
 #slide1 {
   width: 35%;
   line-height: 1;
 }
 
-#slide1 h5 {
-  width: 70%;
-  margin-top: 1vw;
+#slide1 h2 {
+  color: var(--primary);
 }
 #slide1 #p1 {
   margin-top: 1vw;
@@ -584,6 +653,7 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 .accordion-title .plus {
   position: relative;
@@ -598,7 +668,7 @@ h6 {
   transform: translate(-50%, -50%);
   width: 100%;
   height: 0.01vw;
-  background-color: var(--secondary);
+  background-color: var(--primary);
 }
 .accordion.active .accordion-title .plus .line2 {
   height: 0;
@@ -610,11 +680,12 @@ h6 {
   transform: translate(-50%, -50%);
   width: 0.01vw;
   height: 100%;
-  background-color: var(--secondary);
+  background-color: var(--primary);
   transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
 }
 .accordion-title h2 {
   font-size: 2vw;
+  color: var(--primary);
 }
 .accordion.active .accordion-dec{
     height: 60vw;
@@ -636,12 +707,15 @@ h6 {
 }
 .accordion-dec  h5,.accordion-dec  h6{
   font-size: 1.05vw;
+  color: var(--primary);
 }
 .row h6{
   opacity: .7;
+  color: var(--primary);
 }
 .accordion-dec .row h5{
   padding: 0;
+  color: var(--primary);
 }
 
 .row-last{
@@ -658,11 +732,24 @@ h6 {
 }
 .accordion-dec .row2 h5{
   padding: 0;
+  color: var(--primary);
 }
 .apply-job{
   height: 3vw;
-  width: fit-content;
-  margin-left: 1vw;
+  width: 100%;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.apply-job h3{
+  font-family: para3;
+  font-size: 1vw;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--secondary);
 }
 
 .location{
@@ -687,21 +774,22 @@ h6 {
 .count-l{
   width: 1.5vw;
   height: 1.5vw;
-  background-color: var(--secondary);
+  background-color: var(--primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .count-l h6{
-  color: var(--primary);
   font-size: .8vw;
   font-weight: 700;
+  color: var(--secondary);
 }
 .accordion-dec h5 {
   width: 70%;
   padding: 3vw 1vw;
   padding-top: 1vw;
+  color: var(--primary);
 }
 
 #popup-apply{
@@ -732,6 +820,7 @@ h6 {
   right: 2vw;
   font-size: 1.3vw;
   cursor: pointer;
+  color: var(--secondary);
 }
 #from-left{
   width: 100%;
@@ -748,10 +837,36 @@ h6 {
   display: flex;
   flex-direction: column;
 }
+
+#from-right form .pop-input{
+  width: 100%;
+  margin-bottom: 3vw;
+  position: relative;
+}
+#from-right form .pop-input h6{
+  font-size: .9vw;
+  font-weight: 400;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--secondary);
+  transition: all ease .3s;
+}
+
+#from-right form .pop-input.active h6{
+  top: 0%;
+  font-size: .7vw;
+  opacity: .8;
+}
+
+#file{
+  display: none;
+}
+
 #from-right form input{
   width: 100%;
   padding: 1vw 0;
-  margin-bottom: 3vw;
   background-color: transparent;
   outline: none;
   border: none;
@@ -761,12 +876,13 @@ h6 {
 #Uplaod{
   padding: .3vw 1vw;
   border-radius: 50px;
-  background-color:#d2d1d1;
+  background-color:rgba(128, 128, 128, 0.447);
   width: fit-content;
   margin-bottom: 3vw;
   display: flex;
   align-items: center;
   gap: .5vw;
+  cursor: pointer;
 }
 #Uplaod i{
   font-size: 1vw;
@@ -780,6 +896,7 @@ h6 {
   width: 35%;
   font-family: para3;
   font-size: .9vw;
+  color: var(--secondary);
 }
 #from-right form p span{
   opacity: .7;

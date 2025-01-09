@@ -79,7 +79,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2.3vw 2vw;
+  padding: 3vw 2vw;
   background: linear-gradient(
     180deg,
     #f2f2ee 0,
@@ -107,9 +107,20 @@ body {
   cursor: pointer;
   font-size: 1.2vw;
   pointer-events: all;
+  transition:  all ease 0.3s;
 }
 
-#dot {
+#navbar #mode:hover{
+  transform: rotate(-15deg);
+}
+
+#p{
+  position: relative;
+}
+#dot{
+  position: absolute;
+  left: -6%;
+  bottom: -.5vw;
   opacity: 0;
 }
 
@@ -145,6 +156,10 @@ body {
   border-radius: 50%;
   background-color: var(--secondary);
   color: var(--secondary);
+  transition: all ease .3s;
+}
+#navbar #menu:hover{
+  transform: scale(1.15);
 }
 #menu-c {
   display: flex;

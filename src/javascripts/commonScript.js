@@ -76,157 +76,24 @@ function logo() {
       duration: .4,
       delay: .2
     }, "a")
-    .to("#dot", {
-      opacity: 1,
+    .to("#o", {
       x: -f.offsetWidth * 3,
       duration: .4,
       delay: .2
     }, "a")
-    .to("#o", {
-      x: -f.offsetWidth * 2,
-      duration: .4,
-      delay: .2
-    }, "a")
+    .to("#p", {
+      y:"-1vw",
+      duration: .2,
+      delay: -.2
+    },"s")
+    .to("#dot", {
+      opacity:1,
+      duration: .2,
+      delay: -.2
+    },"s")
 }
 logo()
 
-function darkMode() {
-  // Initialize mode based on localStorage or default to false
-  var mode = localStorage.getItem("mode") === "true";
-
-  // Apply initial mode
-  const root = document.documentElement;
-  if (mode) {
-    root.style.setProperty('--primary', '#000');
-    root.style.setProperty('--secondary', '#fff');
-    root.style.setProperty('--back', 'rgba(255, 255, 255, 0.473)');
-    root.style.setProperty('--invert-filter', 'invert(1)');
-    document.querySelector("#mode").classList.remove("ri-sun-line");
-    document.querySelector("#mode").classList.add("ri-moon-line");
-    document.querySelector("#navbar").style.background = `
-  linear-gradient(
-    180deg,
-    #000000 0,
-    hsla(0, 0%, 0%, .987) 11%,  
-    hsla(0, 0%, 0%, .951) 20.8%, 
-    hsla(0, 0%, 0%, .896) 29.6%, 
-    hsla(0, 0%, 0%, .825) 37.5%, 
-    hsla(0, 0%, 0%, .741) 44.6%, 
-    hsla(0, 0%, 0%, .648) 51%,   
-    hsla(0, 0%, 0%, .55) 57%,    
-    hsla(0, 0%, 0%, .45) 62.5%,  
-    hsla(0, 0%, 0%, .352) 67.7%,  
-    hsla(0, 0%, 0%, .259) 72.7%,
-    hsla(0, 0%, 0%, .175) 77.8%,  
-    hsla(0, 0%, 0%, .104) 82.9%,  
-    hsla(0, 0%, 0%, .049) 88.2%,  
-    hsla(0, 0%, 0%, .013) 93.9%,  
-    hsla(0, 0%, 0%, 0)
-  )
-`;
-
-  } else {
-    root.style.setProperty('--primary', '#F2F2EE');
-    root.style.setProperty('--secondary', '#000');
-    root.style.setProperty('--back', 'rgba(0, 0, 0, 0.473)');
-    root.style.setProperty('--invert-filter', 'invert(0)');
-    document.querySelector("#mode").classList.remove("ri-moon-line");
-    document.querySelector("#mode").classList.add("ri-sun-line");
-    document.querySelector("#navbar").style.background = `
-  linear-gradient(
-    180deg,
-    #F2F2EE 0,
-    hsla(0, 0%, 94.1%, .987) 11%,  
-    hsla(0, 0%, 94.1%, .951) 20.8%, 
-    hsla(0, 0%, 94.1%, .896) 29.6%, 
-    hsla(0, 0%, 94.1%, .825) 37.5%, 
-    hsla(0, 0%, 94.1%, .741) 44.6%, 
-    hsla(0, 0%, 94.1%, .648) 51%,   
-    hsla(0, 0%, 94.1%, .55) 57%,    
-    hsla(0, 0%, 94.1%, .45) 62.5%,  
-    hsla(0, 0%, 94.1%, .352) 67.7%,  
-    hsla(0, 0%, 94.1%, .259) 72.7%,
-    hsla(0, 0%, 94.1%, .175) 77.8%,  
-    hsla(0, 0%, 94.1%, .104) 82.9%,  
-    hsla(0, 0%, 94.1%, .049) 88.2%,  
-    hsla(0, 0%, 94.1%, .013) 93.9%,  
-    hsla(0, 0%, 94.1%, 0)
-  )
-`;
-
-  }
-
-  document.querySelector("#mode").addEventListener("click", function () {
-    console.log("click");
-
-    if (!mode) {
-      root.style.setProperty('--primary', '#000');
-      root.style.setProperty('--secondary', '#fff');
-      root.style.setProperty('--back', 'rgba(255, 255, 255, 0.473)');
-      root.style.setProperty('--invert-filter', 'invert(1)');
-      document.querySelector("#mode").classList.remove("ri-sun-line");
-      document.querySelector("#mode").classList.add("ri-moon-line");
-      document.querySelector("#navbar").style.background = `
-  linear-gradient(
-    180deg,
-    #000000 0,
-    hsla(0, 0%, 0%, .987) 11%,  
-    hsla(0, 0%, 0%, .951) 20.8%, 
-    hsla(0, 0%, 0%, .896) 29.6%, 
-    hsla(0, 0%, 0%, .825) 37.5%, 
-    hsla(0, 0%, 0%, .741) 44.6%, 
-    hsla(0, 0%, 0%, .648) 51%,   
-    hsla(0, 0%, 0%, .55) 57%,    
-    hsla(0, 0%, 0%, .45) 62.5%,  
-    hsla(0, 0%, 0%, .352) 67.7%,  
-    hsla(0, 0%, 0%, .259) 72.7%,
-    hsla(0, 0%, 0%, .175) 77.8%,  
-    hsla(0, 0%, 0%, .104) 82.9%,  
-    hsla(0, 0%, 0%, .049) 88.2%,  
-    hsla(0, 0%, 0%, .013) 93.9%,  
-    hsla(0, 0%, 0%, 0)
-  )
-`;
-
-      mode = true;
-    } else {
-      root.style.setProperty('--primary', '#F2F2EE');
-      root.style.setProperty('--secondary', '#000');
-      root.style.setProperty('--back', 'rgba(0, 0, 0, 0.473)');
-      root.style.setProperty('--invert-filter', 'invert(0)');
-      document.querySelector("#mode").classList.remove("ri-moon-line");
-      document.querySelector("#mode").classList.add("ri-sun-line");
-      document.querySelector("#navbar").style.background = `
-  linear-gradient(
-    180deg,
-    #F2F2EE 0,
-    hsla(0, 0%, 94.1%, .987) 11%,  
-    hsla(0, 0%, 94.1%, .951) 20.8%, 
-    hsla(0, 0%, 94.1%, .896) 29.6%, 
-    hsla(0, 0%, 94.1%, .825) 37.5%, 
-    hsla(0, 0%, 94.1%, .741) 44.6%, 
-    hsla(0, 0%, 94.1%, .648) 51%,   
-    hsla(0, 0%, 94.1%, .55) 57%,    
-    hsla(0, 0%, 94.1%, .45) 62.5%,  
-    hsla(0, 0%, 94.1%, .352) 67.7%,  
-    hsla(0, 0%, 94.1%, .259) 72.7%,
-    hsla(0, 0%, 94.1%, .175) 77.8%,  
-    hsla(0, 0%, 94.1%, .104) 82.9%,  
-    hsla(0, 0%, 94.1%, .049) 88.2%,  
-    hsla(0, 0%, 94.1%, .013) 93.9%,  
-    hsla(0, 0%, 94.1%, 0)
-  )
-`;
-
-
-      mode = false;
-    }
-
-    // Save mode in localStorage
-    localStorage.setItem("mode", mode);
-  });
-}
-darkMode();
 
 
 function menuOpen() {
@@ -350,3 +217,97 @@ function menuOpen() {
   })
 }
 menuOpen()
+
+
+function darkMode() {
+  // Initialize mode based on localStorage or default to false
+  let mode = localStorage.getItem("mode") === "true";
+
+  // Function to apply mode styles
+  function applyModeStyles() {
+    const root = document.documentElement;
+    const modeButton = document.querySelector("#mode");
+    const navbar = document.querySelector("#navbar");
+
+    if (mode) {
+      root.style.setProperty("--primary", "#000");
+      root.style.setProperty("--secondary", "#f2f2ee");
+      root.style.setProperty("--back", "rgba(255, 255, 255, 0.473)");
+      root.style.setProperty("--invert-filter", "invert(1)");
+      modeButton.classList.remove("ri-sun-line", "ri-sun-fill");
+      modeButton.classList.add("ri-moon-line");
+      navbar.style.background = `linear-gradient(
+        180deg,
+        #000000 0,
+        hsla(0, 0%, 0%, .987) 11%,  
+        hsla(0, 0%, 0%, .951) 20.8%, 
+        hsla(0, 0%, 0%, .896) 29.6%, 
+        hsla(0, 0%, 0%, .825) 37.5%, 
+        hsla(0, 0%, 0%, .741) 44.6%, 
+        hsla(0, 0%, 0%, .648) 51%,   
+        hsla(0, 0%, 0%, .55) 57%,    
+        hsla(0, 0%, 0%, .45) 62.5%,  
+        hsla(0, 0%, 0%, .352) 67.7%,  
+        hsla(0, 0%, 0%, .259) 72.7%,  
+        hsla(0, 0%, 0%, .175) 77.8%,  
+        hsla(0, 0%, 0%, .104) 82.9%,  
+        hsla(0, 0%, 0%, .049) 88.2%,  
+        hsla(0, 0%, 0%, .013) 93.9%,  
+        hsla(0, 0%, 0%, 0)
+      )`;
+    } else {
+      root.style.setProperty("--primary", "#F2F2EE");
+      root.style.setProperty("--secondary", "#000");
+      root.style.setProperty("--back", "rgba(0, 0, 0, 0.473)");
+      root.style.setProperty("--invert-filter", "invert(0)");
+      modeButton.classList.remove("ri-moon-line", "ri-moon-fill");
+      modeButton.classList.add("ri-sun-line");
+      navbar.style.background = `linear-gradient(
+        180deg,
+        #F2F2EE 0,
+        hsla(0, 0%, 94.1%, .987) 11%,  
+        hsla(0, 0%, 94.1%, .951) 20.8%, 
+        hsla(0, 0%, 94.1%, .896) 29.6%, 
+        hsla(0, 0%, 94.1%, .825) 37.5%, 
+        hsla(0, 0%, 94.1%, .741) 44.6%, 
+        hsla(0, 0%, 94.1%, .648) 51%,   
+        hsla(0, 0%, 94.1%, .55) 57%,    
+        hsla(0, 0%, 94.1%, .45) 62.5%,  
+        hsla(0, 0%, 94.1%, .352) 67.7%,  
+        hsla(0, 0%, 94.1%, .259) 72.7%,  
+        hsla(0, 0%, 94.1%, .175) 77.8%,  
+        hsla(0, 0%, 94.1%, .104) 82.9%,  
+        hsla(0, 0%, 94.1%, .049) 88.2%,  
+        hsla(0, 0%, 94.1%, .013) 93.9%,  
+        hsla(0, 0%, 94.1%, 0)
+      )`;
+    }
+  }
+
+  // Apply initial styles
+  applyModeStyles();
+
+  // Toggle mode on button click
+  document.querySelector("#mode").addEventListener("click", function () {
+    mode = !mode;
+    localStorage.setItem("mode", mode);
+    applyModeStyles();
+  });
+
+  // Mouseenter and mouseleave for hover effect
+  document.querySelector("#mode").addEventListener("mouseenter", function () {
+    const modeButton = document.querySelector("#mode");
+    if (mode) {
+      modeButton.classList.remove("ri-moon-line");
+      modeButton.classList.add("ri-moon-fill");
+    } else {
+      modeButton.classList.remove("ri-sun-line");
+      modeButton.classList.add("ri-sun-fill");
+    }
+  });
+
+  document.querySelector("#mode").addEventListener("mouseleave", function () {
+    applyModeStyles(); // Reset to the correct icon state
+  });
+}
+darkMode();

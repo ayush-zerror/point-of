@@ -706,7 +706,6 @@ linear-gradient(
   hsla(0, 0%, 0%, 0)
 )
 `;
-
   } else {
     root.style.setProperty('--primary', '#F2F2EE');
     root.style.setProperty('--secondary', '#000');
@@ -735,11 +734,9 @@ linear-gradient(
   hsla(0, 0%, 94.1%, 0)
 )
 `;
-
   }
 
   document.querySelector("#mode").addEventListener("click", function () {
-
     if (!mode) {
       root.style.setProperty('--primary', '#000');
       root.style.setProperty('--secondary', '#fff');
@@ -768,7 +765,6 @@ linear-gradient(
   hsla(0, 0%, 0%, 0)
 )
 `;
-
       mode = true;
     } else {
       root.style.setProperty('--primary', '#F2F2EE');
@@ -798,15 +794,34 @@ linear-gradient(
   hsla(0, 0%, 94.1%, 0)
 )
 `;
-
-
       mode = false;
     }
-
     // Save mode in localStorage
     localStorage.setItem("mode", mode);
   });
+
+  // Add mouseenter and mouseleave event listeners
+  document.querySelector("#mode").addEventListener("mouseenter", function () {
+    if (mode) {
+      this.classList.remove("ri-moon-line");
+      this.classList.add("ri-moon-fill");
+    } else {
+      this.classList.remove("ri-sun-line");
+      this.classList.add("ri-sun-fill");
+    }
+  });
+
+  document.querySelector("#mode").addEventListener("mouseleave", function () {
+    if (mode) {
+      this.classList.remove("ri-moon-fill");
+      this.classList.add("ri-moon-line");
+    } else {
+      this.classList.remove("ri-sun-fill");
+      this.classList.add("ri-sun-line");
+    }
+  });
 }
+
 darkMode();
 
 
@@ -878,17 +893,21 @@ function logo() {
       duration: .4,
       delay: .2
     }, "a")
-    .to(".navbar2 #dot", {
-      opacity: 1,
+    .to(".navbar2 #o", {
       x: -f.offsetWidth * 3,
       duration: .4,
       delay: .2
     }, "a")
-    .to(".navbar2 #o", {
-      x: -f.offsetWidth * 2,
-      duration: .4,
-      delay: .2
-    }, "a")
+    .to("#p", {
+      y:"-1vw",
+      duration: .2,
+      delay: -.2
+    },"s")
+    .to("#dot", {
+      opacity:1,
+      duration: .2,
+      delay: -.2
+    },"s")
 }
 logo()
 

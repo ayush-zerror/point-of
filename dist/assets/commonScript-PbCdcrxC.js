@@ -1,0 +1,38 @@
+const i=new Lenis;i.on("scroll",t=>{const a=document.getElementById("popup");a&&a.contains(t.target)||ScrollTrigger.update()});gsap.ticker.add(t=>{i.raf(t*1e3)});gsap.ticker.lagSmoothing(0);gsap.to(window,{scrollTo:0});const s=document.querySelector("#cursor");window.addEventListener("mousemove",function(t){s&&gsap.to(s,{opacity:1,top:t.clientY,left:t.clientX})});function l(){const t=document.querySelector("#point"),a=document.querySelector("#f");var e=gsap.timeline({scrollTrigger:{trigger:"#page1",scroller:"body",start:"top top",end:"top -5%",scrub:1}});e.to("#point",{opacity:0,x:2,duration:.2,ease:"power1.out"},"a").to("#f",{opacity:0,x:2,duration:.2,ease:"power1.out"},"a").to("#p",{x:t.offsetWidth/2+t.offsetWidth/2/1.8,duration:.4,delay:.2},"a").to("#o",{x:-a.offsetWidth*3,duration:.4,delay:.2},"a").to("#p",{y:"-1vw",duration:.2,delay:-.2},"s").to("#dot",{opacity:1,duration:.2,delay:-.2},"s")}l();function c(){var t=!1;document.querySelector("#menu-c").addEventListener("click",function(){t?(gsap.to("#navigation",{top:"-130%",clipPath:"polygon(0 0, 100% 0, 100% 97%, 0 89%)",duration:1.5,ease:"power4.out"}),t=!1):(gsap.to("#navigation",{top:0,clipPath:"polygon(0 0, 100% 0, 100% 100%, 0 100%)",duration:1.5,ease:"power4.out"}),t=!0)});let a=document.querySelectorAll(".shape"),e=document.querySelectorAll("#shape-select a"),r=document.querySelectorAll("#social-l a");e.forEach(function(o){o.addEventListener("mouseenter",function(){for(var n=0;n<=e.length;n++)e[n]!==o?gsap.to(e[n],{filter:"blur(4px)",opacity:.4,duration:.4}):gsap.to(o,{filter:"blur(0px)",opacity:1,duration:.4});o.getAttribute("data-index")!=="0"&&(gsap.to(a[0],{transform:"scale(0)",opacity:0,duration:.5,ease:"power4.out"}),gsap.to(a[o.getAttribute("data-index")],{transform:"scale(1)",opacity:1,duration:.5,ease:"power4.out"}))})}),e.forEach(function(o,n){o.addEventListener("mouseleave",function(){gsap.to(e,{filter:"blur(0px)",opacity:1,duration:.4}),o.getAttribute("data-index")!=="0"&&(gsap.to(a[o.getAttribute("data-index")],{transform:"scale(0)",opacity:0,duration:.5,ease:"power4.out"}),gsap.to(a[0],{transform:"scale(1)",opacity:1,duration:.5,ease:"power4.out"}))})}),r.forEach(function(o){o.addEventListener("mouseenter",function(){for(var n=0;n<=r.length;n++)r[n]!==o?gsap.to(r[n],{filter:"blur(2px)",opacity:.5,duration:.4}):gsap.to(o,{filter:"blur(0px)",opacity:1,duration:.4})})}),r.forEach(function(o,n){o.addEventListener("mouseleave",function(){gsap.to(r,{filter:"blur(0px)",opacity:1,duration:.4})})})}c();function u(){let t=localStorage.getItem("mode")==="true";function a(){const e=document.documentElement,r=document.querySelector("#mode"),o=document.querySelector("#navbar");t?(e.style.setProperty("--primary","#000"),e.style.setProperty("--secondary","#f2f2ee"),e.style.setProperty("--back","rgba(255, 255, 255, 0.473)"),e.style.setProperty("--invert-filter","invert(1)"),r.classList.remove("ri-sun-line","ri-sun-fill"),r.classList.add("ri-moon-line"),o.style.background=`linear-gradient(
+        180deg,
+        #000000 0,
+        hsla(0, 0%, 0%, .987) 11%,  
+        hsla(0, 0%, 0%, .951) 20.8%, 
+        hsla(0, 0%, 0%, .896) 29.6%, 
+        hsla(0, 0%, 0%, .825) 37.5%, 
+        hsla(0, 0%, 0%, .741) 44.6%, 
+        hsla(0, 0%, 0%, .648) 51%,   
+        hsla(0, 0%, 0%, .55) 57%,    
+        hsla(0, 0%, 0%, .45) 62.5%,  
+        hsla(0, 0%, 0%, .352) 67.7%,  
+        hsla(0, 0%, 0%, .259) 72.7%,  
+        hsla(0, 0%, 0%, .175) 77.8%,  
+        hsla(0, 0%, 0%, .104) 82.9%,  
+        hsla(0, 0%, 0%, .049) 88.2%,  
+        hsla(0, 0%, 0%, .013) 93.9%,  
+        hsla(0, 0%, 0%, 0)
+      )`):(e.style.setProperty("--primary","#F2F2EE"),e.style.setProperty("--secondary","#000"),e.style.setProperty("--back","rgba(0, 0, 0, 0.473)"),e.style.setProperty("--invert-filter","invert(0)"),r.classList.remove("ri-moon-line","ri-moon-fill"),r.classList.add("ri-sun-line"),o.style.background=`linear-gradient(
+        180deg,
+        #F2F2EE 0,
+        hsla(0, 0%, 94.1%, .987) 11%,  
+        hsla(0, 0%, 94.1%, .951) 20.8%, 
+        hsla(0, 0%, 94.1%, .896) 29.6%, 
+        hsla(0, 0%, 94.1%, .825) 37.5%, 
+        hsla(0, 0%, 94.1%, .741) 44.6%, 
+        hsla(0, 0%, 94.1%, .648) 51%,   
+        hsla(0, 0%, 94.1%, .55) 57%,    
+        hsla(0, 0%, 94.1%, .45) 62.5%,  
+        hsla(0, 0%, 94.1%, .352) 67.7%,  
+        hsla(0, 0%, 94.1%, .259) 72.7%,  
+        hsla(0, 0%, 94.1%, .175) 77.8%,  
+        hsla(0, 0%, 94.1%, .104) 82.9%,  
+        hsla(0, 0%, 94.1%, .049) 88.2%,  
+        hsla(0, 0%, 94.1%, .013) 93.9%,  
+        hsla(0, 0%, 94.1%, 0)
+      )`)}a(),document.querySelector("#mode").addEventListener("click",function(){t=!t,localStorage.setItem("mode",t),a()}),document.querySelector("#mode").addEventListener("mouseenter",function(){const e=document.querySelector("#mode");t?(e.classList.remove("ri-moon-line"),e.classList.add("ri-moon-fill")):(e.classList.remove("ri-sun-line"),e.classList.add("ri-sun-fill"))}),document.querySelector("#mode").addEventListener("mouseleave",function(){a()})}u();
+//# sourceMappingURL=commonScript-PbCdcrxC.js.map
