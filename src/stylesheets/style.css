@@ -464,6 +464,20 @@ h6 {
   will-change: transform;
   backface-visibility: hidden;
   color: var(--secondary);
+  z-index: 3;
+}
+#hero-video{
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+}
+#hero-video img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #page1 h1 {
@@ -480,6 +494,7 @@ h6 {
   white-space: nowrap;
   text-transform: uppercase;
   color: var(--secondary);
+  z-index: 5;
 }
 
 #page2{
@@ -510,11 +525,52 @@ h6 {
   align-items: center;
 }
 #service-wrapper{
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 #service-content{
+  position: relative;
   width: 50%;
+}
+#service-content2{
+  position: absolute;
+  top: 0;
+}
+#service-content2 h2{
+  opacity: 0;
+  transform: translateX(30%);
+}
+#point-container {
+  width: 100%;
+  height: 2px;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  pointer-events: none;
+}
+#cir1{
+  width: 1.5vw;
+  height: 1.5vw;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20%;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+}
+#cir2{
+  width: 1.5vw;
+  height: 1.5vw;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 25%;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
 }
 #page4{
   height: 100vh;
@@ -558,13 +614,20 @@ h6 {
   justify-content: center;
   perspective: 4000px;
   overflow: hidden;
+  mask-image: url("/circle.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  /* background-color: red; */
+  mask-size: 1.4%;
+  opacity: 0;
+  background-color: var(--secondary);
 }
 #page5 h1 {
   font-family: heading5;
   font-size: 9vw;
   text-align: center;
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--primary);
 }
 #video-container {
   height: 100%;

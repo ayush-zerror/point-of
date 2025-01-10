@@ -26,17 +26,113 @@ function page1Animation() {
   tl1
     .to("#page1 h1", {
       transform: " rotateY(8deg) rotateX(2deg) scale(9) translateX(30%)",
-      duration: 1.8,
+      duration: 1.2,
       ease: "expo.out",
     }, "a")
     .to("#page1 h4", {
-      transform: " rotateY(8deg) rotateX(2deg) scale(2) translateX(-10%)",
-      duration: 1.8,
+      transform: " rotateY(8deg) rotateX(2deg) scale(1.8) translateX(-10%)",
+      duration: 1.2,
       ease: "expo.out",
     }, "a")
+    .to("#hero-video", {
+      top: "0%",
+      delay: -.4
+      // duration: 1.8,
+    })
+
 
 }
 page1Animation()
+
+var tll = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#page3",
+    scroller: "body",
+    start: "top 60%",
+    end: "top -150%",
+    scrub: 1,
+  }
+})
+tll
+  .to("#cir1,#cir2", {
+    clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+    duration: .1,
+  })
+  .to("#cir1", {
+    left: "22.5%",
+    duration: .1,
+  }, "a")
+  .to("#cir2", {
+    left: "22.5%",
+    duration: .1,
+  }, "a")
+  .to("#cir1", {
+    display: "none",
+    duration:0,
+  })
+  .to("#cir2", {
+    transform: "translateY(-50%) scale(3)",
+    duration: .1,
+  })
+  .to("#cir2", {
+    transform: "translateY(-50%) scale(.8)",
+    duration: .1,
+  })
+  .to("#cir2", {
+    transform: "translateY(-50%) scale(1)",
+    duration: .1,
+  })
+  .to("#cir2", {
+    left: "30%",
+    duration: .1,
+  })
+  .to("#cir2", {
+    left: "10%",
+    duration: .1,
+  })
+  .to("#cir2", {
+    left: "22.5%",
+    duration: .1,
+  })
+  .to("#cir2", {
+    top: "20%",
+    duration: .1,
+  })
+  .to("#cir2", {
+    left: "50%",
+    transform: "translate(-50%,-50%) scale(1)",
+    duration: .1,
+  })
+var tl = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#page3",
+    scroller: "body",
+    start: "top 0%",
+    end: "top -100%",
+    scrub: 1,
+    pin: true,
+  }
+})
+tl
+  .to("#service-content >h2", {
+    transform: "translateX(30%)",
+    duration: .5,
+    opacity: 0,
+    filter: "blur(50px)",
+    stagger: {
+      amount: .3
+    },
+  })
+  .to("#service-content2 h2", {
+    transform: "translateX(0%)",
+    duration: .5,
+    opacity: 1,
+    stagger: {
+      amount: .3
+    },
+  })
+
+
 
 function page4Animation() {
   const page4WrapperWidth = document.querySelector("#project-wrapper").scrollWidth
@@ -74,6 +170,17 @@ function page5Animation() {
   })
   tl5
 
+    .to("#cir2", {
+      opacity: 0
+    },"c")
+    .to("#page5", {
+      opacity: 1
+    },"c")
+    .to("#page5", {
+      maskSize: "200%",
+      duration:4,
+      delay:-.2
+    })
     .to("#video-container", {
       clipPath: " polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       duration: 1
