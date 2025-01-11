@@ -44,6 +44,27 @@ function page1Animation() {
 }
 page1Animation()
 
+var clutter = ""
+document.querySelector("#page2-text").textContent.split(" ").forEach((w) => {
+  clutter += `<span> ${w}</span>`
+})
+
+document.querySelector("#page2-text").innerHTML = clutter
+
+gsap.to(document.querySelectorAll("#page2-text span"), {
+  opacity: 1,
+  stagger: 0.2,
+  scrollTrigger: {
+    trigger: "#page2",
+    scroller: "body",
+    start: "top 0%",
+    end: "top -100%",
+    scrub: 1,
+    pin:true
+  }
+})
+
+
 var tll = gsap.timeline({
   scrollTrigger: {
     trigger: "#page3",
@@ -68,7 +89,7 @@ tll
   }, "a")
   .to("#cir1", {
     display: "none",
-    duration:0,
+    duration: 0,
   })
   .to("#cir2", {
     transform: "translateY(-50%) scale(3)",
@@ -100,6 +121,14 @@ tll
   })
   .to("#cir2", {
     left: "50%",
+    transform: "translate(-50%,-50%) scale(1)",
+    duration: .1,
+  })
+  .to("#cir2", {
+    left: "49vw",
+    width: "0.65vw",
+    height: "0.65vw",
+    backgroundColor: "transparent",
     transform: "translate(-50%,-50%) scale(1)",
     duration: .1,
   })
@@ -138,20 +167,53 @@ function page4Animation() {
   const page4WrapperWidth = document.querySelector("#project-wrapper").scrollWidth
   const slideValue = page4WrapperWidth - window.innerWidth
 
-  gsap.to("#project-wrapper", {
-    transform: `translateX(-${slideValue + 100}px)`,
-    duration: 1,
-    ease: "linear",
+  var tl4 = gsap.timeline({
     scrollTrigger: {
       trigger: "#page4",
       scroller: "body",
-      // markers: true,
       start: "top top",
-      end: "top -200%",
+      end: "top -180%",
       scrub: 1,
       pin: true,
     }
   })
+
+  tl4
+    .to("#project-wrapper", {
+      transform: `translateX(-${slideValue}px)`,
+      duration: 1,
+      ease: "linear",
+    })
+    .to(".view-all .cirr", {
+      opacity: 1,
+      duration: 0
+    }, "c")
+    .to("#cir2", {
+      opacity: 0,
+      duration: 0,
+    }, "c")
+    .to(".view-all .cirr", {
+      width: "2.5vw",
+      height: "2.5vw",
+      backgroundColor: "var(--secondary)",
+      duration: .2,
+    }, "s")
+    .to(".view-all .cirr i", {
+      opacity: 1,
+      duration: .1,
+      delay: 0.1
+    }, "s")
+    .to("#cir2", {
+      left: "50%",
+      duration: .1,
+    }, "s")
+    .to("#cir2", {
+      width: "1.5vw",
+      height: "1.5vw",
+      opacity: 1,
+      backgroundColor: "var(--secondary)",
+      duration: .1,
+    })
 }
 page4Animation()
 
@@ -164,22 +226,26 @@ function page5Animation() {
       scroller: "body",
       start: "top 0%",
       end: "top -400%",
-      scrub: true,
+      scrub: 1,
       pin: true,
     }
   })
   tl5
 
-    .to("#cir2", {
-      opacity: 0
-    },"c")
+    .fromTo("#cir2", {
+      opacity: 1,
+    }, {
+      opacity: 0,
+      duration: .1,
+    }, "c")
     .to("#page5", {
-      opacity: 1
-    },"c")
+      opacity: 1,
+      duration: .1
+    }, "c")
     .to("#page5", {
       maskSize: "200%",
-      duration:4,
-      delay:-.2
+      duration: 4,
+      delay: -.2
     })
     .to("#video-container", {
       clipPath: " polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",

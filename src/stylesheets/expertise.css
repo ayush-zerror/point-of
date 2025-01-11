@@ -590,6 +590,7 @@ h6 {
   padding-top: 10vh;
   width: 100vw;
   overflow: hidden;
+  background-color: black;
 }
 #page3 #svg-container {
   width: 200vw;
