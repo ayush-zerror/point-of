@@ -616,6 +616,7 @@ h6 {
   font-family: para3;
   font-weight: 500;
   font-size: 1vw;
+  color: var(--secondary);
 }
 #text-cir{
   position: absolute;
