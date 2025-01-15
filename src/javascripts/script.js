@@ -10,45 +10,6 @@ var swiper = new Swiper(".mySwiper", {
   speed: 600, // Adjust slide transition speed
 });
 
-var whiteNav = `linear-gradient(
-  180deg,
-  #F2F2EE 0,
-  hsla(0, 0%, 94.1%, .987) 11%,  
-  hsla(0, 0%, 94.1%, .951) 20.8%, 
-  hsla(0, 0%, 94.1%, .896) 29.6%, 
-  hsla(0, 0%, 94.1%, .825) 37.5%, 
-  hsla(0, 0%, 94.1%, .741) 44.6%, 
-  hsla(0, 0%, 94.1%, .648) 51%,   
-  hsla(0, 0%, 94.1%, .55) 57%,    
-  hsla(0, 0%, 94.1%, .45) 62.5%,  
-  hsla(0, 0%, 94.1%, .352) 67.7%,  
-  hsla(0, 0%, 94.1%, .259) 72.7%,  
-  hsla(0, 0%, 94.1%, .175) 77.8%,  
-  hsla(0, 0%, 94.1%, .104) 82.9%,  
-  hsla(0, 0%, 94.1%, .049) 88.2%,  
-  hsla(0, 0%, 94.1%, .013) 93.9%,  
-  hsla(0, 0%, 94.1%, 0)
-)`
-
-var blackNav = `linear-gradient(
-  180deg,
-  #000000 0,
-  hsla(0, 0%, 0%, .987) 11%,  
-  hsla(0, 0%, 0%, .951) 20.8%, 
-  hsla(0, 0%, 0%, .896) 29.6%, 
-  hsla(0, 0%, 0%, .825) 37.5%, 
-  hsla(0, 0%, 0%, .741) 44.6%, 
-  hsla(0, 0%, 0%, .648) 51%,   
-  hsla(0, 0%, 0%, .55) 57%,    
-  hsla(0, 0%, 0%, .45) 62.5%,  
-  hsla(0, 0%, 0%, .352) 67.7%,  
-  hsla(0, 0%, 0%, .259) 72.7%,  
-  hsla(0, 0%, 0%, .175) 77.8%,  
-  hsla(0, 0%, 0%, .104) 82.9%,  
-  hsla(0, 0%, 0%, .049) 88.2%,  
-  hsla(0, 0%, 0%, .013) 93.9%,  
-  hsla(0, 0%, 0%, 0)
-)`
 
 const cursor = document.querySelector("#drag-cursor")
 window.addEventListener("mousemove", function (e) {
@@ -182,25 +143,6 @@ page1Animation()
 
 function page2Animation() {
 
-  const tl2s = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#page2",
-      scroller: "body",
-      start: "top 15%",
-      end: "top 10%",
-      scrub: true,
-      // markers: true
-    }
-  })
-  tl2s
-    .to("#navbar", {
-      background:blackNav ,
-      duration: .5,
-    },"f")
-    .to("#mode,#logo,#menu",{
-      filter:"invert(1)",
-      duration:.5
-    },"f")
 
   var clutter = ""
   document.querySelector("#page2-text").textContent.split(" ").forEach((w) => {
@@ -228,358 +170,291 @@ function page2Animation() {
 }
 page2Animation()
 
-function pointStartAnimation() {
-
-
-  let mode = localStorage.getItem("mode") === "true";
-  var colorToApply = mode === "true" ? blackNav : whiteNav
-
-  const tl3s = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#page3",
-      scroller: "body",
-      start: "top 15%",
-      end: "top 10%",
-      scrub: true,
-      // markers: true
-    }
-  })
-  tl3s
-    .to("#navbar", {
-      background: colorToApply,
-      duration: .5
-    },"e")
-    .to("#mode,#logo,#menu",{
-      filter:`invert(${mode ? 1 : 0})`,
-      duration:.5
-    },"e")
-
-
-  var tl3 = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#page3",
-      scroller: "body",
-      start: "top 70%",
-      end: "top 0%",
-      scrub: 1,
-    }
-  })
-  tl3
-    .to(".service-cir1,.service-cir2", {
-      clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-      duration: .8,
-    })
-    .to(".service-cir1,.service-cir2", {
-      left: "50%",
-      duration: 1,
-    })
-    .to(".service-cir2", {
-      opacity: 0,
-      duration: .4,
-    })
-    .to(".service-cir1", {
-      transform: "translate(-50%, -50%) scale(2)",
-      duration: .8,
-    })
-    .to(".service-cir1", {
-      transform: "translate(-50%, -50%) scale(1)",
-      duration: .8,
-    })
-
-}
-pointStartAnimation()
-
 
 function pointMidAnimation() {
+  const canvas = document.getElementById("physicsCanvas");
+  const engine = Matter.Engine.create();
+  const world = engine.world;
+  const render = Matter.Render.create({
+    canvas: canvas,
+    engine: engine,
+    options: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      wireframes: false,
+      background: "transparent"
+    }
+  });
 
+  // Create ground and walls
+  const ground = Matter.Bodies.rectangle(window.innerWidth / 2, window.innerHeight + 10, window.innerWidth, 20, {
+    isStatic: true
+  });
+
+  const walls = [
+    Matter.Bodies.rectangle(-10, window.innerHeight / 2, 20, window.innerHeight, { isStatic: true }),
+    Matter.Bodies.rectangle(window.innerWidth + 10, window.innerHeight / 2, 20, window.innerHeight, { isStatic: true })
+  ];
+
+  Matter.World.add(world, [ground, ...walls]);
+
+  const rootStyles = getComputedStyle(document.documentElement);
+  const ballColor = rootStyles.getPropertyValue("--secondary").trim();
+  // Create a ball function
+  function createBall(x, y) {
+    return Matter.Bodies.circle(x, y, 20, { restitution: 0.9, render: { fillStyle: ballColor } });
+  }
+
+  // Add mouse control for moving the balls
+  const mouse = Matter.Mouse.create(render.canvas);
+  const mouseConstraint = Matter.MouseConstraint.create(engine, {
+    mouse: mouse,
+    constraint: {
+      stiffness: 0.2,
+      render: {
+        visible: false,
+      },
+    },
+  });
+  Matter.World.add(world, mouseConstraint);
+
+  // Ensure mouse resizes with the canvas
+  render.mouse = mouse;
+
+  // Enable scrolling by preventing mouse wheel interference
+  render.canvas.addEventListener('wheel', (e) => {
+    if (!mouseConstraint.mouse.button) {  // Only prevent default if no mouse interaction
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, { passive: false });
+
+  // Add 20 balls once
+  for (let i = 0; i < 20; i++) {
+    const ball = createBall(Math.random() * window.innerWidth, Math.random() * -100);  // Random horizontal position
+    Matter.World.add(world, ball);
+  }
 
   var tl = gsap.timeline({
     scrollTrigger: {
       trigger: "#page3",
       scroller: "body",
-      start: "top 0%",
-      end: "top -350%",
-      scrub: 2,
+      start: "top top",
+      end: "+=4000",
+      scrub: true,
       pin: true,
-      anticipatePin: 1, // Helps smooth out pin transitions
-
+      markers: true,
+      onEnter: () => {
+        Matter.Render.run(render);
+        Matter.Runner.run(Matter.Runner.create(), engine);
+      },
     }
-  });
-
+  })
   tl
-    .to(".service-cir1", {
-      left: "18%",
+    .to("#circle2", {
+      top: "29%",
+      transform: "translate(-50%,-50%) scale(1)",
+      duration: 1.5,
+    })
+    .to("#right-content > h2", {
+      x: 300,
+      filter: "blur(4px)",
+      opacity: 0,
       duration: .8,
-    })
-    .to(".service-cir1", {
-      left: "50%",
-      transform: "translate(-50%, -50%) scale(.6)",
-      duration: 1,
-    })
-    .to(".service-cir1", {
-      left: "95.8%",
-      transform: "translate(-50%, -50%) scale(1)",
-      duration: 1,
-    })
-    .to("#text-cir", {
-      opacity: 1,
-      duration: .4,
-    })
-    .to(".service-cir1", {
-      left: "95.8%",
-      opacity: 0,
-      transform: "translate(-50%, -50%) scale(0)",
-      duration: .4,
-    })
-
-    .to("#service-content >h2", {
-      transform: "translateX(30%)",
-      duration: 1.2,
-      opacity: 0,
-      filter: "blur(50px)",
       stagger: {
-        amount: 0.3
-      },
+        amount: 0.2,
+      }
     })
-    .to("#service-content2 h2", {
+    .to("#right-content-top > h2", {
       transform: "translateX(0%)",
-      duration: 1.2,
       opacity: 1,
+      duration: .8,
       stagger: {
-        amount: 0.3
-      },
+        amount: 0.2,
+      }
     })
-
     .to("#ser2,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
-      opacity: 0.4,
-      duration: 1,
-      ease: "power2.inOut"
-    }, "p1")
+      opacity: .4,
+      duration: .5,
+    }, "a")
     .to("#para1", {
       opacity: 1,
-      duration: 1,
-      ease: "power2.inOut"
-    }, "p1")
-    .to("#text-cir", {
-      top: "25%",
-      duration: 1,
-      delay: .5,
-      ease: "power2.inOut"
-    }, "p2")
+      duration: .5
+    }, "a")
+
+    .to("#circle2", {
+      top: "37%",
+      duration: .8,
+    }, "b")
     .to("#ser1,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
-      opacity: 0.4,
-      duration: 1,
-      delay: .5,
-      ease: "power2.inOut"
-    }, "p2")
+      opacity: .4,
+      duration: .5,
+    }, "b")
     .to("#ser2", {
       filter: "blur(0px)",
       opacity: 1,
-      duration: 1,
-      delay: .5,
-      ease: "power2.inOut"
-    }, "p2")
+      duration: .5,
+    }, "b")
     .to("#para1", {
       opacity: 0,
-      duration: 0,
-      delay: .5,
-      ease: "power2.inOut"
-    }, "p2")
+      duration: .5
+    }, "b")
     .to("#para2", {
       opacity: 1,
-      duration: 1,
-      delay: .5,
-      ease: "power2.inOut"
-    }, "p2")
+      duration: .4
+    })
 
-    .to("#text-cir", {
-      top: "41.5%",
-      duration: 1,
-      delay: 1,
-      ease: "power2.inOut"
-    }, "p3")
-    .to("#ser1,#ser2,#ser4 ,#ser5,#ser6", {
+    .to("#circle2", {
+      top: "45.3%",
+      duration: .8,
+    }, "c")
+    .to("#ser1,#ser2,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
-      opacity: 0.4,
-      duration: 1,
-      delay: 1,
-      ease: "power2.inOut"
-    }, "p3")
+      opacity: .4,
+      duration: .5,
+    }, "c")
     .to("#ser3", {
       filter: "blur(0px)",
       opacity: 1,
-      duration: 1,
-      delay: 1,
-      ease: "power2.inOut"
-    }, "p3")
+      duration: .5,
+    }, "c")
     .to("#para2", {
       opacity: 0,
-      duration: 0,
-      delay: 1,
-      ease: "power2.inOut"
-    }, "p3")
+      duration: .5
+    }, "c")
     .to("#para3", {
       opacity: 1,
-      duration: 1,
-      delay: 1,
-      ease: "power2.inOut"
-    }, "p3")
+      duration: .4
+    })
 
-    .to("#text-cir", {
-      top: "58%",
-      duration: 1,
-      delay: 1.5,
-      ease: "power2.inOut"
-    }, "p4")
+    .to("#circle2", {
+      top: "53.3%",
+      duration: .8,
+    }, "d")
     .to("#ser1,#ser2,#ser3,#ser5,#ser6", {
       filter: "blur(4px)",
-      opacity: 0.4,
-      duration: 1,
-      delay: 1.5,
-      ease: "power2.inOut"
-    }, "p4")
+      opacity: .4,
+      duration: .5,
+    }, "d")
     .to("#ser4", {
       filter: "blur(0px)",
       opacity: 1,
-      duration: 1,
-      delay: 1.5,
-      ease: "power2.inOut"
-    }, "p4")
+      duration: .5,
+    }, "d")
     .to("#para3", {
       opacity: 0,
-      duration: 0,
-      delay: 1.5,
-      ease: "power2.inOut"
-    }, "p4")
+      duration: .5
+    }, "d")
     .to("#para4", {
       opacity: 1,
-      duration: 1,
-      delay: 1.5,
-      ease: "power2.inOut"
-    }, "p4")
+      duration: .4
+    })
 
-    .to("#text-cir", {
-      top: "74.5%",
-      duration: 1,
-      delay: 2,
-      ease: "power2.inOut"
-    }, "p5")
+    .to("#circle2", {
+      top: "61.3%",
+      duration: .8,
+    }, "e")
     .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
       filter: "blur(4px)",
-      opacity: 0.4,
-      duration: 1,
-      delay: 2,
-      ease: "power2.inOut"
-    }, "p5")
+      opacity: .4,
+      duration: .5,
+    }, "e")
     .to("#ser5", {
       filter: "blur(0px)",
       opacity: 1,
-      duration: 1,
-      delay: 2,
-      ease: "power2.inOut"
-    }, "p5")
+      duration: .5,
+    }, "e")
     .to("#para4", {
       opacity: 0,
-      duration: 0,
-      delay: 2,
-      ease: "power2.inOut"
-    }, "p5")
+      duration: .5
+    }, "e")
     .to("#para5", {
       opacity: 1,
-      duration: 1,
-      delay: 2,
-      ease: "power2.inOut"
-    }, "p5")
+      duration: .4
+    })
 
-    .to("#text-cir", {
-      top: "91%",
-      duration: 1,
-      delay: 2.5,
-      ease: "power2.inOut"
-    }, "p6")
+    .to("#circle2", {
+      top: "69.3%",
+      duration: .8,
+    }, "f")
     .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
       filter: "blur(4px)",
-      opacity: 0.4,
-      duration: 1,
-      delay: 2.5,
-      ease: "power2.inOut"
-    }, "p6")
+      opacity: .4,
+      duration: .5,
+    }, "f")
     .to("#ser6", {
       filter: "blur(0px)",
       opacity: 1,
-      duration: 1,
-      delay: 2.5,
-      ease: "power2.inOut"
-    }, "p6")
+      duration: .5,
+    }, "f")
     .to("#para5", {
       opacity: 0,
-      duration: 0,
-      delay: 2.5,
-      ease: "power2.inOut"
-    }, "p6")
+      duration: .5
+    }, "f")
     .to("#para6", {
       opacity: 1,
-      duration: 1,
-      delay: 2.5,
-      ease: "power2.inOut"
-    }, "p6")
+      duration: .4,
+      onComplete: () => {
+        removeBottomWallAndBalls();
+      },
+    })
 
+  function removeBottomWallAndBalls() {
+    // Remove the bottom wall
+    Matter.World.remove(world, ground);
+
+    // Remove balls from the world when they fall out of view
+    Matter.Events.on(engine, "afterUpdate", () => {
+      const ballsToRemove = [];
+      world.bodies.forEach((body) => {
+        if (body.label === "Ball" && body.position.y > window.innerHeight + 50) {
+          ballsToRemove.push(body);
+        }
+      });
+
+      ballsToRemove.forEach((ball) => {
+        Matter.World.remove(world, ball);
+      });
+    });
+  }
 }
 pointMidAnimation()
 
-
 function page4Animation() {
-
-  var tl3e = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#page4",
-      scroller: "body",
-      start: "top 81%",
-      end: "top 79%",
-      scrub: true,
-    }
-  })
-
-  tl3e
-    .to("#text-cir", {
-      opacity: 0,
-      duration: .8,
-    }, "c")
-    .to("#cir2m", {
-      opacity: 1,
-      duration: .8,
-    }, "c")
-
 
   var tl4e = gsap.timeline({
     scrollTrigger: {
       trigger: "#page4",
       scroller: "body",
-      start: "top 75%",
-      end: "top 60%",
+      start: "top 100%%",
+      end: "top 80%",
       scrub: 1,
+      // markers: true
     }
   })
   tl4e
-    .to("#cir2m", {
-      left: "49vw",
+
+    .to("#circle2", {
+      top: "50%",
+      left:"-670%",
+      transform: "translate(-50%,-50%) scale(1)",
       width: "0.65vw",
       height: "0.65vw",
       backgroundColor: "transparent",
-      transform: "translate(-50%,-50%) scale(1)",
-      duration: 1,
-    }, "c")
+      duration: 2,
+    })
     .to("#ser1,#ser2,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(0px)",
       opacity: 1,
-      duration: 1,
-    }, "c")
+      duration: 2,
+    })
     .to("#para6", {
       opacity: 0,
-      duration: 1,
-    }, "c")
+      duration: 2,
+    })
+
 
   const page4WrapperWidth = document.querySelector("#project-wrapper").scrollWidth
   const slideValue = page4WrapperWidth - window.innerWidth
@@ -598,16 +473,12 @@ function page4Animation() {
   tl4
     .to("#project-wrapper", {
       transform: `translateX(-${slideValue}px)`,
-      duration: 1,
+      duration: 1.5,
       ease: "linear",
     })
     .to(".view-all .cirr", {
       opacity: 1,
       duration: 0
-    }, "c")
-    .to("#cir2m", {
-      opacity: 0,
-      duration: 0,
     }, "c")
     .to(".view-all .cirr", {
       width: "2.5vw",
@@ -620,18 +491,14 @@ function page4Animation() {
       duration: .1,
       delay: 0.1
     }, "s")
-    .to("#cir2m", {
-      left: "50%",
-      duration: .1,
-    }, "s")
-    .to("#cir2m", {
+    .to("#circle2", {
+      left:"50%",
       width: "2.5vw",
       height: "2.5vw",
-      opacity: 1,
       backgroundColor: "var(--secondary)",
-      duration: .1,
+      duration: .5,
     })
-    .to(".view-all .cirr", {
+    .to(".view-all", {
       opacity: 0,
       duration: .3,
     })
@@ -640,9 +507,6 @@ page4Animation()
 
 
 function page5Animation() {
-
-  let mode1 = localStorage.getItem("mode") === "true";
-  var colorToApply1 = mode1 === "true" ?  whiteNav : blackNav
 
 
   const tl5 = gsap.timeline({
@@ -665,16 +529,6 @@ function page5Animation() {
       duration: 4,
       delay: -.2
     })
-    .to("#mode,#logo,#menu",{
-      filter:`invert(${mode1 ? 0 : 1})`,
-      duration:.5,
-      delay: -3
-    },"m")
-    .to("#navbar", {
-      background: colorToApply1,
-      duration: .5,
-      delay: -3
-    },"m")
     .to("#video-container", {
       clipPath: " polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
       duration: 1
@@ -706,44 +560,4 @@ page5Animation()
 
 
 
-const tl3s = gsap.timeline({
-  scrollTrigger: {
-    trigger: "#page6",
-    scroller: "body",
-    start: "top 15%",
-    end: "top 10%",
-    scrub: true,
-    markers: true
-  }
-})
-tl3s
-  .to("#navbar", {
-    background: whiteNav,
-    duration: .5
-  },"e")
-  .to("#mode,#logo,#menu",{
-    filter:`invert(0)`,
-    duration:.5
-  },"e")
 
-
-
-const tlf = gsap.timeline({
-  scrollTrigger: {
-    trigger: "#footer",
-    scroller: "body",
-    start: "top 15%",
-    end: "top 10%",
-    scrub: true,
-    // markers: true
-  }
-})
-tlf
-  .to("#navbar", {
-    background: blackNav,
-    duration: .5
-  },"m")
-  .to("#mode,#logo,#menu",{
-    filter:"invert(1)",
-    duration:.5
-  },"m")
