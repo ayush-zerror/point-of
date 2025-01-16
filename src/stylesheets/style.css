@@ -60,15 +60,31 @@ body {
   height: 100%;
 }
 #cursor {
-  width: .7vw;
-  height: .7vw;
+  width: 1.2vw;
+  height: 1.2vw;
   border-radius: 50%;
   position: fixed;
-  background-color: var(--secondary);
-  z-index: 9;
+  border: 1px solid white;
+  mix-blend-mode: difference;
+  z-index: 99999;
+  pointer-events: none;
+  transform: translate(-50%,-50%);
+  font-size: .9vw;
+  font-family: para3;
+  font-weight: 500;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#playCur{
+  position: fixed;
+  transform: translate(-50%,-50%);
+  z-index: 999999;
+  font-size: 1.6vw;
+  color: white;
   pointer-events: none;
   opacity: 0;
-  display: none;
 }
 #drag-cursor{
   width: 4vw;
@@ -534,22 +550,29 @@ h6 {
 
 #page1 h1 {
   position: absolute;
-  bottom: 15%;
-  left: 50%;
+  top: 50%;
+  left: 3%;
   height: auto;
   transform-origin: right;
-  transform: rotateY(0deg) rotateX(0deg) scale(1) translateX(-50%);
+  transform: rotateY(0deg) rotateX(0deg) scale(1) translate(0,-50%);
   will-change: transform;
   backface-visibility: hidden;
   font-family: heading2;
-  font-size: 8vw;
-  white-space: nowrap;
+  font-size: 4vw;
   text-transform: uppercase;
-  color: var(--secondary);
+  /* color: var(--secondary); */
   z-index: 5;
   overflow: hidden;
+  color: transparent;
+  background: linear-gradient(to bottom right, #786D3F 50%, var(--secondary)); 
+  background-clip: text;
+  -webkit-background-clip: text; 
 }
-
+#home-title{
+  height: 4vw;
+  overflow: hidden !important;
+  display: inline-block;
+}
 #page2{
   height: 100vh;
   width: 100%;
@@ -614,8 +637,9 @@ canvas {
   transform: translate(-50%,-50%) scale(0);
   left: 50%;
   border-radius: 50px;
-  border: 1px solid #000;
+  border: 1px solid var(--secondary);
 }
+
 
 #content-page3{
   width: 100%;
@@ -652,6 +676,25 @@ canvas {
   position: relative;
   height: 50%;
   width: 48%;
+}
+#right-content h2{
+  font-size: 51px;
+}
+#circle-text{
+  width: 1.5vw;
+  height: 1.5vw;
+  background-color: var(--secondary);
+  position: absolute;
+  top: 5%;
+  /* top: 21%; */
+  /* top: 37.5%; */
+  /* top: 53.3%; */
+  /* top: 69.7%; */
+  /* top: 85.5%; */
+  left: -6.15%;
+  border: 1px solid var(--secondary);
+  border-radius: 50px;
+  opacity: 0;
 }
 #right-content-top{
   position: absolute;
@@ -861,11 +904,10 @@ canvas {
 #page6{
   height: 100vh;
   width: 100%;
-  padding-top: 13vw;
+  padding-top: 15vw;
   padding-bottom: 5vw;
   background-color: var(--primary);
   position: relative;
-  z-index: 9;
 }
 .swiper {
   width: 100%;
@@ -931,7 +973,6 @@ canvas {
   align-items:center;
   background-color: var(--primary);
   position: relative;
-  z-index: 9;
 }
 
 #page7 h2{

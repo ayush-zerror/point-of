@@ -11,51 +11,62 @@ var swiper = new Swiper(".mySwiper", {
 });
 
 
-const cursor = document.querySelector("#drag-cursor")
+const cursor = document.querySelector("#cursor")
 window.addEventListener("mousemove", function (e) {
   gsap.to(cursor, {
     top: e.clientY,
     left: e.clientX,
+    scale: 1
   })
-})
-window.addEventListener("mousedown", function (e) {
-  gsap.to(cursor, {
+  gsap.to("#playCur", {
     top: e.clientY,
     left: e.clientX,
-  })
-})
-window.addEventListener("mouseup", function (e) {
-  gsap.to(cursor, {
-    top: e.clientY,
-    left: e.clientX,
+    duration: 0
   })
 })
 
 document.querySelector("#page6").addEventListener("mouseenter", function (e) {
   gsap.to(cursor, {
-    opacity: 1,
+    width: "4vw",
+    height: "4vw",
+    backgroundColor: "white",
   })
+  cursor.innerHTML = "Drag"
 })
 document.querySelector("#page6").addEventListener("mouseleave", function (e) {
   gsap.to(cursor, {
-    opacity: 0,
+    width: "1.5vw",
+    height: "1.5vw",
+    backgroundColor: "transparent",
   })
+  cursor.innerHTML = ""
 })
 
 var muted = true
 document.querySelectorAll("#page6 .video-container video").forEach(function (vid) {
   vid.addEventListener("mouseenter", function (e) {
+    gsap.to("#playCur", {
+      opacity: 1,
+      duration: .2
+    })
+    cursor.innerHTML = ""
     if (muted) {
-      cursor.querySelector("h6").textContent = "Play"
+      document.querySelector("#playCur").classList.add("ri-play-fill")
+      document.querySelector("#playCur").classList.remove("ri-pause-fill")
     }
     else {
-      cursor.querySelector("h6").textContent = "Pause"
+      document.querySelector("#playCur").classList.add("ri-pause-fill")
+      document.querySelector("#playCur").classList.remove("ri-play-fill")
     }
   })
 })
 document.querySelectorAll("#page6 .video-container video").forEach(function (vid) {
   vid.addEventListener("mouseleave", function (e) {
-    cursor.querySelector("h6").textContent = "Drag"
+    gsap.to("#playCur", {
+      opacity: 0,
+      duration: .2
+    })
+    cursor.innerHTML = "Drag"
   })
 })
 
@@ -74,15 +85,6 @@ document.querySelectorAll("#page6 .video-container video").forEach(function (vid
 })
 
 function page1Animation() {
-
-  // document.querySelectorAll(".word-style").forEach((w)=>{
-  //   var clutter= ""
-  //   w.textContent.split("").forEach((l)=>{
-  //     clutter += `<span>${l}</span>`
-  //   })
-  //   w.innerHTML = clutter
-  // })
-
 
   const words = document.querySelectorAll(".word-style");
 
@@ -111,16 +113,16 @@ function page1Animation() {
       trigger: "#page1",
       scroller: "body",
       start: "top 0%",
-      end: "top -200%",
+      end: "top -100%",
       scrub: 1,
       pin: true,
-      anticipatePin: 1, // Helps smooth out pin transitions
+      // pinSpacing: false,
     }
   });
 
   tl1
     .to("#page1 h1", {
-      transform: "rotateY(8deg) rotateX(2deg) scale(9) translateX(20%)", // Simplified transform
+      transform: "rotateY(4deg) rotateX(2deg) scale(15) translateX(-10%)", // Simplified transform
       duration: 1.2,
       ease: "power3.out", // Less taxing easing function
     }, "a")
@@ -132,9 +134,8 @@ function page1Animation() {
     }, "a")
     .to("#hero-video", {
       top: "0%",
-      duration: 1.8, // Ensure a smooth duration
-      ease: "power3.out",
-    }); // Align with other animations
+      // delay: -.5
+    });
 
 
 }
@@ -199,10 +200,40 @@ function pointMidAnimation() {
   Matter.World.add(world, [ground, ...walls]);
 
   const rootStyles = getComputedStyle(document.documentElement);
-  const ballColor = rootStyles.getPropertyValue("--secondary").trim();
-  // Create a ball function
-  function createBall(x, y) {
-    return Matter.Bodies.circle(x, y, 20, { restitution: 0.9, render: { fillStyle: ballColor } });
+  const shapeColor = rootStyles.getPropertyValue("--secondary").trim();
+
+  // Function to create a random shape (circle, rectangle, triangle)
+  function createRandomShape(x, y) {
+    const size = Math.random() * 30 + 20; // Ensures size is between 20 and 50
+    const type = Math.random();
+
+    let shape;
+    if (type < 0.4) {
+      shape = Matter.Bodies.circle(x, y, size / 2, { restitution: 0.9, render: { fillStyle: shapeColor } });
+    } else if (type < 0.7) {
+      shape = Matter.Bodies.rectangle(x, y, size, size, { restitution: 0.8, render: { fillStyle: shapeColor } });
+    } else {
+      shape = Matter.Bodies.polygon(x, y, 3, size, { restitution: 0.8, render: { fillStyle: shapeColor } });
+    }
+
+    // Apply a small initial force or velocity to prevent shapes from being stuck
+    Matter.Body.applyForce(shape, shape.position, { x: 0, y: -0.05 });
+
+    return shape;
+  }
+
+  // Function to create floating text
+  function createText(x, y, text) {
+    return Matter.Bodies.rectangle(x, y, 100, 50, {
+      restitution: 0.8,
+      render: {
+        sprite: {
+          texture: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='50'>
+            <text x='10' y='30' font-size='20' font-family='para3' fill='black'>${text}</text>
+          </svg>`,
+        },
+      },
+    });
   }
 
   // Add mouse control for moving the balls
@@ -229,10 +260,46 @@ function pointMidAnimation() {
     }
   }, { passive: false });
 
-  // Add 20 balls once
-  for (let i = 0; i < 20; i++) {
-    const ball = createBall(Math.random() * window.innerWidth, Math.random() * -100);  // Random horizontal position
-    Matter.World.add(world, ball);
+  // Flag to check if shapes have been added
+  let shapesAdded = false;
+
+  // Function to add shapes and text dynamically
+  function addShapesAndText() {
+    if (shapesAdded) {
+      return; // Prevent adding shapes again if they have already been added
+    }
+
+    const elements = [];
+    const words = ["Design", "Innovation", "Friction", "Curiosity", "Inception"];
+
+    // Add random shapes
+    for (let i = 0; i < 15; i++) {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * -200;
+      elements.push(createRandomShape(x, y));
+    }
+
+    // Add text elements
+    for (let i = 0; i < words.length; i++) {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * -200;
+      elements.push(createText(x, y, words[i]));
+    }
+
+    // Add elements to the world
+    Matter.World.add(world, elements);
+
+    // Set the flag to true once shapes and text have been added
+    shapesAdded = true;
+
+    // Cleanup after a while to improve performance
+    setTimeout(() => {
+      elements.forEach(element => {
+        if (element.position.y > window.innerHeight + 100) {
+          Matter.Composite.remove(world, element);
+        }
+      });
+    }, 12000);
   }
 
   var tl = gsap.timeline({
@@ -243,19 +310,30 @@ function pointMidAnimation() {
       end: "+=4000",
       scrub: true,
       pin: true,
-      markers: true,
       onEnter: () => {
+        // Run render and runner only if it's the first time entering
         Matter.Render.run(render);
         Matter.Runner.run(Matter.Runner.create(), engine);
+        addShapesAndText();
       },
     }
-  })
+  });
+
+
   tl
     .to("#circle2", {
       top: "29%",
       transform: "translate(-50%,-50%) scale(1)",
       duration: 1.5,
     })
+    .to("#circle-text", {
+      opacity: 1,
+      duration: .3,
+    }, "op")
+    .to("#circle2", {
+      opacity: 0,
+      duration: .3,
+    }, "op")
     .to("#right-content > h2", {
       x: 300,
       filter: "blur(4px)",
@@ -263,7 +341,8 @@ function pointMidAnimation() {
       duration: .8,
       stagger: {
         amount: 0.2,
-      }
+      },
+      delay: .2
     })
     .to("#right-content-top > h2", {
       transform: "translateX(0%)",
@@ -272,7 +351,12 @@ function pointMidAnimation() {
       stagger: {
         amount: 0.2,
       }
-    })
+    }, "bk")
+    .to("#circle2", {
+      top: "50%",
+      transform: "translate(-50%,-50%) scale(1)",
+      duration: .8,
+    }, "bk")
     .to("#ser2,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -283,119 +367,144 @@ function pointMidAnimation() {
       duration: .5
     }, "a")
 
-    .to("#circle2", {
-      top: "37%",
+    .to("#circle-text", {
+      top: "21%",
       duration: .8,
+      delay: 1
     }, "b")
     .to("#ser1,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
       duration: .5,
+      delay: 1
     }, "b")
     .to("#ser2", {
       filter: "blur(0px)",
       opacity: 1,
       duration: .5,
+      delay: 1
     }, "b")
     .to("#para1", {
       opacity: 0,
-      duration: .5
+      duration: .5,
+      delay: 1
     }, "b")
     .to("#para2", {
       opacity: 1,
-      duration: .4
+      duration: .4,
+      delay: .5
     })
 
-    .to("#circle2", {
-      top: "45.3%",
+    .to("#circle-text", {
+      top: "37.5%",
       duration: .8,
+      delay: 1
     }, "c")
     .to("#ser1,#ser2,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
       duration: .5,
+      delay: 1
     }, "c")
     .to("#ser3", {
       filter: "blur(0px)",
       opacity: 1,
       duration: .5,
+      delay: 1
     }, "c")
     .to("#para2", {
       opacity: 0,
-      duration: .5
+      duration: .5,
+      delay: 1
     }, "c")
     .to("#para3", {
       opacity: 1,
-      duration: .4
+      duration: .4,
+      delay: .5
     })
 
-    .to("#circle2", {
+    .to("#circle-text", {
       top: "53.3%",
       duration: .8,
+      delay: 1
     }, "d")
     .to("#ser1,#ser2,#ser3,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
       duration: .5,
+      delay: 1
     }, "d")
     .to("#ser4", {
       filter: "blur(0px)",
       opacity: 1,
       duration: .5,
+      delay: 1
     }, "d")
     .to("#para3", {
       opacity: 0,
-      duration: .5
+      duration: .5,
+      delay: 1
     }, "d")
     .to("#para4", {
       opacity: 1,
-      duration: .4
+      duration: .4,
+      delay: .5
     })
 
-    .to("#circle2", {
-      top: "61.3%",
+    .to("#circle-text", {
+      top: "69.7%",
       duration: .8,
+      delay: 1
     }, "e")
     .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
       duration: .5,
+      delay: 1
     }, "e")
     .to("#ser5", {
       filter: "blur(0px)",
       opacity: 1,
       duration: .5,
+      delay: 1
     }, "e")
     .to("#para4", {
       opacity: 0,
-      duration: .5
+      duration: .5,
+      delay: 1
     }, "e")
     .to("#para5", {
       opacity: 1,
-      duration: .4
+      duration: .4,
+      delay: .5
     })
 
-    .to("#circle2", {
-      top: "69.3%",
+    .to("#circle-text", {
+      top: "85.5%",
       duration: .8,
+      delay: 1
     }, "f")
     .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
       filter: "blur(4px)",
       opacity: .4,
       duration: .5,
+      delay: 1
     }, "f")
     .to("#ser6", {
       filter: "blur(0px)",
       opacity: 1,
       duration: .5,
+      delay: 1
     }, "f")
     .to("#para5", {
       opacity: 0,
-      duration: .5
+      duration: .5,
+      delay: 1
     }, "f")
     .to("#para6", {
       opacity: 1,
       duration: .4,
+      delay: .5,
       onComplete: () => {
         removeBottomWallAndBalls();
       },
@@ -428,31 +537,34 @@ function page4Animation() {
     scrollTrigger: {
       trigger: "#page4",
       scroller: "body",
-      start: "top 100%%",
-      end: "top 80%",
-      scrub: 1,
+      start: "top 82%%",
+      end: "top 77%",
+      scrub: true,
       // markers: true
     }
   })
   tl4e
 
     .to("#circle2", {
-      top: "50%",
-      left:"-670%",
+      opacity: 1,
       transform: "translate(-50%,-50%) scale(1)",
       width: "0.65vw",
       height: "0.65vw",
       backgroundColor: "transparent",
-      duration: 2,
-    })
+      duration: .8,
+    }, "oc")
+    .to("#circle-text", {
+      opacity: 0,
+      duration: .8,
+    }, "oc")
     .to("#ser1,#ser2,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(0px)",
       opacity: 1,
-      duration: 2,
+      duration: .8,
     })
     .to("#para6", {
       opacity: 0,
-      duration: 2,
+      duration: .8,
     })
 
 
@@ -475,7 +587,11 @@ function page4Animation() {
       transform: `translateX(-${slideValue}px)`,
       duration: 1.5,
       ease: "linear",
-    })
+    }, "sl")
+    .to("#circle2", {
+      left: "-670%",
+      duration: 1,
+    }, "sl")
     .to(".view-all .cirr", {
       opacity: 1,
       duration: 0
@@ -492,7 +608,7 @@ function page4Animation() {
       delay: 0.1
     }, "s")
     .to("#circle2", {
-      left:"50%",
+      left: "50%",
       width: "2.5vw",
       height: "2.5vw",
       backgroundColor: "var(--secondary)",
@@ -500,7 +616,11 @@ function page4Animation() {
     })
     .to(".view-all", {
       opacity: 0,
-      duration: .3,
+      duration: .3
+    })
+    .to(".view-all", {
+      display: "none",
+      delay: .2
     })
 }
 page4Animation()

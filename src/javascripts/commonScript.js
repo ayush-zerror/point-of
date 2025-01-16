@@ -32,16 +32,16 @@ gsap.to(window, {
 
 
 
-const cursor = document.querySelector("#cursor")
-window.addEventListener("mousemove", function (e) {
-  if (cursor) {
-    gsap.to(cursor, {
-      opacity: 1,
-      top: e.clientY,
-      left: e.clientX,
-    })
-  }
-})
+// const cursor = document.querySelector("#cursor")
+// window.addEventListener("mousemove", function (e) {
+//   if (cursor) {
+//     gsap.to(cursor, {
+//       opacity: 1,
+//       top: e.clientY,
+//       left: e.clientX,
+//     })
+//   }
+// })
 
 function logo() {
 
@@ -72,12 +72,12 @@ function logo() {
       ease: "power1.out"
     }, "a")
     .to("#p", {
-      x: point.offsetWidth / 2 + (point.offsetWidth / 2) / 1.8,
+      x: point.offsetWidth / 2 + (point.offsetWidth / 2) / 1.6,
       duration: .4,
       delay: .2
     }, "a")
     .to("#o", {
-      x: -f.offsetWidth * 3,
+      x: -f.offsetWidth * 2.7,
       duration: .4,
       delay: .2
     }, "a")

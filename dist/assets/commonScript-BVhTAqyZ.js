@@ -1,0 +1,38 @@
+const s=new Lenis;s.on("scroll",o=>{const a=document.getElementById("popup");a&&a.contains(o.target)||ScrollTrigger.update()});gsap.ticker.add(o=>{s.raf(o*1e3)});gsap.ticker.lagSmoothing(0);gsap.to(window,{scrollTo:0});function l(){const o=document.querySelector("#point"),a=document.querySelector("#f");var e=gsap.timeline({scrollTrigger:{trigger:"#page1",scroller:"body",start:"top top",end:"top -5%",scrub:1}});e.to("#point",{opacity:0,x:2,duration:.2,ease:"power1.out"},"a").to("#f",{opacity:0,x:2,duration:.2,ease:"power1.out"},"a").to("#p",{x:o.offsetWidth/2+o.offsetWidth/2/1.6,duration:.4,delay:.2},"a").to("#o",{x:-a.offsetWidth*2.7,duration:.4,delay:.2},"a").to("#p",{y:"-1vw",duration:.2,delay:-.2},"s").to("#dot",{opacity:1,duration:.2,delay:-.2},"s")}l();function i(){var o=!1;document.querySelector("#menu-c").addEventListener("click",function(){o?(gsap.to("#navigation",{top:"-130%",clipPath:"polygon(0 0, 100% 0, 100% 97%, 0 89%)",duration:1.5,ease:"power4.out"}),o=!1):(gsap.to("#navigation",{top:0,clipPath:"polygon(0 0, 100% 0, 100% 100%, 0 100%)",duration:1.5,ease:"power4.out"}),o=!0)});let a=document.querySelectorAll(".shape"),e=document.querySelectorAll("#shape-select a"),r=document.querySelectorAll("#social-l a");e.forEach(function(t){t.addEventListener("mouseenter",function(){for(var n=0;n<=e.length;n++)e[n]!==t?gsap.to(e[n],{filter:"blur(4px)",opacity:.4,duration:.4}):gsap.to(t,{filter:"blur(0px)",opacity:1,duration:.4});t.getAttribute("data-index")!=="0"&&(gsap.to(a[0],{transform:"scale(0)",opacity:0,duration:.5,ease:"power4.out"}),gsap.to(a[t.getAttribute("data-index")],{transform:"scale(1)",opacity:1,duration:.5,ease:"power4.out"}))})}),e.forEach(function(t,n){t.addEventListener("mouseleave",function(){gsap.to(e,{filter:"blur(0px)",opacity:1,duration:.4}),t.getAttribute("data-index")!=="0"&&(gsap.to(a[t.getAttribute("data-index")],{transform:"scale(0)",opacity:0,duration:.5,ease:"power4.out"}),gsap.to(a[0],{transform:"scale(1)",opacity:1,duration:.5,ease:"power4.out"}))})}),r.forEach(function(t){t.addEventListener("mouseenter",function(){for(var n=0;n<=r.length;n++)r[n]!==t?gsap.to(r[n],{filter:"blur(2px)",opacity:.5,duration:.4}):gsap.to(t,{filter:"blur(0px)",opacity:1,duration:.4})})}),r.forEach(function(t,n){t.addEventListener("mouseleave",function(){gsap.to(r,{filter:"blur(0px)",opacity:1,duration:.4})})})}i();function c(){let o=localStorage.getItem("mode")==="true";function a(){const e=document.documentElement,r=document.querySelector("#mode"),t=document.querySelector("#navbar");o?(e.style.setProperty("--primary","#000"),e.style.setProperty("--secondary","#f2f2ee"),e.style.setProperty("--back","rgba(255, 255, 255, 0.473)"),e.style.setProperty("--invert-filter","invert(1)"),r.classList.remove("ri-sun-line","ri-sun-fill"),r.classList.add("ri-moon-line"),t.style.background=`linear-gradient(
+        180deg,
+        #000000 0,
+        hsla(0, 0%, 0%, .987) 11%,  
+        hsla(0, 0%, 0%, .951) 20.8%, 
+        hsla(0, 0%, 0%, .896) 29.6%, 
+        hsla(0, 0%, 0%, .825) 37.5%, 
+        hsla(0, 0%, 0%, .741) 44.6%, 
+        hsla(0, 0%, 0%, .648) 51%,   
+        hsla(0, 0%, 0%, .55) 57%,    
+        hsla(0, 0%, 0%, .45) 62.5%,  
+        hsla(0, 0%, 0%, .352) 67.7%,  
+        hsla(0, 0%, 0%, .259) 72.7%,  
+        hsla(0, 0%, 0%, .175) 77.8%,  
+        hsla(0, 0%, 0%, .104) 82.9%,  
+        hsla(0, 0%, 0%, .049) 88.2%,  
+        hsla(0, 0%, 0%, .013) 93.9%,  
+        hsla(0, 0%, 0%, 0)
+      )`):(e.style.setProperty("--primary","#F2F2EE"),e.style.setProperty("--secondary","#000"),e.style.setProperty("--back","rgba(0, 0, 0, 0.473)"),e.style.setProperty("--invert-filter","invert(0)"),r.classList.remove("ri-moon-line","ri-moon-fill"),r.classList.add("ri-sun-line"),t.style.background=`linear-gradient(
+        180deg,
+        #F2F2EE 0,
+        hsla(0, 0%, 94.1%, .987) 11%,  
+        hsla(0, 0%, 94.1%, .951) 20.8%, 
+        hsla(0, 0%, 94.1%, .896) 29.6%, 
+        hsla(0, 0%, 94.1%, .825) 37.5%, 
+        hsla(0, 0%, 94.1%, .741) 44.6%, 
+        hsla(0, 0%, 94.1%, .648) 51%,   
+        hsla(0, 0%, 94.1%, .55) 57%,    
+        hsla(0, 0%, 94.1%, .45) 62.5%,  
+        hsla(0, 0%, 94.1%, .352) 67.7%,  
+        hsla(0, 0%, 94.1%, .259) 72.7%,  
+        hsla(0, 0%, 94.1%, .175) 77.8%,  
+        hsla(0, 0%, 94.1%, .104) 82.9%,  
+        hsla(0, 0%, 94.1%, .049) 88.2%,  
+        hsla(0, 0%, 94.1%, .013) 93.9%,  
+        hsla(0, 0%, 94.1%, 0)
+      )`)}a(),document.querySelector("#mode").addEventListener("click",function(){o=!o,localStorage.setItem("mode",o),a()}),document.querySelector("#mode").addEventListener("mouseenter",function(){const e=document.querySelector("#mode");o?(e.classList.remove("ri-moon-line"),e.classList.add("ri-moon-fill")):(e.classList.remove("ri-sun-line"),e.classList.add("ri-sun-fill"))}),document.querySelector("#mode").addEventListener("mouseleave",function(){a()})}c();
+//# sourceMappingURL=commonScript-BVhTAqyZ.js.map
