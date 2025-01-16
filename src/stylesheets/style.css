@@ -678,7 +678,7 @@ canvas {
   width: 48%;
 }
 #right-content h2{
-  font-size: 51px;
+  font-size: 51px !important;
 }
 #circle-text{
   width: 1.5vw;
