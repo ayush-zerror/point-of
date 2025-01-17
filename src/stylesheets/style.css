@@ -687,6 +687,7 @@ h6 {
   flex-direction: column;
   justify-content: center;
   background-color: var(--primary);
+  cursor: none;
 }
 #page2-text span {
   opacity: 0.4;
@@ -710,6 +711,7 @@ h6 {
   align-items: center;
   justify-content: center;
   user-select: none;
+  cursor: none;
 }
 
 #point-container2 {
@@ -798,6 +800,7 @@ h6 {
 #page4 {
   height: 100vh;
   width: 100%;
+  cursor: none;
 }
 #project-wrapper {
   width: 100%;
@@ -909,6 +912,7 @@ h6 {
   mask-size: 1.4%;
   opacity: 0;
   background-color: var(--secondary);
+  cursor: none;
 }
 #page5 h1 {
   font-family: heading5;
@@ -996,6 +1000,7 @@ h6 {
   padding-bottom: 5vw;
   background-color: var(--primary);
   position: relative;
+  cursor: none;
 }
 .swiper {
   width: 100%;
@@ -1061,6 +1066,7 @@ h6 {
   align-items: center;
   background-color: var(--primary);
   position: relative;
+  cursor: none;
 }
 
 #page7 h2 {
@@ -1116,6 +1122,7 @@ h6 {
   flex-direction: column;
   justify-content: space-between;
   align-items: end;
+  cursor: none;
 }
 #footer a {
   text-decoration: none;
