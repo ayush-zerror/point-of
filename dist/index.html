@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
-  <script type="module" crossorigin src="/assets/index-Dd37egoK.js"></script>
+  <script type="module" crossorigin src="/assets/index-WUNIqF4b.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
   <link rel="modulepreload" crossorigin href="/assets/commonScript-BVhTAqyZ.js">
-  <link rel="stylesheet" crossorigin href="/assets/index-5Ae3nVpO.css">
+  <link rel="stylesheet" crossorigin href="/assets/index-BLCIqyLx.css">
 </head>
 
 <body>
     <div id="cursor"></div>
+    <div id="small-cursor"></div>
     <i id="playCur" class="ri-play-fill"></i>
     <div id="drag-cursor">
         <h6>Drag</h6>
@@ -74,15 +75,15 @@
         </div>
     </div>
     <nav id="navbar">
-        <i id="mode" class="ri-sun-line"></i>
+        <i id="mode" class="ri-sun-line cursor-scale"></i>
         <a href="/" id="mobile-logo">
             <img src="/logo.png" alt="">
         </a>
-        <a href="/" id="logo">
+        <a href="/" id="logo" class="cursor-scale">
             <span id="p"><img src="/p.png" alt=""><span id="dot">.</span></span><span id="point"><img src="/point.png"
                     alt=""></span><span id="o"><img src="/o.png" alt=""></span><span id="f"><img src="/f.png" alt="">
         </a>
-        <div id="menu-c">
+        <div id="menu-c" class="cursor-scale">
             <div id="menu"></div>
         </div>
     </nav>
@@ -90,7 +91,7 @@
         <div id="point-container2">
             <div id="circle2"></div>
         </div>
-        <section id="page1">
+        <!-- <section id="page1">
             <h4>The future <br> is an exciting place <br>to be.We create<br>brands that aspire to <br> be there.</h4>
             <h1>Point Of <br> <span id="home-title"><span id="placeholder">Innovation</span><span
                         class="word-style home-title-word word-1">Design</span><span
@@ -101,18 +102,35 @@
             <div id="hero-video">
                 <img src="https://framerusercontent.com/images/qDCQ1HdEMJ7lsZichbXmdFayKE.png" alt="">
             </div>
+        </section> -->
+        <section id="page1">
+            <div id="text-container">
+                <h1>Point Of</h1>
+                <div id="title-hero">
+                    <h1>Design</h1>
+                    <h1>Friction</h1>
+                    <h1>Innovation</h1>
+                </div>
+            </div>
+            <div id="curtain1"></div>
+            <div id="curtain2"></div>
+            <div id="page1-over">
+                <img id="ig1" src="https://images.unsplash.com/photo-1736496690005-3045da00c199?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <img id="ig2" src="https://images.unsplash.com/photo-1736496690005-3045da00c199?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <img id="ig3" src="https://images.unsplash.com/photo-1736496690005-3045da00c199?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <img id="ig4" src="https://images.unsplash.com/photo-1736496690005-3045da00c199?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <img id="ig5" src="https://images.unsplash.com/photo-1736496690005-3045da00c199?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+                <img id="ig6" src="https://images.unsplash.com/photo-1736496690005-3045da00c199?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+            </div>
         </section>
         <section id="page2">
             <h5>About</h5>
             <h2 id="page2-text">Riad Mammadov is a pianist and composer with a deep passion for both classical and contemporary music, as well as a dedicated explorer and ambassador of Mugham and Jazz Mugham.</h2>
         </section>
         <section id="page3">
-            <div id="canvas-container">
-                <canvas id="physicsCanvas"></canvas>
-            </div>
             <div id="content-page3">
                 <div id="left-content">
-                    <h5>Our Expertise</h5>
+                    <h2>Our Expertise</h2>
                     <div id="left-content-text">
                         <p id="para1">Brand identities that are meticulously crafted <br>
                             to ensure distinction enduring recognition in <br> a competitive market.</p>
@@ -134,13 +152,12 @@
                     </div>
                 </div>
                 <div id="right-content">
-                    <h2>Our multidisciplinary team</h2>
-                    <h2>possesses a diverse range </h2>
+                    <h2 id="h1height">Our multidisciplinary team</h2>
+                    <h2 id="h1height2">possesses a diverse range </h2>
                     <h2>of expertise, enabling </h2>
                     <h2>us to ensure seamless </h2>
                     <h2>brand consistency across</h2>
                     <h2>all your projects.</h2>
-                    <div id="circle-text"></div>
                     <div id="right-content-top">
                         <h2 id="ser1">Branding</h2>
                         <h2 id="ser2">UI/UX Design</h2>

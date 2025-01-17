@@ -10,18 +10,70 @@ var swiper = new Swiper(".mySwiper", {
   speed: 600, // Adjust slide transition speed
 });
 
+var loader = gsap.timeline()
+
+loader
+.to("#curtain1",{
+  clipPath:" polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+  duration:1,
+  delay:.5
+},"a")
+.to("#title-hero h1",{
+  transform:"translateY(-100%)",
+  duration:1,
+  delay:.5
+},"a")
+.to("#curtain2",{
+  clipPath:"polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+  duration:1,
+  delay:.5
+},"a")
+.to("#curtain2",{
+  clipPath:" polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+  duration:1,
+},"b")
+.to("#title-hero h1",{
+  transform:"translateY(-200%)",
+  duration:1
+},"b")
+.to("#text-container",{
+  left:"50%",
+  transform:"translate(-50%,-50%)",
+  duration:1
+})
+
 
 const cursor = document.querySelector("#cursor")
 window.addEventListener("mousemove", function (e) {
   gsap.to(cursor, {
     top: e.clientY,
     left: e.clientX,
-    scale: 1
+  })
+  gsap.to("#small-cursor", {
+    top: e.clientY,
+    left: e.clientX,
+    duration:0,
   })
   gsap.to("#playCur", {
     top: e.clientY,
     left: e.clientX,
     duration: 0
+  })
+})
+document.querySelectorAll(".cursor-scale").forEach(function(elem){
+  elem.addEventListener("mouseenter", function(e) {
+    gsap.to(cursor, {
+      width:"2.5vw",
+      height: "2.5vw",
+    })
+  })
+})
+document.querySelectorAll(".cursor-scale").forEach(function(elem){
+  elem.addEventListener("mouseleave", function(e) {
+    gsap.to(cursor, {
+      width:"1.2vw",
+      height: "1.2vw",
+    })
   })
 })
 
@@ -84,66 +136,65 @@ document.querySelectorAll("#page6 .video-container video").forEach(function (vid
   })
 })
 
-function page1Animation() {
+// function page1Animation() {
 
-  const words = document.querySelectorAll(".word-style");
+//   const words = document.querySelectorAll(".word-style");
 
-  let index = 0;
-  setInterval(function () {
-    gsap.to(words[index], {
-      top: "-100%",
-      duration: 0.8,
-      onComplete: function () {
-        gsap.set(this._targets[0], { top: "100%" });
-      }
-    });
+//   let index = 0;
+//   setInterval(function () {
+//     gsap.to(words[index], {
+//       top: "-100%",
+//       duration: 0.8,
+//       onComplete: function () {
+//         gsap.set(this._targets[0], { top: "100%" });
+//       }
+//     });
 
-    // Increment index before checking if it's the last element
-    index = index === words.length - 1 ? 0 : index + 1;
+//     // Increment index before checking if it's the last element
+//     index = index === words.length - 1 ? 0 : index + 1;
 
-    gsap.to(words[index], {
-      top: "0%",
-      duration: 0.8,
-    });
-  }, 3000);
-
-
-  const tl1 = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#page1",
-      scroller: "body",
-      start: "top 0%",
-      end: "top -100%",
-      scrub: 1,
-      pin: true,
-      // pinSpacing: false,
-    }
-  });
-
-  tl1
-    .to("#page1 h1", {
-      transform: "rotateY(4deg) rotateX(2deg) scale(15) translateX(-10%)", // Simplified transform
-      duration: 1.2,
-      ease: "power3.out", // Less taxing easing function
-    }, "a")
-    .to("#page1 h4", {
-      transform: "scale(1.8) rotateY(8deg) rotateX(2deg) translateX(-10%)", // Simplified transform
-      opacity: 1,
-      duration: 1.2,
-      ease: "power3.out",
-    }, "a")
-    .to("#hero-video", {
-      top: "0%",
-      // delay: -.5
-    });
+//     gsap.to(words[index], {
+//       top: "0%",
+//       duration: 0.8,
+//     });
+//   }, 3000);
 
 
-}
-page1Animation()
+//   const tl1 = gsap.timeline({
+//     scrollTrigger: {
+//       trigger: "#page1",
+//       scroller: "body",
+//       start: "top 0%",
+//       end: "top -100%",
+//       scrub: 1,
+//       pin: true,
+//       // pinSpacing: false,
+//     }
+//   });
+
+//   tl1
+//     .to("#page1 h1", {
+//       transform: "rotateY(4deg) rotateX(2deg) scale(15) translateX(-10%)", // Simplified transform
+//       duration: 1.2,
+//       ease: "power3.out", // Less taxing easing function
+//     }, "a")
+//     .to("#page1 h4", {
+//       transform: "scale(1.8) rotateY(8deg) rotateX(2deg) translateX(-10%)", // Simplified transform
+//       opacity: 1,
+//       duration: 1.2,
+//       ease: "power3.out",
+//     }, "a")
+//     .to("#hero-video", {
+//       top: "0%",
+//       // delay: -.5
+//     });
+
+
+// }
+// page1Animation()
 
 
 function page2Animation() {
-
 
   var clutter = ""
   document.querySelector("#page2-text").textContent.split(" ").forEach((w) => {
@@ -173,134 +224,13 @@ page2Animation()
 
 
 function pointMidAnimation() {
-  const canvas = document.getElementById("physicsCanvas");
-  const engine = Matter.Engine.create();
-  const world = engine.world;
-  const render = Matter.Render.create({
-    canvas: canvas,
-    engine: engine,
-    options: {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      wireframes: false,
-      background: "transparent"
-    }
-  });
 
-  // Create ground and walls
-  const ground = Matter.Bodies.rectangle(window.innerWidth / 2, window.innerHeight + 10, window.innerWidth, 20, {
-    isStatic: true
-  });
+  const page3 = document.querySelector("#page3");
+  const h2 = document.querySelector("#h1height");
+  const h22 = document.querySelector("#h1height2");
 
-  const walls = [
-    Matter.Bodies.rectangle(-10, window.innerHeight / 2, 20, window.innerHeight, { isStatic: true }),
-    Matter.Bodies.rectangle(window.innerWidth + 10, window.innerHeight / 2, 20, window.innerHeight, { isStatic: true })
-  ];
-
-  Matter.World.add(world, [ground, ...walls]);
-
-  const rootStyles = getComputedStyle(document.documentElement);
-  const shapeColor = rootStyles.getPropertyValue("--secondary").trim();
-
-  // Function to create a random shape (circle, rectangle, triangle)
-  function createRandomShape(x, y) {
-    const size = Math.random() * 30 + 20; // Ensures size is between 20 and 50
-    const type = Math.random();
-
-    let shape;
-    if (type < 0.4) {
-      shape = Matter.Bodies.circle(x, y, size / 2, { restitution: 0.9, render: { fillStyle: shapeColor } });
-    } else if (type < 0.7) {
-      shape = Matter.Bodies.rectangle(x, y, size, size, { restitution: 0.8, render: { fillStyle: shapeColor } });
-    } else {
-      shape = Matter.Bodies.polygon(x, y, 3, size, { restitution: 0.8, render: { fillStyle: shapeColor } });
-    }
-
-    // Apply a small initial force or velocity to prevent shapes from being stuck
-    Matter.Body.applyForce(shape, shape.position, { x: 0, y: -0.05 });
-
-    return shape;
-  }
-
-  // Function to create floating text
-  function createText(x, y, text) {
-    return Matter.Bodies.rectangle(x, y, 100, 50, {
-      restitution: 0.8,
-      render: {
-        sprite: {
-          texture: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='50'>
-            <text x='10' y='30' font-size='20' font-family='para3' fill='black'>${text}</text>
-          </svg>`,
-        },
-      },
-    });
-  }
-
-  // Add mouse control for moving the balls
-  const mouse = Matter.Mouse.create(render.canvas);
-  const mouseConstraint = Matter.MouseConstraint.create(engine, {
-    mouse: mouse,
-    constraint: {
-      stiffness: 0.2,
-      render: {
-        visible: false,
-      },
-    },
-  });
-  Matter.World.add(world, mouseConstraint);
-
-  // Ensure mouse resizes with the canvas
-  render.mouse = mouse;
-
-  // Enable scrolling by preventing mouse wheel interference
-  render.canvas.addEventListener('wheel', (e) => {
-    if (!mouseConstraint.mouse.button) {  // Only prevent default if no mouse interaction
-      e.preventDefault();
-      e.stopPropagation();
-    }
-  }, { passive: false });
-
-  // Flag to check if shapes have been added
-  let shapesAdded = false;
-
-  // Function to add shapes and text dynamically
-  function addShapesAndText() {
-    if (shapesAdded) {
-      return; // Prevent adding shapes again if they have already been added
-    }
-
-    const elements = [];
-    const words = ["Design", "Innovation", "Friction", "Curiosity", "Inception"];
-
-    // Add random shapes
-    for (let i = 0; i < 15; i++) {
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * -200;
-      elements.push(createRandomShape(x, y));
-    }
-
-    // Add text elements
-    for (let i = 0; i < words.length; i++) {
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * -200;
-      elements.push(createText(x, y, words[i]));
-    }
-
-    // Add elements to the world
-    Matter.World.add(world, elements);
-
-    // Set the flag to true once shapes and text have been added
-    shapesAdded = true;
-
-    // Cleanup after a while to improve performance
-    setTimeout(() => {
-      elements.forEach(element => {
-        if (element.position.y > window.innerHeight + 100) {
-          Matter.Composite.remove(world, element);
-        }
-      });
-    }, 12000);
-  }
+  let positionFromPage3Top = h2.getBoundingClientRect().top - page3.getBoundingClientRect().top + h2.offsetHeight /2
+  let diff = (h22.getBoundingClientRect().top - h2.getBoundingClientRect().top) - .2
 
   var tl = gsap.timeline({
     scrollTrigger: {
@@ -310,30 +240,16 @@ function pointMidAnimation() {
       end: "+=4000",
       scrub: true,
       pin: true,
-      onEnter: () => {
-        // Run render and runner only if it's the first time entering
-        Matter.Render.run(render);
-        Matter.Runner.run(Matter.Runner.create(), engine);
-        addShapesAndText();
-      },
     }
   });
 
 
   tl
     .to("#circle2", {
-      top: "29%",
+      top: positionFromPage3Top,
       transform: "translate(-50%,-50%) scale(1)",
       duration: 1.5,
     })
-    .to("#circle-text", {
-      opacity: 1,
-      duration: .3,
-    }, "op")
-    .to("#circle2", {
-      opacity: 0,
-      duration: .3,
-    }, "op")
     .to("#right-content > h2", {
       x: 300,
       filter: "blur(4px)",
@@ -352,26 +268,22 @@ function pointMidAnimation() {
         amount: 0.2,
       }
     }, "bk")
-    .to("#circle2", {
-      top: "50%",
-      transform: "translate(-50%,-50%) scale(1)",
-      duration: .8,
-    }, "bk")
     .to("#ser2,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
       duration: .5,
     }, "a")
     .to("#para1", {
-      opacity: 1,
+      opacity: .5,
       duration: .5
     }, "a")
 
-    .to("#circle-text", {
-      top: "21%",
+    .to("#circle2", {
+      top: positionFromPage3Top + diff*1,
+      transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    }, "b")
+    },"b")
     .to("#ser1,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -390,16 +302,17 @@ function pointMidAnimation() {
       delay: 1
     }, "b")
     .to("#para2", {
-      opacity: 1,
+      opacity: .5,
       duration: .4,
       delay: .5
     })
 
-    .to("#circle-text", {
-      top: "37.5%",
+    .to("#circle2", {
+      top: positionFromPage3Top + diff*2,
+      transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    }, "c")
+    },"c")
     .to("#ser1,#ser2,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -418,16 +331,17 @@ function pointMidAnimation() {
       delay: 1
     }, "c")
     .to("#para3", {
-      opacity: 1,
+      opacity: .5,
       duration: .4,
       delay: .5
     })
 
-    .to("#circle-text", {
-      top: "53.3%",
+    .to("#circle2", {
+      top: positionFromPage3Top + diff*3,
+      transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    }, "d")
+    },"d")
     .to("#ser1,#ser2,#ser3,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -446,16 +360,17 @@ function pointMidAnimation() {
       delay: 1
     }, "d")
     .to("#para4", {
-      opacity: 1,
+      opacity: .5,
       duration: .4,
       delay: .5
     })
 
-    .to("#circle-text", {
-      top: "69.7%",
+    .to("#circle2", {
+      top: positionFromPage3Top + diff*4,
+      transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    }, "e")
+    },"e")
     .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -474,16 +389,17 @@ function pointMidAnimation() {
       delay: 1
     }, "e")
     .to("#para5", {
-      opacity: 1,
+      opacity: .5,
       duration: .4,
       delay: .5
     })
 
-    .to("#circle-text", {
-      top: "85.5%",
+    .to("#circle2", {
+      top: positionFromPage3Top + diff*5,
+      transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    }, "f")
+    },"f")
     .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
       filter: "blur(4px)",
       opacity: .4,
@@ -502,32 +418,10 @@ function pointMidAnimation() {
       delay: 1
     }, "f")
     .to("#para6", {
-      opacity: 1,
+      opacity: .5,
       duration: .4,
       delay: .5,
-      onComplete: () => {
-        removeBottomWallAndBalls();
-      },
     })
-
-  function removeBottomWallAndBalls() {
-    // Remove the bottom wall
-    Matter.World.remove(world, ground);
-
-    // Remove balls from the world when they fall out of view
-    Matter.Events.on(engine, "afterUpdate", () => {
-      const ballsToRemove = [];
-      world.bodies.forEach((body) => {
-        if (body.label === "Ball" && body.position.y > window.innerHeight + 50) {
-          ballsToRemove.push(body);
-        }
-      });
-
-      ballsToRemove.forEach((ball) => {
-        Matter.World.remove(world, ball);
-      });
-    });
-  }
 }
 pointMidAnimation()
 
@@ -537,8 +431,8 @@ function page4Animation() {
     scrollTrigger: {
       trigger: "#page4",
       scroller: "body",
-      start: "top 82%%",
-      end: "top 77%",
+      start: "top 100%%",
+      end: "top 63%",
       scrub: true,
       // markers: true
     }
@@ -546,25 +440,25 @@ function page4Animation() {
   tl4e
 
     .to("#circle2", {
-      opacity: 1,
+      top:"50%",
       transform: "translate(-50%,-50%) scale(1)",
-      width: "0.65vw",
-      height: "0.65vw",
-      backgroundColor: "transparent",
-      duration: .8,
-    }, "oc")
-    .to("#circle-text", {
-      opacity: 0,
-      duration: .8,
+      duration: 2.3,
     }, "oc")
     .to("#ser1,#ser2,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(0px)",
       opacity: 1,
       duration: .8,
-    })
+    },"oc")
     .to("#para6", {
       opacity: 0,
       duration: .8,
+    },"oc")
+    .to("#circle2", {
+      top:"50%",
+      width: "0.65vw",
+      height: "0.65vw",
+      backgroundColor: "transparent",
+      duration: .6,
     })
 
 
@@ -616,11 +510,11 @@ function page4Animation() {
     })
     .to(".view-all", {
       opacity: 0,
-      duration: .3
+      duration: .2
     })
     .to(".view-all", {
       display: "none",
-      delay: .2
+      delay: .09
     })
 }
 page4Animation()
