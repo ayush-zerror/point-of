@@ -131,9 +131,10 @@ body {
   width: 100%;
   height: 5vh;
   position: fixed;
-  top: 0;
+  top: -100%;
   left: 0;
   z-index: 9999;
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -241,7 +242,7 @@ body {
   position: fixed;
   top: -130%;
   left: 0;
-  z-index: 5;
+  z-index: 99;
   display: flex;
   align-items: center;
   padding: 2.3vw 2vw;
@@ -630,54 +631,82 @@ h6 {
   text-transform: uppercase;
   color: gray;
 }
+#page1 h2 {
+  font-family: heading5;
+  font-weight: 600;
+  font-size: 4.8vw;
+  text-transform: uppercase;
+  color: gray;
+  opacity: 0;
+}
+#page1 span{
+  font-family: heading5;
+  font-weight: 600;
+  font-size: 4.5vw;
+  text-transform: uppercase;
+  color: gray;
+}
 #title-hero {
-  height: 4vw;
+  height: 4.5vw;
   overflow: hidden;
+  position: relative;
+  /* width:50vw; */
+  /* background-color: red; */
 }
-#title-hero h1 {
-  line-height: 0.9;
-  overflow: hidden;
-  transform: translateY(0%);
+
+#title-hero h1  {
+  position: absolute;
+  top:100%;
+  line-height: 1;
+  /* overflow: hidden; */
+  width: 100%;
 }
+#title-hero h1:nth-child(1){
+  top: 0;
+}
+#title-hero h1 span{
+  display: inline-block;
+}
+
 #page1-over {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1.1);
-  height: 150vh;
-  width: 120vw;
+  transform: translate(-50%, -50%) scale(1);
+  height: 100vh;
+  width: 100vw;
   z-index: 3;
-  display: none;
+  opacity: 0;
 }
 #page1-over img {
-  width: 500px;
-  height: 400px;
+  width: 400px;
+  height: 300px;
   object-fit: cover;
   position: absolute;
 }
 #ig1 {
-  left: 15%;
-  top: 25%;
+  left: 0%;
+  top: -5%;
 }
 #ig2 {
-  right: -2%;
-  top: 30%;
+  right: -10%;
+  top: 10%;
 }
 #ig3 {
-  left: 0;
-  bottom: 0;
+  left: -10%;
+  bottom: -10%;
 }
 #ig4 {
-  right: 0;
-  bottom: 0;
+  right: -20%;
+  bottom: -20%;
 }
 #ig5 {
   right: 33%;
   bottom: 5%;
 }
 #ig6 {
-  left: 50%;
-  top: 10%;
+  left: 45%;
+  top: -20%;
 }
 #page2 {
   height: 100vh;

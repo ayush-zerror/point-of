@@ -10,38 +10,109 @@ var swiper = new Swiper(".mySwiper", {
   speed: 600, // Adjust slide transition speed
 });
 
+document.addEventListener('DOMContentLoaded', function(){
+  
+document.querySelectorAll("#title-hero h1").forEach(function (h) {
+  var clutter = ""
+  h.textContent.split("").forEach(function (l) {
+    clutter += `<span>${l}</span>`
+  })
+  h.innerHTML = clutter
+})
+
+
+
 var loader = gsap.timeline()
 
 loader
 .to("#curtain1",{
   clipPath:" polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-  duration:1,
-  delay:.5
+  duration:.7,
+  delay:.5,
+  ease: "power2.in",
 },"a")
-.to("#title-hero h1",{
-  transform:"translateY(-100%)",
-  duration:1,
-  delay:.5
-},"a")
+
 .to("#curtain2",{
   clipPath:"polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-  duration:1,
-  delay:.5
+  duration:.7,
+  delay:.3,
+  ease: "power2.in",
+},"a")
+.to(".firsth span", {
+  y: "-100%",
+  stagger:{
+    amount:.2,
+  },
+  duration:.6,
+  delay:.7
+},"a")
+.to(".secondh span", {
+  y: "-100%",
+  stagger:{
+    amount:.2,
+  },
+  duration:.6,
+  delay:.7
 },"a")
 .to("#curtain2",{
   clipPath:" polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+  duration:.7,
+  ease: "power2.in",
+},"b")
+
+.to(".secondh span", {
+  y: "-200%",
+  stagger:{
+    amount:.2,
+  },
+  duration:.6,
+  delay:.2
+},"b")
+.to(".thirdh span", {
+  y: "-100%",
+  stagger:{
+    amount:.2,
+  },
+  duration:.6,
+  delay:.2
+},"b")
+.to("#page1 h1",{
   duration:1,
-},"b")
-.to("#title-hero h1",{
-  transform:"translateY(-200%)",
-  duration:1
-},"b")
+  color:"var(--secondary)"
+},"c")
+.to("#page1 h1 span",{
+  duration:1,
+  color:"var(--secondary)"
+},"c")
 .to("#text-container",{
   left:"50%",
   transform:"translate(-50%,-50%)",
   duration:1
+},"c")
+.to("#navbar",{
+  top:"0%",
+  duration:.6,
+  opacity:1
+},"c")
+.to("#page1-over",{
+  duration:.6,
+  opacity:1,
+  top:"50%",
+  left:"50%",
+  transform:"translate(-50%,-50%)",
 })
 
+
+window.addEventListener("mousemove", function (e) {
+  gsap.to("#page1-over", {
+    top: window.innerHeight / 2 - (e.clientY - window.innerHeight / 2) * 0.3,
+    left: window.innerWidth / 2 - (e.clientX - window.innerWidth / 2) * 0.3,
+    duration: 1.2, // Smooth slow effect
+    ease: "power2.out",
+  });
+});
+
+})
 
 const cursor = document.querySelector("#cursor")
 window.addEventListener("mousemove", function (e) {
@@ -52,26 +123,27 @@ window.addEventListener("mousemove", function (e) {
   gsap.to("#small-cursor", {
     top: e.clientY,
     left: e.clientX,
-    duration:0,
+    duration: 0,
   })
   gsap.to("#playCur", {
     top: e.clientY,
     left: e.clientX,
+    transform: "translate(-50%,-50%)",
     duration: 0
   })
 })
-document.querySelectorAll(".cursor-scale").forEach(function(elem){
-  elem.addEventListener("mouseenter", function(e) {
+document.querySelectorAll(".cursor-scale").forEach(function (elem) {
+  elem.addEventListener("mouseenter", function (e) {
     gsap.to(cursor, {
-      width:"2.5vw",
+      width: "2.5vw",
       height: "2.5vw",
     })
   })
 })
-document.querySelectorAll(".cursor-scale").forEach(function(elem){
-  elem.addEventListener("mouseleave", function(e) {
+document.querySelectorAll(".cursor-scale").forEach(function (elem) {
+  elem.addEventListener("mouseleave", function (e) {
     gsap.to(cursor, {
-      width:"1.2vw",
+      width: "1.2vw",
       height: "1.2vw",
     })
   })
@@ -229,7 +301,7 @@ function pointMidAnimation() {
   const h2 = document.querySelector("#h1height");
   const h22 = document.querySelector("#h1height2");
 
-  let positionFromPage3Top = h2.getBoundingClientRect().top - page3.getBoundingClientRect().top + h2.offsetHeight /2
+  let positionFromPage3Top = h2.getBoundingClientRect().top - page3.getBoundingClientRect().top + h2.offsetHeight / 2
   let diff = (h22.getBoundingClientRect().top - h2.getBoundingClientRect().top) - .2
 
   var tl = gsap.timeline({
@@ -279,11 +351,11 @@ function pointMidAnimation() {
     }, "a")
 
     .to("#circle2", {
-      top: positionFromPage3Top + diff*1,
+      top: positionFromPage3Top + diff * 1,
       transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    },"b")
+    }, "b")
     .to("#ser1,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -308,11 +380,11 @@ function pointMidAnimation() {
     })
 
     .to("#circle2", {
-      top: positionFromPage3Top + diff*2,
+      top: positionFromPage3Top + diff * 2,
       transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    },"c")
+    }, "c")
     .to("#ser1,#ser2,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -337,11 +409,11 @@ function pointMidAnimation() {
     })
 
     .to("#circle2", {
-      top: positionFromPage3Top + diff*3,
+      top: positionFromPage3Top + diff * 3,
       transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    },"d")
+    }, "d")
     .to("#ser1,#ser2,#ser3,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -366,11 +438,11 @@ function pointMidAnimation() {
     })
 
     .to("#circle2", {
-      top: positionFromPage3Top + diff*4,
+      top: positionFromPage3Top + diff * 4,
       transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    },"e")
+    }, "e")
     .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -395,11 +467,11 @@ function pointMidAnimation() {
     })
 
     .to("#circle2", {
-      top: positionFromPage3Top + diff*5,
+      top: positionFromPage3Top + diff * 5,
       transform: "translate(-50%,-50%) scale(1)",
       duration: .8,
       delay: 1
-    },"f")
+    }, "f")
     .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
       filter: "blur(4px)",
       opacity: .4,
@@ -440,7 +512,7 @@ function page4Animation() {
   tl4e
 
     .to("#circle2", {
-      top:"50%",
+      top: "50%",
       transform: "translate(-50%,-50%) scale(1)",
       duration: 2.3,
     }, "oc")
@@ -448,13 +520,13 @@ function page4Animation() {
       filter: "blur(0px)",
       opacity: 1,
       duration: .8,
-    },"oc")
+    }, "oc")
     .to("#para6", {
       opacity: 0,
       duration: .8,
-    },"oc")
+    }, "oc")
     .to("#circle2", {
-      top:"50%",
+      top: "50%",
       width: "0.65vw",
       height: "0.65vw",
       backgroundColor: "transparent",

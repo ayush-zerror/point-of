@@ -95,7 +95,6 @@ function logo() {
 logo()
 
 
-
 function menuOpen() {
   var menu = false
   document.querySelector("#menu-c").addEventListener("click", function () {
@@ -221,6 +220,7 @@ menuOpen()
 
 function darkMode() {
   // Initialize mode based on localStorage or default to false
+
   let mode = localStorage.getItem("mode") === "true";
 
   // Function to apply mode styles
