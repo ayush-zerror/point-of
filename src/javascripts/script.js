@@ -10,109 +10,129 @@ var swiper = new Swiper(".mySwiper", {
   speed: 600, // Adjust slide transition speed
 });
 
-document.addEventListener('DOMContentLoaded', function(){
-  
-document.querySelectorAll("#title-hero h1").forEach(function (h) {
-  var clutter = ""
-  h.textContent.split("").forEach(function (l) {
-    clutter += `<span>${l}</span>`
+function loader() {
+  document.addEventListener('DOMContentLoaded', function () {
+
+    document.querySelectorAll("#title-hero h1").forEach(function (h) {
+      var clutter = ""
+      h.textContent.split("").forEach(function (l) {
+        clutter += `<span>${l}</span>`
+      })
+      h.innerHTML = clutter
+    })
+
+
+
+    var loader = gsap.timeline()
+
+    loader
+      .to("#curtain1", {
+        clipPath: " polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+        duration: .8,
+        delay: .4,
+        ease: "power2.in",
+      }, "a")
+
+      .to("#curtain2", {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        duration: .8,
+        delay: .3,
+        ease: "power2.in",
+      }, "a")
+      .to(".firsth span", {
+        y: "-100%",
+        stagger: {
+          amount: .2,
+        },
+        duration: .6,
+        delay: .8,
+        onComplete: function () {
+          gsap.set(".firsth span", { y: "100%" })
+        }
+      }, "a")
+      .to(".secondh span", {
+        y: "-100%",
+        stagger: {
+          amount: .2,
+        },
+        duration: .6,
+        delay: .8,
+      }, "a")
+      .to("#curtain2", {
+        clipPath: " polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+        duration: .8,
+        ease: "power2.in",
+      }, "b")
+
+      .to(".secondh span", {
+        y: "-200%",
+        stagger: {
+          amount: .2,
+        },
+        duration: .6,
+        delay: .2,
+        onComplete: function () {
+          gsap.set(".secondh span", { y: "0%" })
+        }
+      }, "b")
+      .to(".thirdh span", {
+        y: "-100%",
+        stagger: {
+          amount: .2,
+        },
+        duration: .6,
+        delay: .2
+      }, "b")
+      .to("#page1 h1", {
+        duration: 1,
+        color: "var(--secondary)"
+      }, "c")
+      .to("#page1 h1 span", {
+        duration: 1,
+        color: "var(--secondary)"
+      }, "c")
+      .to(".toph", {
+        left: "50%",
+        transform: "translate(-50%,-50%)",
+        duration: 1
+      }, "c")
+      .to("#title-hero", {
+        left: "50%",
+        transform: "translate(-50%,-50%)",
+        duration: .9
+      }, "c")
+      .to("#navbar", {
+        top: "0%",
+        duration: .6,
+        opacity: 1
+      }, "c")
+      .to("#page1-over", {
+        duration: .6,
+        opacity: 1,
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%,-50%)",
+     
+      })
+
+
+    window.addEventListener("mousemove", function (e) {
+      gsap.to("#page1-over", {
+        top: window.innerHeight / 2 - (e.clientY - window.innerHeight / 2) * 0.3,
+        left: window.innerWidth / 2 - (e.clientX - window.innerWidth / 2) * 0.3,
+        duration: 1.2, // Smooth slow effect
+        ease: "power2.out",
+      });
+    });
+
   })
-  h.innerHTML = clutter
-})
 
 
 
-var loader = gsap.timeline()
-
-loader
-.to("#curtain1",{
-  clipPath:" polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-  duration:.7,
-  delay:.5,
-  ease: "power2.in",
-},"a")
-
-.to("#curtain2",{
-  clipPath:"polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-  duration:.7,
-  delay:.3,
-  ease: "power2.in",
-},"a")
-.to(".firsth span", {
-  y: "-100%",
-  stagger:{
-    amount:.2,
-  },
-  duration:.6,
-  delay:.7
-},"a")
-.to(".secondh span", {
-  y: "-100%",
-  stagger:{
-    amount:.2,
-  },
-  duration:.6,
-  delay:.7
-},"a")
-.to("#curtain2",{
-  clipPath:" polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-  duration:.7,
-  ease: "power2.in",
-},"b")
-
-.to(".secondh span", {
-  y: "-200%",
-  stagger:{
-    amount:.2,
-  },
-  duration:.6,
-  delay:.2
-},"b")
-.to(".thirdh span", {
-  y: "-100%",
-  stagger:{
-    amount:.2,
-  },
-  duration:.6,
-  delay:.2
-},"b")
-.to("#page1 h1",{
-  duration:1,
-  color:"var(--secondary)"
-},"c")
-.to("#page1 h1 span",{
-  duration:1,
-  color:"var(--secondary)"
-},"c")
-.to("#text-container",{
-  left:"50%",
-  transform:"translate(-50%,-50%)",
-  duration:1
-},"c")
-.to("#navbar",{
-  top:"0%",
-  duration:.6,
-  opacity:1
-},"c")
-.to("#page1-over",{
-  duration:.6,
-  opacity:1,
-  top:"50%",
-  left:"50%",
-  transform:"translate(-50%,-50%)",
-})
+}
+loader()
 
 
-window.addEventListener("mousemove", function (e) {
-  gsap.to("#page1-over", {
-    top: window.innerHeight / 2 - (e.clientY - window.innerHeight / 2) * 0.3,
-    left: window.innerWidth / 2 - (e.clientX - window.innerWidth / 2) * 0.3,
-    duration: 1.2, // Smooth slow effect
-    ease: "power2.out",
-  });
-});
-
-})
 
 const cursor = document.querySelector("#cursor")
 window.addEventListener("mousemove", function (e) {
@@ -347,7 +367,7 @@ function pointMidAnimation() {
     }, "a")
     .to("#para1", {
       opacity: .5,
-      duration: .5
+      duration: .4
     }, "a")
 
     .to("#circle2", {
@@ -370,14 +390,14 @@ function pointMidAnimation() {
     }, "b")
     .to("#para1", {
       opacity: 0,
-      duration: .5,
+      duration: .4,
       delay: 1
     }, "b")
     .to("#para2", {
       opacity: .5,
       duration: .4,
-      delay: .5
-    })
+      delay: 1.4
+    }, "b")
 
     .to("#circle2", {
       top: positionFromPage3Top + diff * 2,
@@ -399,14 +419,14 @@ function pointMidAnimation() {
     }, "c")
     .to("#para2", {
       opacity: 0,
-      duration: .5,
+      duration: .4,
       delay: 1
     }, "c")
     .to("#para3", {
       opacity: .5,
       duration: .4,
-      delay: .5
-    })
+      delay: 1.4
+    }, "c")
 
     .to("#circle2", {
       top: positionFromPage3Top + diff * 3,
@@ -428,14 +448,14 @@ function pointMidAnimation() {
     }, "d")
     .to("#para3", {
       opacity: 0,
-      duration: .5,
+      duration: .4,
       delay: 1
     }, "d")
     .to("#para4", {
       opacity: .5,
       duration: .4,
-      delay: .5
-    })
+      delay: 1.4
+    }, "d")
 
     .to("#circle2", {
       top: positionFromPage3Top + diff * 4,
@@ -457,14 +477,14 @@ function pointMidAnimation() {
     }, "e")
     .to("#para4", {
       opacity: 0,
-      duration: .5,
+      duration: .4,
       delay: 1
     }, "e")
     .to("#para5", {
       opacity: .5,
       duration: .4,
-      delay: .5
-    })
+      delay: 1.4
+    }, "e")
 
     .to("#circle2", {
       top: positionFromPage3Top + diff * 5,
@@ -486,13 +506,17 @@ function pointMidAnimation() {
     }, "f")
     .to("#para5", {
       opacity: 0,
-      duration: .5,
+      duration: .4,
       delay: 1
     }, "f")
     .to("#para6", {
       opacity: .5,
       duration: .4,
-      delay: .5,
+      delay: 1.4,
+    }, "f")
+    .to("#para6", {
+      opacity: .5,
+      delay: .3,
     })
 }
 pointMidAnimation()
@@ -594,6 +618,27 @@ page4Animation()
 
 function page5Animation() {
 
+  const tl5s = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#page5",
+      scroller: "body",
+      start: "top 15%",
+      end: "top 0%",
+      scrub: 1,
+      // markers:true
+    }
+  })
+  tl5s
+    .to("#navbar", {
+      opacity: 0,
+      pointerEvent: "none",
+      duration: .2
+    }, "a")
+    .to("#navbar-black", {
+      opacity: 1,
+      pointerEvent: "all",
+      duration: .2
+    }, "a")
 
   const tl5 = gsap.timeline({
     scrollTrigger: {
@@ -644,6 +689,54 @@ function page5Animation() {
 }
 page5Animation()
 
+function page6Animation() {
+  const tl6s = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#page6",
+      scroller: "body",
+      start: "top 0%",
+      end: "top -5%",
+      scrub: 1,
+      // markers:true
+    }
+  })
+  tl6s
+    .to("#navbar-black", {
+      opacity: 0,
+      pointerEvent: "none",
+      duration: .2
+    }, "a")
+    .to("#navbar", {
+      opacity: 1,
+      pointerEvent: "all",
+      duration: .2
+    }, "a")
+}
+page6Animation()
 
 
+function footerAnimation() {
 
+  const ft = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#footer",
+      scroller: "body",
+      start: "top 15%",
+      end: "top 0%",
+      scrub: 1,
+      // markers:true
+    }
+  })
+  ft
+    .to("#navbar", {
+      opacity: 0,
+      pointerEvent: "none",
+      duration: .2
+    }, "a")
+    .to("#navbar-black", {
+      opacity: 1,
+      duration: .2,
+      pointerEvent: "all",
+    }, "a")
+}
+footerAnimation()

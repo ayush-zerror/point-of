@@ -480,7 +480,7 @@ h6 {
 .linei {
   width: 100%;
   height: 0.08vw;
-  background-color: black;
+  background-color: var(--secondary);
   position: absolute;
   bottom: 0%;
   left: 0;
@@ -583,13 +583,13 @@ h6 {
 #career h2,
 #career h5,
 #career h6 {
-  color: var(--primary) !important;
+  color:white;
 }
 
 #career {
   height: 100vh;
   width: 100%;
-  background-color: var(--secondary) !important;
+  background-color: black;
   padding: 2.3vw 2vw;
   display: flex;
   flex-direction: column;
@@ -617,7 +617,7 @@ h6 {
   padding-bottom: 5vw;
   display: flex;
   justify-content: space-between;
-  background-color: var(--secondary);
+  background-color: black;
   pointer-events: auto;
 }
 
@@ -627,7 +627,7 @@ h6 {
 }
 
 #slide1 h2 {
-  color: var(--primary);
+  color: white;
 }
 #slide1 #p1 {
   margin-top: 1vw;
@@ -637,7 +637,7 @@ h6 {
   font-size: 1.2vw;
   line-height: 1.4;
   font-weight: 400;
-  color: var(--secondary);
+  color: black;
 }
 #slide2 {
   width: 60%;
@@ -668,7 +668,7 @@ h6 {
   transform: translate(-50%, -50%);
   width: 100%;
   height: 0.01vw;
-  background-color: var(--primary);
+  background-color: white;
 }
 .accordion.active .accordion-title .plus .line2 {
   height: 0;
@@ -680,12 +680,12 @@ h6 {
   transform: translate(-50%, -50%);
   width: 0.01vw;
   height: 100%;
-  background-color: var(--primary);
+  background-color: white;
   transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
 }
 .accordion-title h2 {
   font-size: 2vw;
-  color: var(--primary);
+  color: white;
 }
 .accordion.active .accordion-dec{
     height: 60vw;
@@ -707,15 +707,15 @@ h6 {
 }
 .accordion-dec  h5,.accordion-dec  h6{
   font-size: 1.05vw;
-  color: var(--primary);
+  color: white;
 }
 .row h6{
   opacity: .7;
-  color: var(--primary);
+  color: white;
 }
 .accordion-dec .row h5{
   padding: 0;
-  color: var(--primary);
+  color: white;
 }
 
 .row-last{
@@ -732,12 +732,12 @@ h6 {
 }
 .accordion-dec .row2 h5{
   padding: 0;
-  color: var(--primary);
+  color: white;
 }
 .apply-job{
   height: 3vw;
   width: 100%;
-  background-color: var(--primary);
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -749,7 +749,7 @@ h6 {
   font-size: 1vw;
   line-height: 1.5;
   font-weight: 500;
-  color: var(--secondary);
+  color: black;
 }
 
 .location{
@@ -774,7 +774,7 @@ h6 {
 .count-l{
   width: 1.5vw;
   height: 1.5vw;
-  background-color: var(--primary);
+  background-color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -783,19 +783,19 @@ h6 {
 .count-l h6{
   font-size: .8vw;
   font-weight: 700;
-  color: var(--secondary);
+  color: black;
 }
 .accordion-dec h5 {
   width: 70%;
   padding: 3vw 1vw;
   padding-top: 1vw;
-  color: var(--primary);
+  color: white;
 }
 
 #popup-apply{
   width: 100%;
   height: 100vh;
-  background-color:var(--back);
+  background-color:rgba(255, 255, 255, 0.099);
   position: fixed;
   top: 0;
   left: 0;
@@ -809,7 +809,7 @@ h6 {
   position: absolute;
   bottom: -100%;
   left: 0;
-  background-color: var(--primary);
+  background-color: black;
   display: flex; 
   justify-content: space-between;
   padding: 2.3vw 2vw;
@@ -820,7 +820,7 @@ h6 {
   right: 2vw;
   font-size: 1.3vw;
   cursor: pointer;
-  color: var(--secondary);
+  color: white;
 }
 #from-left{
   width: 100%;
@@ -850,7 +850,7 @@ h6 {
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: var(--secondary);
+  color: white;
   transition: all ease .3s;
 }
 
@@ -886,7 +886,7 @@ h6 {
 }
 #Uplaod i{
   font-size: 1vw;
-  color: var(--secondary);
+  color: white;
 }
 #Uplaod h5{
   font-size: 1vw;
@@ -896,16 +896,16 @@ h6 {
   width: 35%;
   font-family: para3;
   font-size: .9vw;
-  color: var(--secondary);
+  color: white;
 }
 #from-right form p span{
-  opacity: .7;
+  opacity: .4;
 }
 
 #from-right form p a{
   text-decoration: none;
   opacity: 1;
-  color: var(--secondary);
+  color: white;
 }
 
 @media (max-width: 600px) {
@@ -915,7 +915,7 @@ h6 {
   #navbar #menu {
     height: 5.5vw;
     width: 5.5vw;
-    background-color: var(--secondary);
+    background-color: black;
   }
   #navbar #logo {
     display: none;

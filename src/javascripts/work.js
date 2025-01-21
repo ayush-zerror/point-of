@@ -678,7 +678,7 @@ function darkMode() {
 
   // Apply initial mode
   const root = document.documentElement;
-  if (mode) {
+  if (!mode) {
     root.style.setProperty('--primary', '#000');
     root.style.setProperty('--secondary', '#fff');
     root.style.setProperty('--back', '#00000086');
@@ -737,7 +737,7 @@ linear-gradient(
   }
 
   document.querySelector("#mode").addEventListener("click", function () {
-    if (!mode) {
+    if (mode) {
       root.style.setProperty('--primary', '#000');
       root.style.setProperty('--secondary', '#fff');
       root.style.setProperty('--back', '#00000086');
@@ -765,7 +765,7 @@ linear-gradient(
   hsla(0, 0%, 0%, 0)
 )
 `;
-      mode = true;
+      mode = false;
     } else {
       root.style.setProperty('--primary', '#F2F2EE');
       root.style.setProperty('--secondary', '#000');
@@ -794,7 +794,7 @@ linear-gradient(
   hsla(0, 0%, 94.1%, 0)
 )
 `;
-      mode = false;
+      mode = true;
     }
     // Save mode in localStorage
     localStorage.setItem("mode", mode);
@@ -802,7 +802,7 @@ linear-gradient(
 
   // Add mouseenter and mouseleave event listeners
   document.querySelector("#mode").addEventListener("mouseenter", function () {
-    if (mode) {
+    if (!mode) {
       this.classList.remove("ri-moon-line");
       this.classList.add("ri-moon-fill");
     } else {
@@ -812,7 +812,7 @@ linear-gradient(
   });
 
   document.querySelector("#mode").addEventListener("mouseleave", function () {
-    if (mode) {
+    if (!mode) {
       this.classList.remove("ri-moon-fill");
       this.classList.add("ri-moon-line");
     } else {

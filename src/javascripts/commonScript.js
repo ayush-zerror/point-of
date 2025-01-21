@@ -94,10 +94,80 @@ function logo() {
 }
 logo()
 
+function logoBlack() {
+
+  const point2 = document.querySelector("#point-black")
+  const f2 = document.querySelector("#f-black")
+
+  var tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#page1",
+      scroller: "body",
+      start: "top top",
+      end: "top -5%",
+      scrub: 1,
+    }
+  })
+
+  tl
+    .to("#point-black", {
+      opacity: 0,
+      x: 2,
+      duration: .2,
+      ease: "power1.out",
+    }, "a")
+    .to("#f-black", {
+      opacity: 0,
+      x: 2,
+      duration: .2,
+      ease: "power1.out"
+    }, "a")
+    .to("#p-black", {
+      x: point2?.offsetWidth / 2 + (point2?.offsetWidth / 2) / 1.6,
+      duration: .4,
+      delay: .2
+    }, "a")
+    .to("#o-black", {
+      x: -f2?.offsetWidth * 2.7,
+      duration: .4,
+      delay: .2
+    }, "a")
+    .to("#p-black", {
+      y:"-1vw",
+      duration: .2,
+      delay: -.2
+    },"s")
+    .to("#dot-black", {
+      opacity:1,
+      duration: .2,
+      delay: -.2
+    },"s")
+}
+logoBlack()
+
 
 function menuOpen() {
   var menu = false
   document.querySelector("#menu-c").addEventListener("click", function () {
+    if (!menu) {
+      gsap.to("#navigation", {
+        top: 0,
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        duration: 1.5,
+        ease: "power4.out"
+      })
+      menu = true
+    } else {
+      gsap.to("#navigation", {
+        top: "-130%",
+        clipPath: "polygon(0 0, 100% 0, 100% 97%, 0 89%)",
+        duration: 1.5,
+        ease: "power4.out"
+      })
+      menu = false
+    }
+  })
+  document.querySelector("#menu-c-black")?.addEventListener("click", function () {
     if (!menu) {
       gsap.to("#navigation", {
         top: 0,
@@ -229,7 +299,7 @@ function darkMode() {
     const modeButton = document.querySelector("#mode");
     const navbar = document.querySelector("#navbar");
 
-    if (mode) {
+    if (!mode) {
       root.style.setProperty("--primary", "#000");
       root.style.setProperty("--secondary", "#f2f2ee");
       root.style.setProperty("--back", "rgba(255, 255, 255, 0.473)");
@@ -294,10 +364,16 @@ function darkMode() {
     applyModeStyles();
   });
 
+  document.querySelector("#mode-black")?.addEventListener("click", function () {
+    mode = !mode;
+    localStorage.setItem("mode", mode);
+    applyModeStyles();
+  });
+
   // Mouseenter and mouseleave for hover effect
   document.querySelector("#mode").addEventListener("mouseenter", function () {
     const modeButton = document.querySelector("#mode");
-    if (mode) {
+    if (!mode) {
       modeButton.classList.remove("ri-moon-line");
       modeButton.classList.add("ri-moon-fill");
     } else {
@@ -309,5 +385,6 @@ function darkMode() {
   document.querySelector("#mode").addEventListener("mouseleave", function () {
     applyModeStyles(); // Reset to the correct icon state
   });
+ 
 }
 darkMode();

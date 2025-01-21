@@ -219,6 +219,7 @@ body {
 #navbar #menu:hover {
   transform: scale(1.15);
 }
+
 #menu-c {
   display: flex;
   align-items: center;
@@ -233,6 +234,125 @@ body {
   font-weight: 400;
   color: var(--secondary);
 }
+
+/* black nav */
+
+#navbar-black {
+  width: 100%;
+  height: 5vh;
+  position: fixed;
+  top: 0%;
+  left: 0;
+  z-index: 9999;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  mix-blend-mode: difference;
+  justify-content: space-between;
+  padding: 3vw 2vw;
+  background: linear-gradient(
+    180deg,
+    #000000 0,
+    hsla(0, 0%, 0%, .987) 11%,  
+    hsla(0, 0%, 0%, .951) 20.8%, 
+    hsla(0, 0%, 0%, .896) 29.6%, 
+    hsla(0, 0%, 0%, .825) 37.5%, 
+    hsla(0, 0%, 0%, .741) 44.6%, 
+    hsla(0, 0%, 0%, .648) 51%,   
+    hsla(0, 0%, 0%, .55) 57%,    
+    hsla(0, 0%, 0%, .45) 62.5%,  
+    hsla(0, 0%, 0%, .352) 67.7%,  
+    hsla(0, 0%, 0%, .259) 72.7%,  
+    hsla(0, 0%, 0%, .175) 77.8%,  
+    hsla(0, 0%, 0%, .104) 82.9%,  
+    hsla(0, 0%, 0%, .049) 88.2%,  
+    hsla(0, 0%, 0%, .013) 93.9%,  
+    hsla(0, 0%, 0%, 0)
+  );
+  color: white;
+  pointer-events: none;
+}
+#navbar-black #mode-black {
+  cursor: pointer;
+  font-size: 1.2vw;
+  pointer-events: all;
+  transition: all ease 0.3s;
+}
+
+#navbar-black #mode-black:hover {
+  transform: rotate(-15deg);
+}
+
+#navbar-black #logo-black {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  font-family: para2;
+  font-weight: 600;
+  font-size: 1.6vw;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+#p-black {
+  position: relative;
+}
+#dot-black {
+  position: absolute;
+  left: -6%;
+  bottom: -0.5vw;
+  opacity: 0;
+}
+
+#navbar-black #logo-black span {
+  display: inline-block;
+}
+#navbar-black #logo-black img {
+  height: 1.2vw;
+  filter: invert(1);
+}
+
+#navbar-black #menu-black {
+  height: 1.3vw;
+  width: 1.3vw;
+  border-radius: 50%;
+  background-color: white;
+  color: white;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+#navbar-black #menu-black:hover {
+  transform: scale(1.15);
+}
+
+#mobile-logo-black {
+  display: none;
+}
+
+#menu-c-black {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  pointer-events: all;
+  cursor: pointer;
+}
+#menu-c-black h5 {
+  font-family: para3;
+  font-size: 1.1vw;
+  line-height: 1.4;
+  font-weight: 400;
+  color: white;
+}
+/* black nav end */
+
+
+
 
 #navigation {
   height: 100vh;
@@ -620,16 +740,29 @@ h6 {
 #text-container {
   position: absolute;
   top: 50%;
-  left: 2%;
-  transform: translate(0%,-50%);
+  left: 50%;
+  transform: translate(-50%,-50%);
   z-index: 9;
+  width: 100%;
+  /* background-color: red; */
+  height: 9vw;
 }
+.toph{
+  position: absolute;
+  top: 0;
+  left: 2%;
+}
+.toph h1{
+  position: absolute;
+}
+
 #page1 h1 {
   font-family: heading5;
   font-weight: 600;
-  font-size: 4.5vw;
+  font-size: 4.8vw;
   text-transform: uppercase;
   color: gray;
+  /* opacity: 0; */
 }
 #page1 h2 {
   font-family: heading5;
@@ -647,18 +780,18 @@ h6 {
   color: gray;
 }
 #title-hero {
+  bottom: 0%;
+  width: fit-content;
   height: 4.5vw;
   overflow: hidden;
-  position: relative;
-  /* width:50vw; */
-  /* background-color: red; */
+  position: absolute;
+  left: 2%;
 }
 
 #title-hero h1  {
   position: absolute;
   top:100%;
   line-height: 1;
-  /* overflow: hidden; */
   width: 100%;
 }
 #title-hero h1:nth-child(1){
@@ -679,8 +812,8 @@ h6 {
   opacity: 0;
 }
 #page1-over img {
-  width: 400px;
-  height: 300px;
+  width: 450px;
+  height: 350px;
   object-fit: cover;
   position: absolute;
 }
@@ -691,6 +824,7 @@ h6 {
 #ig2 {
   right: -10%;
   top: 10%;
+  opacity: .3;
 }
 #ig3 {
   left: -10%;
@@ -703,10 +837,12 @@ h6 {
 #ig5 {
   right: 33%;
   bottom: 5%;
+  opacity: .4;
 }
 #ig6 {
   left: 45%;
   top: -20%;
+  opacity: .5;
 }
 #page2 {
   height: 100vh;
@@ -790,6 +926,7 @@ h6 {
   font-weight: 500;
   position: absolute;
   top: 0;
+  color: var(--secondary);
 }
 
 #right-content {
@@ -1125,7 +1262,7 @@ h6 {
 
 .marquee-wrap img {
   width: 6vw;
-  filter: grayscale(100%) contrast(100%) brightness(0%);
+  filter: grayscale(100%) contrast(100%) brightness(0%) var(--invert-filter);
 }
 .marquee-wrap img:hover {
   filter: none;
@@ -1141,12 +1278,13 @@ h6 {
 }
 
 #footer {
+  position: relative;
   height: 100vh;
   width: 100%;
-  background-color: var(--secondary);
+  background-color: black;
   padding: 2vw;
   padding-top: 8vw;
-  color: var(--primary);
+  color: #f2f2ee;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1155,7 +1293,7 @@ h6 {
 }
 #footer a {
   text-decoration: none;
-  color: var(--primary);
+  color: #f2f2ee;
   display: block;
   font-family: para3;
   font-size: 0.9vw;
@@ -1171,7 +1309,7 @@ h6 {
 }
 #footer-tp h5,
 #footer-tp h6 {
-  color: var(--primary);
+  color: #f2f2ee;
   font-size: 0.9vw;
 }
 #ft-service {
@@ -1206,7 +1344,7 @@ h6 {
 #ft-btn {
   height: 45px;
   padding: 0.7vw 1vw;
-  background-color: var(--primary);
+  background-color: #f2f2ee;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -1216,10 +1354,10 @@ h6 {
 #ft-btn h5 {
   font-size: 0.8vw;
   text-transform: capitalize;
-  color: var(--secondary);
+  color: black;
 }
 #footer-btm h5 {
-  color: var(--primary);
+  color: #f2f2ee;
   font-size: 0.9vw;
 }
 #footer-btm {
@@ -1294,6 +1432,30 @@ h6 {
   #mode {
     display: none;
   }
+
+  /* black nav */
+  #navbar-black {
+    padding: 10vw 7vw;
+  }
+  #navbar-black #menu-black {
+    height: 5.5vw;
+    width: 5.5vw;
+    background-color: var(--secondary);
+  }
+  #navbar-black #logo-black {
+    display: none;
+  }
+  #logo-black {
+    display: none;
+  }
+  #mobile-logo-black {
+    display: block;
+  }
+  #mode-black {
+    display: none;
+  }
+
+  /* black nav end */
 
   #navigation {
     padding: 4vw 7vw;
