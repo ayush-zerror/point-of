@@ -851,8 +851,9 @@ h6 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: var(--primary);
+  /* background-color: var(--primary); */
   cursor: none;
+  mix-blend-mode: difference;
 }
 #page2-text span {
   opacity: 0.4;
@@ -860,11 +861,11 @@ h6 {
 #page2 h5 {
   margin-bottom: 3vw;
   font-weight: 500;
-  color: var(--secondary);
+  color: white;
 }
 #page2 h2 {
   font-size: 3.4vw;
-  color: var(--secondary);
+  color: white;
 }
 
 #page3 {
@@ -890,15 +891,17 @@ h6 {
   /* background-color: red; */
 }
 #circle2 {
-  width: 1.5vw;
-  height: 1.5vw;
-  background-color: var(--secondary);
+  width: 200vw;
+  height: 200vw;
+  background-color: white;
   position: absolute;
-  top: 0%;
-  transform: translate(-50%, -50%) scale(0);
+  top: 88%;
+  transform: translate(-50%, -50%) scale(1);
+  /* filter: blur(200px); */
+  opacity: 0;
   left: 50%;
-  border-radius: 50px;
-  border: 1px solid var(--secondary);
+  border-radius: 50%;
+  border: 1px solid white;
 }
 
 #content-page3 {

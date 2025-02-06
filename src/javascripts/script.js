@@ -93,12 +93,12 @@ function loader() {
       }, "c")
       .to(".toph", {
         left: "50%",
-        transform: "translate(-50%,-50%)",
+        transform: "translate(-50%,0%)",
         duration: 1
       }, "c")
       .to("#title-hero", {
         left: "50%",
-        transform: "translate(-50%,-50%)",
+        transform: "translate(-50%,0%)",
         duration: .9
       }, "c")
       .to("#navbar", {
@@ -112,7 +112,7 @@ function loader() {
         top: "50%",
         left: "50%",
         transform: "translate(-50%,-50%)",
-     
+
       })
 
 
@@ -295,20 +295,69 @@ function page2Animation() {
 
   document.querySelector("#page2-text").innerHTML = clutter
 
-  gsap.to(document.querySelectorAll("#page2-text span"), {
-    opacity: 1,
-    stagger: 0.2,
+  var tl2 = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#page2",
+      scroller: "body",
+      start: "top 10%",
+      end: "top 0%",
+      scrub: 1,
+      // markers: true
+    }
+  })
+
+  tl2
+    .to("#circle2", {
+      opacity: 1,
+      duration: .8
+    },"a")
+    .to("#navbar", {
+      opacity: 0,
+      pointerEvent: "none",
+      duration: .2
+    }, "a")
+    .to("#navbar-black", {
+      opacity: 1,
+      pointerEvent: "all",
+      duration: .2
+    }, "a")
+
+
+  var tl22 = gsap.timeline({
     scrollTrigger: {
       trigger: "#page2",
       scroller: "body",
       start: "top 0%",
-      end: "top -100%",
+      end: "top -140%",
       scrub: 1,
       pin: true,
       anticipatePin: 1, // Helps smooth out pin transitions
 
     }
   })
+  tl22
+    .to(document.querySelectorAll("#page2-text span"), {
+      opacity: 1,
+      stagger: 0.2,
+    }, "a")
+    .to("#circle2", {
+      width: "1.5vw",
+      height: "1.5vw",
+      // filter: "blur(0px)",
+      duration: 8,
+      autoRound: false
+    }, "a")
+    .to("#navbar-black", {
+      opacity: 0,
+      pointerEvent: "none",
+      duration: .2
+    }, "b")
+    .to("#navbar", {
+      opacity: 1,
+      pointerEvent: "all",
+      duration: .2
+    }, "b")
+
 
 
 }
@@ -324,6 +373,26 @@ function pointMidAnimation() {
   let positionFromPage3Top = h2.getBoundingClientRect().top - page3.getBoundingClientRect().top + h2.offsetHeight / 2
   let diff = (h22.getBoundingClientRect().top - h2.getBoundingClientRect().top) - .2
 
+  var tlc = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#page3",
+      scroller: "body",
+      start: "top 100%",
+      end: "top 5%",
+      scrub: 1,
+      // markers: true
+    }
+  })
+
+  tlc
+    .to("#circle2", {
+      top: positionFromPage3Top,
+      transform: "translate(-50%,-50%) scale(1)",
+      duration: 3,
+    })
+
+
+
   var tl = gsap.timeline({
     scrollTrigger: {
       trigger: "#page3",
@@ -335,13 +404,8 @@ function pointMidAnimation() {
     }
   });
 
-
   tl
-    .to("#circle2", {
-      top: positionFromPage3Top,
-      transform: "translate(-50%,-50%) scale(1)",
-      duration: 1.5,
-    })
+
     .to("#right-content > h2", {
       x: 300,
       filter: "blur(4px)",
@@ -740,3 +804,5 @@ function footerAnimation() {
     }, "a")
 }
 footerAnimation()
+
+
