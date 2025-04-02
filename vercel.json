@@ -65,12 +65,24 @@
         "dest": "/brand-expertise.html"
       },
       {
+        "src": "/ui-ux-expertise",
+        "dest": "/ui-ux-expertise.html"
+      },
+      {
         "src": "/websites-expertise",
         "dest": "/websites-expertise.html"
       },
       {
-        "src": "/campaigns-expertise",
-        "dest": "/campaigns-expertise.html"
+        "src": "/strategy-expertise",
+        "dest": "/strategy-expertise.html"
+      },
+      {
+        "src": "/marketing-expertise",
+        "dest": "/marketing-expertise.html"
+      },
+      {
+        "src": "/media-production-expertise",
+        "dest": "/media-production-expertise.html"
       },
       {
         "src": "/contact",

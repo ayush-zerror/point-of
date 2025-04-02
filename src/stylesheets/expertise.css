@@ -604,6 +604,146 @@ h6 {
   padding: 2vw 7vw;
 }
 
+
+
+
+#footer {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+  padding: 2vw;
+  padding-top: 8vw;
+  color: #f2f2ee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  cursor: none;
+}
+#footer a {
+  text-decoration: none;
+  color: #f2f2ee;
+  display: block;
+  font-family: para3;
+  font-size: 0.9vw;
+  font-weight: 400;
+}
+
+#footer-tp {
+  width: 32%;
+}
+#footer-tp h5 {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+#footer-tp h5,
+#footer-tp h6 {
+  color: #f2f2ee;
+  font-size: 0.9vw;
+}
+#ft-service {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 1vw 0;
+  margin-bottom: 2vw;
+}
+.ft-ser {
+  width: 50%;
+}
+#input-wrap {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  gap: 5%;
+  margin-top: 1vw;
+}
+#input-wrap input {
+  padding: 0.7vw 1vw;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border: 1px solid rgba(128, 128, 128, 0.745);
+  width: 65%;
+  border-radius: 5px;
+  color: var(--primary);
+  height: 45px;
+}
+#ft-btn {
+  height: 45px;
+  padding: 0.7vw 1vw;
+  background-color: #f2f2ee;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#ft-btn h5 {
+  font-size: 0.8vw;
+  text-transform: capitalize;
+  color: black;
+}
+#footer-btm h5 {
+  color: #f2f2ee;
+  font-size: 0.9vw;
+}
+#footer-btm {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#footer-btm > div {
+  width: fit-content;
+}
+
+#footer-btm > div:nth-child(5) {
+  text-align: right;
+}
+.ft-social {
+  margin-bottom: 0.3vw;
+}
+.lineUnder {
+  position: relative;
+  cursor: pointer;
+  width: fit-content;
+}
+.lineUnder::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 0.01vw;
+  background-color: white;
+  mix-blend-mode: difference;
+  transition: all ease 0.3s;
+}
+.lineUnder:hover:before {
+  width: 100%;
+}
+.linewrap {
+  display: flex;
+  gap: 6px;
+  width: fit-content;
+}
+.lastft {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+
+
+
+
+
+
+
+
+
 #mobile-logo {
   display: none;
 }
