@@ -504,7 +504,7 @@ h5 span {
   color: var(--secondary);
 }
 #slide2 {
-  width: 60%;
+  width: 50%;
 }
 
 .accordion{
@@ -518,6 +518,8 @@ h5 span {
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+  transition: all ease .3s;
+
 }
 .accordion-title .plus{
     position: relative;
@@ -549,6 +551,15 @@ h5 span {
 }
 .accordion-title h2{
     font-size: 2vw;
+}
+.accordion.active h2{
+  opacity: 1;
+}
+.accordion h2{
+  opacity: .5;
+}
+.accordion-title:hover h2{
+  opacity: 1;
 }
 .accordion.active .accordion-dec{
     height: 15vw;

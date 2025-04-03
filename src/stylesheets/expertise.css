@@ -424,7 +424,7 @@ h2 span {
 h5,
 h6 {
   font-family: para3;
-  font-size: 1.2vw;
+  font-size: 1.1vw;
   line-height: 1.4;
   font-weight: 400;
   color: var(--secondary);
@@ -465,33 +465,34 @@ h6 {
   line-height: 1;
 }
 #page2 {
-  height: 110vh;
+  height: 105vh;
   width: 100%;
-  padding: 2.3vw 2vw;
-  padding-bottom: 4vw;
+  padding: 6vw 2vw;
+  padding-bottom: 2vw;
   display: flex;
-  align-items: end;
-  justify-content: center;
+  align-items: center;
 }
 
 #page2 #wrp {
   width: 100%;
+  height: 100%;
   display: flex;
-  align-items: start;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
 }
 #lfs {
-  width: 35%;
+  width: 100%;
 }
 #lfs h2 {
-  line-height: 0.8;
+  line-height: 1;
+  margin-bottom: 4vw;
 }
 #lfs h5 {
   width: 65%;
   margin-top: 1vw;
 }
 #rts {
-  width: 60%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -499,8 +500,7 @@ h6 {
 }
 #rts .service {
   width: 30%;
-  margin-bottom: 4vw;
-  height: 30vh;
+  margin-bottom: 2vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -514,6 +514,7 @@ h6 {
 }
 #rts .service h5 {
   width: fit-content;
+  line-height: 1.6;
 }
 
 #more-btn {
@@ -527,6 +528,7 @@ h6 {
   cursor: pointer;
   user-select: none;
   margin-left: -1.1vw;
+  margin-top: 1.5vw;
 }
 
 #more-btn .cirr {
@@ -619,7 +621,6 @@ h6 {
   flex-direction: column;
   justify-content: space-between;
   align-items: end;
-  cursor: none;
 }
 #footer a {
   text-decoration: none;

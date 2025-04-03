@@ -124,7 +124,8 @@ document.querySelector(".popup-close").addEventListener("click", function (e) {
 function clock() {
 
     const arrows = [...document.querySelectorAll('.arrow')];
-    // const digital = document.querySelector('.digital');
+    const hourV = document.querySelector('.digital .hour');
+    const minuteV = document.querySelector('.digital .minute');
     setInterval(() => {
         const date = new Date();
         const hour = date.getHours();
@@ -135,7 +136,8 @@ function clock() {
 
         arrows[1].style.setProperty('--rotate', `${minute * 6 + second / 10}deg`);
         arrows[2].style.setProperty('--rotate', `${second * 6 + milliSecond / 180}deg`);
-        // digital.textContent = `${('0' + hour).substr(-2)}:${('0' + minute).substr(-2)}:${('0' + second).substr(-2)}`;
+        hourV.textContent = `${('0' + hour).substr(-2)}`;
+        minuteV.textContent = `${('0' + minute).substr(-2)}`;
     }, 50);
 
     const bigTicks = [...document.querySelectorAll('.tick.big')];
@@ -161,11 +163,152 @@ document.addEventListener("DOMContentLoaded", function () {
         drag: true,  // Keep dragging enabled
         focus: 'center',
         perPage: 3,
-        gap:"5px",
+        gap: "5px",
         autoScroll: {
             speed: 1,
         },
     });
 
     splide.mount(window.splide.Extensions); // Only mount once
+});
+
+function contactNavSwitch(){
+    
+var ntl = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#image-slider",
+        scroller: "body",
+        start: "top 0%",
+        end: "top -100%",
+        scrub: 1,
+        pin: true,
+    }
+})
+ntl
+    .to("#contact-form", {
+        top: "0%",
+    }, "a")
+    .to("#navbar", {
+        opacity: 0,
+        pointerEvent: "none",
+        duration: .2
+    }, "a")
+    .to("#navbar-black", {
+        opacity: 1,
+        pointerEvent: "all",
+        duration: .2
+    }, "a")
+
+
+var tl22 = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#career",
+        scroller: "body",
+        start: "top 0%",
+        end: "top -100%",
+        scrub: 1,
+    }
+})
+tl22
+    .to("#navbar-black", {
+        opacity: 0,
+        pointerEvent: "none",
+        duration: .2
+    }, "b")
+    .to("#navbar", {
+        opacity: 1,
+        pointerEvent: "all",
+        duration: .2
+    }, "b")
+}
+contactNavSwitch()
+
+
+function footerNavSwitch() {
+
+    var ftl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#footer",
+            scroller: "body",
+            start: "top 50%",
+            end: "top 0%",
+            scrub: 1,
+        }
+    })
+    ftl
+        .to("#navbar", {
+            opacity: 0,
+            pointerEvent: "none",
+            duration: .2
+        }, "a")
+        .to("#navbar-black", {
+            opacity: 1,
+            pointerEvent: "all",
+            duration: .2
+        }, "a")
+
+
+}
+footerNavSwitch()
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    var input = document.querySelector("#mobile_code");
+
+    // Initialize intl-tel-input
+    var iti = window.intlTelInput(input, {
+        initialCountry: "in", // Set default country to India
+        separateDialCode: true
+    });
+
+    // Optional: Get the selected country code on input change
+    input.addEventListener("countrychange", function () {
+        var countryCode = iti.getSelectedCountryData().dialCode;
+        console.log("Selected Country Code: +" + countryCode);
+    });
+ 
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdowns = document.querySelectorAll(".custom-dropdown");
+
+    dropdowns.forEach(dropdown => {
+        const selected = dropdown.querySelector(".dropdown-selected");
+        const optionsContainer = dropdown.querySelector(".dropdown-options");
+        const options = dropdown.querySelectorAll(".dropdown-item");
+        const hiddenInput = dropdown.querySelector("input[type='hidden']");
+
+        // Toggle dropdown
+        selected.addEventListener("click", (event) => {
+            event.stopPropagation(); // Prevent immediate closure
+            closeAllDropdowns(); // Close other dropdowns first
+            optionsContainer.style.display = optionsContainer.style.display === "block" ? "none" : "block";
+        });
+
+        // Handle selection
+        options.forEach(option => {
+            option.addEventListener("click", (event) => {
+                event.stopPropagation(); // Prevent bubbling to document click event
+                selected.textContent = option.textContent;
+                
+                // ✅ Only update hidden input if it exists
+                if (hiddenInput) {
+                    hiddenInput.value = option.dataset.value;
+                }
+
+                optionsContainer.style.display = "none"; // Close dropdown
+            });
+        });
+    });
+
+    // Close all dropdowns when clicking outside
+    document.addEventListener("click", () => {
+        closeAllDropdowns();
+    });
+
+    function closeAllDropdowns() {
+        document.querySelectorAll(".dropdown-options").forEach(optionsContainer => {
+            optionsContainer.style.display = "none";
+        });
+    }
 });
