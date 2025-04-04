@@ -77,7 +77,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2.3vw 2vw;
+  padding: 3vw 3.8vw;
   background: linear-gradient(
     180deg,
     #f2f2ee 0,
@@ -186,7 +186,7 @@ body {
   z-index: 5;
   display: flex;
   align-items: center;
-  padding: 2.3vw 2vw;
+  padding: 2.3vw 3.8vw;
 }
 #leftm {
   position: relative;
@@ -338,7 +338,7 @@ body {
   justify-content: space-between;
   width: 100%;
   height: 8vw;
-  padding: 2vw;
+  padding: 2vw 3.8vw;
 }
 #nav-lef {
   width: 42%;
@@ -413,27 +413,152 @@ body {
   width: 0;
 }
 
+
+/* black nav */
+
+#navbar-black {
+  width: 100%;
+  height: 5vh;
+  position: fixed;
+  top: 0%;
+  left: 0;
+  z-index: 9999;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  mix-blend-mode: difference;
+  justify-content: space-between;
+  padding: 3vw 3.8vw;
+  background: linear-gradient(
+    180deg,
+    #000000 0,
+    hsla(0, 0%, 0%, .987) 11%,  
+    hsla(0, 0%, 0%, .951) 20.8%, 
+    hsla(0, 0%, 0%, .896) 29.6%, 
+    hsla(0, 0%, 0%, .825) 37.5%, 
+    hsla(0, 0%, 0%, .741) 44.6%, 
+    hsla(0, 0%, 0%, .648) 51%,   
+    hsla(0, 0%, 0%, .55) 57%,    
+    hsla(0, 0%, 0%, .45) 62.5%,  
+    hsla(0, 0%, 0%, .352) 67.7%,  
+    hsla(0, 0%, 0%, .259) 72.7%,  
+    hsla(0, 0%, 0%, .175) 77.8%,  
+    hsla(0, 0%, 0%, .104) 82.9%,  
+    hsla(0, 0%, 0%, .049) 88.2%,  
+    hsla(0, 0%, 0%, .013) 93.9%,  
+    hsla(0, 0%, 0%, 0)
+  );
+  color: white;
+  pointer-events: none;
+}
+#navbar-black #mode-black {
+  cursor: pointer;
+  font-size: 1.2vw;
+  pointer-events: all;
+  transition: all ease 0.3s;
+}
+
+#navbar-black #mode-black:hover {
+  transform: rotate(-15deg);
+}
+
+#navbar-black #logo-black {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  font-family: para2;
+  font-weight: 600;
+  font-size: 1.6vw;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+#p-black {
+  position: relative;
+}
+#dot-black {
+  position: absolute;
+  left: -6%;
+  bottom: -0.5vw;
+  opacity: 0;
+}
+
+#navbar-black #logo-black span {
+  display: inline-block;
+}
+#navbar-black #logo-black img {
+  height: 1.2vw;
+  filter: invert(1);
+}
+
+#navbar-black #menu-black {
+  height: 1.3vw;
+  width: 1.3vw;
+  border-radius: 50%;
+  background-color: white;
+  color: white;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+#navbar-black #menu-black:hover {
+  transform: scale(1.15);
+}
+
+#mobile-logo-black {
+  display: none;
+}
+
+#menu-c-black {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  pointer-events: all;
+  cursor: pointer;
+}
+#menu-c-black h5 {
+  font-family: para3;
+  font-size: 1.1vw;
+  line-height: 1.4;
+  font-weight: 400;
+  color: white;
+}
+/* black nav end */
+
+
+
 h2 {
-  font-family: heading2;
+  font-family: heading4;
   font-weight: 100;
-  line-height: 1.3;
-  font-size: 3vw;
+  /* line-height: 1.3;
+  font-size: 3vw; */
+  font-size: 2rem;
+  line-height: 1.2;
   color: var(--secondary);
 }
 h2 span {
-  font-family: heading2;
+  font-family: heading4;
   font-weight: 100;
-  font-size: 3vw;
+  /* font-size: 3vw; */
+  font-size: 2rem;
+  line-height: 1.2;
 }
 h5,
 h6,
 h5 span {
   font-family: para3;
-  font-size: 1.2vw;
-  line-height: 1.4;
-  font-weight: 400;
+  /* font-size: 1.1vw; */
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: 500;
   color: var(--secondary);
 }
+
 #main {
   width: 100%;
   background-color: var(--primary);
@@ -446,7 +571,7 @@ h5 span {
   flex-direction: column;
   align-items: start;
   justify-content: end;
-  padding: 2vw;
+  padding: 2vw 3.8vw;
   padding-bottom: 2vw;
 }
 
@@ -463,12 +588,14 @@ h5 span {
 #page1 h2 {
   width: 80%;
   font-size: 3.5vw;
+  font-weight: 100;
+  line-height: 1.2;
 }
 
 #page2 {
   height: 100vh;
   width: 100%;
-  padding: 0 2vw;
+  padding: 0 3.8vw;
 }
 #page2 video {
   height: 100%;
@@ -479,7 +606,7 @@ h5 span {
 #page3 {
   min-height: 50vh;
   width: 100%;
-  padding: 10vw 2vw;
+  padding: 10vw 3.8vw;
   padding-bottom: 5vw;
   display: flex;
   justify-content: space-between;
@@ -490,9 +617,10 @@ h5 span {
 }
 
 #slide1 h5 {
-  width:70%;
+  width:90%;
   margin-top: 1vw;
 }
+
 #slide1 #p1{
   margin-top: 1vw;
 }
@@ -579,7 +707,7 @@ h5 span {
 #page4{
     min-height: 80vh;
     width: 100%;
-    padding: 2vw;
+    padding: 2vw 3.8vw;
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -632,22 +760,22 @@ h5 span {
   height: 100vh;
   width: 100%;
   background-color: black;
-  padding: 2vw;
+  padding: 2vw 3.8vw;
   padding-top: 8vw;
   color: #f2f2ee;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: end;
-  cursor: none;
 }
 #footer a {
   text-decoration: none;
   color: #f2f2ee;
   display: block;
   font-family: para3;
-  font-size: 0.9vw;
-  font-weight: 400;
+  font-size: 1.05vw;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 #footer-tp {
@@ -708,7 +836,7 @@ h5 span {
 }
 #footer-btm h5 {
   color: #f2f2ee;
-  font-size: 0.9vw;
+  font-size: 1.05vw;
 }
 #footer-btm {
   width: 100%;

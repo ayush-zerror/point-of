@@ -157,6 +157,7 @@ function clock() {
 }
 clock()
 
+// splide sliders
 document.addEventListener("DOMContentLoaded", function () {
     const splide = new Splide('.splide', {
         type: 'loop',
@@ -166,6 +167,8 @@ document.addEventListener("DOMContentLoaded", function () {
         gap: "5px",
         autoScroll: {
             speed: 1,
+            pauseOnHover: false,  // Prevent stopping on hover
+            pauseOnFocus: false,  // Optional: also prevent stopping when focused
         },
     });
 
@@ -230,7 +233,7 @@ function footerNavSwitch() {
         scrollTrigger: {
             trigger: "#footer",
             scroller: "body",
-            start: "top 50%",
+            start: "top 60%",
             end: "top 0%",
             scrub: 1,
         }
@@ -239,19 +242,19 @@ function footerNavSwitch() {
         .to("#navbar", {
             opacity: 0,
             pointerEvent: "none",
-            duration: .2
+            duration: .5
         }, "a")
         .to("#navbar-black", {
             opacity: 1,
             pointerEvent: "all",
-            duration: .2
+            duration: .5
         }, "a")
 
 
 }
 footerNavSwitch()
 
-
+// dynamic country code
 document.addEventListener("DOMContentLoaded", function () {
     var input = document.querySelector("#mobile_code");
 
@@ -269,34 +272,45 @@ document.addEventListener("DOMContentLoaded", function () {
  
 });
 
+// custom dropdown
 document.addEventListener("DOMContentLoaded", function () {
     const dropdowns = document.querySelectorAll(".custom-dropdown");
 
     dropdowns.forEach(dropdown => {
+        const selectedWrap = dropdown.querySelector(".dropdown-selected-wrap");
         const selected = dropdown.querySelector(".dropdown-selected");
         const optionsContainer = dropdown.querySelector(".dropdown-options");
         const options = dropdown.querySelectorAll(".dropdown-item");
         const hiddenInput = dropdown.querySelector("input[type='hidden']");
 
         // Toggle dropdown
-        selected.addEventListener("click", (event) => {
+        selectedWrap.addEventListener("click", (event) => {
             event.stopPropagation(); // Prevent immediate closure
-            closeAllDropdowns(); // Close other dropdowns first
-            optionsContainer.style.display = optionsContainer.style.display === "block" ? "none" : "block";
+            const isOpen = optionsContainer.style.display === "block";
+
+            closeAllDropdowns(); // Close others first
+
+            if (!isOpen) {
+                optionsContainer.style.display = "block";
+                selectedWrap.classList.add("open");
+            } else {
+                optionsContainer.style.display = "none";
+                selectedWrap.classList.remove("open");
+            }
         });
 
         // Handle selection
         options.forEach(option => {
             option.addEventListener("click", (event) => {
-                event.stopPropagation(); // Prevent bubbling to document click event
+                event.stopPropagation();
                 selected.textContent = option.textContent;
-                
-                // ✅ Only update hidden input if it exists
+
                 if (hiddenInput) {
                     hiddenInput.value = option.dataset.value;
                 }
 
-                optionsContainer.style.display = "none"; // Close dropdown
+                optionsContainer.style.display = "none";
+                selectedWrap.classList.remove("open");
             });
         });
     });
@@ -307,8 +321,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function closeAllDropdowns() {
-        document.querySelectorAll(".dropdown-options").forEach(optionsContainer => {
-            optionsContainer.style.display = "none";
+        document.querySelectorAll(".dropdown-options").forEach(container => {
+            container.style.display = "none";
+        });
+        document.querySelectorAll(".dropdown-selected-wrap").forEach(wrap => {
+            wrap.classList.remove("open");
         });
     }
 });
+

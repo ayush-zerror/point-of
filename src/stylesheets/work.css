@@ -73,7 +73,7 @@ body {
   z-index: 5;
   display: flex;
   align-items: center;
-  padding: 2.3vw 2vw;
+  padding: 2.3vw 3.8vw;
 }
 .navigation2 {
   z-index: 10 !important;
@@ -225,7 +225,7 @@ body {
   justify-content: space-between;
   width: 100%;
   height: 8vw;
-  padding: 2vw;
+  padding: 2vw 3.8vw;
 }
 #nav-lef {
   width: 42%;
@@ -310,7 +310,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 3vw 2vw;
+  padding: 3vw 3.8vw;
   pointer-events: none;
 }
 #menu{
@@ -364,7 +364,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: end !important;
-  padding: 3vw 2vw;
+  padding: 3vw 3.8vw;
   pointer-events: none;
 }
 .navbar1 #logo {
@@ -708,7 +708,7 @@ body {
 
 #bottom {
   width: 100%;
-  padding: 2vw;
+  padding: 2vw 3.8vw;
   height: 8vw;
   position: absolute;
   bottom: 0;
@@ -886,7 +886,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 2vw;
+  padding: 2vw 3.8vw;
   height: 8vw;
   display: flex;
   justify-content: space-between;
@@ -976,7 +976,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.5vw 3vw;
+  padding: 1.5vw 3.8vw;
   padding-top: 4vw;
   gap: 1.5vw;
 }
