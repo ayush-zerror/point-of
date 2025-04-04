@@ -781,7 +781,7 @@ h6 {
 
 #right form .input.active h6 {
   top: 0%;
-  font-size: 0.7vw;
+  font-size: .9vw;
   opacity: 0.8;
 }
 #right form .input h6,
@@ -801,7 +801,7 @@ h6 {
 }
 #right form .textarea.active h6 {
   top: 0%;
-  font-size: 0.7vw;
+  font-size: 0.9vw;
   opacity: 0.8;
 }
 #right form input {
@@ -1343,7 +1343,7 @@ h6 {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(100%);
+  filter: grayscale(100%) contrast(120%);
 }
 
 .splide__arrow {
