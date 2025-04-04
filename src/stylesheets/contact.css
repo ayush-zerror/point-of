@@ -771,7 +771,7 @@ h6 {
 .linei {
   width: 100%;
   height: 0.08vw;
-  background-color: var(--primary);
+  background-color: white;
   position: absolute;
   bottom: 0%;
   left: 0;
@@ -781,7 +781,7 @@ h6 {
 
 #right form .input.active h6 {
   top: 0%;
-  font-size: .9vw;
+  font-size: 1vw;
   opacity: 0.8;
 }
 #right form .input h6,
@@ -801,7 +801,7 @@ h6 {
 }
 #right form .textarea.active h6 {
   top: 0%;
-  font-size: 0.9vw;
+  font-size: 1vw;
   opacity: 0.8;
 }
 #right form input {
@@ -1101,6 +1101,9 @@ h6 {
 #from-left h2,#from-left h5{
   color: white;
 }
+#from-left h5{
+  margin-bottom: .8vw;
+}
 
 #from-right {
   width: 100%;
@@ -1119,19 +1122,18 @@ h6 {
   position: relative;
 }
 #from-right form .pop-input h6 {
-  font-size: 0.9vw;
-  font-weight: 400;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
   color: white;
   transition: all ease 0.3s;
+  text-transform: capitalize;
 }
 
 #from-right form .pop-input.active h6 {
   top: 0%;
-  font-size: 0.7vw;
+  font-size: 1vw;
   opacity: 0.8;
 }
 
@@ -1171,7 +1173,8 @@ h6 {
 #from-right form p {
   width: 35%;
   font-family: para3;
-  font-size: 0.9vw;
+  font-size: 1.05vw;
+  line-height: 1.3;
   color: white;
 }
 #from-right form p span {
