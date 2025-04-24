@@ -1148,7 +1148,7 @@ h6 {
 }
 
 #page7 h2 {
-  width: 60%;
+  width: 70%;
   text-align: center;
   margin-bottom: 1vw;
 }
@@ -1173,7 +1173,7 @@ h6 {
 }
 
 .marquee-wrap img {
-  width: 6vw;
+  width: 7vw;
   filter: grayscale(100%) contrast(100%) brightness(0%) var(--invert-filter);
 }
 .marquee-wrap img:hover {

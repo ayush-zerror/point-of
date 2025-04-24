@@ -398,7 +398,7 @@ function pointMidAnimation() {
       trigger: "#page3",
       scroller: "body",
       start: "top top",
-      end: "+=4000",
+      end: "+=3000",
       scrub: true,
       pin: true,
     }
@@ -521,67 +521,67 @@ function pointMidAnimation() {
       delay: 1.4
     }, "d")
 
-    .to("#circle2", {
-      top: positionFromPage3Top + diff * 4,
-      transform: "translate(-50%,-50%) scale(1)",
-      duration: .8,
-      delay: 1
-    }, "e")
-    .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
-      filter: "blur(4px)",
-      opacity: .4,
-      duration: .5,
-      delay: 1
-    }, "e")
-    .to("#ser5", {
-      filter: "blur(0px)",
-      opacity: 1,
-      duration: .5,
-      delay: 1
-    }, "e")
-    .to("#para4", {
-      opacity: 0,
-      duration: .4,
-      delay: 1
-    }, "e")
-    .to("#para5", {
-      opacity: .5,
-      duration: .4,
-      delay: 1.4
-    }, "e")
+    // .to("#circle2", {
+    //   top: positionFromPage3Top + diff * 4,
+    //   transform: "translate(-50%,-50%) scale(1)",
+    //   duration: .8,
+    //   delay: 1
+    // }, "e")
+    // .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
+    //   filter: "blur(4px)",
+    //   opacity: .4,
+    //   duration: .5,
+    //   delay: 1
+    // }, "e")
+    // .to("#ser5", {
+    //   filter: "blur(0px)",
+    //   opacity: 1,
+    //   duration: .5,
+    //   delay: 1
+    // }, "e")
+    // .to("#para4", {
+    //   opacity: 0,
+    //   duration: .4,
+    //   delay: 1
+    // }, "e")
+    // .to("#para5", {
+    //   opacity: .5,
+    //   duration: .4,
+    //   delay: 1.4
+    // }, "e")
 
-    .to("#circle2", {
-      top: positionFromPage3Top + diff * 5,
-      transform: "translate(-50%,-50%) scale(1)",
-      duration: .8,
-      delay: 1
-    }, "f")
-    .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
-      filter: "blur(4px)",
-      opacity: .4,
-      duration: .5,
-      delay: 1
-    }, "f")
-    .to("#ser6", {
-      filter: "blur(0px)",
-      opacity: 1,
-      duration: .5,
-      delay: 1
-    }, "f")
-    .to("#para5", {
-      opacity: 0,
-      duration: .4,
-      delay: 1
-    }, "f")
-    .to("#para6", {
-      opacity: .5,
-      duration: .4,
-      delay: 1.4,
-    }, "f")
-    .to("#para6", {
-      opacity: .5,
-      delay: .3,
-    })
+    // .to("#circle2", {
+    //   top: positionFromPage3Top + diff * 5,
+    //   transform: "translate(-50%,-50%) scale(1)",
+    //   duration: .8,
+    //   delay: 1
+    // }, "f")
+    // .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
+    //   filter: "blur(4px)",
+    //   opacity: .4,
+    //   duration: .5,
+    //   delay: 1
+    // }, "f")
+    // .to("#ser6", {
+    //   filter: "blur(0px)",
+    //   opacity: 1,
+    //   duration: .5,
+    //   delay: 1
+    // }, "f")
+    // .to("#para5", {
+    //   opacity: 0,
+    //   duration: .4,
+    //   delay: 1
+    // }, "f")
+    // .to("#para6", {
+    //   opacity: .5,
+    //   duration: .4,
+    //   delay: 1.4,
+    // }, "f")
+    // .to("#para6", {
+    //   opacity: .5,
+    //   delay: .3,
+    // })
 }
 pointMidAnimation()
 
