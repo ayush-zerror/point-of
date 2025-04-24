@@ -527,18 +527,16 @@ body {
 h2 {
   font-family: heading2;
   font-weight: 100;
-  /* line-height: 1.3;
-  font-size: 3vw; */
-  font-size: 2rem;
   line-height: 1.2;
+  font-size: 3vw;
   color: var(--secondary);
 }
 h2 span {
   font-family: heading2;
   font-weight: 100;
-  /* font-size: 3vw; */
-  font-size: 2rem;
   line-height: 1.2;
+  font-size: 3vw;
+  color: var(--secondary);
 }
 h5,
 h6 {
@@ -555,9 +553,9 @@ h6 {
   overflow: hidden;
 }
 #page1 {
-  height: 90vh;
+  height:100vh;
   width: 100%;
-  padding: 10vw 3.8vw;
+  padding: 8vw 3.8vw;
   padding-bottom: 2vw;
   display: flex;
   flex-direction: column;
@@ -643,7 +641,7 @@ h6 {
 }
 .address-link {
   display: inline-block;
-  margin-bottom: 1vw;
+  margin-bottom: 1.5vw;
   font-size: 1.1vw;
   line-height: 1.6;
   font-family: para2;
@@ -784,7 +782,7 @@ h6 {
 .linei {
   width: 100%;
   height: 0.08vw;
-  background-color: white;
+  background-color: var(--primary);
   position: absolute;
   bottom: 0%;
   left: 0;
@@ -794,8 +792,8 @@ h6 {
 
 #right form .input.active h6 {
   top: 0%;
-  font-size: 1vw;
-  opacity: 0.8;
+  font-size: .9vw;
+  opacity: 0.5;
 }
 #right form .input h6,
 #right form .textarea h6 {
@@ -808,14 +806,15 @@ h6 {
   color: var(--primary);
   transition: all ease 0.3s;
   text-transform: capitalize;
+  opacity: .5;
 }
 #right form .textarea h6 {
   top: 15%;
 }
 #right form .textarea.active h6 {
   top: 0%;
-  font-size: 1vw;
-  opacity: 0.8;
+  font-size: .9vw;
+  opacity: .5;
 }
 #right form input {
   flex-shrink: 0;
@@ -1143,12 +1142,13 @@ h6 {
   color: white;
   transition: all ease 0.3s;
   text-transform: capitalize;
+  opacity: .5;
 }
 
 #from-right form .pop-input.active h6 {
   top: 0%;
-  font-size: 1vw;
-  opacity: 0.8;
+  font-size: .9vw;
+  opacity: 0.5;
 }
 
 #file {
@@ -1705,6 +1705,7 @@ h6 {
   cursor: pointer;
   display: flex;
   align-items: center;
+  opacity: .5;
 }
 .dropdown-selected-wrap {
   width: 100%;
