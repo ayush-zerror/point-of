@@ -1148,6 +1148,7 @@ body {
   }
   #mobile-logo {
     display: block;
+    filter: invert(1);
   }
   #navigation {
     padding: 4vw 7vw;

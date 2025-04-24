@@ -104,14 +104,12 @@ body {
   cursor: pointer;
   font-size: 1.2vw;
   pointer-events: all;
-  transition:  all ease 0.3s;
+  transition: all ease 0.3s;
 }
 
-#navbar #mode:hover{
+#navbar #mode:hover {
   transform: rotate(-15deg);
 }
-
-
 
 #navbar #logo {
   position: absolute;
@@ -131,13 +129,13 @@ body {
   pointer-events: all;
 }
 
-#p{
+#p {
   position: relative;
 }
-#dot{
+#dot {
   position: absolute;
   left: -6%;
-  bottom: -.5vw;
+  bottom: -0.5vw;
   opacity: 0;
 }
 
@@ -155,9 +153,9 @@ body {
   border-radius: 50%;
   background-color: var(--secondary);
   color: var(--secondary);
-  transition: all ease .3s;
+  transition: all ease 0.3s;
 }
-#navbar #menu:hover{
+#navbar #menu:hover {
   transform: scale(1.15);
 }
 #menu-c {
@@ -234,7 +232,6 @@ body {
   text-decoration: none;
   display: block;
   width: fit-content;
-
 }
 #shape-c {
   position: absolute;
@@ -254,7 +251,7 @@ body {
 #shape2 {
   position: absolute;
   opacity: 0;
-  transform:  scale(0.9);
+  transform: scale(0.9);
   height: 100%;
   width: 100%;
   background-color: var(--secondary);
@@ -273,7 +270,7 @@ body {
 #shape3 {
   position: absolute;
   opacity: 0;
-  transform:  scale(0.9);
+  transform: scale(0.9);
   width: 100%;
   height: 100%;
   background-color: var(--secondary);
@@ -282,7 +279,7 @@ body {
 #shape4 {
   position: absolute;
   opacity: 0;
-  transform:  scale(0.9);
+  transform: scale(0.9);
   height: 100%;
   width: 100%;
   background-color: var(--secondary);
@@ -310,7 +307,7 @@ body {
 #shape5 {
   position: absolute;
   opacity: 0;
-  transform:  scale(0.9);
+  transform: scale(0.9);
   height: 100%;
   width: 100%;
   background-color: var(--secondary);
@@ -326,8 +323,6 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-
 
 #nav-btm {
   position: absolute;
@@ -413,7 +408,6 @@ body {
   width: 0;
 }
 
-
 /* black nav */
 
 #navbar-black {
@@ -432,20 +426,20 @@ body {
   background: linear-gradient(
     180deg,
     #000000 0,
-    hsla(0, 0%, 0%, .987) 11%,  
-    hsla(0, 0%, 0%, .951) 20.8%, 
-    hsla(0, 0%, 0%, .896) 29.6%, 
-    hsla(0, 0%, 0%, .825) 37.5%, 
-    hsla(0, 0%, 0%, .741) 44.6%, 
-    hsla(0, 0%, 0%, .648) 51%,   
-    hsla(0, 0%, 0%, .55) 57%,    
-    hsla(0, 0%, 0%, .45) 62.5%,  
-    hsla(0, 0%, 0%, .352) 67.7%,  
-    hsla(0, 0%, 0%, .259) 72.7%,  
-    hsla(0, 0%, 0%, .175) 77.8%,  
-    hsla(0, 0%, 0%, .104) 82.9%,  
-    hsla(0, 0%, 0%, .049) 88.2%,  
-    hsla(0, 0%, 0%, .013) 93.9%,  
+    hsla(0, 0%, 0%, 0.987) 11%,
+    hsla(0, 0%, 0%, 0.951) 20.8%,
+    hsla(0, 0%, 0%, 0.896) 29.6%,
+    hsla(0, 0%, 0%, 0.825) 37.5%,
+    hsla(0, 0%, 0%, 0.741) 44.6%,
+    hsla(0, 0%, 0%, 0.648) 51%,
+    hsla(0, 0%, 0%, 0.55) 57%,
+    hsla(0, 0%, 0%, 0.45) 62.5%,
+    hsla(0, 0%, 0%, 0.352) 67.7%,
+    hsla(0, 0%, 0%, 0.259) 72.7%,
+    hsla(0, 0%, 0%, 0.175) 77.8%,
+    hsla(0, 0%, 0%, 0.104) 82.9%,
+    hsla(0, 0%, 0%, 0.049) 88.2%,
+    hsla(0, 0%, 0%, 0.013) 93.9%,
     hsla(0, 0%, 0%, 0)
   );
   color: white;
@@ -530,8 +524,6 @@ body {
 }
 /* black nav end */
 
-
-
 h2 {
   font-family: heading2;
   font-weight: 100;
@@ -581,7 +573,7 @@ h5 span {
 #page1 .explore-btn i {
   transform: rotate(90deg);
 }
-#page1 .explore-btn h3{
+#page1 .explore-btn h3 {
   font-size: 1vw;
   font-weight: 500;
 }
@@ -617,14 +609,14 @@ h5 span {
 }
 
 #slide1 h5 {
-  width:90%;
+  width: 90%;
   margin-top: 1vw;
 }
 
-#slide1 #p1{
+#slide1 #p1 {
   margin-top: 1vw;
 }
-#slide1 p{
+#slide1 p {
   font-family: para3;
   font-size: 1.2vw;
   line-height: 1.4;
@@ -635,131 +627,128 @@ h5 span {
   width: 50%;
 }
 
-.accordion{
-    width: 100%;
+.accordion {
+  width: 100%;
 }
-.accordion-title{
-    width: 100%;
-    padding: 2vw 1vw;
-    border-top: 1px solid rgba(128, 128, 128, 0.745);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-  transition: all ease .3s;
-
+.accordion-title {
+  width: 100%;
+  padding: 2vw 1vw;
+  border-top: 1px solid rgba(128, 128, 128, 0.745);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all ease 0.3s;
 }
-.accordion-title .plus{
-    position: relative;
-    height: 1.8vw;
-    width: 1.8vw;
-    cursor: pointer;
+.accordion-title .plus {
+  position: relative;
+  height: 1.8vw;
+  width: 1.8vw;
+  cursor: pointer;
 }
-.accordion-title .plus .line1{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 100%;
-    height: .01vw;
-    background-color: var(--secondary);
+.accordion-title .plus .line1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 0.01vw;
+  background-color: var(--secondary);
 }
-.accordion.active .accordion-title .plus .line2{
-    height: 0;
+.accordion.active .accordion-title .plus .line2 {
+  height: 0;
 }
-.accordion-title .plus .line2{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: .01vw;
-    height: 100%;
-    background-color: var(--secondary);
-    transition: all cubic-bezier(0.19, 1, 0.22, 1) .8s;
+.accordion-title .plus .line2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.01vw;
+  height: 100%;
+  background-color: var(--secondary);
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
 }
-.accordion-title h2{
-    font-size: 2vw;
+.accordion-title h2 {
+  font-size: 2vw;
 }
-.accordion.active h2{
+.accordion.active h2 {
   opacity: 1;
 }
-.accordion h2{
-  opacity: .5;
+.accordion h2 {
+  opacity: 0.5;
 }
-.accordion-title:hover h2{
+.accordion-title:hover h2 {
   opacity: 1;
 }
-.accordion.active .accordion-dec{
-    height: 15vw;
+.accordion.active .accordion-dec {
+  height: 15vw;
 }
-.accordion.active  .marketing-accordion-dec{
+.accordion.active .marketing-accordion-dec {
   height: 25vw !important;
 }
 .accordion-dec {
-    overflow: hidden;
-    height: 0vw;
-    display: flex;
-    align-items: center;
-    transition: all cubic-bezier(0.19, 1, 0.22, 1) .8s;
+  overflow: hidden;
+  height: 0vw;
+  display: flex;
+  align-items: center;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
 }
-.accordion-dec h5{
-    width: 70%;
-    padding: 3vw 1vw;
-    padding-top: 1vw;
+.accordion-dec h5 {
+  width: 70%;
+  padding: 3vw 1vw;
+  padding-top: 1vw;
 }
-.accordion  .marketing-accordion-dec h5{
+.accordion .marketing-accordion-dec h5 {
   width: 85%;
 }
-#page4{
-    min-height: 80vh;
-    width: 100%;
-    padding: 2vw 3.8vw;
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    flex-direction: column;
+#page4 {
+  min-height: 80vh;
+  width: 100%;
+  padding: 2vw 3.8vw;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-direction: column;
 }
-#works{
-    margin-top: 2vw;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+#works {
+  margin-top: 2vw;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-#works .work{
-    width: 28vw;
+#works .work {
+  width: 28vw;
   height: 65vh;
 }
 
-#works .work img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+#works .work img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-#page5{
-    height: 90vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#page5 {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#page5 .review{
-    width: 60%;
-    text-align: center;
-}
-
-#page5 .review h2{
-    font-size: 3.5vw;
-    margin-bottom: 3vw;
+#page5 .review {
+  width: 60%;
+  text-align: center;
 }
 
-#page5 .review .name{
-    font-weight: 600;
-    display: inline-block;
+#page5 .review h2 {
+  font-size: 3.5vw;
+  margin-bottom: 3vw;
 }
 
-
+#page5 .review .name {
+  font-weight: 600;
+  display: inline-block;
+}
 
 #footer {
   position: relative;
@@ -889,7 +878,6 @@ h5 span {
   align-items: end;
 }
 
-
 #mobile-logo {
   display: none;
 }
@@ -901,19 +889,40 @@ h5 span {
   #navbar {
     padding: 10vw 7vw;
   }
+  #navbar-black {
+    padding: 10vw 7vw;
+  }
   #navbar #menu {
     height: 5.5vw;
     width: 5.5vw;
     background-color: var(--secondary);
   }
-  #navbar #logo {
+  #navbar-black #menu-black {
+    height: 5.5vw;
+    width: 5.5vw;
+    background-color: var(--secondary);
+  }
+  #navbar #logo,
+  #navbar-black #logo-black {
     display: none;
   }
-  #logo {
+  #logo,
+  #logo-black {
     display: none;
   }
   #mobile-logo {
     display: block;
+    filter: invert(1);
+  }
+  #mobile-logo-black {
+    display: block;
+  }
+  #mobile-logo-black img {
+    width: 40%;
+    filter: invert(1);
+  }
+  #navbar-black #mode-black {
+    display: none;
   }
   #mode {
     display: none;
@@ -921,7 +930,7 @@ h5 span {
 
   #navigation {
     padding: 4vw 7vw;
-}
+  }
 
   #leftm {
     display: none;
@@ -958,7 +967,83 @@ h5 span {
   }
   #nav-btm {
     height: auto;
-    padding:6vw 7vw;
+    padding: 6vw 7vw;
   }
-  
+
+  #page1 {
+    height: 45vh;
+    padding: 0 3.5vw;
+  }
+
+  #page1 h2 {
+    width: 100%;
+    font-size: 7.5vw;
+  }
+  #page1 .explore-btn {
+    margin: 10vw 0;
+    gap: 3.5vw;
+  }
+  #page1 .explore-btn h3 {
+    font-size: 4.5vw;
+  }
+
+  #page2 {
+    height: 25vh;
+  }
+
+  #page3 {
+    flex-direction: column;
+  }
+  #slide1 {
+    width: 100%;
+  }
+  #slide1 h5 {
+    width: 100%;
+    margin: 10vw 0;
+  }
+  #slide2 {
+    width: 100%;
+  }
+
+  .accordion-title {
+    padding: 5vw 1vw;
+  }
+
+  .accordion-title h2 {
+    font-family: para2;
+    /* font-size: 1.1vw; */
+    font-size: 1.125rem;
+    line-height: 1.35;
+    font-weight: 500;
+    color: var(--secondary);
+  }
+  .accordion-dec h5 {
+    width: 100%;
+  }
+  .accordion.active .accordion-dec {
+    height: 75vw;
+  }
+  .accordion .marketing-accordion-dec h5 {
+    width: 100%;
+  }
+  .accordion.active .marketing-accordion-dec {
+    height: 128vw !important;
+  }
+
+  #page4 {
+    justify-content: flex-start;
+    padding: 10vh 3.5vw;
+    min-height: 40vh;
+  }
+
+  #works {
+    width: 100%;
+    overflow-x: auto;
+    gap: 6vw;
+  }
+  #works .work {
+    width: 90%;
+    height: 50vh;
+    flex-shrink: 0;
+}
 }

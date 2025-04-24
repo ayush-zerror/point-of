@@ -792,6 +792,7 @@ h6 {
   }
   #mobile-logo {
     display: block;
+    filter: invert(1);
   }
   #mode {
     display: none;

@@ -868,10 +868,14 @@ h6 {
 }
 #mobile-logo img {
   width: 40%;
+  filter: invert(1);
 }
 
 @media (max-width: 600px) {
   #navbar {
+    padding: 10vw 7vw;
+  }
+  #navbar-black{
     padding: 10vw 7vw;
   }
   #navbar #menu {
@@ -879,14 +883,29 @@ h6 {
     width: 5.5vw;
     background-color: var(--secondary);
   }
-  #navbar #logo {
+  #navbar-black #menu-black{
+    height: 5.5vw;
+    width: 5.5vw;
+    background-color: var(--secondary);
+  }
+  #navbar #logo ,#navbar-black #logo-black {
     display: none;
   }
-  #logo {
+  #logo ,#logo-black{
     display: none;
   }
   #mobile-logo {
     display: block;
+  }
+  #mobile-logo-black {
+    display: block;
+  }
+  #mobile-logo-black img {
+    width: 40%;
+    filter: invert(1);
+  }
+  #navbar-black #mode-black {
+    display: none;
   }
   #mode {
     display: none;
@@ -964,6 +983,7 @@ h6 {
     flex-direction: column;
     justify-content: start;
     align-items: start;
+    gap: 8vw;
   }
   #rts .service {
     width: 100%;
