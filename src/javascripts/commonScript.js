@@ -31,6 +31,32 @@ gsap.to(window, {
 })
 
 
+function scrollToHashElement() {
+  const hash = window.location.hash;
+  if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+          lenis.scrollTo(target, {
+              offset: -60, // adjust if you have fixed headers
+              duration: 1.2,
+              easing: (t) => 1 - Math.pow(1 - t, 4), // smooth easing
+          });
+      }
+  }
+}
+
+// Run after page load (for direct links with #)
+window.addEventListener("load", () => {
+  setTimeout(scrollToHashElement, 100); // small delay helps if DOM is rendering
+});
+
+// Also run if the hash changes (e.g., user clicks a link)
+window.addEventListener("hashchange", () => {
+  setTimeout(scrollToHashElement, 100);
+});
+
+
+
 
 // const cursor = document.querySelector("#cursor")
 // window.addEventListener("mousemove", function (e) {

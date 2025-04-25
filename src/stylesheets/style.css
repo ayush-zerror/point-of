@@ -811,6 +811,7 @@ h6 {
   left: 50%;
   border-radius: 50%;
   border: 1px solid white;
+  mix-blend-mode: difference;
 }
 
 #content-page3 {

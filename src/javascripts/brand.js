@@ -366,6 +366,9 @@ const yearData = [
 
 
 
+
+function numberIncreaseAnimtion(){
+    
 var tl = gsap.timeline({
     scrollTrigger: {
         trigger: "#page2",
@@ -406,7 +409,27 @@ tl
     }, "a")
 
 
+}
+numberIncreaseAnimtion()
 
+document.querySelectorAll(".logo-brand").forEach((logo)=>{
+    var logotl = gsap.timeline({
+        scrollTrigger:{
+            trigger:logo,
+            scroller: "body",
+            start: "top 85%",
+            end: "top 70%",
+            // scrub: 1,
+            // markers:true
+        }
+    })
+    logotl.fromTo(logo,{
+        opacity:0
+    },{
+        opacity:1,
+        duration:.3
+    })
+})
 //for rendering data of name data
 data.forEach((d, index) => {
     // Create brand div
@@ -422,7 +445,7 @@ data.forEach((d, index) => {
     projectName.textContent = d.projectName;
     serviceHeading.textContent = d.service;
     serviceDiv.appendChild(projectName);
-    serviceDiv.appendChild(serviceHeading);
+    // serviceDiv.appendChild(serviceHeading);
 
     // Create rit div
     const ritDiv = document.createElement("div");
@@ -478,9 +501,9 @@ data.forEach((d, index) => {
     const projectName = document.createElement("h5");
     const serviceHeading = document.createElement("h5");
     projectName.textContent = d.projectName;
-    serviceHeading.textContent = d.service;
+    // serviceHeading.textContent = d.service;
     serviceDiv.appendChild(projectName);
-    serviceDiv.appendChild(serviceHeading);
+    // serviceDiv.appendChild(serviceHeading);
 
     // Create rit div
     const ritDiv = document.createElement("div");
@@ -596,7 +619,7 @@ data.forEach((d, index) => {
     projectName.textContent = d.projectName;
     serviceHeading.textContent = d.service;
     serviceDiv.appendChild(projectName);
-    serviceDiv.appendChild(serviceHeading);
+    // serviceDiv.appendChild(serviceHeading);
 
     // Create rit div
     const ritDiv = document.createElement("div");
@@ -749,7 +772,7 @@ brandHoverAnimation()
 //giving active class to current category and removing from others
 function filtering() {
     const capsule = document.querySelectorAll(".capsule")
-    const page4Height = window.innerHeight * 3 + (window.innerHeight / 3)
+    const page4Height = window.innerHeight * 3 
     capsule.forEach(function (c) {
         c.addEventListener("click", function () {
             // Initialize previousCategory to null for each click
@@ -818,3 +841,41 @@ function filtering() {
 
 }
 filtering()
+
+
+
+document.querySelectorAll("#page5 .right5 h2").forEach(function(h2) {
+    h2.addEventListener("click", function() {
+        console.log("clicked");
+        
+        document.querySelector("#page6").scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+});
+
+
+function footerNavSwitch() {
+
+    var ftl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#footer",
+            scroller: "body",
+            start: "top 60%",
+            end: "top 0%",
+            scrub: 1,
+        }
+    })
+    ftl
+        .to("#navbar", {
+            opacity: 0,
+            pointerEvent: "none",
+            duration: .5
+        }, "a")
+        .to("#navbar-black", {
+            opacity: 1,
+            pointerEvent: "all",
+            duration: .5
+        }, "a")
+
+
+}
+footerNavSwitch()

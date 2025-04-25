@@ -359,3 +359,151 @@ function page3NavSwitch() {
 page3NavSwitch()
 
 
+
+function approachAnimation() {
+
+    var aptl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#page4",
+            scroller: "body",
+            start: "top top",
+            end: "top -350%",
+            scrub: 1,
+            // markers: true,
+            pin: true
+        }
+    });
+
+    aptl
+        // STEP 1
+        .fromTo(".apr-circle1", {
+            backgroundColor: "rgb(46, 46, 46)",
+            borderColor: "rgb(46, 46, 46)",
+        }, {
+            backgroundColor: "var(--secondary)",
+            borderColor: "var(--secondary)",
+            duration: 0.3
+        }, "a")
+        .fromTo(".approach1", {
+            opacity: 0,
+            y: 50
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5
+        }, "a")
+
+        // STEP 2
+        .fromTo(".approach2", {
+            opacity: 0,
+            y: 50
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5
+        }, "b")
+        .fromTo(".step-loader-bar", {
+            width: "0%",
+        }, {
+            width: "50%",
+            duration: 0.5
+        }, "b")
+        .fromTo(".apr-circle2", {
+            backgroundColor: "rgb(46, 46, 46)",
+            borderColor: "rgb(46, 46, 46)",
+        }, {
+            backgroundColor: "var(--secondary)",
+            borderColor: "var(--secondary)",
+            duration: 0.2,
+            delay: .5
+        }, "b")
+
+        // STEP 3
+        .fromTo(".approach3", {
+            opacity: 0,
+            y: 50
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5
+        }, "c")
+        .fromTo(".step-loader-bar", {
+            width: "50%",
+        }, {
+            width: "100%",
+            duration: 0.5
+        }, "c")
+        .fromTo(".apr-circle3", {
+            backgroundColor: "rgb(46, 46, 46)",
+            borderColor: "rgb(46, 46, 46)",
+        }, {
+            backgroundColor: "var(--secondary)",
+            borderColor: "var(--secondary)",
+            duration: 0.2,
+            delay: .5
+        }, "c")
+
+        // STEP 4
+
+        .fromTo("#approach-content h5, #page4 >h2 , .step-loader-bar", {
+            opacity: 1
+        }, {
+            opacity: 0,
+            duration: .5
+        }, "d")
+        .fromTo("#step-three", {
+            backgroundColor: "rgb(46, 46, 46)",
+        }, {
+            backgroundColor: "transparent",
+            duration: 0.5,
+        }, "d")
+    const page4 = document.querySelector("#page4");
+    const circles = document.querySelectorAll(".aprCir");
+    const h2s = document.querySelectorAll("#approach-content h2");
+
+    // Get center of page4
+    const page4Rect = page4.getBoundingClientRect();
+    const centerX = page4Rect.left + page4Rect.width / 2 + window.scrollX;
+    const centerY = page4Rect.top + page4Rect.height / 2 + window.scrollY;
+
+    const offsets = [
+        { x: -80, y: -40 },
+        { x: 80, y: -40 },
+        { x: 0, y: 80 }
+    ];
+
+    circles.forEach((circle, i) => {
+        aptl.to(circle, {
+            x: centerX - (circle.getBoundingClientRect().left + circle.offsetWidth / 2 + window.scrollX) + offsets[i].x,
+            y: centerY - (circle.getBoundingClientRect().top + circle.offsetHeight / 2 + window.scrollY) + offsets[i].y,
+            width: "30vw",
+            height: "30vw",
+            backgroundColor: "transparent",
+            transform: "translate(-50%, -50%)",
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.5
+        }, "d");
+    });
+
+    // Animate the h2 text stack
+    // Animate the h2 elements
+    h2s.forEach((h2, i) => {
+        const rect = h2.getBoundingClientRect();
+        const h2X = rect.left + rect.width / 2 + window.scrollX;
+        const h2Y = rect.top + rect.height / 2 + window.scrollY;
+
+        const deltaX = centerX - h2X;
+        const deltaY = centerY - h2Y;
+
+        aptl.to(h2, {
+            x: deltaX,
+            y: deltaY + i * 60,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: .5
+        }, "d");
+    });
+
+}
+approachAnimation()
