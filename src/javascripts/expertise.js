@@ -377,8 +377,8 @@ function approachAnimation() {
     aptl
         // STEP 1
         .fromTo(".apr-circle1", {
-            backgroundColor: "rgb(46, 46, 46)",
-            borderColor: "rgb(46, 46, 46)",
+            backgroundColor: "var(--light-line)",
+            borderColor: "var(--light-line)",
         }, {
             backgroundColor: "var(--secondary)",
             borderColor: "var(--secondary)",
@@ -409,8 +409,8 @@ function approachAnimation() {
             duration: 0.5
         }, "b")
         .fromTo(".apr-circle2", {
-            backgroundColor: "rgb(46, 46, 46)",
-            borderColor: "rgb(46, 46, 46)",
+            backgroundColor: "var(--light-line)",
+            borderColor: "var(--light-line)",
         }, {
             backgroundColor: "var(--secondary)",
             borderColor: "var(--secondary)",
@@ -434,8 +434,8 @@ function approachAnimation() {
             duration: 0.5
         }, "c")
         .fromTo(".apr-circle3", {
-            backgroundColor: "rgb(46, 46, 46)",
-            borderColor: "rgb(46, 46, 46)",
+            backgroundColor: "var(--light-line)",
+            borderColor: "var(--light-line)",
         }, {
             backgroundColor: "var(--secondary)",
             borderColor: "var(--secondary)",
@@ -452,7 +452,7 @@ function approachAnimation() {
             duration: .5
         }, "d")
         .fromTo("#step-three", {
-            backgroundColor: "rgb(46, 46, 46)",
+            backgroundColor: "var(--light-line)",
         }, {
             backgroundColor: "transparent",
             duration: 0.5,

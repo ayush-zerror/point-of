@@ -44,6 +44,7 @@
   --primary: #f2f2ee;
   --secondary: #000;
   --invert-filter: invert(0);
+  --light-line:#cbcbcb;
 }
 
 * {
@@ -748,14 +749,14 @@ h6 {
 #step-three{
   width: 77%;
   height: 2px;
-  background-color: rgb(46, 46, 46);
+  background-color: var(--light-line);
   margin: 6vw 0 4vw;
   position: relative;
 }
 .step-loader-bar{
   width: 0%;
   height: 100%;
-  background-color: white;
+  background-color: var(--secondary);
   left: 0%; 
 }
 #step-three .aprCir{
@@ -769,18 +770,18 @@ h6 {
 }
 .apr-circle1{
   left: 0;
-  background-color: rgb(46, 46, 46);
-  border: 1px solid rgb(46, 46, 46);
+  background-color: var(--light-line);
+  border: 1px solid var(--light-line);
 }
 .apr-circle2{
   left: 50%;
-  background-color: rgb(46, 46, 46);
-  border: 1px solid rgb(46, 46, 46);
+  background-color: var(--light-line);
+  border: 1px solid var(--light-line);
 }
 .apr-circle3{
   left: calc(100% - .8vw);
-  background-color: rgb(46, 46, 46);
-  border: 1px solid rgb(46, 46, 46);
+  background-color: var(--light-line);
+  border: 1px solid var(--light-line);
 }
 #approach-content{
   width: 100%;

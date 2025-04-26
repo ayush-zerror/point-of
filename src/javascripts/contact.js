@@ -87,8 +87,13 @@ accordions.forEach(accordion => {
 
 
 const popup = document.querySelector("#popup-apply")
+const jobTitle = document.querySelector("#job-title")
 document.querySelectorAll(".apply-job").forEach(function (btn) {
+
     btn.addEventListener("click", function (e) {
+        var jobType = btn.dataset.job
+        console.log(jobType);
+        jobTitle.textContent = jobType
         gsap.set(popup, { display: "block" })
         gsap.to(popup, {
             opacity: 1,
@@ -101,8 +106,7 @@ document.querySelectorAll(".apply-job").forEach(function (btn) {
     })
 })
 
-
-document.querySelector(".popup-close").addEventListener("click", function (e) {
+function closeJobPopup() {
     var tl = gsap.timeline()
     gsap.set(popup, { display: "block" })
     tl
@@ -117,8 +121,23 @@ document.querySelector(".popup-close").addEventListener("click", function (e) {
                 gsap.set(popup, { display: "none" })
             }
         }, "a")
+}
 
-})
+
+const popupApply = document.querySelector("#popup-apply");
+const applyForm = document.querySelector("#apply-form");
+const popupClose = document.querySelector(".popup-close");
+
+popupClose.addEventListener("click", function (e) {
+    closeJobPopup();
+});
+
+popupApply.addEventListener("click", function (e) {
+    // Only close if the click is outside of #apply-form
+    if (!applyForm.contains(e.target)) {
+        closeJobPopup();
+    }
+});
 
 
 function clock() {
@@ -175,54 +194,54 @@ document.addEventListener("DOMContentLoaded", function () {
     splide.mount(window.splide.Extensions); // Only mount once
 });
 
-function contactNavSwitch(){
-    
-var ntl = gsap.timeline({
-    scrollTrigger: {
-        trigger: "#image-slider",
-        scroller: "body",
-        start: "top 0%",
-        end: "top -100%",
-        scrub: 1,
-        pin: true,
-    }
-})
-ntl
-    .to("#contact-form", {
-        top: "0%",
-    }, "a")
-    .to("#navbar", {
-        opacity: 0,
-        pointerEvent: "none",
-        duration: .2
-    }, "a")
-    .to("#navbar-black", {
-        opacity: 1,
-        pointerEvent: "all",
-        duration: .2
-    }, "a")
+function contactNavSwitch() {
+
+    var ntl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#image-slider",
+            scroller: "body",
+            start: "top 0%",
+            end: "top -100%",
+            scrub: 1,
+            pin: true,
+        }
+    })
+    ntl
+        .to("#contact-form", {
+            top: "0%",
+        }, "a")
+        .to("#navbar", {
+            opacity: 0,
+            pointerEvent: "none",
+            duration: .2
+        }, "a")
+        .to("#navbar-black", {
+            opacity: 1,
+            pointerEvent: "all",
+            duration: .2
+        }, "a")
 
 
-var tl22 = gsap.timeline({
-    scrollTrigger: {
-        trigger: "#career",
-        scroller: "body",
-        start: "top 0%",
-        end: "top -100%",
-        scrub: 1,
-    }
-})
-tl22
-    .to("#navbar-black", {
-        opacity: 0,
-        pointerEvent: "none",
-        duration: .2
-    }, "b")
-    .to("#navbar", {
-        opacity: 1,
-        pointerEvent: "all",
-        duration: .2
-    }, "b")
+    var tl22 = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#career",
+            scroller: "body",
+            start: "top 0%",
+            end: "top -100%",
+            scrub: 1,
+        }
+    })
+    tl22
+        .to("#navbar-black", {
+            opacity: 0,
+            pointerEvent: "none",
+            duration: .2
+        }, "b")
+        .to("#navbar", {
+            opacity: 1,
+            pointerEvent: "all",
+            duration: .2
+        }, "b")
 }
 contactNavSwitch()
 
@@ -269,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var countryCode = iti.getSelectedCountryData().dialCode;
         console.log("Selected Country Code: +" + countryCode);
     });
- 
+
 });
 
 // custom dropdown

@@ -118,7 +118,8 @@ function logo() {
       delay: -.2
     },"s")
 }
-logo()
+// logo()
+window.addEventListener("load", logo);
 
 function logoBlack() {
 
@@ -169,7 +170,8 @@ function logoBlack() {
       delay: -.2
     },"s")
 }
-logoBlack()
+// logoBlack()
+window.addEventListener("load", logoBlack);
 
 
 function menuOpen() {
@@ -330,6 +332,7 @@ function darkMode() {
       root.style.setProperty("--secondary", "#f2f2ee");
       root.style.setProperty("--back", "rgba(255, 255, 255, 0.473)");
       root.style.setProperty("--invert-filter", "invert(1)");
+      root.style.setProperty("--light-line", "#3b3b3b");
       modeButton.classList.remove("ri-sun-line", "ri-sun-fill");
       modeButton.classList.add("ri-moon-line");
       navbar.style.background = `linear-gradient(
@@ -356,6 +359,7 @@ function darkMode() {
       root.style.setProperty("--secondary", "#000");
       root.style.setProperty("--back", "rgba(0, 0, 0, 0.473)");
       root.style.setProperty("--invert-filter", "invert(0)");
+      root.style.setProperty("--light-line", "#cbcbcb");
       modeButton.classList.remove("ri-moon-line", "ri-moon-fill");
       modeButton.classList.add("ri-sun-line");
       navbar.style.background = `linear-gradient(

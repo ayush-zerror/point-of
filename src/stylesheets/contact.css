@@ -1018,7 +1018,7 @@ h6 {
   padding: 0;
   color: var(--secondary);
 }
-.apply-job {
+.apply-job,#submit-btn {
   height: 3vw;
   width: 100%;
   background-color: var(--secondary);
@@ -1027,8 +1027,19 @@ h6 {
   justify-content: center;
   cursor: pointer;
 }
+#submit-btn{
+  background-color: #fff !important;
+  margin-bottom: 2vw;
+}
+#submit-btn h3{
+  font-family: para3;
+  font-size: 1vw;
+  line-height: 1.5;
+  font-weight: 500;
+  color: black !important;
+}
 
-.apply-job h3 {
+.apply-job h3{
   font-family: para3;
   font-size: 1vw;
   line-height: 1.5;

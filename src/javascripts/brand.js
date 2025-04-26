@@ -369,16 +369,17 @@ const yearData = [
 
 function numberIncreaseAnimtion(){
     
-var tl = gsap.timeline({
-    scrollTrigger: {
-        trigger: "#page2",
-        scroller: "body",
-        start: "top 70%",
-        end: "top 55%",
-        scrub: 1,
-        // markers:true
-    }
-})
+// var tl = gsap.timeline({
+//     scrollTrigger: {
+//         trigger: "#page2",
+//         scroller: "body",
+//         start: "top 70%",
+//         end: "top 55%",
+//         scrub: 1,
+//         // markers:true
+//     }
+// })
+var tl = gsap.timeline()
 
 tl
     .to(".numbers4", {
