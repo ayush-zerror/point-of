@@ -22,6 +22,11 @@ const headerData = [
   "creative disruption?",
   "emotional design?",
   "design thinking?",
+  "design ethics?",
+  "design for social impact?",
+  "beauty in functional design?",
+  "AI as a creative partner?",
+  "emotion in brand design?"
 ];
 
 const changingHeader = document.querySelector(".thirdh");
