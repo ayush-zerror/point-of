@@ -665,6 +665,7 @@ h6 {
 }
 .toph h1{
   position: absolute;
+  white-space: nowrap;
 }
 
 #page1 h1 {
@@ -682,6 +683,7 @@ h6 {
   text-transform: uppercase;
   color: gray;
   opacity: 0;
+   white-space: nowrap;
 }
 #page1 span{
   font-family: heading5;
@@ -692,7 +694,7 @@ h6 {
 }
 #title-hero {
   bottom: 0%;
-  width: fit-content;
+  /* width: fit-content; */
   height: 4.5vw;
   overflow: hidden;
   position: absolute;
@@ -704,6 +706,7 @@ h6 {
   top:100%;
   line-height: 1;
   width: 100%;
+  white-space: nowrap;
 }
 #title-hero h1:nth-child(1){
   top: 0;

@@ -10,16 +10,55 @@ var swiper = new Swiper(".mySwiper", {
   speed: 600, // Adjust slide transition speed
 });
 
+gsap.registerPlugin(TextPlugin);
+
+const headerData = [
+  "creativity? ",
+  "design innovation?",
+  "circular design?",
+  "storytelling?",
+  "brand loyalty?",
+  "human-centered design?",
+  "creative disruption?",
+  "emotional design?",
+  "design thinking?",
+];
+
+const changingHeader = document.querySelector(".thirdh");
+let index = 0;
+
+// Function to change header text with a typewriter effect
+function changeHeader() {
+  gsap.to(changingHeader, {
+    duration: 1.5,           // Total time for the typing effect
+    text: headerData[index],  // Text to type
+    ease: "none",            // No easing, for smooth typing
+    onComplete: () => {
+      // After typing the text, move to the next index after a brief pause
+      setTimeout(() => {
+        index = (index === headerData.length - 1) ? 0 : index + 1;
+        changeHeader();  // Start the next text change
+      }, 2000);  // Pause for 1 second after typing before switching
+    }
+  });
+}
+
+
 function loader() {
   document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll("#title-hero h1").forEach(function (h) {
-      var clutter = ""
+      let clutter = "";
       h.textContent.split("").forEach(function (l) {
-        clutter += `<span>${l}</span>`
-      })
-      h.innerHTML = clutter
-    })
+        if (l === " ") {
+          clutter += `<span>&nbsp;</span>`; // Use &nbsp; for non-breaking space
+        } else {
+          clutter += `<span>${l}</span>`;
+        }
+      });
+      h.innerHTML = clutter;
+    });
+    
 
 
 
@@ -112,7 +151,11 @@ function loader() {
         top: "50%",
         left: "50%",
         transform: "translate(-50%,-50%)",
-
+        onComplete: () => {
+          gsap.set(".thirdh",{top:0})
+          // Once the first animation is complete, start the text-changing animation
+          changeHeader();
+        }
       })
 
 
