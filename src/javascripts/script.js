@@ -164,14 +164,14 @@ function loader() {
       })
 
 
-    window.addEventListener("mousemove", function (e) {
-      gsap.to("#page1-over", {
-        top: window.innerHeight / 2 - (e.clientY - window.innerHeight / 2) * 0.3,
-        left: window.innerWidth / 2 - (e.clientX - window.innerWidth / 2) * 0.3,
-        duration: 1.2, // Smooth slow effect
-        ease: "power2.out",
-      });
-    });
+    // window.addEventListener("mousemove", function (e) {
+    //   gsap.to("#page1-over", {
+    //     top: window.innerHeight / 2 - (e.clientY - window.innerHeight / 2) * 0.3,
+    //     left: window.innerWidth / 2 - (e.clientX - window.innerWidth / 2) * 0.3,
+    //     duration: 1.2, // Smooth slow effect
+    //     ease: "power2.out",
+    //   });
+    // });
 
   })
 
