@@ -1440,45 +1440,56 @@ function correctRadius (radius) {
     return radius;
 }
 
-window.addEventListener('mousemove', e => {
+document.addEventListener('mousemove', e => {
     console.log("hey");
-    
-    let posX = scaleByPixelRatio(e.offsetX);
-    let posY = scaleByPixelRatio(e.offsetY);
+
+    const rect = canvas.getBoundingClientRect();
+    const posX = scaleByPixelRatio(e.clientX - rect.left);
+    const posY = scaleByPixelRatio(e.clientY - rect.top);
 
     let pointer = pointers.find(p => p.id === -1);
     if (!pointer) {
         pointer = new pointerPrototype();
-        pointers.push(pointer); // Make sure it's added to the list
+        pointers.push(pointer);
     }
 
     updatePointerMoveData(pointer, posX, posY);
 });
 
 
-window.addEventListener('touchstart', e => {
+document.addEventListener('touchstart', e => {
     e.preventDefault();
+
     const touches = e.targetTouches;
+    const rect = canvas.getBoundingClientRect(); // <- get canvas position
+
     while (touches.length >= pointers.length)
         pointers.push(new pointerPrototype());
+
     for (let i = 0; i < touches.length; i++) {
-        let posX = scaleByPixelRatio(touches[i].pageX);
-        let posY = scaleByPixelRatio(touches[i].pageY);
+        let posX = scaleByPixelRatio(touches[i].clientX - rect.left);
+        let posY = scaleByPixelRatio(touches[i].clientY - rect.top);
         updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
     }
-});
+}, { passive: false }); // passive: false is needed for e.preventDefault to work
 
-window.addEventListener('touchmove', e => {
-    e.preventDefault();
+
+document.addEventListener('touchmove', e => {
+    e.preventDefault(); // still needed to prevent scrolling
+
     const touches = e.targetTouches;
+    const rect = canvas.getBoundingClientRect(); // canvas position in viewport
+
     for (let i = 0; i < touches.length; i++) {
         let pointer = pointers[i + 1];
         if (!pointer.down) continue;
-        let posX = scaleByPixelRatio(touches[i].pageX);
-        let posY = scaleByPixelRatio(touches[i].pageY);
+
+        let posX = scaleByPixelRatio(touches[i].clientX - rect.left);
+        let posY = scaleByPixelRatio(touches[i].clientY - rect.top);
         updatePointerMoveData(pointer, posX, posY);
     }
-}, false);
+}, { passive: false });
+
 
 window.addEventListener('touchend', e => {
     const touches = e.changedTouches;
