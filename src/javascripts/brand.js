@@ -367,56 +367,103 @@ const yearData = [
 
 
 
-function numberIncreaseAnimtion(){
-    
-// var tl = gsap.timeline({
-//     scrollTrigger: {
-//         trigger: "#page2",
-//         scroller: "body",
-//         start: "top 70%",
-//         end: "top 55%",
-//         scrub: 1,
-//         // markers:true
-//     }
-// })
-var tl = gsap.timeline()
+function numberIncreaseAnimtion() {
 
-tl
-    .to(".numbers4", {
-        y: "-400%"
-    }, "a")
+    // var tl = gsap.timeline({
+    //     scrollTrigger: {
+    //         trigger: "#page2",
+    //         scroller: "body",
+    //         start: "top 70%",
+    //         end: "top 55%",
+    //         scrub: 1,
+    //         // markers:true
+    //     }
+    // })
+    var tl = gsap.timeline()
 
-    .to(".numbers33", {
-        y: "-1200%"
-    }, "a")
+    tl
+        .to(".numbers4", {
+            y: "-400%"
+        }, "a")
 
-    .to(".numbers3", {
-        y: "-100%"
-    }, "a")
-    .to(".numbers2", {
-        y: "-500%"
-    }, "a")
-    .to(".numbers22", {
-        y: "-1200%"
-    }, "a")
-    .to(".numbers222", {
-        y: "-2000%"
-    }, "a")
-    .to(".numbers1", {
-        y: "-400%"
-    }, "a")
-    .to(".numbers11", {
-        y: "-1000%"
-    }, "a")
+        .to(".numbers33", {
+            y: "-1200%"
+        }, "a")
+
+        .to(".numbers3", {
+            y: "-100%"
+        }, "a")
+        .to(".numbers2", {
+            y: "-500%"
+        }, "a")
+        .to(".numbers22", {
+            y: "-1200%"
+        }, "a")
+        .to(".numbers222", {
+            y: "-2000%"
+        }, "a")
+        .to(".numbers1", {
+            y: "-400%"
+        }, "a")
+        .to(".numbers11", {
+            y: "-1000%"
+        }, "a")
+        .to(".line-count", {
+            width: "100%",
+            stagger: {
+                amount: .3
+            }
+        }, "a")
 
 
 }
 numberIncreaseAnimtion()
 
-document.querySelectorAll(".logo-brand").forEach((logo)=>{
+
+function page1Animation() {
+
+    var tl1 = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#page1",
+            scroller: "body",
+            start: "top top",
+            end: "top -150%",
+            scrub: 1,
+            // markers:true,
+            pin: true
+        }
+    })
+    tl1
+        .to(".line-fill", {
+            width: "100%",
+            stagger: .45
+        })
+        .to(".count-wrap", {
+            transform: "translateX(30%)",
+            stagger: {
+                amount: -.3
+            },
+            opacity: 0,
+            duration: .8
+        })
+        .to("#title-over h2", {
+            transform: "translateX(0%)",
+            opacity: 1,
+            stagger: {
+                amount: .2
+            },
+            duration: .8
+        })
+
+
+}
+page1Animation()
+
+
+document.querySelectorAll(".logo-brand").forEach((logo) => {
     var logotl = gsap.timeline({
-        scrollTrigger:{
-            trigger:logo,
+        scrollTrigger: {
+            trigger: logo,
             scroller: "body",
             start: "top 85%",
             end: "top 70%",
@@ -424,11 +471,11 @@ document.querySelectorAll(".logo-brand").forEach((logo)=>{
             // markers:true
         }
     })
-    logotl.fromTo(logo,{
-        opacity:0
-    },{
-        opacity:1,
-        duration:.3
+    logotl.fromTo(logo, {
+        opacity: 0
+    }, {
+        opacity: 1,
+        duration: .3
     })
 })
 //for rendering data of name data
@@ -773,7 +820,7 @@ brandHoverAnimation()
 //giving active class to current category and removing from others
 function filtering() {
     const capsule = document.querySelectorAll(".capsule")
-    const page4Height = window.innerHeight * 3 
+    const page4Height = window.innerHeight * 4
     capsule.forEach(function (c) {
         c.addEventListener("click", function () {
             // Initialize previousCategory to null for each click
@@ -810,14 +857,14 @@ function filtering() {
                 c.classList.add("active");
                 c.querySelector("h6").textContent = 'Click to reset'
             }
-
+            document.querySelector("#page4").scrollIntoView({behavior:"smooth"})
             // Scroll animation using GSAP
             var tl = gsap.timeline();
             tl
-                .to(window, {
-                    scrollTo: { y: page4Height, duration: 0.8 },
-                    ease: Power3.easeInOut
-                })
+                // .to(window, {
+                //     scrollTo: { y: page4Height, duration: 0.8 },
+                //     ease: Power3.easeInOut
+                // })
                 .to(divToRemove, {
                     paddingTop: "10vw",
                     opacity: 0,
@@ -845,10 +892,10 @@ filtering()
 
 
 
-document.querySelectorAll("#page5 .right5 h2").forEach(function(h2) {
-    h2.addEventListener("click", function() {
+document.querySelectorAll("#page5 .right5 h2").forEach(function (h2) {
+    h2.addEventListener("click", function () {
         console.log("clicked");
-        
+
         document.querySelector("#page6").scrollIntoView({ behavior: "smooth", block: "center" });
     });
 });

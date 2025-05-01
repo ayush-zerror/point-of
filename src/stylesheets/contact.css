@@ -541,7 +541,6 @@ h2 span {
 h5,
 h6 {
   font-family: para2;
-  /* font-size: 1.1vw; */
   font-size: 1.125rem;
   line-height: 1.35;
   font-weight: 500;
@@ -569,6 +568,8 @@ h6 {
   height: 100%;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid rgba(128, 128, 128, 0.384);
+  padding-top: 1vw;
 }
 .left-section {
   width: 30%;
@@ -586,6 +587,11 @@ h6 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.line-contact{
+  width: 100%;
+  height: 1px;
+  background-color: rgba(128, 128, 128, 0.384);
 }
 .right-section a {
   text-decoration: none;

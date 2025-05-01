@@ -1,14 +1,14 @@
-document.querySelectorAll(".text-splite").forEach((t) => {
-  var clutter = ""
-  t.textContent.split("").forEach((l) => {
-    if (l === " ") {
-      clutter += `<span>&nbsp;</span>`;
-    } else {
-      clutter += `<span>${l}</span>`;
-    }
-  })
-  t.innerHTML = clutter
-})
+// document.querySelectorAll(".text-splite").forEach((t) => {
+//   var clutter = ""
+//   t.textContent.split("").forEach((l) => {
+//     if (l === " ") {
+//       clutter += `<span>&nbsp;</span>`;
+//     } else {
+//       clutter += `<span>${l}</span>`;
+//     }
+//   })
+//   t.innerHTML = clutter
+// })
 
 function loader() {
   var ltl = gsap.timeline()
@@ -33,20 +33,28 @@ loader()
 
 
 function text() {
-  document.querySelectorAll(".text-splite").forEach(function (t) {
-    gsap.from(t.querySelectorAll("span"), {
-      y: 20,
-      opacity: 0,
-      stagger: .1,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: t,
-        scroller: "body",
-        start: "top 65%",
-        end: "top 45%",
-        scrub: 1,
-      }
-    })
+
+
+  let split = SplitText.create(".text-splite", {
+    type: "words, lines, chars"
+  });
+  
+  // Add custom class to each word span
+  split.words.forEach(word => word.classList.add("my-word"));
+  split.chars.forEach(char => char.classList.add("my-char"));
+
+  gsap.from(".my-char", {
+    y: 20,
+    opacity: 0,
+    stagger: .1,
+    duration: 1.5,
+    scrollTrigger: {
+      trigger: ".text-splite",
+      scroller: "body",
+      start: "top 65%",
+      end: "top 45%",
+      scrub: 1,
+    }
   })
 }
 text()

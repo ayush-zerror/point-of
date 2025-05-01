@@ -176,8 +176,6 @@ body {
   color: var(--secondary);
 }
 
-
-
 /* black nav */
 
 #navbar-black {
@@ -196,20 +194,20 @@ body {
   background: linear-gradient(
     180deg,
     #000000 0,
-    hsla(0, 0%, 0%, .987) 11%,  
-    hsla(0, 0%, 0%, .951) 20.8%, 
-    hsla(0, 0%, 0%, .896) 29.6%, 
-    hsla(0, 0%, 0%, .825) 37.5%, 
-    hsla(0, 0%, 0%, .741) 44.6%, 
-    hsla(0, 0%, 0%, .648) 51%,   
-    hsla(0, 0%, 0%, .55) 57%,    
-    hsla(0, 0%, 0%, .45) 62.5%,  
-    hsla(0, 0%, 0%, .352) 67.7%,  
-    hsla(0, 0%, 0%, .259) 72.7%,  
-    hsla(0, 0%, 0%, .175) 77.8%,  
-    hsla(0, 0%, 0%, .104) 82.9%,  
-    hsla(0, 0%, 0%, .049) 88.2%,  
-    hsla(0, 0%, 0%, .013) 93.9%,  
+    hsla(0, 0%, 0%, 0.987) 11%,
+    hsla(0, 0%, 0%, 0.951) 20.8%,
+    hsla(0, 0%, 0%, 0.896) 29.6%,
+    hsla(0, 0%, 0%, 0.825) 37.5%,
+    hsla(0, 0%, 0%, 0.741) 44.6%,
+    hsla(0, 0%, 0%, 0.648) 51%,
+    hsla(0, 0%, 0%, 0.55) 57%,
+    hsla(0, 0%, 0%, 0.45) 62.5%,
+    hsla(0, 0%, 0%, 0.352) 67.7%,
+    hsla(0, 0%, 0%, 0.259) 72.7%,
+    hsla(0, 0%, 0%, 0.175) 77.8%,
+    hsla(0, 0%, 0%, 0.104) 82.9%,
+    hsla(0, 0%, 0%, 0.049) 88.2%,
+    hsla(0, 0%, 0%, 0.013) 93.9%,
     hsla(0, 0%, 0%, 0)
   );
   color: white;
@@ -293,7 +291,6 @@ body {
   color: white;
 }
 /* black nav end */
-
 
 #navigation {
   height: 100vh;
@@ -545,10 +542,10 @@ h2 span {
 }
 h5,
 h6 {
-  font-family: para3;
-  font-size: 1.2vw;
-  line-height: 1.4;
-  font-weight: 400;
+  font-family: para2;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: 500;
   color: var(--secondary);
 }
 #main {
@@ -558,75 +555,94 @@ h6 {
 }
 
 #page1 {
-  height: 55vh;
-  width: 100%;
-  overflow: hidden;
-  padding: 2vw 3.8vw;
-  padding-top: 7vw;
-  padding-left: 28.5%;
-}
-
-#page1 h2 {
-  width: 100%;
-  margin-bottom: 0.6vw;
-}
-#page1 h5 {
-  width: 75%;
-}
-
-#page2 {
   height: 100vh;
   width: 100%;
-  padding: 2vw 3.8vw;
+  overflow: hidden;
+  padding: 3vw 3.8vw;
+  padding-top: 7vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: end;
 }
-#page2 #count {
+
+#page1 #title-over{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 70%;
+}
+#page1 #title-over h2{
+  transform: translateX(20%);
+  opacity: 0;
+}
+
+#page1 #count {
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-#page2 #count h1 {
+#page1 #count h1 {
   text-align: left;
   font-family: heading2;
   font-weight: 100;
   line-height: 1;
-  font-size: 8vw;
+  font-size: 5.5vw;
   color: var(--secondary);
 }
 
-#page2 .num {
+#page1 .num {
   overflow: hidden;
-  height: 8vw;
+  height: 5.5vw;
   display: flex;
   justify-content: flex-start;
   margin-bottom: 1.5vw;
 }
 
-#page2 #count p {
+#page1 #count p {
   font-family: para3;
-  font-size: 1.2vw;
+  font-size: 1vw;
   line-height: 1.4;
   font-weight: 400;
   color: var(--secondary);
   text-align: left;
 }
 
-#page2 #count h2 {
+.line-count{
+  width: 0%;
+  height: 1px;
+  background-color: rgba(128, 128, 128, 0.745);
+}
+
+.line-fill{
+  width: 0%;
+  height: 100%;
+  background-color: #fff;
+}
+#page1 #count .count-wrap h2 {
   font-family: heading5;
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 1.4;
   margin-bottom: 0.6vw;
   padding-top: 1.5vw;
-  border-top: 1px solid rgba(128, 128, 128, 0.745);
+  /* border-top: 1px solid rgba(128, 128, 128, 0.745); */
 }
 
-#page2 #count .count-wrap {
+#page1 #count .count-wrap {
   width: 20%;
 }
+
+#page2 {
+  height: 55vh;
+  width: 100%;
+  padding: 2vw 3.8vw;
+  display: flex;
+  align-items: end;
+}
+
 #page2 #legacy {
   width: 100%;
   display: flex;
@@ -638,7 +654,6 @@ h6 {
   width: 50%;
   font-size: 2vw;
 }
-
 #page3 {
   min-height: 100vh;
   width: 100%;
@@ -670,7 +685,7 @@ h6 {
   align-items: center;
   justify-content: center;
 }
-#page3 .logo-brand .cover h2{
+#page3 .logo-brand .cover h2 {
   font-family: heading4;
   font-size: 1.5vw;
   font-weight: 600;
@@ -686,7 +701,7 @@ h6 {
   justify-content: center;
   transition: all ease 0.8s;
 }
-#page3 .logo-brand:hover .logo-c{
+#page3 .logo-brand:hover .logo-c {
   opacity: 0;
 }
 #page3 .logo-c img {
@@ -710,11 +725,14 @@ h6 {
   width: 100%;
   min-height: 100vh;
   padding: 2vw 0;
+  scroll-margin-top: 100px;
 }
 #project-showcase {
   position: fixed;
   right: 2vw;
-  bottom: 2vw;
+  /* bottom: 2vw; */
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 9;
   width: 19vw;
   height: 12vw;
@@ -750,14 +768,17 @@ h6 {
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 #filter-brands #rt {
-  width: 50%;
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+#filter-brands #rt:nth-child(2) {
+  width: 60%;
 }
 
 #filter-brands .capsule {
@@ -820,7 +841,7 @@ h6 {
 .brand {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   transition: all ease 0.5s;
   cursor: pointer;
   padding: 0.2vw 3.8vw;
@@ -832,7 +853,7 @@ h6 {
   background-color: rgba(128, 128, 128, 0.799);
 }
 .brand .serv {
-  width: 50%;
+  width: 30%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -842,7 +863,7 @@ h6 {
   width: 50%;
 }
 .brand .rit {
-  width: 50%;
+  width: 60%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -874,7 +895,7 @@ h6 {
   padding-top: 2vw;
 }
 .year-wrp {
-  width: 96vw;
+  width: 92.4vw;
   display: flex;
   justify-content: end;
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
@@ -883,7 +904,8 @@ h6 {
 }
 
 .year-number {
-  width: calc((100% / 2) / 2);
+  /* width: calc((100% / 2) / 2); */
+  width: 40%;
 }
 
 .service-s {
@@ -969,7 +991,7 @@ h6 {
   display: flex;
   align-items: center;
 }
-#content-page5{
+#content-page5 {
   width: 100%;
   display: flex;
   align-items: start;
@@ -985,16 +1007,16 @@ h6 {
   font-size: 2vw !important;
   margin-bottom: 1.8vw;
 }
-#page5 .right5 h2 span{
+#page5 .right5 h2 span {
   font-size: 2vw !important;
   margin-left: 1vw;
-  padding-bottom: .5vw;
+  padding-bottom: 0.5vw;
 }
-#page5 .right5 h2 span:nth-child(1){
+#page5 .right5 h2 span:nth-child(1) {
   width: 2.5vw;
   display: inline-block;
   text-align: right;
-  opacity: .5;
+  opacity: 0.5;
 }
 #page6 {
   width: 100%;
@@ -1021,8 +1043,6 @@ h6 {
   width: fit-content;
   text-decoration: none;
 }
-
-
 
 #footer {
   position: relative;
@@ -1158,8 +1178,6 @@ h6 {
 #mobile-logo img {
   width: 40%;
 }
-
-
 
 @media (max-width: 600px) {
   #navbar {

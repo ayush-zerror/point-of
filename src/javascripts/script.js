@@ -385,12 +385,12 @@ function page2Animation() {
     },"a")
     .to("#navbar", {
       opacity: 0,
-      pointerEvent: "none",
+      pointerEvents: "none",
       duration: .2
     }, "a")
     .to("#navbar-black", {
       opacity: 1,
-      pointerEvent: "all",
+      pointerEvents: "all",
       duration: .2
     }, "a")
 
@@ -421,12 +421,12 @@ function page2Animation() {
     }, "a")
     .to("#navbar-black", {
       opacity: 0,
-      pointerEvent: "none",
+      pointerEvents: "none",
       duration: .2
     }, "b")
     .to("#navbar", {
       opacity: 1,
-      pointerEvent: "all",
+      pointerEvents: "all",
       duration: .2
     }, "b")
 
@@ -470,7 +470,7 @@ function pointMidAnimation() {
       trigger: "#page3",
       scroller: "body",
       start: "top top",
-      end: "+=3000",
+      end: "+=2000",
       scrub: true,
       pin: true,
     }
@@ -767,12 +767,12 @@ function page5Animation() {
   tl5s
     .to("#navbar", {
       opacity: 0,
-      pointerEvent: "none",
+      pointerEvents: "none",
       duration: .2
     }, "a")
     .to("#navbar-black", {
       opacity: 1,
-      pointerEvent: "all",
+      pointerEvents: "all",
       duration: .2
     }, "a")
 
@@ -839,12 +839,12 @@ function page6Animation() {
   tl6s
     .to("#navbar-black", {
       opacity: 0,
-      pointerEvent: "none",
+      pointerEvents: "none",
       duration: .2
     }, "a")
     .to("#navbar", {
       opacity: 1,
-      pointerEvent: "all",
+      pointerEvents: "all",
       duration: .2
     }, "a")
 }
@@ -866,13 +866,13 @@ function footerAnimation() {
   ft
     .to("#navbar", {
       opacity: 0,
-      pointerEvent: "none",
+      pointerEvents: "none",
       duration: .2
     }, "a")
     .to("#navbar-black", {
       opacity: 1,
       duration: .2,
-      pointerEvent: "all",
+      pointerEvents: "all",
     }, "a")
 }
 footerAnimation()
