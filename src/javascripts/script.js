@@ -32,23 +32,49 @@ const headerData = [
 const changingHeader = document.querySelector(".thirdh");
 let index = 0;
 
-// Function to change header text with a typewriter effect
-function changeHeader() {
-  gsap.fromTo(changingHeader, 
-    { text: "" }, // Start with empty string
-    { 
-      duration: 1.5,
-      text: headerData[index],
-      ease: "none",
-      onComplete: () => {
-        setTimeout(() => {
-          index = (index === headerData.length - 1) ? 0 : index + 1;
-          changeHeader(); // Recursive call to cycle texts
-        }, 2000); // Wait before typing next string
-      }
-    }
-  );
+function typeWriter(text, onComplete) {
+  let tl = gsap.timeline({ onComplete });
+
+  for (let i = 0; i <= text.length; i++) {
+    tl.to(changingHeader, {
+      text: text.substring(0, i),
+      duration: 0.05,
+      ease: "none"
+    });
+  }
+
+  return tl;
 }
+
+function backspaceText(currentText, onComplete) {
+  let tl = gsap.timeline({ onComplete });
+
+  for (let i = currentText.length; i >= 0; i--) {
+    tl.to(changingHeader, {
+      text: currentText.substring(0, i),
+      duration: 0.03,
+      ease: "none"
+    });
+  }
+
+  return tl;
+}
+
+function changeHeader() {
+  const currentText = changingHeader.textContent;
+  const nextText = headerData[index];
+
+  backspaceText(currentText, () => {
+    typeWriter(nextText, () => {
+      setTimeout(() => {
+        index = (index === headerData.length - 1) ? 0 : index + 1;
+        changeHeader();
+      }, 2000); // pause after typing before next backspace
+    });
+  });
+}
+changeHeader();
+
 
 function loader() {
   document.addEventListener('DOMContentLoaded', function () {
@@ -64,9 +90,6 @@ function loader() {
       });
       h.innerHTML = clutter;
     });
-    
-
-
 
     var loader = gsap.timeline()
 
@@ -179,7 +202,7 @@ function loader() {
 
 
 }
-loader()
+// loader()
 
 
 
@@ -388,7 +411,7 @@ function page2Animation() {
     .to(document.querySelectorAll("#page2-text span"), {
       opacity: 1,
       stagger: 0.2,
-    }, "a")
+    })
     .to("#circle2", {
       width: "1.5vw",
       height: "1.5vw",
@@ -455,24 +478,24 @@ function pointMidAnimation() {
 
   tl
 
-    .to("#right-content > h2", {
-      x: 300,
-      filter: "blur(4px)",
-      opacity: 0,
-      duration: .8,
-      stagger: {
-        amount: 0.2,
-      },
-      delay: .2
-    })
-    .to("#right-content-top > h2", {
-      transform: "translateX(0%)",
-      opacity: 1,
-      duration: .8,
-      stagger: {
-        amount: 0.2,
-      }
-    }, "bk")
+    // .to("#right-content > h2", {
+    //   x: 300,
+    //   filter: "blur(4px)",
+    //   opacity: 0,
+    //   duration: .8,
+    //   stagger: {
+    //     amount: 0.2,
+    //   },
+    //   delay: .2
+    // })
+    // .to("#right-content-top > h2", {
+    //   transform: "translateX(0%)",
+    //   opacity: 1,
+    //   duration: .8,
+    //   stagger: {
+    //     amount: 0.2,
+    //   }
+    // }, "bk")
     .to("#ser2,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,

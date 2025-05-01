@@ -1441,8 +1441,6 @@ function correctRadius (radius) {
 }
 
 document.addEventListener('mousemove', e => {
-    console.log("hey");
-
     const rect = canvas.getBoundingClientRect();
     const posX = scaleByPixelRatio(e.clientX - rect.left);
     const posY = scaleByPixelRatio(e.clientY - rect.top);
