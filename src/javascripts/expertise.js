@@ -116,6 +116,23 @@ function page3svgAnimation() {
                 duration: 1.5,
                 delay: 2.5
             }, "a")
+
+            var tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger:"#page3",
+                    scroller: "body",
+                    // markers: true,
+                    start: "100% 60%",
+                    end: "100% 0%",
+                    scrub: 1,
+                },
+            })
+            tl2
+            .to(circleGroup, {
+                y: "+=700", // or any value that makes it look like a fall
+                ease: "bounce.out", // optional for a bounce effect
+                duration: 1
+            })
     } else {
 
         const pathScrollerMobile = document.querySelector("#page3-mobile");

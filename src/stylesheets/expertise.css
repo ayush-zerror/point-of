@@ -714,16 +714,19 @@ h6 {
 }
 
 #page3 {
-  height: 110vh;
+  height: 100vh;
   padding: 0 3.8vw;
   padding-top: 10vh;
   width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: black;
+  position: relative;
+  z-index: 9;
 }
 #page3 #svg-container {
   width: 200vw;
   height: 200vh;
+  z-index: 999;
 }
 
 #page3-mobile {
@@ -736,11 +739,12 @@ h6 {
 #page4{
   width: 100%;
   height: 100vh;
-  background-color: var(--primary);
   padding: 2.3vw 3.8vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  z-index: 8;
 }
 #approach-wrap{
   width: 100%;

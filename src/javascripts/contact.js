@@ -300,14 +300,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const selected = dropdown.querySelector(".dropdown-selected");
         const optionsContainer = dropdown.querySelector(".dropdown-options");
         const options = dropdown.querySelectorAll(".dropdown-item");
-        const hiddenInput = dropdown.querySelector("input[type='hidden']");
+        const hiddenInput = dropdown.parentElement.querySelector("input[type='hidden']");
+
+        let otherInput = null; // Will be created dynamically if needed
 
         // Toggle dropdown
         selectedWrap.addEventListener("click", (event) => {
-            event.stopPropagation(); // Prevent immediate closure
+            event.stopPropagation();
             const isOpen = optionsContainer.style.display === "block";
-
-            closeAllDropdowns(); // Close others first
+            closeAllDropdowns();
 
             if (!isOpen) {
                 optionsContainer.style.display = "block";
@@ -318,15 +319,48 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Handle selection
+        // Handle option selection
         options.forEach(option => {
             option.addEventListener("click", (event) => {
                 event.stopPropagation();
-                selected.textContent = option.textContent;
+                const value = option.dataset.value;
 
-                if (hiddenInput) {
-                    hiddenInput.value = option.dataset.value;
+                // Remove existing inline input if any
+                if (otherInput) {
+                    otherInput.remove();
+                    otherInput = null;
+                    selected.textContent = ""; // Clear the div so new value can be set
                 }
+
+                if (option.textContent.trim().toLowerCase() === "other") {
+                    selected.textContent = "";
+                    otherInput = document.createElement("input");
+                    otherInput.type = "text";
+                    otherInput.placeholder = "Please specify...";
+                    otherInput.className = "inline-other-input";
+                    otherInput.style.border = "none";
+                    otherInput.style.background = "transparent";
+                    otherInput.style.outline = "none";
+                    otherInput.style.color = "var(--primary)";
+                    otherInput.style.opacity = "0.8";
+                    
+                
+                    selected.appendChild(otherInput);
+                    selected.style.opacity = "1"; // <-- Make sure it's fully visible
+                    dropdown.style.padding = "0";
+                    otherInput.focus();
+                
+                    otherInput.addEventListener("input", () => {
+                        hiddenInput.value = otherInput.value;
+                    });
+                
+                } else {
+                    dropdown.style.padding = "1vw 0";
+                    selected.textContent = option.textContent;
+                    selected.style.opacity = "1"; // <-- Ensure opacity for selected option
+                    hiddenInput.value = value;
+                }
+                
 
                 optionsContainer.style.display = "none";
                 selectedWrap.classList.remove("open");
@@ -334,9 +368,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Close all dropdowns when clicking outside
-    document.addEventListener("click", () => {
-        closeAllDropdowns();
+    // Prevent dropdown from closing when typing in inline input
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest(".custom-dropdown")) {
+            closeAllDropdowns();
+        }
     });
 
     function closeAllDropdowns() {
@@ -348,4 +384,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-

@@ -552,7 +552,7 @@ h6 {
   overflow: hidden;
 }
 #page1 {
-  height:100vh;
+  height: 100vh;
   width: 100%;
   padding: 8vw 3.8vw;
   padding-bottom: 2vw;
@@ -588,7 +588,7 @@ h6 {
   flex-direction: column;
   justify-content: space-between;
 }
-.line-contact{
+.line-contact {
   width: 100%;
   height: 1px;
   background-color: rgba(128, 128, 128, 0.384);
@@ -798,7 +798,7 @@ h6 {
 
 #right form .input.active h6 {
   top: 0%;
-  font-size: .9vw;
+  font-size: 0.9vw;
   opacity: 0.5;
 }
 #right form .input h6,
@@ -812,15 +812,15 @@ h6 {
   color: var(--primary);
   transition: all ease 0.3s;
   text-transform: capitalize;
-  opacity: .5;
+  opacity: 0.5;
 }
 #right form .textarea h6 {
   top: 15%;
 }
 #right form .textarea.active h6 {
   top: 0%;
-  font-size: .9vw;
-  opacity: .5;
+  font-size: 0.9vw;
+  opacity: 0.5;
 }
 #right form input {
   flex-shrink: 0;
@@ -831,6 +831,12 @@ h6 {
   color: var(--primary);
   outline: none;
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+}
+#right form input::placeholder{
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
 }
 #right form .textarea {
   width: 100%;
@@ -847,6 +853,8 @@ h6 {
   border: none;
   outline: none;
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
+  font-size: 1.1rem !important;
+  color: var(--primary);
 }
 
 #mobile-logo {
@@ -1024,7 +1032,8 @@ h6 {
   padding: 0;
   color: var(--secondary);
 }
-.apply-job,#submit-btn {
+.apply-job,
+#submit-btn {
   height: 3vw;
   width: 100%;
   background-color: var(--secondary);
@@ -1033,11 +1042,11 @@ h6 {
   justify-content: center;
   cursor: pointer;
 }
-#submit-btn{
+#submit-btn {
   background-color: #fff !important;
   margin-bottom: 2vw;
 }
-#submit-btn h3{
+#submit-btn h3 {
   font-family: para3;
   font-size: 1vw;
   line-height: 1.5;
@@ -1045,7 +1054,7 @@ h6 {
   color: black !important;
 }
 
-.apply-job h3{
+.apply-job h3 {
   font-family: para3;
   font-size: 1vw;
   line-height: 1.5;
@@ -1159,12 +1168,12 @@ h6 {
   color: white;
   transition: all ease 0.3s;
   text-transform: capitalize;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 #from-right form .pop-input.active h6 {
   top: 0%;
-  font-size: .9vw;
+  font-size: 0.9vw;
   opacity: 0.5;
 }
 
@@ -1708,9 +1717,11 @@ h6 {
   font-size: 1.125rem;
   line-height: 1.35;
   font-weight: 500;
+  padding: 1vw 0;
 }
+
 .last {
-  padding: 1vw 0 !important;
+  /* padding: 1vw 0 !important; */
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
 }
 
@@ -1722,7 +1733,7 @@ h6 {
   cursor: pointer;
   display: flex;
   align-items: center;
-  opacity: .5;
+  opacity: 0.5;
 }
 .dropdown-selected-wrap {
   width: 100%;
