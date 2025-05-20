@@ -65,6 +65,13 @@ function page3svgAnimation() {
         const circleGroup = [circle, circleShadow];
         const textElements = panel.querySelectorAll("text");
 
+        const finalPosition = path.getPointAtLength(path.getTotalLength());
+        const newCircle = document.querySelector("#path-c")
+
+
+        newCircle.style.width = `${circle.getBoundingClientRect().width}px`;
+        newCircle.style.height = `${circle.getBoundingClientRect().height}px`;
+
         gsap.set(textElements, { opacity: 0.2 });
         gsap.set(textElements[0], { opacity: 1 });
 
@@ -91,6 +98,17 @@ function page3svgAnimation() {
             duration: 4,
             ease: "none",
             onUpdate: () => {
+                // newCircle.style.left = `${circle.getBoundingClientRect().left}px`;
+                // newCircle.style.top = `${circle.getBoundingClientRect().top}px`;
+                const rect = circle.getBoundingClientRect();
+                gsap.set(newCircle, {
+                    x: rect.left,
+                    y: rect.top,
+                    duration: 0,
+                    ease: "none"
+                });
+
+
                 let circleX =
                     circle.getBoundingClientRect().left +
                     circle.getBoundingClientRect().width / 2;
@@ -104,8 +122,9 @@ function page3svgAnimation() {
                         1 - distanceX / (window.innerWidth / 2.2)
                     );
                     gsap.to(text, { opacity: opacity, immediateRender: false });
-                });
-            },
+                })
+
+            }
         }, "a")
             .to(panel, {
                 x: "-100vw",
@@ -116,23 +135,33 @@ function page3svgAnimation() {
                 duration: 1.5,
                 delay: 2.5
             }, "a")
+            .to([circle,circleShadow ],{
+                opacity:0,
+                duration:.3
+            },"b")
+            .to(newCircle,{
+                opacity:1,
+                duration:.3
+            },"b")
 
-            var tl2 = gsap.timeline({
-                scrollTrigger: {
-                    trigger:"#page3",
-                    scroller: "body",
-                    // markers: true,
-                    start: "100% 60%",
-                    end: "100% 0%",
-                    scrub: 1,
-                },
-            })
-            tl2
-            .to(circleGroup, {
-                y: "+=700", // or any value that makes it look like a fall
-                ease: "bounce.out", // optional for a bounce effect
-                duration: 1
-            })
+        const appCir = document.querySelector(".approach1")    
+
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger:"#page3",
+                scroller: "body",
+                // markers: true,
+                start: "100% 90%",
+                end: "100% 50%",
+                scrub: 1,
+            },
+        })
+        tl2
+        .to(newCircle, {
+            x:appCir.getBoundingClientRect().left,
+            opacity:0,
+            // y:appCir.getBoundingClientRect().top,
+        })
     } else {
 
         const pathScrollerMobile = document.querySelector("#page3-mobile");

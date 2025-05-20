@@ -330,6 +330,8 @@ function darkMode() {
     if (!mode) {
       root.style.setProperty("--primary", "#000");
       root.style.setProperty("--secondary", "#f2f2ee");
+      root.style.setProperty("--heading", "#c0bfbf");
+      root.style.setProperty("--para", "#717171");
       root.style.setProperty("--back", "rgba(255, 255, 255, 0.473)");
       root.style.setProperty("--invert-filter", "invert(1)");
       root.style.setProperty("--light-line", "#3b3b3b");
@@ -357,6 +359,8 @@ function darkMode() {
     } else {
       root.style.setProperty("--primary", "#F2F2EE");
       root.style.setProperty("--secondary", "#000");
+      root.style.setProperty("--heading", "#000");
+      root.style.setProperty("--para", "#000");
       root.style.setProperty("--back", "rgba(0, 0, 0, 0.473)");
       root.style.setProperty("--invert-filter", "invert(0)");
       root.style.setProperty("--light-line", "#cbcbcb");

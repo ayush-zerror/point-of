@@ -369,17 +369,17 @@ const yearData = [
 
 function numberIncreaseAnimtion() {
 
-    // var tl = gsap.timeline({
-    //     scrollTrigger: {
-    //         trigger: "#page2",
-    //         scroller: "body",
-    //         start: "top 70%",
-    //         end: "top 55%",
-    //         scrub: 1,
-    //         // markers:true
-    //     }
-    // })
-    var tl = gsap.timeline()
+    var tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#counter-section",
+            scroller: "body",
+            start: "top 70%",
+            end: "top 55%",
+            scrub: 1,
+            // markers:true
+        }
+    })
+    // var tl = gsap.timeline()
 
     tl
         .to(".numbers4", {
@@ -418,46 +418,6 @@ function numberIncreaseAnimtion() {
 
 }
 numberIncreaseAnimtion()
-
-
-function page1Animation() {
-
-    var tl1 = gsap.timeline({
-        scrollTrigger: {
-            trigger: "#page1",
-            scroller: "body",
-            start: "top top",
-            end: "top -150%",
-            scrub: 1,
-            // markers:true,
-            pin: true
-        }
-    })
-    tl1
-        .to(".line-fill", {
-            width: "100%",
-            stagger: .45
-        })
-        .to(".count-wrap", {
-            transform: "translateX(30%)",
-            stagger: {
-                amount: -.3
-            },
-            opacity: 0,
-            duration: .8
-        })
-        .to("#title-over h2", {
-            transform: "translateX(0%)",
-            opacity: 1,
-            stagger: {
-                amount: .2
-            },
-            duration: .8
-        })
-
-
-}
-page1Animation()
 
 
 document.querySelectorAll(".logo-brand").forEach((logo) => {

@@ -1,21 +1,10 @@
-// document.querySelectorAll(".text-splite").forEach((t) => {
-//   var clutter = ""
-//   t.textContent.split("").forEach((l) => {
-//     if (l === " ") {
-//       clutter += `<span>&nbsp;</span>`;
-//     } else {
-//       clutter += `<span>${l}</span>`;
-//     }
-//   })
-//   t.innerHTML = clutter
-// })
 
 function loader() {
   var ltl = gsap.timeline()
 
   ltl
     .to("#hero-img", {
-      transform: "translateY(40vh)",
+      transform: "translateY(13vh)",
       duration: .8,
       delay:.3,
      eease: "expo.in",
@@ -30,53 +19,25 @@ function loader() {
 loader()
 
 
-
-
-function text() {
-
-
-  let split = SplitText.create(".text-splite", {
-    type: "words, lines, chars"
-  });
-  
-  // Add custom class to each word span
-  split.words.forEach(word => word.classList.add("my-word"));
-  split.chars.forEach(char => char.classList.add("my-char"));
-
-  gsap.from(".my-char", {
-    y: 20,
-    opacity: 0,
-    stagger: .1,
-    duration: 1.5,
-    scrollTrigger: {
-      trigger: ".text-splite",
-      scroller: "body",
-      start: "top 65%",
-      end: "top 45%",
-      scrub: 1,
-    }
-  })
-}
-text()
-
 const fullView = document.querySelector("#full-view")
 const overView = document.querySelector("#over-view")
 
 
 function scrollForView() {
+  document.querySelector("#page3").scrollIntoView({behavior:"smooth"})
   const tl = gsap.timeline()
   tl
-    .to(window, {
-      scrollTo: window.innerHeight * 2 + window.innerHeight / 5,
-      ease: "power1.out",
-    })
+    // .to(window, {
+    //   scrollTo: window.innerHeight * 2 + window.innerHeight / 5,
+    //   ease: "power1.out",
+    // })
     .to("#fullView-container", {
       paddingTop: "15vw",
       duration: .6,
       opacity: 0,
     }, "a")
     .to("#overView-container", {
-      paddingTop:"10vw",
+      paddingTop:"0vw",
       opacity: 1,
       duration: .6,
       delay: .2,
@@ -94,20 +55,22 @@ function scrollForView() {
 }
 
 function scrollForFullView() {
-  const scroll = window.innerHeight * 2 + window.innerHeight / 5
+  // const scroll = window.innerHeight * 2 + window.innerHeight / 5
+  document.querySelector("#page3").scrollIntoView({behavior:"smooth"})
+
   const tl = gsap.timeline()
   tl
-    .to(window, {
-      scrollTo: scroll,
-      ease: "power1.out",
-    })
+    // .to(window, {
+    //   scrollTo: scroll,
+    //   ease: "power1.out",
+    // })
     .to("#overView-container", {
       paddingTop:"20vw",
       opacity: 0,
       duration: .6,
     }, "a")
     .to("#fullView-container", {
-      paddingTop: "10vw",
+      paddingTop: "0vw",
       duration: .6,
       delay: .2,
       opacity: 1,
@@ -170,16 +133,3 @@ view.forEach(function (v) {
   })
 })
 
-document.querySelectorAll(".next-p").forEach(function(p){
-  gsap.to(p.querySelector("img"),{
-    transform:"scale(1)",
-    duration:.5,
-    scrollTrigger:{
-      trigger:p,
-      scroller:"body",
-      start:"top 60%",
-      end:"top 40%",
-      scrub:1,
-    }
-  })
-})

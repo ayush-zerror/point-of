@@ -43,6 +43,8 @@
 :root {
   --primary: #f2f2ee;
   --secondary: #000;
+  --heading:#c0bfbf;
+  --para:#717171;
   --invert-filter: invert(0);
 }
 
@@ -541,9 +543,10 @@ h2 span {
   color: var(--secondary);
 }
 h5,
-h6 {
+h6,
+p {
   font-family: para2;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
   color: var(--secondary);
@@ -553,38 +556,80 @@ h6 {
   background-color: var(--primary);
   overflow: hidden;
 }
-
-#page1 {
-  height: 100vh;
+#page1{
   width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  padding: 3vw 3.8vw;
-  padding-top: 7vw;
+  position: relative;
+}
+#page1 img{
+  width: 260vw;
+  height: auto;
+  object-fit: contain;
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 50s;
+}
+@keyframes rotate {
+  0%{
+    transform: rotate(0deg);
+  }
+ 100%{
+  transform: rotate(360deg);
+ }
+  
+}
+#brand-hero-over{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 0 12vw;
   display: flex;
   flex-direction: column;
   justify-content: end;
 }
-
-#page1 #title-over{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  width: 70%;
+#brand-hero-over h2{
+  margin-left: 30%;
+  margin-bottom: 2vw;
+  color: var(--heading);
 }
-#page1 #title-over h2{
-  transform: translateX(20%);
-  opacity: 0;
+#brand-hero-over .common-btn{
+  margin-left: 30%;
 }
 
-#page1 #count {
+#counter-section {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 3vw 6vw;
+  padding-top: 7vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10vw;
+}
+
+
+#counter-section > h2{
+  margin-left: 30%;
+  margin-right: 6vw;
+  font-size: 2.5vw;
+}
+
+#counter-section #count {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-#page1 #count h1 {
+#counter-section #count h1 {
   text-align: left;
   font-family: heading2;
   font-weight: 100;
@@ -593,7 +638,7 @@ h6 {
   color: var(--secondary);
 }
 
-#page1 .num {
+#counter-section .num {
   overflow: hidden;
   height: 5.5vw;
   display: flex;
@@ -601,7 +646,7 @@ h6 {
   margin-bottom: 1.5vw;
 }
 
-#page1 #count p {
+#counter-section #count p {
   font-family: para3;
   font-size: 1vw;
   line-height: 1.4;
@@ -621,7 +666,7 @@ h6 {
   height: 100%;
   background-color: #fff;
 }
-#page1 #count .count-wrap h2 {
+#counter-section #count .count-wrap h2 {
   font-family: heading5;
   font-size: 1.3rem;
   font-weight: 500;
@@ -631,14 +676,13 @@ h6 {
   /* border-top: 1px solid rgba(128, 128, 128, 0.745); */
 }
 
-#page1 #count .count-wrap {
+#counter-section #count .count-wrap {
   width: 20%;
 }
 
 #page2 {
-  height: 55vh;
   width: 100%;
-  padding: 2vw 3.8vw;
+  padding: 2vw 6vw;
   display: flex;
   align-items: end;
 }
@@ -650,9 +694,10 @@ h6 {
   justify-content: space-between;
 }
 
-#page2 #legacy h5 {
-  width: 50%;
-  font-size: 2vw;
+#page2 #legacy h2{
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--heading) !important;
 }
 #page3 {
   min-height: 100vh;
@@ -724,18 +769,18 @@ h6 {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 2vw 0;
+  padding: 4vw 0 2vw;
   scroll-margin-top: 100px;
 }
 #project-showcase {
   position: fixed;
-  right: 2vw;
+  right: 20vw;
   /* bottom: 2vw; */
   top: 50%;
   transform: translateY(-50%);
   z-index: 9;
-  width: 19vw;
-  height: 12vw;
+  width: 20vw;
+  height: 20vw;
   pointer-events: none;
 }
 #project-showcase .show {
@@ -757,13 +802,19 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3.8vw;
+  padding: 0 6vw;
+}
+#top h2{
+  color: var(--heading);
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-bottom: 2vw;
 }
 
 #filter-brands {
   margin: 0 auto;
   margin-top: 2vw;
-  width: 92.4vw;
+  width: 88vw;
   height: 10vh;
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
   display: flex;
@@ -844,13 +895,18 @@ h6 {
   /* justify-content: space-between; */
   transition: all ease 0.5s;
   cursor: pointer;
-  padding: 0.2vw 3.8vw;
+  padding: 0.2vw 6vw;
+  text-transform: uppercase;
 }
 .brand h5 {
   font-size: 1vw;
+  color: var(--para);
 }
 .brand:hover {
   background-color: rgba(128, 128, 128, 0.799);
+}
+.brand:hover h5{
+  color: var(--secondary);
 }
 .brand .serv {
   width: 30%;
@@ -863,14 +919,18 @@ h6 {
   width: 50%;
 }
 .brand .rit {
-  width: 60%;
+  width: 70%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.brand .year,
+
 .brand .industry {
   width: 50%;
+}
+.brand .year{
+  width: 40%;
+  text-align: end;
 }
 .brand-industry {
   width: 100%;
@@ -895,7 +955,7 @@ h6 {
   padding-top: 2vw;
 }
 .year-wrp {
-  width: 92.4vw;
+  width: 88vw;
   display: flex;
   justify-content: end;
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
@@ -906,6 +966,7 @@ h6 {
 .year-number {
   /* width: calc((100% / 2) / 2); */
   width: 40%;
+  text-align: end;
 }
 
 .service-s {
@@ -986,64 +1047,39 @@ h6 {
 
 #page5 {
   width: 100%;
-  height: 100vh;
-  padding: 0 3.8vw;
+  min-height: 100vh;
+  padding: 10vw 6vw;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
 }
-#content-page5 {
+#page5 >h2{
+  margin-bottom: 2vw;
+}
+#page5-cont{
   width: 100%;
-  display: flex;
-  align-items: start;
-}
-#page5 .left5 {
-  width: 50%;
-}
-
-#page5 .right5 {
-  width: 50%;
-}
-#page5 .right5 h2 {
-  font-size: 2vw !important;
-  margin-bottom: 1.8vw;
-}
-#page5 .right5 h2 span {
-  font-size: 2vw !important;
-  margin-left: 1vw;
-  padding-bottom: 0.5vw;
-}
-#page5 .right5 h2 span:nth-child(1) {
-  width: 2.5vw;
-  display: inline-block;
-  text-align: right;
-  opacity: 0.5;
-}
-#page6 {
-  width: 100%;
-  padding: 4vw 3.8vw 6vw;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
-
-#page6 .left6 {
-  width: 50%;
-  height: 100%;
+#page5-cont .box{
+  width: 28%;
+  height:100px;
+  flex-shrink: 0;
+  text-align: left;
+  margin-top: 7vw;
 }
-
-#page6 .right6 {
-  width: 50%;
-  height: 100%;
-}
-#page6 .right6 h5 {
+#page5-cont .box h2{
+  font-size: 1.5vw;
   margin-bottom: 1vw;
+  letter-spacing: 1px;
+  color: var(--heading);
 }
-#page6 .right6 #hire-btn {
-  width: 2.5vw;
-  height: 2.5vw;
-  width: fit-content;
-  text-decoration: none;
+#page5-cont .box p{
+  width: 80%;
+  color: var(--para);
 }
-
 #footer {
   position: relative;
   height: 100vh;
@@ -1178,6 +1214,80 @@ h6 {
 #mobile-logo img {
   width: 40%;
 }
+
+
+
+.common-btn {
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6vw;
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+}
+
+.common-btn .cirr {
+  width: 0.4vw;
+  height: 0.4vw;
+  background-color: var(--secondary);
+  border-radius: 50px;
+  transition: all ease 0.3s;
+}
+
+.common-btn:hover .cirr {
+  width: .9vw;
+  height: .9vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary);
+}
+.common-btn .cirr i {
+  color: var(--primary);
+  font-family: para3;
+  font-weight: 500;
+  font-size: .5vw;
+  display: none;
+}
+
+.common-btn:hover .cirr i {
+  display: block;
+}
+
+.common-btn h3 {
+  position: relative;
+  transition: all ease 0.3s;
+  margin-right: 1vw;
+  font-family: para3;
+  font-size: .9vw;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--heading);
+  text-transform: uppercase;
+}
+.common-btn:hover h3 {
+  margin-right: 0;
+}
+
+.common-btn h3::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom: 0%;
+  background-color: var(--heading);
+  height: 0.01vw;
+  transition: all ease 0.3s;
+}
+.common-btn:hover h3::after {
+  width: 0;
+}
+
+
+
+
 
 @media (max-width: 600px) {
   #navbar {

@@ -714,11 +714,11 @@ h6 {
 }
 
 #page3 {
-  height: 100vh;
+  height: 105vh;
   padding: 0 3.8vw;
   padding-top: 10vh;
   width: 100vw;
-  /* overflow: hidden; */
+  overflow: hidden;
   background-color: black;
   position: relative;
   z-index: 9;
@@ -726,9 +726,21 @@ h6 {
 #page3 #svg-container {
   width: 200vw;
   height: 200vh;
-  z-index: 999;
 }
 
+#path-c{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  position:fixed;
+  background-color: white;
+  z-index:999999;
+  transition: none;
+  opacity: 0;
+  pointer-events: none;
+}
 #page3-mobile {
   width: 100%;
   height: auto;
@@ -764,8 +776,10 @@ h6 {
 }
 #step-three .aprCir{
   position: absolute;
-  width: .8vw;
-  height: .8vw;
+  /* width: .8vw;
+  height: .8vw; */
+  width: 25px;
+  height: 25px;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 50%;
