@@ -81,8 +81,8 @@
         "dest": "/contact.html"
       },
       {
-        "src": "/career",
-        "dest": "/career.html"
+        "src": "/about",
+        "dest": "/about.html"
       },
       {
         "src": "/",

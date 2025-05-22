@@ -1,14 +1,19 @@
 var swiper = new Swiper(".mySwiper", {
-  slidesPerView: 1.2,
-  spaceBetween: 10,
-  loop: true, // Enable infinite loop
-  freeMode: true, // Allow free dragging
-  centeredSlides: false, // Don't center the slides
-  freeModeMomentum: true, // Enable smooth momentum
-  freeModeMomentumRatio: 0.5, // Control the momentum speed (lower = slower, smoother)
-  freeModeMomentumBounce: false, // Prevent bounce effect
-  speed: 600, // Adjust slide transition speed
+  grabCursor: true,
+  pagination: {
+    el: ".swiper-pagination",
+    type: "progressbar",
+  },
+  touchRatio: 1.2,               // Slightly more sensitive than default
+  threshold: 5,                  // Lower = easier to trigger slide
+  touchStartPreventDefault: true, // default is true – keeps drag behavior clean
+  resistance: true,              // Enable edge resistance
+  resistanceRatio: 0.85,         // Prevent sticky feel near edges
+  longSwipes: true,
+  longSwipesRatio: 0.3,          // 0.3 = faster to trigger long swipe
+  longSwipesMs: 300              // shorter duration swipe counts as a swipe
 });
+
 
 gsap.registerPlugin(TextPlugin);
 
@@ -241,64 +246,6 @@ document.querySelectorAll(".cursor-scale").forEach(function (elem) {
   })
 })
 
-document.querySelector("#page6").addEventListener("mouseenter", function (e) {
-  gsap.to(cursor, {
-    width: "4vw",
-    height: "4vw",
-    backgroundColor: "white",
-  })
-  cursor.innerHTML = "Drag"
-})
-document.querySelector("#page6").addEventListener("mouseleave", function (e) {
-  gsap.to(cursor, {
-    width: "1.5vw",
-    height: "1.5vw",
-    backgroundColor: "transparent",
-  })
-  cursor.innerHTML = ""
-})
-
-var muted = true
-document.querySelectorAll("#page6 .video-container video").forEach(function (vid) {
-  vid.addEventListener("mouseenter", function (e) {
-    gsap.to("#playCur", {
-      opacity: 1,
-      duration: .2
-    })
-    cursor.innerHTML = ""
-    if (muted) {
-      document.querySelector("#playCur").classList.add("ri-play-fill")
-      document.querySelector("#playCur").classList.remove("ri-pause-fill")
-    }
-    else {
-      document.querySelector("#playCur").classList.add("ri-pause-fill")
-      document.querySelector("#playCur").classList.remove("ri-play-fill")
-    }
-  })
-})
-document.querySelectorAll("#page6 .video-container video").forEach(function (vid) {
-  vid.addEventListener("mouseleave", function (e) {
-    gsap.to("#playCur", {
-      opacity: 0,
-      duration: .2
-    })
-    cursor.innerHTML = "Drag"
-  })
-})
-
-
-document.querySelectorAll("#page6 .video-container video").forEach(function (vid) {
-  vid.addEventListener("click", function (e) {
-    if (muted) {
-      vid.muted = false
-      muted = false
-    }
-    else {
-      vid.muted = true
-      muted = true
-    }
-  })
-})
 
 
 function page2Animation() {
@@ -356,7 +303,7 @@ function page2Animation() {
       opacity: 1,
       stagger: 0.2,
     })
-     .to(document.querySelectorAll(".page2-text2 span"), {
+    .to(document.querySelectorAll(".page2-text2 span"), {
       opacity: 1,
       stagger: 0.2,
     })
