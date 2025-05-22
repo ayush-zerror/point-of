@@ -566,8 +566,8 @@ p {
   position: relative;
 }
 #page1 img{
-  width: 260vw;
-  height: auto;
+  height: 165vw;
+  width: auto;
   object-fit: contain;
   animation-name: rotate;
   animation-iteration-count: infinite;
@@ -632,18 +632,18 @@ p {
 #counter-section #count h1 {
   text-align: left;
   font-family: heading2;
-  font-weight: 100;
+  font-weight: 600;
+  letter-spacing: 1px;
   line-height: 1;
-  font-size: 5.5vw;
+  font-size: 4vw;
   color: var(--secondary);
 }
 
 #counter-section .num {
   overflow: hidden;
-  height: 5.5vw;
+  height: 4vw;
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 1.5vw;
 }
 
 #counter-section #count p {
@@ -651,7 +651,7 @@ p {
   font-size: 1vw;
   line-height: 1.4;
   font-weight: 400;
-  color: var(--secondary);
+  color: var(--para);
   text-align: left;
 }
 
@@ -659,6 +659,7 @@ p {
   width: 0%;
   height: 1px;
   background-color: rgba(128, 128, 128, 0.745);
+  margin: 1.5vw 0;
 }
 
 .line-fill{
@@ -671,9 +672,6 @@ p {
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 1.4;
-  margin-bottom: 0.6vw;
-  padding-top: 1.5vw;
-  /* border-top: 1px solid rgba(128, 128, 128, 0.745); */
 }
 
 #counter-section #count .count-wrap {
@@ -845,6 +843,9 @@ p {
   cursor: pointer;
   width: fit-content;
   transition: all ease 0.3s;
+  text-transform: uppercase;
+  font-family: heading2 !important;
+  letter-spacing: 1px;
 }
 
 #filter-brands .capsule:hover h6 {
@@ -902,9 +903,9 @@ p {
   font-size: 1vw;
   color: var(--para);
 }
-.brand:hover {
+/* .brand:hover {
   background-color: rgba(128, 128, 128, 0.799);
-}
+} */
 .brand:hover h5{
   color: var(--secondary);
 }

@@ -569,8 +569,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 22.5vw;
-  height: 57vh;
+  width: 26vw;
+  height: 26vw;
   z-index: 3;
   cursor: pointer;
 }
@@ -824,12 +824,11 @@ body {
 }
 #list-content {
   width: 100%;
-  padding: 18vh 8vw;
+  padding: 19.1vh 6vw;
   padding-bottom: 0;
   display: flex;
   align-items: start;
-  /* justify-content: center; */
-  gap: 8.25vw;
+  gap: 5vw;
   flex-wrap: wrap;
 }
 #list::-webkit-scrollbar {
@@ -838,8 +837,8 @@ body {
 
 #list .project-parent {
   position: relative;
-  width: 22.5vw;
-  height: 60.5vh;
+  width: 26vw;
+  height: calc(26vw + 3.5vh);
   margin-bottom: 21.5vh;
   transform-origin: center;
   overflow: hidden;

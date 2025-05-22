@@ -181,7 +181,7 @@ function loader() {
         left: "50%",
         transform: "translate(-50%,-50%)",
         onComplete: () => {
-          gsap.set(".thirdh",{top:0})
+          gsap.set(".thirdh", { top: 0 })
           // Once the first animation is complete, start the text-changing animation
           changeHeader();
         }
@@ -300,72 +300,16 @@ document.querySelectorAll("#page6 .video-container video").forEach(function (vid
   })
 })
 
-// function page1Animation() {
-
-//   const words = document.querySelectorAll(".word-style");
-
-//   let index = 0;
-//   setInterval(function () {
-//     gsap.to(words[index], {
-//       top: "-100%",
-//       duration: 0.8,
-//       onComplete: function () {
-//         gsap.set(this._targets[0], { top: "100%" });
-//       }
-//     });
-
-//     // Increment index before checking if it's the last element
-//     index = index === words.length - 1 ? 0 : index + 1;
-
-//     gsap.to(words[index], {
-//       top: "0%",
-//       duration: 0.8,
-//     });
-//   }, 3000);
-
-
-//   const tl1 = gsap.timeline({
-//     scrollTrigger: {
-//       trigger: "#page1",
-//       scroller: "body",
-//       start: "top 0%",
-//       end: "top -100%",
-//       scrub: 1,
-//       pin: true,
-//       // pinSpacing: false,
-//     }
-//   });
-
-//   tl1
-//     .to("#page1 h1", {
-//       transform: "rotateY(4deg) rotateX(2deg) scale(15) translateX(-10%)", // Simplified transform
-//       duration: 1.2,
-//       ease: "power3.out", // Less taxing easing function
-//     }, "a")
-//     .to("#page1 h4", {
-//       transform: "scale(1.8) rotateY(8deg) rotateX(2deg) translateX(-10%)", // Simplified transform
-//       opacity: 1,
-//       duration: 1.2,
-//       ease: "power3.out",
-//     }, "a")
-//     .to("#hero-video", {
-//       top: "0%",
-//       // delay: -.5
-//     });
-
-
-// }
-// page1Animation()
-
 
 function page2Animation() {
-
-  var clutter = ""
-  document.querySelector("#page2-text").textContent.split(" ").forEach((w) => {
-    clutter += `<span> ${w}</span>`
+  document.querySelectorAll(".page2-text").forEach(function (text) {
+    var clutter = ""
+    text.textContent.split(" ").forEach((w) => {
+      clutter += `<span> ${w}</span>`
+    })
+    text.innerHTML = clutter
   })
 
-  document.querySelector("#page2-text").innerHTML = clutter
 
   var tl2 = gsap.timeline({
     scrollTrigger: {
@@ -382,7 +326,7 @@ function page2Animation() {
     .to("#circle2", {
       opacity: 1,
       duration: .8
-    },"a")
+    }, "a")
     .to("#navbar", {
       opacity: 0,
       pointerEvents: "none",
@@ -408,7 +352,11 @@ function page2Animation() {
     }
   })
   tl22
-    .to(document.querySelectorAll("#page2-text span"), {
+    .to(document.querySelectorAll(".page2-text1 span"), {
+      opacity: 1,
+      stagger: 0.2,
+    })
+     .to(document.querySelectorAll(".page2-text2 span"), {
       opacity: 1,
       stagger: 0.2,
     })
@@ -593,67 +541,67 @@ function pointMidAnimation() {
       delay: 1.4
     }, "d")
 
-    // .to("#circle2", {
-    //   top: positionFromPage3Top + diff * 4,
-    //   transform: "translate(-50%,-50%) scale(1)",
-    //   duration: .8,
-    //   delay: 1
-    // }, "e")
-    // .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
-    //   filter: "blur(4px)",
-    //   opacity: .4,
-    //   duration: .5,
-    //   delay: 1
-    // }, "e")
-    // .to("#ser5", {
-    //   filter: "blur(0px)",
-    //   opacity: 1,
-    //   duration: .5,
-    //   delay: 1
-    // }, "e")
-    // .to("#para4", {
-    //   opacity: 0,
-    //   duration: .4,
-    //   delay: 1
-    // }, "e")
-    // .to("#para5", {
-    //   opacity: .5,
-    //   duration: .4,
-    //   delay: 1.4
-    // }, "e")
+  // .to("#circle2", {
+  //   top: positionFromPage3Top + diff * 4,
+  //   transform: "translate(-50%,-50%) scale(1)",
+  //   duration: .8,
+  //   delay: 1
+  // }, "e")
+  // .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
+  //   filter: "blur(4px)",
+  //   opacity: .4,
+  //   duration: .5,
+  //   delay: 1
+  // }, "e")
+  // .to("#ser5", {
+  //   filter: "blur(0px)",
+  //   opacity: 1,
+  //   duration: .5,
+  //   delay: 1
+  // }, "e")
+  // .to("#para4", {
+  //   opacity: 0,
+  //   duration: .4,
+  //   delay: 1
+  // }, "e")
+  // .to("#para5", {
+  //   opacity: .5,
+  //   duration: .4,
+  //   delay: 1.4
+  // }, "e")
 
-    // .to("#circle2", {
-    //   top: positionFromPage3Top + diff * 5,
-    //   transform: "translate(-50%,-50%) scale(1)",
-    //   duration: .8,
-    //   delay: 1
-    // }, "f")
-    // .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
-    //   filter: "blur(4px)",
-    //   opacity: .4,
-    //   duration: .5,
-    //   delay: 1
-    // }, "f")
-    // .to("#ser6", {
-    //   filter: "blur(0px)",
-    //   opacity: 1,
-    //   duration: .5,
-    //   delay: 1
-    // }, "f")
-    // .to("#para5", {
-    //   opacity: 0,
-    //   duration: .4,
-    //   delay: 1
-    // }, "f")
-    // .to("#para6", {
-    //   opacity: .5,
-    //   duration: .4,
-    //   delay: 1.4,
-    // }, "f")
-    // .to("#para6", {
-    //   opacity: .5,
-    //   delay: .3,
-    // })
+  // .to("#circle2", {
+  //   top: positionFromPage3Top + diff * 5,
+  //   transform: "translate(-50%,-50%) scale(1)",
+  //   duration: .8,
+  //   delay: 1
+  // }, "f")
+  // .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
+  //   filter: "blur(4px)",
+  //   opacity: .4,
+  //   duration: .5,
+  //   delay: 1
+  // }, "f")
+  // .to("#ser6", {
+  //   filter: "blur(0px)",
+  //   opacity: 1,
+  //   duration: .5,
+  //   delay: 1
+  // }, "f")
+  // .to("#para5", {
+  //   opacity: 0,
+  //   duration: .4,
+  //   delay: 1
+  // }, "f")
+  // .to("#para6", {
+  //   opacity: .5,
+  //   duration: .4,
+  //   delay: 1.4,
+  // }, "f")
+  // .to("#para6", {
+  //   opacity: .5,
+  //   delay: .3,
+  // })
 }
 pointMidAnimation()
 

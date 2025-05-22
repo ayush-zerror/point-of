@@ -43,6 +43,8 @@
 :root {
   --primary: #f2f2ee;
   --secondary: #000;
+  --heading: #c0bfbf;
+  --para: #717171;
   --invert-filter: invert(0);
 }
 
@@ -540,9 +542,10 @@ h2 span {
 }
 h5,
 h6,
-h5 span {
+h5 span,
+p {
   font-family: para2;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
   color: var(--secondary);
@@ -554,39 +557,10 @@ h5 span {
 }
 
 #page1 {
-  height: 60vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: end;
-  padding: 2vw 3.8vw;
-  padding-bottom: 2vw;
-}
-
-#page1 .explore-btn {
-  height: 4vw;
-}
-#page1 .explore-btn i {
-  transform: rotate(90deg);
-}
-#page1 .explore-btn h3 {
-  font-size: 1vw;
-  font-weight: 500;
-}
-#page1 h2 {
-  width: 80%;
-  font-size: 3.5vw;
-  font-weight: 100;
-  line-height: 1.2;
-}
-
-#page2 {
   height: 100vh;
   width: 100%;
-  padding: 0 3.8vw;
 }
-#page2 video {
+#page1 img {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -595,7 +569,7 @@ h5 span {
 #page3 {
   min-height: 50vh;
   width: 100%;
-  padding: 10vw 3.8vw;
+  padding: 10vw 6vw;
   padding-bottom: 5vw;
   display: flex;
   justify-content: space-between;
@@ -603,11 +577,14 @@ h5 span {
 #slide1 {
   width: 35%;
   line-height: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-#slide1 h5 {
-  width: 90%;
-  margin-top: 1vw;
+#slide1 h2 {
+  font-weight: 600;
+  letter-spacing: 1px !important;
 }
 
 #slide1 #p1 {
@@ -621,7 +598,15 @@ h5 span {
   color: var(--secondary);
 }
 #slide2 {
-  width: 50%;
+  width: 62%;
+}
+#slide2 >h2{
+  letter-spacing: 1px;
+  color: var(--heading) !important;
+}
+#slide2 > p {
+  margin: 3.5vw 0;
+  color: var(--para) !important;
 }
 
 .accordion {
@@ -629,7 +614,7 @@ h5 span {
 }
 .accordion-title {
   width: 100%;
-  padding: 2vw 1vw;
+  padding: 2vw 0;
   border-top: 1px solid rgba(128, 128, 128, 0.745);
   display: flex;
   align-items: center;
@@ -667,6 +652,7 @@ h5 span {
 }
 .accordion-title h2 {
   font-size: 2vw;
+  color:  var(--heading) !important;
 }
 .accordion.active h2 {
   opacity: 1;
@@ -678,10 +664,7 @@ h5 span {
   opacity: 1;
 }
 .accordion.active .accordion-dec {
-  height: 15vw;
-}
-.accordion.active .marketing-accordion-dec {
-  height: 25vw !important;
+  height: 10vw;
 }
 .accordion-dec {
   overflow: hidden;
@@ -691,48 +674,67 @@ h5 span {
   transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
 }
 .accordion-dec h5 {
-  width: 70%;
-  padding: 3vw 1vw;
+  width: 80%;
+  padding: 3vw 0;
   padding-top: 1vw;
+  color: var(--para) !important;
 }
 .accordion .marketing-accordion-dec h5 {
   width: 85%;
 }
+
 #page4 {
-  min-height: 80vh;
   width: 100%;
-  padding: 2vw 3.8vw;
+  padding: 2vw 6vw;
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  background-color: var(--primary);
+}
+#page4.page4-top{
+  align-items: flex-end;
+  gap: 4vw;
+  padding: 8vw 6vw;
+}
+#page4.page4-top #works{
+  margin: 0 !important;
+}
+#page4 #hire-btn {
+  height: 2.5vw;
+}
+
+#page4 h2 {
+  font-size: 2vw !important;
+  letter-spacing: 1px;
+  margin-bottom: 1vw;
 }
 #works {
-  margin-top: 2vw;
+  margin-top: 3vw;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 #works .work {
-  width: 28vw;
-  height: 65vh;
+  width: 26vw;
+  height: 26vw;
 }
 
-.work-text-wrap{
+.work-text-wrap {
   height: 3.5vh;
   overflow: hidden;
 }
-.work-text-wrap h5{
+.work-text-wrap h5 {
   font-family: para3;
   font-size: 2.3vh;
   font-weight: 500;
   text-transform: capitalize;
   transition: all ease 0.3s;
   transform: translateY(100%);
-  color: var(--secondary);
+  color: var(--heading);
 }
-#works .work:hover h5{
+#works .work:hover h5 {
   transform: translateY(0%);
 }
 #works .work img {
@@ -740,29 +742,18 @@ h5 span {
   height: calc(100% - 3.5vh);
   object-fit: cover;
 }
-
-#page5 {
-  height: 90vh;
+#page5{
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-#page5 .review {
-  width: 60%;
   text-align: center;
+  gap: 2vw;
+  padding: 10vw 0;
 }
-
-#page5 .review h2 {
-  font-size: 3.5vw;
-  margin-bottom: 3vw;
+#page5 h2{
+  color: var(--heading) !important;
 }
-
-#page5 .review .name {
-  font-weight: 600;
-  display: inline-block;
-}
-
 #footer {
   position: relative;
   height: 100vh;
@@ -896,6 +887,74 @@ h5 span {
 }
 #mobile-logo img {
   width: 40%;
+}
+
+.common-btn {
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6vw;
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+}
+
+.common-btn .cirr {
+  width: 0.4vw;
+  height: 0.4vw;
+  background-color: var(--secondary);
+  border-radius: 50px;
+  transition: all ease 0.3s;
+}
+
+.common-btn:hover .cirr {
+  width: 0.9vw;
+  height: 0.9vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary);
+}
+.common-btn .cirr i {
+  color: var(--primary);
+  font-family: para3;
+  font-weight: 500;
+  font-size: 0.5vw;
+  display: none;
+}
+
+.common-btn:hover .cirr i {
+  display: block;
+}
+
+.common-btn h3 {
+  position: relative;
+  transition: all ease 0.3s;
+  margin-right: 1vw;
+  font-family: para3;
+  font-size: 0.9vw;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--heading);
+  text-transform: uppercase;
+}
+.common-btn:hover h3 {
+  margin-right: 0;
+}
+
+.common-btn h3::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom: 0%;
+  background-color: var(--heading);
+  height: 0.01vw;
+  transition: all ease 0.3s;
+}
+.common-btn:hover h3::after {
+  width: 0;
 }
 
 @media (max-width: 600px) {
@@ -1058,5 +1117,5 @@ h5 span {
     width: 90%;
     height: 50vh;
     flex-shrink: 0;
-}
+  }
 }

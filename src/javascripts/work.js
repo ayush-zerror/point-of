@@ -1150,7 +1150,7 @@ document.querySelector("#filter-btn").addEventListener("click", function () {
 
 //filter close btn
 document.querySelector("#cross").addEventListener("click", function () {
-  if (projectByFilter.length === 0) {
+  if (projectByFilter?.length === 0) {
     const filterProject = projects.filter((p, i) => i !== currentSlide)
     renderProjects(filterProject)
     listClickAnimation()

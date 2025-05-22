@@ -383,15 +383,14 @@ function numberIncreaseAnimtion() {
 
     tl
         .to(".numbers4", {
-            y: "-400%"
+            y: "-500%"
         }, "a")
-
-        .to(".numbers33", {
-            y: "-1200%"
+         .to(".numbers44", {
+            y: "-100%"
         }, "a")
 
         .to(".numbers3", {
-            y: "-100%"
+            y: "-800%"
         }, "a")
         .to(".numbers2", {
             y: "-500%"

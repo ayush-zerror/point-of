@@ -654,7 +654,7 @@ h6 {
   transform: translate(-50%, -50%);
   z-index: 9;
   width: 100%;
-  height: 11vw;
+  height: 9.5vw;
 }
 .toph {
   position: absolute;
@@ -668,40 +668,31 @@ h6 {
   white-space: nowrap;
   left: 50%;
   transform: translate(-50%, 0);
+  font-family: heading1 !important;
+  font-weight: 100 !important;
+  letter-spacing: 1.5px !important;
 }
 
 #page1 h1 {
-  /* font-family: heading5; */
-  /* font-weight: 100; */
-  /* font-size: 4.8vw; */
-  text-transform: uppercase;
-  /* color: gray; */
-  /* opacity: 0; */
   color: var(--secondary);
-
   font-family: heading2;
   font-weight: 100;
   line-height: 1;
-  font-size: 5.5vw;
+  font-size: 3vw;
+  letter-spacing: 1px;
+  font-family: 100;
 }
 #page1 h2 {
-  /* font-family: heading5; */
-  /* font-weight: 100; */
-  /* font-size: 4.8vw; */
   text-transform: uppercase;
   color: gray;
   opacity: 0;
   white-space: nowrap;
-
   font-family: heading2;
   font-weight: 100;
   line-height: 1;
-  font-size: 5.5vw;
+  font-size: 3vw;
 }
 #page1 span {
-  /* font-family: heading5; */
-  /* font-weight: 600; */
-  /* font-size: 4.5vw; */
   text-transform: uppercase;
   color: gray;
   font-family: heading2;
@@ -711,11 +702,9 @@ h6 {
 }
 #title-hero {
   bottom: 0%;
-  /* width: fit-content; */
   height: 5.5vw;
   overflow: hidden;
   position: absolute;
-  /* left: 3.8%; */
   left: 50%;
   transform: translate(-50%, 0);
 }
@@ -727,6 +716,9 @@ h6 {
   width: 100%;
   white-space: nowrap;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 #title-hero h1:nth-child(3) {
   top: 0;
@@ -789,8 +781,12 @@ h6 {
   /* background-color: var(--primary); */
   mix-blend-mode: difference;
 }
-#page2-text span {
+.page2-text span {
   opacity: 0.4;
+}
+.page2-text2{
+  margin-top: 3vw;
+  margin-bottom: 1.5vw;
 }
 #page2 h5 {
   margin-bottom: 3vw;
@@ -812,7 +808,7 @@ h6 {
   position: relative;
   height: 100vh;
   width: 100%;
-  padding: 0vw 3.8vw;
+  padding: 0vw 6vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -935,9 +931,9 @@ h6 {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 8.5vw 10vw;
+  padding: 8.5vw 6vw;
   padding-right: 0;
-  gap: 5vw;
+  gap: 5.4vw;
 }
 .view-all-wrapper {
   flex-shrink: 0;
@@ -1007,8 +1003,8 @@ h6 {
 
 .project-h {
   flex-shrink: 0;
-  height: 100%;
-  width: 28%;
+  height: 26vw;
+  width: 26vw;
   z-index: 9;
   display: flex;
   flex-direction: column;
@@ -1065,9 +1061,8 @@ h6 {
 }
 #page5 h1 {
   text-align: center;
-  text-transform: uppercase;
   color: var(--primary);
-  font-family: heading2;
+  font-family: heading1;
   font-weight: 100;
   line-height: 1;
   font-size: 5.5vw;
@@ -1393,6 +1388,80 @@ h6 {
 #mobile-logo img {
   width: 40%;
 }
+
+
+
+.common-btn {
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6vw;
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+}
+
+.common-btn .cirr {
+  width: 0.4vw;
+  height: 0.4vw;
+  background-color: var(--secondary);
+  border-radius: 50px;
+  transition: all ease 0.3s;
+}
+
+.common-btn:hover .cirr {
+  width: .9vw;
+  height: .9vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary);
+}
+.common-btn .cirr i {
+  color: var(--primary);
+  font-family: para3;
+  font-weight: 500;
+  font-size: .5vw;
+  display: none;
+}
+
+.common-btn:hover .cirr i {
+  display: block;
+}
+
+.common-btn h3 {
+  position: relative;
+  transition: all ease 0.3s;
+  margin-right: 1vw;
+  font-family: para3;
+  font-size: .9vw;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--heading);
+  text-transform: uppercase;
+}
+.common-btn:hover h3 {
+  margin-right: 0;
+}
+
+.common-btn h3::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom: 0%;
+  background-color: var(--heading);
+  height: 0.01vw;
+  transition: all ease 0.3s;
+}
+.common-btn:hover h3::after {
+  width: 0;
+}
+
+
+
+
 
 @media (max-width: 600px) {
   #navbar {
