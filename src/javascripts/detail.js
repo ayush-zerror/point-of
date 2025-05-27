@@ -18,7 +18,7 @@ gsap.to("#hero-img", {
     start: "top 0%",
     end: "bottom -20%",
     scrub: 0.5,
-    markers: true,
+    // markers: true,
   },
 })
 
