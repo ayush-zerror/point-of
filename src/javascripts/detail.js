@@ -1,30 +1,54 @@
-
 function loader() {
   var ltl = gsap.timeline()
-
   ltl
-    .to("#hero-img", {
-      transform: "translateY(13vh)",
-      duration: .8,
-      delay:.3,
-     eease: "expo.in",
-    },"p")
     .to("#navbar", {
       transform: "translateY(0%)",
-      duration: 1,
-      delay:.4,
-     eease: "expo.in",
+      duration: .6,
+      delay: .2,
+      eease: "expo.in",
     }, "p")
 }
 loader()
+gsap.to("#hero-img", {
+  y: 80, // ← cleaner and faster
+  duration: 1,
+  scrollTrigger: {
+    trigger: "#page1",
+    scroller: "body", // only needed if using a custom scroller like Lenis
+    start: "top 0%",
+    end: "bottom -20%",
+    scrub: 0.5,
+    markers: true,
+  },
+})
 
+function imageParallax() {
+  const parallexImage = document.querySelectorAll(".zoom");
+
+  parallexImage?.forEach(function (img) {
+    gsap.to(img.querySelector("img"), {
+      y: 80, // ← cleaner and faster
+      duration: 1,
+      scrollTrigger: {
+        trigger: img,
+        scroller: "body", // only needed if using a custom scroller like Lenis
+        start: "top 10%",
+        end: "bottom -50%",
+        scrub: 0.5,
+        // markers: true,
+      },
+    });
+  });
+
+}
+imageParallax()
 
 const fullView = document.querySelector("#full-view")
 const overView = document.querySelector("#over-view")
 
 
 function scrollForView() {
-  document.querySelector("#page3").scrollIntoView({behavior:"smooth"})
+  document.querySelector("#page3").scrollIntoView({ behavior: "smooth" })
   const tl = gsap.timeline()
   tl
     // .to(window, {
@@ -37,26 +61,23 @@ function scrollForView() {
       opacity: 0,
     }, "a")
     .to("#overView-container", {
-      paddingTop:"0vw",
+      paddingTop: "0vw",
       opacity: 1,
       duration: .6,
       delay: .2,
       onStart: () => {
         document.querySelector("#overView-container").style.display = "flex";
         document.querySelector("#fullView-container").style.display = "none";
-      },
-      onComplete: () => {
-        text()
       }
 
     }, "a")
 
-    
+
 }
 
 function scrollForFullView() {
   // const scroll = window.innerHeight * 2 + window.innerHeight / 5
-  document.querySelector("#page3").scrollIntoView({behavior:"smooth"})
+  document.querySelector("#page3").scrollIntoView({ behavior: "smooth" })
 
   const tl = gsap.timeline()
   tl
@@ -65,7 +86,7 @@ function scrollForFullView() {
     //   ease: "power1.out",
     // })
     .to("#overView-container", {
-      paddingTop:"20vw",
+      paddingTop: "20vw",
       opacity: 0,
       duration: .6,
     }, "a")
@@ -78,9 +99,6 @@ function scrollForFullView() {
         document.querySelector("#overView-container").style.display = "none";
         document.querySelector("#fullView-container").style.display = "flex";
 
-      },
-      onComplete: () => {
-        text()
       }
     }, "a")
 

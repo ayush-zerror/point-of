@@ -445,17 +445,16 @@ p {
 }
 
 #page1 {
-  height: 113vh;
+  height: 100vh;
   width: 100%;
+  overflow: hidden;
 }
 
 #page1 img {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   object-fit: cover;
-  object-position: 50% 0;
-  position: absolute;
-  transform: translateY(0vh);
+  object-position: 50% 0%;
 }
 
 #page2 {
@@ -616,9 +615,10 @@ p {
   overflow: hidden;
 }
 #page3 .showcase img {
-  height: 100%;
+  height: 120%;
   width: 100%;
   object-fit: cover;
+  object-position: bottom;
 }
 
 #page3 .showcase .elem {
@@ -739,12 +739,13 @@ p {
   font-size: 2.3vh;
   font-weight: 500;
   text-transform: capitalize;
-  transition: all ease 0.3s;
-  transform: translateY(100%);
-  color: var(--heading);
+ transition: all ease 0.3s;
+  transform: translateY(100%) rotate(25deg);
+  transform-origin: left;
+  color: var(--secondary);
 }
 #works .work:hover h5 {
-  transform: translateY(0%);
+  transform: translateY(0%) rotate(0deg);
 }
 #works .work img {
   width: 100%;

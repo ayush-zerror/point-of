@@ -1,59 +1,87 @@
-// Initialize a new Lenis instance for smooth scrolling
-const lenis = new Lenis();
+function lenisSetup() {
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => 1 - Math.pow(1 - t, 3),
+    smooth: true,
+    smoothTouch: true,
+    direction: "vertical",
+    gestureDirection: "vertical",
+    wheelMultiplier: 0.8,
+    touchMultiplier: 1.2,
+    infinite: false,
+  });
 
-// Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
-// lenis.on('scroll', ScrollTrigger.update);
 
-lenis.on('scroll', (event) => {
-  const popup = document.getElementById('popup');
+  // Ensure the page starts at the top on reload
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    lenis.scrollTo(0, { immediate: true });
+  }, 10); // Small delay to ensure it applies after initialization
 
-  // If the event target is inside the popup, skip Lenis logic
-  if (popup && popup.contains(event.target)) {
-    return;
+  lenis.on('scroll', (event) => {
+    // const popup = document.getElementById('popup');
+
+    // // If the event target is inside the popup, skip Lenis logic
+    // if (popup && popup.contains(event.target)) {
+    //   return;
+    // }
+
+    // // Otherwise, update ScrollTrigger or other handlers
+    ScrollTrigger.update();
+  });
+
+  // Use requestAnimationFrame to update Lenis
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
   }
 
-  // Otherwise, update ScrollTrigger or other handlers
-  ScrollTrigger.update();
-});
+  requestAnimationFrame(raf);
+}
+lenisSetup()
+// window.addEventListener("load", );
+
+
+
 
 // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
 // This ensures Lenis's smooth scroll animation updates on each GSAP tick
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000); // Convert time from seconds to milliseconds
-})
+// gsap.ticker.add((time) => {
+//   lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+// })
 
 // Disable lag smoothing in GSAP to prevent any delay in scroll animations
-gsap.ticker.lagSmoothing(0);
+// gsap.ticker.lagSmoothing(0);
 
 
-gsap.to(window, {
-  scrollTo: 0
-})
+// gsap.to(window, {
+//   scrollTo: 0
+// })
 
 
-function scrollToHashElement() {
-  const hash = window.location.hash;
-  if (hash) {
-      const target = document.querySelector(hash);
-      if (target) {
-          lenis.scrollTo(target, {
-              offset: -60, // adjust if you have fixed headers
-              duration: 1.2,
-              easing: (t) => 1 - Math.pow(1 - t, 4), // smooth easing
-          });
-      }
-  }
-}
+// function scrollToHashElement() {
+//   const hash = window.location.hash;
+//   if (hash) {
+//     const target = document.querySelector(hash);
+//     if (target) {
+//       lenis.scrollTo(target, {
+//         offset: -60, // adjust if you have fixed headers
+//         duration: 1.2,
+//         easing: (t) => 1 - Math.pow(1 - t, 4), // smooth easing
+//       });
+//     }
+//   }
+// }
 
-// Run after page load (for direct links with #)
-window.addEventListener("load", () => {
-  setTimeout(scrollToHashElement, 100); // small delay helps if DOM is rendering
-});
+// // Run after page load (for direct links with #)
+// window.addEventListener("load", () => {
+//   setTimeout(scrollToHashElement, 100); // small delay helps if DOM is rendering
+// });
 
-// Also run if the hash changes (e.g., user clicks a link)
-window.addEventListener("hashchange", () => {
-  setTimeout(scrollToHashElement, 100);
-});
+// // Also run if the hash changes (e.g., user clicks a link)
+// window.addEventListener("hashchange", () => {
+//   setTimeout(scrollToHashElement, 100);
+// });
 
 
 
@@ -108,15 +136,15 @@ function logo() {
       delay: .2
     }, "a")
     .to("#p", {
-      y:"-1vw",
+      y: "-1vw",
       duration: .2,
       delay: -.2
-    },"s")
+    }, "s")
     .to("#dot", {
-      opacity:1,
+      opacity: 1,
       duration: .2,
       delay: -.2
-    },"s")
+    }, "s")
 }
 // logo()
 window.addEventListener("load", logo);
@@ -160,15 +188,15 @@ function logoBlack() {
       delay: .2
     }, "a")
     .to("#p-black", {
-      y:"-1vw",
+      y: "-1vw",
       duration: .2,
       delay: -.2
-    },"s")
+    }, "s")
     .to("#dot-black", {
-      opacity:1,
+      opacity: 1,
       duration: .2,
       delay: -.2
-    },"s")
+    }, "s")
 }
 // logoBlack()
 window.addEventListener("load", logoBlack);
@@ -419,7 +447,7 @@ function darkMode() {
   document.querySelector("#mode").addEventListener("mouseleave", function () {
     applyModeStyles(); // Reset to the correct icon state
   });
- 
+
 }
 darkMode();
 
