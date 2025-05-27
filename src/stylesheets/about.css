@@ -598,7 +598,7 @@ p {
   justify-content: center;
   overflow: hidden;
   position: relative;
-  background-color: var(--secondary);
+  background-color: var(--primary);
 }
 #page2 img {
   height: 98vw;
@@ -635,7 +635,7 @@ p {
 .accordion-title {
   width: 100%;
   padding: 1.5vw 0;
-  border-bottom: 1px solid var(--primary);
+  border-bottom: 1px solid var(--secondary);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -645,7 +645,7 @@ p {
 
 .accordion-title h2 {
   font-size: 2vw;
-  color: var(--primary) !important;
+  color: var(--heading) !important;
   letter-spacing: 1px;
 }
 
@@ -663,7 +663,7 @@ p {
   width: 95%;
   padding: 3vw 0 0;
   padding-top: 1vw;
-  color: var(--primary) !important;
+  color: var(--para) !important;
   line-height: 1.5 !important;
   font-size: 1vw !important;
   letter-spacing: 0.5px !important;

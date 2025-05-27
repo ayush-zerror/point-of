@@ -1,3 +1,15 @@
+gsap.to(".line-container",{
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    duration: 1,
+    ease: "power1.inOut",
+    scrollTrigger: {
+        trigger: "#page1",
+        scroller: "body",
+        start: "bottom 90%",    
+        end: "bottom 40%",
+    }
+})
+
 document.querySelectorAll("#right form .input").forEach(function (i) {
     i.querySelector("input").addEventListener("focus", function () {
         i.classList.add("active")
@@ -143,21 +155,40 @@ popupApply.addEventListener("click", function (e) {
 
 // splide sliders
 document.addEventListener("DOMContentLoaded", function () {
-    const splide = new Splide('.splide', {
-        type: 'loop',
-        drag: true,  // Keep dragging enabled
-        focus: 'center',
+    // Initialize Splide slider
+    const splide = new Splide(".splide", {
+        type: "loop",
+        drag: true,
+        focus: "center",
         perPage: 3,
-        gap: "5px",
+        gap: "20px",
         autoScroll: {
             speed: 1,
-            pauseOnHover: false,  // Prevent stopping on hover
-            pauseOnFocus: false,  // Optional: also prevent stopping when focused
+            pauseOnHover: false,
+            pauseOnFocus: false,
         },
     });
 
-    splide.mount(window.splide.Extensions); // Only mount once
+    // Mount with autoScroll extension
+    splide.mount(window.splide.Extensions);
+
+    // Move slider further left on scroll (xPercent negative)
+    gsap.to(".splide__list", {
+        xPercent: -150, // move further left
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#image-slider",
+            start: "top 90%",
+            end: "bottom top",
+            scrub: 1,
+             invalidateOnRefresh: true,
+        immediateRender: false,
+            // markers: true,
+        },
+    });
 });
+
+
 
 function contactNavSwitch() {
 

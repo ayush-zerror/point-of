@@ -9,6 +9,19 @@ gsap.registerPlugin(
     MotionPathPlugin,
 );
 
+gsap.to(".line-container", {
+    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+    duration: 1,
+    ease: "power1.inOut",
+    scrollTrigger: {
+        trigger: "#page2",
+        scroller: "body",
+        start: "top 0%",
+        end: "top -50%",
+    }
+})
+
+
 function serviceBlurAnime(services) {
     services.forEach(function (l) {
         l.addEventListener("mouseenter", function () {
@@ -98,17 +111,6 @@ function page3svgAnimation() {
             duration: 4,
             ease: "none",
             onUpdate: () => {
-                // newCircle.style.left = `${circle.getBoundingClientRect().left}px`;
-                // newCircle.style.top = `${circle.getBoundingClientRect().top}px`;
-                const rect = circle.getBoundingClientRect();
-                gsap.set(newCircle, {
-                    x: rect.left,
-                    y: rect.top,
-                    duration: 0,
-                    ease: "none"
-                });
-
-
                 let circleX =
                     circle.getBoundingClientRect().left +
                     circle.getBoundingClientRect().width / 2;
@@ -127,7 +129,7 @@ function page3svgAnimation() {
             }
         }, "a")
             .to(panel, {
-                x: "-100vw",
+                x: "-105vw",
                 duration: 3,
             }, "a")
             .to(panel, {
@@ -135,33 +137,11 @@ function page3svgAnimation() {
                 duration: 1.5,
                 delay: 2.5
             }, "a")
-            .to([circle,circleShadow ],{
-                opacity:0,
-                duration:.3
-            },"b")
-            .to(newCircle,{
-                opacity:1,
-                duration:.3
-            },"b")
+         .to(circleGroup, {
+                y: "+=200",
+                ease: "bounce.out",
+            });
 
-        const appCir = document.querySelector(".approach1")    
-
-        var tl2 = gsap.timeline({
-            scrollTrigger: {
-                trigger:"#page3",
-                scroller: "body",
-                // markers: true,
-                start: "100% 90%",
-                end: "100% 50%",
-                scrub: 1,
-            },
-        })
-        tl2
-        .to(newCircle, {
-            x:appCir.getBoundingClientRect().left,
-            opacity:0,
-            // y:appCir.getBoundingClientRect().top,
-        })
     } else {
 
         const pathScrollerMobile = document.querySelector("#page3-mobile");

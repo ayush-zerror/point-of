@@ -604,6 +604,11 @@ function page4Animation() {
   })
 
   tl4
+    .to(".home-project-wrap img", {
+      transform: "translateX(-80px)",
+      duration: 2.5,
+      ease: "power2.out",
+    }, "sl")
     .to("#project-wrapper", {
       transform: `translateX(-${slideValue}px)`,
       duration: 1.5,

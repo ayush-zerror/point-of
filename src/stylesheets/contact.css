@@ -43,8 +43,8 @@
 :root {
   --primary: #f2f2ee;
   --secondary: #000;
-  --heading:#c0bfbf;
-  --para:#717171;
+  --heading: #c0bfbf;
+  --para: #717171;
   --back: rgba(0, 0, 0, 0.473);
   --invert-filter: invert(0);
 }
@@ -60,7 +60,7 @@ body {
   height: 100%;
   /* overflow: hidden; */
 }
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
 }
 #cursor {
@@ -565,17 +565,46 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: end;
+  position: relative;
   background-color: var(--primary);
 }
+.line-container {
+  width: 5px;
+  height: 20vw;
+  position: absolute;
+  bottom: -15vw;
+  left: 30.01%;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
 
-#watch{
+.draw-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: 1px;
+  height: 20vw;
+  background: linear-gradient(to bottom, transparent, var(--secondary));
+}
+.circle-line {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  position: absolute;
+  bottom:0%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--secondary);
+}
+
+#watch {
   width: 13vw;
   height: 13vw;
   margin-bottom: 5vw;
   margin-left: 25%;
   position: relative;
 }
-#watch img{
+#watch img {
   width: 100%;
   height: 100%;
   animation-name: rotate;
@@ -584,15 +613,14 @@ p {
   animation-timing-function: linear;
 }
 @keyframes rotate {
-  0%{
+  0% {
     transform: rotate(0deg);
   }
-  100%{
+  100% {
     transform: rotate(360deg);
   }
-  
 }
-.watch-over{
+.watch-over {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -603,32 +631,32 @@ p {
   justify-content: center;
   flex-direction: column;
 }
-.watch-over h6{
+.watch-over h6 {
   text-align: center;
   line-height: 1.1;
-  font-size: .8vw;
+  font-size: 0.8vw;
   letter-spacing: 1px;
   font-weight: 600;
   color: var(--heading);
 }
 
-#page1 h2{
+#page1 h2 {
   margin-left: 30%;
   margin-bottom: 2vw;
   color: var(--heading);
 }
-#page1 .common-btn{
+#page1 .common-btn {
   margin-left: 30%;
 }
 
-#connect-section{
+#connect-section {
   width: 100%;
   background-color: var(--primary);
-  padding: 15vw 0 2vw;
+  padding: 20vw 0 2vw;
   padding-left: 30%;
 }
 
-#connect-section h2:nth-child(1){
+#connect-section h2:nth-child(1) {
   font-weight: 100 !important;
   font-family: heading1 !important;
 }
@@ -710,7 +738,7 @@ p {
   height: 100%;
 }
 
-#form .common-btn{
+#form .common-btn {
   margin-top: 2vw;
 }
 
@@ -726,7 +754,7 @@ p {
 }
 
 #form .common-btn h3 {
-  color:var(--primary);
+  color: var(--primary);
 }
 
 #form .common-btn h3::after {
@@ -744,7 +772,7 @@ p {
   color: var(--primary);
   line-height: 1.5;
   margin-top: 2vw;
-  font-size: .9vw;
+  font-size: 0.9vw;
 }
 #right form p a {
   text-decoration: none;
@@ -991,7 +1019,7 @@ p {
   /* font-size: 1.05vw; */
   color: var(--heading) !important;
 }
-.accordion-dec .common-btn{
+.accordion-dec .common-btn {
   margin-top: 2vw;
 }
 
@@ -1001,25 +1029,25 @@ p {
   font-size: 1rem;
   line-height: 1.4;
   font-weight: 500;
-   color: #717171 !important;
+  color: #717171 !important;
 }
-.accordion-dec p .about-v{
+.accordion-dec p .about-v {
   margin: 2vw 0;
 }
 .accordion-dec ul {
   list-style: disc;
-  padding-left: .9rem; /* or adjust as needed */
+  padding-left: 0.9rem; /* or adjust as needed */
 }
 .accordion-dec ul li::marker {
   font-size: 0.6em; /* This works in modern browsers */
 }
-.accordion-dec ul li{
+.accordion-dec ul li {
   font-family: para2;
   font-size: 1rem;
   line-height: 1.4;
   font-weight: 500;
-   color: #717171 !important;
-  margin-bottom:.3vw;
+  color: #717171 !important;
+  margin-bottom: 0.3vw;
 }
 .row h6 {
   opacity: 0.7;
@@ -1067,7 +1095,7 @@ p {
 .accordion-dec h5 {
   width: 100%;
   letter-spacing: 1px;
-  padding: 3vw 0vw .5vw;
+  padding: 3vw 0vw 0.5vw;
   padding-top: 1vw;
   color: #c0bfbf !important;
   font-weight: 600;
@@ -1227,23 +1255,23 @@ p {
 .splide__pagination {
   display: none !important;
 }
-#address-cont{
+#address-cont {
   width: 100%;
   padding-left: 30%;
   display: flex;
   padding-right: 6vw;
   margin-top: 3vw;
 }
-#address-cont div{
+#address-cont div {
   width: 40%;
 }
-#address-cont div h2{
+#address-cont div h2 {
   font-size: 1.4vw !important;
   letter-spacing: 1px;
   font-weight: 600;
   margin-bottom: 1vw;
 }
-#address-cont div p{
+#address-cont div p {
   color: var(--para);
 }
 #page4 {
@@ -1285,12 +1313,13 @@ p {
   font-size: 2.3vh;
   font-weight: 500;
   text-transform: capitalize;
-  transition: all ease 0.3s;
-  transform: translateY(100%);
+ transition: all ease 0.3s;
+  transform: translateY(100%) rotate(25deg);
+  transform-origin: left;
   color: var(--heading);
 }
 #works .work:hover h5 {
-  transform: translateY(0%);
+  transform: translateY(0%) rotate(0deg);
 }
 #works .work img {
   width: 100%;
@@ -1677,10 +1706,6 @@ p {
   color: var(--secondary);
 }
 
-
-
-
-
 .common-btn {
   pointer-events: all;
   display: flex;
@@ -1701,8 +1726,8 @@ p {
 }
 
 .common-btn:hover .cirr {
-  width: .9vw;
-  height: .9vw;
+  width: 0.9vw;
+  height: 0.9vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1712,7 +1737,7 @@ p {
   color: var(--primary);
   font-family: para3;
   font-weight: 500;
-  font-size: .5vw;
+  font-size: 0.5vw;
   display: none;
 }
 
@@ -1725,7 +1750,7 @@ p {
   transition: all ease 0.3s;
   margin-right: 1vw;
   font-family: para3;
-  font-size: .9vw;
+  font-size: 0.9vw;
   line-height: 1.5;
   font-weight: 500;
   color: var(--heading);
@@ -1748,5 +1773,3 @@ p {
 .common-btn:hover h3::after {
   width: 0;
 }
-
-

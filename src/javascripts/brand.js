@@ -369,12 +369,13 @@ const yearData = [
 
 function numberIncreaseAnimtion() {
 
+
     var tl = gsap.timeline({
         scrollTrigger: {
             trigger: "#counter-section",
             scroller: "body",
             start: "top 70%",
-            end: "top 55%",
+            end: "top 45%",
             scrub: 1,
             // markers:true
         }
@@ -385,7 +386,7 @@ function numberIncreaseAnimtion() {
         .to(".numbers4", {
             y: "-500%"
         }, "a")
-         .to(".numbers44", {
+        .to(".numbers44", {
             y: "-100%"
         }, "a")
 
@@ -409,10 +410,43 @@ function numberIncreaseAnimtion() {
         }, "a")
         .to(".line-count", {
             width: "100%",
-            stagger: {
-                amount: .3
-            }
-        }, "a")
+            duration: 1
+        })
+
+  document.fonts.ready.then(() => {
+  const split = new SplitText("#line-split", {
+    type: "lines words"
+  });
+
+  var tl2 = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#counter-section",
+      scroller: "body",
+      start: "top 0%",
+      end: "top -100%",
+      scrub: 1,
+      pin: true,
+    //   markers: true
+    }
+  });
+
+  tl2
+    .to(".line-fill", {
+      width: "100%",
+      duration: 1
+    }, "a") // labeled 'a'
+
+    .from(split.lines, {
+      x: 100,
+      opacity: 0,
+      stagger: {
+        amount: 0.2
+      },
+      duration: 1
+    }, "a+=0.5"); // starts 0.5s after label 'a'
+});
+
+
 
 
 }
@@ -816,7 +850,7 @@ function filtering() {
                 c.classList.add("active");
                 c.querySelector("h6").textContent = 'Click to reset'
             }
-            document.querySelector("#page4").scrollIntoView({behavior:"smooth"})
+            document.querySelector("#page4").scrollIntoView({ behavior: "smooth" })
             // Scroll animation using GSAP
             var tl = gsap.timeline();
             tl

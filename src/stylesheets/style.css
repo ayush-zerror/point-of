@@ -606,12 +606,13 @@ h2 span {
   color: var(--secondary);
 }
 h5,
-h6 {
+h6,
+p {
   font-family: para2;
-  font-size: 1.125rem;
-  line-height: 1.35;
+  font-size: 1rem;
+  line-height: 1.4;
   font-weight: 500;
-  color: var(--secondary);
+  color: var(--para);
 }
 #main {
   width: 100%;
@@ -853,6 +854,11 @@ h6 {
   position: relative;
   width: 35%;
 }
+#left-content h2 {
+  letter-spacing: 1px;
+  font-weight: 600 !important;
+  color: var(--heading);
+}
 #left-content h5 {
   margin-top: 1.1vw;
 }
@@ -865,10 +871,6 @@ h6 {
   opacity: 0;
   position: absolute;
   top: 0;
-  font-family: para2;
-  font-size: 1.125rem;
-  line-height: 1.35;
-  font-weight: 500;
   color: var(--secondary);
 }
 
@@ -1020,14 +1022,17 @@ h6 {
   font-weight: 500;
   text-transform: capitalize;
   transition: all ease 0.3s;
-  transform: translateY(100%);
+  transform: translateY(100%) rotate(25deg);
+  transform-origin: left;
+  color: var(--secondary);
 }
 .project-h:hover h5 {
-  transform: translateY(0%);
+  transform: translateY(0%) rotate(0deg);
 }
 .home-project-wrap {
   width: 100%;
   height: calc(100% - 3.5vh);
+  overflow: hidden;
 }
 
 .last-project {
@@ -1036,8 +1041,11 @@ h6 {
 
 .project-h img {
   height: 100%;
-  width: 100%;
+  width: 120%;
   object-fit: cover;
+  object-position: left;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .project-center {
   width: 61%;
@@ -1159,6 +1167,9 @@ h6 {
   justify-content: center;
   align-items: center;
 }
+.swiper-slide:active .review-box {
+  scale: 0.98;
+}
 .swiper-container {
   display: flex;
   justify-content: center;
@@ -1169,8 +1180,9 @@ h6 {
   width: 23vw;
   height: 23vw;
   background-color: gray;
+  transition: all ease 0.2s;
 }
-.review-box img{
+.review-box img {
   width: 100%;
   height: 100%;
   object-position: center;
@@ -1186,7 +1198,7 @@ h6 {
   font-size: 2.5vw !important;
   color: var(--heading) !important;
   letter-spacing: 1px;
-  margin-bottom: .5vw;
+  margin-bottom: 0.5vw;
 }
 .review-details h3 {
   font-family: para3;
@@ -1206,6 +1218,16 @@ h6 {
 
 .swiper-pagination-progressbar {
   background: rgba(128, 128, 128, 0.301);
+}
+.swiper-horizontal > .swiper-pagination-progressbar,
+.swiper-pagination-progressbar.swiper-pagination-horizontal,
+.swiper-pagination-progressbar.swiper-pagination-vertical.swiper-pagination-progressbar-opposite,
+.swiper-vertical
+  > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite {
+  height: 1px;
+}
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  transition-duration: 0.8s !important;
 }
 
 .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
