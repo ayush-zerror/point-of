@@ -797,6 +797,10 @@ p {
   transform: scaleX(0);
 }
 
+#apply-form .linei{
+  background-color: white;
+}
+
 #right form .input.active h6 {
   top: 0%;
   font-size: 0.9vw;
@@ -1062,35 +1066,7 @@ p {
   padding: 0;
   color: var(--secondary);
 }
-.apply-job,
-#submit-btn {
-  height: 3vw;
-  width: 100%;
-  background-color: var(--secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-#submit-btn {
-  background-color: #fff !important;
-  margin-bottom: 2vw;
-}
-#submit-btn h3 {
-  font-family: para3;
-  font-size: 1vw;
-  line-height: 1.5;
-  font-weight: 500;
-  color: black !important;
-}
 
-.apply-job h3 {
-  font-family: para3;
-  font-size: 1vw;
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--primary);
-}
 
 .accordion-dec h5 {
   width: 100%;
@@ -1139,8 +1115,14 @@ p {
 #from-left h5 {
   color: white;
 }
+#from-left h2{
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--heading);
+}
 #from-left h5 {
   margin-bottom: 0.8vw;
+  color: var(--para);
 }
 
 #from-right {
@@ -1172,7 +1154,10 @@ p {
 
 #from-right form .pop-input.active h6 {
   top: 0%;
-  font-size: 0.9vw;
+  font-size: 1rem;
+  font-weight: 500 !important;
+  font-family: para2 !important;
+  line-height: 1.4;
   opacity: 0.5;
 }
 
@@ -1187,6 +1172,9 @@ p {
   outline: none;
   border: none;
   border-bottom: 1px solid rgba(128, 128, 128, 0.745);
+}
+#from-right .common-btn{
+  margin-bottom: 2vw;
 }
 #Uplaod {
   padding: 0.3vw 1vw;
@@ -1210,8 +1198,9 @@ p {
 
 #from-right form p {
   width: 35%;
-  font-family: para3;
-  font-size: 1.05vw;
+  font-family: para2;
+  font-size: 0.9vw;
+  font-weight: 500;
   line-height: 1.3;
   color: white;
 }
@@ -1623,17 +1612,6 @@ p {
   }
   .accordion.active .accordion-dec {
     height: 240vw;
-  }
-  .apply-job h3 {
-    font-family: para2;
-    /* font-size: 1.1vw; */
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--primary);
-  }
-  .apply-job {
-    height: 12vw;
-    margin-top: 8vw;
   }
 }
 
