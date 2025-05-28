@@ -852,6 +852,13 @@ p {
   background-color: var(--light-line);
   border: 1px solid var(--light-line);
 }
+.apr-circle1-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--secondary);
+  border: 1px solid var(--secondary);
+}
 .apr-circle2 {
   left: 50%;
   background-color: var(--light-line);

@@ -16,8 +16,9 @@ gsap.to(".line-container", {
     scrollTrigger: {
         trigger: "#page2",
         scroller: "body",
-        start: "top 0%",
+        start: "top 30%",
         end: "top -50%",
+        scrub:1
     }
 })
 
@@ -137,10 +138,13 @@ function page3svgAnimation() {
                 duration: 1.5,
                 delay: 2.5
             }, "a")
-         .to(circleGroup, {
-                y: "+=200",
+            .to(circleGroup, {
+                y: "+=800",
                 ease: "bounce.out",
-            });
+            })
+            .to(circleGroup, {
+                opacity: 0
+            })
 
     } else {
 
@@ -393,7 +397,7 @@ function approachAnimation() {
             trigger: "#page4",
             scroller: "body",
             start: "top top",
-            end: "top -350%",
+            end: "top -300%",
             scrub: 1,
             // markers: true,
             pin: true
@@ -402,6 +406,17 @@ function approachAnimation() {
 
     aptl
         // STEP 1
+         .fromTo("#page4 > h2,.apr-circle2,.apr-circle3", {
+            opacity: 0,
+        }, {
+            opacity: 1,
+            duration: 0.2
+        })
+         .fromTo("#step-three", {
+            backgroundColor: "transparent",
+        }, {
+            backgroundColor: "var(--light-line)",
+        })
         .fromTo(".apr-circle1", {
             backgroundColor: "var(--light-line)",
             borderColor: "var(--light-line)",
@@ -443,6 +458,9 @@ function approachAnimation() {
             duration: 0.2,
             delay: .5
         }, "b")
+        .to(".apr-circle1-inner",{
+            opacity:0,
+        },"b")
 
         // STEP 3
         .fromTo(".approach3", {

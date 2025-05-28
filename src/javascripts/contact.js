@@ -7,6 +7,7 @@ gsap.to(".line-container",{
         scroller: "body",
         start: "bottom 90%",    
         end: "bottom 40%",
+        scrub:1
     }
 })
 
