@@ -1039,6 +1039,10 @@ p {
   letter-spacing: 1px;
 }
 
+#page5 img{
+  width: 20%;
+  margin-top: 12vw;
+}
 
 #mobile-logo {
   display: none;

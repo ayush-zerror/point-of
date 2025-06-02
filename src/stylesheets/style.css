@@ -139,7 +139,7 @@ body {
   top: 0%;
   left: 0;
   z-index: 9999;
-  opacity: 0;
+  opacity: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -249,7 +249,7 @@ body {
   top: 0%;
   left: 0;
   z-index: 9999;
-  opacity: 1;
+  opacity: 0;
   display: flex;
   align-items: center;
   mix-blend-mode: difference;
@@ -626,6 +626,7 @@ p {
   align-items: center;
   padding: 2vw 3.8vw;
   position: relative;
+  overflow: hidden;
 }
 #curtain1 {
   position: absolute;
@@ -734,46 +735,39 @@ p {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  height: 100vh;
-  width: 100vw;
-  z-index: 3;
-  opacity: 0;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#page1-over img {
-  width: 450px;
-  height: 350px;
-  object-fit: cover;
-  position: absolute;
-  visibility: hidden;
+#page1-over img{
+  width: 100%;
+  height: 220vh;
+  object-fit: contain;
+  animation-name: rotate;
+  animation-duration: 60s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
-#ig1 {
-  left: 0%;
-  top: -5%;
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-#ig2 {
-  right: -10%;
-  top: 10%;
-  opacity: 0.3;
+.gradient{
+  width: 100%;
+    height: 4vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+   background: linear-gradient(to top,var(--primary), transparent);
 }
-#ig3 {
-  left: -10%;
-  bottom: -10%;
-}
-#ig4 {
-  right: -20%;
-  bottom: -20%;
-}
-#ig5 {
-  right: 33%;
-  bottom: 5%;
-  opacity: 0.4;
-}
-#ig6 {
-  left: 45%;
-  top: -20%;
-  opacity: 0.5;
-}
+
 #page2 {
   height: 100vh;
   width: 100%;

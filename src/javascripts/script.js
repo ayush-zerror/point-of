@@ -284,6 +284,11 @@ function page2Animation() {
       pointerEvents: "all",
       duration: .2
     }, "a")
+    .to('.gradient',{
+      opacity:0,
+      duration:.5,
+      delay:-.2
+    },"a")
 
 
   var tl22 = gsap.timeline({
