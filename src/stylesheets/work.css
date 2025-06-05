@@ -314,6 +314,7 @@ body {
   justify-content: space-between;
   padding: 3vw 3.8vw;
   pointer-events: none;
+  
 }
 #menu {
   cursor: pointer;
@@ -1096,12 +1097,12 @@ body {
 }
 
 #mobile-logo img {
-  width: 45%;
+  width: 100%;
 }
 #page1-mobile {
   min-height: 100vh;
   width: 100%;
-  padding: 4vw 7vw;
+  padding: 4vw 4vw;
   padding-top: 15vh;
   overflow-y: auto;
 }
@@ -1129,13 +1130,16 @@ body {
 
 .project-showcase {
   width: 100%;
-  height: 50vh;
+  height: 100vw;
 }
 
 .project-showcase img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.navbar1 #mode{
+  display: none;
 }
 
 @media (max-width: 600px) {
@@ -1144,8 +1148,28 @@ body {
     overflow: auto !important;
   }
   .navbar1 {
-    padding: 10vw 7vw;
+    padding: 10vw 4vw;
     z-index: 9;
+    justify-content: space-between !important;
+      background: linear-gradient(
+    180deg,
+    #000000 0,
+    hsla(0, 0%, 0%, 0.987) 11%,
+    hsla(0, 0%, 0%, 0.951) 20.8%,
+    hsla(0, 0%, 0%, 0.896) 29.6%,
+    hsla(0, 0%, 0%, 0.825) 37.5%,
+    hsla(0, 0%, 0%, 0.741) 44.6%,
+    hsla(0, 0%, 0%, 0.648) 51%,
+    hsla(0, 0%, 0%, 0.55) 57%,
+    hsla(0, 0%, 0%, 0.45) 62.5%,
+    hsla(0, 0%, 0%, 0.352) 67.7%,
+    hsla(0, 0%, 0%, 0.259) 72.7%,
+    hsla(0, 0%, 0%, 0.175) 77.8%,
+    hsla(0, 0%, 0%, 0.104) 82.9%,
+    hsla(0, 0%, 0%, 0.049) 88.2%,
+    hsla(0, 0%, 0%, 0.013) 93.9%,
+    hsla(0, 0%, 0%, 0)
+  );
   }
   .navbar1 #menu {
     height: 5.5vw;
@@ -1155,12 +1179,17 @@ body {
   .navbar1 #logo {
     display: none;
   }
+  .navbar1 #mode{
+  display: block;
+  font-size: 5.5vw;
+}
   #mobile-logo {
-    display: block;
+    display: inline-block;
     filter: invert(1);
+    width: 45%;
   }
   #navigation {
-    padding: 4vw 7vw;
+    padding: 4vw;
   }
 
   #leftm {
