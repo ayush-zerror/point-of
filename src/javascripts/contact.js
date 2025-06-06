@@ -1,13 +1,13 @@
-gsap.to(".line-container",{
+gsap.to(".line-container", {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
     duration: 1,
     ease: "power1.inOut",
     scrollTrigger: {
         trigger: "#page1",
         scroller: "body",
-        start: "bottom 90%",    
+        start: "bottom 90%",
         end: "bottom 40%",
-        scrub:1
+        scrub: 1
     }
 })
 
@@ -182,17 +182,14 @@ document.addEventListener("DOMContentLoaded", function () {
             start: "top 90%",
             end: "bottom top",
             scrub: 1,
-             invalidateOnRefresh: true,
-        immediateRender: false,
+            invalidateOnRefresh: true,
+            immediateRender: false,
             // markers: true,
         },
     });
 });
 
-
-
-function contactNavSwitch() {
-
+function contactPin() {
     var ntl = gsap.timeline({
         scrollTrigger: {
             trigger: "#image-slider",
@@ -217,6 +214,14 @@ function contactNavSwitch() {
             pointerEvent: "all",
             duration: .2
         }, "a")
+
+}
+
+
+
+
+function contactNavSwitch() {
+
 
 
     var tl22 = gsap.timeline({
@@ -268,7 +273,6 @@ function footerNavSwitch() {
 
 
 }
-footerNavSwitch()
 
 // dynamic country code
 document.addEventListener("DOMContentLoaded", function () {
@@ -340,24 +344,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     otherInput.style.outline = "none";
                     otherInput.style.color = "var(--primary)";
                     otherInput.style.opacity = "0.8";
-                    
-                
+
+
                     selected.appendChild(otherInput);
                     selected.style.opacity = "1"; // <-- Make sure it's fully visible
                     dropdown.style.padding = "0";
                     otherInput.focus();
-                
+
                     otherInput.addEventListener("input", () => {
                         hiddenInput.value = otherInput.value;
                     });
-                
+
                 } else {
                     dropdown.style.padding = "1vw 0";
                     selected.textContent = option.textContent;
                     selected.style.opacity = "1"; // <-- Ensure opacity for selected option
                     hiddenInput.value = value;
                 }
-                
+
 
                 optionsContainer.style.display = "none";
                 selectedWrap.classList.remove("open");
@@ -381,3 +385,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+
+if(window.innerWidth > 600){
+    contactPin()
+    footerNavSwitch()
+}

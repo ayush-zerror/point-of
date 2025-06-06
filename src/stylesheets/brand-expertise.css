@@ -600,7 +600,7 @@ p {
 #slide2 {
   width: 62%;
 }
-#slide2 >h2{
+#slide2 > h2 {
   letter-spacing: 1px;
   color: var(--heading) !important;
 }
@@ -652,7 +652,7 @@ p {
 }
 .accordion-title h2 {
   font-size: 2vw;
-  color:  var(--heading) !important;
+  color: var(--heading) !important;
 }
 .accordion.active h2 {
   opacity: 1;
@@ -692,12 +692,12 @@ p {
   flex-direction: column;
   background-color: var(--primary);
 }
-#page4.page4-top{
+#page4.page4-top {
   align-items: flex-end;
   gap: 4vw;
   padding: 8vw 6vw;
 }
-#page4.page4-top #works{
+#page4.page4-top #works {
   margin: 0 !important;
 }
 #page4 #hire-btn {
@@ -730,7 +730,7 @@ p {
   font-size: 2.3vh;
   font-weight: 500;
   text-transform: capitalize;
- transition: all ease 0.3s;
+  transition: all ease 0.3s;
   transform: translateY(100%) rotate(25deg);
   transform-origin: left;
   color: var(--heading);
@@ -743,7 +743,7 @@ p {
   height: calc(100% - 3.5vh);
   object-fit: cover;
 }
-#page5{
+#page5 {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -752,7 +752,7 @@ p {
   gap: 2vw;
   padding: 10vw 0;
 }
-#page5 h2{
+#page5 h2 {
   color: var(--heading) !important;
 }
 #footer {
@@ -960,10 +960,10 @@ p {
 
 @media (max-width: 600px) {
   #navbar {
-    padding: 10vw 7vw;
+    padding: 10vw 4vw;
   }
   #navbar-black {
-    padding: 10vw 7vw;
+    padding: 10vw 4vw;
   }
   #navbar #menu {
     height: 5.5vw;
@@ -1044,31 +1044,24 @@ p {
   }
 
   #page1 {
-    height: 45vh;
-    padding: 0 3.5vw;
+    height: 100vh;
+    padding: 0;
   }
-
-  #page1 h2 {
-    width: 100%;
-    font-size: 7.5vw;
-  }
-  #page1 .explore-btn {
-    margin: 10vw 0;
-    gap: 3.5vw;
-  }
-  #page1 .explore-btn h3 {
-    font-size: 4.5vw;
-  }
-
   #page2 {
     height: 25vh;
   }
 
   #page3 {
     flex-direction: column;
+    padding: 10vw 4vw;
   }
+
   #slide1 {
     width: 100%;
+  }
+  #slide1 h2 {
+    font-size: 7vw;
+    margin-bottom: 5vw;
   }
   #slide1 h5 {
     width: 100%;
@@ -1078,8 +1071,9 @@ p {
     width: 100%;
   }
 
+  
   .accordion-title {
-    padding: 5vw 1vw;
+    padding: 4vw 0;
   }
 
   .accordion-title h2 {
@@ -1092,6 +1086,7 @@ p {
   }
   .accordion-dec h5 {
     width: 100%;
+    font-size: 1.2rem;
   }
   .accordion.active .accordion-dec {
     height: 75vw;
@@ -1102,21 +1097,63 @@ p {
   .accordion.active .marketing-accordion-dec {
     height: 128vw !important;
   }
-
+#slide2{
+  margin-top: 10vw;
+}
   #page4 {
     justify-content: flex-start;
-    padding: 10vh 3.5vw;
+    padding:4vw !important;
+    padding-bottom: 10vw;
     min-height: 40vh;
   }
+  #page5 h2{
+    font-size: 7vw !important;
+    margin-bottom: 5vw;
+  }
 
+  #page4 h2 {
+    font-size: 7vw !important;
+    margin-bottom: 5vw;
+  }
   #works {
     width: 100%;
-    overflow-x: auto;
-    gap: 6vw;
+    flex-direction: column;
   }
   #works .work {
-    width: 90%;
-    height: 50vh;
-    flex-shrink: 0;
+    width: 100%;
+    height: 100vw;
+    margin-bottom: 5vw;
+  }
+  .common-btn {
+    gap: 2.5vw;
+  }
+  .common-btn h3 {
+    font-size: 3vw;
+  }
+  .common-btn .cirr {
+    width: 2.5vw;
+    height: 2.5vw;
+  }
+
+  #footer {
+    height: auto;
+    padding: 10vw 4vw;
+  }
+  #footer-btm {
+    flex-direction: column;
+    gap: 20vw;
+  }
+
+  #footer-btm h5 {
+    font-size: 1.2rem;
+  }
+  #footer a {
+    font-size: 1.2rem;
+  }
+  .lastft {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
   }
 }

@@ -919,4 +919,6 @@ function footerNavSwitch() {
 
 
 }
-footerNavSwitch()
+if(window.innerWidth > 600){
+    footerNavSwitch()
+}

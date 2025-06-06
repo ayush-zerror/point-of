@@ -1004,14 +1004,16 @@ p {
   margin-top: 13vw;
 }
 .count-mwrap h1 {
-  font-size: 25vw;
+  color: var(--heading);
+  font-size: 15vw !important;
   font-family: heading2;
 }
 
 .count-mwrap p {
   font-family: para3;
   font-weight: 400;
-  font-size: 4.5vw;
+  font-size: 1.2rem;
+  color: var(--para);
 }
 
 #page4-mobile {
@@ -1316,9 +1318,13 @@ p {
     display: inline-block;
     font-size: 5vw !important;
   }
+  #page3 > h2 {
+    font-size: 7vw;
+    margin-bottom: 5vw;
+  }
 
   #navigation {
-    padding: 4vw 7vw;
+    padding: 4vw;
   }
 
   #leftm {
@@ -1365,7 +1371,7 @@ p {
     font-size: 5vw;
     margin-bottom: 5vw;
   }
-  #brand-hero-over{
+  #brand-hero-over {
     padding-bottom: 40vh;
   }
 
@@ -1417,25 +1423,23 @@ p {
   }
   #page4-mobile {
     display: block;
-    padding:10vw 4vw;
+    padding: 10vw 4vw;
   }
-  
+
   #page4-mobile h4 {
     display: none;
   }
   .brand-m {
-    padding:5vw 0vw;
+    padding: 5vw 0vw;
   }
   #page5 {
-    align-items: start;
     padding: 10vw 4vw;
   }
   #page5 > h2 {
-    text-align: left;
-    font-size: 5vw;
+    font-size: 7vw;
     margin-bottom: 5vw;
   }
-  #page5-cont{
+  #page5-cont {
     margin-top: 3vw;
   }
   #counter-section {
@@ -1445,13 +1449,16 @@ p {
     color: var(--secondary);
     font-size: 15vw;
   }
-  #page5-cont{
+  #page5-cont {
     flex-direction: column;
   }
-  #page5-cont .box h2{
+  #page5-cont .box h2 {
     font-size: 4vw;
   }
-  #page5-cont .box{
+  #page5-cont .box p{
+    font-size: 1.2rem;
+  }
+  #page5-cont .box {
     width: 100%;
   }
   .common-btn {
@@ -1463,5 +1470,27 @@ p {
   .common-btn .cirr {
     width: 2.5vw;
     height: 2.5vw;
+  }
+
+  #footer {
+    height: auto;
+    padding: 10vw 4vw;
+  }
+  #footer-btm {
+    flex-direction: column;
+    gap: 20vw;
+  }
+
+  #footer-btm h5 {
+    font-size: 1.2rem;
+  }
+  #footer a {
+    font-size: 1.2rem;
+  }
+  .lastft {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
   }
 }

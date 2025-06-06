@@ -1032,7 +1032,7 @@ p {
   display: none;
 }
 #mobile-logo img {
-  width: 40%;
+  width: 100%;
 }
 
 .common-btn {
@@ -1104,11 +1104,14 @@ p {
 }
 
 @media (max-width: 600px) {
+  #about-hero-over {
+    padding-bottom: 40vh;
+  }
   #navbar {
-    padding: 10vw 7vw;
+    padding: 10vw 4vw;
   }
   #navbar-black {
-    padding: 10vw 7vw;
+    padding: 10vw 4vw;
   }
   #navbar #menu {
     height: 5.5vw;
@@ -1130,30 +1133,36 @@ p {
   }
   #mobile-logo {
     display: block;
+    width: 45%;
     filter: invert(1);
+    pointer-events: all;
   }
   #mobile-logo-black {
     display: block;
+    width: 45%;
   }
   #mobile-logo-black img {
-    width: 40%;
+    width: 100%;
     filter: invert(1);
   }
   #navbar-black #mode-black {
     display: none;
   }
   #mode {
-    display: none;
+    display: inline-block;
+    font-size: 5vw !important;
   }
 
   #navigation {
-    padding: 4vw 7vw;
+    padding: 4vw;
   }
 
   #leftm {
     display: none;
   }
-
+  #about-hero-over h2 {
+    font-size: 5vw;
+  }
   #rightm {
     width: 100%;
     height: 100%;
@@ -1187,4 +1196,147 @@ p {
     height: auto;
     padding: 6vw 7vw;
   }
+  #about2-over{
+    padding: 4vw;
+  }
+  .accordion{
+    width: 100%;
+    margin-bottom: 8vw;
+  }
+  .accordion h2{
+    font-size: 5vw;
+    margin-bottom: 5vw;
+  }
+  .accordion-dec h5{
+    font-size: 1.2rem !important;
+    margin-top: 5vw;
+  }
+  #page3 {
+    padding: 10vw 4vw;
+  }
+  #place {
+    font-size: 5vw !important;
+    margin-bottom: 5vw;
+  }
+  #page3-h2{
+    font-size: 7vw;
+    margin-bottom: 5vw;
+  }
+  #page3-para{
+    font-size: 1.2rem !important;
+  }
+  #page3 p {
+    font-size: 1.2rem;
+    margin-bottom: 5vw;
+  }
+  #page4 {
+    flex-direction: column;
+    padding: 4vw;
+    gap: 10vw;
+  }
+  .member-container{
+    width: 100%;
+  }
+  .member-container .profile{
+    width: 100%;
+    height: 100vw;
+  }
+  .member-name{
+    margin-bottom: 2vw;
+    font-size: 7vw !important;
+  }
+  .member-tag {
+    font-size: 4vw !important;
+  }
+  .member-desc {
+    font-size: 1.2rem !important;
+    margin: 5vw 0;
+  }
+  #page5-cont {
+    flex-direction: column;
+  }
+  #page5-cont .box {
+    width: 100%;
+    height: auto;
+  }
+  #page5-title {
+    font-size: 7vw;
+    text-align: left;
+    width: 100%;
+  }
+  #page5-cont .box h2{
+    font-size: 5vw;
+    margin-bottom: 2vw;
+  }
+  .ring-circle{
+    transform: translateX(-50%) rotateX(0deg);
+  }
+  .container-circle{
+    scale: .5;
+    height: 75vh;
+  }
+  #page5-cont .box p{
+    font-size: 1.2rem;
+    width: 90%;
+  }
+  #page5-over{
+    padding: 30vw 4vw;
+    padding-bottom: 0;
+  }
+  #page6{
+    padding: 4vw;
+  }
+  #page6 > h2{
+    width: 100%;
+    font-size: 6vw;
+    text-align: left;
+  }
+#page6-cont {
+  flex-direction: column;
+}  
+#page6-cont .box-pg6 p {
+  font-size: 1.2rem;
+  width: 90%;
+}
+#page6-cont .box-pg6{
+  width: 100%;
+  height: auto;
+}
+#page6-cont .box-pg6 h2 {
+  font-size: 5vw;
+  margin-bottom: 2vw;
+}
+   .common-btn {
+    gap: 2.5vw;
+  }
+  .common-btn h3 {
+    font-size: 3vw;
+  }
+  .common-btn .cirr {
+    width: 2.5vw;
+    height: 2.5vw;
+  }
+
+  #footer {
+    height: auto;
+    padding: 10vw 4vw;
+  }
+  #footer-btm {
+    flex-direction: column;
+    gap: 20vw;
+  }
+
+  #footer-btm h5 {
+    font-size: 1.2rem;
+  }
+  #footer a {
+    font-size: 1.2rem;
+  }
+  .lastft {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
 }

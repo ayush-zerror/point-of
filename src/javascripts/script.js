@@ -697,7 +697,7 @@ function page5Animation() {
       duration: .1
     }, "c")
     .to("#page5", {
-      maskSize: "200%",
+      maskSize: "280%",
       duration: 4,
       delay: -.2
     })
