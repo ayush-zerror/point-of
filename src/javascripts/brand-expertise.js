@@ -5,16 +5,16 @@ accordions.forEach(accordion => {
             if (accordions[i] !== accordion) {
                 accordions[i].classList.remove("active");
             } else {
-                if(accordion.classList.contains("active")) {
+                if (accordion.classList.contains("active")) {
                     accordion.classList.remove("active");
                 }
-                else{
+                else {
                     accordion.classList.add("active");
 
                 }
             }
         }
-        
+
     })
 })
 
@@ -44,4 +44,6 @@ function footerNavSwitch() {
 
 
 }
-footerNavSwitch()
+if (window.innerWidth > 600) {
+    footerNavSwitch()
+}
