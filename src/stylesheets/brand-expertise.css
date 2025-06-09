@@ -57,7 +57,6 @@ html,
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 #cursor {
   width: 1.2vw;
@@ -887,7 +886,7 @@ p {
   display: none;
 }
 #mobile-logo img {
-  width: 40%;
+  width: 100%;
 }
 
 .common-btn {
@@ -984,21 +983,24 @@ p {
     display: none;
   }
   #mobile-logo {
-    display: block;
+    display: inline-block;
+    width: 45%;
     filter: invert(1);
   }
   #mobile-logo-black {
-    display: block;
+    display: inline-block;
+    width: 45%;
   }
   #mobile-logo-black img {
-    width: 40%;
+    width: 100%;
     filter: invert(1);
   }
   #navbar-black #mode-black {
     display: none;
   }
   #mode {
-    display: none;
+    display: inline-block;
+    font-size: 5vw !important;
   }
 
   #navigation {
