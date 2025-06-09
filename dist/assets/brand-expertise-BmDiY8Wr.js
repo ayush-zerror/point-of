@@ -1,2 +1,2 @@
 const a=document.querySelectorAll(".accordion");a.forEach(t=>{t.querySelector(".accordion-title").addEventListener("click",()=>{for(var e=0;e<a.length;e++)a[e]!==t?a[e].classList.remove("active"):t.classList.contains("active")?t.classList.remove("active"):t.classList.add("active")})});function r(){var t=gsap.timeline({scrollTrigger:{trigger:"#footer",scroller:"body",start:"top 60%",end:"top 0%",scrub:1}});t.to("#navbar",{opacity:0,pointerEvent:"none",duration:.5},"a").to("#navbar-black",{opacity:1,pointerEvent:"all",duration:.5},"a")}r();
-//# sourceMappingURL=brand-expertise-CR8q4py6.js.map
+//# sourceMappingURL=brand-expertise-BmDiY8Wr.js.map
