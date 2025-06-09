@@ -81,134 +81,6 @@ function changeHeader() {
 changeHeader();
 
 
-function loader() {
-  document.addEventListener('DOMContentLoaded', function () {
-
-    document.querySelectorAll("#title-hero h1").forEach(function (h) {
-      let clutter = "";
-      h.textContent.split("").forEach(function (l) {
-        if (l === " ") {
-          clutter += `<span>&nbsp;</span>`; // Use &nbsp; for non-breaking space
-        } else {
-          clutter += `<span>${l}</span>`;
-        }
-      });
-      h.innerHTML = clutter;
-    });
-
-    var loader = gsap.timeline()
-
-    loader
-      .to("#curtain1", {
-        clipPath: " polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-        duration: .8,
-        delay: .4,
-        ease: "power2.in",
-      }, "a")
-
-      .to("#curtain2", {
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-        duration: .8,
-        delay: .3,
-        ease: "power2.in",
-      }, "a")
-      .to(".firsth span", {
-        y: "-100%",
-        stagger: {
-          amount: .2,
-        },
-        duration: .6,
-        delay: .8,
-        onComplete: function () {
-          gsap.set(".firsth span", { y: "100%" })
-        }
-      }, "a")
-      .to(".secondh span", {
-        y: "-100%",
-        stagger: {
-          amount: .2,
-        },
-        duration: .6,
-        delay: .8,
-      }, "a")
-      .to("#curtain2", {
-        clipPath: " polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-        duration: .8,
-        ease: "power2.in",
-      }, "b")
-
-      .to(".secondh span", {
-        y: "-200%",
-        stagger: {
-          amount: .2,
-        },
-        duration: .6,
-        delay: .2,
-        onComplete: function () {
-          gsap.set(".secondh span", { y: "0%" })
-        }
-      }, "b")
-      .to(".thirdh span", {
-        y: "-100%",
-        stagger: {
-          amount: .2,
-        },
-        duration: .6,
-        delay: .2
-      }, "b")
-      .to("#page1 h1", {
-        duration: 1,
-        color: "var(--secondary)"
-      }, "c")
-      .to("#page1 h1 span", {
-        duration: 1,
-        color: "var(--secondary)"
-      }, "c")
-      .to(".toph", {
-        left: "50%",
-        transform: "translate(-50%,0%)",
-        duration: 1
-      }, "c")
-      .to("#title-hero", {
-        left: "50%",
-        transform: "translate(-50%,0%)",
-        duration: .9
-      }, "c")
-      .to("#navbar", {
-        top: "0%",
-        duration: .6,
-        opacity: 1
-      }, "c")
-      .to("#page1-over", {
-        duration: .6,
-        opacity: 1,
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%,-50%)",
-        onComplete: () => {
-          gsap.set(".thirdh", { top: 0 })
-          // Once the first animation is complete, start the text-changing animation
-          changeHeader();
-        }
-      })
-
-
-    // window.addEventListener("mousemove", function (e) {
-    //   gsap.to("#page1-over", {
-    //     top: window.innerHeight / 2 - (e.clientY - window.innerHeight / 2) * 0.3,
-    //     left: window.innerWidth / 2 - (e.clientX - window.innerWidth / 2) * 0.3,
-    //     duration: 1.2, // Smooth slow effect
-    //     ease: "power2.out",
-    //   });
-    // });
-
-  })
-
-
-
-}
-// loader()
-
 
 
 const cursor = document.querySelector("#cursor")
@@ -333,7 +205,7 @@ function page2Animation() {
 
 
 }
-page2Animation()
+
 
 
 function pointMidAnimation() {
@@ -555,7 +427,12 @@ function pointMidAnimation() {
   //   delay: .3,
   // })
 }
+
+
+if(window.innerWidth>600){
+page2Animation()
 pointMidAnimation()
+}
 
 function page4Animation() {
 
@@ -654,8 +531,101 @@ function page4Animation() {
       delay: .09
     })
 }
-page4Animation()
 
+function page4AnimationMobile() {
+
+  var tl4e = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#page4",
+      scroller: "body",
+      start: "top 100%%",
+      end: "top 63%",
+      scrub: true,
+      // markers: true
+    }
+  })
+  tl4e
+
+    .to("#circle2", {
+      top: "50%",
+      transform: "translate(-50%,-50%) scale(1)",
+      duration: 2.3,
+    }, "oc")
+    .to("#ser1,#ser2,#ser3,#ser4,#ser5,#ser6", {
+      filter: "blur(0px)",
+      opacity: 1,
+      duration: .8,
+    }, "oc")
+    .to("#para6", {
+      opacity: 0,
+      duration: .8,
+    }, "oc")
+    .to("#circle2", {
+      top: "50%",
+      width: "0.65vw",
+      height: "0.65vw",
+      backgroundColor: "transparent",
+      duration: .6,
+    })
+
+
+
+  var tl4 = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#page4",
+      scroller: "body",
+      start: "top top",
+      end: "top -180%",
+      scrub: 1,
+      pin: true,
+    }
+  })
+
+  tl4
+    .to("#project-wrapper", {
+      transform: `translateX(-490%)`,
+      duration: 1.5,
+      ease: "linear",
+    }, "sl")
+    .to("#circle2", {
+      left: "-670%",
+      duration: 1,
+    }, "sl")
+    .to(".view-all .cirr", {
+      opacity: 1,
+      duration: 0
+    }, "c")
+    .to(".view-all .cirr", {
+      width: "2.5vw",
+      height: "2.5vw",
+      backgroundColor: "var(--secondary)",
+      duration: .2,
+    }, "s")
+    .to(".view-all .cirr i", {
+      opacity: 1,
+      duration: .1,
+      delay: 0.1
+    }, "s")
+    .to("#circle2", {
+      left: "50%",
+      width: "2.5vw",
+      height: "2.5vw",
+      backgroundColor: "var(--secondary)",
+      duration: .5,
+    })
+    .to(".view-all", {
+      opacity: 0,
+      duration: .2
+    })
+    .to(".view-all", {
+      display: "none",
+    })
+}
+if(window.innerWidth>600){
+page4Animation()
+}else{
+  page4AnimationMobile()
+}
 
 function page5Animation() {
 

@@ -1161,7 +1161,10 @@ p {
   justify-content: center;
   align-items: center;
 }
-.swiper-slide:active .review-box {
+.swiper-slide:active{
+  cursor: grabbing!important;
+}
+.swiper-slide:active .swiper-container {
   scale: 0.98;
 }
 .swiper-container {
@@ -1169,12 +1172,13 @@ p {
   justify-content: center;
   align-items: center;
   gap: 4vw;
+  transition: all ease 0.2s;
+
 }
 .review-box {
   width: 23vw;
   height: 23vw;
   background-color: gray;
-  transition: all ease 0.2s;
 }
 .review-box img {
   width: 100%;
@@ -1533,7 +1537,7 @@ p {
   #mobile-logo {
     display: inline-block;
     width: 45%;
-    filter: invert(1);
+    filter: var(--invert-filter);
   }
   #mode {
     display: inline-block;
@@ -1570,6 +1574,45 @@ p {
 
   #navigation {
     padding: 4vw;
+  }
+  #page1 h1{
+    font-size: 5vw;
+  }
+  #text-container {
+    height: 13.5vw;
+  }
+  #page2 {
+    mix-blend-mode: normal;
+    height: 50vh;
+    padding: 4vw;
+  }
+  #page2 h2 {
+    font-size: 1.2rem;
+    color: var(--secondary);
+    width: 90%;
+  }
+  #page2 .common-btn{
+    margin-top: 5vw;
+  }
+  #page3 {
+    height: 50vh;
+    padding: 0 4vw;
+  }
+  #content-page3{
+    flex-direction: column;
+  }
+  #left-content{
+    width: 100%;
+    margin-bottom: 5vw;
+  }
+  #right-content-top h2{
+    font-size: 1.2rem !important;
+  }
+  #left-content h2 {
+    font-size: 7vw;
+  }
+  #right-content{
+    width: 100%;
   }
   #page5 h1 {
     font-size: 7vw;
@@ -1656,6 +1699,13 @@ p {
   .review-details h3 {
     font-size: 1rem;
   }
+  .project-h{
+    width: 90%;
+    height: 90vw;
+  }
+  #project-wrapper {
+    padding: 4vw;
+  }
   .common-btn {
     gap: 2.5vw;
   }
@@ -1665,6 +1715,13 @@ p {
   .common-btn .cirr {
     width: 2.5vw;
     height: 2.5vw;
+  }
+  .view-all .cirr {
+    width: 2.5vw;
+    height: 2.5vw;
+  }
+  .view-all h3 {
+    font-size: 3vw;
   }
 
   #footer {

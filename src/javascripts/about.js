@@ -74,3 +74,32 @@ function ringAnimation() {
 if(window.innerWidth >600){
   ringAnimation()
 }
+
+function footerNavSwitch() {
+
+    var ftl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#footer",
+            scroller: "body",
+            start: "top 60%",
+            end: "top 0%",
+            scrub: 1,
+        }
+    })
+    ftl
+        .to("#navbar", {
+            opacity: 0,
+            pointerEvent: "none",
+            duration: .5
+        }, "a")
+        .to("#navbar-black", {
+            opacity: 1,
+            pointerEvent: "all",
+            duration: .5
+        }, "a")
+
+
+}
+if(window.innerWidth > 600){
+    footerNavSwitch()
+}

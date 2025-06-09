@@ -403,10 +403,10 @@ const projects = [
 filterCount.textContent = projects.length
 
 //rendering project in mobile view
-if(window.innerWidth <= 600){
+if (window.innerWidth <= 600) {
   document.querySelector("#page1-mobile").innerHTML = ""
   var clutter = ""
-  projects.forEach(function(project){
+  projects.forEach(function (project) {
     clutter += ` <a href=${project.route} class="project-m">
                 <div class="project-showcase">
                     <img src=${project.image} alt="">
@@ -683,8 +683,8 @@ function darkMode() {
     root.style.setProperty('--secondary', '#fff');
     root.style.setProperty('--back', '#00000086');
     root.style.setProperty('--invert-filter', 'invert(1)');
-    document.querySelector("#mode").classList.remove("ri-sun-line");
-    document.querySelector("#mode").classList.add("ri-moon-line");
+    document.querySelector(".navbar2 #mode").classList.remove("ri-sun-line");
+    document.querySelector(".navbar2 #mode").classList.add("ri-moon-line");
     document.querySelector(".navbar2").style.background = `
 linear-gradient(
   180deg,
@@ -711,8 +711,8 @@ linear-gradient(
     root.style.setProperty('--secondary', '#000');
     root.style.setProperty('--back', '#f2f2ee83');
     root.style.setProperty('--invert-filter', 'invert(0)');
-    document.querySelector("#mode").classList.remove("ri-moon-line");
-    document.querySelector("#mode").classList.add("ri-sun-line");
+    document.querySelector(".navbar2 #mode").classList.remove("ri-moon-line");
+    document.querySelector(".navbar2 #mode").classList.add("ri-sun-line");
     document.querySelector(".navbar2").style.background = `
 linear-gradient(
   180deg,
@@ -736,14 +736,16 @@ linear-gradient(
 `;
   }
 
-  document.querySelector("#mode").addEventListener("click", function () {
+  document.querySelector(".navbar2 #mode").addEventListener("click", function () {
+    console.log("hye");
+
     if (mode) {
       root.style.setProperty('--primary', '#000');
       root.style.setProperty('--secondary', '#fff');
       root.style.setProperty('--back', '#00000086');
       root.style.setProperty('--invert-filter', 'invert(1)');
-      document.querySelector("#mode").classList.remove("ri-sun-line");
-      document.querySelector("#mode").classList.add("ri-moon-line");
+      document.querySelector(".navbar2 #mode").classList.remove("ri-sun-line");
+      document.querySelector(".navbar2 #mode").classList.add("ri-moon-line");
       document.querySelector(".navbar2").style.background = `
 linear-gradient(
   180deg,
@@ -771,8 +773,8 @@ linear-gradient(
       root.style.setProperty('--secondary', '#000');
       root.style.setProperty('--back', '#f2f2ee83');
       root.style.setProperty('--invert-filter', 'invert(0)');
-      document.querySelector("#mode").classList.remove("ri-moon-line");
-      document.querySelector("#mode").classList.add("ri-sun-line");
+      document.querySelector(".navbar2 #mode").classList.remove("ri-moon-line");
+      document.querySelector(".navbar2 #mode").classList.add("ri-sun-line");
       document.querySelector(".navbar2").style.background = `
 linear-gradient(
   180deg,
@@ -801,7 +803,7 @@ linear-gradient(
   });
 
   // Add mouseenter and mouseleave event listeners
-  document.querySelector("#mode").addEventListener("mouseenter", function () {
+  document.querySelector(".navbar2 #mode").addEventListener("mouseenter", function () {
     if (!mode) {
       this.classList.remove("ri-moon-line");
       this.classList.add("ri-moon-fill");
@@ -811,7 +813,7 @@ linear-gradient(
     }
   });
 
-  document.querySelector("#mode").addEventListener("mouseleave", function () {
+  document.querySelector(".navbar2 #mode").addEventListener("mouseleave", function () {
     if (!mode) {
       this.classList.remove("ri-moon-fill");
       this.classList.add("ri-moon-line");
@@ -899,15 +901,15 @@ function logo() {
       delay: .2
     }, "a")
     .to("#p", {
-      y:"-1vw",
+      y: "-1vw",
       duration: .2,
       delay: -.2
-    },"s")
+    }, "s")
     .to("#dot", {
-      opacity:1,
+      opacity: 1,
       duration: .2,
       delay: -.2
-    },"s")
+    }, "s")
 }
 logo()
 
@@ -917,9 +919,9 @@ function menuOpen() {
   var menu2 = false
   document.querySelector("#menu-c").addEventListener("click", function () {
     if (!menu) {
-     if(window.innerWidth > 600){
-      gsap.set(".navbar1", { mixBlendMode: "difference" })
-     }
+      if (window.innerWidth > 600) {
+        gsap.set(".navbar1", { mixBlendMode: "difference" })
+      }
       gsap.to(".navigation1", {
         top: 0,
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
@@ -935,7 +937,7 @@ function menuOpen() {
         ease: "power4.out",
         onStart: function () {
           setTimeout(function () {
-            if(window.innerWidth > 600){
+            if (window.innerWidth > 600) {
               gsap.set(".navbar1", { mixBlendMode: "normal" })
             }
           }, 500)
@@ -990,20 +992,20 @@ function menuOpen() {
       if (l.getAttribute("data-index") === "0") {
         return;
       }
-     
-        gsap.to(shapes[0], {
-          transform: "rotate(40deg) scale(0)",
-          opacity: 0,
-          duration: .5,
-          ease: "power4.out",
-        })
-        gsap.to(shapes[l.getAttribute("data-index")], {
-          transform: "rotate(0deg) scale(1)",
-          opacity: 1,
-          duration: .5,
-          ease: "power4.out",
-        })
-      
+
+      gsap.to(shapes[0], {
+        transform: "rotate(40deg) scale(0)",
+        opacity: 0,
+        duration: .5,
+        ease: "power4.out",
+      })
+      gsap.to(shapes[l.getAttribute("data-index")], {
+        transform: "rotate(0deg) scale(1)",
+        opacity: 1,
+        duration: .5,
+        ease: "power4.out",
+      })
+
 
     })
   })
@@ -1088,20 +1090,20 @@ function menuOpen() {
       if (l.getAttribute("data-index") === "0") {
         return;
       }
-     
-        gsap.to(shapes2[0], {
-          transform: "rotate(40deg) scale(0)",
-          opacity: 0,
-          duration: .5,
-          ease: "power4.out",
-        })
-        gsap.to(shapes2[l.getAttribute("data-index")], {
-          transform: "rotate(0deg) scale(1)",
-          opacity: 1,
-          duration: .5,
-          ease: "power4.out",
-        })
-      
+
+      gsap.to(shapes2[0], {
+        transform: "rotate(40deg) scale(0)",
+        opacity: 0,
+        duration: .5,
+        ease: "power4.out",
+      })
+      gsap.to(shapes2[l.getAttribute("data-index")], {
+        transform: "rotate(0deg) scale(1)",
+        opacity: 1,
+        duration: .5,
+        ease: "power4.out",
+      })
+
 
     })
   })
@@ -1188,7 +1190,7 @@ function toActiveFilter(services) {
       for (var i = 0; i < services.length; i++) {
         if (!services[i].classList.contains("active")) {
           services[i].style.opacity = .4;
-        }else{
+        } else {
           services[i].style.opacity = 1;
         }
       }
@@ -1196,25 +1198,25 @@ function toActiveFilter(services) {
       // console.log(service, industry, year);
 
       projectByFilter = projects.filter(project => {
-        const matchesService = service.length > 0 
-          ? service.includes(project.service) 
+        const matchesService = service.length > 0
+          ? service.includes(project.service)
           : true;
-      
-        const matchesIndustry = industry.length > 0 
-          ? industry.includes(project.industry) 
+
+        const matchesIndustry = industry.length > 0
+          ? industry.includes(project.industry)
           : true;
-      
-        const matchesYear = year.length > 0 
-          ? year.includes(project.year) 
+
+        const matchesYear = year.length > 0
+          ? year.includes(project.year)
           : true;
-      
+
         return matchesService && matchesIndustry && matchesYear;
       });
 
       console.log(projectByFilter);
-      
-      
-      
+
+
+
       if (projectByFilter.length > 0) {
         filterCount.textContent = projectByFilter.length
         document.querySelector("#filter-view").style.display = "block";
@@ -1240,7 +1242,7 @@ document.querySelector("#reset-btn").addEventListener("click", function () {
   })
 })
 
-function resetFilter(){
+function resetFilter() {
   document.querySelectorAll(".filter-by h5").forEach(function (item) {
     item.classList.remove("active");
     item.style.opacity = 1;
@@ -1288,21 +1290,21 @@ document.querySelector("#filter-view").addEventListener("click", function (e) {
 async function checkForFilter() {
   serviceFls?.forEach(function (s) {
     if (s.classList.contains("active")) {
-      if(!service?.includes(s.textContent.trim())){
+      if (!service?.includes(s.textContent.trim())) {
         service.push(s.textContent.trim())
       }
     }
   })
   industryFls?.forEach(function (i) {
     if (i.classList.contains("active")) {
-      if(!industry?.includes(i.textContent.trim())){
-        industry.push(i.textContent.trim()) 
+      if (!industry?.includes(i.textContent.trim())) {
+        industry.push(i.textContent.trim())
       }
     }
   })
   yearFls?.forEach(function (y) {
     if (y.classList.contains("active")) {
-      if(!year?.includes(Number(y.textContent.trim()))){
+      if (!year?.includes(Number(y.textContent.trim()))) {
         year.push(Number(y.textContent.trim()))
       }
     }

@@ -1146,7 +1146,8 @@ p {
     filter: invert(1);
   }
   #navbar-black #mode-black {
-    display: none;
+    display: inline-block;
+    font-size: 5vw;
   }
   #mode {
     display: inline-block;
