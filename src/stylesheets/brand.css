@@ -1189,45 +1189,40 @@ p {
   }
 
   #navigation {
-    padding: 4vw;
+    padding: 6vw;
+    justify-content: space-between;
+    padding-top: 25vh;
   }
 
-  #leftm {
-    display: none;
-  }
-
-  #rightm {
-    width: 100%;
-    height: 100%;
-    display: flex;
+  #top-container {
     flex-direction: column;
-    justify-content: center;
-    gap: 10vh;
-    padding-bottom: 8vw;
+    align-items: start;
+    gap: 5vw;
+  }
+  #navigation-link a {
+    font-size: 11.5vw;
+    margin-bottom: 4vw;
   }
 
-  #shape-select a {
-    font-family: heading3;
-    font-size: 12vw;
+  #top-container .common-btn h3{
+    font-size: 5vw;
   }
-
-  #social-l a {
-    font-family: para3;
-    font-size: 4.5vw;
+  #top-container .common-btn .cirr{
+    width: 2.5vw;
+    height: 2.5vw;
   }
-
-  #nav-lef {
-    width: 65%;
+  #btm-container {
+    flex-direction: column-reverse;
+    align-items: start;
+    gap: 5vw;
+    padding-top: 5vw;
   }
-
-  #hire-btn h3 {
-    margin-right: 1vw;
-    font-size: 4.5vw;
-    white-space: nowrap;
+  #navigation-social{
+    width: 100%;
+    justify-content: space-between;
   }
-  #nav-btm {
-    height: auto;
-    padding: 6vw 7vw;
+  #navigation-social a{
+    font-size: 1.2rem;
   }
   #page1 img {
     height: 200vw;
