@@ -19,6 +19,54 @@ accordions.forEach(accordion => {
 })
 
 
+
+function page4Animation() {
+  gsap.fromTo(".page4-top .work", {
+    opacity: 0,
+    y: 80, 
+  }, {
+    opacity: 1,
+    y: 0,
+    stagger: {
+      amount: 1, 
+    },
+    duration: 2.5, 
+    scrollTrigger: {
+      trigger: ".page4-top",
+      scroller: "body",
+      start: "top 60%", 
+      end: "top 10%",   
+      scrub: 2,         
+    //   markers: true
+    }
+  });
+}
+page4Animation();
+function page5Animation() {
+  gsap.fromTo(".page4-btm .work", {
+    opacity: 0,
+    y: 80, 
+  }, {
+    opacity: 1,
+    y: 0,
+    stagger: {
+      amount: 1, 
+    },
+    duration: 2.5, 
+    scrollTrigger: {
+      trigger: ".page4-btm",
+      scroller: "body",
+      start: "top 60%", 
+      end: "top 10%",   
+      scrub: 2,         
+    //   markers: true
+    }
+  });
+}
+page5Animation();
+
+
+
 function footerNavSwitch() {
 
     var ftl = gsap.timeline({

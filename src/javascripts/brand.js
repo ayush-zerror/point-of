@@ -364,12 +364,30 @@ const yearData = [
     },
 ];
 
+function page1Animation() {
+  gsap.to("#brand-hero-over", {
+    opacity: 1,
+    y: -200,
+    duration:1, 
+    scrollTrigger: {
+      trigger: "#page1",
+      scroller: "body",
+      start: "top 0%", 
+      end: "top -100%",   
+      scrub: 1,         
+    //   markers: true
+    }
+  });
+}
+page1Animation();
 
 
 
 function numberIncreaseAnimtion() {
 
 
+
+  document.fonts.ready.then(() => {
     var tl = gsap.timeline({
         scrollTrigger: {
             trigger: "#counter-section",
@@ -413,7 +431,7 @@ function numberIncreaseAnimtion() {
             duration: 1
         })
 
-  document.fonts.ready.then(() => {
+
   const split = new SplitText("#line-split", {
     type: "lines words"
   });
@@ -423,10 +441,10 @@ function numberIncreaseAnimtion() {
       trigger: "#counter-section",
       scroller: "body",
       start: "top 0%",
-      end: "top -100%",
+      end: "+=100%",
       scrub: 1,
       pin: true,
-    //   markers: true
+      anticipatePin: 1,
     }
   });
 
@@ -443,7 +461,47 @@ function numberIncreaseAnimtion() {
         amount: 0.2
       },
       duration: 1
-    }, "a+=0.5"); // starts 0.5s after label 'a'
+    },);
+
+
+    document.querySelectorAll(".logo-brand").forEach((logo) => {
+    var logotl = gsap.timeline({
+        scrollTrigger: {
+            trigger: logo,
+            scroller: "body",
+            start: "top 85%",
+            end: "top 70%",
+            scrub: 1,
+        }
+    })
+        logotl.fromTo(logo, {
+            opacity: 0
+        }, {
+            opacity: 1,
+            duration: .3
+        })
+})
+
+function page5Animation() {
+  gsap.fromTo("#page5 .box", {
+    opacity: 0,
+    y: 50,
+  }, {
+    opacity: 1,
+    y: 0,
+    stagger:.2,
+    duration: 1,
+    scrollTrigger: {
+      trigger: "#page5-cont",
+      scroller: "body",
+      start: "top 50%",
+      end: "top 20%",
+    //   scrub: true,
+    //   markers:true
+    }
+  })
+}
+page5Animation()
 });
 
 
@@ -453,24 +511,7 @@ function numberIncreaseAnimtion() {
 numberIncreaseAnimtion()
 
 
-document.querySelectorAll(".logo-brand").forEach((logo) => {
-    var logotl = gsap.timeline({
-        scrollTrigger: {
-            trigger: logo,
-            scroller: "body",
-            start: "top 85%",
-            end: "top 70%",
-            // scrub: 1,
-            // markers:true
-        }
-    })
-    logotl.fromTo(logo, {
-        opacity: 0
-    }, {
-        opacity: 1,
-        duration: .3
-    })
-})
+
 //for rendering data of name data
 data.forEach((d, index) => {
     // Create brand div
@@ -885,13 +926,8 @@ filtering()
 
 
 
-document.querySelectorAll("#page5 .right5 h2").forEach(function (h2) {
-    h2.addEventListener("click", function () {
-        console.log("clicked");
 
-        document.querySelector("#page6").scrollIntoView({ behavior: "smooth", block: "center" });
-    });
-});
+
 
 
 function footerNavSwitch() {

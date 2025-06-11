@@ -130,7 +130,7 @@ function page3svgAnimation() {
             }
         }, "a")
             .to(panel, {
-                x: "-105vw",
+                x: "-109vw",
                 duration: 3,
             }, "a")
             .to(panel, {
@@ -141,9 +141,11 @@ function page3svgAnimation() {
             .to(circleGroup, {
                 y: "+=800",
                 ease: "bounce.out",
+                duration: .6,
             })
             .to(circleGroup, {
-                opacity: 0
+                opacity: 0,
+                duration:0
             })
 
     } else {
@@ -715,3 +717,20 @@ if(window.innerWidth > 600){
 }else{
     approachAnimationMobile()
 }
+
+document.querySelector("#page5").addEventListener("mousemove", (e) => {
+  const bg = document.querySelector("#page5 #bg");
+  const pageRect = document.querySelector("#page5").getBoundingClientRect();
+
+  const x = (e.clientX - pageRect.left) / pageRect.width;
+  const y = (e.clientY - pageRect.top) / pageRect.height;
+
+  const moveAmount = 20; // reduce from 100 to 30 for smoother movement
+
+  gsap.to(bg, {
+    x: -(x * moveAmount),
+    y: -(y * moveAmount),
+    duration: 0.5,
+    ease: "power2.out"
+  });
+});

@@ -78,7 +78,7 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 8;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -529,7 +529,8 @@ p {
   position: relative;
   width: fit-content;
   line-height: 1;
-  margin-bottom: 0.8vw;
+  /* margin-bottom: 0.8vw; */
+  padding: 0.4vw 0;
   font-size: 1vw;
   color: var(--para) !important;
   cursor: default;
@@ -617,9 +618,10 @@ p {
 }
 
 #page3 {
-  height: 105vh;
+  height: 100vh;
   padding: 0 3.8vw;
   padding-top: 10vh;
+  padding-bottom: 0;
   width: 100vw;
   overflow: hidden;
   background-color: black;

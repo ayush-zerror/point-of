@@ -450,6 +450,7 @@ p {
 #slide2 > p {
   margin: 3.5vw 0;
   color: var(--para) !important;
+  width: 85%;
 }
 
 .accordion {

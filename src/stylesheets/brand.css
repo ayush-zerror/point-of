@@ -78,7 +78,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 8;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -922,7 +922,6 @@ p {
 }
 #page5-cont .box {
   width: 28%;
-  height: 100px;
   flex-shrink: 0;
   text-align: left;
   margin-top: 7vw;

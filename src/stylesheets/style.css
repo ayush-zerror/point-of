@@ -138,7 +138,7 @@ body {
   position: fixed;
   top: 0%;
   left: 0;
-  z-index: 9999;
+  z-index: 99999;
   opacity: 1;
   display: flex;
   align-items: center;
@@ -388,44 +388,44 @@ body {
   color: var(--secondary);
   text-decoration: none;
   margin-bottom: 1vw;
-  opacity: .5;
+  opacity: 0.5;
   letter-spacing: 1px;
 }
 
-#top-container .common-btn{
+#top-container .common-btn {
   text-decoration: none;
 }
-#top-container .common-btn .cirr{
-  width: .8vw;
-  height: .8vw;
+#top-container .common-btn .cirr {
+  width: 0.8vw;
+  height: 0.8vw;
 }
-#top-container .common-btn h3{
+#top-container .common-btn h3 {
   text-transform: lowercase;
   font-size: 2vw;
   font-weight: 100;
 }
-#btm-container{
+#btm-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid var(--para);
   padding-top: 3vw;
 }
-#navigation-social{
+#navigation-social {
   display: flex;
   align-items: center;
   gap: 4vw;
 }
-#navigation-social a{
+#navigation-social a {
   text-decoration: none;
-   font-family: para3;
+  font-family: para3;
   font-size: 0.9vw;
   line-height: 1.5;
   font-weight: 500;
   color: var(--heading);
 }
 
-#nav-btn-container{
+#nav-btn-container {
   display: flex;
   align-items: center;
   gap: 3vw;
@@ -830,11 +830,12 @@ p {
 .view-all h3 {
   position: relative;
   transition: all ease 0.3s;
+  color: var(--secondary);
   font-family: para3;
-  font-size: 1vw;
+  font-size: 0.9vw;
   line-height: 1.5;
   font-weight: 500;
-  color: var(--secondary);
+  text-transform: uppercase;
 }
 
 .project-h {
@@ -1001,8 +1002,8 @@ p {
   justify-content: center;
   align-items: center;
 }
-.swiper-slide:active{
-  cursor: grabbing!important;
+.swiper-slide:active {
+  cursor: grabbing !important;
 }
 .swiper-slide:active .swiper-container {
   scale: 0.98;
@@ -1013,7 +1014,6 @@ p {
   align-items: center;
   gap: 4vw;
   transition: all ease 0.2s;
-
 }
 .review-box {
   width: 23vw;
@@ -1159,7 +1159,7 @@ p {
   position: relative;
   height: 100vh;
   width: 100%;
-  background-color:var(--primary);
+  background-color: var(--primary);
   padding: 6vw;
   color: var(--secondary);
   display: flex;
@@ -1177,7 +1177,7 @@ p {
   justify-content: flex-end;
   gap: 4vw;
 }
-#ft-left img{
+#ft-left img {
   width: 4vw;
 }
 #ft-left h2 {
@@ -1189,7 +1189,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap:4vw;
+  gap: 4vw;
 }
 #footer-links {
   display: flex;
@@ -1227,8 +1227,8 @@ p {
   display: flex;
   gap: 5vw;
 }
-#footer #social h5{
-  margin-bottom: .5vw;
+#footer #social h5 {
+  margin-bottom: 0.5vw;
 }
 #ft-right h5 {
   color: var(--heading);
@@ -1237,37 +1237,37 @@ p {
   font-weight: 500;
   line-height: 1.4;
 }
-.heading-ft{
-   font-size: 1rem;
+.heading-ft {
+  font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
   color: var(--para);
   display: inline-block;
-  margin-bottom: .5vw;
+  margin-bottom: 0.5vw;
 }
-#input-box input{
+#input-box input {
   width: 100%;
-  padding: .8vw 0;
+  padding: 0.8vw 0;
   border: none;
   outline: none;
   background-color: transparent;
   border-bottom: 1px solid var(--para);
 }
-.social-links{
+.social-links {
   display: flex;
   flex-direction: column;
 }
-.address-link{
-     font-family: para2;
+.address-link {
+  font-family: para2;
   font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
   color: var(--para);
   display: inline-block;
 }
-.social-links a{
+.social-links a {
   text-decoration: none;
-   font-family: para2;
+  font-family: para2;
   font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
@@ -1449,10 +1449,10 @@ p {
     margin-bottom: 4vw;
   }
 
-  #top-container .common-btn h3{
+  #top-container .common-btn h3 {
     font-size: 5vw;
   }
-  #top-container .common-btn .cirr{
+  #top-container .common-btn .cirr {
     width: 2.5vw;
     height: 2.5vw;
   }
@@ -1462,14 +1462,14 @@ p {
     gap: 5vw;
     padding-top: 5vw;
   }
-  #navigation-social{
+  #navigation-social {
     width: 100%;
     justify-content: space-between;
   }
-  #navigation-social a{
+  #navigation-social a {
     font-size: 4vw;
   }
-  #page1 h1{
+  #page1 h1 {
     font-size: 5vw;
   }
   #text-container {
@@ -1485,36 +1485,36 @@ p {
     color: var(--secondary);
     width: 90%;
   }
-  #page2 .common-btn{
+  #page2 .common-btn {
     margin-top: 5vw;
   }
   #page3 {
     height: 50vh;
     padding: 0 4vw;
   }
-  #content-page3{
+  #content-page3 {
     flex-direction: column;
   }
-  #left-content{
+  #left-content {
     width: 100%;
     margin-bottom: 5vw;
   }
-  #right-content-top h2{
+  #right-content-top h2 {
     font-size: 1.2rem !important;
   }
   #left-content h2 {
     font-size: 7vw;
   }
-  #right-content{
+  #right-content {
     width: 100%;
   }
   #page5 h1 {
     font-size: 7vw;
   }
-  #page7{
+  #page7 {
     height: 60vh;
   }
-  #page7-wrap h2{
+  #page7-wrap h2 {
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 5vw;
@@ -1556,7 +1556,7 @@ p {
   .review-details h3 {
     font-size: 1rem;
   }
-  .project-h{
+  .project-h {
     width: 90%;
     height: 90vw;
   }
@@ -1581,8 +1581,7 @@ p {
     font-size: 3vw;
   }
 
-  
-  #footer{
+  #footer {
     height: auto;
   }
 
@@ -1600,20 +1599,20 @@ p {
   #ft-left {
     gap: 12vw;
   }
-  #footer-links a  {
+  #footer-links a {
     margin-bottom: 5vw;
   }
   #bottom-links a {
     font-size: 1.2rem;
   }
-  #ft-right{
+  #ft-right {
     gap: 12vw;
   }
   .heading-ft {
     font-size: 1.2rem;
     margin-bottom: 2vw;
   }
-  .address-link{
+  .address-link {
     font-size: 1.2rem;
   }
   .social-links a {
@@ -1622,12 +1621,11 @@ p {
   #footer #social h5 {
     margin-bottom: 2vw;
   }
-  #input-box input{
+  #input-box input {
     font-size: 1.2rem;
     padding: 4vw 0;
   }
   #footer #social {
     gap: 16vw;
   }
-
 }

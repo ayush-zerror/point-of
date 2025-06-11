@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function () {
 var swiper = new Swiper(".mySwiper", {
   grabCursor: true,
   pagination: {
@@ -156,11 +157,11 @@ function page2Animation() {
       pointerEvents: "all",
       duration: .2
     }, "a")
-    .to('.gradient',{
-      opacity:0,
-      duration:.5,
-      delay:-.2
-    },"a")
+    .to('.gradient', {
+      opacity: 0,
+      duration: .5,
+      delay: -.2
+    }, "a")
 
 
   var tl22 = gsap.timeline({
@@ -206,8 +207,6 @@ function page2Animation() {
 
 }
 
-
-
 function pointMidAnimation() {
 
   const page3 = document.querySelector("#page3");
@@ -250,24 +249,6 @@ function pointMidAnimation() {
 
   tl
 
-    // .to("#right-content > h2", {
-    //   x: 300,
-    //   filter: "blur(4px)",
-    //   opacity: 0,
-    //   duration: .8,
-    //   stagger: {
-    //     amount: 0.2,
-    //   },
-    //   delay: .2
-    // })
-    // .to("#right-content-top > h2", {
-    //   transform: "translateX(0%)",
-    //   opacity: 1,
-    //   duration: .8,
-    //   stagger: {
-    //     amount: 0.2,
-    //   }
-    // }, "bk")
     .to("#ser2,#ser3,#ser4,#ser5,#ser6", {
       filter: "blur(4px)",
       opacity: .4,
@@ -364,74 +345,12 @@ function pointMidAnimation() {
       duration: .4,
       delay: 1.4
     }, "d")
-
-  // .to("#circle2", {
-  //   top: positionFromPage3Top + diff * 4,
-  //   transform: "translate(-50%,-50%) scale(1)",
-  //   duration: .8,
-  //   delay: 1
-  // }, "e")
-  // .to("#ser1,#ser2,#ser3,#ser4,#ser6", {
-  //   filter: "blur(4px)",
-  //   opacity: .4,
-  //   duration: .5,
-  //   delay: 1
-  // }, "e")
-  // .to("#ser5", {
-  //   filter: "blur(0px)",
-  //   opacity: 1,
-  //   duration: .5,
-  //   delay: 1
-  // }, "e")
-  // .to("#para4", {
-  //   opacity: 0,
-  //   duration: .4,
-  //   delay: 1
-  // }, "e")
-  // .to("#para5", {
-  //   opacity: .5,
-  //   duration: .4,
-  //   delay: 1.4
-  // }, "e")
-
-  // .to("#circle2", {
-  //   top: positionFromPage3Top + diff * 5,
-  //   transform: "translate(-50%,-50%) scale(1)",
-  //   duration: .8,
-  //   delay: 1
-  // }, "f")
-  // .to("#ser1,#ser2,#ser3,#ser4,#ser5", {
-  //   filter: "blur(4px)",
-  //   opacity: .4,
-  //   duration: .5,
-  //   delay: 1
-  // }, "f")
-  // .to("#ser6", {
-  //   filter: "blur(0px)",
-  //   opacity: 1,
-  //   duration: .5,
-  //   delay: 1
-  // }, "f")
-  // .to("#para5", {
-  //   opacity: 0,
-  //   duration: .4,
-  //   delay: 1
-  // }, "f")
-  // .to("#para6", {
-  //   opacity: .5,
-  //   duration: .4,
-  //   delay: 1.4,
-  // }, "f")
-  // .to("#para6", {
-  //   opacity: .5,
-  //   delay: .3,
-  // })
 }
 
 
-if(window.innerWidth>600){
-page2Animation()
-pointMidAnimation()
+if (window.innerWidth > 600) {
+  page2Animation()
+  pointMidAnimation()
 }
 
 function page4Animation() {
@@ -488,7 +407,7 @@ function page4Animation() {
   tl4
     .to(".home-project-wrap img", {
       transform: "translateX(-80px)",
-      duration: 2.5,
+      duration: 1.5,
       ease: "power2.out",
     }, "sl")
     .to("#project-wrapper", {
@@ -621,9 +540,9 @@ function page4AnimationMobile() {
       display: "none",
     })
 }
-if(window.innerWidth>600){
-page4Animation()
-}else{
+if (window.innerWidth > 600) {
+  page4Animation()
+} else {
   page4AnimationMobile()
 }
 
@@ -700,10 +619,10 @@ function page5Animation() {
 }
 page5Animation()
 
-function page6Animation() {
+function page7Animation() {
   const tl6s = gsap.timeline({
     scrollTrigger: {
-      trigger: "#page6",
+      trigger: "#page7",
       scroller: "body",
       start: "top 0%",
       end: "top -5%",
@@ -723,8 +642,28 @@ function page6Animation() {
       duration: .2
     }, "a")
 }
-page6Animation()
+page7Animation()
 
+
+function page6Animation() {
+  gsap.fromTo("#page6 .swiper-container", {
+    opacity: 0,
+    x: 100,
+  }, {
+    opacity: 1,
+    x: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: "#page6",
+      scroller: "body",
+      start: "top 30%",
+      end: "top 0%",
+      // scrub: true,
+      // markers:true
+    }
+  })
+}
+page6Animation()
 
 function footerAnimation() {
 
@@ -753,3 +692,4 @@ function footerAnimation() {
 footerAnimation()
 
 
+});
