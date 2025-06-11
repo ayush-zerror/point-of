@@ -131,37 +131,37 @@ function page2Animation() {
   })
 
 
-  var tl2 = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#page2",
-      scroller: "body",
-      start: "top 10%",
-      end: "top 0%",
-      scrub: 1,
-      // markers: true
-    }
-  })
+var tl2 = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#page2",
+    scroller: "body",
+    start: "top 20%",
+    end: "top 0%",
+    scrub: 1,
+    markers: true
+  }
+});
 
-  tl2
-    .to("#circle2", {
-      opacity: 1,
-      duration: .8
-    }, "a")
-    .to("#navbar", {
-      opacity: 0,
-      pointerEvents: "none",
-      duration: .2
-    }, "a")
-    .to("#navbar-black", {
-      opacity: 1,
-      pointerEvents: "all",
-      duration: .2
-    }, "a")
-    .to('.gradient', {
-      opacity: 0,
-      duration: .5,
-      delay: -.2
-    }, "a")
+tl2
+  .to("#circle2", {
+    opacity: 1,
+    ease: "power2.out",
+    duration: 1
+  }, "a")
+   .to(".gradient", {
+    opacity: 0,
+    ease: "power2.out",
+    duration: .1
+  }, "a")
+  .to("#navbar", {
+    opacity: 0,
+    pointerEvents: "none",
+  }, "a")
+  .to("#navbar-black", {
+    opacity: 1,
+    pointerEvents: "all",
+  }, "a")
+ 
 
 
   var tl22 = gsap.timeline({
