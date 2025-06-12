@@ -1174,9 +1174,11 @@ p {
     display: none;
   }
   #mobile-logo {
-    display: inline-block;
+     display: flex;
+    align-items: end;
     width: 45%;
     filter: invert(1);
+    pointer-events: auto;
   }
   #mode {
     display: inline-block;
@@ -1220,9 +1222,12 @@ p {
     width: 100%;
     justify-content: space-between;
   }
-  #navigation-social a{
-    font-size: 4vw;
+  #navigation-social a {
+    font-size: 1.05rem;
   }
+  #nav-btn-container{
+  gap: 12vw;
+}
   #page1 img {
     height: 200vw;
   }
@@ -1268,14 +1273,18 @@ p {
   }
 
   #page3 .logo-brand {
-    width: calc(100% / 2);
-    height: 38vw;
+    width: calc(100% / 3);
+    height: 32vw;
     border-bottom: 1px solid rgba(128, 128, 128, 0.745);
+    border-right: 1px solid rgba(128, 128, 128, 0.745);
   }
   #page3 .logo-brand:nth-child(even) {
-    width: calc(100% / 2);
-    height: 38vw;
+    width: calc(100% / 3);
+    height: 32vw;
     border-right: 1px solid rgba(128, 128, 128, 0.745);
+  }
+  #page3 .logo-c img {
+    width: 50%;
   }
   #page4 {
     display: none;
@@ -1315,7 +1324,7 @@ p {
     font-size: 4vw;
   }
   #page5-cont .box p{
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
   #page5-cont .box {
     width: 100%;
@@ -1331,9 +1340,13 @@ p {
     height: 2.5vw;
   }
 
+  .count-mwrap p {
+    font-size: 1.05rem;
+  }
   
-  #footer{
+  #footer {
     height: auto;
+    padding-top: 15vw;
   }
 
   #footer-container {
@@ -1350,30 +1363,30 @@ p {
   #ft-left {
     gap: 12vw;
   }
-  #footer-links a  {
+  #footer-links a {
     margin-bottom: 5vw;
   }
   #bottom-links a {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
   }
-  #ft-right{
+  #ft-right {
     gap: 12vw;
   }
   .heading-ft {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
     margin-bottom: 2vw;
   }
-  .address-link{
-    font-size: 1.2rem;
+  .address-link {
+    font-size: 1.06rem;
   }
   .social-links a {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
   }
   #footer #social h5 {
     margin-bottom: 2vw;
   }
-  #input-box input{
-    font-size: 1.2rem;
+  #input-box input {
+    font-size: 1.06rem;
     padding: 4vw 0;
   }
   #footer #social {

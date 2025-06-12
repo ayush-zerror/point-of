@@ -1380,6 +1380,128 @@ p {
   width: 0;
 }
 
+
+#page3mobile {
+  min-height: 50vh;
+  width: 100%;
+  padding: 10vw 6vw;
+  padding-bottom: 5vw;
+  display: none;
+  justify-content: space-between;
+}
+#slide1 {
+  width: 35%;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#slide1 h2 {
+  font-weight: 600;
+  letter-spacing: 1px !important;
+}
+
+#slide1 #p1 {
+  margin-top: 1vw;
+}
+#slide1 p {
+  font-family: para3;
+  font-size: 1.2vw;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--secondary);
+}
+#slide2 {
+  width: 62%;
+}
+#slide2 > h2 {
+  letter-spacing: 1px;
+  color: var(--heading) !important;
+}
+#slide2 > p {
+  margin: 3.5vw 0;
+  color: var(--para) !important;
+  width: 85%;
+}
+
+.accordion {
+  width: 100%;
+}
+.accordion-title {
+  width: 100%;
+  padding: 2vw 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.745);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all ease 0.3s;
+}
+.accordion-title .plus {
+  position: relative;
+  height: 1.8vw;
+  width: 1.8vw;
+  cursor: pointer;
+}
+.accordion-title .plus .line1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 0.01vw;
+  background-color: var(--secondary);
+}
+.accordion.active .accordion-title .plus .line2 {
+  height: 0;
+}
+.accordion-title .plus .line2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.01vw;
+  height: 100%;
+  background-color: var(--secondary);
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
+}
+.accordion-title h2 {
+  font-size: 2vw;
+  color: var(--heading) !important;
+}
+.accordion.active h2 {
+  opacity: 1;
+}
+.accordion h2 {
+  opacity: 0.5;
+}
+.accordion-title:hover h2 {
+  opacity: 1;
+}
+.accordion.active .accordion-dec {
+  height: 10vw;
+}
+.accordion-dec {
+  overflow: hidden;
+  height: 0vw;
+  display: flex;
+  align-items: center;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
+}
+.accordion-dec h5 {
+  width: 80%;
+  padding: 3vw 0;
+  padding-top: 1vw;
+  color: var(--para) !important;
+}
+.accordion .marketing-accordion-dec h5 {
+  width: 85%;
+}
+
+
+
+
 @media (max-width: 600px) {
   #navbar {
     padding: 10vw 4vw;
@@ -1396,9 +1518,11 @@ p {
     display: none;
   }
   #mobile-logo {
-    display: inline-block;
     width: 45%;
+    pointer-events: auto;
     filter: var(--invert-filter);
+    display: flex;
+    align-items: end;
   }
   #mode {
     display: inline-block;
@@ -1421,14 +1545,18 @@ p {
     display: none;
   }
   #mobile-logo-black {
-    display: inline-block;
     width: 100%;
+    display: flex;
+    align-items: end;
   }
   #mobile-logo-black img {
     width: 45%;
   }
   #mode-black {
     display: none;
+  }
+  .view-all{
+    gap: 2.5vw;
   }
 
   /* black nav end */
@@ -1448,7 +1576,9 @@ p {
     font-size: 11.5vw;
     margin-bottom: 4vw;
   }
-
+  #nav-btn-container {
+    gap: 12vw;
+  }
   #top-container .common-btn h3 {
     font-size: 5vw;
   }
@@ -1467,7 +1597,7 @@ p {
     justify-content: space-between;
   }
   #navigation-social a {
-    font-size: 4vw;
+    font-size: 1.05rem;
   }
   #page1 h1 {
     font-size: 5vw;
@@ -1491,6 +1621,7 @@ p {
   #page3 {
     height: 50vh;
     padding: 0 4vw;
+    display: none;
   }
   #content-page3 {
     flex-direction: column;
@@ -1508,6 +1639,56 @@ p {
   #right-content {
     width: 100%;
   }
+  
+  #page3mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 10vw 4vw;
+  }
+
+  #slide1 {
+    width: 100%;
+  }
+  #slide1 h2 {
+    font-size: 7vw;
+    margin-bottom: 5vw;
+  }
+  #slide1 h5 {
+    width: 100%;
+    margin: 10vw 0;
+  }
+  #slide2 {
+    width: 100%;
+  }
+
+  .accordion-title {
+    padding: 4vw 0;
+  }
+
+  .accordion-title h2 {
+    font-family: para2;
+    /* font-size: 1.1vw; */
+    font-size: 1.125rem;
+    line-height: 1.35;
+    font-weight: 500;
+    color: var(--secondary);
+  }
+  .accordion-dec h5 {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+  .accordion.active .accordion-dec {
+    height: 75vw;
+  }
+  .accordion .marketing-accordion-dec h5 {
+    width: 100%;
+  }
+  .accordion.active .marketing-accordion-dec {
+    height: 128vw !important;
+  }
+  #slide2 {
+    margin-top: 10vw;
+  }
   #page5 h1 {
     font-size: 7vw;
   }
@@ -1523,7 +1704,7 @@ p {
     margin-top: 15vw;
   }
   .marquee-wrap img {
-    width: 12vw;
+    width: 20vw;
   }
 
   #page8 > h2 {
@@ -1550,7 +1731,7 @@ p {
     margin-bottom: 1.5vw;
   }
   .review-details p {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
     margin: 5vw 0;
   }
   .review-details h3 {
@@ -1583,6 +1764,7 @@ p {
 
   #footer {
     height: auto;
+    padding-top: 15vw;
   }
 
   #footer-container {
@@ -1603,26 +1785,26 @@ p {
     margin-bottom: 5vw;
   }
   #bottom-links a {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
   }
   #ft-right {
     gap: 12vw;
   }
   .heading-ft {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
     margin-bottom: 2vw;
   }
   .address-link {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
   }
   .social-links a {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
   }
   #footer #social h5 {
     margin-bottom: 2vw;
   }
   #input-box input {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
     padding: 4vw 0;
   }
   #footer #social {

@@ -1473,14 +1473,19 @@ p {
   }
   #mobile-logo {
     width: 45%;
-    display: block;
+     display: flex;
+    align-items: end;
     filter: invert(1);
+    pointer-events: auto;
   }
   #mobile-logo-black {
-    display: block;
+     display: flex;
+    align-items: end;
+    width: 100%;
+    pointer-events: auto;
   }
   #mobile-logo-black img {
-    width: 40%;
+    width: 45%;
     filter: invert(1);
   }
   #navbar-black #mode-black {
@@ -1524,9 +1529,12 @@ p {
     width: 100%;
     justify-content: space-between;
   }
-  #navigation-social a{
-    font-size: 4vw;
+  #navigation-social a {
+    font-size: 1.05rem;
   }
+  #nav-btn-container{
+  gap: 12vw;
+}
   #page1 {
     padding: 30vw 4vw;
     padding-bottom: 40vh;
@@ -1569,13 +1577,13 @@ p {
     font-size: 7vw;
   }
   #right form input {
-    font-size: 1.2rem;
+    font-size: 1.05rem !important;
   }
   #right form .input h6 {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
   .dropdown-selected {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
   #address-cont {
     flex-direction: column;
@@ -1604,7 +1612,7 @@ p {
     margin-bottom: 2vw;
   }
   #address-cont div p {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
   #address-cont div p br {
     display: none;
@@ -1625,10 +1633,10 @@ p {
     margin-top: 6vw;
   }
   #right form textarea {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
   #right form .textarea h6 {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
 
   #right {
@@ -1702,7 +1710,7 @@ p {
     font-size: 7vw;
   }
   .career-btm-text h5 {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     width: 100%;
   }
   .career-btm-text {
@@ -1726,7 +1734,7 @@ p {
     padding: 10vw 4vw;
   }
   #page4 h2 {
-    font-size: 4vw !important;
+    font-size: 7vw !important;
     margin-bottom: 4vw;
   }
   #works {
@@ -1734,6 +1742,9 @@ p {
     gap: 5vw;
     margin-top: 10vw;
   }
+  #works .work h5 {
+    transform: translateY(0%) rotate(0deg);
+}
   #works .work {
     width: 100%;
     height: 100vw;
@@ -1751,7 +1762,7 @@ p {
     margin-bottom: 5vw;
   }
   .accordion-dec p {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     width: 100%;
   }
   .accordion-title h2 {
@@ -1768,10 +1779,10 @@ p {
     margin-bottom: 4vw;
   }
   .accordion-dec ul li {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
   .accordion.active .accordion-dec {
-    height: 200vw;
+    height: 170vw;
   }
   .accordion-title {
     padding: 4vw 0;
@@ -1788,8 +1799,9 @@ p {
   }
 
   
-  #footer{
+  #footer {
     height: auto;
+    padding-top: 15vw;
   }
 
   #footer-container {
@@ -1806,30 +1818,30 @@ p {
   #ft-left {
     gap: 12vw;
   }
-  #footer-links a  {
+  #footer-links a {
     margin-bottom: 5vw;
   }
   #bottom-links a {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
   }
-  #ft-right{
+  #ft-right {
     gap: 12vw;
   }
   .heading-ft {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
     margin-bottom: 2vw;
   }
-  .address-link{
-    font-size: 1.2rem;
+  .address-link {
+    font-size: 1.06rem;
   }
   .social-links a {
-    font-size: 1.2rem;
+    font-size: 1.06rem;
   }
   #footer #social h5 {
     margin-bottom: 2vw;
   }
-  #input-box input{
-    font-size: 1.2rem;
+  #input-box input {
+    font-size: 1.06rem;
     padding: 4vw 0;
   }
   #footer #social {

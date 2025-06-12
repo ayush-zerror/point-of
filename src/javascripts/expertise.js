@@ -18,7 +18,7 @@ gsap.to(".line-container", {
         scroller: "body",
         start: "top 30%",
         end: "top -50%",
-        scrub:1
+        scrub: 1
     }
 })
 
@@ -145,7 +145,7 @@ function page3svgAnimation() {
             })
             .to(circleGroup, {
                 opacity: 0,
-                duration:0
+                duration: 0
             })
 
     } else {
@@ -196,7 +196,12 @@ function page3svgAnimation() {
                         });
                     }
                 }
-            });
+            })
+            .to(circleGroupMobile, {
+                opacity: 0,
+                duration: 0,
+                delay:-.2
+            })
     }
 
 }
@@ -408,13 +413,13 @@ function approachAnimation() {
 
     aptl
         // STEP 1
-         .fromTo("#page4 > h2,.apr-circle2,.apr-circle3", {
+        .fromTo("#page4 > h2,.apr-circle2,.apr-circle3", {
             opacity: 0,
         }, {
             opacity: 1,
             duration: 0.2
         })
-         .fromTo("#step-three", {
+        .fromTo("#step-three", {
             backgroundColor: "transparent",
         }, {
             backgroundColor: "var(--light-line)",
@@ -460,9 +465,9 @@ function approachAnimation() {
             duration: 0.2,
             delay: .5
         }, "b")
-        .to(".apr-circle1-inner",{
-            opacity:0,
-        },"b")
+        .to(".apr-circle1-inner", {
+            opacity: 0,
+        }, "b")
 
         // STEP 3
         .fromTo(".approach3", {
@@ -568,13 +573,13 @@ function approachAnimationMobile() {
 
     aptl
         // STEP 1
-         .fromTo("#page4 > h2,.apr-circle2,.apr-circle3", {
+        .fromTo("#page4 > h2,.apr-circle2,.apr-circle3", {
             opacity: 0,
         }, {
             opacity: 1,
             duration: 0.2
         })
-         .fromTo("#step-three", {
+        .fromTo("#step-three", {
             backgroundColor: "transparent",
         }, {
             backgroundColor: "var(--light-line)",
@@ -620,9 +625,9 @@ function approachAnimationMobile() {
             duration: 0.2,
             delay: .5
         }, "b")
-        .to(".apr-circle1-inner",{
-            opacity:0,
-        },"b")
+        .to(".apr-circle1-inner", {
+            opacity: 0,
+        }, "b")
 
         // STEP 3
         .fromTo(".approach3", {
@@ -673,9 +678,9 @@ function approachAnimationMobile() {
     const centerY = page4Rect.top + page4Rect.height / 2 + window.scrollY;
 
     const offsets = [
-        { x: -80, y: -40 },
-        { x: 80, y: -40 },
-        { x: 0, y: 80 }
+        { x: -65, y: -25 },
+        { x: 65, y: -25 },
+        { x: 0, y: 65 }
     ];
 
     circles.forEach((circle, i) => {
@@ -704,7 +709,7 @@ function approachAnimationMobile() {
 
         aptl.to(h2, {
             x: deltaX,
-            y: deltaY + i * 60,
+            y: deltaY + i * 30,
             duration: 0.8,
             ease: "power2.out",
             delay: .5
@@ -712,25 +717,25 @@ function approachAnimationMobile() {
     });
 
 }
-if(window.innerWidth > 600){
+if (window.innerWidth > 600) {
     approachAnimation()
-}else{
+} else {
     approachAnimationMobile()
 }
 
 document.querySelector("#page5").addEventListener("mousemove", (e) => {
-  const bg = document.querySelector("#page5 #bg");
-  const pageRect = document.querySelector("#page5").getBoundingClientRect();
+    const bg = document.querySelector("#page5 #bg");
+    const pageRect = document.querySelector("#page5").getBoundingClientRect();
 
-  const x = (e.clientX - pageRect.left) / pageRect.width;
-  const y = (e.clientY - pageRect.top) / pageRect.height;
+    const x = (e.clientX - pageRect.left) / pageRect.width;
+    const y = (e.clientY - pageRect.top) / pageRect.height;
 
-  const moveAmount = 20; // reduce from 100 to 30 for smoother movement
+    const moveAmount = 20; // reduce from 100 to 30 for smoother movement
 
-  gsap.to(bg, {
-    x: -(x * moveAmount),
-    y: -(y * moveAmount),
-    duration: 0.5,
-    ease: "power2.out"
-  });
+    gsap.to(bg, {
+        x: -(x * moveAmount),
+        y: -(y * moveAmount),
+        duration: 0.5,
+        ease: "power2.out"
+    });
 });
