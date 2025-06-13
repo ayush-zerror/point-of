@@ -35,26 +35,28 @@ document.addEventListener("DOMContentLoaded", function () {
     "emotion in brand design?"
   ];
 
-  const accordions = document.querySelectorAll(".accordion")
-  accordions.forEach(accordion => {
-    accordion.querySelector(".accordion-title").addEventListener("click", () => {
-      for (var i = 0; i < accordions.length; i++) {
-        if (accordions[i] !== accordion) {
-          accordions[i].classList.remove("active");
-        } else {
-          if (accordion.classList.contains("active")) {
-            accordion.classList.remove("active");
-          }
-          else {
-            accordion.classList.add("active");
+  if (window.innerWidth < 600) {
+    const accordions = document.querySelectorAll(".accordion")
+    accordions.forEach(accordion => {
+      accordion.querySelector(".accordion-title").addEventListener("click", () => {
+        for (var i = 0; i < accordions.length; i++) {
+          if (accordions[i] !== accordion) {
+            accordions[i].classList.remove("active");
+          } else {
+            if (accordion.classList.contains("active")) {
+              accordion.classList.remove("active");
+            }
+            else {
+              accordion.classList.add("active");
 
+            }
           }
         }
-      }
 
+      })
     })
-  })
 
+  }
 
   const changingHeader = document.querySelector(".thirdh");
   let index = 0;
@@ -209,7 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .to("#circle2", {
         width: "1.5vw",
         height: "1.5vw",
-        // filter: "blur(0px)",
         duration: 8,
         autoRound: false
       }, "a")
@@ -235,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const h22 = document.querySelector("#h1height2");
 
     let positionFromPage3Top = h2.getBoundingClientRect().top - page3.getBoundingClientRect().top + h2.offsetHeight / 2
+
     let diff = (h22.getBoundingClientRect().top - h2.getBoundingClientRect().top) - .2
 
     var tlc = gsap.timeline({
@@ -270,102 +272,205 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tl
 
-      .to("#ser2,#ser3,#ser4,#ser5,#ser6", {
-        filter: "blur(4px)",
-        opacity: .4,
+      .to(".accordion-dec1", {
+        height: "7vw",
         duration: .5,
       }, "a")
-      .to("#para1", {
-        opacity: .5,
-        duration: .4
+      .to(".title1", {
+        opacity:1,
+        duration: .5,
       }, "a")
 
+
+      .to(".accordion-dec1", {
+        height: "0",
+        duration: .5,
+      }, "b")
+      .to(".accordion-dec2", {
+        height: "7vw",
+        duration: .5,
+      }, "b")
       .to("#circle2", {
-        top: positionFromPage3Top + diff * 1,
-        transform: "translate(-50%,-50%) scale(1)",
-        duration: .8,
-        delay: 1
-      }, "b")
-      .to("#ser1,#ser3,#ser4,#ser5,#ser6", {
-        filter: "blur(4px)",
-        opacity: .4,
+        scale: 0,
         duration: .5,
-        delay: 1
       }, "b")
-      .to("#ser2", {
-        filter: "blur(0px)",
-        opacity: 1,
+      .to(".accordion-cir2", {
+        transform: 'translateY(-50%) scale(1)',
         duration: .5,
-        delay: 1
       }, "b")
-      .to("#para1", {
-        opacity: 0,
-        duration: .4,
-        delay: 1
+      .to(".title1", {
+        opacity:0.5,
+        duration: .5,
       }, "b")
-      .to("#para2", {
-        opacity: .5,
-        duration: .4,
-        delay: 1.4
+      .to(".title2", {
+        opacity:1,
+        duration: .5,
       }, "b")
 
-      .to("#circle2", {
-        top: positionFromPage3Top + diff * 2,
-        transform: "translate(-50%,-50%) scale(1)",
-        duration: .8,
-        delay: 1
-      }, "c")
-      .to("#ser1,#ser2,#ser4,#ser5,#ser6", {
-        filter: "blur(4px)",
-        opacity: .4,
+
+
+      .to(".accordion-dec2", {
+        height: "0",
         duration: .5,
-        delay: 1
       }, "c")
-      .to("#ser3", {
-        filter: "blur(0px)",
-        opacity: 1,
+      .to(".accordion-dec3", {
+        height: "7vw",
         duration: .5,
-        delay: 1
       }, "c")
-      .to("#para2", {
-        opacity: 0,
-        duration: .4,
-        delay: 1
+      .to(".accordion-cir2", {
+        scale: 0,
+        duration: .5,
       }, "c")
-      .to("#para3", {
-        opacity: .5,
-        duration: .4,
-        delay: 1.4
+      .to(".accordion-cir3", {
+        transform: 'translateY(-50%) scale(1)',
+        duration: .5,
+      }, "c")
+       .to(".title2", {
+        opacity:0.5,
+        duration: .5,
+      }, "c")
+      .to(".title3", {
+        opacity:1,
+        duration: .5,
       }, "c")
 
+      .to(".accordion-dec3", {
+        height: "0",
+        duration: .5,
+      }, "d")
+      .to(".accordion-dec4", {
+        height: "7vw",
+        duration: .5,
+      }, "d")
+      .to(".accordion-cir3", {
+        scale: 0,
+        duration: .5,
+      }, "d")
+      .to(".accordion-cir4", {
+        transform: 'translateY(-50%) scale(1)',
+        duration: .5,
+      }, "d")
+       .to(".title3", {
+        opacity:0.5,
+        duration: .5,
+      }, "d")
+      .to(".title4", {
+        opacity:1,
+        duration: .5,
+      }, "d")
+
+
       .to("#circle2", {
-        top: positionFromPage3Top + diff * 3,
+        top: positionFromPage3Top + diff * 1 + 2,
+        transform: "translate(-50%,-50%) scale(0)",
+        duration: .5,
+      })
+
+      .to(".accordion-cir4", {
+        transform: 'translateY(-50%) scale(0)',
+        duration: .2,
+      }, "e")
+      .to("#circle2", {
         transform: "translate(-50%,-50%) scale(1)",
-        duration: .8,
-        delay: 1
-      }, "d")
-      .to("#ser1,#ser2,#ser3,#ser5,#ser6", {
-        filter: "blur(4px)",
-        opacity: .4,
-        duration: .5,
-        delay: 1
-      }, "d")
-      .to("#ser4", {
-        filter: "blur(0px)",
-        opacity: 1,
-        duration: .5,
-        delay: 1
-      }, "d")
-      .to("#para3", {
-        opacity: 0,
-        duration: .4,
-        delay: 1
-      }, "d")
-      .to("#para4", {
-        opacity: .5,
-        duration: .4,
-        delay: 1.4
-      }, "d")
+        duration: .1,
+      }, "e")
+      .to(".title4", {
+        opacity:0.5,
+        duration: .1,
+      }, "e")
+
+
+    //   .to("#para1", {
+    //     opacity: .5,
+    //     duration: .4
+    //   }, "a")
+
+    //   .to("#circle2", {
+    //     top: positionFromPage3Top + diff * 1,
+    //     transform: "translate(-50%,-50%) scale(1)",
+    //     duration: .8,
+    //     delay: 1
+    //   }, "b")
+    //   .to("#ser1,#ser3,#ser4,#ser5,#ser6", {
+    //     filter: "blur(4px)",
+    //     opacity: .4,
+    //     duration: .5,
+    //     delay: 1
+    //   }, "b")
+    //   .to("#ser2", {
+    //     filter: "blur(0px)",
+    //     opacity: 1,
+    //     duration: .5,
+    //     delay: 1
+    //   }, "b")
+    //   .to("#para1", {
+    //     opacity: 0,
+    //     duration: .4,
+    //     delay: 1
+    //   }, "b")
+    //   .to("#para2", {
+    //     opacity: .5,
+    //     duration: .4,
+    //     delay: 1.4
+    //   }, "b")
+
+    //   .to("#circle2", {
+    //     top: positionFromPage3Top + diff * 2,
+    //     transform: "translate(-50%,-50%) scale(1)",
+    //     duration: .8,
+    //     delay: 1
+    //   }, "c")
+    //   .to("#ser1,#ser2,#ser4,#ser5,#ser6", {
+    //     filter: "blur(4px)",
+    //     opacity: .4,
+    //     duration: .5,
+    //     delay: 1
+    //   }, "c")
+    //   .to("#ser3", {
+    //     filter: "blur(0px)",
+    //     opacity: 1,
+    //     duration: .5,
+    //     delay: 1
+    //   }, "c")
+    //   .to("#para2", {
+    //     opacity: 0,
+    //     duration: .4,
+    //     delay: 1
+    //   }, "c")
+    //   .to("#para3", {
+    //     opacity: .5,
+    //     duration: .4,
+    //     delay: 1.4
+    //   }, "c")
+
+    //   .to("#circle2", {
+    //     top: positionFromPage3Top + diff * 3,
+    //     transform: "translate(-50%,-50%) scale(1)",
+    //     duration: .8,
+    //     delay: 1
+    //   }, "d")
+    //   .to("#ser1,#ser2,#ser3,#ser5,#ser6", {
+    //     filter: "blur(4px)",
+    //     opacity: .4,
+    //     duration: .5,
+    //     delay: 1
+    //   }, "d")
+    //   .to("#ser4", {
+    //     filter: "blur(0px)",
+    //     opacity: 1,
+    //     duration: .5,
+    //     delay: 1
+    //   }, "d")
+    //   .to("#para3", {
+    //     opacity: 0,
+    //     duration: .4,
+    //     delay: 1
+    //   }, "d")
+    //   .to("#para4", {
+    //     opacity: .5,
+    //     duration: .4,
+    //     delay: 1.4
+    //   }, "d")
   }
 
 

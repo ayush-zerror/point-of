@@ -648,8 +648,10 @@ p {
   height: 100vh;
   width: 100%;
   padding: 0vw 6vw;
+  padding-top: 12vw;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  align-items: start;
   justify-content: center;
   user-select: none;
 }
@@ -695,71 +697,72 @@ p {
   font-weight: 600 !important;
   color: var(--heading);
 }
-#left-content h5 {
-  margin-top: 1.1vw;
-}
-#left-content-text {
-  position: relative;
-  width: 100%;
-  margin-top: 1vw;
-}
-#left-content-text p {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  color: var(--secondary);
-}
 
 #right-content {
   position: relative;
   width: 48%;
 }
-#right-content h2 {
-  font-size: 2vw !important;
-  margin-bottom: 1.8vw;
-  text-transform: capitalize;
+.accordion {
+  width: 100%;
 }
-#right-content > h2 {
-  opacity: 0;
-}
-#circle-text {
-  width: 1.5vw;
-  height: 1.5vw;
-  background-color: var(--secondary);
-  position: absolute;
-  top: 5%;
-  /* top: 21%; */
-  /* top: 37.5%; */
-  /* top: 53.3%; */
-  /* top: 69.7%; */
-  /* top: 85.5%; */
-  left: -6.15%;
-  border: 1px solid var(--secondary);
-  border-radius: 50px;
-  opacity: 0;
-}
-#right-content-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-#right-content-top h2 {
-  transform: translateX(0%);
-  opacity: 1;
-}
-#right-content-top h2 a {
-  text-decoration: none;
-  color: var(--secondary);
-}
-#right-content-top h2 i {
-  opacity: 0;
+.accordion-title {
+  width: 100%;
+  padding: 2vw 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.745);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
   transition: all ease 0.3s;
-  margin-left: -20px;
+  position: relative;
 }
-#right-content-top h2:hover i {
+.accordion-title .accordion-cir {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  left: -2.5vw;
+  height: 1.5vw;
+  width: 1.5vw;
+  border-radius: 50%;
+  background-color: var(--secondary);
+}
+
+.accordion-title h2 {
+  font-size: 2vw;
+  color: var(--heading) !important;
+}
+.accordion.active h2 {
   opacity: 1;
-  margin-left: 2px;
 }
+.accordion h2 {
+  opacity: 0.5;
+}
+.accordion-title:hover h2 {
+  opacity: 1;
+}
+.accordion.active .accordion-dec {
+  height: 10vw;
+}
+ 
+#page3 .accordion-dec {
+  overflow: hidden;
+  height: 0vw;
+  display: flex;
+  align-items: start;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.8s;
+}
+#page3 .accordion-dec h5 {
+  width: 90%;
+  padding: 1vw 0;
+  padding-top: 0;
+  color: var(--para) !important;
+}
+.accordion .marketing-accordion-dec h5 {
+  width: 85%;
+}
+
+
+
 #page4 {
   height: 100vh;
   width: 100%;
