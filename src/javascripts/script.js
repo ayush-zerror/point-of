@@ -709,7 +709,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   if (window.innerWidth > 600) {
-    // page4Animation()
+    page4Animation()
     page5Animation()
   } else {
     page4AnimationMobile()

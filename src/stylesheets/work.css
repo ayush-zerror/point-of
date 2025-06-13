@@ -261,8 +261,9 @@ body {
   height: 1.3vw;
   width: 1.3vw;
   border-radius: 50%;
-  background-color: white;
-  color: white;
+  /* background-color: white; */
+  /* color: white; */
+  border: 2px solid white;
   pointer-events: all;
   transition: all ease 0.3s !important;
 }
@@ -275,8 +276,9 @@ body {
   height: 1.3vw;
   width: 1.3vw;
   border-radius: 50%;
-  background-color: var(--secondary);
-  color: var(--secondary);
+  /* background-color: var(--secondary); */
+  /* color: var(--secondary); */
+  border: 2px solid var(--secondary);
   pointer-events: all;
   transition: all ease 0.3s !important;
   cursor: pointer;
@@ -291,10 +293,10 @@ body {
   opacity: 0;
 }
 .navbar1 #menu:hover {
-  transform: scale(1.15) !important;
+  background-color: #fff;
 }
 .navbar2 #menu:hover {
-  transform: scale(1.15) !important;
+  background-color: var(--secondary);
 }
 
 h2 {

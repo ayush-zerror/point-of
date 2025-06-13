@@ -928,6 +928,12 @@ function menuOpen() {
         duration: 1.5,
         ease: "power4.out"
       })
+      gsap.from("#navigation-link a,#top-container .common-btn,#btm-container", {
+        x: 50,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.1,
+      })
       menu = true
     } else {
       gsap.to(".navigation1", {
@@ -954,6 +960,13 @@ function menuOpen() {
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
         duration: 1.5,
         ease: "power4.out"
+      })
+      gsap.from("#navigation-link a,#top-container .common-btn,#btm-container", {
+        x: 50,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.1,
+        delay:-.1
       })
       menu2 = true
     } else {

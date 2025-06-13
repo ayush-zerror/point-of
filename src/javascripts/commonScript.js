@@ -39,63 +39,7 @@ function lenisSetup() {
   requestAnimationFrame(raf);
 }
 lenisSetup()
-// window.addEventListener("load", );
 
-
-
-
-// Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
-// This ensures Lenis's smooth scroll animation updates on each GSAP tick
-// gsap.ticker.add((time) => {
-//   lenis.raf(time * 1000); // Convert time from seconds to milliseconds
-// })
-
-// Disable lag smoothing in GSAP to prevent any delay in scroll animations
-// gsap.ticker.lagSmoothing(0);
-
-
-// gsap.to(window, {
-//   scrollTo: 0
-// })
-
-
-// function scrollToHashElement() {
-//   const hash = window.location.hash;
-//   if (hash) {
-//     const target = document.querySelector(hash);
-//     if (target) {
-//       lenis.scrollTo(target, {
-//         offset: -60, // adjust if you have fixed headers
-//         duration: 1.2,
-//         easing: (t) => 1 - Math.pow(1 - t, 4), // smooth easing
-//       });
-//     }
-//   }
-// }
-
-// // Run after page load (for direct links with #)
-// window.addEventListener("load", () => {
-//   setTimeout(scrollToHashElement, 100); // small delay helps if DOM is rendering
-// });
-
-// // Also run if the hash changes (e.g., user clicks a link)
-// window.addEventListener("hashchange", () => {
-//   setTimeout(scrollToHashElement, 100);
-// });
-
-
-
-
-// const cursor = document.querySelector("#cursor")
-// window.addEventListener("mousemove", function (e) {
-//   if (cursor) {
-//     gsap.to(cursor, {
-//       opacity: 1,
-//       top: e.clientY,
-//       left: e.clientX,
-//     })
-//   }
-// })
 
 function logo() {
 
@@ -212,6 +156,12 @@ function menuOpen() {
         duration: 1.5,
         ease: "power4.out"
       })
+        gsap.from("#navigation-link a,#top-container .common-btn,#btm-container",{
+        x:50,
+        opacity:0,
+        duration: 1.5,
+        stagger: 0.1,
+      })
       menu = true
     } else {
       gsap.to("#navigation", {
@@ -231,6 +181,12 @@ function menuOpen() {
         duration: 1.5,
         ease: "power4.out"
       })
+        gsap.from("#navigation-link a,#top-container .common-btn,#btm-container",{
+        x:50,
+        opacity:0,
+        duration: 1.5,
+        stagger: 0.1,
+      })
       menu = true
     } else {
       gsap.to("#navigation", {
@@ -243,103 +199,103 @@ function menuOpen() {
     }
   })
 
-  let shapes = document.querySelectorAll(".shape")
-  let link = document.querySelectorAll("#shape-select a")
-  let socialLink = document.querySelectorAll("#social-l a")
+  // let shapes = document.querySelectorAll(".shape")
+  // let link = document.querySelectorAll("#shape-select a")
+  // let socialLink = document.querySelectorAll("#social-l a")
 
-  link.forEach(function (l) {
-    l.addEventListener("mouseenter", function () {
-      for (var i = 0; i <= link.length; i++) {
-        if (link[i] !== l) {
-          gsap.to(link[i], {
-            filter: "blur(4px)",
-            opacity: .4,
-            duration: .4
-          })
-        }
-        else {
-          gsap.to(l, {
-            filter: "blur(0px)",
-            opacity: 1,
-            duration: .4
-          })
-        }
-      }
+  // link.forEach(function (l) {
+  //   l.addEventListener("mouseenter", function () {
+  //     for (var i = 0; i <= link.length; i++) {
+  //       if (link[i] !== l) {
+  //         gsap.to(link[i], {
+  //           filter: "blur(4px)",
+  //           opacity: .4,
+  //           duration: .4
+  //         })
+  //       }
+  //       else {
+  //         gsap.to(l, {
+  //           filter: "blur(0px)",
+  //           opacity: 1,
+  //           duration: .4
+  //         })
+  //       }
+  //     }
 
-      if (l.getAttribute("data-index") === "0") {
-        return;
-      }
-      gsap.to(shapes[0], {
-        transform: "scale(0)",
-        opacity: 0,
-        duration: .5,
-        ease: "power4.out",
-      })
-      gsap.to(shapes[l.getAttribute("data-index")], {
-        transform: "scale(1)",
-        opacity: 1,
-        duration: .5,
-        ease: "power4.out",
-      })
+  //     if (l.getAttribute("data-index") === "0") {
+  //       return;
+  //     }
+  //     gsap.to(shapes[0], {
+  //       transform: "scale(0)",
+  //       opacity: 0,
+  //       duration: .5,
+  //       ease: "power4.out",
+  //     })
+  //     gsap.to(shapes[l.getAttribute("data-index")], {
+  //       transform: "scale(1)",
+  //       opacity: 1,
+  //       duration: .5,
+  //       ease: "power4.out",
+  //     })
 
-    })
-  })
+  //   })
+  // })
 
-  link.forEach(function (l, idx) {
-    l.addEventListener("mouseleave", function () {
-      gsap.to(link, {
-        filter: "blur(0px)",
-        opacity: 1,
-        duration: .4
-      })
-      if (l.getAttribute("data-index") === "0") {
-        return;
-      }
-      gsap.to(shapes[l.getAttribute("data-index")], {
-        transform: "scale(0)",
-        opacity: 0,
-        duration: .5,
-        ease: "power4.out",
-      })
-      gsap.to(shapes[0], {
-        transform: "scale(1)",
-        opacity: 1,
-        duration: .5,
-        ease: "power4.out",
-      })
-    })
-  })
+  // link.forEach(function (l, idx) {
+  //   l.addEventListener("mouseleave", function () {
+  //     gsap.to(link, {
+  //       filter: "blur(0px)",
+  //       opacity: 1,
+  //       duration: .4
+  //     })
+  //     if (l.getAttribute("data-index") === "0") {
+  //       return;
+  //     }
+  //     gsap.to(shapes[l.getAttribute("data-index")], {
+  //       transform: "scale(0)",
+  //       opacity: 0,
+  //       duration: .5,
+  //       ease: "power4.out",
+  //     })
+  //     gsap.to(shapes[0], {
+  //       transform: "scale(1)",
+  //       opacity: 1,
+  //       duration: .5,
+  //       ease: "power4.out",
+  //     })
+  //   })
+  // })
 
-  socialLink.forEach(function (l) {
-    l.addEventListener("mouseenter", function () {
-      for (var i = 0; i <= socialLink.length; i++) {
-        if (socialLink[i] !== l) {
-          gsap.to(socialLink[i], {
-            filter: "blur(2px)",
-            opacity: .5,
-            duration: .4
-          })
-        }
-        else {
-          gsap.to(l, {
-            filter: "blur(0px)",
-            opacity: 1,
-            duration: .4
-          })
-        }
-      }
-    })
-  })
+  // socialLink.forEach(function (l) {
+  //   l.addEventListener("mouseenter", function () {
+  //     for (var i = 0; i <= socialLink.length; i++) {
+  //       if (socialLink[i] !== l) {
+  //         gsap.to(socialLink[i], {
+  //           filter: "blur(2px)",
+  //           opacity: .5,
+  //           duration: .4
+  //         })
+  //       }
+  //       else {
+  //         gsap.to(l, {
+  //           filter: "blur(0px)",
+  //           opacity: 1,
+  //           duration: .4
+  //         })
+  //       }
+  //     }
+  //   })
+  // })
 
-  socialLink.forEach(function (l, idx) {
-    l.addEventListener("mouseleave", function () {
-      gsap.to(socialLink, {
-        filter: "blur(0px)",
-        opacity: 1,
-        duration: .4
-      })
-    })
-  })
+  // socialLink.forEach(function (l, idx) {
+  //   l.addEventListener("mouseleave", function () {
+  //     gsap.to(socialLink, {
+  //       filter: "blur(0px)",
+  //       opacity: 1,
+  //       duration: .4
+  //     })
+  //   })
+  // })
 }
 menuOpen()
 

@@ -426,10 +426,7 @@ function numberIncreaseAnimtion() {
         .to(".numbers11", {
             y: "-1000%"
         }, "a")
-        .to(".line-count", {
-            width: "100%",
-            duration: 1
-        })
+     
 
 
   const split = new SplitText("#line-split", {
@@ -494,8 +491,8 @@ function page5Animation() {
     scrollTrigger: {
       trigger: "#page5-cont",
       scroller: "body",
-      start: "top 50%",
-      end: "top 20%",
+      start: "top 80%",
+      end: "top 50%",
     //   scrub: true,
     //   markers:true
     }

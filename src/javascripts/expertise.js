@@ -121,7 +121,7 @@ function page3svgAnimation() {
                         text.getBoundingClientRect().width / 2;
                     let distanceX = Math.abs(circleX - textX);
                     let opacity = Math.max(
-                        0.2,
+                        0.1,
                         1 - distanceX / (window.innerWidth / 2.2)
                     );
                     gsap.to(text, { opacity: opacity, immediateRender: false });

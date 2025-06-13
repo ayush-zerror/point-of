@@ -216,13 +216,14 @@ body {
   height: 1.3vw;
   width: 1.3vw;
   border-radius: 50%;
-  background-color: var(--secondary);
-  color: var(--secondary);
+  /* background-color: var(--secondary); */
+  /* color: var(--secondary); */
+  border: 2px solid var(--secondary);
   transition: all ease 0.3s;
   cursor: pointer;
 }
 #navbar #menu:hover {
-  transform: scale(1.15);
+  background-color: var(--secondary);
 }
 
 #menu-c {
@@ -327,13 +328,14 @@ body {
   height: 1.3vw;
   width: 1.3vw;
   border-radius: 50%;
-  background-color: white;
-  color: white;
+  /* background-color: white; */
+  /* color: white; */
+  border: 2px solid white;
   transition: all ease 0.3s;
   cursor: pointer;
 }
 #navbar-black #menu-black:hover {
-  transform: scale(1.15);
+  background-color: white;
 }
 
 #mobile-logo-black {
@@ -1006,7 +1008,7 @@ p {
   cursor: grabbing !important;
 }
 .swiper-slide:active .swiper-container {
-  scale: 0.98;
+  scale: 0.98 !important;
 }
 .swiper-container {
   display: flex;
@@ -1104,7 +1106,7 @@ p {
 }
 #marquee {
   display: flex;
-  margin-top: 5vw;
+  margin-top: 10vw;
 }
 .marquee-wrap {
   width: fit-content;

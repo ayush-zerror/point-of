@@ -1,4 +1,5 @@
-const accordions = document.querySelectorAll(".accordion")
+const accordions = document.querySelectorAll(".accordion");
+
 accordions.forEach(accordion => {
     accordion.querySelector(".accordion-title").addEventListener("click", () => {
         for (var i = 0; i < accordions.length; i++) {
@@ -7,16 +8,18 @@ accordions.forEach(accordion => {
             } else {
                 if (accordion.classList.contains("active")) {
                     accordion.classList.remove("active");
-                }
-                else {
+                } else {
                     accordion.classList.add("active");
-
                 }
             }
         }
 
-    })
-})
+        // ✅ Refresh ScrollTrigger after layout changes
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 300); // delay allows CSS transitions (if any) to complete
+    });
+});
 
 
 

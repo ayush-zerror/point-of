@@ -33,23 +33,30 @@ function page1Animation() {
 page1Animation();
 
 function page2Animation() {
-  gsap.fromTo("#page2 .accordion", {
+  var tl = gsap.timeline({
+     scrollTrigger: {
+      trigger: "#page2",
+      scroller: "body",
+      start: "top 70%",
+      end: "top 40%",
+      // scrub: true,
+      // markers:true
+    }
+  })
+  tl.fromTo("#page2 .accordion", {
     opacity: 0,
-    x: 100,
+    x: 50,
   }, {
     opacity: 1,
     x: 0,
     stagger: 0.4,
     duration: 1,
-    scrollTrigger: {
-      trigger: "#page2",
-      scroller: "body",
-      start: "top 50%",
-      end: "top 0%",
-      // scrub: true,
-      // markers:true
-    }
-  })
+  },"a")
+  .to(".accordion-title .line",{
+    width: "100%",
+    duration: 1,
+    stagger: 0.4,
+  },"a")
 }
 page2Animation()
 
@@ -65,8 +72,8 @@ function page5Animation() {
     scrollTrigger: {
       trigger: "#page5-top",
       scroller: "body",
-      start: "top 50%",
-      end: "top 20%",
+       start: "top 80%",
+      end: "top 50%",
       // scrub: true,
       // markers:true
     }
@@ -119,8 +126,8 @@ function page6Animation() {
     scrollTrigger: {
       trigger: "#page6-cont",
       scroller: "body",
-      start: "top 50%",
-      end: "top 20%",
+      start: "top 80%",
+      end: "top 50%",
       // scrub: true,
       // markers:true
     }
