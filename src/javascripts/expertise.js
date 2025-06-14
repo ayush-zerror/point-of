@@ -165,43 +165,43 @@ function page3svgAnimation() {
                 scroller: "body",
                 markers: true,
                 start: "top 20%",
-                end: "top -50%",
+                end: "top -60%",
                 scrub: 1,
                 markers: false
             },
         });
 
-        tl
-            .to(circleGroupMobile, {
-                motionPath: {
-                    path: pathMobile,
-                    align: pathMobile,
-                    alignOrigin: [0.5, 0.5],
-                    start: 0,
-                    end: 1,
-                    onUpdate: (self) => {
-                        let circleX =
-                            circleMobile.getBoundingClientRect().top +
-                            circleMobile.getBoundingClientRect().height / 2;
-                        textElementsMobile.forEach((text) => {
-                            let textX =
-                                text.getBoundingClientRect().top +
-                                text.getBoundingClientRect().height / 2;
-                            let distanceX = Math.abs(circleX - textX);
-                            let opacity = Math.max(
-                                0.2,
-                                1 - distanceX / (window.innerHeight / 2.2)
-                            );
-                            gsap.set(text, { opacity: opacity, immediateRender: !1 });
-                        });
-                    }
-                }
-            })
+        tl.to(circleGroupMobile, {
+            motionPath: {
+                path: pathMobile,
+                align: pathMobile,
+                alignOrigin: [0.5, 0.5],
+                start: 0,
+                end: 1,
+            },
+            onUpdate: () => {
+                let circleY =
+                    circleMobile.getBoundingClientRect().top +
+                    circleMobile.getBoundingClientRect().height / 2;
+                textElementsMobile.forEach((text) => {
+                    let textY =
+                        text.getBoundingClientRect().top +
+                        text.getBoundingClientRect().height / 2;
+                    let distanceY = Math.abs(circleY - textY);
+                    let opacity = Math.max(
+                        0.2,
+                        1 - distanceY / (window.innerHeight / 2.2)
+                    );
+                    gsap.to(text, { opacity: opacity, immediateRender: false });
+                });
+            }
+        })
             .to(circleGroupMobile, {
                 opacity: 0,
                 duration: 0,
-                delay:-.2
-            })
+                delay: -.1
+            });
+
     }
 
 }

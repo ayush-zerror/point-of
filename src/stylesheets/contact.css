@@ -1457,12 +1457,10 @@ p {
   #navbar #menu {
     height: 5.5vw;
     width: 5.5vw;
-    background-color: var(--secondary);
   }
   #navbar-black #menu-black {
     height: 5.5vw;
     width: 5.5vw;
-    background-color: var(--secondary);
   }
   #navbar #logo,
   #navbar-black #logo-black {
@@ -1684,17 +1682,48 @@ p {
   .right-section #find-us {
     margin-top: 16vw;
   }
-  #call-Schedule p,
-  #call-Schedule p:nth-child(2) {
-    font-family: para2;
-    /* font-size: 1.1vw; */
-    font-size: 1.125rem;
-    line-height: 1.35;
-    font-weight: 500;
-    color: var(--secondary);
+
+  #apply-form{
+    flex-direction: column;
+    padding-top: 15vw;
+    gap: 10vw;
   }
-  #call {
-    margin-bottom: 2vw !important;
+  #from-left {
+    height: fit-content;
+  }
+  #from-left h5 {
+    font-size: 5vw;
+    margin-bottom: 3vw;
+  }
+  #cross {
+    font-size: 6vw;
+  }
+  #from-right form input {
+    padding: 4vw 0;
+  }
+  #from-left h2{
+    font-size: 7vw;
+  } 
+  #Uplaod h5 {
+    font-size: 4vw;
+  }
+  #Uplaod i {
+    font-size: 4vw;
+  }
+  #Uplaod{
+    padding: 2vw 4vw;
+    gap: 4vw;
+    margin: 5vw 0 8vw;
+  }
+  #from-right form p{
+    font-size: 1.2rem;
+    width: 80%;
+    font-weight: 100;
+    margin-top: 5vw;
+  }
+
+  .accordion-dec .common-btn{
+    margin-top: 7vw;
   }
   #career {
     padding: 10vw 4vw;
@@ -1783,7 +1812,7 @@ p {
     font-size: 1.05rem;
   }
   .accordion.active .accordion-dec {
-    height: 170vw;
+    height: 180vw;
   }
   .accordion-title {
     padding: 4vw 0;

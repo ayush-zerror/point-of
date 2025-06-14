@@ -807,7 +807,6 @@ p {
   #navbar #menu {
     height: 5.5vw;
     width: 5.5vw;
-    background-color: var(--secondary);
   }
   #navbar #logo {
     display: none;

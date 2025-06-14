@@ -836,12 +836,10 @@ p {
   #navbar #menu {
     height: 5.5vw;
     width: 5.5vw;
-    background-color: var(--secondary);
   }
   #navbar-black #menu-black {
     height: 5.5vw;
     width: 5.5vw;
-    background-color: var(--secondary);
   }
   #navbar #logo,
   #navbar-black #logo-black {
@@ -890,6 +888,10 @@ p {
   #navigation-link a {
     font-size: 11.5vw;
     margin-bottom: 4vw;
+  }
+  #slide2 > h2{
+    font-size: 5vw;
+    margin-bottom: 5vw;
   }
 
   #top-container .common-btn h3{

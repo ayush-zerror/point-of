@@ -58,6 +58,10 @@ body {
   width: 100%;
   height: 100%;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+
 #cursor {
   width: 1.2vw;
   height: 1.2vw;
@@ -621,6 +625,7 @@ p {
   width: 100%;
   height: auto;
   position: relative;
+  z-index: 1;
 }
 
 #page5 img {
@@ -998,12 +1003,10 @@ p {
   #navbar #menu {
     height: 5.5vw;
     width: 5.5vw;
-    background-color: var(--secondary);
   }
   #navbar-black #menu-black {
     height: 5.5vw;
     width: 5.5vw;
-    background-color: var(--secondary);
   }
   #navbar #logo,
   #navbar-black #logo-black {

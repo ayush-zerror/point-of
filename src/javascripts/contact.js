@@ -295,6 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+
 // custom dropdown
 document.addEventListener("DOMContentLoaded", function () {
     const dropdowns = document.querySelectorAll(".custom-dropdown");
@@ -390,30 +391,30 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-if(window.innerWidth > 600){
+if (window.innerWidth > 600) {
     contactPin()
     footerNavSwitch()
 }
 
 function page4Animation() {
-  gsap.fromTo("#page4 .work", {
-    opacity: 0,
-    y: 80, 
-  }, {
-    opacity: 1,
-    y: 0,
-    stagger: {
-      amount: 1, 
-    },
-    duration: 2.5, 
-    scrollTrigger: {
-      trigger: "#page4",
-      scroller: "body",
-      start: "top 60%", 
-      end: "top 10%",   
-      scrub: 2,         
-    //   markers: true
-    }
-  });
+    gsap.fromTo("#page4 .work", {
+        opacity: 0,
+        y: 80,
+    }, {
+        opacity: 1,
+        y: 0,
+        stagger: {
+            amount: 1,
+        },
+        duration: 2.5,
+        scrollTrigger: {
+            trigger: "#page4",
+            scroller: "body",
+            start: "top 60%",
+            end: "top 10%",
+            scrub: 2,
+            //   markers: true
+        }
+    });
 }
 page4Animation();
