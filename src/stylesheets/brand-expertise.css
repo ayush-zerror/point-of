@@ -925,11 +925,17 @@ p {
   #page2 {
     height: 25vh;
   }
+  #slide2 > p{
+    margin-bottom: 10vw;
+  }
 
   #page3 {
     flex-direction: column;
     padding: 10vw 4vw;
   }
+  .work-text-wrap h5 {
+    transform: translateY(0%) rotate(0deg);
+}
 
   #slide1 {
     width: 100%;

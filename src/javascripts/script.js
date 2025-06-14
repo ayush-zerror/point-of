@@ -485,7 +485,7 @@ document.addEventListener("DOMContentLoaded", function () {
       scrollTrigger: {
         trigger: "#page4",
         scroller: "body",
-        start: "top 100%%",
+        start: "top 100%",
         end: "top 63%",
         scrub: true,
         // markers: true
@@ -583,28 +583,13 @@ document.addEventListener("DOMContentLoaded", function () {
       scrollTrigger: {
         trigger: "#page4",
         scroller: "body",
-        start: "top 100%%",
+        start: "top 100%",
         end: "top 63%",
         scrub: true,
         // markers: true
       }
     })
     tl4e
-
-      // .to("#circle2", {
-      //   top: "50%",
-      //   transform: "translate(-50%,-50%) scale(1)",
-      //   duration: 2.3,
-      // }, "oc")
-      .to("#ser1,#ser2,#ser3,#ser4,#ser5,#ser6", {
-        filter: "blur(0px)",
-        opacity: 1,
-        duration: .8,
-      }, "oc")
-      .to("#para6", {
-        opacity: 0,
-        duration: .8,
-      }, "oc")
       .to("#circle2", {
         top: "50%",
         width: "2.5vw",
@@ -620,9 +605,10 @@ document.addEventListener("DOMContentLoaded", function () {
         trigger: "#page4",
         scroller: "body",
         start: "top top",
-        end: "top -120%",
+        end: "top -100%",
         scrub: 1,
         pin: true,
+        // markers: true
       }
     })
 
@@ -632,10 +618,6 @@ document.addEventListener("DOMContentLoaded", function () {
         duration: 1.5,
         ease: "linear",
       }, "sl")
-      // .to("#circle2", {
-      //   left: "10%",
-      //   duration: 1,
-      // }, "sl")
       .to(".view-all .cirr", {
         opacity: 1,
         duration: 0
@@ -649,14 +631,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .to(".view-all .cirr i", {
         opacity: 1,
         duration: .1,
-        delay: 0.1
       }, "s")
       .to("#circle2", {
-        // left: "50%",
-        width: "2.5vw",
-        height: "2.5vw",
         backgroundColor: "var(--secondary)",
-        duration: .5,
+        duration: .3,
         opacity: 1
       })
       .to(".view-all", {
@@ -665,6 +643,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .to(".view-all", {
         display: "none",
+        duration:.2
       })
   }
 
@@ -768,9 +747,10 @@ document.addEventListener("DOMContentLoaded", function () {
         trigger: "#page5",
         scroller: "body",
         start: "top 0%",
-        end: "top -400%",
+        end: "top -250%",
         scrub: 1,
         pin: true,
+        // markers: true
       }
     })
     tl5
@@ -780,20 +760,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }, "c")
       .to("#page5", {
         maskSize: "280%",
-        duration: 4,
-        delay: -.2
+        duration: 2.5,
+        delay: -.4
       })
       .to("#video-container", {
         clipPath: " polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         duration: 1
       })
       .to("#video-container", {
-        transform: "translate(-50%,-50%) scale(.6) rotateY(-20deg) rotateX(-2deg)",
-        height: "30%",
+        transform: "translate(-50%,-50%) scale(.6) rotateY(-20deg) rotateX(-2deg) scaleY(0.3)",
         duration: 1.5
       })
       .to("#video-container", {
-        transform: "translate(-50%,-50%) scale(.5) rotateY(-20deg) rotateY(20deg)   rotateX(-2deg) rotateX(2deg)",
+        transform: "translate(-50%,-50%) scale(.5) rotateY(-20deg) rotateY(20deg) scaleY(0.3)   rotateX(-2deg) rotateX(2deg)",
         duration: 1.5
       })
       .to("#img-over", {
@@ -801,8 +780,9 @@ document.addEventListener("DOMContentLoaded", function () {
         duration: 4
       })
       .to("#video-container", {
-        transform: "translate(-50%,-50%) scale(.6) rotateY(-20deg) rotateX(-2deg)",
+        transform: "translate(-50%,-50%) scale(.6) rotateY(-20deg) rotateX(-2deg) scaleY(1)",
         duration: 1.5,
+        height: "100%",
       })
       .to("#video-container", {
         transform: "translate(-50%,-50%)",
