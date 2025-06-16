@@ -1165,9 +1165,13 @@ p {
     justify-content: space-between;
   }
   #navbar #menu {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border: 3px solid var(--secondary);
   }
+  .brand-m:hover {
+    background-color: transparent;
+}
   #navbar #logo {
     display: none;
   }
@@ -1296,7 +1300,9 @@ p {
   }
 
   #page4-mobile h4 {
-    display: none;
+    color: var(--para);
+    font-size: 1.05rem;
+    letter-spacing: .5px;
   }
   .brand-m {
     padding: 5vw 0vw;

@@ -64,8 +64,6 @@ body {
   overscroll-behavior: none !important;
 }
 
-
-
 .navigation2 {
   z-index: 10 !important;
 }
@@ -103,47 +101,47 @@ body {
   color: var(--secondary);
   text-decoration: none;
   margin-bottom: 1vw;
-  opacity: .5;
+  opacity: 0.5;
   letter-spacing: 1px;
 }
-#navigation-link a:nth-child(2){
+#navigation-link a:nth-child(2) {
   opacity: 1;
   font-weight: 600;
 }
-#top-container .common-btn{
+#top-container .common-btn {
   text-decoration: none;
 }
-#top-container .common-btn .cirr{
-  width: .8vw;
-  height: .8vw;
+#top-container .common-btn .cirr {
+  width: 0.8vw;
+  height: 0.8vw;
 }
-#top-container .common-btn h3{
+#top-container .common-btn h3 {
   text-transform: lowercase;
   font-size: 2vw;
   font-weight: 100;
 }
-#btm-container{
+#btm-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid var(--para);
   padding-top: 3vw;
 }
-#navigation-social{
+#navigation-social {
   display: flex;
   align-items: center;
   gap: 4vw;
 }
-#navigation-social a{
+#navigation-social a {
   text-decoration: none;
-   font-family: para3;
+  font-family: para3;
   font-size: 0.9vw;
   line-height: 1.5;
   font-weight: 500;
   color: var(--heading);
 }
 
-#nav-btn-container{
+#nav-btn-container {
   display: flex;
   align-items: center;
   gap: 3vw;
@@ -976,6 +974,7 @@ p {
   padding: 4vw 4vw;
   padding-top: 15vh;
   overflow-y: auto;
+  display: none;
 }
 #page1-mobile .project-m {
   width: 100%;
@@ -997,7 +996,7 @@ p {
   font-size: 1.05rem;
   font-weight: 500;
   opacity: 0.8;
-  margin-top: .5vw;
+  margin-top: 0.5vw;
   color: var(--para);
 }
 
@@ -1023,6 +1022,7 @@ p {
   color: var(--secondary);
   display: flex;
   align-items: flex-end;
+  display: none;
 }
 
 #footer-container {
@@ -1236,6 +1236,11 @@ p {
   width: 0;
 }
 
+ #mobile-logo{
+    display: none;
+  }
+
+
 @media (max-width: 600px) {
   html,
   body {
@@ -1266,24 +1271,25 @@ p {
     );
   }
   .navbar1 #menu {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border: 3px solid var(--secondary);
   }
   .navbar1 #logo {
     display: none;
   }
   .navbar1 #mode {
     display: block;
-    font-size: 5.5vw;
+    font-size: 5vw;
   }
   #mobile-logo {
-     display: flex;
+    display: flex;
     align-items: end;
     filter: invert(1);
     width: 45%;
     pointer-events: auto;
   }
- 
+
   #navigation {
     padding: 6vw;
     justify-content: space-between;
@@ -1299,7 +1305,7 @@ p {
     font-size: 11.5vw;
     margin-bottom: 4vw;
   }
-   .common-btn {
+  .common-btn {
     gap: 2.5vw;
   }
   .common-btn h3 {
@@ -1310,10 +1316,10 @@ p {
     height: 2.5vw;
   }
 
-  #top-container .common-btn h3{
+  #top-container .common-btn h3 {
     font-size: 5vw;
   }
-  #top-container .common-btn .cirr{
+  #top-container .common-btn .cirr {
     width: 2.5vw;
     height: 2.5vw;
   }
@@ -1323,20 +1329,148 @@ p {
     gap: 5vw;
     padding-top: 5vw;
   }
-  #navigation-social{
+  #navigation-social {
     width: 100%;
     justify-content: space-between;
   }
   #navigation-social a {
     font-size: 1.05rem;
   }
-  #nav-btn-container{
-  gap: 12vw;
-}
-  #page1 {
-    display: none;
+  #nav-btn-container {
+    gap: 12vw;
   }
+  .navbar2{
+    padding: 10vw 4vw !important;
+  }
+  #navbar #mode {
+    font-size: 5vw;
+  }
+  #logo{
+    display: none !important;
+  }
+  #mobile-logo{
+    width: 45%;
+    display: inline-block;
+  }
+  #mobile-logo img{
+    width: 100%;
+  }
+  #navbar #menu {
+    width: 5vw;
+    height: 5vw;
+    border: 3px solid var(--secondary);
+  }
+  #page1 {
+    height: 100dvh;
+  }
+  #inner-container {
+    width: 90vw;
+    height: 90vw;
+  }
+  #bottom {
+    width: 100%;
+    padding: 0 4vw;
+  }
+  .text-wrapper h5 {
+    transform: translateY(0%) rotate(0deg);
+    color: var(--secondary) !important;
+}
 
+  .slide-text {
+    top: 17%;
+    left: 8vw;
+    transform: translate(0, 0);
+  }
+  #list .project-parent {
+    width: 100vw;
+    height: calc(100vw + 3.5vh);
+    margin-bottom: 5vw;
+  }
+  .slide-text .title {
+    height: 8vw;
+    display: inline-block;
+  }
+  #close-btn svg {
+    width: 3vw;
+    height: 3vw;
+  }
+  #close-btn, #filter-btn {
+    gap: 2.5vw;
+  }
+  #close h3 {
+    font-size: 3vw;
+    letter-spacing: .5px;
+  }
+  #close{
+    padding: 8vw 4vw;
+  }
+  .slide-text h1 {
+    font-size: 7vw;
+  }
+  #allproject {
+    gap: 2.5vw;
+  }
+  #project-count h5,
+  #project-count span {
+    font-size: 3vw;
+  }
+  #count-wraper {
+    width: 5vw;
+    height: 5vw;
+  }
+  #list-content {
+    padding: 25vw 4vw 18vw;
+  }
+  #filterby-wrp {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  #fhead {
+    width: 100% !important;
+    margin-bottom: 8vw !important;
+  }
+  #filter-content h5 {
+    font-size: 1.05rem;
+    letter-spacing: .5px;
+    margin-bottom: 1.2vw;
+  }
+  #filter-content h5.active::before {
+    width: 1.2vw;
+    height: 1.2vw;
+    left: -2.1vw;
+  }
+  #filter-content {
+    height: 85vh;
+    padding:4vw;
+    padding-bottom: 8vw;
+  }
+  #filter-content h2 {
+    font-size: 1.05rem;
+    margin-bottom: 3vw;
+    color: var(--para);
+    letter-spacing: .5px;
+  }
+  #filter-reset{
+    margin-bottom: 15vw;
+  }
+  #cross{
+    font-size: 5vw;
+  }
+  #allproject svg {
+    width: 3vw;
+    height: 3vw;
+  }
+  #filter-content .filter-by {
+    width: 50%;
+    margin-bottom: 8vw;
+}
+  #allproject h3 {
+    font-size: 3vw;
+    letter-spacing: 1px;
+  }
+  .slide-text p {
+    font-size: 1.05rem;
+  }
   #footer {
     height: auto;
     padding-top: 15vw;

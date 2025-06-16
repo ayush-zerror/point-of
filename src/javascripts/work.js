@@ -6,6 +6,50 @@ let currentSlide = 0;
 let isAnimating = false;
 var projectByFilter = null;
 
+function lenisSetup() {
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => 1 - Math.pow(1 - t, 3),
+    smooth: true,
+    smoothTouch: true,
+    direction: "vertical",
+    gestureDirection: "vertical",
+    wheelMultiplier: 0.8,
+    touchMultiplier: 1.2,
+    infinite: false,
+  });
+
+
+  // Ensure the page starts at the top on reload
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    lenis.scrollTo(0, { immediate: true });
+  }, 10); // Small delay to ensure it applies after initialization
+
+  lenis.on('scroll', (event) => {
+    // const popup = document.getElementById('popup');
+
+    // // If the event target is inside the popup, skip Lenis logic
+    // if (popup && popup.contains(event.target)) {
+    //   return;
+    // }
+
+    // // Otherwise, update ScrollTrigger or other handlers
+    ScrollTrigger.update();
+  });
+
+  // Use requestAnimationFrame to update Lenis
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+}
+if (window.innerWidth < 600) {
+  lenisSetup()
+}
+
 window.addEventListener('load', () => {
   if (sessionStorage.getItem('reloadPrevious') === 'true') {
     sessionStorage.removeItem('reloadPrevious'); // Remove the flag after reloading
@@ -13,292 +57,191 @@ window.addEventListener('load', () => {
   }
 });
 
+
 //scroll animation for gallery view
-document.addEventListener("wheel", function (e) {
-  if (isAnimating) return; // Prevent overlapping animations
+let touchStartY = 0;
+let touchEndY = 0;
+
+// Touch support for mobile
+document.addEventListener("touchstart", function (e) {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener("touchend", function (e) {
+  touchEndY = e.changedTouches[0].clientY;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const deltaY = touchStartY - touchEndY;
+  if (Math.abs(deltaY) < 50) return; // avoid small swipes
+
+  const fakeWheelEvent = {
+    deltaY: deltaY,
+    preventDefault: () => { },
+  };
+
+  handleScroll(fakeWheelEvent);
+}
+
+// Wheel scroll for desktop
+document.addEventListener("wheel", handleScroll, { passive: false });
+
+// Main scroll logic
+function handleScroll(e) {
+  if (isAnimating) return;
   isAnimating = true;
-  //TO STOP macOS BOUNCE AND PULL EFFECT
+
   const scrollTop = window.scrollY;
   const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-  // Prevent default scrolling behavior
   e.preventDefault();
 
-  // Detect the scroll direction and prevent overscroll
   if (e.deltaY > 0 && scrollTop >= maxScroll) {
-    // Scrolling down and already at the bottom of the page
     window.scrollTo(0, maxScroll);
   } else if (e.deltaY < 0 && scrollTop <= 0) {
-    // Scrolling up and already at the top of the page
     window.scrollTo(0, 0);
   } else {
-    // Normal scrolling behavior
     window.scrollBy(0, e.deltaY);
   }
 
-  const direction = e.deltaY > 0 ? 1 : -1; // Determine scroll direction (down = 1, up = -1)
-  const nextSlide = (currentSlide + direction + slides.length) % slides.length; // Calculate next slide dynamically
+  const direction = e.deltaY > 0 ? 1 : -1;
+  const nextSlide = (currentSlide + direction + slides.length) % slides.length;
 
   const tl = gsap.timeline({
     onComplete: () => {
-      currentSlide = nextSlide; // Update current slide index
+      currentSlide = nextSlide;
       isAnimating = false;
     },
   });
 
-  // For scrolling down (direction = 1)
   if (direction > 0) {
-    gsap.set(slides[nextSlide], {
-      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-    })
-    gsap.set(slides[nextSlide].querySelector("img"), {
-      objectPosition: "50% -20%",
-      scale: 1.5,
-    })
-    gsap.set(counts[nextSlide], {
-      top: "100%",
-      opacity: 0,
-    })
-    //for inner slides
-    gsap.set(innerSlides[nextSlide], {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-    })
-    gsap.set(innerSlides[nextSlide].querySelector("img"), {
-      objectPosition: "50% 1000%",
-    })
+    gsap.set(slides[nextSlide], { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)" });
+    gsap.set(slides[nextSlide].querySelector("img"), { objectPosition: "50% -20%", scale: 1.5 });
+    gsap.set(counts[nextSlide], { top: "100%", opacity: 0 });
+    gsap.set(innerSlides[nextSlide], { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" });
+    gsap.set(innerSlides[nextSlide].querySelector("img"), { objectPosition: "50% 1000%" });
 
     tl.to(slides[currentSlide], {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-      duration: 1.5,
-      ease: "expo.out",
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", duration: 1.5, ease: "expo.out",
       onComplete: function () {
-        gsap.set(this._targets[0], {
-          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)"
-        })
+        gsap.set(this._targets[0], { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)" });
       }
     }, "a")
-      .to(slides[currentSlide].querySelector("img"), {
-        objectPosition: "50% 20%",
-        scale: 1.5,
-        duration: 1.5,
-        ease: "expo.out",
-        onComplete: function () {
-          gsap.set(this._targets[0], {
-            objectPosition: "50% -20%",
-            scale: 1.5,
-          })
-        }
-      }, "a")
-      .to(slides[currentSlide].querySelectorAll(".slide-text h1"), {
-        transform: "rotate(-5deg) translateY(-100%)",
-        opacity: 0,
-        duration: .8,
-        onComplete: function () {
-          gsap.set(this._targets[0], {
-            transform: "rotate(5deg) translateY(100%)"
-          }, "a")
-        }
-      }, "a")
-      .to(counts[currentSlide], {
-        top: "-100%",
-        duration: .8,
-        opacity: 0,
-        onComplete: () => {
-          gsap.set(counts[currentSlide], {
-            top: "100%",
-            opacity: 1,
-          })
-        }
-      }, "a")
-      .to(counts[nextSlide], {
-        top: "0%",
-        duration: .8,
-        opacity: .7,
-      }, "a")
+    .to(slides[currentSlide].querySelector("img"), {
+      objectPosition: "50% 20%", scale: 1.5, duration: 1.5, ease: "expo.out",
+      onComplete: function () {
+        gsap.set(this._targets[0], { objectPosition: "50% -20%", scale: 1.5 });
+      }
+    }, "a")
+    .to(slides[currentSlide].querySelectorAll(".slide-text h1"), {
+      transform: "rotate(-5deg) translateY(-100%)", opacity: 0, duration: .8,
+      onComplete: function () {
+        gsap.set(this._targets[0], { transform: "rotate(5deg) translateY(100%)" });
+      }
+    }, "a")
+    .to(counts[currentSlide], {
+      top: "-100%", duration: .8, opacity: 0,
+      onComplete: () => gsap.set(counts[currentSlide], { top: "100%", opacity: 1 })
+    }, "a")
+    .to(counts[nextSlide], { top: "0%", duration: .8, opacity: .7 }, "a")
 
-      //for inner slides
-      .to(innerSlides[currentSlide], {
-        clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
-        duration: 1.5,
-        ease: "expo.out",
-        onComplete: function () {
-          gsap.set(this._targets[0], {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)"
-          })
-        }
-      }, "a")
-      .to(innerSlides[currentSlide].querySelector("img"), {
-        objectPosition: "50% -1000%",
-        duration: 1.5,
-        ease: "expo.out",
-        onComplete: function () {
-          gsap.set(this._targets[0], {
-            objectPosition: "50% 1000%",
-          })
-        }
-      }, "a")
+    .to(innerSlides[currentSlide], {
+      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)", duration: 1.5, ease: "expo.out",
+      onComplete: function () {
+        gsap.set(this._targets[0], { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" });
+      }
+    }, "a")
+    .to(innerSlides[currentSlide].querySelector("img"), {
+      objectPosition: "50% -1000%", duration: 1.5, ease: "expo.out",
+      onComplete: function () {
+        gsap.set(this._targets[0], { objectPosition: "50% 1000%" });
+      }
+    }, "a")
 
+    .to(slides[nextSlide], {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1.5, ease: "expo.out"
+    }, "a")
+    .to(slides[nextSlide].querySelector("img"), {
+      objectPosition: "50% 0%", scale: 1, duration: 1.5, ease: "expo.out"
+    }, "a")
+    .fromTo(slides[nextSlide].querySelectorAll(".slide-text h1"), {
+      transform: "rotate(5deg) translateY(100%)", opacity: 0
+    }, {
+      transform: "rotate(0deg) translateY(0%)", opacity: 1, duration: .8
+    }, "a")
 
+    .to(innerSlides[nextSlide], {
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)", duration: 1.5, ease: "expo.out"
+    }, "a")
+    .to(innerSlides[nextSlide].querySelector("img"), {
+      objectPosition: "50% 0%", duration: 1.5, ease: "expo.out"
+    }, "a");
 
-      // Animate next slide in
-      .to(slides[nextSlide], {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        duration: 1.5,
-        ease: "expo.out",
-      }, "a")
-      .to(slides[nextSlide].querySelector("img"), {
-        objectPosition: "50% 0%",
-        scale: 1,
-        duration: 1.5,
-        ease: "expo.out",
-      }, "a")
-      .fromTo(slides[nextSlide].querySelectorAll(".slide-text h1"), {
-        transform: "rotate(5deg) translateY(100%)",
-        opacity: 0
-      }, {
-        transform: "rotate(0deg) translateY(0%)",
-        opacity: 1,
-        duration: .8,
-      }, "a")
-
-      //for inner slides
-      .to(innerSlides[nextSlide], {
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-        duration: 1.5,
-        ease: "expo.out",
-      }, "a")
-      .to(innerSlides[nextSlide].querySelector("img"), {
-        objectPosition: "50% 0%",
-        duration: 1.5,
-        ease: "expo.out",
-      }, "a")
-  }
-  // For scrolling up (direction = -1)
-  else {
-    gsap.set(slides[nextSlide], {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-    })
-    gsap.set(slides[nextSlide].querySelector("img"), {
-      objectPosition: "50% 20%",
-      scale: 1.5,
-    })
-    gsap.set(counts[nextSlide], {
-      top: "-100%",
-      opacity: 0,
-    })
-    //for inner slides
-    gsap.set(innerSlides[nextSlide], {
-      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-    })
-    gsap.set(innerSlides[nextSlide].querySelector("img"), {
-      objectPosition: "50% -1000%",
-    })
+  } else {
+    gsap.set(slides[nextSlide], { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" });
+    gsap.set(slides[nextSlide].querySelector("img"), { objectPosition: "50% 20%", scale: 1.5 });
+    gsap.set(counts[nextSlide], { top: "-100%", opacity: 0 });
+    gsap.set(innerSlides[nextSlide], { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)" });
+    gsap.set(innerSlides[nextSlide].querySelector("img"), { objectPosition: "50% -1000%" });
 
     tl.to(slides[currentSlide], {
-      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-      duration: 1.5,
-      ease: "expo.out",
+      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)", duration: 1.5, ease: "expo.out",
       onComplete: function () {
-        gsap.set(this._targets[0], {
-          clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)"
-        })
+        gsap.set(this._targets[0], { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" });
       }
     }, "a")
-      .to(slides[currentSlide].querySelector("img"), {
-        objectPosition: "50% -20%",
-        scale: 1.5,
-        duration: 1.5,
-        ease: "expo.out",
-        onComplete: function () {
-          gsap.set(this._targets[0], {
-            objectPosition: "50% 20%",
-            scale: 1.5,
-          })
-        }
-      }, "a")
-      .to(slides[currentSlide].querySelectorAll(".slide-text h1"), {
-        transform: "rotate(5deg) translateY(100%)",
-        opacity: 0,
-        duration: .8,
-        onComplete: function () {
-          gsap.set(this._targets[0], {
-            transform: "rotate(-5deg) translateY(-100%)"
-          }, "a")
-        }
-      }, "a")
-      .to(counts[currentSlide], {
-        top: "100%",
-        duration: .8,
-        opacity: 0,
-        onComplete: () => {
-          gsap.set(counts[currentSlide], {
-            top: "-100%",
-            opacity: 1,
-          })
-        }
-      }, "a")
-      .to(counts[nextSlide], {
-        top: "0%",
-        duration: .8,
-        opacity: .7,
-      }, "a")
+    .to(slides[currentSlide].querySelector("img"), {
+      objectPosition: "50% -20%", scale: 1.5, duration: 1.5, ease: "expo.out",
+      onComplete: function () {
+        gsap.set(this._targets[0], { objectPosition: "50% 20%", scale: 1.5 });
+      }
+    }, "a")
+    .to(slides[currentSlide].querySelectorAll(".slide-text h1"), {
+      transform: "rotate(5deg) translateY(100%)", opacity: 0, duration: .8,
+      onComplete: function () {
+        gsap.set(this._targets[0], { transform: "rotate(-5deg) translateY(-100%)" });
+      }
+    }, "a")
+    .to(counts[currentSlide], {
+      top: "100%", duration: .8, opacity: 0,
+      onComplete: () => gsap.set(counts[currentSlide], { top: "-100%", opacity: 1 })
+    }, "a")
+    .to(counts[nextSlide], { top: "0%", duration: .8, opacity: .7 }, "a")
 
-      //for inner slides
-      .to(innerSlides[currentSlide], {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-        duration: 1.5,
-        ease: "expo.out",
-        onComplete: function () {
-          gsap.set(this._targets[0], {
-            clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)"
-          })
-        }
-      }, "a")
-      .to(innerSlides[currentSlide].querySelector("img"), {
-        objectPosition: "50% 1000%",
-        duration: 1.5,
-        ease: "expo.out",
-        onComplete: function () {
-          gsap.set(this._targets[0], {
-            objectPosition: "50% -1000%",
-          })
-        }
-      }, "a")
+    .to(innerSlides[currentSlide], {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)", duration: 1.5, ease: "expo.out",
+      onComplete: function () {
+        gsap.set(this._targets[0], { clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)" });
+      }
+    }, "a")
+    .to(innerSlides[currentSlide].querySelector("img"), {
+      objectPosition: "50% 1000%", duration: 1.5, ease: "expo.out",
+      onComplete: function () {
+        gsap.set(this._targets[0], { objectPosition: "50% -1000%" });
+      }
+    }, "a")
 
-      // Animate next slide in
-      .to(slides[nextSlide], {
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-        duration: 1.5,
-        ease: "expo.out",
-      }, "a")
-      .to(slides[nextSlide].querySelector("img"), {
-        objectPosition: "50% 0%",
-        scale: 1,
-        duration: 1.5,
-        ease: "expo.out",
-      }, "a")
-      .fromTo(slides[nextSlide].querySelectorAll(".slide-text h1"), {
-        transform: "rotate(-5deg) translateY(-100%)",
-        opacity: 0
-      }, {
-        transform: "rotate(0deg) translateY(0%)",
-        opacity: 1,
-        duration: .8,
-      }, "a")
+    .to(slides[nextSlide], {
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)", duration: 1.5, ease: "expo.out"
+    }, "a")
+    .to(slides[nextSlide].querySelector("img"), {
+      objectPosition: "50% 0%", scale: 1, duration: 1.5, ease: "expo.out"
+    }, "a")
+    .fromTo(slides[nextSlide].querySelectorAll(".slide-text h1"), {
+      transform: "rotate(-5deg) translateY(-100%)", opacity: 0
+    }, {
+      transform: "rotate(0deg) translateY(0%)", opacity: 1, duration: .8
+    }, "a")
 
-      //for inner slides
-      .to(innerSlides[nextSlide], {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        duration: 1.5,
-        ease: "expo.out",
-      }, "a")
-      .to(innerSlides[nextSlide].querySelector("img"), {
-        objectPosition: "50% 0%",
-        duration: 1.5,
-        ease: "expo.out",
-      }, "a")
+    .to(innerSlides[nextSlide], {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1.5, ease: "expo.out"
+    }, "a")
+    .to(innerSlides[nextSlide].querySelector("img"), {
+      objectPosition: "50% 0%", duration: 1.5, ease: "expo.out"
+    }, "a");
   }
+}
 
-}, { passive: false });
 
 
 const projects = [
@@ -966,7 +909,7 @@ function menuOpen() {
         opacity: 0,
         duration: 1.5,
         stagger: 0.1,
-        delay:-.1
+        delay: -.1
       })
       menu2 = true
     } else {

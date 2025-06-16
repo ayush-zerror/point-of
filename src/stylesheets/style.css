@@ -1513,8 +1513,9 @@ p {
     padding: 10vw 4vw;
   }
   #navbar #menu {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border: 3px solid var(--secondary);
   }
   #navbar #logo {
     display: none;
@@ -1539,8 +1540,9 @@ p {
     padding: 10vw 4vw;
   }
   #navbar-black #menu-black {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border: 3px solid white;
   }
   #navbar-black #logo-black {
     display: none;
@@ -1618,7 +1620,8 @@ p {
   }
   #page2 h2 {
     font-size: 1.2rem;
-    color: var(--secondary);
+    color: var(--heading);
+    letter-spacing: .5px;
     width: 90%;
   }
   #page2 .common-btn {
@@ -1650,6 +1653,7 @@ p {
     display: flex;
     flex-direction: column;
     padding: 10vw 4vw;
+    min-height: auto;
   }
 
   #slide1 {
@@ -1657,7 +1661,7 @@ p {
   }
   #slide1 h2 {
     font-size: 7vw;
-    margin-bottom: 5vw;
+    margin-bottom: 10vw;
   }
   #slide1 h5 {
     width: 100%;
@@ -1670,30 +1674,32 @@ p {
   .accordion-title {
     padding: 4vw 0;
   }
+  .project-h h5 {
+    transform: translateY(0%) rotate(0deg);
+}
 
   .accordion-title h2 {
     font-family: para2;
     /* font-size: 1.1vw; */
-    font-size: 1.125rem;
+    font-size: 1.2rem;
     line-height: 1.35;
     font-weight: 500;
+    letter-spacing: .5px;
     color: var(--secondary);
+    opacity: 1;
   }
   .accordion-dec h5 {
     width: 100%;
     font-size: 1.2rem;
   }
   .accordion.active .accordion-dec {
-    height: 75vw;
+    height: 58vw;
   }
   .accordion .marketing-accordion-dec h5 {
     width: 100%;
   }
   .accordion.active .marketing-accordion-dec {
     height: 128vw !important;
-  }
-  #slide2 {
-    margin-top: 10vw;
   }
   #page5 h1 {
     font-size: 7vw;

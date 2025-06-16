@@ -800,14 +800,14 @@ yearData.reverse().forEach(function (y, index) {
 
 //for rendering data in mobile
 var clutterm = ""
-data.forEach(function (data) {
+data.slice(0,12).forEach(function (data) {
     clutterm += `
      <div class="brand-m">
                 <div class="location">
-                    <h5>${data.service}</h5>
+                    <h5>${data.projectName}</h5>
                     <h5>${data.year}</h5>
                 </div>
-                <h4>${data.projectName}</h4>
+                <h4>${data.service}</h4>
             </div>
     `
 })

@@ -279,21 +279,35 @@ function footerNavSwitch() {
 
 // dynamic country code
 document.addEventListener("DOMContentLoaded", function () {
-    var input = document.querySelector("#mobile_code");
+    const inputPhone = document.querySelector("#mobile_code_phone");
 
-    // Initialize intl-tel-input
-    var iti = window.intlTelInput(input, {
-        initialCountry: "in", // Set default country to India
-        separateDialCode: true
-    });
+    if (inputPhone) {
+        const itiPhone = window.intlTelInput(inputPhone, {
+            initialCountry: "in",
+            separateDialCode: true,
+            dropdownContainer: document.querySelector(".phone-input-mobile")
+        });
 
-    // Optional: Get the selected country code on input change
-    input.addEventListener("countrychange", function () {
-        var countryCode = iti.getSelectedCountryData().dialCode;
-        console.log("Selected Country Code: +" + countryCode);
-    });
+        inputPhone.addEventListener("countrychange", function () {
+            const code = itiPhone.getSelectedCountryData().dialCode;
+            console.log("Selected Country Code: +" + code);
+        });
+    }
 
+    const input = document.querySelector("#mobile_code");
+    if (input) {
+        const iti = window.intlTelInput(input, {
+            initialCountry: "in"
+        });
+
+        input.addEventListener("countrychange", function () {
+            const code = iti.getSelectedCountryData().dialCode;
+            console.log("Selected Country Code (mobile_code): +" + code);
+        });
+    }
 });
+
+
 
 
 // custom dropdown

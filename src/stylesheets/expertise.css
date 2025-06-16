@@ -303,7 +303,7 @@ a {
   position: fixed;
   top: -130%;
   left: 0;
-  z-index: 5;
+  z-index: 99;
   padding: 6vw;
   display: flex;
   flex-direction: column;
@@ -997,12 +997,14 @@ p {
     padding: 10vw 4vw;
   }
   #navbar #menu {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border:3px solid var(--secondary);
   }
   #navbar-black #menu-black {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border:3px solid white;
   }
   #navbar #logo,
   #navbar-black #logo-black {
@@ -1092,7 +1094,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    gap: 8vw;
+    gap: 15vw;
   }
   #lfs {
     width: 100%;

@@ -211,52 +211,51 @@ body {
   color: var(--secondary);
   text-decoration: none;
   margin-bottom: 1vw;
-  opacity: .5;
+  opacity: 0.5;
   letter-spacing: 1px;
 }
-#navigation-link a:nth-child(2){
+#navigation-link a:nth-child(2) {
   opacity: 1;
   font-weight: 600;
 }
-#top-container .common-btn{
+#top-container .common-btn {
   text-decoration: none;
 }
-#top-container .common-btn .cirr{
-  width: .8vw;
-  height: .8vw;
+#top-container .common-btn .cirr {
+  width: 0.8vw;
+  height: 0.8vw;
 }
-#top-container .common-btn h3{
+#top-container .common-btn h3 {
   text-transform: lowercase;
   font-size: 2vw;
   font-weight: 100;
 }
-#btm-container{
+#btm-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid var(--para);
   padding-top: 3vw;
 }
-#navigation-social{
+#navigation-social {
   display: flex;
   align-items: center;
   gap: 4vw;
 }
-#navigation-social a{
+#navigation-social a {
   text-decoration: none;
-   font-family: para3;
+  font-family: para3;
   font-size: 0.9vw;
   line-height: 1.5;
   font-weight: 500;
   color: var(--heading);
 }
 
-#nav-btn-container{
+#nav-btn-container {
   display: flex;
   align-items: center;
   gap: 3vw;
 }
-
 
 h2 {
   font-family: heading2;
@@ -280,7 +279,7 @@ p {
   font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
-  color: var(--secondary);
+  color: var(--para);
 }
 .text-splite span {
   display: inline-block;
@@ -451,6 +450,10 @@ p {
 #overview-text .rt {
   width: 50%;
 }
+#overview-text .lf h5{
+  color: var(--heading);
+  letter-spacing: .5px;
+}
 
 #page3 .showcase {
   width: 100%;
@@ -602,7 +605,7 @@ p {
   position: relative;
   height: 100vh;
   width: 100%;
-  background-color:var(--primary);
+  background-color: var(--primary);
   padding: 6vw;
   color: var(--secondary);
   display: flex;
@@ -620,7 +623,7 @@ p {
   justify-content: flex-end;
   gap: 4vw;
 }
-#ft-left img{
+#ft-left img {
   width: 4vw;
 }
 #ft-left h2 {
@@ -632,7 +635,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap:4vw;
+  gap: 4vw;
 }
 #footer-links {
   display: flex;
@@ -670,8 +673,8 @@ p {
   display: flex;
   gap: 5vw;
 }
-#footer #social h5{
-  margin-bottom: .5vw;
+#footer #social h5 {
+  margin-bottom: 0.5vw;
 }
 #ft-right h5 {
   color: var(--heading);
@@ -680,37 +683,37 @@ p {
   font-weight: 500;
   line-height: 1.4;
 }
-.heading-ft{
-   font-size: 1rem;
+.heading-ft {
+  font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
   color: var(--para);
   display: inline-block;
-  margin-bottom: .5vw;
+  margin-bottom: 0.5vw;
 }
-#input-box input{
+#input-box input {
   width: 100%;
-  padding: .8vw 0;
+  padding: 0.8vw 0;
   border: none;
   outline: none;
   background-color: transparent;
   border-bottom: 1px solid var(--para);
 }
-.social-links{
+.social-links {
   display: flex;
   flex-direction: column;
 }
-.address-link{
-     font-family: para2;
+.address-link {
+  font-family: para2;
   font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
   color: var(--para);
   display: inline-block;
 }
-.social-links a{
+.social-links a {
   text-decoration: none;
-   font-family: para2;
+  font-family: para2;
   font-size: 1rem;
   line-height: 1.35;
   font-weight: 500;
@@ -800,13 +803,14 @@ p {
 @media (max-width: 600px) {
   h2 {
     font-size: 5vw;
-}
+  }
   #navbar {
     padding: 10vw 4vw;
   }
   #navbar #menu {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border: 3px solid var(--secondary);
   }
   #navbar #logo {
     display: none;
@@ -815,7 +819,7 @@ p {
     display: none;
   }
   #mobile-logo {
-     display: flex;
+    display: flex;
     align-items: end;
     width: 45%;
     filter: invert(1);
@@ -842,10 +846,10 @@ p {
     margin-bottom: 4vw;
   }
 
-  #top-container .common-btn h3{
+  #top-container .common-btn h3 {
     font-size: 5vw;
   }
-  #top-container .common-btn .cirr{
+  #top-container .common-btn .cirr {
     width: 2.5vw;
     height: 2.5vw;
   }
@@ -855,18 +859,23 @@ p {
     gap: 5vw;
     padding-top: 5vw;
   }
-  #navigation-social{
+  #navigation-social {
     width: 100%;
     justify-content: space-between;
   }
   #navigation-social a {
     font-size: 1.05rem;
   }
-  #nav-btn-container{
-  gap: 12vw;
-}
+  #nav-btn-container {
+    gap: 12vw;
+  }
   #page1 {
-    height: 100vh;
+    height: auto;
+    padding: 5vw 0 0 0;
+  }
+  #project-name p {
+    font-size: 4vw;
+    margin: 3vw 0 5vw;
   }
   #page1 h2 {
     position: absolute;
@@ -877,7 +886,6 @@ p {
   #page2 {
     min-height: 50vh !important;
     padding: 10vw 4vw;
-    padding-bottom: 0vw;
     display: flex;
     flex-direction: column;
   }
@@ -939,10 +947,10 @@ p {
   #viewMore h3 {
     font-size: 4.5vw;
   }
-  #project-name h2{
+  #project-name h2 {
     font-size: 7vw;
   }
-  #challenge h2{
+  #challenge h2 {
     font-size: 3vw !important;
     margin-bottom: 5vw;
   }
@@ -1023,26 +1031,52 @@ p {
     font-size: 5vw;
     margin: 1vw auto;
   }
-#approach {
-  font-size: 3vw !important;
-  margin-bottom: 5vw;
-}
-#works .work h5{
-  transform: translateY(0%) rotate(0deg) !important;
-}
-#page4 h2{
-  font-size: 7vw;
-}
-  #overview {
-    display: none;
+  #approach {
+    font-size: 3vw !important;
+    margin-bottom: 5vw;
   }
+  #works .work h5 {
+    transform: translateY(0%) rotate(0deg) !important;
+  }
+  #page4 h2 {
+    font-size: 7vw;
+  }
+  #page3 #overview {
+    width: 100%;
+    height: 8vh;
+    left: 0;
+    transform: translateX(0%) scale(0.8);
+    padding: 1.5vw;
+  }
+  #full-view h1 {
+    font-size: 5vw;
+    letter-spacing: 0.5px;
+  }
+  #over-view h1 {
+    font-size: 5vw;
+    letter-spacing: 0.5px;
+  }
+  #overView-container .over-card {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2vw;
+  }
+  #overview-text .about {
+    flex-direction: column;
+    gap: 5vw;
+  }
+  #overview-text .lf,
+  #overview-text .rt {
+    width: 100%;
+  }
+
   #page4 {
-    padding:6vw 4vw;
+    padding: 6vw 4vw;
   }
-  #works{
+  #works {
     flex-direction: column;
   }
-  #works .work{
+  #works .work {
     width: 100%;
     height: 100vw;
     margin-bottom: 8vw;
@@ -1050,7 +1084,7 @@ p {
   .common-btn {
     gap: 2.5vw;
   }
-  .common-btn h3{
+  .common-btn h3 {
     font-size: 3vw;
   }
   .common-btn .cirr {
@@ -1058,7 +1092,6 @@ p {
     height: 2.5vw;
   }
 
-  
   #footer {
     height: auto;
     padding-top: 15vw;

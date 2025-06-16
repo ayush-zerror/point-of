@@ -1001,12 +1001,18 @@ p {
     padding: 10vw 4vw;
   }
   #navbar #menu {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border: 3px solid var(--secondary);
   }
+  #page1 img {
+    height: 50%;
+    width: 100%;
+}
   #navbar-black #menu-black {
-    height: 5.5vw;
-    width: 5.5vw;
+    height: 5vw;
+    width: 5vw;
+    border: 3px solid white;
   }
   #navbar #logo,
   #navbar-black #logo-black {

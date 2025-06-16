@@ -36,25 +36,29 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   if (window.innerWidth < 600) {
-    const accordions = document.querySelectorAll(".accordion")
-    accordions.forEach(accordion => {
-      accordion.querySelector(".accordion-title").addEventListener("click", () => {
-        for (var i = 0; i < accordions.length; i++) {
-          if (accordions[i] !== accordion) {
-            accordions[i].classList.remove("active");
-          } else {
-            if (accordion.classList.contains("active")) {
-              accordion.classList.remove("active");
-            }
-            else {
-              accordion.classList.add("active");
+    const accordions = document.querySelectorAll(".accordion");
 
+accordions.forEach(accordion => {
+    accordion.querySelector(".accordion-title").addEventListener("click", () => {
+        for (var i = 0; i < accordions.length; i++) {
+            if (accordions[i] !== accordion) {
+                accordions[i].classList.remove("active");
+            } else {
+                if (accordion.classList.contains("active")) {
+                    accordion.classList.remove("active");
+                } else {
+                    accordion.classList.add("active");
+                }
             }
-          }
         }
 
-      })
-    })
+        // ✅ Refresh ScrollTrigger after layout changes
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 300); // delay allows CSS transitions (if any) to complete
+    });
+});
+
 
   }
 
@@ -277,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
         duration: .5,
       }, "a")
       .to(".title1", {
-        opacity:1,
+        opacity: 1,
         duration: .5,
       }, "a")
 
@@ -299,11 +303,11 @@ document.addEventListener("DOMContentLoaded", function () {
         duration: .5,
       }, "b")
       .to(".title1", {
-        opacity:0.5,
+        opacity: 0.5,
         duration: .5,
       }, "b")
       .to(".title2", {
-        opacity:1,
+        opacity: 1,
         duration: .5,
       }, "b")
 
@@ -325,12 +329,12 @@ document.addEventListener("DOMContentLoaded", function () {
         transform: 'translateY(-50%) scale(1)',
         duration: .5,
       }, "c")
-       .to(".title2", {
-        opacity:0.5,
+      .to(".title2", {
+        opacity: 0.5,
         duration: .5,
       }, "c")
       .to(".title3", {
-        opacity:1,
+        opacity: 1,
         duration: .5,
       }, "c")
 
@@ -350,12 +354,12 @@ document.addEventListener("DOMContentLoaded", function () {
         transform: 'translateY(-50%) scale(1)',
         duration: .5,
       }, "d")
-       .to(".title3", {
-        opacity:0.5,
+      .to(".title3", {
+        opacity: 0.5,
         duration: .5,
       }, "d")
       .to(".title4", {
-        opacity:1,
+        opacity: 1,
         duration: .5,
       }, "d")
 
@@ -375,7 +379,7 @@ document.addEventListener("DOMContentLoaded", function () {
         duration: .1,
       }, "e")
       .to(".title4", {
-        opacity:0.5,
+        opacity: 0.5,
         duration: .1,
       }, "e")
 
@@ -643,7 +647,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .to(".view-all", {
         display: "none",
-        duration:.2
+        duration: .2
       })
   }
 
