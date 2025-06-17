@@ -42,6 +42,7 @@ lenisSetup()
 
 
 function logo() {
+  if(window.innerWidth < 600)  return;
 
   const point = document.querySelector("#point")
   const f = document.querySelector("#f")

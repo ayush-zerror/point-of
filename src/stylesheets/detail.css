@@ -808,9 +808,9 @@ p {
     padding: 10vw 4vw;
   }
   #navbar #menu {
-    height: 5vw;
-    width: 5vw;
-    border: 3px solid var(--secondary);
+    height: 4.8vw;
+    width: 4.8vw;
+    border: 2px solid var(--secondary);
   }
   #navbar #logo {
     display: none;
@@ -870,8 +870,7 @@ p {
     gap: 12vw;
   }
   #page1 {
-    height: auto;
-    padding: 5vw 0 0 0;
+    height: 40vh;
   }
   #project-name p {
     font-size: 4vw;
@@ -898,6 +897,12 @@ p {
   .service-box {
     padding: 3vw 0;
     width: 30%;
+    margin: 0;
+    margin-bottom: 5%;
+  }
+  #box-container{
+    gap: 5%;
+    margin-top: 5%;
   }
   #project-details > p {
     width: 100%;
@@ -1115,26 +1120,26 @@ p {
     margin-bottom: 5vw;
   }
   #bottom-links a {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   #ft-right {
     gap: 12vw;
   }
   .heading-ft {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     margin-bottom: 2vw;
   }
   .address-link {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   .social-links a {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   #footer #social h5 {
     margin-bottom: 2vw;
   }
   #input-box input {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     padding: 4vw 0;
   }
   #footer #social {

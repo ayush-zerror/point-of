@@ -6,49 +6,6 @@ let currentSlide = 0;
 let isAnimating = false;
 var projectByFilter = null;
 
-function lenisSetup() {
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => 1 - Math.pow(1 - t, 3),
-    smooth: true,
-    smoothTouch: true,
-    direction: "vertical",
-    gestureDirection: "vertical",
-    wheelMultiplier: 0.8,
-    touchMultiplier: 1.2,
-    infinite: false,
-  });
-
-
-  // Ensure the page starts at the top on reload
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-    lenis.scrollTo(0, { immediate: true });
-  }, 10); // Small delay to ensure it applies after initialization
-
-  lenis.on('scroll', (event) => {
-    // const popup = document.getElementById('popup');
-
-    // // If the event target is inside the popup, skip Lenis logic
-    // if (popup && popup.contains(event.target)) {
-    //   return;
-    // }
-
-    // // Otherwise, update ScrollTrigger or other handlers
-    ScrollTrigger.update();
-  });
-
-  // Use requestAnimationFrame to update Lenis
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-
-  requestAnimationFrame(raf);
-}
-if (window.innerWidth < 600) {
-  lenisSetup()
-}
 
 window.addEventListener('load', () => {
   if (sessionStorage.getItem('reloadPrevious') === 'true') {
@@ -345,23 +302,6 @@ const projects = [
 
 filterCount.textContent = projects.length
 
-//rendering project in mobile view
-if (window.innerWidth <= 600) {
-  document.querySelector("#page1-mobile").innerHTML = ""
-  var clutter = ""
-  projects.forEach(function (project) {
-    clutter += ` <a href=${project.route} class="project-m">
-                <div class="project-showcase">
-                    <img src=${project.image} alt="">
-                </div>
-                <h4>${project.name}</h4>
-                <p>Frontier Health Innovation</p>
-            </a>`
-  })
-
-  document.querySelector("#page1-mobile").innerHTML = clutter
-}
-
 // Utility function to create an element with optional attributes and children
 function createElement(tag, options = {}, ...children) {
   const element = document.createElement(tag);
@@ -463,6 +403,10 @@ function listClickAnimation() {
   document.querySelectorAll(".project-parent").forEach(function (project) {
     project.addEventListener("click", function (event) {
       const route = project.getAttribute("data-url")
+      if(window.innerWidth < 600){
+        window.location.href = route;
+        return;
+      }
       gsap.to(document.querySelector(".navbar2"), {
         opacity: 0,
         top: "-10%",
@@ -772,6 +716,10 @@ darkMode();
 
 //gallery view click animation
 document.querySelector("#inner-container").addEventListener("click", function () {
+  if(window.innerWidth < 600) {
+    window.location.href = projects[currentSlide].route;
+    return;
+  }
   isAnimating = true
   gsap.to(document.querySelector(".navbar1"), {
     opacity: 0,
@@ -807,6 +755,7 @@ document.querySelector("#inner-container").addEventListener("click", function ()
 //logo animation on scroll
 function logo() {
 
+  if(window.innerWidth < 600)  return;
   const point = document.querySelector("#point")
   const f = document.querySelector("#f")
 
@@ -1108,6 +1057,8 @@ document.querySelector("#filter-btn").addEventListener("click", function () {
 
 //filter close btn
 document.querySelector("#cross").addEventListener("click", function () {
+  console.log("close");
+  
   if (projectByFilter?.length === 0) {
     const filterProject = projects.filter((p, i) => i !== currentSlide)
     renderProjects(filterProject)

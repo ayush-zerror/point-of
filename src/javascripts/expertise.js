@@ -165,8 +165,8 @@ function page3svgAnimation() {
                 scroller: "body",
                 markers: true,
                 start: "top 20%",
-                end: "top -60%",
-                scrub: 1,
+                end: "top -50%",
+                scrub: true,
                 markers: false
             },
         });
@@ -196,10 +196,24 @@ function page3svgAnimation() {
                 });
             }
         })
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: pathScrollerMobile,
+                start: "bottom bottom", // when motion path ends
+                end: "+=20%",       // pin duration
+                pin: true,
+                scrub: true,
+                // markers: true,
+            }
+        })
+            .to(circleGroupMobile, {
+                y: "+=800",
+                ease: "bounce.out",
+                duration: 1
+            })
             .to(circleGroupMobile, {
                 opacity: 0,
-                duration: 0,
-                delay: -.1
+                duration: 0.2
             });
 
     }
@@ -611,9 +625,9 @@ function approachAnimationMobile() {
             duration: 0.5
         }, "b")
         .fromTo(".step-loader-bar", {
-            width: "0%",
+            height: "0%",
         }, {
-            width: "50%",
+            height: "50%",
             duration: 0.5
         }, "b")
         .fromTo(".apr-circle2", {
@@ -639,9 +653,9 @@ function approachAnimationMobile() {
             duration: 0.5
         }, "c")
         .fromTo(".step-loader-bar", {
-            width: "50%",
+            height: "50%",
         }, {
-            width: "100%",
+            height: "100%",
             duration: 0.5
         }, "c")
         .fromTo(".apr-circle3", {
@@ -678,9 +692,9 @@ function approachAnimationMobile() {
     const centerY = page4Rect.top + page4Rect.height / 2 + window.scrollY;
 
     const offsets = [
-        { x: -65, y: -25 },
-        { x: 65, y: -25 },
-        { x: 0, y: 65 }
+        { x: -60, y: -25 },
+        { x: 60, y: -25 },
+        { x: 0, y: 40 }
     ];
 
     circles.forEach((circle, i) => {
@@ -711,6 +725,7 @@ function approachAnimationMobile() {
             x: deltaX,
             y: deltaY + i * 30,
             duration: 0.8,
+            scale: .7,
             ease: "power2.out",
             delay: .5
         }, "d");

@@ -1001,18 +1001,18 @@ p {
     padding: 10vw 4vw;
   }
   #navbar #menu {
-    height: 5vw;
-    width: 5vw;
-    border: 3px solid var(--secondary);
+    height: 4.8vw;
+    width: 4.8vw;
+    border: 2px solid var(--secondary);
   }
   #page1 img {
     height: 50%;
     width: 100%;
 }
   #navbar-black #menu-black {
-    height: 5vw;
-    width: 5vw;
-    border: 3px solid white;
+    height: 4.8vw;
+    width: 4.8vw;
+    border: 2px solid white;
   }
   #navbar #logo,
   #navbar-black #logo-black {
@@ -1237,26 +1237,26 @@ p {
     margin-bottom: 5vw;
   }
   #bottom-links a {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   #ft-right {
     gap: 12vw;
   }
   .heading-ft {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     margin-bottom: 2vw;
   }
   .address-link {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   .social-links a {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   #footer #social h5 {
     margin-bottom: 2vw;
   }
   #input-box input {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     padding: 4vw 0;
   }
   #footer #social {

@@ -581,7 +581,7 @@ p {
   font-size: 1rem;
   line-height: 1.4;
   font-weight: 500;
-  opacity: 0.8;
+  color: var(--secondary);
 }
 
 #bottom {
@@ -671,6 +671,7 @@ p {
 #allproject h3 {
   font-size: 1vw;
   font-weight: 400;
+  text-transform: uppercase;
 }
 #allproject h3::before {
   content: "";
@@ -832,6 +833,7 @@ p {
   font-size: 1vw;
   line-height: 1.4;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 #filterl {
@@ -957,6 +959,7 @@ p {
   color: var(--secondary);
   font-size: 1.3vw;
   cursor: pointer;
+  z-index: 9999;
 }
 
 /* for responsive page */
@@ -1271,9 +1274,9 @@ p {
     );
   }
   .navbar1 #menu {
-    height: 5vw;
-    width: 5vw;
-    border: 3px solid var(--secondary);
+    height: 4.8vw;
+    width: 4.8vw;
+    border: 2px solid var(--secondary);
   }
   .navbar1 #logo {
     display: none;
@@ -1358,14 +1361,14 @@ p {
   #navbar #menu {
     width: 5vw;
     height: 5vw;
-    border: 3px solid var(--secondary);
+    border: 2px solid var(--secondary);
   }
   #page1 {
     height: 100dvh;
   }
   #inner-container {
-    width: 90vw;
-    height: 90vw;
+    width:80vw;
+    height: 80vw;
   }
   #bottom {
     width: 100%;
@@ -1410,9 +1413,12 @@ p {
   #allproject {
     gap: 2.5vw;
   }
+
   #project-count h5,
   #project-count span {
     font-size: 3vw;
+    color: var(--heading) !important;
+    opacity: 1 !important;
   }
   #count-wraper {
     width: 5vw;
@@ -1494,26 +1500,26 @@ p {
     margin-bottom: 5vw;
   }
   #bottom-links a {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   #ft-right {
     gap: 12vw;
   }
   .heading-ft {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     margin-bottom: 2vw;
   }
   .address-link {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   .social-links a {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   #footer #social h5 {
     margin-bottom: 2vw;
   }
   #input-box input {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     padding: 4vw 0;
   }
   #footer #social {

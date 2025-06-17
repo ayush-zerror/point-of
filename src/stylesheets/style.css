@@ -743,7 +743,7 @@ p {
 .accordion.active .accordion-dec {
   height: 10vw;
 }
- 
+
 #page3 .accordion-dec {
   overflow: hidden;
   height: 0vw;
@@ -760,8 +760,6 @@ p {
 .accordion .marketing-accordion-dec h5 {
   width: 85%;
 }
-
-
 
 #page4 {
   height: 100vh;
@@ -1386,7 +1384,6 @@ p {
   width: 0;
 }
 
-
 #page3mobile {
   min-height: 50vh;
   width: 100%;
@@ -1505,17 +1502,14 @@ p {
   width: 85%;
 }
 
-
-
-
 @media (max-width: 600px) {
   #navbar {
     padding: 10vw 4vw;
   }
   #navbar #menu {
-    height: 5vw;
-    width: 5vw;
-    border: 3px solid var(--secondary);
+    height: 4.8vw;
+    width: 4.8vw;
+    border: 2px solid var(--secondary);
   }
   #navbar #logo {
     display: none;
@@ -1540,12 +1534,25 @@ p {
     padding: 10vw 4vw;
   }
   #navbar-black #menu-black {
-    height: 5vw;
-    width: 5vw;
-    border: 3px solid white;
+    height: 4.8vw;
+    width: 4.8vw;
+    border: 2px solid white;
   }
   #navbar-black #logo-black {
     display: none;
+  }
+  #page8 {
+    padding: 22vw 6vw 15vw;
+  }
+  .accordion-title .plus {
+    width: 3.5vw;
+    height: 3.5vw;
+  }
+  .accordion-title .plus .line1 {
+    height: 0.1vw;
+  }
+  .accordion-title .plus .line2 {
+    width: 0.1vw;
   }
   #logo-black {
     display: none;
@@ -1563,7 +1570,7 @@ p {
     display: inline-block;
     font-size: 5vw !important;
   }
-  .view-all{
+  .view-all {
     gap: 2.5vw;
   }
 
@@ -1621,7 +1628,7 @@ p {
   #page2 h2 {
     font-size: 1.2rem;
     color: var(--heading);
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     width: 90%;
   }
   #page2 .common-btn {
@@ -1648,7 +1655,7 @@ p {
   #right-content {
     width: 100%;
   }
-  
+
   #page3mobile {
     display: flex;
     flex-direction: column;
@@ -1676,7 +1683,7 @@ p {
   }
   .project-h h5 {
     transform: translateY(0%) rotate(0deg);
-}
+  }
 
   .accordion-title h2 {
     font-family: para2;
@@ -1684,13 +1691,13 @@ p {
     font-size: 1.2rem;
     line-height: 1.35;
     font-weight: 500;
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     color: var(--secondary);
     opacity: 1;
   }
   .accordion-dec h5 {
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
   .accordion.active .accordion-dec {
     height: 58vw;
@@ -1715,6 +1722,9 @@ p {
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 5vw;
+  }
+  #page7-wrap h2 br {
+    display: none;
   }
   #marquee {
     margin-top: 15vw;
@@ -1748,7 +1758,7 @@ p {
     margin-bottom: 1.5vw;
   }
   .review-details p {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     margin: 5vw 0;
   }
   .review-details h3 {
@@ -1802,26 +1812,26 @@ p {
     margin-bottom: 5vw;
   }
   #bottom-links a {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   #ft-right {
     gap: 12vw;
   }
   .heading-ft {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     margin-bottom: 2vw;
   }
   .address-link {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   .social-links a {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
   }
   #footer #social h5 {
     margin-bottom: 2vw;
   }
   #input-box input {
-    font-size: 1.06rem;
+    font-size: 1.05rem;
     padding: 4vw 0;
   }
   #footer #social {
