@@ -1239,10 +1239,9 @@ p {
   width: 0;
 }
 
- #mobile-logo{
-    display: none;
-  }
-
+#mobile-logo {
+  display: none;
+}
 
 @media (max-width: 600px) {
   html,
@@ -1342,20 +1341,20 @@ p {
   #nav-btn-container {
     gap: 12vw;
   }
-  .navbar2{
+  .navbar2 {
     padding: 10vw 4vw !important;
   }
   #navbar #mode {
     font-size: 5vw;
   }
-  #logo{
+  #logo {
     display: none !important;
   }
-  #mobile-logo{
+  #mobile-logo {
     width: 45%;
     display: inline-block;
   }
-  #mobile-logo img{
+  #mobile-logo img {
     width: 100%;
   }
   #navbar #menu {
@@ -1367,17 +1366,18 @@ p {
     height: 100dvh;
   }
   #inner-container {
-    width:80vw;
+    width: 80vw;
     height: 80vw;
   }
   #bottom {
     width: 100%;
+    user-select: none;
     padding: 0 4vw;
   }
   .text-wrapper h5 {
     transform: translateY(0%) rotate(0deg);
     color: var(--secondary) !important;
-}
+  }
 
   .slide-text {
     top: 17%;
@@ -1397,16 +1397,33 @@ p {
     width: 3vw;
     height: 3vw;
   }
-  #close-btn, #filter-btn {
+  #close-btn,
+  #filter-btn {
     gap: 2.5vw;
   }
   #close h3 {
     font-size: 3vw;
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
   }
-  #close{
+  #close {
     padding: 8vw 4vw;
+    user-select: none;
   }
+
+  #close-btn:hover svg {
+    transform: scale(1);
+    opacity: 1;
+  }
+  #filter-btn:hover i {
+    transform: scale(1);
+    opacity: 1;
+  }
+  #close-btn:hover h3::before,
+  #filter-btn:hover h3::before {
+    transform: scale(0);
+    opacity: 0;
+  }
+
   .slide-text h1 {
     font-size: 7vw;
   }
@@ -1425,7 +1442,7 @@ p {
     height: 5vw;
   }
   #list-content {
-    padding: 25vw 4vw 18vw;
+    padding: 25vw 4vw;
   }
   #filterby-wrp {
     flex-wrap: wrap;
@@ -1437,7 +1454,7 @@ p {
   }
   #filter-content h5 {
     font-size: 1.05rem;
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     margin-bottom: 1.2vw;
   }
   #filter-content h5.active::before {
@@ -1447,19 +1464,19 @@ p {
   }
   #filter-content {
     height: 85vh;
-    padding:4vw;
+    padding: 4vw;
     padding-bottom: 8vw;
   }
   #filter-content h2 {
     font-size: 1.05rem;
     margin-bottom: 3vw;
     color: var(--para);
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
   }
-  #filter-reset{
+  #filter-reset {
     margin-bottom: 15vw;
   }
-  #cross{
+  #cross {
     font-size: 5vw;
   }
   #allproject svg {
@@ -1469,11 +1486,21 @@ p {
   #filter-content .filter-by {
     width: 50%;
     margin-bottom: 8vw;
-}
+  }
   #allproject h3 {
     font-size: 3vw;
     letter-spacing: 1px;
   }
+
+  #allproject:hover svg {
+    transform: scale(1);
+    opacity: 1;
+  }
+  #allproject:hover h3::before {
+    transform: scale(0);
+    opacity: 0;
+  }
+
   .slide-text p {
     font-size: 1.05rem;
   }
@@ -1515,6 +1542,7 @@ p {
   .social-links a {
     font-size: 1.05rem;
   }
+
   #footer #social h5 {
     margin-bottom: 2vw;
   }
