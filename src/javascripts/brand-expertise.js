@@ -22,6 +22,21 @@ accordions.forEach(accordion => {
 });
 
 
+gsap.to(".border-line", {
+    width: "100%",
+    duration: 1,
+    stagger: .3,
+    scrollTrigger: {
+        trigger: ".border-line",
+        scroller: "body",
+        start: "top 70%",
+        end: "top 40%",
+        scrub: 1,
+        // markers: true,
+    }
+})
+
+
 
 function page4Animation() {
   gsap.fromTo(".page4-top .work", {

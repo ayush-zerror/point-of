@@ -38,26 +38,40 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.innerWidth < 600) {
     const accordions = document.querySelectorAll(".accordion");
 
-accordions.forEach(accordion => {
-    accordion.querySelector(".accordion-title").addEventListener("click", () => {
+    accordions.forEach(accordion => {
+      accordion.querySelector(".accordion-title").addEventListener("click", () => {
         for (var i = 0; i < accordions.length; i++) {
-            if (accordions[i] !== accordion) {
-                accordions[i].classList.remove("active");
+          if (accordions[i] !== accordion) {
+            accordions[i].classList.remove("active");
+          } else {
+            if (accordion.classList.contains("active")) {
+              accordion.classList.remove("active");
             } else {
-                if (accordion.classList.contains("active")) {
-                    accordion.classList.remove("active");
-                } else {
-                    accordion.classList.add("active");
-                }
+              accordion.classList.add("active");
             }
+          }
         }
 
         // ✅ Refresh ScrollTrigger after layout changes
         setTimeout(() => {
-            ScrollTrigger.refresh();
+          ScrollTrigger.refresh();
         }, 300); // delay allows CSS transitions (if any) to complete
+      });
     });
-});
+
+    gsap.to(".border-line",{
+      width: "100%",
+      duration: 1,
+      stagger:.3,
+      scrollTrigger: {
+        trigger: "#page3mobile",
+        scroller: "body",
+        start: "top 70%",
+        end: "top 40%",
+        scrub: 1,
+        // markers:true
+      }
+    })
 
 
   }

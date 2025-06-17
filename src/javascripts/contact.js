@@ -102,6 +102,7 @@ accordions.forEach(accordion => {
 });
 
 
+
 const popup = document.querySelector("#popup-apply")
 const jobTitle = document.querySelector("#job-title")
 document.querySelectorAll(".apply-job").forEach(function (btn) {
@@ -409,6 +410,21 @@ if (window.innerWidth > 600) {
     contactPin()
     footerNavSwitch()
 }
+
+gsap.to(".border-line", {
+    width: "100%",
+    duration: 1,
+    stagger: .3,
+    scrollTrigger: {
+        trigger: "#page3",
+        scroller: "body",
+        start: "top 70%",
+        end: "top 40%",
+        scrub: 1,
+    }
+})
+
+
 
 function page4Animation() {
     gsap.fromTo("#page4 .work", {

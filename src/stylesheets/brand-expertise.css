@@ -461,12 +461,21 @@ p {
 .accordion-title {
   width: 100%;
   padding: 2vw 0;
-  border-top: 1px solid rgba(128, 128, 128, 0.745);
+  /* border-top: 1px solid rgba(128, 128, 128, 0.745); */
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   transition: all ease 0.3s;
+  position: relative;
+}
+.border-line{
+  position: absolute;
+  width: 0%;
+  height: 0.1vw;
+  background-color: rgba(128, 128, 128, 0.745);
+  top: 0;
+  right: 0;
 }
 .accordion-title .plus {
   position: relative;
