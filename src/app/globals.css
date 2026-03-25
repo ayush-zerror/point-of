@@ -1,26 +1,101 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
+/* =========================
+   🎨 DESIGN TOKENS
+========================= */
+
+/* Light */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --primary: #3A4C92;
+  --secondary: #8FA2FF;
+
+  --muted: #6b7280;
+  --border: #e5e7eb;
 }
 
+/* Dark */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --primary: #8FA2FF;
+  --secondary: #3A4C92;
+
+  --muted: #9ca3af;
+  --border: #262626;
+}
+
+/* =========================
+   🔗 TAILWIND MAPPING
+========================= */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* =========================
+   🧠 GLOBAL TYPOGRAPHY
+========================= */
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, sans-serif;
+}
+
+/* Headings */
+.h1 {
+  @apply text-3xl md:text-4xl font-bold tracking-tight;
+}
+
+.h2 {
+  @apply text-2xl md:text-3xl font-semibold;
+}
+
+.h3 {
+  @apply text-xl md:text-2xl font-semibold;
+}
+
+/* Subheadings */
+.subheading {
+  @apply text-lg font-medium text-muted;
+}
+
+/* Paragraphs */
+.p {
+  @apply text-base leading-relaxed text-foreground;
+}
+
+.subpara {
+  @apply text-sm text-muted;
+}
+
+/* =========================
+   🧱 UI UTILITIES
+========================= */
+
+.card {
+  @apply bg-background border border-border rounded-xl p-4 shadow-sm;
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90 transition;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-black px-4 py-2 rounded-lg hover:opacity-90 transition;
+}
+
+/* Smooth transition */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
