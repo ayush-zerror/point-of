@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@remixicon/react": "^4.9.0",
     "@studio-freight/lenis": "^1.0.42",
     "@studio-freight/tempus": "^0.0.44",
     "lucide-react": "^1.6.0",
