@@ -1,29 +1,35 @@
 import { Send } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-neutral-300 dark:border-neutral-700   dark:text-neutral-100">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+    <footer className="w-full ">
+      <div className="px-20 mx-auto  py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          
           {/* LOGO */}
           <div className="flex items-start">
-            <div className="text-5xl font-light leading-none tracking-tight">
-              <span className="block">P.</span>
-              <span className="block">O</span>
-            </div>
+            <Image
+              src="/logo/po-logo.png"
+              alt="logo"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="h-14 w-auto object-contain invert dark:invert-0"
+            />
           </div>
 
           {/* NAV LINKS */}
           <div className="space-y-3 text-sm tracking-wide">
-            {["STUDIO", "WORK", "EXPERTISE", "BRANDS", "CONNECT"].map((item) => (
-              <p
-                key={item}
-                className="cursor-pointer hover:opacity-60 transition"
-              >
-                {item}
-              </p>
-            ))}
+            {["STUDIO", "WORK", "EXPERTISE", "BRANDS", "CONNECT"].map(
+              (item) => (
+                <p
+                  key={item}
+                  className="cursor-pointer hover:opacity-60 transition"
+                >
+                  {item}
+                </p>
+              ),
+            )}
           </div>
 
           {/* SOCIAL LINKS */}
@@ -62,7 +68,6 @@ export default function Footer() {
 
         {/* DIVIDER */}
         <div className="border-t border-neutral-300 dark:border-neutral-700 mt-12 pt-6 flex flex-col md:flex-row justify-between text-sm">
-          
           <div className="flex gap-4 text-neutral-600 dark:text-neutral-400">
             <p className="cursor-pointer hover:text-neutral-900 dark:hover:text-white">
               Privacy

@@ -12,6 +12,9 @@
   --background: #000;
   --foreground: #f2f2ee;
 }
+html {
+  font-size: 16px; /* default is 16px */
+}
 
 @theme {
   --color-background: var(--background);
