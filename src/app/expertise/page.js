@@ -1,9 +1,12 @@
+import HeroSection from '@/components/expertise/HeroSection'
 import React from 'react'
 
-const page = () => {
+const Expertise = () => {
   return (
-    <div>page</div>
+    <>
+      <HeroSection />
+    </>
   )
 }
 
-export default page
+export default Expertise

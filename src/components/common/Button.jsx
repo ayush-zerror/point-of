@@ -3,7 +3,7 @@ import React from 'react'
 const Button = ({title}) => {
   return (
      <div className="pt-10">
-          <button className="cursor-pointer group flex items-center gap-2 text-sm tracking-wide uppercase">
+          <button className="cursor-pointer group flex items-center gap-2 text-sm font-[600] tracking-wide uppercase">
             {/* Circle */}
             <span className="relative flex items-center justify-center w-2 h-2 bg-foreground rounded-full transition-all duration-300 group-hover:w-5 group-hover:h-5">
               {/* Arrow */}

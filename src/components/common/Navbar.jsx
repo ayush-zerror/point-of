@@ -11,10 +11,17 @@ import Link from "next/link";
 
 export default function Navbar() {
   const { setTheme, resolvedTheme } = useTheme();
+
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false); // ✅ FIX
 
   const navRef = useRef(null);
   const tl = useRef(null);
+
+  // ✅ Fix hydration issue
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isDark = resolvedTheme === "dark";
 
@@ -41,7 +48,7 @@ export default function Navbar() {
           opacity: 1,
           duration: 0.8,
         },
-        "-=0.5",
+        "-=0.5"
       );
   }, []);
 
@@ -63,15 +70,19 @@ export default function Navbar() {
       {/* NAVBAR */}
       <nav className="fixed top-0 left-0 w-full z-20 nav-gradient text-foreground">
         <div className="relative z-30 flex items-center justify-between h-20 px-6 md:px-12">
+          
           {/* THEME TOGGLE */}
           <button
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className="cursor-pointer transition-all duration-300 hover:-rotate-45"
           >
-            {isDark ? (
-              <RiSunLine className="w-5 h-5" />
-            ) : (
-              <RiMoonLine className="w-5 h-5" />
+            {/* ✅ render only after mount */}
+            {mounted && (
+              isDark ? (
+                <RiSunLine className="w-5 h-5" />
+              ) : (
+                <RiMoonLine className="w-5 h-5" />
+              )
             )}
           </button>
 
@@ -102,6 +113,7 @@ export default function Navbar() {
           className="absolute h-screen top-[-100vh] w-full z-10 bg-background text-foreground"
         >
           <div className="flex flex-col h-full justify-center gap-20 px-6 md:px-20 py-10 md:py-16">
+            
             {/* TOP */}
             <div className="flex flex-col md:flex-row justify-between items-end gap-12">
               <div className="space-y-6 md:space-y-4">
@@ -139,7 +151,7 @@ export default function Navbar() {
                     >
                       {item}
                     </p>
-                  ),
+                  )
                 )}
               </div>
 
@@ -152,6 +164,7 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </nav>

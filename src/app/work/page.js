@@ -1,9 +1,12 @@
+import WorkSection from '@/components/work/WorkSection'
 import React from 'react'
 
-const page = () => {
+const Work = () => {
   return (
-    <div>page</div>
+    <>
+      <WorkSection />
+    </>
   )
 }
 
-export default page
+export default Work
