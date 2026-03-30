@@ -11,9 +11,9 @@ const FoundersSection = () => {
           <div className="w-full max-w-[520px] mx-auto md:mx-0">
             <div className="w-full aspect-square overflow-hidden mb-8">
               <img
-                src="/about/piran.jpeg"
+                src="/about/piran.png"
                 alt="Piran Tarapore"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[50%_10%]"
               />
             </div>
 
@@ -41,7 +41,7 @@ const FoundersSection = () => {
               <img
                 src="/about/pearl.webp"
                 alt="Pearl Jain"
-                className="w-full h-full object-cover grayscale"
+                className="w-full h-full object-cover object-[50%_25%]"
               />
             </div>
 
