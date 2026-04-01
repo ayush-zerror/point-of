@@ -20,35 +20,35 @@ const brands = [
 
 const SelectedBrands = () => {
   return (
-    <section className="w-full  py-24 px-20">
+    <section className="w-full py-16 md:py-24 px-4 sm:px-8 md:px-20">
       
-      <div
-        className="
-          w-full
-        "
-      >
+      <div className="w-full">
         
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-[200]  mb-16">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-[200] mb-10 md:mb-16">
           Selected Brands
         </h2>
 
-        {/* Grid */}
+        {/* Grid Container */}
         <div className="border border-foreground">
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5">
+          <div className="grid grid-cols-3 md:grid-cols-5">
             
             {brands.map((brand, index) => (
               <div
                 key={index}
                 className="
-                  h-32 md:h-52
+                  h-24 sm:h-28 md:h-40 lg:h-52
                   flex items-center justify-center
-                  border-r border-b border-foreground
-                  last:border-r-0
+                  border-b border-r border-foreground
+                  
+                  /* Remove right border on last column */
+                  [&:nth-child(2n)]:sm:border-r
+                  [&:nth-child(3n)]:md:border-r
+                  [&:nth-child(5n)]:border-r-0
                 "
               >
-                <span className=" text-sm md:text-base tracking-wide">
+                <span className="text-xs sm:text-sm md:text-base tracking-wide text-center px-2">
                   {brand}
                 </span>
               </div>

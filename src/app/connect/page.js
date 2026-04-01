@@ -19,15 +19,15 @@ const Connect = () => {
         btntitle={"CONNECT"}
       />
       {/* Scroll Scene */}
-      <div className="relative h-[200vh]">
+      <div className="relative md:h-[200vh]">
 
-        {/* Contact (VISIBLE FIRST) */}
-        <div className="sticky top-0 h-screen z-10">
+        {/* Contact */}
+        <div className="h-auto md:sticky md:top-0 md:h-screen z-10">
           <ContactSection />
         </div>
 
-        {/* GetInTouch (STARTS BELOW, COMES UP) */}
-        <div className="absolute bottom-0 left-0 w-full h-screen z-20">
+        {/* GetInTouch */}
+        <div className="w-full h-auto md:absolute md:bottom-0 md:left-0 md:h-screen z-20">
           <GetInTouch />
         </div>
 
