@@ -1,29 +1,17 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { Circle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { RiMoonLine, RiSunLine } from "@remixicon/react";
 import Image from "next/image";
 import Button from "./Button";
 import gsap from "gsap";
 import Link from "next/link";
 
 export default function Navbar() {
-  const { setTheme, resolvedTheme } = useTheme();
-
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false); // ✅ FIX
 
   const navRef = useRef(null);
   const tl = useRef(null);
-
-  // ✅ Fix hydration issue
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isDark = resolvedTheme === "dark";
 
   // GSAP Setup
   useEffect(() => {
@@ -71,20 +59,8 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 w-full z-20 nav-gradient text-foreground">
         <div className="relative z-30 flex items-center justify-between h-20 px-6 md:px-12">
           
-          {/* THEME TOGGLE */}
-          <button
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="cursor-pointer transition-all duration-300 hover:-rotate-45"
-          >
-            {/* ✅ render only after mount */}
-            {mounted && (
-              isDark ? (
-                <RiSunLine className="w-5 h-5" />
-              ) : (
-                <RiMoonLine className="w-5 h-5" />
-              )
-            )}
-          </button>
+          {/* LEFT EMPTY (previously theme toggle) */}
+          <div className="w-5" />
 
           {/* LOGO */}
           <div className="absolute left-1/2 -translate-x-1/2">
@@ -93,7 +69,7 @@ export default function Navbar() {
               alt="logo"
               width={180}
               height={80}
-              className="w-[100px] sm:w-[120px] md:w-[150px] lg:w-[180px] h-auto object-contain dark:invert"
+              className="w-[100px] sm:w-[120px] md:w-[150px] lg:w-[180px] invert h-auto object-contain"
               priority
             />
           </div>

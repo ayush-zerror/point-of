@@ -1,6 +1,5 @@
 import SmoothScroller from "@/components/SmoothScroller";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import localFont from "next/font/local";
@@ -38,11 +37,9 @@ export default function RootLayout({ children }) {
 
       <body suppressHydrationWarning className={`${headingFont.variable} ${bodyFont.variable}`}>
         <SmoothScroller />
-        <ThemeProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <Navbar />
+        {children}
+        <Footer />
       </body>
     </html>
   );

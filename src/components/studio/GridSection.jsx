@@ -40,7 +40,7 @@ const GridSection = ({ title, btntitle, data }) => {
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover invert dark:invert-0"
+                    className="w-full h-full object-cover invert-0"
                   />
                 </div>
               )}

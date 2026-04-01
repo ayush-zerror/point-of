@@ -1,17 +1,11 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
 
 /* Light */
 :root {
-  --background: #f2f2ee;
-  --foreground: #000;
-}
-
-/* Dark */
-.dark {
   --background: #000;
   --foreground: #f2f2ee;
 }
+
 html {
   font-size: 16px; /* default is 16px */
 }
@@ -55,7 +49,7 @@ body {
 }
 
 /* Dark override */
-.dark .nav-gradient {
+.nav-gradient {
   background: linear-gradient(
     rgb(0, 0, 0) 0px,
     rgba(0, 0, 0, 0.99) 11%,

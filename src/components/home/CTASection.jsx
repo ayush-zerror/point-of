@@ -5,15 +5,15 @@ const CTASection = () => {
   return (
     <section
       className="w-full min-h-[50vh] flex items-center justify-center px-6 
-      bg-[#f3f3f1] dark:bg-black text-neutral-900 dark:text-white"
+      "
     >
       <div className="text-center flex flex-col items-center">
         {/* HEADING */}
-          <p className="text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3]">
-            Got a project in mind?
-            <br />
-            Learn how we can help.
-          </p>
+        <p className="text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3]">
+          Got a project in mind?
+          <br />
+          Learn how we can help.
+        </p>
         {/* CTA */}
         <Button title={"LET’S TALK"} />
       </div>
