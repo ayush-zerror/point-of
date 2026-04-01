@@ -7,7 +7,7 @@ import React from 'react'
 const ExpertiseDetails = () => {
   return (
     <>
-      <HeroSection />
+      <HeroSection src="https://www.wearepointof.com/COVER%20EXPERTISE/COVER_BRANDING.jpeg" />
       <AboutExpertise/>
       <InstagramSection />
       <CTASection />
