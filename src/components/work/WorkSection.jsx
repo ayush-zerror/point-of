@@ -1,22 +1,26 @@
 "use client";
 import gsap from 'gsap';
+import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 const DEFAULT_PROJECTS = [
   {
     coverImage: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png",
     name: "Contigo Tequila",
+    slug: "contigo-tequila",
     description: "Bridging Mexico and India.",
     titles: ["Contigo", "Tequila"],
   },
   {
     coverImage: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/8bf51c209757845.67053c2f6afcf.png",
     name: "Typcaste",
+    slug: "typcaste",
     description: "Breaking design's status quo.",
     titles: ["Typcaste"],
   },
   {
     coverImage: "https://www.wearepointof.com/projects/Label%20Ritu%20Kumar/image%20(1).webp",
     name: "Label Ritu Kumar",
+    slug: "label-ritu-kumar",
     description: "Fashion empire meets the social generation.",
     titles: ["Label", "Ritu Kumar"],
   },
@@ -26,9 +30,26 @@ const CLIP_VISIBLE = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
 const CLIP_HIDDEN_TOP = "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)";        // collapses to top
 const CLIP_HIDDEN_BOTTOM = "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)"; // collapses to bottom
 
+const toSlug = (value = "") =>
+  String(value)
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+
 
 const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
-  const items = useMemo(() => projects ?? [], [projects]);
+  const items = useMemo(
+    () =>
+      (projects ?? []).map((project) => ({
+        ...project,
+        slug:
+          project.slug ||
+          toSlug(project.name || (Array.isArray(project.titles) ? project.titles.join(" ") : "project")),
+      })),
+    [projects]
+  );
   const containerRef = useRef(null);
   const touchStartYRef = useRef(null);
   const cooldownRef = useRef(0);
@@ -571,29 +592,35 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
       </div>
 
       {/* ── Center foreground (inner-container) ── */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[26vw] h-[26vw] min-w-[180px] min-h-[180px] overflow-hidden pointer-events-none z-20">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[56vw] h-[56vw] sm:w-[44vw] sm:h-[44vw] md:w-[34vw] md:h-[34vw] lg:w-[26vw] lg:h-[26vw] min-w-[150px] min-h-[150px] sm:min-w-[180px] sm:min-h-[180px] overflow-hidden z-20">
         {items.map((project, i) => (
-          <img
+          <Link
             key={`ctr-${i}`}
-            ref={(el) => { centerRefs.current[i] = el; }}
-            src={project.coverImage}
-            alt={project.name}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              clipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
-              WebkitClipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
-              willChange: "clip-path",
-              zIndex: i === 0 ? 1 : 0,
-            }}
-          />
+            href={`/work/${project.slug}`}
+            className={`absolute inset-0 block ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
+            aria-label={`Open ${project.name}`}
+          >
+            <img
+              ref={(el) => { centerRefs.current[i] = el; }}
+              src={project.coverImage}
+              alt={project.name}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                clipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
+                WebkitClipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
+                willChange: "clip-path",
+                zIndex: i === 0 ? 1 : 0,
+              }}
+            />
+          </Link>
         ))}
       </div>
-      {/* ── Side text (animated like ProjectClipReveal) ── */}
+      {/* ── Side text (animated overlay) ── */}
       <div className="absolute inset-0 z-30 pointer-events-none">
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
-            className="absolute left-8 md:left-42 top-1/2 -translate-y-1/2 max-w-[min(520px,85vw)]"
+            className="absolute left-4 right-4 top-[8%] sm:right-auto sm:left-8 sm:top-1/2 sm:-translate-y-1/2 md:left-12 lg:left-16 max-w-[min(460px,92vw)] sm:max-w-[min(500px,85vw)] text-center sm:text-left"
           >
             {(project.titles ?? [project.name]).map((title, ti) => (
               <div key={ti} className="overflow-hidden">
@@ -602,7 +629,7 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
                     if (!textRefs.current[i]) textRefs.current[i] = [];
                     textRefs.current[i][ti] = el;
                   }}
-                  className="text-white font-heading font-extralight tracking-[0.5px] leading-[1.1] text-5xl"
+                  className="text-white font-heading font-extralight tracking-[0.4px] leading-[1.08] text-[clamp(1.45rem,5.6vw,2.4rem)] sm:text-[clamp(1.85rem,5vw,3.4rem)]"
                   style={{
                     display: "inline-block",
                     willChange: "transform, opacity",
@@ -616,12 +643,12 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
               </div>
             ))}
 
-            <div className="overflow-hidden mt-3">
+            <div className="overflow-hidden mt-2 sm:mt-3">
               <p
                 ref={(el) => {
                   descRefs.current[i] = el;
                 }}
-                className="text-white/60 font-heading font-extralight leading-[1.6] tracking-[0.2px] text-sm md:text-base max-w-[46ch]"
+                className="text-white/60 font-heading font-extralight leading-[1.55] tracking-[0.15px] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch]"
                 style={{
                   willChange: "transform, opacity",
                   transform: i === 0 ? "translateY(0%)" : "translateY(100%)",
@@ -636,8 +663,8 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
       </div>
 
       {/* ── Bottom bar: animated counter (like ProjectClipReveal) ── */}
-      <div className="absolute bottom-8 right-10 z-30 flex items-center gap-2 pointer-events-none">
-        <div className="relative h-4.5 overflow-hidden min-w-8">
+      <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-10 z-30 flex items-center gap-2 pointer-events-none">
+        <div className="relative h-5 overflow-hidden min-w-8">
           {items.map((_, i) => (
             <span
               key={`cnt-${i}`}
