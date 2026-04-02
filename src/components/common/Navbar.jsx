@@ -6,9 +6,11 @@ import Image from "next/image";
 import Button from "./Button";
 import gsap from "gsap";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navRef = useRef(null);
   const tl = useRef(null);
@@ -56,7 +58,11 @@ export default function Navbar() {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 w-full z-20 nav-gradient text-foreground">
+      <nav
+        className={`fixed top-0 left-0 w-full z-20 text-foreground ${
+          pathname === "/work" ? "" : "nav-gradient"
+        }`}
+      >
         <div className="relative z-30 flex items-center justify-between h-20 px-6 md:px-12">
           
           {/* LEFT EMPTY (previously theme toggle) */}
@@ -104,7 +110,7 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className="nav-item block text-2xl md:text-4xl lg:text-5xl font-heading font-[200] cursor-pointer hover:translate-x-2 transition-all"
+                    className="nav-item block text-2xl md:text-4xl lg:text-5xl font-heading font-extralight cursor-pointer hover:translate-x-2 transition-all"
                   >
                     {item.name}
                   </Link>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import Button from "../common/Button";
 
+
 const accordionData = [
   {
     title: "Strategy & Counsel",
@@ -26,7 +27,7 @@ const AboutExpertise = () => {
   const [active, setActive] = useState(null);
 
   return (
-    <section className="w-full bg-black text-white px-4 sm:px-10 md:px-16 lg:px-20 py-20 md:py-28">
+    <section className="w-full  px-4 sm:px-10 md:px-16 lg:px-20 py-20 md:py-28">
       
       {/* GRID */}
       <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-stretch">
@@ -48,12 +49,12 @@ const AboutExpertise = () => {
         {/* RIGHT */}
         <div className="space-y-6">
           
-          <h3 className="text-2xl md:text-4xl lg:text-5xl font-light leading-tight text-gray-300">
+          <h3 className="text-2xl md:text-4xl lg:text-5xl font-light leading-tight ">
             We build purposeful, distinctive brands rooted in strategy,
             storytelling, and design.
           </h3>
 
-          <p className="text-sm md:text-base text-gray-400 max-w-xl">
+          <p className="text-sm md:text-base  max-w-xl">
             We craft brand identities that are strategic, emotionally resonant,
             and built to last. From research and positioning to visual systems
             and tone of voice, we help businesses stand out and stay consistent
@@ -72,7 +73,7 @@ const AboutExpertise = () => {
                     onClick={() => setActive(isOpen ? null : index)}
                     className="w-full flex items-center justify-between py-6 md:py-8 text-left group"
                   >
-                    <span className="text-lg md:text-2xl text-gray-400 group-hover:text-white transition">
+                    <span className="text-lg md:text-2xl  transition">
                       {item.title}
                     </span>
 
@@ -88,7 +89,7 @@ const AboutExpertise = () => {
                       isOpen ? "max-h-40 pb-6" : "max-h-0"
                     }`}
                   >
-                    <p className="text-sm md:text-base text-gray-400 max-w-xl">
+                    <p className="text-sm md:text-base  max-w-xl">
                       {item.content}
                     </p>
                   </div>

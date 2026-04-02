@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Button from "../common/Button";
 
 const jobs = [
   {
@@ -113,7 +114,7 @@ const JoinTeam = () => {
   };
 
   return (
-    <section className="w-full bg-black text-white py-24">
+    <section className="w-full py-24">
       <div
         className="
           w-full
@@ -127,9 +128,9 @@ const JoinTeam = () => {
         </h2>
 
         {/* Description */}
-        <p className="max-w-3xl text-gray-400 leading-relaxed text-sm md:text-base mb-24">
+        <p className="max-w-3xl leading-relaxed text-sm md:text-base mb-24">
           We’re building a team of curious thinkers and creative doers who care deeply about craft and collaboration.
-          <span className="text-white"> people@wearepointof.com</span>
+          <span className=""> people@wearepointof.com</span>
         </p>
 
         {/* Vacancies */}
@@ -141,21 +142,20 @@ const JoinTeam = () => {
         <div className="space-y-6 max-w-3xl">
           {jobs.map((job, index) => (
             <div key={index} className="border-b border-gray-700 pb-6">
-              
+
               {/* Header */}
               <div
                 onClick={() => toggle(index)}
                 className="flex items-center justify-between cursor-pointer group"
               >
-                <span className="text-lg md:text-2xl text-gray-400 group-hover:text-white transition">
+                <span className="text-lg md:text-2xl  transition">
                   {job.title}
                 </span>
 
                 {/* Rotating + */}
                 <span
-                  className={`text-gray-400 text-2xl transition-transform duration-300 ${
-                    activeIndex === index ? "rotate-45 text-white" : ""
-                  }`}
+                  className={`text-2xl transition-transform duration-300 ${activeIndex === index ? "rotate-45 " : ""
+                    }`}
                 >
                   +
                 </span>
@@ -169,8 +169,8 @@ const JoinTeam = () => {
                 `}
               >
                 {job.content && (
-                  <div className="space-y-6 text-gray-400 text-sm md:text-[15px]">
-                    
+                  <div className="space-y-6  text-sm md:text-[15px]">
+
                     {/* Meta */}
                     <div className="uppercase text-xs tracking-wide space-y-1">
                       <p>Experience: {job.content.exp}</p>
@@ -181,14 +181,14 @@ const JoinTeam = () => {
                     <p>{job.content.description}</p>
 
                     <div>
-                      <h4 className="text-white text-xs uppercase mb-2">
+                      <h4 className=" text-xs uppercase mb-2">
                         About You:
                       </h4>
                       <p>{job.content.about}</p>
                     </div>
 
                     <div>
-                      <h4 className="text-white text-xs uppercase mb-2">
+                      <h4 className=" text-xs uppercase mb-2">
                         What You'll Do:
                       </h4>
                       <ul className="list-disc pl-5 space-y-2">
@@ -199,7 +199,7 @@ const JoinTeam = () => {
                     </div>
 
                     <div>
-                      <h4 className="text-white text-xs uppercase mb-2">
+                      <h4 className=" text-xs uppercase mb-2">
                         Requirements:
                       </h4>
                       <ul className="list-disc pl-5 space-y-2">
@@ -210,26 +210,21 @@ const JoinTeam = () => {
                     </div>
 
                     <div>
-                      <h4 className="text-white text-xs uppercase mb-2">
+                      <h4 className=" text-xs uppercase mb-2">
                         Software Skills:
                       </h4>
                       <p>{job.content.skills}</p>
                     </div>
 
                     <div>
-                      <h4 className="text-white text-xs uppercase mb-2">
+                      <h4 className=" text-xs uppercase mb-2">
                         Culture Note:
                       </h4>
                       <p>{job.content.culture}</p>
                     </div>
 
-                    {/* Apply */}
-                    <button className="mt-6 flex items-center gap-2">
-                      <span className="w-2 h-2 bg-white rounded-full"></span>
-                      <span className="border-b border-white text-sm">
-                        APPLY
-                      </span>
-                    </button>
+
+                    <Button title="APPLY" />
 
                   </div>
                 )}

@@ -1,9 +1,15 @@
+"use client";
 import React from 'react'
 
-const Button = ({title}) => {
+const Button = ({ title, onClick }) => {
+  const handleClick = (event) => {
+    // Forward the click event to the parent handler (if provided).
+    if (typeof onClick === 'function') onClick(event)
+  }
+
   return (
-     <div className="pt-10">
-          <button className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-[600] tracking-wide uppercase">
+     <div className="mt-10">
+         <button onClick={handleClick} className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase">
             {/* Circle */}
             <span className="relative flex items-center justify-center w-2 h-2 bg-foreground rounded-full transition-all duration-300 group-hover:w-5 group-hover:h-5">
               {/* Arrow */}
@@ -26,7 +32,7 @@ const Button = ({title}) => {
             <span className="relative uppercase">
                {title}
               {/* Underline */}
-              <span className="absolute right-0 -bottom-1 h-[1px] w-full bg-foreground transition-all duration-300 group-hover:w-0"></span>
+               <span className="absolute right-0 -bottom-1 h-px w-full bg-foreground transition-all duration-300 group-hover:w-0"></span>
             </span>
           </button>
         </div>

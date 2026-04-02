@@ -33,7 +33,7 @@ const BrandsIndex = () => {
         </h2>
 
         {/* Desktop Header (NO BORDER NOW) */}
-        <div className="hidden md:grid grid-cols-3 text-xs uppercase tracking-wide pb-4">
+        <div className="hidden md:grid grid-cols-3 border-b text-xs uppercase tracking-wide pb-4">
           <span>Brand</span>
           <span>Industry</span>
           <span className="text-right">Year</span>
@@ -72,12 +72,10 @@ const BrandsIndex = () => {
 
         {/* Button */}
         {data.length > 10 && (
-          <div className="mt-10">
-            <Button
-              title={showAll ? "SEE LESS" : "SEE MORE"}
-              onClick={() => setShowAll(!showAll)}
-            />
-          </div>
+          <Button
+            title={showAll ? "SEE LESS" : "SEE MORE"}
+            onClick={() => setShowAll(!showAll)}
+          />
         )}
 
       </div>

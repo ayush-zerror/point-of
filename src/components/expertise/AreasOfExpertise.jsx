@@ -47,7 +47,7 @@ const data = [
 
 const AreasOfExpertise = () => {
   return (
-    <section className="w-full bg-black text-white py-16 md:py-28">
+    <section className="w-full  py-16 md:py-28">
       <div
         className="
           relative w-full
@@ -69,12 +69,12 @@ const AreasOfExpertise = () => {
               </div>
 
               {/* Line */}
-              <div className="w-px flex-1 bg-gray-700"></div>
+              <div className="w-px flex-1 bg-foreground"></div>
             </div>
           </div>
 
           {/* Heading */}
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-[200] mb-10 sm:mb-12 md:mb-20 text-gray-300">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-[200] mb-10 sm:mb-12 md:mb-20 ">
             Areas of Expertise
           </h2>
 
@@ -82,11 +82,11 @@ const AreasOfExpertise = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 md:gap-16">
             {data.map((section, index) => (
               <div key={index}>
-                <h3 className="text-base sm:text-lg md:text-xl tracking-wide mb-3 sm:mb-4 md:mb-6 text-gray-200">
+                <h3 className="text-base sm:text-lg md:text-xl tracking-wide mb-3 sm:mb-4 md:mb-6 ">
                   {section.title}
                 </h3>
 
-                <ul className="space-y-2 text-sm sm:text-base text-gray-400">
+                <ul className="space-y-2 text-sm sm:text-base ">
                   {section.items.map((item, i) => (
                     <li key={i} className="flex gap-2">
                       <span>•</span>

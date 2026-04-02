@@ -1,7 +1,7 @@
 import SmoothScroller from "@/components/SmoothScroller";
 import "./globals.css";
 import Navbar from "@/components/common/Navbar";
-import Footer from "@/components/common/Footer";
+import FooterVisibility from "@/components/common/FooterVisibility";
 import localFont from "next/font/local";
 
 export const metadata = {
@@ -39,7 +39,8 @@ export default function RootLayout({ children }) {
         <SmoothScroller />
         <Navbar />
         {children}
-        <Footer />
+        <FooterVisibility excludePath="/work" />
+
       </body>
     </html>
   );
