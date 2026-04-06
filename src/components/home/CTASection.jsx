@@ -4,7 +4,7 @@ import Button from "../common/Button";
 const CTASection = () => {
   return (
     <section
-      className="w-full min-h-[50vh] flex items-center justify-center px-6 
+      className="w-full bg-black min-h-[50vh] flex items-center justify-center px-6 
       "
     >
       <div className="text-center flex flex-col items-center">

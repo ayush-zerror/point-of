@@ -29,10 +29,10 @@ const Button = ({ title, onClick }) => {
             </span>
 
             {/* Text with animated underline */}
-            <span className="relative uppercase">
+            <span className="relative uppercase whitespace-nowrap">
                {title}
               {/* Underline */}
-               <span className="absolute right-0 -bottom-1 h-px w-full bg-foreground transition-all duration-300 group-hover:w-0"></span>
+               <span className="absolute  right-0 -bottom-1 h-px w-full bg-foreground transition-all duration-300 group-hover:w-0"></span>
             </span>
           </button>
         </div>

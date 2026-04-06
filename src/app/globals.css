@@ -4,6 +4,7 @@
 :root {
   --background: #000;
   --foreground: #f2f2ee;
+  --secondary:#E8E8E1;
 }
 
 html {
@@ -13,6 +14,7 @@ html {
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
 
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);

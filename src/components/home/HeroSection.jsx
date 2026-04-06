@@ -52,7 +52,7 @@ const HeroSection = () => {
   }, [displayText, isDeleting, textIndex]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative bg-black w-full h-screen overflow-hidden">
       {/* ROTATING IMAGE */}
       <div className="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <Image

@@ -1,3 +1,5 @@
+// layout.tsx
+
 import SmoothScroller from "@/components/SmoothScroller";
 import "./globals.css";
 import Navbar from "@/components/common/Navbar";
@@ -8,7 +10,6 @@ export const metadata = {
   title: "App",
   description: "Next App",
 };
-// layout.tsx
 
 const headingFont = localFont({
   src: [
@@ -34,13 +35,11 @@ const bodyFont = localFont({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-
       <body suppressHydrationWarning className={`${headingFont.variable} ${bodyFont.variable}`}>
         <SmoothScroller />
         <Navbar />
         {children}
         <FooterVisibility excludePath="/work" />
-
       </body>
     </html>
   );
