@@ -5,6 +5,10 @@
   --background: #000;
   --foreground: #f2f2ee;
   --secondary:#E8E8E1;
+
+  --color-heading: #E7E7E0;
+  --color-subheading: #c0bfbf;
+  --color-desc: #8E8E8E;
 }
 
 html {
@@ -15,6 +19,10 @@ html {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-secondary: var(--secondary);
+
+  --color-heading: var(--color-heading);
+  --color-subheading: var(--color-subheading);
+  --color-desc: var(--color-desc);
 
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
@@ -27,6 +35,26 @@ body {
 ::-webkit-scrollbar {
   display: none;
 }
+
+
+@layer components {
+  .heading-xl {
+    @apply text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3];
+  }
+  .heading-lg {
+    @apply font-heading font-extralight leading-[1.2] tracking-[0px]
+           text-2xl md:text-3xl lg:text-4xl;
+  }
+  .heading-md {
+    @apply font-heading font-light leading-[1.2] tracking-[0px]
+           text-lg md:text-xl lg:text-2xl;
+  }
+
+  .para {
+    @apply font-body font-normal text-base leading-normal tracking-[0.3px];
+  }
+}
+
 
 /* Default (light) */
 .nav-gradient {

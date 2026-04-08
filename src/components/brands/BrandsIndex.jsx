@@ -27,7 +27,7 @@ const BrandsIndex = () => {
       <div className="w-full">
 
         {/* Heading */}
-        <h2 className="text-2xl sm:text-3xl md:text-5xl font-[200] mb-10 md:mb-12">
+        <h2 className="heading-xl mb-10 md:mb-12">
           Brands Index{" "}
           <span className="text-sm md:text-base">({data.length})</span>
         </h2>

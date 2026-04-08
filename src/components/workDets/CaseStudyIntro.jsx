@@ -11,11 +11,11 @@ export default function CaseStudyIntro() {
         <div className="flex flex-col justify-between h-full">
           
           <div className="space-y-4">
-            <h2 className="text-3xl md:text-5xl font-light">
+            <h2 className="heading-xl text-heading font-[400]">
               Contigo Tequila
             </h2>
 
-            <p className="text-sm md:text-base text-gray-400 tracking-wide">
+            <p className="heading-md text-desc">
               MEXICO & INDIA
             </p>
           </div>
@@ -25,11 +25,11 @@ export default function CaseStudyIntro() {
         {/* RIGHT */}
         <div className="space-y-8">
           
-          <h3 className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-300 leading-tight">
+          <h3 className="heading-xl text-subheading">
             Bridging Mexico and India.
           </h3>
 
-          <p className="text-sm md:text-base text-gray-400 max-w-2xl leading-relaxed">
+          <p className="para text-desc max-w-2xl">
             Contigo is a premium tequila that celebrates the connection between two vibrant cultures.
             The name means "with you" in Spanish—a promise of togetherness that resonates across borders.
             We created a brand that honors Mexican tequila-making traditions while embracing India's colorful

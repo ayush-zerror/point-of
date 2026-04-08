@@ -36,7 +36,7 @@ const AboutExpertise = () => {
         <div className="flex flex-col justify-between h-full">
           
           {/* TOP CONTENT */}
-          <h2 className="text-3xl md:text-5xl font-light">
+          <h2 className="heading-xl text-heading">
             Branding
           </h2>
 
@@ -49,12 +49,12 @@ const AboutExpertise = () => {
         {/* RIGHT */}
         <div className="space-y-6">
           
-          <h3 className="text-2xl md:text-4xl lg:text-5xl font-light leading-tight ">
+          <h3 className="heading-xl text-subheading">
             We build purposeful, distinctive brands rooted in strategy,
             storytelling, and design.
           </h3>
 
-          <p className="text-sm md:text-base  max-w-xl">
+          <p className="para text-desc max-w-xl">
             We craft brand identities that are strategic, emotionally resonant,
             and built to last. From research and positioning to visual systems
             and tone of voice, we help businesses stand out and stay consistent
@@ -73,7 +73,7 @@ const AboutExpertise = () => {
                     onClick={() => setActive(isOpen ? null : index)}
                     className="w-full flex items-center justify-between py-6 md:py-8 text-left group"
                   >
-                    <span className="text-lg md:text-2xl  transition">
+                    <span className="heading-lg text-desc transition">
                       {item.title}
                     </span>
 
@@ -89,7 +89,7 @@ const AboutExpertise = () => {
                       isOpen ? "max-h-40 pb-6" : "max-h-0"
                     }`}
                   >
-                    <p className="text-sm md:text-base  max-w-xl">
+                    <p className="para text-desc max-w-xl">
                       {item.content}
                     </p>
                   </div>

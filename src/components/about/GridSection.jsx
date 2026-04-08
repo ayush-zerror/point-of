@@ -12,7 +12,7 @@ const GridSection = ({ title, btntitle, data }) => {
         {/* Heading */}
         {title && (
           <div className="text-center mb-12 sm:mb-16 md:mb-20 flex flex-col items-center gap-6">
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-[200] leading-[1.3] max-w-3xl">
+            <h2 className="heading-xl text-subheading max-w-3xl">
               {title}
             </h2>
 
@@ -24,19 +24,19 @@ const GridSection = ({ title, btntitle, data }) => {
         <div
           className={`
             grid grid-cols-1 
-            ${isFour ? "sm:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}
+            ${isFour ? "sm:grid-cols-2 lg:grid-cols-2 lg:gap-x-32" : "sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-24"}
             gap-y-12 sm:gap-y-16 md:gap-y-20 lg:gap-y-24
-            gap-x-6 sm:gap-x-10 md:gap-x-16 lg:gap-x-24
+            gap-x-6 sm:gap-x-10 md:gap-x-16 
           `}
         >
           {data.map((item, index) => (
             <div
               key={index}
-              className="w-full max-w-full sm:max-w-[520px] mx-auto"
+              className="w-full"
             >
               {/* Video */}
               {item.video && (
-                <div className="w-12 sm:w-14 md:w-16 lg:w-20 aspect-square mb-3 sm:mb-4 overflow-hidden">
+                <div className="w-12 sm:w-14 md:w-16 lg:w-18 aspect-square mb-3 sm:mb-4 overflow-hidden">
                   <video
                     src={item.video}
                     autoPlay
@@ -49,12 +49,12 @@ const GridSection = ({ title, btntitle, data }) => {
               )}
 
               {/* Title */}
-              <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-3 sm:mb-4">
+              <h3 className="heading-md text-subheading mb-3 sm:mb-4">
                 {item.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
+              <p className="para text-desc">
                 {item.desc}
               </p>
             </div>

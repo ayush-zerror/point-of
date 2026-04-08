@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
+import OverviewSection from "./OverviewSection";
 
 const Overview = () => {
   return (
     <section className="w-full">
-      
+
       <div
         className="
         grid 
@@ -18,10 +20,13 @@ const Overview = () => {
         lg:auto-rows-[250px]
       "
       >
-        
+
         {/* IMG 1 */}
         <div className="overflow-hidden md:row-span-2 flex items-start">
-          <img
+          <Image
+            width={1000}
+            height={1000}
+            alt=""
             src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/911b86203085493.669248c5b0691.png"
             className="w-full h-auto object-cover"
           />
@@ -29,7 +34,10 @@ const Overview = () => {
 
         {/* IMG 2 */}
         <div className="overflow-hidden md:row-span-2 flex items-start">
-          <img
+          <Image
+            width={1000}
+            height={1000}
+            alt=""
             src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/8a5f1f203085493.6690ed4ea1131.png"
             className="w-full h-auto object-cover"
           />
@@ -37,7 +45,10 @@ const Overview = () => {
 
         {/* IMG 3 */}
         <div className="overflow-hidden md:col-span-2 md:row-span-2">
-          <img
+          <Image
+            width={1000}
+            height={1000}
+            alt=""
             src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png"
             className="w-full h-full object-cover"
           />
@@ -45,7 +56,10 @@ const Overview = () => {
 
         {/* IMG 4 */}
         <div className="overflow-hidden md:col-span-2 md:row-span-2">
-          <img
+          <Image
+            width={1000}
+            height={1000}
+            alt=""
             src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/7a0d8c203085493.669b5e81b1932.png"
             className="w-full h-full object-cover"
           />
@@ -53,7 +67,10 @@ const Overview = () => {
 
         {/* IMG 5 */}
         <div className="overflow-hidden md:row-span-2 flex items-start">
-          <img
+          <Image
+            width={1000}
+            height={1000}
+            alt=""
             src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/be2f47203085493.669248c5aeab3.png"
             className="w-full h-auto object-cover"
           />
@@ -61,13 +78,17 @@ const Overview = () => {
 
         {/* IMG 6 */}
         <div className="overflow-hidden md:row-span-2 flex items-start">
-          <img
+          <Image
+            width={1000}
+            height={1000}
+            alt=""
             src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/9d07b5203085493.669b5e81af856.png"
             className="w-full h-auto object-cover"
           />
         </div>
 
       </div>
+      <OverviewSection/>
 
     </section>
   );

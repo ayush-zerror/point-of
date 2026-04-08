@@ -59,27 +59,28 @@ export default function Navbar() {
     <>
       {/* NAVBAR */}
       <nav
-        className={`fixed top-0 left-0 w-full z-20 text-foreground ${
-          pathname === "/work" ? "" : "nav-gradient"
-        }`}
+        className={`fixed top-0 left-0 w-full z-20 text-foreground ${pathname === "/work" ? "" : "nav-gradient"
+          }`}
       >
         <div className="relative z-30 flex items-center justify-between h-20 px-6 md:px-12">
-          
+
           {/* LEFT EMPTY (previously theme toggle) */}
           <div className="w-5" />
 
+
           {/* LOGO */}
           <div className="absolute left-1/2 -translate-x-1/2">
-            <Image
-              src="/logo/logo.png"
-              alt="logo"
-              width={180}
-              height={80}
-              className="w-[100px] sm:w-[120px] md:w-[150px] lg:w-[180px] invert h-auto object-contain"
-              priority
-            />
+            <Link href="/" className="block">
+              <Image
+                src="/logo/logo.png"
+                alt="logo"
+                width={180}
+                height={80}
+                className="w-[100px] sm:w-[120px] md:w-[150px] lg:w-[180px] invert h-auto object-contain cursor-pointer"
+                priority
+              />
+            </Link>
           </div>
-
           {/* MENU BUTTON */}
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -95,12 +96,12 @@ export default function Navbar() {
           className="absolute h-screen top-[-100vh] w-full z-10 bg-background text-foreground"
         >
           <div className="flex flex-col h-full justify-center gap-20 px-6 md:px-20 py-10 md:py-16">
-            
+
             {/* TOP */}
             <div className="flex flex-col md:flex-row justify-between items-end gap-12">
               <div className="space-y-6 md:space-y-4">
                 {[
-                  { name: "Studio", href: "/studio" },
+                  { name: "About", href: "/about" },
                   { name: "Work", href: "/work" },
                   { name: "Expertise", href: "/expertise" },
                   { name: "Brands", href: "/brands" },
@@ -110,7 +111,7 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className="nav-item block text-2xl md:text-4xl lg:text-5xl font-heading font-extralight cursor-pointer hover:translate-x-2 transition-all"
+                    className="nav-item block text-2xl md:text-4xl uppercase lg:text-5xl font-heading font-extralight cursor-pointer hover:translate-x-2 transition-all"
                   >
                     {item.name}
                   </Link>

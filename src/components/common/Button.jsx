@@ -11,7 +11,7 @@ const Button = ({ title, onClick }) => {
      <div className="mt-10">
          <button onClick={handleClick} className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase">
             {/* Circle */}
-            <span className="relative flex items-center justify-center w-2 h-2 bg-foreground rounded-full transition-all duration-300 group-hover:w-5 group-hover:h-5">
+            <span className="relative flex items-center justify-center w-2 h-2 bg-subheading rounded-full transition-all duration-300 group-hover:w-5 group-hover:h-5">
               {/* Arrow */}
               <svg
                 className="w-3 h-3 text-background opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100"
@@ -29,10 +29,10 @@ const Button = ({ title, onClick }) => {
             </span>
 
             {/* Text with animated underline */}
-            <span className="relative uppercase whitespace-nowrap">
+            <span className="relative uppercase whitespace-nowrap text-subheading">
                {title}
               {/* Underline */}
-               <span className="absolute  right-0 -bottom-1 h-px w-full bg-foreground transition-all duration-300 group-hover:w-0"></span>
+               <span className="absolute pointer-events-none  right-0 -bottom-1 h-px w-full bg-subheading transition-all duration-300 group-hover:w-0"></span>
             </span>
           </button>
         </div>

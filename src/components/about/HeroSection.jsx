@@ -30,12 +30,7 @@ const HeroSection = ({
         >
           {/* Title */}
           <h2
-            className="
-              text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl
-              font-heading font-[200]
-              leading-[1.3]
-              max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px]
-            "
+            className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px]"
           >
             {title}
           </h2>

@@ -11,7 +11,7 @@ const GetInTouch = () => {
             md:pr-6
           "
         >
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-light mb-10 sm:mb-12 md:mb-16">
+          <h1 className="heading-xl mb-10 sm:mb-12 md:mb-16">
             Get in touch
           </h1>
 

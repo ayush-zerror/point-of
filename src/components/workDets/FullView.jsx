@@ -17,18 +17,18 @@ const FullView = () => {
       <div className="grid grid-cols-1 md:grid-cols-[40%_60%]">
         {/* LEFT */}
         <div>
-          <p className="text-xs md:text-sm tracking-[0.2em] text-gray-400">
+          <p className="text-sm font-semibold text-subheading">
             CHALLENGE
           </p>
         </div>
 
         {/* RIGHT */}
         <div className="space-y-8">
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-300 leading-tight max-w-3xl">
+          <h2 className="heading-xl text-subheading max-w-3xl">
             An authentic tequila brand that speaks to Indian consumers
           </h2>
 
-          <p className="text-sm md:text-base text-gray-400 leading-relaxed max-w-2xl">
+          <p className="para text-desc max-w-2xl">
             How do you create an authentic tequila brand that speaks to Indian
             consumers without losing its Mexican soul? The challenge was to
             develop a premium spirit that could compete with established global

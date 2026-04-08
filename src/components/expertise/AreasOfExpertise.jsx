@@ -74,7 +74,7 @@ const AreasOfExpertise = () => {
           </div>
 
           {/* Heading */}
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-[200] mb-10 sm:mb-12 md:mb-20 ">
+          <h2 className="heading-xl mb-10 sm:mb-12 md:mb-16 ">
             Areas of Expertise
           </h2>
 

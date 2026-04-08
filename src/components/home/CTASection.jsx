@@ -9,7 +9,7 @@ const CTASection = () => {
     >
       <div className="text-center flex flex-col items-center">
         {/* HEADING */}
-        <p className="text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3]">
+        <p className="heading-xl text-desc">
           Got a project in mind?
           <br />
           Learn how we can help.

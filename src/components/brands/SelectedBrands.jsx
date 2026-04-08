@@ -25,7 +25,7 @@ const SelectedBrands = () => {
       <div className="w-full">
         
         {/* Heading */}
-        <h2 className="text-2xl sm:text-3xl md:text-5xl font-[200] mb-10 md:mb-16">
+        <h2 className="heading-xl mb-10 md:mb-12">
           Selected Brands
         </h2>
 

@@ -15,7 +15,7 @@ const BrandsSection = () => {
   return (
     <section className="w-full  py-24 md:py-52 bg-black">
       <div className="max-w-5xl m-auto">
-        <p className="text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3]">
+        <p className="heading-xl text-desc">
           We partner with visionary entrepreneurs, industry leaders, &
           disruptive startups to build brands that spark change & drive global
           impact.

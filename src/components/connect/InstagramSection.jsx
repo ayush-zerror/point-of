@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Button from "../common/Button";
 
 const posts = [
   {
@@ -25,36 +26,28 @@ const posts = [
 const InstagramSection = () => {
   return (
     <section className="w-full bg-black text-white py-20 md:py-28">
-      
+
       {/* Header */}
       <div className="flex flex-col items-center justify-center mb-16 md:mb-20">
-        <h2 className="text-lg md:text-2xl text-gray-300 mb-3 md:mb-4">
+        <h2 className="heading-lg text-subheading">
           @wearepointof
         </h2>
-
-        <button className="text-xs md:text-sm text-gray-400 flex items-center gap-2 group">
-          <span className="rotate-45 transition group-hover:translate-x-1">
-            ↗
-          </span>
-          <span className="border-b border-gray-500 group-hover:border-white transition">
-            FOLLOW
-          </span>
-        </button>
+        <Button title={"FOLLOW"} />
       </div>
 
       {/* Container */}
       <div className="px-4 sm:px-6 md:px-10 lg:px-28 xl:px-20">
-        
+
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 lg:gap-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 lg:gap-20">
           {posts.map((post, index) => (
-            
+
             <Link
               key={index}
               href={`/work/${post.slug}`}
               className="relative group block"
             >
-              
+
               {/* TITLE */}
               <div className="absolute -top-8 left-0 overflow-hidden z-10">
                 <span
@@ -73,7 +66,7 @@ const InstagramSection = () => {
 
               {/* CARD */}
               <div className="relative w-full aspect-square overflow-hidden bg-neutral-900">
-                
+
                 {/* VIDEO */}
                 <video
                   src={post.video}

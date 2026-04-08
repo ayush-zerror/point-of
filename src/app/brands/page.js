@@ -2,8 +2,8 @@ import BrandsIndex from '@/components/brands/BrandsIndex'
 import SelectedBrands from '@/components/brands/SelectedBrands'
 import StatsSection from '@/components/brands/StatsSection'
 import TestimonialSection from '@/components/brands/TestimonialSection'
-import GridSection from '@/components/studio/GridSection'
-import HeroSection from '@/components/studio/HeroSection'
+import GridSection from '@/components/about/GridSection'
+import HeroSection from '@/components/about/HeroSection'
 import React from 'react'
 const cultureValues = [
   {

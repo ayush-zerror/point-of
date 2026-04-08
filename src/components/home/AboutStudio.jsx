@@ -9,13 +9,13 @@ const AboutStudio = () => {
       <div className="mx-auto">
         <div className="max-w-5xl space-y-12">
         {/* Paragraph 1 */}
-        <p className="text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3] ">
+        <p className="heading-xl">
           Point Of is an independent consultancy based in Mumbai, redefining how
           brands engage with culture and consumers.
         </p>
 
         {/* Paragraph 2 */}
-        <p className="text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3] ">
+        <p className="heading-xl">
           We work at the intersection of design, strategy, and
           technology—crafting identities that balance innovation with timeless
           storytelling. Building for India and beyond.

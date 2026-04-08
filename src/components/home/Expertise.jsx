@@ -60,7 +60,7 @@ export default function Expertise() {
 
           {/* LEFT */}
           <div className="w-1/2 flex flex-col justify-between">
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3]">
+            <h1 className="heading-xl text-heading">
               Expertise
             </h1>
 
@@ -79,21 +79,21 @@ export default function Expertise() {
               return (
                 <div key={i} className="relative border-b border-white/20 pb-6">
 
-                 <div className="relative">
-                   {/* Circle aligned to same X axis */}
-                   <motion.div
-                    animate={{ scale: isActive ? 1 : 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute -left-8.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-white"
-                  />
+                  <div className="relative">
+                    {/* Circle aligned to same X axis */}
+                    <motion.div
+                      animate={{ scale: isActive ? 1 : 0 }}
+                      transition={{ duration: 0.4 }}
+                      className="absolute -left-8.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-white"
+                    />
 
-                  <h2
-                    className={`text-3xl md:text-4xl font-light transition-colors duration-300 ${isActive ? "text-white" : "text-white/40"
-                      }`}
-                  >
-                    {item.title}
-                  </h2>
-                 </div>
+                    <h2
+                      className={`heading-lg transition-colors duration-300 ${isActive ? "text-subheading" : "text-desc"
+                        }`}
+                    >
+                      {item.title}
+                    </h2>
+                  </div>
 
                   {/* Accordion */}
                   <motion.div
@@ -105,7 +105,9 @@ export default function Expertise() {
                     transition={{ duration: 0.4 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-base md:text-lg text-white/60 mt-4 max-w-xl leading-relaxed">
+                    <p
+                      className="para text-desc mt-4 max-w-xl"
+                    >
                       {item.content}
                     </p>
                   </motion.div>

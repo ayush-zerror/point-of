@@ -8,6 +8,8 @@ import { Autoplay, Pagination } from "swiper/modules";
 // Styles
 import "swiper/css";
 import "swiper/css/pagination";
+import Image from "next/image";
+import Button from "../common/Button";
 
 const testimonials = [
   {
@@ -28,7 +30,7 @@ const testimonials = [
 
 const TestimonialSection = () => {
   return (
-    <section className="w-full bg-black text-white py-16 md:py-24 px-4 sm:px-8 md:px-20">
+    <section className="w-full  py-16 md:py-24 px-4 sm:px-8 md:px-20">
       <div className="w-full">
         <Swiper
           modules={[Autoplay, Pagination]}
@@ -42,33 +44,30 @@ const TestimonialSection = () => {
 
                 {/* LEFT IMAGE */}
                 <div className="w-full max-w-xs sm:max-w-sm">
-                  <img
+                  <Image
+                    width={1000}
+                    height={1000}
                     src={item.image}
-                    alt=""
+                    alt={item.name}
                     className="w-full aspect-square object-cover"
                   />
                 </div>
 
                 {/* RIGHT CONTENT */}
                 <div className="max-w-xl">
-                  <h3 className="text-xl sm:text-2xl md:text-4xl font-[200] text-gray-200 mb-3">
+                  <h3 className="heading-lg text-subheading mb-3">
                     {item.name}
                   </h3>
 
-                  <p className="text-[10px] sm:text-xs uppercase text-gray-400 mb-4 md:mb-6 tracking-wide">
+                  <p className="para text-desc mb-4 md:mb-6">
                     {item.role}
                   </p>
 
-                  <p className="text-sm sm:text-base text-gray-400 leading-relaxed mb-6 md:mb-8">
+                  <p className="para text-desc mb-6 md:mb-8">
                     {item.text}
                   </p>
-
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="w-2 h-2 bg-white rounded-full"></span>
-                    <span className="border-b border-gray-500">
-                      {item.brand}
-                    </span>
-                  </div>
+                  
+                  <Button title={item.brand} />
                 </div>
 
               </div>

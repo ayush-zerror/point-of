@@ -2,8 +2,12 @@ import ContactSection from '@/components/connect/ContactSection'
 import GetInTouch from '@/components/connect/GetInTouch'
 import InstagramSection from '@/components/connect/InstagramSection'
 import JoinTeam from '@/components/connect/JoinTeam'
-import HeroSection from '@/components/studio/HeroSection'
+import HeroSection from '@/components/about/HeroSection'
 import React from 'react'
+import AccordionSection from '@/components/connect/AccordionSection'
+import { vacancies } from '@/helper/vacancies'
+
+
 
 const Connect = () => {
   return (
@@ -34,6 +38,7 @@ const Connect = () => {
       </div>
 
       <JoinTeam />
+      <AccordionSection data={vacancies} title="Current Vacancies" />
       <InstagramSection />
     </>
   )
