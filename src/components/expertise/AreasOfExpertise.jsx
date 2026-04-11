@@ -75,7 +75,7 @@ const AreasOfExpertise = () => {
 
           {/* Heading */}
           <h2 className="heading-xl mb-10 sm:mb-12 md:mb-16 ">
-            Areas of Expertise
+          Areas of expertise
           </h2>
 
           {/* Grid */}

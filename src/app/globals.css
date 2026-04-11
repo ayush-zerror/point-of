@@ -39,7 +39,7 @@ body {
 
 @layer components {
   .heading-xl {
-    @apply text-2xl md:text-4xl lg:text-5xl font-heading font-[200] leading-[1.3];
+    @apply text-2xl md:text-4xl lg:text-5xl font-heading font-extralight leading-[1.3];
   }
   .heading-lg {
     @apply font-heading font-extralight leading-[1.2] tracking-[0px]

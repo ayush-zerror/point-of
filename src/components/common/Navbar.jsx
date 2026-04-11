@@ -143,7 +143,10 @@ export default function Navbar() {
                   <Button title={"SHOWREEL"} />
                 </div>
                 <div className="nav-item">
-                  <Button title={"CAREER"} />
+                  <Button title={"CAREERS"} />
+                </div>
+                <div className="nav-item">
+                  <Button title={"UNIVERSE"} />
                 </div>
               </div>
             </div>

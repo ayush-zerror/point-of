@@ -50,9 +50,9 @@ const ContactSection = () => {
             <h3 className="heading-md text-subheading mb-3 md:mb-4">
                 Barcelona, Spain
               </h3>
-              <p className="para text-desc">Passeig de Gràcia,</p>
-              <p className="para text-desc">17 Barcelona,</p>
-              <p className="para text-desc">B 08007</p>
+              <p className="para text-desc">Carrer de Girona 179,</p>
+              <p className="para text-desc">Eixample, Barcelona</p>
+              <p className="para text-desc">Catalunya 08037</p>
             </div>
 
           </div>

@@ -142,7 +142,7 @@ const Studio = () => {
       <FoundersSection data={foundersData} />
 
       <GridSection
-        title="How We Transform Brands?"
+        title="How we transform brands?"
         data={transformData}
       />
       <OurValues />

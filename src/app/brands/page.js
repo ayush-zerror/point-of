@@ -50,6 +50,7 @@ const Brnads = () => {
       <StatsSection />
       <SelectedBrands />
       <BrandsIndex />
+      <TestimonialSection />
       <GridSection
         title={
           <>
@@ -59,7 +60,6 @@ const Brnads = () => {
         btntitle={"LET'S TALK"}
         data={cultureValues}
       />
-      <TestimonialSection />
     </>
   )
 }

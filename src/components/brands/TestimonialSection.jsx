@@ -30,7 +30,7 @@ const testimonials = [
 
 const TestimonialSection = () => {
   return (
-    <section className="w-full  py-16 md:py-24 px-4 sm:px-8 md:px-20">
+    <section className="w-full py-16 md:py-24 px-4 sm:px-8 md:px-20">
       <div className="w-full">
         <Swiper
           modules={[Autoplay, Pagination]}
@@ -66,7 +66,7 @@ const TestimonialSection = () => {
                   <p className="para text-desc mb-6 md:mb-8">
                     {item.text}
                   </p>
-                  
+
                   <Button title={item.brand} />
                 </div>
 

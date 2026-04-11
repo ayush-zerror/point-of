@@ -71,7 +71,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         {/* First line */}
         <h1 className="font-thin tracking-[0.5px] leading-[1.2] font-heading mb-2 text-3xl sm:text-4xl md:text-5xl lg:text-[2rem] xl:text-[2.2rem]">
-          What is the Point Of
+        What is the point of
         </h1>
 
         {/* Typing line */}

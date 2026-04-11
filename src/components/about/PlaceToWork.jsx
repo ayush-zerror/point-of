@@ -42,7 +42,7 @@ const PlaceToWork = () => {
           <h2
             className="heading-xl text-subheading mb-6"
           >
-            Two Minds. One Vision.
+            Two minds. One vision
           </h2>
 
           <p className="heading-lg text-desc max-w-[900px]">
