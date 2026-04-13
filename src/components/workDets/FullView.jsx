@@ -1,5 +1,6 @@
 import React from "react";
 import ShowcaseGrid from "./ShowcaseGrid";
+import Image from "next/image";
 
 const FullView = () => {
   return (
