@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import FooterVisibility from "@/components/common/FooterVisibility";
 import localFont from "next/font/local";
+import ToasterProvider from "@/components/common/ToasterProvider";
 
 export const metadata = {
   title: "App",
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning className={`${headingFont.variable} ${bodyFont.variable}`}>
         <SmoothScroller />
+        <ToasterProvider />
         <Navbar />
         {children}
         <FooterVisibility excludePath="/work" />

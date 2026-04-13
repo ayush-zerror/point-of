@@ -17,6 +17,9 @@
     "next": "16.2.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-hook-form": "^7.72.1",
+    "react-hot-toast": "^2.6.0",
+    "react-phone-input-2": "^2.15.1",
     "split-type": "^0.3.4",
     "swiper": "^12.1.3"
   },
