@@ -6,7 +6,9 @@ const FullView = () => {
     <section className="w-full space-y-20 md:space-y-28">
       {/* IMAGE */}
       <div className="relative w-full h-auto md:h-screen overflow-hidden">
-        <img
+        <Image
+          width={1000}
+          height={1000}
           src="https://www.wearepointof.com/d1.png"
           alt="full"
           className="w-full h-full object-cover"

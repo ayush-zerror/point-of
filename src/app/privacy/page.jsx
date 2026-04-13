@@ -7,16 +7,16 @@ const Privacy = () => {
         
         {/* Heading */}
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+          <h2 className="heading-xl text-subheading">
             PRIVACY POLICY
-          </h1>
+          </h2>
         </div>
 
         {/* Content */}
-        <div className="space-y-12 leading-relaxed text-[15px] md:text-base">
+        <div className="space-y-12 para text-desc">
           
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium tracking-tight">
+            <h2 className="heading-md text-subheading">
               1. Overview
             </h2>
             <p>
@@ -30,7 +30,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">2. What We Collect</h2>
+            <h2 className="heading-md text-subheading">2. What We Collect</h2>
             <p>We collect only the following information:</p>
 
             <ul className="list-disc ml-6 space-y-1 marker:text-neutral-400">
@@ -57,7 +57,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               3. How We Use Your Information
             </h2>
             <p>Your email address is used solely to:</p>
@@ -74,7 +74,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               4. How We Store and Process Emails
             </h2>
             <p>We handle email submissions as follows:</p>
@@ -99,7 +99,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               5. Google Analytics & Cookies
             </h2>
 
@@ -124,7 +124,7 @@ const Privacy = () => {
               We do not connect this data to your identity or your email address.
             </p>
 
-            <h3 className="pt-2 font-medium">Cookie Consent</h3>
+            <h3 className="pt-2 heading-md text-subheading">Cookie Consent</h3>
 
             <p>
               Because Google Analytics uses non-essential cookies, a cookie banner
@@ -144,7 +144,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               6. Essential Cookies
             </h2>
             <p>
@@ -155,7 +155,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">7. Data Security</h2>
+            <h2 className="heading-md text-subheading">7. Data Security</h2>
             <p>We use industry-standard measures including:</p>
 
             <ul className="list-disc ml-6 space-y-1 marker:text-neutral-400">
@@ -172,7 +172,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">8. Data Retention</h2>
+            <h2 className="heading-md text-subheading">8. Data Retention</h2>
             <p>We retain your email address until:</p>
 
             <ul className="list-disc ml-6 space-y-1 marker:text-neutral-400">
@@ -186,7 +186,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">9. Your Rights</h2>
+            <h2 className="heading-md text-subheading">9. Your Rights</h2>
             <p>You may request to:</p>
 
             <ul className="list-disc ml-6 space-y-1 marker:text-neutral-400">
@@ -202,7 +202,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+              <h2 className="heading-md text-subheading">
               10. Children’s Privacy
             </h2>
             <p>
@@ -212,7 +212,7 @@ const Privacy = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               11. Changes to This Policy and Contact
             </h2>
             <p>

@@ -7,16 +7,16 @@ const Legal = () => {
 
         {/* Heading */}
         <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+          <h2 className="heading-xl text-heading">
             LEGAL
-          </h1>
+          </h2>
         </div>
 
         {/* Content */}
-        <div className="space-y-12 leading-relaxed text-[15px] md:text-base">
+        <div className="space-y-12 para text-desc">
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium tracking-tight">
+            <h2 className="heading-md text-subheading">
               1. Agreement to Terms
             </h2>
             <p>
@@ -26,7 +26,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               2. Purpose of Website
             </h2>
             <p>
@@ -37,7 +37,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               3. Intellectual Property
             </h2>
             <p>
@@ -60,7 +60,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               4. Portfolio Material
             </h2>
             <p>
@@ -71,7 +71,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               5. External Links
             </h2>
             <p>
@@ -81,7 +81,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               6. Unsolicited Material
             </h2>
             <p>
@@ -92,7 +92,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               7. Limitation of Liability
             </h2>
             <p>
@@ -103,7 +103,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               8. No Professional Advice
             </h2>
             <p>
@@ -113,7 +113,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               9. Governing Law & Jurisdiction
             </h2>
 
@@ -132,7 +132,7 @@ const Legal = () => {
           </section>
 
           <section className="space-y-3">
-            <h2 className="text-lg md:text-xl font-medium">
+            <h2 className="heading-md text-subheading">
               10. Changes to Terms and Contact
             </h2>
             <p>

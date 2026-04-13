@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Button from "../common/Button";
+import Image from "next/image";
 
 const posts = [
   {
@@ -78,7 +79,9 @@ const InstagramSection = () => {
                 />
 
                 {/* IMAGE */}
-                <img
+                <Image
+                  width={1000}
+                  height={1000}
                   src={post.image}
                   alt={post.title}
                   className="

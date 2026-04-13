@@ -1,5 +1,6 @@
 "use client";
 import gsap from 'gsap';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 const DEFAULT_PROJECTS = [
@@ -574,7 +575,9 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
       {/* ── Background slides ── */}
       <div className="absolute inset-0 z-0">
         {items.map((project, i) => (
-          <img
+          <Image
+            width={1000}
+            height={1000}
             key={`bg-${i}`}
             src={project.coverImage}
             alt={project.name}
@@ -600,7 +603,9 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
             className={`absolute inset-0 block ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
             aria-label={`Open ${project.name}`}
           >
-            <img
+            <Image
+              width={1000}
+              height={1000}
               ref={(el) => { centerRefs.current[i] = el; }}
               src={project.coverImage}
               alt={project.name}
