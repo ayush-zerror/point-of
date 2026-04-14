@@ -13,6 +13,11 @@ const Home = () => {
   return (
     <>
       <HeroSection />
+      {/* Global circle2 — fixed, GSAP-controlled */}
+      <div
+        id="circle2"
+        className="fixed w-[200vw] h-[200vw] opacity-0 bg-heading rounded-full  pointer-events-none top-[80%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+      />
       <AboutStudio />
       <Expertise />
       <OurWork />

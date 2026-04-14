@@ -3,7 +3,7 @@ import React from "react";
 
 const isHexColor = (v) => typeof v === "string" && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v);
 
-const Button = ({ title, onClick, color = "#c0bfbf" }) => {
+const Button = ({ title, onClick, color = "#c0bfbf", className }) => {
   const handleClick = (event) => {
     // Forward the click event to the parent handler (if provided).
     if (typeof onClick === "function") onClick(event);
@@ -15,7 +15,7 @@ const Button = ({ title, onClick, color = "#c0bfbf" }) => {
   const underlineStyle = useInline ? { backgroundColor: color } : undefined;
 
   return (
-    <div className="mt-10">
+    <div className={`mt-10 z-20 relative ${className}`}>
       <button
         onClick={handleClick}
         className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase"

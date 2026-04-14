@@ -13,7 +13,7 @@ const logos = [
 
 const BrandsSection = () => {
   return (
-    <section className="w-full  py-24 md:py-52 bg-black">
+    <section className="w-full  py-24 md:py-52 bg-background relative">
       <div className="max-w-5xl m-auto">
         <p className="heading-xl text-desc">
           We partner with visionary entrepreneurs, industry leaders, &

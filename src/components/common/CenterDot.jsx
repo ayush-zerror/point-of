@@ -77,7 +77,8 @@ export default function CenterDot() {
         transition:
           "width 0.5s cubic-bezier(0.22,1,0.36,1), height 0.5s cubic-bezier(0.22,1,0.36,1)",
       }}
-      className="bg-secondary"
+      className="bg-secondary opacity-0"
+      id="centerDot"
     />
   );
 }
