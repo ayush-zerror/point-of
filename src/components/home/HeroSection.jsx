@@ -4,19 +4,20 @@ import Image from "next/image";
 
 const headerData = [
   "creativity?",
-  "design innovation?",
-  "circular design?",
+  "design?",
   "storytelling?",
   "brand loyalty?",
-  "human-centered design?",
-  "creative disruption?",
-  "emotional design?",
-  "design thinking?",
+  "craft?",
+  "human-centred design?",
+  "imagination?",
+  "minimalism?",
   "design ethics?",
-  "design for social impact?",
-  "beauty in functional design?",
-  "AI as a creative partner?",
-  "emotion in brand design?",
+  "beauty?",
+  "brand trust?",
+  "emotional design?",
+  "creative disruption?",
+  "design for impact?",
+  "doing it differently?",
 ];
 
 const HeroSection = () => {
@@ -32,15 +33,16 @@ const HeroSection = () => {
     if (!isDeleting) {
       timeout = setTimeout(() => {
         setDisplayText(currentText.substring(0, displayText.length + 1));
-      }, 50);
+      }, 80);
     } else {
       timeout = setTimeout(() => {
         setDisplayText(currentText.substring(0, displayText.length - 1));
-      }, 30);
+      }, 40);
     }
 
     if (!isDeleting && displayText === currentText) {
-      timeout = setTimeout(() => setIsDeleting(true), 1200);
+      const isLast = textIndex === headerData.length - 1;
+      timeout = setTimeout(() => setIsDeleting(true), isLast ? 4000 : 2500);
     }
 
     if (isDeleting && displayText === "") {
@@ -75,10 +77,10 @@ const HeroSection = () => {
         </h1>
 
         {/* Typing line */}
-        <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[3rem] ">
-          {displayText}
-          <span className="ml-1 opacity-0">|</span>
-        </p>
+          <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[3rem]">
+            {displayText}
+            <span className="ml-1 opacity-0">|</span>
+          </p>
       </div>
     </section>
   );

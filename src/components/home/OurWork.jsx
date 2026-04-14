@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
-import {
   useRef,
   useLayoutEffect,
   useState,
@@ -14,6 +8,10 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import WorkCard from "../work/WorkCard";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const posts = [
   {
@@ -52,19 +50,15 @@ export default function OurWork() {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
   const buttonCircleRef = useRef(null);
+  const buttonArrowRef = useRef(null);
+  const buttonTextRef = useRef(null);
+  const buttonUnderlineRef = useRef(null);
 
   const [maxTranslate, setMaxTranslate] = useState(0);
 
   // Store the natural (unscaled) resting offset of the button circle
   // relative to the track origin — computed once on mount/resize
   const naturalOffsetRef = useRef(0);
-
-  const [merged, setMerged] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
 
   useLayoutEffect(() => {
     const calculate = () => {
@@ -97,27 +91,134 @@ export default function OurWork() {
     return () => window.removeEventListener("resize", calculate);
   }, []);
 
-  const x = useTransform(scrollYProgress, [0, 1], [0, -maxTranslate]);
+  useLayoutEffect(() => {
+    if (
+      !sectionRef.current ||
+      !trackRef.current ||
+      !buttonCircleRef.current ||
+      !buttonTextRef.current ||
+      !buttonUnderlineRef.current
+    )
+      return;
 
-  // replace setMerged inside useMotionValueEvent with this:
-  useMotionValueEvent(x, "change", (latestX) => {
-    const dist = Math.abs(naturalOffsetRef.current + latestX);
+    const track = trackRef.current;
+    const circle = buttonCircleRef.current;
+    const arrow = buttonArrowRef.current;
+    const textEl = buttonTextRef.current;
+    const underlineEl = buttonUnderlineRef.current;
+    const centerDot = document.querySelector("#centerDot");
+      const cards = gsap.utils.toArray(track.querySelectorAll(".work-card"));
 
-    setMerged(prev => {
-      const next = (() => {
-        if (!prev && dist <= 1) return true;
-        if (prev && dist > 8) return false;
-        return prev;
-      })();
+    const ctx = gsap.context(() => {
+      // ---------- EDIT TIMINGS HERE ----------
+      const DUR_SCROLL_TO_CENTER = 1.5; // horizontal slide
+      const DUR_GROW = 0.4; // circle + centerDot to 40
+      const DUR_HOLD_40 = 0.25; // holds at 40 on reverse/forward
+      const DUR_TEXT_HIDE = 0.35; // text + underline fade
+      const DUR_DOT_SCALE = 6; // centerDot "scale" (size up)
+      const DOT_SCALE_SIZE = 50; // px (adjust as needed)
+      // --------------------------------------
 
-      if (next !== prev) {
-        // Tell the global CenterDot to grow/shrink
-        window.dispatchEvent(new CustomEvent("ourwork:merge", { detail: { merged: next } }));
+      // Initial states (so timeline is deterministic)
+      gsap.set(track, { x: 0 });
+      gsap.set(circle, { width: 8, height: 8 });
+      if (arrow) gsap.set(arrow, { opacity: 0, scale: 0.4 });
+      gsap.set(textEl, { opacity: 1 });
+      gsap.set(underlineEl, { width: "100%", opacity: 1 });
+
+      // One master timeline (horizontal slide → grow → hide text → dot scales)
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // 1) Horizontal slide until button circle reaches viewport center
+      tl.to(track, { x: () => -maxTranslate, duration: DUR_SCROLL_TO_CENTER, ease: "none" }, 0);
+
+      // 2) Button circle + CenterDot become 40px
+      tl.to(
+        circle,
+        { width: 40, height: 40, duration: DUR_GROW, ease: "power2.out" },
+        `>${0}`
+      );
+      if (centerDot) {
+        tl.to(
+          centerDot,
+          { width: 40, height: 40, duration: DUR_GROW, ease: "power2.out" },
+          "<"
+        );
+      }
+      if (arrow) {
+        tl.to(
+          arrow,
+          { opacity: 1, scale: 1, duration: 0.25, ease: "power2.out" },
+          "<+0.12"
+        );
       }
 
-      return next;
-    });
-  });
+      // Hold at 40px for a bit (helps reverse feel)
+      if (centerDot) {
+        tl.to(centerDot, { width: 40, height: 40, duration: DUR_HOLD_40, ease: "none" });
+      } else {
+        tl.to({}, { duration: DUR_HOLD_40 });
+      }
+
+      // 3) Text + underline disappear (and circle fades too, per your spec)
+      tl.to(
+        textEl,
+        { opacity: 0, duration: DUR_TEXT_HIDE, ease: "power2.out" },
+        "hide"
+      );
+      tl.to(
+        underlineEl,
+        { width: "0%", opacity: 0, duration: DUR_TEXT_HIDE, ease: "power2.out" },
+        "hide"
+      );
+      tl.to(circle, { opacity: 0, duration: 0.25, ease: "power2.out" }, "hide+=0.05");
+
+      // 4) CenterDot scales (size up) after text is gone
+      if (centerDot) {
+        tl.to(
+          centerDot,
+          {
+            scale: DOT_SCALE_SIZE,
+            duration: DUR_DOT_SCALE,
+            ease: "power2.out",
+          },
+          "hide+=0.25"
+        );
+      }
+
+      // Cards move out while scaling
+      if (cards.length) {
+        tl.to(
+          cards,
+          {
+            y: -100,
+            opacity: 0,
+            duration: DUR_DOT_SCALE - 3,
+            ease: "power2.out",
+            stagger: 0.03,
+          },
+          "hide+=0.25"
+        );
+      }
+
+      return () => {
+        tl.scrollTrigger?.kill();
+        tl.kill();
+      };
+    }, sectionRef);
+
+    ScrollTrigger.refresh();
+
+    return () => ctx.revert();
+  }, [maxTranslate]);
 
   return (
     <section
@@ -127,9 +228,8 @@ export default function OurWork() {
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
 
         {/* TRACK */}
-        <motion.div
+        <div
           ref={trackRef}
-          style={{ x }}
           className="flex items-center gap-22 px-4 sm:px-10 md:px-16 lg:px-20"
         >
           {/* CARDS */}
@@ -144,18 +244,13 @@ export default function OurWork() {
               {/* BUTTON CIRCLE */}
               <span
                 ref={buttonCircleRef}
-                className="relative flex items-center justify-center rounded-full opacity-0 bg-white"
-                style={{
-                  width: merged ? "40px" : "8px",
-                  height: merged ? "40px" : "8px",
-                  transition: "width 0.5s cubic-bezier(0.22,1,0.36,1), height 0.5s cubic-bezier(0.22,1,0.36,1)",
-                }}
+                className="relative flex items-center justify-center rounded-full "
               >
                 <svg
+                  ref={buttonArrowRef}
                   style={{
-                    opacity: merged ? 1 : 0,
-                    transform: merged ? "scale(1)" : "scale(0.4)",
-                    transition: "opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s",
+                    opacity: 0,
+                    transform: "scale(0.4)",
                   }}
                   className="w-4 h-4 text-black"
                   fill="none"
@@ -169,21 +264,19 @@ export default function OurWork() {
 
               {/* TEXT */}
               <span
+                ref={buttonTextRef}
                 className="relative whitespace-nowrap"
-                style={{
-                  opacity: merged ? 0 : 1,
-                  transition: "opacity 0.3s ease",
-                }}
               >
                 VIEW ALL WORK
                 <span
+                  ref={buttonUnderlineRef}
                   className="absolute right-0 -bottom-1 h-px bg-white transition-all duration-300"
-                  style={{ width: merged ? "0%" : "100%" }}
+                  style={{ width: "100%" }}
                 />
               </span>
             </Link>
           </div>
-        </motion.div>
+        </div>
 
 
       </div>

@@ -6,7 +6,6 @@ import Expertise from '@/components/home/Expertise'
 import HeroSection from '@/components/home/HeroSection'
 import OurWork from '@/components/home/OurWork'
 import Showreel from '@/components/home/Showreel'
-import ShowreelVideo from '@/components/home/ShowreelVideo'
 import React from 'react'
 
 const Home = () => {
@@ -22,7 +21,6 @@ const Home = () => {
       <Expertise />
       <OurWork />
       <Showreel />
-      <ShowreelVideo />
       <BrandsSection />
       <CTASection />
       {/* Center dot — always fixed at viewport center across all pages */}

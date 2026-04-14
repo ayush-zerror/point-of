@@ -230,7 +230,7 @@ const GetInTouch = () => {
             {/* ── Industry ── */}
             {industryIsOther ? (
               <FloatingInput
-                label="Your Industry" required
+                label="Select Your Industry" required
                 {...register("industry", { required: true })}
                 ref={industryOtherRef}
                 onBlur={makeOtherBlur(industryValue, setIndustryIsOther, "industry")}

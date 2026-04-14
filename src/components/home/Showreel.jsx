@@ -1,39 +1,129 @@
 "use client";
 
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 import { useRef } from "react";
-import { useScroll, useMotionValueEvent } from "framer-motion";
+import Image from "next/image";
 
-const Showreel = () => {
-  const sectionRef = useRef(null);
+export default function Showreel() {
+  const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end end"],
+    target: ref,
+    offset: ["start start", "end end"],
   });
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    // Dot scale — fires across full scroll range
-    // So scrolling back naturally shrinks it back down
-    const diagonal = Math.sqrt(
-      Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)
-    );
-    const maxSize = diagonal * 2;
+  // 🎥 Video scale (shrink → HOLD → expand at very end)
+  const scaleRaw = useTransform(
+    scrollYProgress,
+    [0, 0.4, 0.9, 1],
+    [1, 0.6, 0.6, 1]
+  );
 
-    // Scale dot from 8px → maxSize across full progress
-    const size = 8 + (maxSize - 8) * latest;
-
-    window.dispatchEvent(
-      new CustomEvent("showreel:scale", { detail: { size } })
-    );
+  const scale = useSpring(scaleRaw, {
+    stiffness: 100,
+    damping: 20,
   });
+
+
+  // 📦 Overlay movement (finishes before 0.9)
+  const y = useTransform(scrollYProgress, [0.3, 0.9], ["100%", "-100%"]);
 
   return (
     <section
-      ref={sectionRef}
-      className="relative h-[150vh]"
+      ref={ref}
+      className="relative h-[300vh] bg-secondary"
+      style={{ perspective: "4000px" }}
     >
+      
+      {/* STICKY */}
+      <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
+
+        {/* VIDEO */}
+        <motion.div
+          style={{ scale }}
+          className="w-full h-full overflow-hidden"
+        >
+          <video
+            src="/home/showreel.mp4"
+            className="w-full h-full object-cover"
+            muted
+            loop
+            playsInline
+            autoPlay
+          />
+        </motion.div>
+
+        {/* OVERLAY */}
+        <motion.div
+          style={{ y }}
+          className="absolute left-0 top-0 w-full h-[300vh]"
+        >
+
+          {/* PANEL 1 */}
+          <div className="relative h-screen flex items-center justify-center">
+            <Image
+              src="https://www.wearepointof.com/home/sticker1.png"
+              alt="sticker"
+              width={200}
+              height={200}
+              className="absolute top-10 left-10 rotate-[-10deg]"
+            />
+
+            <Image
+              src="https://www.wearepointof.com/home/sticker2.png"
+              alt="sticker"
+              width={200}
+              height={200}
+              className="absolute bottom-10 right-10 rotate-10"
+            />
+          </div>
+
+          {/* PANEL 2 */}
+          <div className="relative h-screen flex items-center justify-center">
+            <Image
+              src="https://www.wearepointof.com/home/sticker3.png"
+              alt="sticker"
+              width={200}
+              height={200}
+              className="absolute top-10 left-28 -rotate-6"
+            />
+
+            <Image
+              src="https://www.wearepointof.com/home/sticker4.png"
+              alt="sticker"
+              width={200}
+              height={200}
+              className="absolute bottom-10 right-10 rotate-[8deg]"
+            />
+          </div>
+
+          {/* PANEL 3 */}
+          <div className="relative h-screen flex items-center justify-center">
+            <Image
+              src="https://www.wearepointof.com/home/sticker5.png"
+              alt="sticker"
+              width={200}
+              height={200}
+              className="absolute top-10 left-10 -rotate-12"
+            />
+
+            <Image
+              src="https://www.wearepointof.com/home/sticker6.png"
+              alt="sticker"
+              width={200}
+              height={200}
+              className="absolute bottom-10 right-10 rotate-12"
+            />
+          </div>
+
+        </motion.div>
+
+      </div>
     </section>
   );
-};
-
-export default Showreel;
+}
