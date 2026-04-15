@@ -2,6 +2,7 @@ import AccordionSection from '@/components/connect/AccordionSection'
 import AreasOfExpertise from '@/components/expertise/AreasOfExpertise'
 import HeroSection from '@/components/expertise/HeroSection'
 import OurApproach from '@/components/expertise/OurApproach'
+import OurProcess from '@/components/expertise/OurProcess'
 import CTASection from '@/components/home/CTASection'
 import { faqs } from '@/helper/faqs'
 import React from 'react'
@@ -11,6 +12,7 @@ const Expertise = () => {
     <>
       <HeroSection />
       <AreasOfExpertise />
+      <OurProcess />
       <OurApproach />
       <AccordionSection data={faqs} title="FAQ" />
       <CTASection />

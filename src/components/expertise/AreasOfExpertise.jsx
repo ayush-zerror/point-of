@@ -1,11 +1,45 @@
-import React from "react";
+"use client";
+import React, { useLayoutEffect, useRef } from "react";
 import Button from "../common/Button";
 import Link from "next/link";
 import { expertiseDetails } from "@/helper/expertise-data";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AreasOfExpertise = () => {
+  const rootRef = useRef(null);
+  const lineRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    const line = lineRef.current;
+    if (!root || !line) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        line,
+        { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
+        {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 1.5,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: root,
+            start: "top 10%",
+            end: "top -40%",
+            scrub: 0.3,
+          },
+        }
+      );
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
   return (
-    <section className="w-full  py-16 md:py-28">
+    <section ref={rootRef} className="w-full  py-16 md:py-28">
       <div
         className="
           relative w-full
@@ -19,15 +53,24 @@ const AreasOfExpertise = () => {
             <div className="flex flex-col items-center h-full">
               {/* Image */}
               <div className="w-40 h-40 lg:w-46 lg:h-46 mb-6">
-                <img
+                <Image
+                  width={1000}
+                  height={1000}
                   src="/expertise/graphic-circle.png"
                   alt="graphic"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain spin-slow"
                 />
               </div>
 
               {/* Line */}
-              <div className="w-px flex-1 bg-foreground"></div>
+               {/* Scroll-animated vertical line */}
+               <div
+                ref={lineRef}
+                style={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
+                className="w-px flex-1 z-30 bg-linear-to-b from-transparent to-foreground"
+              >
+                <span className="w-[3px] h-[3px] bg-foreground rounded-full absolute bottom-0 left-1/2 -translate-x-1/2" />
+              </div>
             </div>
           </div>
 
@@ -44,14 +87,17 @@ const AreasOfExpertise = () => {
                   href={`/expertise/${section.slug}`}
                   className="inline-block"
                 >
-                  <h3 className="uppercase text-base sm:text-lg md:text-xl tracking-wide mb-3 sm:mb-4 md:mb-6 hover:opacity-80 transition-opacity duration-200">
+                  <h3 className="uppercase heading-md text-subheading mb-3 sm:mb-4 md:mb-6 hover:opacity-80 transition-opacity duration-200">
                     {section.expertise}
                   </h3>
                 </Link>
 
-                <ul className="space-y-2 text-sm sm:text-base ">
+                <ul className="expertise-list space-y-2 text-sm sm:text-base">
                   {section.accordion.map((item, i) => (
-                    <li key={i} className="flex gap-2">
+                    <li
+                      key={i}
+                      className="flex w-fit gap-2 text-subheading cursor-pointer transition-[opacity,filter]"
+                    >
                       <span>•</span>
                       <span>{item.title}</span>
                     </li>

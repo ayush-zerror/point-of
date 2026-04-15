@@ -130,3 +130,21 @@ body {
 .word{
   opacity: 0.4;
 }
+
+.expertise-list li {
+  opacity: 1;
+  filter: blur(0);
+  transition: all 0.3s ease;
+}
+
+/* When hovering any item */
+.expertise-list:has(li:hover) li:not(:hover) {
+  opacity: 0.6;
+  filter: blur(2px);
+}
+
+/* Only hovered item stays clear */
+.expertise-list li:hover {
+  opacity: 1;
+  filter: blur(0);
+}
