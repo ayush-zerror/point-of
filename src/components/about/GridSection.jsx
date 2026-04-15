@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import Button from "../common/Button";
+import { useRouter } from "next/navigation";
 
 const GridSection = ({ title, btntitle, data }) => {
   const isFour = data.length === 4;
-
+  const router = useRouter();
   return (
     <div className="w-full py-16 sm:py-20 md:py-28 lg:py-32">
       {/* Container */}
@@ -16,7 +18,9 @@ const GridSection = ({ title, btntitle, data }) => {
               {title}
             </h2>
 
-            {btntitle && <Button title={btntitle} />}
+            {btntitle && <Button title={btntitle} onClick={() => {
+              router.push("/connect");
+            }} />}
           </div>
         )}
 

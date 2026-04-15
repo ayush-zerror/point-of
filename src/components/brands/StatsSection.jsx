@@ -9,7 +9,7 @@ import SplitType from "split-type";
 gsap.registerPlugin(ScrollTrigger);
 
 const BOTTOM_COPY =
-  "Point Of has launched brands, products, books, websites, campaigns & experiences with partners that range from global tech & retail companies to independent artists & cultural institutions.";
+  "From global technology companies to independent artists and cultural institutions — we've helped launch brands, campaigns, digital experiences, and ideas that needed to exist in the world.";
 
 const stats = [
   {
@@ -18,12 +18,12 @@ const stats = [
     desc: "Trusted by over 130 brands across industries to craft clarity through design.",
   },
   {
-    number: "350",
+    number: "350+",
     label: "Projects",
     desc: "From startups to legacy icons, our projects have redefined how brands connect and grow.",
   },
   {
-    number: "11",
+    number: "11+",
     label: "Countries",
     desc: "Our collaborations span eleven countries, connecting brands across the USA, Europe, Asia, and the Middle East.",
   },
@@ -135,6 +135,7 @@ const StatsSection = () => {
       const split = new SplitType(textRef.current, {
         types: "lines, words",
         lineClass: "line",
+        wordClass: "wordspan",
       });
 
       const tl = gsap.timeline({
@@ -207,7 +208,7 @@ const StatsSection = () => {
           <div className="md:col-start-2 md:col-span-3 min-w-0 overflow-visible [&_.line]:block [font-kerning:none]">
             <p
               ref={textRef}
-              className="heading-lg text-subheading m-0 w-full max-w-none text-left leading-[1.45]"
+              className="heading-lg text-heading m-0 w-full max-w-none text-left leading-[1.45]"
             >
               {BOTTOM_COPY}
             </p>

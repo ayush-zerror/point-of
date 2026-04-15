@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../common/Button";
+import ArrowButton from "../common/ArrowButton";
 
 const PlaceToWork = () => {
   return (
@@ -34,7 +35,7 @@ const PlaceToWork = () => {
           </p>
 
           {/* CTA */}
-          <Button title={"LET’S TALK"} />
+          <ArrowButton title={"LET’S TALK"} link={"mailto:think@wearepointof.com"} />
         </div>
 
         {/* Bottom Big Statement */}

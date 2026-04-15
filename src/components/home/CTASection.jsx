@@ -1,7 +1,21 @@
+"use client";
 import React from "react";
 import Button from "../common/Button";
-
-const CTASection = () => {
+import { useRouter } from "next/navigation";
+const CTASection = ({
+  heading = (
+    <>
+      Got a project in mind?
+      <br />
+      Learn how we can help.
+    </>
+  ),
+  buttonTitle = "LET’S TALK",
+} = {}) => {
+  const router = useRouter();
+  const handleButtonClick = () => {
+    router.push("/connect");
+  }
   return (
     <section
       className="w-full bg-background relative min-h-[50vh] flex items-center justify-center px-6 
@@ -9,13 +23,9 @@ const CTASection = () => {
     >
       <div className="text-center flex flex-col items-center">
         {/* HEADING */}
-        <p className="heading-xl text-desc">
-          Got a project in mind?
-          <br />
-          Learn how we can help.
-        </p>
+        <p className="heading-xl text-desc">{heading}</p>
         {/* CTA */}
-        <Button title={"LET’S TALK"} />
+        <Button title={buttonTitle} onClick={handleButtonClick} />
       </div>
     </section>
   );

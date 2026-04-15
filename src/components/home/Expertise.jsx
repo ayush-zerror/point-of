@@ -5,29 +5,34 @@ import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import Button from "../common/Button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 gsap.registerPlugin(ScrollTrigger);
 
 const items = [
   {
     title: "Branding",
+    slug: "branding",
     content:
       "We craft brand identities that are strategic, emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every touchpoint.",
   },
   {
     title: "Website",
+    slug: "website",
     content:
-      "We craft brand identities that are strategic, emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every touchpoint.",
+      "We design and build high-performance websites that do more than just function—they embody your brand. From UX to development, every layer is crafted for clarity, usability, and expression across all devices, platforms, and user journeys.",
   },
   {
     title: "Marketing",
+    slug: "marketing",
     content:
-      "We craft brand identities that are strategic, emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every touchpoint.",
+      "Our marketing services blend creativity, strategy, and digital innovation. We craft powerful campaigns that connect with your audience, drive measurable results, and position your brand to lead within its industry.",
   },
   {
     title: "Print",
+    slug: "print",
     content:
-      "We craft brand identities that are strategic, emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every touchpoint.",
+      "From packaging to posters, we design printed materials that carry your brand with impact and clarity. Every piece is rooted in purpose—whether it's on a shelf, in hand, or at an event—ensuring consistent, thoughtful, and expressive communication.",
   },
 ];
 
@@ -40,7 +45,7 @@ export default function Expertise() {
   const [activeIndex, setActiveIndex] = useState(-1);
   const activeIndexRef = useRef(-1);
   const prevIndexRef = useRef(-1);
-
+  const router = useRouter();
   const forwardOrigin = useRef({ x: 0, y: 0 });
   const handedOff = useRef(false);
   // Tracks whether last bullet is currently fixed/traveling (blocks bullet cycling)
@@ -313,7 +318,9 @@ export default function Expertise() {
           <div className="w-1/2 flex flex-col justify-between">
             <h1 className="heading-xl text-heading">Expertise</h1>
             <div>
-              <Button title="KNOW MORE" />
+              <Button title="Explore our expertise" onClick={() => {
+                router.push("/expertise");
+              }} />
             </div>
           </div>
 
@@ -334,9 +341,12 @@ export default function Expertise() {
                       />
                     </div>
 
-                    <h2 className={`cursor-pointer heading-lg transition-colors duration-300 ${isActive ? "text-subheading" : "text-desc"}`}>
+                    <Link
+                      href={`/expertise/${item.slug}`}
+                      className={`block text-left cursor-pointer heading-lg transition-colors duration-300 ${isActive ? "text-subheading" : "text-desc"}`}
+                    >
                       {item.title}
-                    </h2>
+                    </Link>
                   </div>
 
                   <motion.div

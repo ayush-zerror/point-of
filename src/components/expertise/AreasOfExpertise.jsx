@@ -1,49 +1,7 @@
 import React from "react";
 import Button from "../common/Button";
 import Link from "next/link";
-
-const data = [
-  {
-    title: "BRANDING",
-    items: [
-      "Strategy & Counsel",
-      "Market Audit & Research",
-      "Positioning & Naming",
-      "Architecture, Story & Tone of Voice",
-      "Visual Identity & Logo Design",
-      "Guidelines & Design Systems",
-    ],
-  },
-  {
-    title: "WEBSITE",
-    items: [
-      "Audit & Strategy",
-      "UI & UX",
-      "Design & Development",
-      "Ecommerce, Apps & Integrations",
-      "Optimization, Maintenance & Support",
-      "AI & Digital Experiences",
-    ],
-  },
-  {
-    title: "MARKETING",
-    items: [
-      "Content, Campaigns & Activations",
-      "Creative Direction & Production",
-      "Brand Launch & Growth",
-      "Social Media",
-    ],
-  },
-  {
-    title: "PRINT",
-    items: [
-      "Labels & Packaging",
-      "Stationery & Brochures",
-      "Presentation & Pitch Decks",
-      "Editorial & Merchandise",
-    ],
-  },
-];
+import { expertiseDetails } from "@/helper/expertise-data";
 
 const AreasOfExpertise = () => {
   return (
@@ -51,7 +9,7 @@ const AreasOfExpertise = () => {
       <div
         className="
           relative w-full
-          px-4 sm:px-6 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
+          px-4 sm:px-6 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
           md:pr-6
         "
       >
@@ -80,24 +38,27 @@ const AreasOfExpertise = () => {
 
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 md:gap-16">
-            {data.map((section, index) => (
+            {expertiseDetails.map((section, index) => (
               <div key={index}>
-                <h3 className="text-base sm:text-lg md:text-xl tracking-wide mb-3 sm:mb-4 md:mb-6 ">
-                  {section.title}
-                </h3>
+                <Link
+                  href={`/expertise/${section.slug}`}
+                  className="inline-block"
+                >
+                  <h3 className="uppercase text-base sm:text-lg md:text-xl tracking-wide mb-3 sm:mb-4 md:mb-6 hover:opacity-80 transition-opacity duration-200">
+                    {section.expertise}
+                  </h3>
+                </Link>
 
                 <ul className="space-y-2 text-sm sm:text-base ">
-                  {section.items.map((item, i) => (
+                  {section.accordion.map((item, i) => (
                     <li key={i} className="flex gap-2">
                       <span>•</span>
-                      <span>{item}</span>
+                      <span>{item.title}</span>
                     </li>
                   ))}
                 </ul>
 
-                <Link
-                  href={`/expertise/${section.title.toLowerCase().replace(/\s+/g, "-")}`}
-                >
+                <Link href={`/expertise/${section.slug}`}>
                   <Button title="KNOW MORE" />
                 </Link>
               </div>

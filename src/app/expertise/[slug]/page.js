@@ -1,18 +1,33 @@
-import InstagramSection from '@/components/connect/InstagramSection'
-import AboutExpertise from '@/components/expertiseDets/AboutExpertise'
-import HeroSection from '@/components/expertiseDets/HeroSection'
-import CTASection from '@/components/home/CTASection'
-import React from 'react'
+import InstagramSection from "@/components/connect/InstagramSection";
+import AboutExpertise from "@/components/expertiseDets/AboutExpertise";
+import HeroSection from "@/components/expertiseDets/HeroSection";
+import CTASection from "@/components/home/CTASection";
+import { expertiseDetails } from "@/helper/expertise-data";
+import { notFound } from "next/navigation";
+import React from "react";
 
-const ExpertiseDetails = () => {
+const ExpertiseDetails = async ({ params }) => {
+  // Next can provide `params` synchronously or as a promise (depending on version/config).
+  const resolvedParams = await Promise.resolve(params);
+  const slug = resolvedParams?.slug;
+
+  const data = expertiseDetails.find((item) => item.slug === slug);
+  if (!data) notFound();
+
   return (
     <>
-      <HeroSection src="https://www.wearepointof.com/COVER%20EXPERTISE/COVER_BRANDING.jpeg" />
-      <AboutExpertise/>
+      <HeroSection src={data.banner} />
+      <AboutExpertise
+        expertise={data.expertise}
+        title={data.title}
+        description={data.description}
+        accordion={data.accordion}
+        currentSlug={data.slug}
+      />
+      <CTASection heading={data.ctaTitle} buttonTitle={data.ctaButton} />
       <InstagramSection />
-      <CTASection />
     </>
-  )
-}
+  );
+};
 
-export default ExpertiseDetails
+export default ExpertiseDetails;

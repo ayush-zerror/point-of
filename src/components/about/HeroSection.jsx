@@ -89,6 +89,7 @@ const HeroSection = ({
   bgImage = "",
   title = "",
   btntitle = "",
+  onClick = () => {},
   imgClass = "",
   clockCountry = "",
   clockTimeZone = "",
@@ -127,7 +128,7 @@ const HeroSection = ({
             {title}
           </h2>
 
-          <Button title={btntitle} />
+          <Button title={btntitle} onClick={onClick} />
         </div>
       </div>
     </div>

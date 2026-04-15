@@ -1,3 +1,4 @@
+"use client";
 import BrandsIndex from '@/components/brands/BrandsIndex'
 import SelectedBrands from '@/components/brands/SelectedBrands'
 import StatsSection from '@/components/brands/StatsSection'
@@ -5,6 +6,7 @@ import TestimonialSection from '@/components/brands/TestimonialSection'
 import GridSection from '@/components/about/GridSection'
 import HeroSection from '@/components/about/HeroSection'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 const cultureValues = [
   {
     title: "Design a new product.",
@@ -19,12 +21,12 @@ const cultureValues = [
     desc: "Take your vision from concept to creation.",
   },
   {
-    title: "Product Consulting",
-    desc: "Design and develop an industry leading product.",
+    title: "Business Strategy",
+    desc: "Clarity on direction before design begins. For founders navigating the decisions that shape everything after.",
   },
   {
-    title: "Strategic Design",
-    desc: "Equip teams, create processes, and futureproof your organization.",
+    title: "Design Consulting",
+    desc: "Embed strategic creative thinking into your team. Better briefs, sharper decisions, stronger output.",
   },
   {
     title: "Education & Workshop",
@@ -33,6 +35,7 @@ const cultureValues = [
 ];
 
 const Brnads = () => {
+  const router = useRouter();
   return (
     <>
       <HeroSection
@@ -40,12 +43,15 @@ const Brnads = () => {
         bgImage="/brands/brand-bg.jpg"
         title={
           <>
-            The future is an exciting <br />
-            place to be. We create brands <br />
-            that aspire to be there.
+            The world is being remade
+            by the people willing to build it differently.
+            We're the creative consultancy they call first.
           </>
         }
-        btntitle={"OUR EXPERTISE"}
+        btntitle={"See how we work"}
+        onClick={() => {
+          router.push("/expertise");
+        }}
       />
       <StatsSection />
       <SelectedBrands />
@@ -54,10 +60,10 @@ const Brnads = () => {
       <GridSection
         title={
           <>
-            Got a project in mind? <br /> Learn how we can help.
+          Working on something that <br /> needs clearer thinking?
           </>
         }
-        btntitle={"LET'S TALK"}
+        btntitle={"Start a conversation"}
         data={cultureValues}
       />
     </>

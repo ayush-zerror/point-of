@@ -8,8 +8,12 @@ import localFont from "next/font/local";
 import ToasterProvider from "@/components/common/ToasterProvider";
 
 export const metadata = {
-  title: "App",
-  description: "Next App",
+  title: "Point Of — Global Brand & Strategic Design Consultancy",
+  description: "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+  icons: {
+    icon: [{ url: "/favicon.jpg", type: "image/jpeg" }],
+    apple: [{ url: "/favicon.jpg", type: "image/jpeg" }],
+  },
 };
 
 const headingFont = localFont({

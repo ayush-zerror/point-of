@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Button from '../common/Button'
 
-const AccordionSection = ({ data ,title }) => {
+const AccordionSection = ({ data, title }) => {
     const [activeIndex, setActiveIndex] = useState(null);
 
     const toggle = (index) => {
@@ -49,7 +49,7 @@ const AccordionSection = ({ data ,title }) => {
                             {/* Smooth Content */}
                             <div
                                 className={`
-                  overflow-hidden transition-all duration-500 ease-in-out
+                  overflow-hidden transition-all duration-500 ease-in-out max-w-2xl
                   ${activeIndex === index ? "max-h-[1000px] opacity-100 mt-8" : "max-h-0 opacity-0"}
                 `}
                             >
@@ -109,7 +109,9 @@ const AccordionSection = ({ data ,title }) => {
                                         </div>
 
 
-                                        <Button title="APPLY" />
+                                        <Button title="APPLY" onClick={() => {
+                                            window.open(`mailto:think@wearepointof.com?subject=Application for ${job.title}`);
+                                        }} />
 
                                     </div>
                                 ) : activeIndex === index ? (

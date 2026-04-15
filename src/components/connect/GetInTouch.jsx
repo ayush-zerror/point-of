@@ -241,13 +241,10 @@ const GetInTouch = () => {
                 {...register("industry", { required: true })}
                 onChange={makeSelectChange("industry", setIndustryIsOther)}
               >
-                <option value="D2C">D2C</option>
-                <option value="FMCG">FMCG</option>
-                <option value="Fashion">Fashion</option>
+                <option value="Technology">Technology</option>
+                <option value="Finance">Finance</option>
                 <option value="Healthcare">Healthcare</option>
-                <option value="Hospitality">Hospitality</option>
-                <option value="SaaS / Tech">SaaS / Tech</option>
-                <option value="Personal Brand">Personal Brand</option>
+                <option value="Manufacturing">Manufacturing</option>
                 <option value="Other">Other</option>
               </FloatingSelect>
             )}
@@ -266,12 +263,13 @@ const GetInTouch = () => {
                 {...register("help", { required: true })}
                 onChange={makeSelectChange("help", setHelpIsOther)}
               >
-                <option value="Brand Identity">Brand Identity</option>
-                <option value="Packaging">Packaging</option>
-                <option value="Website">Website</option>
-                <option value="Product Design">Product Design</option>
-                <option value="Campaign / Content">Campaign / Content</option>
-                <option value="Consulting">Consulting</option>
+                <option value="Business Strategy">Business Strategy</option>
+                <option value="Branding & Strategy">Branding & Strategy</option>
+                <option value="Design & Visual">Design & Visual</option>
+                <option value="Website & Digital Solutions">Website & Digital Solutions</option>
+                <option value="Marketing & Communications">Marketing & Communications</option>
+                <option value="Media Production & Creative Services">Media Production & Creative Services</option>
+                <option value="Print & Packaging Design">Print & Packaging Design</option>
                 <option value="Other">Other</option>
               </FloatingSelect>
             )}
@@ -290,11 +288,11 @@ const GetInTouch = () => {
                 {...register("hear", { required: true })}
                 onChange={makeSelectChange("hear", setHearIsOther)}
               >
-                <option value="Google">Google</option>
-                <option value="Instagram">Instagram</option>
-                <option value="LinkedIn">LinkedIn</option>
-                <option value="Referral">Referral</option>
-                <option value="Past Client">Past Client</option>
+                <option value="Google / Search Engine">Google / Search Engine</option>
+                <option value="Social Media (LinkedIn,Behance, Instagram)">Social Media (LinkedIn,Behance, Instagram)</option>
+                <option value="Friend or Family Referral">Friend or Family Referral</option>
+                <option value="Business / Professional Referral">Business / Professional Referral</option>
+                <option value="Event or Conference">Event or Conference</option>
                 <option value="Other">Other</option>
               </FloatingSelect>
             )}

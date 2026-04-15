@@ -3,39 +3,26 @@ import React from "react";
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 // Styles
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import Image from "next/image";
 import Button from "../common/Button";
+import { testimonials } from "@/helper/testimonials";
 
-const testimonials = [
-  {
-    name: "Aaryaman Vyas",
-    role: "FOUNDER OF WHITEHUES",
-    image: "https://www.wearepointof.com/home/chhaya.png",
-    text: `"Point Of ran early workshops that really uncovered how we felt about the brand... The strategy helped us align and gave us clarity we didn't have before."`,
-    brand: "WHITEHUES",
-  },
-  {
-    name: "John Doe",
-    role: "FOUNDER OF BRANDX",
-    image: "https://www.wearepointof.com/home/chhaya.png",
-    text: `"Working with Point Of was a game changer. Their clarity and design thinking elevated our entire brand."`,
-    brand: "BRANDX",
-  },
-];
 
 const TestimonialSection = () => {
   return (
     <section className="w-full py-16 md:py-24 px-4 sm:px-8 md:px-20">
-      <div className="w-full">
+      <div className="w-full cursor-grab">
         <Swiper
-          modules={[Autoplay, Pagination]}
+          modules={[Autoplay, Pagination, Navigation]}
           slidesPerView={1}
           pagination={{ type: "progressbar" }}
+          navigation
           className="testimonial-swiper"
         >
           {testimonials.map((item, index) => (
@@ -76,8 +63,9 @@ const TestimonialSection = () => {
         </Swiper>
       </div>
 
-      {/* CUSTOM PROGRESS BAR STYLING */}
+      {/* CUSTOM STYLES */}
       <style jsx global>{`
+        /* Progress bar */
         .testimonial-swiper .swiper-pagination-progressbar {
           background: #1f1f1f;
           height: 2px;
@@ -90,6 +78,38 @@ const TestimonialSection = () => {
         .swiper-pagination-progressbar {
           bottom: 0;
           top: auto !important;
+        }
+
+        /* Navigation arrow base */
+        .testimonial-swiper .swiper-button-prev,
+        .testimonial-swiper .swiper-button-next {
+          width: 30px;
+          height: 30px;
+          color: #ffffff;
+          transition: opacity 200ms ease, border-color 200ms ease,
+            background 200ms ease, transform 200ms ease;
+          opacity: 0.75;
+        }
+
+        /* Hover state */
+        .testimonial-swiper .swiper-button-prev:hover,
+        .testimonial-swiper .swiper-button-next:hover {
+          opacity: 1;
+        }
+
+        /* White arrow icons */
+        .testimonial-swiper .swiper-button-prev::after,
+        .testimonial-swiper .swiper-button-next::after {
+          font-size: 13px;
+          font-weight: 600;
+          color: #ffffff;
+        }
+
+        /* Disabled state */
+        .testimonial-swiper .swiper-button-prev.swiper-button-disabled,
+        .testimonial-swiper .swiper-button-next.swiper-button-disabled {
+          opacity: 0.25;
+          cursor: not-allowed;
         }
       `}</style>
     </section>

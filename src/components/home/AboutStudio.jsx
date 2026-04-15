@@ -5,6 +5,7 @@ import Button from "../common/Button";
 import SplitType from "split-type";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +13,7 @@ const AboutStudio = () => {
   const sectionRef = useRef(null);
   const p1Ref = useRef(null);
   const p2Ref = useRef(null);
-
+  const router = useRouter();
   useLayoutEffect(() => {
     if (!sectionRef.current || !p1Ref.current || !p2Ref.current) return;
 
@@ -112,6 +113,9 @@ const AboutStudio = () => {
 
         <Button
           title={"Explore our Work"}
+          onClick={() => {
+            router.push("/about");
+          }}
         />
       </div>
     </section>

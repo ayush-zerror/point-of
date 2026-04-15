@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../common/Button";
 import Image from "next/image";
+import ArrowButton from "../common/ArrowButton";
 
 const FoundersSection = ({ data }) => {
   return (
@@ -36,7 +37,7 @@ const FoundersSection = ({ data }) => {
                 {item.desc}
               </p>
 
-              <Button title={item.buttonText || "CONNECT"} />
+              <ArrowButton title={item.buttonText || "CONNECT"} link={item.link} />
             </div>
           ))}
 

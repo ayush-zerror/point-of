@@ -25,6 +25,19 @@ const HeroSection = () => {
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const glowPalette = [
+    "#FFD6A5", // warm peach
+    "#BDE0FE", // cool sky
+    "#FFE5B4", // warm champagne
+    "#CDE7FF", // cool ice
+    "#FFD1DC", // warm blush
+    "#B8FFF1", // cool mint
+    "#FFE9C8", // warm soft gold
+    "#C8D7FF", // cool periwinkle
+  ];
+
+  const glowColor = glowPalette[textIndex % glowPalette.length];
+
   useEffect(() => {
     const currentText = headerData[textIndex];
 
@@ -78,7 +91,24 @@ const HeroSection = () => {
 
         {/* Typing line */}
           <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[3rem]">
-            {displayText}
+            <span className="relative inline-block">
+              {/* diffuse glow behind text */}
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 blur-3xl opacity-35 mix-blend-screen transition-[color,opacity,filter] duration-700"
+                style={{ color: glowColor, filter: "blur(28px)" }}
+              >
+                {displayText || "\u00A0"}
+              </span>
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 blur-xl opacity-22 mix-blend-screen transition-[color,opacity,filter] duration-700"
+                style={{ color: glowColor, filter: "blur(14px)" }}
+              >
+                {displayText || "\u00A0"}
+              </span>
+              <span className="relative text-white">{displayText}</span>
+            </span>
             <span className="ml-1 opacity-0">|</span>
           </p>
       </div>

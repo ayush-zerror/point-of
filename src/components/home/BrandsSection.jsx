@@ -1,5 +1,8 @@
+"use client";
 import React from "react";
 import Button from "../common/Button";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const logos = [
   "https://framerusercontent.com/images/f5tEzCq9SEshAyPmvmHwFwDwRw.png?scale-down-to=512",
@@ -19,8 +22,9 @@ const logos = [
 ];
 
 const BrandsSection = () => {
+  const router = useRouter();
   return (
-    <section className="w-full py-24 md:py-52 md:pb-38 bg-background relative">
+    <section className="w-full py-24 md:py-52 md:pb-20 bg-background relative">
       <div className="max-w-5xl mx-auto px-6 md:px-0 flex flex-col">
         <p className="heading-xl text-desc">
           We partner with visionary entrepreneurs, industry leaders, &
@@ -28,7 +32,9 @@ const BrandsSection = () => {
           impact.
         </p>
 
-        <Button title={"OUR BRANDS"} />
+        <Button title={"See all our brands"} onClick={() => {
+          router.push("/brands");
+        }} />
       </div>
 
       {/* Logo marquee (full width) */}
@@ -43,12 +49,12 @@ const BrandsSection = () => {
                 key={`${src}-${idx}`}
                 className="h-20 w-20 md:h-24 md:w-24 flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
               >
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   src={src}
                   alt="Brand logo"
                   className="max-h-full max-w-full object-contain grayscale brightness-0 invert"
-                  loading="lazy"
-                  draggable={false}
                 />
               </div>
             ))}

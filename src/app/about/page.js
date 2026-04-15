@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Experience from "@/components/about/Experience";
 import FoundersSection from "@/components/about/FoundersSection";
@@ -5,6 +6,7 @@ import GridSection from "@/components/about/GridSection";
 import HeroSection from "@/components/about/HeroSection";
 import PlaceToWork from "@/components/about/PlaceToWork";
 import OurValues from "@/components/about/OurValues";
+import { useRouter } from "next/navigation";
 
 const experienceData = [
   {
@@ -28,6 +30,7 @@ const foundersData = [
     image: "/about/piran.png",
     objectPosition: "object-[50%_10%]",
     buttonText: "CONNECT",
+    link: "https://www.linkedin.com/in/iampirantee/",
   },
   {
     name: "Pearl Jain",
@@ -36,6 +39,7 @@ const foundersData = [
     image: "/about/pearl.webp",
     objectPosition: "object-[50%_25%]",
     buttonText: "CONNECT",
+    link: "https://www.linkedin.com/in/pearllbe/",
   },
 ];
 
@@ -124,6 +128,7 @@ const cultureValues = [
 
 
 const Studio = () => {
+  const router = useRouter();
   return (
     <>
       <HeroSection
@@ -136,6 +141,9 @@ const Studio = () => {
           </>
         }
         btntitle={"OUR BRANDS"}
+        onClick={() => {
+          router.push("/brands");
+        }}
       />
       <Experience data={experienceData} />
       <PlaceToWork />
