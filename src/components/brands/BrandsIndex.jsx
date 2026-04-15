@@ -3,36 +3,9 @@ import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import Button from "../common/Button";
 import Image from "next/image";
+import { rows } from "@/helper/brand";
 
-const BRAND_IMAGE =
-  "https://images.unsplash.com/photo-1611930021559-4a5cb5c38da3?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
-const rows = [
-  { brand: "FAIR BETS", industry: "D2C", year: "2024", image: BRAND_IMAGE },
-  { brand: "FRESHEN GO", industry: "FMCG", year: "2021", image: BRAND_IMAGE },
-  { brand: "MAASIKA", industry: "FEMTECH", year: "2020", image: BRAND_IMAGE },
-  { brand: "NAAZ BIJOUTERIES", industry: "JEWELLERY", year: "2020", image: BRAND_IMAGE },
-  { brand: "PARZAAN DASTUR", industry: "PERSONAL BRAND", year: "2020", image: BRAND_IMAGE },
-  { brand: "OVENLY PATISSERIE", industry: "BAKERY", year: "2021", image: BRAND_IMAGE },
-  { brand: "ZOTA HEALTHCARE", industry: "HEALTHCARE", year: "2021", image: BRAND_IMAGE },
-  { brand: "ZARIYA INDIA", industry: "FASHION / ARTISANAL", year: "2021", image: BRAND_IMAGE },
-  { brand: "HERBANIZE", industry: "WELLNESS", year: "2021", image: BRAND_IMAGE },
-  { brand: "AASHIM GULATI", industry: "PERSONAL BRAND", year: "2021", image: BRAND_IMAGE },
-  { brand: "AHAKZAI", industry: "FASHION", year: "2021", image: BRAND_IMAGE },
-  { brand: "BAKULI BLU POTTERY", industry: "CRAFT / HOME", year: "2021", image: BRAND_IMAGE },
-  { brand: "FAIR BETS", industry: "D2C", year: "2024", image: BRAND_IMAGE },
-  { brand: "FRESHEN GO", industry: "FMCG", year: "2021", image: BRAND_IMAGE },
-  { brand: "MAASIKA", industry: "FEMTECH", year: "2020", image: BRAND_IMAGE },
-  { brand: "NAAZ BIJOUTERIES", industry: "JEWELLERY", year: "2020", image: BRAND_IMAGE },
-  { brand: "PARZAAN DASTUR", industry: "PERSONAL BRAND", year: "2020", image: BRAND_IMAGE },
-  { brand: "OVENLY PATISSERIE", industry: "BAKERY", year: "2021", image: BRAND_IMAGE },
-  { brand: "ZOTA HEALTHCARE", industry: "HEALTHCARE", year: "2021", image: BRAND_IMAGE },
-  { brand: "ZARIYA INDIA", industry: "FASHION / ARTISANAL", year: "2021", image: BRAND_IMAGE },
-  { brand: "HERBANIZE", industry: "WELLNESS", year: "2021", image: BRAND_IMAGE },
-  { brand: "AASHIM GULATI", industry: "PERSONAL BRAND", year: "2021", image: BRAND_IMAGE },
-  { brand: "AHAKZAI", industry: "FASHION", year: "2021", image: BRAND_IMAGE },
-  { brand: "BAKULI BLU POTTERY", industry: "CRAFT / HOME", year: "2021", image: BRAND_IMAGE },
-];
 
 // Matches vanilla exactly:
 // idle/reset  → collapsed at bottom

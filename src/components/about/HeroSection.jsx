@@ -96,7 +96,7 @@ const HeroSection = ({
   showClock = false,
 }) => {
   return (
-    <div className="relative h-screen w-full">
+    <div className="relative h-screen w-full overflow-hidden">
       {/* Background Image */}
       {bgImage && (
         <Image

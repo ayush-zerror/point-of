@@ -170,7 +170,7 @@ const StatsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative z-10 w-full bg-background py-16 md:py-24 px-4 sm:px-8 md:px-40"
+      className="relative z-10  w-full bg-background py-16 md:py-24 px-4 sm:px-8 md:px-40"
     >
       <div className="flex flex-col md:items-end w-full">
         {/* Stats */}
