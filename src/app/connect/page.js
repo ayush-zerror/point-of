@@ -5,12 +5,14 @@ import HeroSection from '@/components/about/HeroSection'
 import React from 'react'
 import AccordionSection from '@/components/connect/AccordionSection'
 import { vacancies } from '@/helper/vacancies'
+import HashScrollToId from "@/components/common/HashScrollToId"
 
 
 
 const Connect = () => {
   return (
     <>
+      <HashScrollToId offset={100} />
       <HeroSection
         showClock={true}
         title={
