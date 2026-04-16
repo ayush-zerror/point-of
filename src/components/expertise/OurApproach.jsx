@@ -1,147 +1,309 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const SEC  = "var(--secondary, #c0bfbf)";
-const LINE = "var(--light-line, #333)";
-const HEAD = "var(--heading, #e8e6e1)";
-const DES  = "var(--des, #888)";
+gsap.registerPlugin(ScrollTrigger);
 
-const columns = [
-  {
-    title: "Strategy",
-    body: "We collaborate closely to uncover your brand's vision, audience, and market position—building a strategy that drives real results.",
-    body2: "By the end, you'll have a clear roadmap to grow your brand—whether it's industry disruption or becoming a household name.",
-  },
-  {
-    title: "Design",
-    body: "Our bold, purpose-driven designs are crafted to make an impact. From typography to color, everything is chosen to communicate clearly and beautifully.",
-    body2: "We bring balance, clarity, and intention together to help your brand stand out—and connect beyond first impressions.",
-  },
-  {
-    title: "Technology",
-    body: "Beyond aesthetics, we focus on how your brand performs across platforms—crafting seamless, intelligent experiences that adapt in real time.",
-    body2: "Guided by design and powered by AI, every interaction is built for clarity, consistency, and connection across screens, spaces, and systems.",
-  },
-];
+const OurApproach = () => {
+    const containerRef = useRef(null);
 
-// Each column animates in its own scroll slice
-// Slices: col1 → 0.0–0.33, col2 → 0.33–0.66, col3 → 0.66–1.0
-const FADE_DURATION = 0.12; // portion of slice used for the fade/slide
+    useEffect(() => {
+        if (!containerRef.current) return;
 
-function Column({ col, start, end }) {
-  const { scrollYProgress } = useScroll(); // re-used from parent via prop instead
+        const aptl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#page4",
+                start: "top top",
+                end: "top -300%",
+                scrub: 1,
+                pin: true,
+            },
+        });
 
-  return null; // placeholder — see below
-}
+        aptl
+            // STEP 1
+            .fromTo(
+                "#page4 > h2, .apr-circle2, .apr-circle3",
+                { opacity: 0 },
+                { opacity: 1, duration: 0.2 }
+            )
+            .fromTo(
+                "#step-three",
+                { backgroundColor: "transparent" },
+                { backgroundColor: "#ffffff2f" }
+           
+            )
+            .fromTo(
+                ".apr-circle1",
+                { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb" },
+                { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb", duration: 0.3 },
+                "a"
+            )
+            .fromTo(
+                ".approach1",
+                { opacity: 0, y: 50 },
+                { opacity: 1, y: 0, duration: 0.5 },
+                "a"
+            )
 
-export default function OurApproach() {
-  const sectionRef = useRef(null);
+            // STEP 2
+            .fromTo(
+                ".approach2",
+                { opacity: 0, y: 50 },
+                { opacity: 1, y: 0, duration: 0.5 },
+                "b"
+            )
+            .fromTo(
+                ".step-loader-bar",
+                { width: "0%" },
+                { width: "50%", duration: 0.5 },
+                "b"
+            )
+            .fromTo(
+                ".apr-circle2",
+                { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb" },
+                { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb", duration: 0.2, delay: 0.5 },
+                "b"
+            )
+            .to(".apr-circle1-inner", { opacity: 0 }, "b")
 
-  const { scrollYProgress: p } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
+            // STEP 3
+            .fromTo(
+                ".approach3",
+                { opacity: 0, y: 50 },
+                { opacity: 1, y: 0, duration: 0.5 },
+                "c"
+            )
+            .fromTo(
+                ".step-loader-bar",
+                { width: "50%" },
+                { width: "100%", duration: 0.5 },
+                "c"
+            )
+            .fromTo(
+                ".apr-circle3",
+                { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb" },
+                { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb", duration: 0.2, delay: 0.5 },
+                "c"
+            )
 
-  // Progress bar: 0% → 33% → 66% → 100%
-  const barW = useTransform(p, [0, 0.33, 0.66, 1], ["0%", "33%", "66%", "100%"]);
+            // STEP 4
+            .fromTo(
+                "#approach-content h5, #page4 > h2, .step-loader-bar",
+                { opacity: 1 },
+                { opacity: 0, duration: 0.5 },
+                "d"
+            )
+            .fromTo(
+                "#step-three",
+                { backgroundColor: "#cbcbcb" },
+                { backgroundColor: "transparent", duration: 0.5 },
+                "d"
+            );
 
-  // Dot activations
-  const dot1 = useTransform(p, [0, 0.10], [0, 1]);
-  const dot2 = useTransform(p, [0.33, 0.43], [0, 1]);
-  const dot3 = useTransform(p, [0.66, 0.76], [0, 1]);
+        // ── CENTER BLOOM ─────────────────────────────────────────
+        const page4 = document.querySelector("#page4");
+        const circles = document.querySelectorAll(".aprCir");
+        const h2s = document.querySelectorAll("#approach-content h2");
 
-  // Column 1: slides in at 0.0
-  const c1Op = useTransform(p, [0.0, 0.12], [0, 1]);
-  const c1Y  = useTransform(p, [0.0, 0.12], [50, 0]);
+        // Must read rects AFTER layout, BEFORE any GSAP transforms
+        const page4Rect = page4.getBoundingClientRect();
+        const centerX = page4Rect.left + page4Rect.width / 2 + window.scrollX;
+        const centerY = page4Rect.top + page4Rect.height / 2 + window.scrollY;
 
-  // Column 2: slides in at 0.33
-  const c2Op = useTransform(p, [0.33, 0.45], [0, 1]);
-  const c2Y  = useTransform(p, [0.33, 0.45], [50, 0]);
+        // Offsets for a 3-circle Venn (equilateral triangle around center).
+        // Computed from final circle size so it scales with screen width.
+        const targetDiameterPx = window.innerWidth * 0.3; // matches "30vw"
+        const r = targetDiameterPx / 2;
+        const side = r * 0.6; // smaller => more overlap, larger => less overlap
+        const h = (Math.sqrt(3) / 2) * side;
+        const yShift = r * 0.03; // small visual nudge downward to feel centered
 
-  // Column 3: slides in at 0.66
-  const c3Op = useTransform(p, [0.66, 0.78], [0, 1]);
-  const c3Y  = useTransform(p, [0.66, 0.78], [50, 0]);
+        const offsets = [
+            { x: -side / 2, y: -h / 3 + yShift },
+            { x: side / 2, y: -h / 3 + yShift },
+            { x: 0, y: (2 * h) / 3 + yShift },
+        ];
 
-  const colAnims = [
-    { opacity: c1Op, y: c1Y },
-    { opacity: c2Op, y: c2Y },
-    { opacity: c3Op, y: c3Y },
-  ];
+        circles.forEach((circle, i) => {
+            // IMPORTANT:
+            // When we grow circles from 25px → 30vw, their centers shift if they're
+            // anchored by left/right. So we explicitly re-anchor all circles to
+            // the same reference point (50%/50%) and then apply offsets.
+            aptl.to(
+                circle,
+                {
+                    // Detach from `#step-three` alignment during bloom so the Venn
+                    // centers in the viewport even if the line stays left.
+                    position: "fixed",
+                    left: "50%",
+                    top: "50%",
+                    right: "auto",
+                    bottom: "auto",
+                    marginLeft: 0,
+                    marginTop: 0,
+                    xPercent: -50,
+                    yPercent: -50,
+                    x: offsets[i].x,
+                    y: offsets[i].y,
+                    width: "30vw",
+                    height: "30vw",
+                    backgroundColor: "transparent",
+                    duration: 0.8,
+                    ease: "power2.out",
+                    delay: 0.5,
+                },
+                "d"
+            );
+        });
 
-  const dots = [dot1, dot2, dot3];
+        h2s.forEach((h2, i) => {
+            const rect = h2.getBoundingClientRect();
+            const h2X = rect.left + rect.width / 2 + window.scrollX;
+            const h2Y = rect.top + rect.height / 2 + window.scrollY;
 
-  return (
-    // 400vh gives enough room to scroll through all 3 steps
-    <section ref={sectionRef} className="relative h-[400vh]">
-      <div className="sticky top-0 w-full h-[100svh] px-[6vw] py-[2.3vw] flex flex-col justify-center overflow-hidden z-[8]">
+            aptl.to(
+                h2,
+                {
+                    x: centerX - h2X,
+                    y: centerY - h2Y + i * 35,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    delay: 0.5,
+                },
+                "d"
+            );
+        });
 
-        {/* Heading */}
-        <h2
-          className="heading-xl text-subheading"
+    }, []);
+
+    return (
+        <div
+            id="page4"
+            ref={containerRef}
+            className="relative z-8 flex h-screen w-full flex-col justify-center px-[6vw] py-[2.3vw]"
         >
-          Our Approach
-        </h2>
+            <h2 className="heading-xl mb-[6vw] text-heading">Our Approach</h2>
 
-        <div className="w-full">
-
-          {/* Progress bar track */}
-          <div className="relative w-[72%] h-px mt-[6vw] mb-[4vw]" style={{ backgroundColor: LINE }}>
-
-            {/* Filled bar */}
-            <motion.div
-              className="absolute top-0 left-0 h-full"
-              style={{ width: barW, backgroundColor: SEC }}
-            />
-
-            {/* Dot 1 — left */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-[14px] h-[14px] rounded-full" style={{ backgroundColor: LINE }}>
-              <motion.div className="w-full h-full rounded-full" style={{ backgroundColor: SEC, opacity: dot1 }} />
-            </div>
-
-            {/* Dot 2 — mid */}
-            <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[14px] h-[14px] rounded-full" style={{ backgroundColor: LINE }}>
-              <motion.div className="w-full h-full rounded-full" style={{ backgroundColor: SEC, opacity: dot2 }} />
-            </div>
-
-            {/* Dot 3 — right */}
-            <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-[14px] h-[14px] rounded-full" style={{ backgroundColor: LINE }}>
-              <motion.div className="w-full h-full rounded-full" style={{ backgroundColor: SEC, opacity: dot3 }} />
-            </div>
-          </div>
-
-          {/* Content columns */}
-          <div className="w-full flex items-start justify-between">
-            {columns.map((col, i) => (
-              <motion.div
-                key={col.title}
-                className="w-[28%]"
-                style={{ opacity: colAnims[i].opacity, y: colAnims[i].y }}
-              >
-                <h2
-                  className="mb-[2vw] w-fit heading-md text-subheading"
+            <div id="approach-wrap" className="w-full">
+                {/* 
+                    KEY FIX: No Tailwind translate classes on circles.
+                    Position circle2 with marginLeft instead of -translate-x-1/2.
+                    GSAP reads getBoundingClientRect() and Tailwind transforms
+                    corrupt those values, pushing circles off-center.
+                */}
+                <div
+                    id="step-three"
+                    className="relative mb-[4vw] h-[2px] w-[72%]"
+                    style={{ backgroundColor: "transparent" }}
                 >
-                  {col.title}
-                </h2>
-                <h5
-                  className="mb-[1vw] para text-desc"
-                  style={{ color: DES }}
-                >
-                  {col.body}
-                </h5>
-                <h5
-                  className="para text-desc"
-                  style={{ color: DES }}
-                >
-                  {col.body2}
-                </h5>
-              </motion.div>
-            ))}
-          </div>
+                    {/* Circle 1 — left: 0, vertically centered with negative margin */}
+                    <div
+                        className="aprCir apr-circle1 absolute rounded-full origin-center"
+                        style={{
+                            left: 0,
+                            top: "50%",
+                            marginTop: -12.5,   // half of 25px, no Tailwind translate
+                            width: 25,
+                            height: 25,
+                            backgroundColor: "#cbcbcb",
+                            border: "1px solid #cbcbcb",
+                        }}
+                    >
+                        <div
+                            className="apr-circle1-inner h-full w-full rounded-full"
+                            style={{
+                                backgroundColor: "#cbcbcb",
+                                border: "1px solid #cbcbcb",
+                            }}
+                        />
+                    </div>
 
+                    {/* Circle 2 — centered, marginLeft instead of -translateX-1/2 */}
+                    <div
+                        className="aprCir apr-circle2 absolute rounded-full origin-center"
+                        style={{
+                            left: "50%",
+                            marginLeft: -12.5,  // half of 25px, no Tailwind translate
+                            top: "50%",
+                            marginTop: -12.5,
+                            width: 25,
+                            height: 25,
+                            backgroundColor: "#cbcbcb",
+                            border: "1px solid #cbcbcb",
+                        }}
+                    />
+
+                    {/* Circle 3 — right: 0, vertically centered */}
+                    <div
+                        className="aprCir apr-circle3 absolute rounded-full origin-center"
+                        style={{
+                            right: 0,
+                            top: "50%",
+                            marginTop: -12.5,
+                            width: 25,
+                            height: 25,
+                            backgroundColor: "#cbcbcb",
+                            border: "1px solid #cbcbcb",
+                        }}
+                    />
+
+                    <div
+                        className="step-loader-bar absolute left-0 top-0 h-full"
+                        style={{ width: "0%", backgroundColor: "#cbcbcb" }}
+                    />
+                </div>
+
+                <div
+                    id="approach-content"
+                    className="flex w-full items-start justify-between"
+                >
+                    <div className="approach1 w-[28%] opacity-0">
+                        <h2 className="heading-md mb-[2vw] w-fit">Strategy</h2>
+                        <h5 className="para mb-[1vw] text-desc">
+                            We collaborate closely to uncover your brand's vision,
+                            audience, and market position—building a strategy that
+                            drives real results.
+                        </h5>
+                        <h5 className="para2a para text-desc">
+                            By the end, you'll have a clear roadmap to grow your
+                            brand—whether it's industry disruption or becoming a
+                            household name.
+                        </h5>
+                    </div>
+
+                    <div className="approach2 w-[28%] opacity-0">
+                        <h2 className="heading-md mb-[2vw] w-fit">Design</h2>
+                        <h5 className="para mb-[1vw] text-desc">
+                            Our bold, purpose-driven designs are crafted to make an
+                            impact. From typography to color, everything is chosen to
+                            communicate clearly and beautifully.
+                        </h5>
+                        <h5 className="para2a para text-desc">
+                            We bring balance, clarity, and intention together to help
+                            your brand stand out—and connect beyond first impressions.
+                        </h5>
+                    </div>
+
+                    <div className="approach3 w-[28%] opacity-0">
+                        <h2 className="heading-md mb-[2vw] w-fit">Technology</h2>
+                        <h5 className="para mb-[1vw] text-desc">
+                            Beyond aesthetics, we focus on how your brand performs
+                            across platforms—crafting seamless, intelligent experiences
+                            that adapt in real time.
+                        </h5>
+                        <h5 className="para2a para text-desc">
+                            Guided by design and powered by AI, every interaction is
+                            built for clarity, consistency, and connection across
+                            screens, spaces, and systems.
+                        </h5>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
-  );
-}
+    );
+};
+
+export default OurApproach;
