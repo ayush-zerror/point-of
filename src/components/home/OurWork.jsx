@@ -10,41 +10,16 @@ import Image from "next/image";
 import WorkCard from "../work/WorkCard";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import caseStudyData from "@/helper/case-study";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const posts = [
-  {
-    slug: "project-1",
-    title: "Project One",
-    video: "https://www.wearepointof.com/videos/Contigo_v4.mp4",
-    image: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png",
-  },
-  {
-    slug: "project-2",
-    title: "Project Two",
-    video: "https://www.wearepointof.com/videos/Chhaya%20Jain_v3.mp4",
-    image: "https://www.wearepointof.com/home/chhaya.png",
-  },
-  {
-    slug: "project-3",
-    title: "Project Three",
-    video: "https://www.wearepointof.com/videos/typcaste_v2.mp4",
-    image: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/8bf51c209757845.67053c2f6afcf.png",
-  },
-  {
-    slug: "project-4",
-    title: "Project Four",
-    video: "https://www.wearepointof.com/videos/Jadau.mp4",
-    image: "https://mir-s3-cdn-cf.behance.net/projects/404/930dd1224112355.Y3JvcCwxMTE2LDg3MywxNDAsMA.png",
-  },
-  {
-    slug: "project-5",
-    title: "Project Five",
-    video: "https://www.wearepointof.com/videos/Whitehues_v2.mp4",
-    image: "https://www.wearepointof.com/home/whitehues.png",
-  },
-];
+const posts = (caseStudyData ?? []).slice(0, 6).map((c) => ({
+  slug: c?.slug ?? "",
+  title: c?.title ?? "",
+  video: c?.microanimation ?? "",
+  image: c?.coverImage ?? "",
+}));
 
 export default function OurWork() {
   const sectionRef = useRef(null);

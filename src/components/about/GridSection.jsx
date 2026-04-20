@@ -1,11 +1,46 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Button from "../common/Button";
 import { useRouter } from "next/navigation";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const GridSection = ({ title, btntitle, data }) => {
   const isFour = data.length === 4;
   const router = useRouter();
+  const cardsRef = useRef([]);
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const cards = cardsRef.current.filter(Boolean);
+    if (!cards.length || !gridRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        cards,
+        { y: 48, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    }, gridRef);
+
+    return () => ctx.revert();
+  }, [data]);
+
   return (
     <div className="w-full py-16 sm:py-20 md:py-28 lg:py-32">
       {/* Container */}
@@ -26,6 +61,7 @@ const GridSection = ({ title, btntitle, data }) => {
 
         {/* Grid */}
         <div
+          ref={gridRef}
           className={`
             grid grid-cols-1 
             ${isFour ? "sm:grid-cols-2 lg:grid-cols-2 lg:gap-x-32" : "sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-24"}
@@ -37,6 +73,9 @@ const GridSection = ({ title, btntitle, data }) => {
             <div
               key={index}
               className="w-full"
+              ref={(el) => {
+                cardsRef.current[index] = el;
+              }}
             >
               {/* Video */}
               {item.video && (

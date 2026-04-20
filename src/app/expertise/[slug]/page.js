@@ -3,6 +3,7 @@ import AboutExpertise from "@/components/expertiseDets/AboutExpertise";
 import HeroSection from "@/components/expertiseDets/HeroSection";
 import CTASection from "@/components/home/CTASection";
 import { expertiseDetails } from "@/helper/expertise-data";
+import caseStudyData from "@/helper/case-study";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -13,6 +14,8 @@ const ExpertiseDetails = async ({ params }) => {
 
   const data = expertiseDetails.find((item) => item.slug === slug);
   if (!data) notFound();
+
+  const caseStudies = (caseStudyData ?? []).slice(0, 3);
 
   return (
     <>
@@ -25,7 +28,7 @@ const ExpertiseDetails = async ({ params }) => {
         currentSlug={data.slug}
       />
       <CTASection heading={data.ctaTitle} buttonTitle={data.ctaButton} />
-      <InstagramSection />
+      <InstagramSection caseStudies={caseStudies} />
     </>
   );
 };

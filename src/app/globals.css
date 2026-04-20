@@ -18,7 +18,7 @@ html {
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-secondary: red;
+  --color-secondary: var(--secondary);
 
   --color-heading: var(--color-heading);
   --color-subheading: var(--color-subheading);
@@ -76,6 +76,12 @@ body {
     rgba(240, 240, 240, 0.01) 93.9%,
     rgba(240, 240, 240, 0)
   );
+}
+
+/* Flip for bottom strip */
+.nav-gradient-reverse {
+  transform: rotate(180deg);
+  transform-origin: center;
 }
 
 /* Dark override */

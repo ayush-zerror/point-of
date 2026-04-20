@@ -8,21 +8,21 @@ const DEFAULT_PROJECTS = [
     coverImage: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png",
     name: "Contigo Tequila",
     slug: "contigo-tequila",
-    description: "Bridging Mexico and India.",
+    gist: "Bridging Mexico and India.",
     titles: ["Contigo", "Tequila"],
   },
   {
     coverImage: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/8bf51c209757845.67053c2f6afcf.png",
     name: "Typcaste",
     slug: "typcaste",
-    description: "Breaking design's status quo.",
+    gist: "Breaking design's status quo.",
     titles: ["Typcaste"],
   },
   {
     coverImage: "https://www.wearepointof.com/projects/Label%20Ritu%20Kumar/image%20(1).webp",
     name: "Label Ritu Kumar",
     slug: "label-ritu-kumar",
-    description: "Fashion empire meets the social generation.",
+    gist: "Fashion empire meets the social generation.",
     titles: ["Label", "Ritu Kumar"],
   },
 ];
@@ -60,7 +60,7 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
   const bgRefs = useRef([]);   // background <img> refs
   const centerRefs = useRef([]); // center (child) <img> refs
   const textRefs = useRef([]); // array of arrays of title refs per slide
-  const descRefs = useRef([]); // description <p> refs per slide
+  const descRefs = useRef([]); // gist <p> refs per slide
   const counterRefs = useRef([]); // counter <span> refs per slide
 
   const [scrollDirection, setScrollDirection] = useState(null); // 'up' | 'down' | null
@@ -236,7 +236,7 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
       0
     );
 
-    // --- Text + description + counter (DOWN) ---
+    // --- Text + gist + counter (DOWN) ---
     if (h1sPrev?.length) {
       tl.to(
         h1sPrev,
@@ -431,7 +431,7 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
       0
     );
 
-    // --- Text + description + counter (UP) ---
+    // --- Text + gist + counter (UP) ---
     if (h1sPrev?.length) {
       tl.to(
         h1sPrev,
@@ -660,7 +660,7 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
                   opacity: i === 0 ? 1 : 0,
                 }}
               >
-                {project.description}
+                {project.gist}
               </p>
             </div>
           </div>

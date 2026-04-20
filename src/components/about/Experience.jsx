@@ -4,6 +4,10 @@ import Image from "next/image";
 const Experience = ({ data }) => {
   return (
     <div className="relative w-full min-h-screen overflow-hidden ">
+      {/* Gradient strips */}
+      <div className="nav-gradient pointer-events-none absolute inset-x-0 top-0 z-20 h-24" />
+      <div className="nav-gradient nav-gradient-reverse pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24" />
+
       {/* Background Image */}
       <Image
         width={1000}
@@ -22,7 +26,7 @@ const Experience = ({ data }) => {
                 {item.title}
               </h2>
 
-              <div className="w-full h-[1px] bg-white/30 mb-6"></div>
+              <div className="mb-6 h-px w-full bg-white/30"></div>
 
               <p className="para text-desc max-w-[700px]">
                 {item.desc}

@@ -343,7 +343,7 @@ export default function Expertise() {
 
                     <Link
                       href={`/expertise/${item.slug}`}
-                      className={`block text-left cursor-pointer heading-lg transition-colors duration-300 ${isActive ? "text-subheading" : "text-desc"}`}
+                      className={`block text-left hover:text-heading cursor-pointer heading-lg transition-colors duration-300 ${isActive ? "text-subheading" : "text-desc"}`}
                     >
                       {item.title}
                     </Link>

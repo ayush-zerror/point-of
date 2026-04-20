@@ -6,10 +6,12 @@ import React from 'react'
 import AccordionSection from '@/components/connect/AccordionSection'
 import { vacancies } from '@/helper/vacancies'
 import HashScrollToId from "@/components/common/HashScrollToId"
+import caseStudyData from "@/helper/case-study"
 
 
 
 const Connect = () => {
+  const caseStudies = (caseStudyData ?? []).slice(0, 3)
   return (
     <>
       <HashScrollToId offset={100} />
@@ -27,7 +29,7 @@ const Connect = () => {
       <ContactSection />
       <JoinTeam />
       <AccordionSection data={vacancies} title="Current Vacancies" />
-      <InstagramSection />
+      <InstagramSection caseStudies={caseStudies} />
     </>
   )
 }

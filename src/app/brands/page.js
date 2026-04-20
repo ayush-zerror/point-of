@@ -52,6 +52,7 @@ const Brnads = () => {
         onClick={() => {
           router.push("/expertise");
         }}
+        enableTextParallax={true}
       />
       <StatsSection />
       <SelectedBrands />

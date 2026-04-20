@@ -1,6 +1,12 @@
 "use client";
 
-export default function CaseStudyIntro() {
+export default function CaseStudyIntro({ caseStudy }) {
+  const title = caseStudy?.title ?? "";
+  const location = caseStudy?.location ?? "";
+  const gist = caseStudy?.gist ?? "";
+  const about = caseStudy?.about ?? "";
+  const services = Array.isArray(caseStudy?.services) ? caseStudy.services : [];
+
   return (
     <section className="w-full bg-black text-white px-4 sm:px-10 md:px-16 lg:px-20 py-20 md:py-28">
       
@@ -11,12 +17,12 @@ export default function CaseStudyIntro() {
         <div className="flex flex-col justify-between h-full">
           
           <div className="space-y-4">
-            <h2 className="heading-xl text-heading font-[400]">
-              Contigo Tequila
+            <h2 className="heading-xl text-heading font-normal">
+              {title}
             </h2>
 
             <p className="heading-md text-desc">
-              MEXICO & INDIA
+              {location?.toUpperCase?.() ? location.toUpperCase() : location}
             </p>
           </div>
 
@@ -26,30 +32,23 @@ export default function CaseStudyIntro() {
         <div className="space-y-8">
           
           <h3 className="heading-xl text-subheading">
-            Bridging Mexico and India.
+            {gist}
           </h3>
 
           <p className="para text-desc max-w-2xl">
-            Contigo is a premium tequila that celebrates the connection between two vibrant cultures.
-            The name means "with you" in Spanish—a promise of togetherness that resonates across borders.
-            We created a brand that honors Mexican tequila-making traditions while embracing India's colorful
-            celebration culture, resulting in a spirit that brings people together through shared moments of joy.
+            {about}
           </p>
 
           {/* BUTTONS */}
           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 pt-6">
-            
-            <button className="border border-white/20 px-6 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition">
-              NOMENCLATURE
-            </button>
-
-            <button className="border border-white/20 px-6 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition">
-              BRAND IDENTITY
-            </button>
-
-            <button className="border border-white/20 px-6 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition sm:w-full md:w-auto">
-              PACKAGING
-            </button>
+            {services.map((service) => (
+              <button
+                key={service}
+                className="border border-white/20 px-6 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition"
+              >
+                {String(service).toUpperCase()}
+              </button>
+            ))}
 
           </div>
 

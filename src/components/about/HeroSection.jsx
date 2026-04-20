@@ -3,10 +3,15 @@
 import React, {
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import Button from "../common/Button";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ─── tiny sub-component so clock state is isolated ─── */
 const Clock = ({ clockCountry, clockTimeZone }) => {
@@ -62,7 +67,7 @@ const Clock = ({ clockCountry, clockTimeZone }) => {
   return (
     <div
       id="clock-container"
-      className="w-48 h-48 absolute -top-60 left-[24.5rem] rounded-full"
+      className="absolute -top-60 left-98 h-48 w-48 rounded-full"
     >
       <Image
         src="/contact/clock.png"
@@ -94,12 +99,72 @@ const HeroSection = ({
   clockCountry = "",
   clockTimeZone = "",
   showClock = false,
+  enableBgParallax = false,
+  enableTextParallax = false,
 }) => {
+  const rootRef = useRef(null);
+  const bgRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (!rootRef.current) return;
+
+    const root = rootRef.current;
+    const bg = bgRef.current;
+
+    const ctx = gsap.context(() => {
+      // Content parallax on scroll (optional)
+      if (enableTextParallax && contentRef.current) {
+        gsap.to(contentRef.current, {
+          opacity: 1,
+          y: -200,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: root,
+            start: "top top",
+            end: "top -100%",
+            scrub: 0.8,
+            invalidateOnRefresh: true,
+            // markers: true,
+          },
+        });
+      }
+
+      // Subtle background parallax on mouse move
+      if (enableBgParallax && bg) {
+        const handleMouseMove = (e) => {
+          const pageRect = root.getBoundingClientRect();
+          const x = (e.clientX - pageRect.left) / pageRect.width;
+          const y = (e.clientY - pageRect.top) / pageRect.height;
+          const moveAmount = 20;
+
+          gsap.to(bg, {
+            x: -(x * moveAmount),
+            y: -(y * moveAmount),
+            duration: 0.5,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        };
+
+        root.addEventListener("mousemove", handleMouseMove);
+        return () => root.removeEventListener("mousemove", handleMouseMove);
+      }
+    }, rootRef);
+
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => ctx.revert();
+  }, [bgImage]);
+
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div
+      ref={rootRef}
+      className="relative h-screen w-full overflow-hidden"
+    >
       {/* Background Image */}
       {bgImage && (
         <Image
+          ref={bgRef}
           width={1000}
           height={1000}
           src={bgImage}
@@ -112,9 +177,10 @@ const HeroSection = ({
       {/* Content */}
       <div className="relative z-10 h-full flex items-end">
         <div
+          ref={contentRef}
           className="
             w-full relative
-            pl-6 sm:pl-12 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
+            pl-6 sm:pl-12 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
             pr-6
             pb-12 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-40
           "

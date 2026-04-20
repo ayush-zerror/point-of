@@ -3,28 +3,16 @@ import Link from "next/link";
 import Button from "../common/Button";
 import Image from "next/image";
 
-const posts = [
-  {
-    video: "https://www.wearepointof.com/videos/Chhaya%20Jain_v3.mp4",
-    image: "https://www.wearepointof.com/home/chhaya.png",
-    title: "CHHAYA JAIN",
-    slug: "1",
-  },
-  {
-    video: "https://www.wearepointof.com/videos/Whitehues_v2.mp4",
-    image: "https://www.wearepointof.com/home/whitehues.png",
-    title: "WHITEHUES",
-    slug: "2",
-  },
-  {
-    video: "https://www.wearepointof.com/videos/Jadau.mp4",
-    image: "https://www.wearepointof.com/projects/Jadau/maina%20jadai.png",
-    title: "JADAU",
-    slug: "3",
-  },
-];
+const InstagramSection = ({ caseStudies }) => {
+  const posts = Array.isArray(caseStudies)
+    ? caseStudies.slice(0, 3).map((c) => ({
+        video: c?.microanimation ?? "",
+        image: c?.coverImage ?? "",
+        title: String(c?.title ?? ""),
+        slug: c?.slug ?? "",
+      }))
+    : [];
 
-const InstagramSection = () => {
   return (
     <section className="w-full bg-black text-white py-20 md:py-28">
 
@@ -55,7 +43,7 @@ const InstagramSection = () => {
                   className="
                     inline-block
                     origin-left
-                    translate-y-[100%] rotate-[10deg]
+                    translate-y-full rotate-10
                     group-hover:translate-y-0 group-hover:rotate-0
                     transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
                     text-white text-sm md:text-base tracking-wide
@@ -69,14 +57,16 @@ const InstagramSection = () => {
               <div className="relative w-full aspect-square overflow-hidden bg-neutral-900">
 
                 {/* VIDEO */}
-                <video
-                  src={post.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                {post.video ? (
+                  <video
+                    src={post.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : null}
 
                 {/* IMAGE */}
                 <Image

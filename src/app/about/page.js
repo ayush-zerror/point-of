@@ -144,6 +144,8 @@ const Studio = () => {
         onClick={() => {
           router.push("/brands");
         }}
+        enableBgParallax={true}
+        enableTextParallax={true}
       />
       <Experience data={experienceData} />
       <PlaceToWork />

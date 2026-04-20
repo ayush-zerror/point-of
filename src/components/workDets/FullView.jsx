@@ -2,7 +2,13 @@ import React from "react";
 import ShowcaseGrid from "./ShowcaseGrid";
 import Image from "next/image";
 
-const FullView = () => {
+const FullView = ({ caseStudy }) => {
+  const fullViewAssets = Array.isArray(caseStudy?.fullViewAssets)
+    ? caseStudy.fullViewAssets
+    : [];
+
+  const heroImage = fullViewAssets?.[0] ?? caseStudy?.coverImage ?? "";
+
   return (
     <section className="w-full space-y-20 md:space-y-28">
       {/* IMAGE */}
@@ -10,7 +16,7 @@ const FullView = () => {
         <Image
           width={1000}
           height={1000}
-          src="https://www.wearepointof.com/d1.png"
+          src={heroImage}
           alt="full"
           className="w-full h-full object-cover"
         />
@@ -28,24 +34,15 @@ const FullView = () => {
         {/* RIGHT */}
         <div className="space-y-8">
           <h2 className="heading-xl text-subheading max-w-3xl">
-            An authentic tequila brand that speaks to Indian consumers
+            {caseStudy?.challenge?.title ?? ""}
           </h2>
 
           <p className="para text-desc max-w-2xl">
-            How do you create an authentic tequila brand that speaks to Indian
-            consumers without losing its Mexican soul? The challenge was to
-            develop a premium spirit that could compete with established global
-            brands while telling a unique cross-cultural story. We needed to
-            navigate complex regulations in both countries, appeal to Indian
-            tastes and celebration traditions, and create packaging that felt
-            genuine to both cultures—all while maintaining the craftsmanship and
-            quality expected from premium tequila. The brand had to educate a
-            new market about tequila culture while feeling immediately familiar
-            and welcoming.
+            {caseStudy?.challenge?.description ?? ""}
           </p>
         </div>
       </div>
-      <ShowcaseGrid />
+      <ShowcaseGrid caseStudy={caseStudy} />
     </section>
   );
 };

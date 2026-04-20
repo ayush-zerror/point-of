@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import FullView from "./FullView";
 import Overview from "./Overview";
 
-export default function ImageToggleSection() {
+export default function ImageToggleSection({ caseStudy }) {
   const [active, setActive] = useState("full");
   const sectionRef = useRef(null);
 
@@ -24,7 +24,11 @@ export default function ImageToggleSection() {
       className="w-full  px-4 sm:px-10 md:px-16 lg:px-20"
     >
       {/* CONDITIONAL RENDER */}
-      {active === "full" ? <FullView /> : <Overview />}
+      {active === "full" ? (
+        <FullView caseStudy={caseStudy} />
+      ) : (
+        <Overview caseStudy={caseStudy} />
+      )}
 
     {/* STICKY TOGGLE */}
 <div className="sticky bottom-6 flex  justify-center z-20 mt-6">

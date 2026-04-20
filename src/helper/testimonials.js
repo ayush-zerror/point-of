@@ -2,7 +2,7 @@ export const testimonials = [
     {
       name: "Aaryaman Vyas",
       role: "Founder, WhiteHues",
-      image: "https://www.wearepointof.com/home/chhaya.png",
+      image: "https://www.wearepointof.com/home/whitehues.png",
       text: `The workshops surfaced something we hadn't expected — how differently we all saw the brand from the inside. Point Of asked the right questions, challenged our assumptions, and built a strategy that gave us real clarity. The rebrand felt like a natural evolution.`,
       brand: "WHITEHUES",
     },
