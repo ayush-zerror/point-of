@@ -13,6 +13,7 @@ const Work = () => {
       slug: c?.slug,
       gist: c?.gist ?? "",
       titles: words.length <= 1 ? [title] : [words[0], words.slice(1).join(" ")],
+      microanimation: c?.microanimation,
     };
   });
 

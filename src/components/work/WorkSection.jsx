@@ -5,6 +5,8 @@ import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import GridButton from '../common/GridButton';
 import WorkCard from './WorkCard';
+import { Spiral as Hamburger } from "hamburger-react";
+
 // clip-path constants — exact values from vanilla JS
 const CLIP_VISIBLE = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
 const CLIP_HIDDEN_TOP = "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)";        // collapses to top
@@ -35,19 +37,58 @@ const WorkSection = ({ projects }) => {
   const cooldownRef = useRef(0);
   const isAnimatingRef = useRef(false);
   const currentIndexRef = useRef(0);
+  const isGridOpenRef = useRef(false);
 
-  const bgRefs = useRef([]);   // background <img> refs
-  const centerRefs = useRef([]); // center (child) <img> refs
-  const textRefs = useRef([]); // array of arrays of title refs per slide
-  const descRefs = useRef([]); // gist <p> refs per slide
+  const bgRefs = useRef([]);      // background <img> refs
+  const centerRefs = useRef([]);  // center (child) <img> refs
+  const textRefs = useRef([]);    // array of arrays of title refs per slide
+  const descRefs = useRef([]);    // gist <p> refs per slide
   const counterRefs = useRef([]); // counter <span> refs per slide
   const gridListRef = useRef(null);
+  const filterOverlayRef = useRef(null);
+  const filterPanelRef = useRef(null);
 
   const [scrollDirection, setScrollDirection] = useState(null); // 'up' | 'down' | null
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGridOpen, setIsGridOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const pad2 = (n) => String(n).padStart(2, "0");
+
+  useEffect(() => {
+    isGridOpenRef.current = isGridOpen;
+  }, [isGridOpen]);
+
+  useEffect(() => {
+    const overlay = filterOverlayRef.current;
+    const panel = filterPanelRef.current;
+    if (!overlay || !panel) return;
+
+    const tl = gsap.timeline({ defaults: { overwrite: true } });
+
+    if (isFilterOpen) {
+      // 1) overlay fades in, 2) panel slides up
+      tl.set(panel, { yPercent: 100 });
+      tl.to(overlay, { opacity: 1, duration: 0.25, ease: "power2.out",
+        onComplete: () => gsap.set(overlay, { pointerEvents: "auto" }),
+       });
+      tl.to(panel, { yPercent: 0, duration: 0.55, ease: "power3.inOut" });
+    } else {
+      // 1) panel slides down, 2) overlay fades out
+      tl.set(panel, { yPercent: 0 });
+      tl.to(panel, { yPercent: 100, duration: 0.45, ease: "power3.inOut" });
+      tl.to(overlay, {
+        opacity: 0,
+        duration: 0.25,
+        ease: "power2.inOut",
+        onComplete: () => gsap.set(overlay, { pointerEvents: "none" }),
+      });
+    }
+
+    return () => tl.kill();
+  }, [isFilterOpen]);
+
+  const toggleFilter = () => setIsFilterOpen((v) => !v);
 
   const applyTextCounterRestState = (activeIdx, forward) => {
     for (let i = 0; i < items.length; i++) {
@@ -95,6 +136,9 @@ const WorkSection = ({ projects }) => {
     if (!el) return;
 
     if (!isGridOpen) {
+      el.scrollTop = 0;
+      // Make it effective immediately (avoid one "extra" wheel event)
+      isGridOpenRef.current = true;
       // OPEN: bottom-collapsed -> fully visible
       gsap.fromTo(
         el,
@@ -108,6 +152,8 @@ const WorkSection = ({ projects }) => {
       );
       setIsGridOpen(true);
     } else {
+      // Allow gallery scroll immediately on close click
+      isGridOpenRef.current = false;
       // CLOSE: fully visible -> top-collapsed
       gsap.to(el, {
         clipPath: CLIP_HIDDEN_TOP,
@@ -206,47 +252,27 @@ const WorkSection = ({ projects }) => {
       },
     });
 
-    // TODO: add your BG animation(s)
     tl.to(
       bgCurrent,
-      {
-        clipPath: CLIP_HIDDEN_TOP,
-        webkitClipPath: CLIP_HIDDEN_TOP,
-        duration: 1,
-      },
+      { clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP, duration: 1 },
       0
     );
-
-    // TODO: add your 2nd animation(s) (child/text/etc)
     tl.to(
       bgNext,
-      {
-        clipPath: CLIP_VISIBLE,
-        webkitClipPath: CLIP_VISIBLE,
-        duration: 1,
-      },
+      { clipPath: CLIP_VISIBLE, webkitClipPath: CLIP_VISIBLE, duration: 1 },
       0
     );
 
     // Center current exits to BOTTOM (opposite of BG)
     tl.to(
       ctrCurrent,
-      {
-        clipPath: CLIP_HIDDEN_BOTTOM,
-        webkitClipPath: CLIP_HIDDEN_BOTTOM,
-        duration: 1,
-      },
+      { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM, duration: 1 },
       0
     );
-
     // Center next enters from TOP
     tl.to(
       ctrNext,
-      {
-        clipPath: CLIP_VISIBLE,
-        webkitClipPath: CLIP_VISIBLE,
-        duration: 1,
-      },
+      { clipPath: CLIP_VISIBLE, webkitClipPath: CLIP_VISIBLE, duration: 1 },
       0
     );
 
@@ -255,58 +281,27 @@ const WorkSection = ({ projects }) => {
       tl.to(
         h1sPrev,
         {
-          rotate: -5,
-          y: "-100%",
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          onComplete() {
-            gsap.set(h1sPrev, { rotate: 5, y: "100%" });
-          },
+          rotate: -5, y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out",
+          onComplete() { gsap.set(h1sPrev, { rotate: 5, y: "100%" }); },
         },
         0
       );
     }
-
     if (h1sNext?.length) {
-      tl.to(
-        h1sNext,
-        {
-          rotate: 0,
-          y: "0%",
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        0
-      );
+      tl.to(h1sNext, { rotate: 0, y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
     }
-
     if (descPrev) {
-      tl.to(
-        descPrev,
-        { y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out" },
-        0
-      );
+      tl.to(descPrev, { y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out" }, 0);
     }
     if (descNext) {
-      tl.to(
-        descNext,
-        { y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" },
-        0
-      );
+      tl.to(descNext, { y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
     }
-
     if (cntPrev) {
       tl.to(
         cntPrev,
         {
-          top: "-100%",
-          opacity: 0,
-          duration: 0.8,
-          onComplete() {
-            gsap.set(cntPrev, { top: "100%", opacity: 0 });
-          },
+          top: "-100%", opacity: 0, duration: 0.8,
+          onComplete() { gsap.set(cntPrev, { top: "100%", opacity: 0 }); },
         },
         0
       );
@@ -317,6 +312,7 @@ const WorkSection = ({ projects }) => {
 
     return tl;
   };
+
   const runUpAnimations = () => {
     if (isAnimatingRef.current) return null;
     const total = items.length;
@@ -342,16 +338,14 @@ const WorkSection = ({ projects }) => {
     bgRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.set(el, {
-        // For UP: keep current visible; park others hidden at TOP
         clipPath: i === current ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
         webkitClipPath: i === current ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
         zIndex: i === current ? 2 : 0,
       });
-
     });
     gsap.set(bgPrev, { zIndex: 1, clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP });
 
-    // Center layer for UP: inactive waits hidden at BOTTOM (ready to enter from bottom on up)
+    // Center layer for UP: inactive waits hidden at BOTTOM
     centerRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.set(el, {
@@ -373,7 +367,6 @@ const WorkSection = ({ projects }) => {
         currentIndexRef.current = prev;
         setActiveIndex(prev);
 
-        // Rest state after every animation (including wrap):
         bgRefs.current.forEach((el, i) => {
           if (!el) return;
           gsap.set(el, {
@@ -383,7 +376,6 @@ const WorkSection = ({ projects }) => {
           });
         });
 
-        // Center rest state after UP: inactive hidden at BOTTOM
         centerRefs.current.forEach((el, i) => {
           if (!el) return;
           gsap.set(el, {
@@ -401,47 +393,29 @@ const WorkSection = ({ projects }) => {
       },
     });
 
-    // BG current exits to BOTTOM (mirror of down)
+    // BG current exits to BOTTOM
     tl.to(
       bgCurrent,
-      {
-        clipPath: CLIP_HIDDEN_BOTTOM,
-        webkitClipPath: CLIP_HIDDEN_BOTTOM,
-        duration: 1,
-      },
+      { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM, duration: 1 },
       0
     );
-
     // BG prev enters from TOP
     tl.to(
       bgPrev,
-      {
-        clipPath: CLIP_VISIBLE,
-        webkitClipPath: CLIP_VISIBLE,
-        duration: 1,
-      },
+      { clipPath: CLIP_VISIBLE, webkitClipPath: CLIP_VISIBLE, duration: 1 },
       0
     );
 
-    // Center current exits to TOP (opposite of BG on UP)
+    // Center current exits to TOP
     tl.to(
       ctrCurrent,
-      {
-        clipPath: CLIP_HIDDEN_TOP,
-        webkitClipPath: CLIP_HIDDEN_TOP,
-        duration: 1,
-      },
+      { clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP, duration: 1 },
       0
     );
-
     // Center prev enters from BOTTOM
     tl.to(
       ctrPrev,
-      {
-        clipPath: CLIP_VISIBLE,
-        webkitClipPath: CLIP_VISIBLE,
-        duration: 1,
-      },
+      { clipPath: CLIP_VISIBLE, webkitClipPath: CLIP_VISIBLE, duration: 1 },
       0
     );
 
@@ -450,58 +424,27 @@ const WorkSection = ({ projects }) => {
       tl.to(
         h1sPrev,
         {
-          rotate: 5,
-          y: "100%",
-          opacity: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          onComplete() {
-            gsap.set(h1sPrev, { rotate: -5, y: "-100%" });
-          },
+          rotate: 5, y: "100%", opacity: 0, duration: 0.8, ease: "power2.out",
+          onComplete() { gsap.set(h1sPrev, { rotate: -5, y: "-100%" }); },
         },
         0
       );
     }
-
     if (h1sNext?.length) {
-      tl.to(
-        h1sNext,
-        {
-          rotate: 0,
-          y: "0%",
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        0
-      );
+      tl.to(h1sNext, { rotate: 0, y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
     }
-
     if (descPrev) {
-      tl.to(
-        descPrev,
-        { y: "100%", opacity: 0, duration: 0.8, ease: "power2.out" },
-        0
-      );
+      tl.to(descPrev, { y: "100%", opacity: 0, duration: 0.8, ease: "power2.out" }, 0);
     }
     if (descNext) {
-      tl.to(
-        descNext,
-        { y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" },
-        0
-      );
+      tl.to(descNext, { y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
     }
-
     if (cntPrev) {
       tl.to(
         cntPrev,
         {
-          top: "100%",
-          opacity: 0,
-          duration: 0.8,
-          onComplete() {
-            gsap.set(cntPrev, { top: "-100%", opacity: 0 });
-          },
+          top: "100%", opacity: 0, duration: 0.8,
+          onComplete() { gsap.set(cntPrev, { top: "-100%", opacity: 0 }); },
         },
         0
       );
@@ -513,39 +456,52 @@ const WorkSection = ({ projects }) => {
     return tl;
   };
 
-  // Detect direction here only.
-  // Replace the TODO blocks with your animations.
   const handleScrollDirection = (dir) => {
     if (!dir) return;
     if (isAnimatingRef.current) return;
+    if (isGridOpenRef.current) return;
 
     setScrollDirection(dir);
 
     if (dir === "up") {
       runUpAnimations();
-
       return;
     }
-
     if (dir === "down") {
       runDownAnimations();
       return;
     }
   };
 
-  // Detect scroll up/down via wheel and swipe gestures on this section.
   useEffect(() => {
     const el = containerRef.current;
+    const gridEl = gridListRef.current;
     if (!el) return;
 
     const onWheel = (e) => {
+      // ✅ FIX: Guard BEFORE preventDefault so grid can scroll natively.
+      // When grid is open, return immediately — the event propagates normally
+      // to the grid element and it scrolls as expected.
+      if (isGridOpenRef.current) return;
+
       const dy = e.deltaY;
       if (Math.abs(dy) < 8) return;
+
+      // Only call preventDefault when gallery is active (blocks page scroll)
       e.preventDefault();
+
       if (isAnimatingRef.current) return;
       if (Date.now() < cooldownRef.current) return;
       cooldownRef.current = Date.now() + 900;
       handleScrollDirection(dy > 0 ? "down" : "up");
+    };
+
+    // ✅ FIX: Stop wheel events inside the grid from bubbling up to the
+    // container listener. Without this, even though we guard with
+    // isGridOpenRef, the container's { passive: false } registration
+    // can interfere with the grid's native scroll on some browsers.
+    const stopGridPropagation = (e) => {
+      e.stopPropagation();
     };
 
     const onTouchStart = (e) => {
@@ -553,6 +509,7 @@ const WorkSection = ({ projects }) => {
     };
 
     const onTouchEnd = (e) => {
+      if (isGridOpenRef.current) return;
       const startY = touchStartYRef.current;
       const endY = e.changedTouches?.[0]?.clientY;
       touchStartYRef.current = null;
@@ -561,24 +518,29 @@ const WorkSection = ({ projects }) => {
       const dy = endY - startY;
       if (Math.abs(dy) < 40) return;
 
-      // Swipe up -> next -> 'down' gesture for our naming
       if (isAnimatingRef.current) return;
       if (Date.now() < cooldownRef.current) return;
       cooldownRef.current = Date.now() + 900;
+      // Swipe up = "down" in our naming (next slide)
       handleScrollDirection(dy < 0 ? "down" : "up");
     };
 
+    // passive: false needed so we can call preventDefault in gallery mode
     el.addEventListener('wheel', onWheel, { passive: false });
+
+    // ✅ Grid wheel events stop here — never reach the container listener
+    gridEl?.addEventListener('wheel', stopGridPropagation, { passive: true });
+
     el.addEventListener('touchstart', onTouchStart, { passive: true });
     el.addEventListener('touchend', onTouchEnd, { passive: true });
 
     return () => {
       el.removeEventListener('wheel', onWheel);
+      gridEl?.removeEventListener('wheel', stopGridPropagation);
       el.removeEventListener('touchstart', onTouchStart);
       el.removeEventListener('touchend', onTouchEnd);
     };
   }, []);
-
 
 
   return (
@@ -609,7 +571,9 @@ const WorkSection = ({ projects }) => {
       </div>
 
       {/* ── Center foreground (inner-container) ── */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[56vw] h-[56vw] sm:w-[44vw] sm:h-[44vw] md:w-[34vw] md:h-[34vw] lg:w-[26vw] lg:h-[26vw] min-w-[150px] min-h-[150px] sm:min-w-[180px] sm:min-h-[180px] z-30">
+      <div
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[300px] md:min-w-[400px] aspect-square z-20 transition-opacity duration-300 ${isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+      >
         <div className='w-full h-full overflow-hidden'>
           {items.map((project, i) => (
             <Link
@@ -636,20 +600,17 @@ const WorkSection = ({ projects }) => {
           ))}
         </div>
 
-        {/* ── Bottom bar: animated counter (like ProjectClipReveal) ── */}
+        {/* ── Bottom bar: animated counter ── */}
         <div
-          className={`w-full flex items-center justify-between absolute top-full pt-4 left-0 transition-opacity duration-300 ${isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-            }`}
+          className={`w-full flex items-center justify-between absolute top-full pt-4 left-0 transition-opacity duration-300 ${isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
         >
           <GridButton title={"GRID VIEW"} onClick={toggleGridList} className={"mt-0!"} />
-          <div className=" z-30 flex items-center gap-2 pointer-events-none">
+          <div className="z-30 flex items-center gap-2 pointer-events-none">
             <div className="relative h-3.5 overflow-hidden min-w-8">
               {items.map((_, i) => (
                 <span
                   key={`cnt-${i}`}
-                  ref={(el) => {
-                    counterRefs.current[i] = el;
-                  }}
+                  ref={(el) => { counterRefs.current[i] = el; }}
                   className="absolute right-0 text-white text-sm font-heading font-extralight tracking-[0.3px] leading-none tabular-nums"
                   style={{
                     top: i === 0 ? "0%" : "100%",
@@ -668,29 +629,114 @@ const WorkSection = ({ projects }) => {
         </div>
       </div>
 
+      {/* ── Grid / list overlay ── */}
       <div
         id='grid-list'
         ref={gridListRef}
-        className='w-full h-full bg-background absolute top-0 left-0 z-20'
+        className='w-full h-full bg-background absolute top-0 left-0 z-30 overflow-y-auto'
         style={{
           clipPath: CLIP_HIDDEN_BOTTOM,
           WebkitClipPath: CLIP_HIDDEN_BOTTOM,
           willChange: "clip-path",
         }}
+        data-lenis-prevent
       >
-        {/* ── Bottom bar: animated counter (like ProjectClipReveal) ── */}
-        <div className='w-full flex items-center justify-between absolute bottom-0 left-0 px-20 pb-10'>
+        {/* ── Bottom bar: grid close button ── */}
+        <div className='w-full flex items-center justify-between fixed bottom-0 left-0 z-30 px-20 pb-10'>
           <GridButton title={"GALLERY VIEW"} onClick={toggleGridList} className={"mt-0!"} />
+          <GridButton title={"FILTER"} onClick={toggleFilter} className={"mt-0!"} />
         </div>
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-20 py-20 px-20">
-          {/* {items.map((project) => (
-            <WorkCard
-              key={project.slug}
-              post={project}
-            />
-          ))} */}
+        <div className="flex flex-wrap justify-between px-20">
+          {items.map((project) => (
+            <div key={project.slug} className='w-fit h-screen flex items-center justify-center'>
+              <WorkCard
+                slug={project.slug}
+                title={project.name}
+                image={project.coverImage}
+                video={project.microanimation}
+              />
+            </div>
+          ))}
         </div>
       </div>
+      {/* ── Filter view ── */}
+      <div
+        ref={filterOverlayRef}
+        className='w-full h-screen flex items-end opacity-0 pointer-events-none bg-background/30 backdrop-blur-xs absolute top-0 left-0 z-40'
+      >
+        {/* filter list */}
+        <div
+          ref={filterPanelRef}
+          className='w-full h-1/2 relative bg-background will-change-transform'
+        >
+          <div className="h-full w-full px-8 sm:px-12 lg:px-20 py-8 text-white">
+            <div className="absolute top-4 right-6 sm:right-10 lg:right-14">
+              <Hamburger
+                size={20}
+                toggled={isFilterOpen}
+                toggle={setIsFilterOpen}
+                label="Close filter"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16">
+              <div className="text-white/70 text-sm tracking-wide">
+                Filter by:
+              </div>
+
+              <div>
+                <div className="text-white/50 text-xs tracking-wide mb-4">Services</div>
+                <ul className="space-y-2 text-sm text-white/80">
+                  <li className="hover:text-white cursor-pointer w-fit">Web Design</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Branding</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Fashion Design</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Web Development</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Interior Design</li>
+                </ul>
+              </div>
+
+              <div>
+                <div className="text-white/50 text-xs tracking-wide mb-4">Industry</div>
+                <ul className="space-y-2 text-sm text-white/80">
+                  <li className="hover:text-white cursor-pointer w-fit">E-commerce</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Education</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Fashion</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Technology</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Architecture</li>
+                  <li className="hover:text-white cursor-pointer w-fit">Entertainment</li>
+                </ul>
+              </div>
+
+              <div>
+                <div className="text-white/50 text-xs tracking-wide mb-4">Year</div>
+                <ul className="space-y-2 text-sm text-white/80">
+                  <li className="hover:text-white cursor-pointer w-fit">2024</li>
+                  <li className="hover:text-white cursor-pointer w-fit">2023</li>
+                  <li className="hover:text-white cursor-pointer w-fit">2022</li>
+                  <li className="hover:text-white cursor-pointer w-fit">2021</li>
+                  <li className="hover:text-white cursor-pointer w-fit">2020</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="absolute bottom-8 left-8 sm:left-12 lg:left-16 right-8 sm:right-12 lg:right-16 flex items-center justify-between">
+              <button
+                type="button"
+                className="heading-md text-heading transition-colors cursor-pointer"
+              >
+                View {items.length} projects →
+              </button>
+              <button
+                type="button"
+                className="heading-md text-heading transition-colors cursor-pointer"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ── Side text (animated overlay) ── */}
       <div className="absolute inset-0 z-10 pointer-events-none">
         {items.map((project, i) => (
@@ -709,8 +755,7 @@ const WorkSection = ({ projects }) => {
                   style={{
                     display: "inline-block",
                     willChange: "transform, opacity",
-                    transform:
-                      i === 0 ? "rotate(0deg) translateY(0%)" : "rotate(5deg) translateY(100%)",
+                    transform: i === 0 ? "rotate(0deg) translateY(0%)" : "rotate(5deg) translateY(100%)",
                     opacity: i === 0 ? 1 : 0,
                   }}
                 >
@@ -721,9 +766,7 @@ const WorkSection = ({ projects }) => {
 
             <div className="overflow-hidden mt-2 sm:mt-3">
               <p
-                ref={(el) => {
-                  descRefs.current[i] = el;
-                }}
+                ref={(el) => { descRefs.current[i] = el; }}
                 className="text-white/60 font-heading font-extralight leading-[1.55] tracking-[0.15px] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch]"
                 style={{
                   willChange: "transform, opacity",
@@ -737,9 +780,8 @@ const WorkSection = ({ projects }) => {
           </div>
         ))}
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default WorkSection
+export default WorkSection;
