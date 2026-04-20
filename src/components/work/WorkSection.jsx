@@ -3,29 +3,8 @@ import gsap from 'gsap';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-const DEFAULT_PROJECTS = [
-  {
-    coverImage: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/021e2e203085493.6690e78c7a22d.png",
-    name: "Contigo Tequila",
-    slug: "contigo-tequila",
-    gist: "Bridging Mexico and India.",
-    titles: ["Contigo", "Tequila"],
-  },
-  {
-    coverImage: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/8bf51c209757845.67053c2f6afcf.png",
-    name: "Typcaste",
-    slug: "typcaste",
-    gist: "Breaking design's status quo.",
-    titles: ["Typcaste"],
-  },
-  {
-    coverImage: "https://www.wearepointof.com/projects/Label%20Ritu%20Kumar/image%20(1).webp",
-    name: "Label Ritu Kumar",
-    slug: "label-ritu-kumar",
-    gist: "Fashion empire meets the social generation.",
-    titles: ["Label", "Ritu Kumar"],
-  },
-];
+import GridButton from '../common/GridButton';
+import WorkCard from './WorkCard';
 // clip-path constants — exact values from vanilla JS
 const CLIP_VISIBLE = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
 const CLIP_HIDDEN_TOP = "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)";        // collapses to top
@@ -40,7 +19,7 @@ const toSlug = (value = "") =>
     .replace(/-+/g, "-");
 
 
-const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
+const WorkSection = ({ projects }) => {
   const items = useMemo(
     () =>
       (projects ?? []).map((project) => ({
@@ -62,9 +41,11 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
   const textRefs = useRef([]); // array of arrays of title refs per slide
   const descRefs = useRef([]); // gist <p> refs per slide
   const counterRefs = useRef([]); // counter <span> refs per slide
+  const gridListRef = useRef(null);
 
   const [scrollDirection, setScrollDirection] = useState(null); // 'up' | 'down' | null
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isGridOpen, setIsGridOpen] = useState(false);
 
   const pad2 = (n) => String(n).padStart(2, "0");
 
@@ -108,6 +89,39 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
     // Initial state: first visible, rest staged for scroll DOWN.
     applyTextCounterRestState(0, true);
   }, [items]);
+
+  const toggleGridList = () => {
+    const el = gridListRef.current;
+    if (!el) return;
+
+    if (!isGridOpen) {
+      // OPEN: bottom-collapsed -> fully visible
+      gsap.fromTo(
+        el,
+        { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM },
+        {
+          clipPath: CLIP_VISIBLE,
+          webkitClipPath: CLIP_VISIBLE,
+          duration: 0.6,
+          ease: "power3.inOut",
+        }
+      );
+      setIsGridOpen(true);
+    } else {
+      // CLOSE: fully visible -> top-collapsed
+      gsap.to(el, {
+        clipPath: CLIP_HIDDEN_TOP,
+        webkitClipPath: CLIP_HIDDEN_TOP,
+        duration: 0.55,
+        ease: "power3.inOut",
+        onComplete: () => {
+          // reset so next open always starts from bottom
+          gsap.set(el, { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM });
+        },
+      });
+      setIsGridOpen(false);
+    }
+  };
 
   // Put BOTH "down" animations here so they run together.
   const runDownAnimations = () => {
@@ -595,33 +609,90 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
       </div>
 
       {/* ── Center foreground (inner-container) ── */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[56vw] h-[56vw] sm:w-[44vw] sm:h-[44vw] md:w-[34vw] md:h-[34vw] lg:w-[26vw] lg:h-[26vw] min-w-[150px] min-h-[150px] sm:min-w-[180px] sm:min-h-[180px] overflow-hidden z-20">
-        {items.map((project, i) => (
-          <Link
-            key={`ctr-${i}`}
-            href={`/work/${project.slug}`}
-            className={`absolute inset-0 block ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
-            aria-label={`Open ${project.name}`}
-          >
-            <Image
-              width={1000}
-              height={1000}
-              ref={(el) => { centerRefs.current[i] = el; }}
-              src={project.coverImage}
-              alt={project.name}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{
-                clipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
-                WebkitClipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
-                willChange: "clip-path",
-                zIndex: i === 0 ? 1 : 0,
-              }}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[56vw] h-[56vw] sm:w-[44vw] sm:h-[44vw] md:w-[34vw] md:h-[34vw] lg:w-[26vw] lg:h-[26vw] min-w-[150px] min-h-[150px] sm:min-w-[180px] sm:min-h-[180px] z-30">
+        <div className='w-full h-full overflow-hidden'>
+          {items.map((project, i) => (
+            <Link
+              key={`ctr-${i}`}
+              href={`/work/${project.slug}`}
+              className={`absolute inset-0 block ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
+              aria-label={`Open ${project.name}`}
+            >
+              <Image
+                width={1000}
+                height={1000}
+                ref={(el) => { centerRefs.current[i] = el; }}
+                src={project.coverImage}
+                alt={project.name}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  clipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
+                  WebkitClipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
+                  willChange: "clip-path",
+                  zIndex: i === 0 ? 1 : 0,
+                }}
+              />
+            </Link>
+          ))}
+        </div>
+
+        {/* ── Bottom bar: animated counter (like ProjectClipReveal) ── */}
+        <div
+          className={`w-full flex items-center justify-between absolute top-full pt-4 left-0 transition-opacity duration-300 ${isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+        >
+          <GridButton title={"GRID VIEW"} onClick={toggleGridList} className={"mt-0!"} />
+          <div className=" z-30 flex items-center gap-2 pointer-events-none">
+            <div className="relative h-3.5 overflow-hidden min-w-8">
+              {items.map((_, i) => (
+                <span
+                  key={`cnt-${i}`}
+                  ref={(el) => {
+                    counterRefs.current[i] = el;
+                  }}
+                  className="absolute right-0 text-white text-sm font-heading font-extralight tracking-[0.3px] leading-none tabular-nums"
+                  style={{
+                    top: i === 0 ? "0%" : "100%",
+                    opacity: i === 0 ? 0.7 : 0,
+                    willChange: "top, opacity",
+                  }}
+                >
+                  {pad2(i + 1)}
+                </span>
+              ))}
+            </div>
+            <span className="text-white/40 text-sm font-heading font-extralight tracking-[0.3px] leading-[1.2] tabular-nums">
+              / {pad2(items.length)}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id='grid-list'
+        ref={gridListRef}
+        className='w-full h-full bg-background absolute top-0 left-0 z-20'
+        style={{
+          clipPath: CLIP_HIDDEN_BOTTOM,
+          WebkitClipPath: CLIP_HIDDEN_BOTTOM,
+          willChange: "clip-path",
+        }}
+      >
+        {/* ── Bottom bar: animated counter (like ProjectClipReveal) ── */}
+        <div className='w-full flex items-center justify-between absolute bottom-0 left-0 px-20 pb-10'>
+          <GridButton title={"GALLERY VIEW"} onClick={toggleGridList} className={"mt-0!"} />
+        </div>
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-20 py-20 px-20">
+          {/* {items.map((project) => (
+            <WorkCard
+              key={project.slug}
+              post={project}
             />
-          </Link>
-        ))}
+          ))} */}
+        </div>
       </div>
       {/* ── Side text (animated overlay) ── */}
-      <div className="absolute inset-0 z-30 pointer-events-none">
+      <div className="absolute inset-0 z-10 pointer-events-none">
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
@@ -666,32 +737,6 @@ const WorkSection = ({ projects = DEFAULT_PROJECTS }) => {
           </div>
         ))}
       </div>
-
-      {/* ── Bottom bar: animated counter (like ProjectClipReveal) ── */}
-      <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-10 z-30 flex items-center gap-2 pointer-events-none">
-        <div className="relative h-5 overflow-hidden min-w-8">
-          {items.map((_, i) => (
-            <span
-              key={`cnt-${i}`}
-              ref={(el) => {
-                counterRefs.current[i] = el;
-              }}
-              className="absolute right-0 text-white text-sm font-heading font-extralight tracking-[0.3px] leading-[1.2] tabular-nums"
-              style={{
-                top: i === 0 ? "0%" : "100%",
-                opacity: i === 0 ? 0.7 : 0,
-                willChange: "top, opacity",
-              }}
-            >
-              {pad2(i + 1)}
-            </span>
-          ))}
-        </div>
-        <span className="text-white/40 text-sm font-heading font-extralight tracking-[0.3px] leading-[1.2] tabular-nums">
-          / {pad2(items.length)}
-        </span>
-      </div>
-
 
     </div>
   )
