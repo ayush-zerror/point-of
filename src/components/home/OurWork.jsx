@@ -14,12 +14,7 @@ import caseStudyData from "@/helper/case-study";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const posts = (caseStudyData ?? []).slice(0, 6).map((c) => ({
-  slug: c?.slug ?? "",
-  title: c?.title ?? "",
-  video: c?.microanimation ?? "",
-  image: c?.coverImage ?? "",
-}));
+const posts = (caseStudyData ?? []).slice(0, 6);
 
 export default function OurWork() {
   const sectionRef = useRef(null);
@@ -209,7 +204,7 @@ export default function OurWork() {
         >
           {/* CARDS */}
           {posts.map((post, index) => (
-            <WorkCard key={index} post={post} />
+            <WorkCard key={index} slug={post.slug} title={post.title} image={post.coverImage} video={post.microanimation} />
           ))}
 
           {/* BUTTON */}

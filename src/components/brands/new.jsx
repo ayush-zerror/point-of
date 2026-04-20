@@ -159,14 +159,6 @@ const StatsSection = () => {
   
       // ✅ revert GSAP + ScrollTrigger safely
       ctx.revert();
-  
-      // ✅ extra safety (optional but solid)
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-  
-      if (splitRef.current) {
-        splitRef.current.revert();
-        splitRef.current = null;
-      }
     };
   }, []);
   return (

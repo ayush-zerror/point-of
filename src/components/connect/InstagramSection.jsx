@@ -2,15 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Button from "../common/Button";
 import Image from "next/image";
+import WorkCard from "../work/WorkCard";
 
 const InstagramSection = ({ caseStudies }) => {
   const posts = Array.isArray(caseStudies)
-    ? caseStudies.slice(0, 3).map((c) => ({
-        video: c?.microanimation ?? "",
-        image: c?.coverImage ?? "",
-        title: String(c?.title ?? ""),
-        slug: c?.slug ?? "",
-      }))
+    ? caseStudies.slice(0, 3)
     : [];
 
   return (
@@ -31,58 +27,7 @@ const InstagramSection = ({ caseStudies }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 lg:gap-20">
           {posts.map((post, index) => (
 
-            <Link
-              key={index}
-              href={`/work/${post.slug}`}
-              className="relative group block"
-            >
-
-              {/* TITLE */}
-              <div className="absolute -top-8 left-0 overflow-hidden z-10">
-                <span
-                  className="
-                    inline-block
-                    origin-left
-                    translate-y-full rotate-10
-                    group-hover:translate-y-0 group-hover:rotate-0
-                    transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-                    text-white text-sm md:text-base tracking-wide
-                  "
-                >
-                  {post.title}
-                </span>
-              </div>
-
-              {/* CARD */}
-              <div className="relative w-full aspect-square overflow-hidden bg-neutral-900">
-
-                {/* VIDEO */}
-                {post.video ? (
-                  <video
-                    src={post.video}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                ) : null}
-
-                {/* IMAGE */}
-                <Image
-                  width={1000}
-                  height={1000}
-                  src={post.image}
-                  alt={post.title}
-                  className="
-                    absolute inset-0 w-full h-full object-cover
-                    transition-opacity duration-700 ease-in-out
-                    opacity-100 group-hover:opacity-0
-                  "
-                />
-              </div>
-
-            </Link>
+           <WorkCard key={index} slug={post.slug} title={post.title} image={post.coverImage} video={post.microanimation} />
           ))}
         </div>
       </div>

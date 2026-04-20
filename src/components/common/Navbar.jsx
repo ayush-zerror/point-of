@@ -72,8 +72,10 @@ export default function Navbar() {
 
     const buildTimeline = () => {
       // 1. Kill existing
-      if (scrollTl) scrollTl.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      if (scrollTl) {
+        scrollTl.scrollTrigger?.kill();
+        scrollTl.kill();
+      }
 
       // 2. Hard reset every transform so measurements are clean
       gsap.set([refOINT.current, refF.current], { clearProps: "all" });
@@ -151,6 +153,9 @@ export default function Navbar() {
         { x: oShift, ease: "power2.inOut", duration: 0.5 },
         0.5
       );
+
+      // Keep other triggers accurate after layout-affecting transforms.
+      ScrollTrigger.refresh();
     };
 
     // Small debounce on resize to avoid thrashing
@@ -167,8 +172,10 @@ export default function Navbar() {
 
     return () => {
       clearTimeout(resizeTimer);
-      if (scrollTl) scrollTl.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      if (scrollTl) {
+        scrollTl.scrollTrigger?.kill();
+        scrollTl.kill();
+      }
       resizeObserver.disconnect();
     };
   }, []);
@@ -190,7 +197,7 @@ export default function Navbar() {
               ref={logoRef}
             >
               {/* P */}
-              <div ref={refP} className="relative flex-shrink-0">
+              <div ref={refP} className="relative shrink-0">
                 <Image
                   src="/logo/p.png"
                   alt="P"
@@ -205,7 +212,7 @@ export default function Navbar() {
               {/* OINT — fades then collapses */}
               <div
                 ref={refOINT}
-                className="flex-shrink-0 overflow-hidden"
+                className="shrink-0 overflow-hidden"
                 style={{ whiteSpace: "nowrap" }}
               >
                 <Image
@@ -219,7 +226,7 @@ export default function Navbar() {
               </div>
 
               {/* O */}
-              <div ref={refO} className="flex-shrink-0">
+              <div ref={refO} className="shrink-0">
                 <Image
                   src="/logo/o.png"
                   alt="O"
@@ -231,7 +238,7 @@ export default function Navbar() {
               </div>
 
               {/* F — fades then collapses */}
-              <div ref={refF} className="flex-shrink-0 overflow-hidden">
+              <div ref={refF} className="shrink-0 overflow-hidden">
                 <Image
                   src="/logo/f.png"
                   alt="F"
