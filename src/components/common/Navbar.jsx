@@ -83,8 +83,8 @@ export default function Navbar() {
       if (span) gsap.set(span, { opacity: 0 });
 
       // 3. Measure after DOM settles
-      const pRect  = refP.current.getBoundingClientRect();
-      const oRect  = refO.current.getBoundingClientRect();
+      const pRect = refP.current.getBoundingClientRect();
+      const oRect = refO.current.getBoundingClientRect();
 
       const pWidth = pRect.width;
       const oWidth = oRect.width;
@@ -95,7 +95,7 @@ export default function Navbar() {
       // P shifts right by its own full width
       // O shifts left by a third of its own width
       // Together they converge symmetrically toward the navbar center
-      const pShift =  pWidth;
+      const pShift = pWidth;
       const oShift = -(oWidth / 3);
 
       // 4. Build timeline
@@ -118,14 +118,14 @@ export default function Navbar() {
       // Phase 2 — collapse OINT width
       scrollTl.to(
         refOINT.current,
-        { width: 0,opacity: 0, ease: "power2.inOut", duration: 0.5 },
+        { width: 0, opacity: 0, ease: "power2.inOut", duration: 0.5 },
         0.5
       );
 
       // Phase 2 — collapse F width
       scrollTl.to(
         refF.current,
-        { width: 0,opacity: 0, ease: "power2.inOut", duration: 0.5 },
+        { width: 0, opacity: 0, ease: "power2.inOut", duration: 0.5 },
         0.5
       );
 
@@ -176,9 +176,8 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 text-foreground ${
-          pathname === "/work" ? "" : "nav-gradient"
-        }`}
+        className={`fixed top-0 left-0 w-full z-50 text-foreground ${pathname === "/work" ? "" : "nav-gradient"
+          }`}
       >
         <div className="relative z-30 flex items-center justify-between h-20 px-6 md:px-12">
           <div className="w-5" />
