@@ -4,9 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import GridButton from '../common/GridButton';
-import WorkCard from './WorkCard';
-import { Spiral as Hamburger } from "hamburger-react";
 import caseStudy from '../../helper/case-study';
+import WorkGridOverlay from "./WorkGridOverlay";
+import WorkFilterPanel from "./WorkFilterPanel";
 
 // clip-path constants — exact values from vanilla JS
 const CLIP_VISIBLE = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
@@ -704,141 +704,25 @@ const WorkSection = ({ projects }) => {
         </div>
       </div>
 
-      {/* ── Grid / list overlay ── */}
-      <div
-        id='grid-list'
-        ref={gridListRef}
-        className='w-full h-full bg-background absolute top-0 left-0 z-30 overflow-y-auto'
-        style={{
-          clipPath: CLIP_HIDDEN_BOTTOM,
-          WebkitClipPath: CLIP_HIDDEN_BOTTOM,
-          willChange: "clip-path",
-        }}
-        data-lenis-prevent
-      >
-        {/* ── Bottom bar: grid close button ── */}
-        <div className='w-full flex items-center justify-between fixed bottom-0 left-0 z-30 px-20 pb-10'>
-          <GridButton title={"GALLERY VIEW"} onClick={toggleGridList} className={"mt-0!"} />
-          <GridButton title={"FILTER"} onClick={toggleFilter} className={"mt-0!"} />
-        </div>
-        <div className="flex flex-wrap justify-between px-20">
-          {filteredCaseStudy.map((project) => (
-            <div key={project.slug} className='w-fit h-screen flex items-center justify-center'>
-              <WorkCard
-                slug={project.slug}
-                title={project.title}
-                image={project.coverImage}
-                video={project.microanimation}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* ── Filter view ── */}
-      <div
-        ref={filterOverlayRef}
-        className='w-full h-screen flex items-end opacity-0 pointer-events-none bg-background/30 backdrop-blur-xs absolute top-0 left-0 z-40'
-      >
-        {/* filter list */}
-        <div
-          ref={filterPanelRef}
-          className='w-full h-1/2 relative bg-background will-change-transform'
-        >
-          <div className="h-full w-full px-8 sm:px-12 lg:px-20 py-8 text-white">
-            <div className="absolute top-4 right-6 sm:right-10 lg:right-14">
-              <Hamburger
-                size={20}
-                toggled={isFilterOpen}
-                toggle={setIsFilterOpen}
-                label="Close filter"
-              />
-            </div>
+      <WorkGridOverlay
+        gridListRef={gridListRef}
+        toggleGridList={toggleGridList}
+        toggleFilter={toggleFilter}
+        projects={filteredCaseStudy}
+      />
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16">
-              <div className="text-heading text-sm tracking-wide">
-                Filter by:
-              </div>
-
-              <div>
-                <div className="text-desc text-xs tracking-wide mb-4">Services</div>
-                <ul className="filter-ul space-y-2 text-sm text-heading">
-                  {filterOptions.services.map((label) => (
-                    <li
-                      key={label}
-                      className={`hover:text-white cursor-pointer w-fit ${activeFilters.services.has(label) ? "active" : ""}`}
-                      onClick={() => toggleFilterItem("services", label)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("services", label);
-                      }}
-                    >
-                      {label}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <div className="text-desc text-xs tracking-wide mb-4">Industry</div>
-                <ul className="filter-ul space-y-2 text-sm text-heading">
-                  {filterOptions.industry.map((label) => (
-                    <li
-                      key={label}
-                      className={`hover:text-white cursor-pointer w-fit ${activeFilters.industry.has(label) ? "active" : ""}`}
-                      onClick={() => toggleFilterItem("industry", label)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("industry", label);
-                      }}
-                    >
-                      {label}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <div className="text-desc text-xs tracking-wide mb-4">Year</div>
-                <ul className="filter-ul space-y-2 text-sm text-heading">
-                  {filterOptions.year.map((label) => (
-                    <li
-                      key={label}
-                      className={`hover:text-white cursor-pointer w-fit ${activeFilters.year.has(label) ? "active" : ""}`}
-                      onClick={() => toggleFilterItem("year", label)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("year", label);
-                      }}
-                    >
-                      {label}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="absolute bottom-8 left-8 sm:left-12 lg:left-16 right-8 sm:right-12 lg:right-16 flex items-center justify-between">
-              <button
-                type="button"
-                className="heading-md text-heading transition-colors cursor-pointer"
-                onClick={onApplyFilters}
-              >
-                View {filteredCaseStudy.length} projects →
-              </button>
-              <button
-                type="button"
-                className="heading-md text-heading transition-colors cursor-pointer"
-                onClick={onResetFilters}
-              >
-                Reset
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <WorkFilterPanel
+        filterOverlayRef={filterOverlayRef}
+        filterPanelRef={filterPanelRef}
+        isFilterOpen={isFilterOpen}
+        setIsFilterOpen={setIsFilterOpen}
+        filterOptions={filterOptions}
+        activeFilters={activeFilters}
+        toggleFilterItem={toggleFilterItem}
+        viewCount={filteredCaseStudy.length}
+        onApply={onApplyFilters}
+        onReset={onResetFilters}
+      />
 
       {/* ── Side text (animated overlay) ── */}
       <div className="absolute inset-0 z-10 pointer-events-none">
