@@ -2,8 +2,42 @@
 
 import Image from "next/image";
 import ArrowButton from "../common/ArrowButton";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ShowcaseGrid({ caseStudy }) {
+  const wrapRef = useRef(null);
+  const mediaRefs = useRef([]);
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const els = mediaRefs.current.filter(Boolean);
+      els.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { yPercent: -8 },
+          {
+            yPercent: 8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el.parentElement, // overflow-hidden box
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
+    }, wrapRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const fullViewAssets = Array.isArray(caseStudy?.fullViewAssets)
     ? caseStudy.fullViewAssets
     : [];
@@ -40,29 +74,39 @@ export default function ShowcaseGrid({ caseStudy }) {
   };
 
   return (
-    <section className="w-full">
+    <section ref={wrapRef} className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
         {/* 1 */}
         <div className={`w-full overflow-hidden ${topCollapsed ? "md:col-span-2 aspect-video" : "aspect-square"}`}>
-          <Image
-            width={1000}
-            height={1000}
-            src={topLeft}
-            alt={`${caseStudyTitle} — showcase image 1`}
-            className="w-full h-full object-cover"
-          />
+          <div
+            ref={(el) => { mediaRefs.current[0] = el; }}
+            className="w-full h-full will-change-transform"
+          >
+            <Image
+              width={1000}
+              height={1000}
+              src={topLeft}
+              alt={`${caseStudyTitle} — showcase image 1`}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
 
         {/* 2 */}
         {!topCollapsed ? (
           <div className="w-full aspect-square overflow-hidden">
-            <Image
-              width={1000}
-              height={1000}
-              src={topRight}
-              alt={`${caseStudyTitle} — showcase image 2`}
-              className="w-full h-full object-cover"
-            />
+            <div
+              ref={(el) => { mediaRefs.current[1] = el; }}
+              className="w-full h-full will-change-transform"
+            >
+              <Image
+                width={1000}
+                height={1000}
+                src={topRight}
+                alt={`${caseStudyTitle} — showcase image 2`}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         ) : null}
 
@@ -86,46 +130,66 @@ export default function ShowcaseGrid({ caseStudy }) {
         </div>
         {/* 3 */}
         <div className="w-full aspect-4/5 overflow-hidden">
-          <Image
-            width={1000}
-            height={1000}
-            src={middleImage}
-            alt={`${caseStudyTitle} — showcase image ${topCollapsed ? 2 : 3}`}
-            className="w-full h-full object-cover"
-          />
+          <div
+            ref={(el) => { mediaRefs.current[2] = el; }}
+            className="w-full h-full will-change-transform"
+          >
+            <Image
+              width={1000}
+              height={1000}
+              src={middleImage}
+              alt={`${caseStudyTitle} — showcase image ${topCollapsed ? 2 : 3}`}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
 
         {/* 4 */}
         {count === 3 ? (
           <div className="w-full md:col-span-2 aspect-video overflow-hidden">
-            <Image
-              width={1000}
-              height={1000}
-              src={bottomFullForThree}
-              alt={`${caseStudyTitle} — showcase image 4`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ) : count >= 4 ? (
-          bottomCollapsed ? (
-            <div className="w-full md:col-span-2 aspect-video overflow-hidden">
+            <div
+              ref={(el) => { mediaRefs.current[3] = el; }}
+              className="w-full h-full will-change-transform"
+            >
               <Image
                 width={1000}
                 height={1000}
-                src={bottomRight}
+                src={bottomFullForThree}
                 alt={`${caseStudyTitle} — showcase image 4`}
                 className="w-full h-full object-cover"
               />
             </div>
+          </div>
+        ) : count >= 4 ? (
+          bottomCollapsed ? (
+            <div className="w-full md:col-span-2 aspect-video overflow-hidden">
+              <div
+                ref={(el) => { mediaRefs.current[3] = el; }}
+                className="w-full h-full will-change-transform"
+              >
+                <Image
+                  width={1000}
+                  height={1000}
+                  src={bottomRight}
+                  alt={`${caseStudyTitle} — showcase image 4`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           ) : (
             <div className="w-full aspect-square overflow-hidden">
-              <Image
-                width={1000}
-                height={1000}
-                src={bottomLeft}
-                alt={`${caseStudyTitle} — showcase image 4`}
-                className="w-full h-full object-cover"
-              />
+              <div
+                ref={(el) => { mediaRefs.current[3] = el; }}
+                className="w-full h-full will-change-transform"
+              >
+                <Image
+                  width={1000}
+                  height={1000}
+                  src={bottomLeft}
+                  alt={`${caseStudyTitle} — showcase image 4`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           )
         ) : null}
@@ -133,13 +197,18 @@ export default function ShowcaseGrid({ caseStudy }) {
         {/* 5 */}
         {count === 5 ? (
           <div className="w-full aspect-square overflow-hidden">
-            <Image
-              width={1000}
-              height={1000}
-              src={bottomRight}
-              alt={`${caseStudyTitle} — showcase image 5`}
-              className="w-full h-full object-cover"
-            />
+            <div
+              ref={(el) => { mediaRefs.current[4] = el; }}
+              className="w-full h-full will-change-transform"
+            >
+              <Image
+                width={1000}
+                height={1000}
+                src={bottomRight}
+                alt={`${caseStudyTitle} — showcase image 5`}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         ) : null}
       </div>

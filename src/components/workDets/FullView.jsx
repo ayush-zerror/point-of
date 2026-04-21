@@ -1,8 +1,40 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
 import ShowcaseGrid from "./ShowcaseGrid";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const FullView = ({ caseStudy }) => {
+  const heroWrapRef = useRef(null);
+  const heroMediaRef = useRef(null);
+
+  useEffect(() => {
+    if (!heroWrapRef.current || !heroMediaRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        heroMediaRef.current,
+        { yPercent: -8 },
+        {
+          yPercent: 8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroWrapRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    }, heroWrapRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const fullViewAssets = Array.isArray(caseStudy?.fullViewAssets)
     ? caseStudy.fullViewAssets
     : [];
@@ -13,14 +45,16 @@ const FullView = ({ caseStudy }) => {
   return (
     <section className="w-full space-y-20 md:space-y-28">
       {/* IMAGE */}
-      <div className="relative w-full h-auto md:h-screen overflow-hidden">
-        <Image
-          width={1000}
-          height={1000}
-          src={heroImage}
-          alt={`${caseStudyTitle} — hero image`}
-          className="w-full h-full object-cover"
-        />
+      <div ref={heroWrapRef} className="relative w-full h-auto md:h-screen overflow-hidden">
+        <div ref={heroMediaRef} className="w-full h-full will-change-transform">
+          <Image
+            width={1000}
+            height={1000}
+            src={heroImage}
+            alt={`${caseStudyTitle} — hero image`}
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
 
       {/* CONTENT */}
