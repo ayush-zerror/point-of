@@ -8,6 +8,13 @@ import { vacancies } from '@/helper/vacancies'
 import HashScrollToId from "@/components/common/HashScrollToId"
 import caseStudyData from "@/helper/case-study"
 
+export const metadata = {
+  title: "Connect",
+  description: "Start a conversation with Point Of. Contact, vacancies, and updates.",
+  keywords: ["Point Of", "Contact", "Connect", "Start a conversation", "Design studio", "Mumbai"],
+  alternates: { canonical: "/connect" },
+};
+
 
 
 const Connect = () => {

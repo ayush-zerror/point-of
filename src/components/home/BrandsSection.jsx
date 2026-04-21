@@ -53,7 +53,7 @@ const BrandsSection = () => {
                   width={100}
                   height={100}
                   src={src}
-                  alt="Brand logo"
+                  alt={`Brand logo ${idx + 1}`}
                   className="max-h-full max-w-full object-contain grayscale brightness-0 invert"
                 />
               </div>

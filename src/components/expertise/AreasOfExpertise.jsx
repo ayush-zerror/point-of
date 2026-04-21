@@ -86,6 +86,7 @@ const AreasOfExpertise = () => {
                 <Link
                   href={`/expertise/${section.slug}`}
                   className="inline-block"
+                  title={section.title}
                 >
                   <h3 className="uppercase heading-md text-subheading mb-3 sm:mb-4 md:mb-6 hover:opacity-80 transition-opacity duration-200">
                     {section.expertise}
@@ -104,7 +105,7 @@ const AreasOfExpertise = () => {
                   ))}
                 </ul>
 
-                <Link href={`/expertise/${section.slug}`}>
+                <Link href={`/expertise/${section.slug}`} title={`Know more about ${section.expertise}`}>
                   <Button title="KNOW MORE" />
                 </Link>
               </div>

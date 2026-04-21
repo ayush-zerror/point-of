@@ -8,6 +8,7 @@ const FullView = ({ caseStudy }) => {
     : [];
 
   const heroImage = fullViewAssets?.[0] ?? caseStudy?.coverImage ?? "";
+  const caseStudyTitle = caseStudy?.title || caseStudy?.name || "Case study";
 
   return (
     <section className="w-full space-y-20 md:space-y-28">
@@ -17,7 +18,7 @@ const FullView = ({ caseStudy }) => {
           width={1000}
           height={1000}
           src={heroImage}
-          alt="full"
+          alt={`${caseStudyTitle} — hero image`}
           className="w-full h-full object-cover"
         />
       </div>

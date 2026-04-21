@@ -150,7 +150,7 @@ const GetInTouch = () => {
       <div className="h-full flex items-center">
         <div className="w-full px-4 sm:px-6 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem] md:pr-20 py-2">
 
-          <h1 className="heading-xl mb-8">Get in touch</h1>
+          <h2 className="heading-xl mb-8">Get in touch</h2>
 
           <form
             onSubmit={handleSubmit(onValidSubmit, onError)}
@@ -313,7 +313,9 @@ const GetInTouch = () => {
             />
             <p className="text-xs sm:text-sm text-gray-600 mt-4 md:mt-6">
               By clicking connect you accept our{" "}
-              <a href="/privacy" className="underline">Privacy Policy</a>
+              <a href="/privacy" className="underline" title="Privacy Policy">
+                Privacy Policy
+              </a>
               <br />
               Prefer email? think@wearepointof.com
             </p>

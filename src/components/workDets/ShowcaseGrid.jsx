@@ -7,6 +7,7 @@ export default function ShowcaseGrid({ caseStudy }) {
   const fullViewAssets = Array.isArray(caseStudy?.fullViewAssets)
     ? caseStudy.fullViewAssets
     : [];
+  const caseStudyTitle = caseStudy?.title || caseStudy?.name || "Case study";
 
   // `FullView` uses index 0 as the hero image, so the grid starts from index 1.
   // ShowcaseGrid supports 3–5 images (excluding the hero).
@@ -47,7 +48,7 @@ export default function ShowcaseGrid({ caseStudy }) {
             width={1000}
             height={1000}
             src={topLeft}
-            alt=""
+            alt={`${caseStudyTitle} — showcase image 1`}
             className="w-full h-full object-cover"
           />
         </div>
@@ -59,7 +60,7 @@ export default function ShowcaseGrid({ caseStudy }) {
               width={1000}
               height={1000}
               src={topRight}
-              alt=""
+              alt={`${caseStudyTitle} — showcase image 2`}
               className="w-full h-full object-cover"
             />
           </div>
@@ -89,7 +90,7 @@ export default function ShowcaseGrid({ caseStudy }) {
             width={1000}
             height={1000}
             src={middleImage}
-            alt=""
+            alt={`${caseStudyTitle} — showcase image ${topCollapsed ? 2 : 3}`}
             className="w-full h-full object-cover"
           />
         </div>
@@ -101,7 +102,7 @@ export default function ShowcaseGrid({ caseStudy }) {
               width={1000}
               height={1000}
               src={bottomFullForThree}
-              alt=""
+              alt={`${caseStudyTitle} — showcase image 4`}
               className="w-full h-full object-cover"
             />
           </div>
@@ -112,7 +113,7 @@ export default function ShowcaseGrid({ caseStudy }) {
                 width={1000}
                 height={1000}
                 src={bottomRight}
-                alt=""
+                alt={`${caseStudyTitle} — showcase image 4`}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -122,7 +123,7 @@ export default function ShowcaseGrid({ caseStudy }) {
                 width={1000}
                 height={1000}
                 src={bottomLeft}
-                alt=""
+                alt={`${caseStudyTitle} — showcase image 4`}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -136,7 +137,7 @@ export default function ShowcaseGrid({ caseStudy }) {
               width={1000}
               height={1000}
               src={bottomRight}
-              alt=""
+              alt={`${caseStudyTitle} — showcase image 5`}
               className="w-full h-full object-cover"
             />
           </div>

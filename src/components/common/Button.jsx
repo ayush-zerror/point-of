@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 
 const isHexColor = (v) => typeof v === "string" && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v);
 
@@ -59,12 +60,23 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
   return (
     <div className={`mt-10 z-20 relative ${className}`}>
       {href ? (
-        <a
-          href={href}
-          className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase"
-        >
-          {inner}
-        </a>
+        href.startsWith("/") ? (
+          <Link
+            href={href}
+            className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase"
+            title={title}
+          >
+            {inner}
+          </Link>
+        ) : (
+          <a
+            href={href}
+            className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase"
+            title={title}
+          >
+            {inner}
+          </a>
+        )
       ) : (
         <button
           onClick={handleClick}

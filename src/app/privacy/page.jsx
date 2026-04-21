@@ -1,5 +1,13 @@
 import React from "react";
 
+export const metadata = {
+  title: "Privacy Policy",
+  description: "Privacy policy and cookie information for Point Of.",
+  keywords: ["Point Of", "Privacy Policy", "Cookies", "Data protection"],
+  alternates: { canonical: "/privacy" },
+  robots: { index: true, follow: true },
+};
+
 const Privacy = () => {
   return (
     <div className="min-h-screen  px-6 md:px-20 lg:px-40 pt-32 pb-16">

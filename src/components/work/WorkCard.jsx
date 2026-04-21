@@ -7,6 +7,7 @@ const WorkCard = ({ slug, title, image, video }) => {
         <Link
             href={`/work/${slug}`}
             className="work-card relative  group block min-w-[300px] md:min-w-[400px]"
+            title={title}
         >
             <div className="absolute -top-8 left-0 overflow-hidden z-10">
                 <span className="inline-block origin-left translate-y-full rotate-10 group-hover:translate-y-0 group-hover:rotate-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base tracking-wide">

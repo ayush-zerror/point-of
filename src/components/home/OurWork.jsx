@@ -209,7 +209,11 @@ export default function OurWork() {
 
           {/* BUTTON */}
           <div className="min-w-[300px] md:min-w-[400px] flex items-center justify-center ml-40">
-            <Link href="/work" className="group cursor-pointer flex items-center gap-3 text-sm font-semibold uppercase tracking-wide">
+            <Link
+              href="/work"
+              className="group cursor-pointer flex items-center gap-3 text-sm font-semibold uppercase tracking-wide"
+              title="View all work"
+            >
 
               {/* BUTTON CIRCLE */}
               <span

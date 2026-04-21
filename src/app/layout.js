@@ -8,11 +8,82 @@ import localFont from "next/font/local";
 import ToasterProvider from "@/components/common/ToasterProvider";
 
 export const metadata = {
-  title: "Point Of — Global Brand & Strategic Design Consultancy",
-  description: "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+  metadataBase: new URL("https://www.wearepointof.com"),
+  title: {
+    default: "Point Of — Global Brand & Strategic Design Consultancy",
+    template: "%s — Point Of",
+  },
+  description:
+    "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+  keywords: [
+    "Point Of",
+    "Brand strategy",
+    "Branding",
+    "Design consultancy",
+    "Strategic design",
+    "Visual identity",
+    "Web design",
+    "Web development",
+    "Digital products",
+    "Mumbai",
+    "India",
+  ],
+  authors: [{ name: "Point Of", url: "https://www.wearepointof.com" }],
+  creator: "Point Of",
+  publisher: "Point Of",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [{ url: "/favicon.jpg", type: "image/jpeg" }],
     apple: [{ url: "/favicon.jpg", type: "image/jpeg" }],
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Point Of",
+    url: "/",
+    title: "Point Of — Where brands are made, shaped, and set in motion",
+    description:
+      "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+    locale: "en_US",
+    images: [
+      {
+        url: "/favicon.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Point Of",
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Point Of — Where brands are made, shaped, and set in motion",
+    description:
+      "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+    images: [
+      {
+        url: "/favicon.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Point Of",
+      },
+    ],
   },
 };
 

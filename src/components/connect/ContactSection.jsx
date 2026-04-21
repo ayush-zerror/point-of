@@ -58,9 +58,9 @@ const ContactSection = () => {
               {/* Email */}
               <div className="mb-10 sm:mb-12 md:mb-16">
                 <p className="para text-desc mb-3 md:mb-2">Email</p>
-                <h1 className="heading-xl text-subheading">
+                <h2 className="heading-xl text-subheading">
                   think@wearepointof.com
-                </h1>
+                </h2>
               </div>
 
               {/* Bottom Grid */}

@@ -7,6 +7,13 @@ import CTASection from '@/components/home/CTASection'
 import { faqs } from '@/helper/faqs'
 import React from 'react'
 
+export const metadata = {
+  title: "Expertise",
+  description: "Brand strategy, design, and digital expertise — how Point Of works.",
+  keywords: ["Point Of", "Expertise", "Brand strategy", "Visual identity", "Web design", "Web development"],
+  alternates: { canonical: "/expertise" },
+};
+
 const Expertise = () => {
   return (
     <>

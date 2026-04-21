@@ -8,13 +8,13 @@ export default function NotFound() {
     <main className="h-[80vh] bg-background text-foreground px-6 sm:px-10 md:px-20 ">
       <div className="h-full border-b border-neutral-700 flex items-center justify-center text-center">
         <div className="max-w-3xl">
-          <p className="text-xs sm:text-sm tracking-[0.22em] text-foreground/60 uppercase">
+          <span className="text-xs sm:text-sm tracking-[0.22em] text-foreground/60 uppercase">
             404 — page not found
-          </p>
+          </span>
 
-          <h1 className="mt-5 heading-xl text-heading">
+          <h2 className="mt-5 heading-xl text-heading">
             That page drifted out of orbit.
-          </h1>
+          </h2>
 
           <p className="mt-4 para text-desc mx-auto max-w-2xl">
             The link might be broken, or the page may have moved. Here are a few quick ways to get

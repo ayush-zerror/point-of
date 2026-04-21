@@ -33,6 +33,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 className={`group block w-fit heading-xl uppercase font-heading font-extralight tracking-tight cursor-pointer transition-transform duration-200 hover:translate-x-2 ${
                   pathname === item.href ? "text-heading" : "text-desc"
                 }`}
+                title={item.name}
               >
                 <span className="nav-item  relative inline-block">
                   {item.name}
@@ -64,6 +65,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
                 className="text-xs sm:text-sm text-foreground/50 hover:text-foreground cursor-pointer transition-colors duration-200"
+                title={item.name}
               >
                 {item.name}
               </a>
@@ -81,6 +83,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 key={item.label}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
+                title={item.label}
               >
                 <Button title={item.label} className="mt-0!" />
               </Link>

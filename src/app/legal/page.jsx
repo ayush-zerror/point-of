@@ -1,5 +1,13 @@
 import React from "react";
 
+export const metadata = {
+  title: "Legal",
+  description: "Legal terms for Point Of and use of wearepointof.com.",
+  keywords: ["Point Of", "Legal", "Terms", "Website terms"],
+  alternates: { canonical: "/legal" },
+  robots: { index: true, follow: true },
+};
+
 const Legal = () => {
   return (
     <div className="min-h-screen  px-6 md:px-20 lg:px-40 pt-32 pb-16">

@@ -95,6 +95,7 @@ const HeroSection = ({
   title = "",
   btntitle = "",
   onClick = () => {},
+  href = "",
   imgClass = "",
   clockCountry = "",
   clockTimeZone = "",
@@ -168,7 +169,7 @@ const HeroSection = ({
           width={1000}
           height={1000}
           src={bgImage}
-          alt="background"
+          alt={typeof title === "string" && title.trim() ? title : "Point Of background image"}
           className={`absolute invert-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover ${imgClass}`}
           priority
         />
@@ -194,7 +195,7 @@ const HeroSection = ({
             {title}
           </h2>
 
-          <Button title={btntitle} onClick={onClick} />
+          <Button title={btntitle} onClick={onClick} href={href} />
         </div>
       </div>
     </div>

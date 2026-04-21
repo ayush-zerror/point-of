@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Experience from "@/components/about/Experience";
 import FoundersSection from "@/components/about/FoundersSection";
@@ -6,7 +5,14 @@ import GridSection from "@/components/about/GridSection";
 import HeroSection from "@/components/about/HeroSection";
 import PlaceToWork from "@/components/about/PlaceToWork";
 import OurValues from "@/components/about/OurValues";
-import { useRouter } from "next/navigation";
+
+export const metadata = {
+  title: "About",
+  description:
+    "Point Of is an independent brand & strategic design consultancy. Meet the studio, our values, and the people behind the work.",
+  keywords: ["Point Of", "About", "Design studio", "Brand strategy", "Mumbai", "Consultancy"],
+  alternates: { canonical: "/about" },
+};
 
 const experienceData = [
   {
@@ -128,7 +134,6 @@ const cultureValues = [
 
 
 const Studio = () => {
-  const router = useRouter();
   return (
     <>
       <HeroSection
@@ -141,9 +146,7 @@ const Studio = () => {
           </>
         }
         btntitle={"OUR BRANDS"}
-        onClick={() => {
-          router.push("/brands");
-        }}
+        href="/brands"
         enableBgParallax={true}
         enableTextParallax={true}
       />

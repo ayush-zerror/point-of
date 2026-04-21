@@ -8,6 +8,7 @@ const Overview = ({ caseStudy }) => {
   const overviewAssets = Array.isArray(caseStudy?.overviewAssets)
     ? caseStudy.overviewAssets
     : [];
+  const caseStudyTitle = caseStudy?.title || caseStudy?.name || "Case study";
 
   const count = overviewAssets.length;
 
@@ -57,7 +58,7 @@ const Overview = ({ caseStudy }) => {
               <Image
                 width={1000}
                 height={1000}
-                alt=""
+                alt={`${caseStudyTitle} — overview image ${index + 1}`}
                 src={src ?? ""}
                 className={`w-full object-cover ${single ? "h-1/2" : "h-full"}`}
               />

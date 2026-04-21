@@ -656,6 +656,7 @@ const WorkSection = ({ projects }) => {
               href={`/work/${project.slug}`}
               className={`absolute inset-0 block ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
               aria-label={`Open ${project.name}`}
+              title={`Open ${project.name}`}
             >
               <Image
                 width={1000}

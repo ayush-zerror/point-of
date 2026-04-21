@@ -13,10 +13,10 @@ export default function Footer() {
           
           {/* LOGO */}
           <div>
-            <Link href="/" className="flex items-start">
+            <Link href="/" className="flex items-start" title="Go to homepage">
               <Image
                 src="/logo/po-logo.png"
-                alt="logo"
+                alt="Point Of logo"
                 width={120}
                 height={40}
                 className="h-12 sm:h-14 w-auto object-contain"
@@ -40,6 +40,7 @@ export default function Footer() {
                   key={item.name}
                   href={item.href}
                   className="block hover:opacity-60 transition"
+                  title={item.name}
                 >
                   {item.name}
                 </Link>
@@ -68,6 +69,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block hover:opacity-60 transition"
+                  title={item.name}
                 >
                   {item.name}
                 </a>
@@ -92,6 +94,7 @@ export default function Footer() {
                 <a
                   href="mailto:think@wearepointof.com"
                   className="font-medium hover:underline"
+                  title="Email Point Of"
                 >
                   think@wearepointof.com
                 </a>
@@ -105,11 +108,11 @@ export default function Footer() {
         <div className="border-t border-neutral-700 mt-10 md:mt-12 py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm">
           
           <div className="flex flex-wrap gap-3 md:gap-4 text-neutral-400">
-            <Link href="/privacy" className="hover:text-white transition">
+            <Link href="/privacy" className="hover:text-white transition" title="Privacy Policy">
               Privacy
             </Link>
             <span>•</span>
-            <Link href="/legal" className="hover:text-white transition">
+            <Link href="/legal" className="hover:text-white transition" title="Legal">
               Legal
             </Link>
           </div>

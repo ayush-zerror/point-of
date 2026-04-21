@@ -316,7 +316,7 @@ export default function Expertise() {
 
           {/* LEFT */}
           <div className="w-1/2 flex flex-col justify-between">
-            <h1 className="heading-xl text-heading">Expertise</h1>
+            <h2 className="heading-xl text-heading">Expertise</h2>
             <div>
               <Button title="Explore our expertise" onClick={() => {
                 router.push("/expertise");
@@ -344,6 +344,7 @@ export default function Expertise() {
                     <Link
                       href={`/expertise/${item.slug}`}
                       className={`block text-left hover:text-heading cursor-pointer heading-lg transition-colors duration-300 ${isActive ? "text-subheading" : "text-desc"}`}
+                      title={item.title}
                     >
                       {item.title}
                     </Link>

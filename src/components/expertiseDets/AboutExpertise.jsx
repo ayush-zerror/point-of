@@ -100,6 +100,7 @@ const AboutExpertise = ({
                       key={x.slug}
                       href={`/expertise/${x.slug}`}
                       className="group inline-flex items-center rounded-full border border-white/15 px-4 py-2 text-sm tracking-wide text-desc/90 transition-colors duration-200 hover:border-white/30 hover:bg-white/5"
+                      title={x.expertise}
                     >
                       <span className="whitespace-nowrap">{x.expertise}</span>
                       <span className="ml-2 opacity-60 transition-opacity duration-200 group-hover:opacity-100">

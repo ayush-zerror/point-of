@@ -195,6 +195,7 @@ export default function Navbar() {
               className="flex items-center"
               onClick={() => setMenuOpen(false)}
               ref={logoRef}
+              title="Go to homepage"
             >
               {/* P */}
               <div ref={refP} className="relative shrink-0">
