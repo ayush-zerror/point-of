@@ -5,6 +5,7 @@ import GridSection from "@/components/about/GridSection";
 import HeroSection from "@/components/about/HeroSection";
 import PlaceToWork from "@/components/about/PlaceToWork";
 import OurValues from "@/components/about/OurValues";
+import CTASection from "@/components/home/CTASection";
 
 export const metadata = {
   title: "About",
@@ -17,7 +18,13 @@ export const metadata = {
 const experienceData = [
   {
     title: "5+ Years in Business",
-    desc: "Founded in 2019 by Piran Tarapore and Pearl Jain, Point Of began with a simple idea: design that inspires connection. Five years on, we continue to evolve—curious, adaptive, and always pushing to create brands that not only stand the test of time but define what’s next.",
+    desc: <>
+      Point Of was founded in 2019 by Piran Tarapore and Pearl Jain — with a belief that design is most powerful when it starts with a question, not an answer.
+      <br />
+      <br />
+      Born in Mumbai, grown across three continents, we've spent six years building a consultancy that doesn't just create brands — it grows with them. From the first naming session to the hundredth campaign, we stay in the room.
+
+    </>,
   },
   {
     title: "100% Independent",
@@ -32,7 +39,7 @@ const foundersData = [
   {
     name: "Piran Tarapore",
     role: "CO-FOUNDER & MANAGING DIRECTOR",
-    desc: "Piran Tarapore is a strategic thinker & marketing specialist with a passion for building brands that resonate. He drives business growth, marketing strategy, & brand positioning for partners across industries.",
+    desc: "Piran builds bridges — between a brand's ambition and the market it is trying to reach, between people who should be in the same room but aren't, between the problem as presented and the one that actually needs solving.\n\nAt Point Of, he leads all things business, strategy, partnerships and growth. He has worked alongside over a hundred brands across industries — and is usually the first call a founder makes when something needs to shift.",
     image: "/about/piran.png",
     objectPosition: "object-[50%_10%]",
     buttonText: "CONNECT",
@@ -41,7 +48,7 @@ const foundersData = [
   {
     name: "Pearl Jain",
     role: "CO-FOUNDER & CREATIVE DIRECTOR",
-    desc: "Pearl Jain is a visionary product designer, creative strategist and artist, currently based in Barcelona. She leads the studio’s efforts in creating brand experiences that are both innovative & culturally relevant.",
+    desc: "Pearl leads all things creative at Point Of — identity, experience, motion, interaction, and the frontier where design meets emerging technology. Her practice spans art, product design, and interaction design, shaped by a restless curiosity about how things are made and why they matter.\n\nBased in Barcelona, she leads the studio's European creative presence — bringing a rigour and range to the work that comes from treating design as both a discipline and an art form.",
     image: "/about/pearl.webp",
     objectPosition: "object-[50%_25%]",
     buttonText: "CONNECT",
@@ -54,18 +61,17 @@ const transformData = [
     title: "Empower",
     desc: (
       <>
-        Design and develop <br />
-        an industry leading product.
+        We give brands the tools, language, and confidence to stand on their own.
       </>
     ),
     video: "/about/1.mp4",
   },
   {
-    title: "Procreate",
+    title: "Originate",
     desc: (
       <>
-        Focus, prioritize, and turn <br /> your product
-        into a category leader.
+        We build from nothing — finding the idea at the root that makes everything else make sense.
+
       </>
     ),
     video: "/about/2.mp4",
@@ -74,8 +80,7 @@ const transformData = [
     title: "Optimization",
     desc: (
       <>
-        Take your vision from <br /> concept
-        to creation.
+        We sharpen what exists. Better decisions, cleaner systems, less friction.
       </>
     ),
     video: "/about/3.mp4",
@@ -84,8 +89,7 @@ const transformData = [
     title: "Pivot",
     desc: (
       <>
-        Guiding your brand to metamorphosize,<br />
-        accept and adjust to change.
+        We help brands move when staying still is the greater risk.
       </>
     ),
     video: "/about/4.mp4",
@@ -94,8 +98,7 @@ const transformData = [
     title: "Reposition",
     desc: (
       <>
-        Equip teams, create processes,<br />
-        and futureproof your organization.
+        We reframe how a brand is seen — in the market, in culture, in people's minds.
       </>
     ),
     video: "/about/5.mp4",
@@ -104,8 +107,7 @@ const transformData = [
     title: "Propel",
     desc: (
       <>
-        Guided processes for dialogue,<br />
-        strategy and innovation.
+        We accelerate brands that are ready to lead their category.
       </>
     ),
     video: "/about/6.mp4",
@@ -156,6 +158,7 @@ const Studio = () => {
 
       <GridSection
         title="How we transform brands?"
+        intro="Six ways we think about work — and what we do to brands that are ready for change."
         data={transformData}
       />
       <OurValues />
@@ -167,6 +170,13 @@ const Studio = () => {
           </>
         }
         data={cultureValues}
+      />
+      <CTASection
+        heading={<>Every brand has a moment that defines it.
+          <br />
+          We are the studio that finds it, builds it, <br /> and stays for what comes next.
+        </>}
+        buttonTitle={"Let's find yours"}
       />
     </>
   );

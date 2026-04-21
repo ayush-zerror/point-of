@@ -73,9 +73,13 @@ const FoundersSection = ({ data }) => {
                 {item.role}
               </p>
 
-              <p className="para text-desc">
-                {item.desc}
-              </p>
+              <div className="para text-desc space-y-4">
+                {String(item.desc ?? "")
+                  .split(/\n\s*\n/)
+                  .map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+              </div>
 
               <ArrowButton title={item.buttonText || "CONNECT"} link={item.link} />
             </div>

@@ -47,8 +47,7 @@ const PlaceToWork = () => {
           </h2>
 
           <p className="heading-lg text-desc max-w-[900px]">
-            We know brands, we know design. <br />
-            Our experience spans a combined 15 years.
+            Point Of was built by two people who see the same problem differently — which is exactly why it works.
           </p>
         </div>
       </div>

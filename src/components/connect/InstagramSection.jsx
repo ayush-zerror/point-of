@@ -6,6 +6,7 @@ import Button from "../common/Button";
 import WorkCard from "../work/WorkCard";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ArrowButton from "../common/ArrowButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +52,7 @@ const InstagramSection = ({ caseStudies }) => {
         <h2 className="heading-lg text-subheading">
           @wearepointof
         </h2>
-        <Button title={"FOLLOW"} />
+        <ArrowButton title={"FOLLOW"} link={"https://www.instagram.com/wearepointof/"} /> 
       </div>
 
       {/* Container */}

@@ -6,9 +6,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const circles = [
   { r: 347, cx: 1050, cy: 1650, label: "EVOLUTION",  pathId: "circlePath1", path: "M703,1650 A337,337 0 0,1 1397,1650" },
   { r: 497, cx: 1050, cy: 1500, label: "IMPACT",     pathId: "circlePath2", path: "M553,1500 A487,487 0 0,1 1547,1500" },
-  { r: 647, cx: 1050, cy: 1350, label: "CURIOSITY",  pathId: "circlePath3", path: "M403,1350 A637,637 0 0,1 1697,1350" },
-  { r: 797, cx: 1050, cy: 1200, label: "INNOVATION", pathId: "circlePath4", path: "M253,1200 A787,787 0 0,1 1847,1200" },
-  { r: 947, cx: 1050, cy: 1050, label: "CREATIVITY", pathId: "circlePath5", path: "M103,1050 A937,937 0 0,1 1997,1050" },
+  { r: 647, cx: 1050, cy: 1350, label: "CRAFT",      pathId: "circlePath3", path: "M403,1350 A637,637 0 0,1 1697,1350" },
+  { r: 797, cx: 1050, cy: 1200, label: "RIGOUR",     pathId: "circlePath4", path: "M253,1200 A787,787 0 0,1 1847,1200" },
+  { r: 947, cx: 1050, cy: 1050, label: "CURIOSITY",  pathId: "circlePath5", path: "M103,1050 A937,937 0 0,1 1997,1050" },
 ];
 
 function CircleItem({ circle, index, scrollYProgress }) {

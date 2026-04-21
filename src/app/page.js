@@ -38,7 +38,13 @@ const Home = () => {
       <OurWork />
       <Showreel />
       <BrandsSection />
-      <CTASection />
+      <CTASection
+        heading={<>Every brand has a moment that defines it.
+          <br />
+          We are the studio that finds it, builds it, <br /> and stays for what comes next.
+        </>}
+        buttonTitle={"Let's find yours"}
+      />
       {/* Center dot — always fixed at viewport center across all pages */}
       <CenterDot />
     </>
