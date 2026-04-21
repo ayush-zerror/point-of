@@ -1,10 +1,37 @@
 "use client";
 
-import { Send } from "lucide-react";
+import { Check, Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState("idle"); // idle | success | error
+
+  useEffect(() => {
+    if (newsletterStatus !== "success") return;
+    const t = setTimeout(() => {
+      setNewsletterStatus("idle")
+      setNewsletterEmail("");
+    }, 6000);
+    return () => clearTimeout(t);
+  }, [newsletterStatus]);
+
+  const isValidEmail = (value) => {
+    const v = String(value ?? "").trim();
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  };
+
+  const submitNewsletter = () => {
+    if (isValidEmail(newsletterEmail)) {
+      setNewsletterStatus("success");
+      // Minimal UX: keep the typed email, just show tick + message.
+      return;
+    }
+    setNewsletterStatus("error");
+  };
+
   return (
     <footer className="w-full bg-background relative">
       <div className="px-4 sm:px-10 md:px-16 lg:px-20 mx-auto pt-12 md:pt-16 lg:pt-30 ">
@@ -84,10 +111,39 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="Email*"
+                  value={newsletterEmail}
+                  onChange={(e) => {
+                    setNewsletterEmail(e.target.value);
+                    if (newsletterStatus !== "idle") setNewsletterStatus("idle");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      submitNewsletter();
+                    }
+                  }}
                   className="w-full bg-transparent outline-none py-2 pr-10 text-sm md:text-base placeholder:text-neutral-500"
                 />
-                <Send className="absolute right-0 top-1/2 -translate-y-1/2 w-5 h-5 opacity-70 cursor-pointer" />
+                <button
+                  type="button"
+                  onClick={submitNewsletter}
+                  className="absolute right-0 top-1/2 -translate-y-1/2"
+                  aria-label="Subscribe to newsletter"
+                  title="Subscribe"
+                >
+                  {newsletterStatus === "success" ? (
+                    <Check className="w-5 h-5 text-green-400" />
+                  ) : (
+                    <Send className="w-5 h-5 opacity-70" />
+                  )}
+                </button>
               </div>
+
+              {newsletterStatus === "success" ? (
+                <p className="text-xs text-green-400">Saved</p>
+              ) : newsletterStatus === "error" ? (
+                <p className="text-xs text-red-400">Please enter a valid email</p>
+              ) : null}
 
               <div className="text-sm">
                 <p className="text-neutral-400">Partner with us</p>
