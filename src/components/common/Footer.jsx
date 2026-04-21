@@ -34,7 +34,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-background relative">
-      <div className="px-4 sm:px-10 md:px-16 lg:px-20 mx-auto pt-12 md:pt-16 lg:pt-30 ">
+      <div className="px-4 sm:px-10 md:px-12 lg:px-20 mx-auto pt-12 md:pt-16 lg:pt-30 ">
         
         <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-0">
           
@@ -46,61 +46,64 @@ export default function Footer() {
                 alt="Point Of logo"
                 width={120}
                 height={40}
-                className="h-12 sm:h-14 w-auto object-contain"
+                className="h-12 sm:h-14 md:h-14 w-auto object-contain"
               />
             </Link>
           </div>
 
           {/* 🔥 RIGHT SIDE WRAPPER */}
-          <div className="flex flex-col sm:flex-row flex-wrap gap-10 sm:gap-16 md:gap-24 lg:gap-28">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-10 sm:gap-16 md:flex-nowrap md:gap-12 lg:gap-28">
             
-            {/* NAV LINKS */}
-            <div className="space-y-3 para text-subheading tracking-wide w-fit">
-              {[
-                { name: "ABOUT", href: "/about" },
-                { name: "WORK", href: "/work" },
-                { name: "EXPERTISE", href: "/expertise" },
-                { name: "BRANDS", href: "/brands" },
-                { name: "CONNECT", href: "/connect" },
-              ].map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block hover:opacity-60 transition"
-                  title={item.name}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+            {/* NAV + SOCIAL (side-by-side on mobile) */}
+            <div className="grid grid-cols-2 gap-10 sm:flex sm:flex-row sm:flex-wrap sm:gap-16 md:flex-nowrap md:gap-12 lg:gap-28">
+              {/* NAV LINKS */}
+              <div className="space-y-3 para text-subheading tracking-wide">
+                {[
+                  { name: "ABOUT", href: "/about" },
+                  { name: "WORK", href: "/work" },
+                  { name: "EXPERTISE", href: "/expertise" },
+                  { name: "BRANDS", href: "/brands" },
+                  { name: "CONNECT", href: "/connect" },
+                ].map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block hover:opacity-60 transition"
+                    title={item.name}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
 
-            {/* SOCIAL LINKS */}
-            <div className="space-y-3 para text-subheading w-fit">
-              {[
-                {
-                  name: "INSTAGRAM",
-                  href: "https://instagram.com/wearepointof",
-                },
-                {
-                  name: "LINKEDIN",
-                  href: "https://linkedin.com/company/wearepointof",
-                },
-                {
-                  name: "BEHANCE",
-                  href: "https://www.behance.net/wearepointof",
-                },
-              ].map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:opacity-60 transition"
-                  title={item.name}
-                >
-                  {item.name}
-                </a>
-              ))}
+              {/* SOCIAL LINKS */}
+              <div className="space-y-3 para text-subheading">
+                {[
+                  {
+                    name: "INSTAGRAM",
+                    href: "https://instagram.com/wearepointof",
+                  },
+                  {
+                    name: "LINKEDIN",
+                    href: "https://linkedin.com/company/wearepointof",
+                  },
+                  {
+                    name: "BEHANCE",
+                    href: "https://www.behance.net/wearepointof",
+                  },
+                ].map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block hover:opacity-60 transition"
+                    title={item.name}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
             </div>
 
             {/* EMAIL SUBSCRIBE */}
@@ -161,7 +164,7 @@ export default function Footer() {
         </div>
 
         {/* DIVIDER */}
-        <div className="border-t border-neutral-700 mt-10 md:mt-12 py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm">
+        <div className="border-t border-neutral-700 mt-10 md:mt-12 py-6 flex flex-row justify-between items-start md:items-center gap-4 text-sm">
           
           <div className="flex flex-wrap gap-3 md:gap-4 text-neutral-400">
             <Link href="/privacy" className="hover:text-white transition" title="Privacy Policy">
