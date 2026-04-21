@@ -6,7 +6,9 @@ const caseStudy = [
         gist: "Bridging Mexico and India.",
 
         services: ["Brand Strategy", "Visual Identity", "Packaging"],
-        filters: ["Branding", "Packaging"],
+        filtersServices: ["Branding", "Packaging"],
+        filtersIndustry: ["Fashion", "Technology"],
+        filtersYear: "2025",
         about: `Contigo is a premium tequila built on the belief that two vibrant cultures share more than they realise. The name means "with you" in Spanish—a promise of togetherness that resonates across borders. We created a brand identity and packaging system that honours both: small-batch highland agave craftsmanship, and the bold warmth of Indian celebration, resulting in a spirit that brings people together through shared moments of joy.`,
 
         challenge: {
@@ -53,7 +55,9 @@ const caseStudy = [
         gist: "Bridging Mexico and India.",
 
         services: ["Brand Strategy", "Visual Identity", "Packaging"],
-        filters: ["Branding", "Packaging"],
+        filtersServices: ["Web Design", "Web Development"],
+        filtersIndustry: ["Architecture", "Entertainment"],
+        filtersYear: "2020",
         about: `Contigo is a premium tequila built on the belief that two vibrant cultures share more than they realise. The name means "with you" in Spanish—a promise of togetherness that resonates across borders. We created a brand identity and packaging system that honours both: small-batch highland agave craftsmanship, and the bold warmth of Indian celebration, resulting in a spirit that brings people together through shared moments of joy.`,
 
         challenge: {
@@ -98,7 +102,9 @@ const caseStudy = [
         gist: "Bridging Mexico and India.",
 
         services: ["Brand Strategy", "Visual Identity", "Packaging"],
-        filters: ["Branding", "Packaging"],
+        filtersServices: ["Branding", "Packaging"],
+        filtersIndustry: ["Branding", "Packaging"],
+        filtersYear: "2002",
         about: `Contigo is a premium tequila built on the belief that two vibrant cultures share more than they realise. The name means "with you" in Spanish—a promise of togetherness that resonates across borders. We created a brand identity and packaging system that honours both: small-batch highland agave craftsmanship, and the bold warmth of Indian celebration, resulting in a spirit that brings people together through shared moments of joy.`,
 
         challenge: {
@@ -143,7 +149,9 @@ const caseStudy = [
         gist: "Bridging Mexico and India.",
 
         services: ["Brand Strategy", "Visual Identity", "Packaging"],
-        filters: ["Branding", "Packaging"],
+        filtersServices: ["Branding", "Packaging"],
+        filtersIndustry: ["Branding", "Packaging"],
+        filtersYear: "2025",
         about: `Contigo is a premium tequila built on the belief that two vibrant cultures share more than they realise. The name means "with you" in Spanish—a promise of togetherness that resonates across borders. We created a brand identity and packaging system that honours both: small-batch highland agave craftsmanship, and the bold warmth of Indian celebration, resulting in a spirit that brings people together through shared moments of joy.`,
 
         challenge: {
@@ -188,7 +196,9 @@ const caseStudy = [
         gist: "Bridging Mexico and India.",
 
         services: ["Brand Strategy", "Visual Identity", "Packaging"],
-        filters: ["Branding", "Packaging"],
+        filtersServices: ["Branding", "Packaging"],
+        filtersIndustry: ["Branding", "Packaging"],
+        filtersYear: "2025",
         about: `Contigo is a premium tequila built on the belief that two vibrant cultures share more than they realise. The name means "with you" in Spanish—a promise of togetherness that resonates across borders. We created a brand identity and packaging system that honours both: small-batch highland agave craftsmanship, and the bold warmth of Indian celebration, resulting in a spirit that brings people together through shared moments of joy.`,
 
         challenge: {

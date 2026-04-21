@@ -156,9 +156,48 @@ body {
 }
 
 
+.filter-ul li{
+  position: relative;
+}
+.filter-ul li:after{
+  width: 0;
+  height: 1px;
+  background-color: var(--color-heading);
+  transition: width 0.3s ease;
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 
+.filter-ul li:hover:after{
+  width: 100%;
+}
 
+.filter-ul li:before{
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-heading);
+  transition: all 0.3s ease;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: -8px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  opacity: 0;
+}
 
+.filter-ul li.active:before{
+  opacity: 1;
+}
+.filter-ul li.active:after{
+  width: 100%;
+}
 
-
+.filter-ul:has(li.active) li:not(.active){
+  color: var(--color-desc);
+}
 

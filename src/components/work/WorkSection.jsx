@@ -6,6 +6,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import GridButton from '../common/GridButton';
 import WorkCard from './WorkCard';
 import { Spiral as Hamburger } from "hamburger-react";
+import caseStudy from '../../helper/case-study';
 
 // clip-path constants — exact values from vanilla JS
 const CLIP_VISIBLE = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
@@ -52,6 +53,32 @@ const WorkSection = ({ projects }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGridOpen, setIsGridOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [activeFilters, setActiveFilters] = useState(() => ({
+    services: new Set(),
+    industry: new Set(),
+    year: new Set(),
+  }));
+
+  const filterOptions = useMemo(() => {
+    const uniq = (arr) => [...new Set(arr.filter(Boolean).map((v) => String(v).trim()).filter(Boolean))];
+
+    const services = uniq(caseStudy.flatMap((p) => (Array.isArray(p?.filtersServices) ? p.filtersServices : [])));
+    const industry = uniq(caseStudy.flatMap((p) => (Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : [])));
+    const years = uniq(caseStudy.map((p) => p?.filtersYear));
+
+    const sortedYears = years.sort((a, b) => {
+      const na = Number(a);
+      const nb = Number(b);
+      if (Number.isFinite(na) && Number.isFinite(nb)) return nb - na; // newest first
+      return b.localeCompare(a);
+    });
+
+    return {
+      services: services.sort((a, b) => a.localeCompare(b)),
+      industry: industry.sort((a, b) => a.localeCompare(b)),
+      year: sortedYears,
+    };
+  }, []);
 
   const pad2 = (n) => String(n).padStart(2, "0");
 
@@ -89,6 +116,51 @@ const WorkSection = ({ projects }) => {
   }, [isFilterOpen]);
 
   const toggleFilter = () => setIsFilterOpen((v) => !v);
+
+  const toggleFilterItem = (group, value) => {
+    setActiveFilters((prev) => {
+      const nextGroup = new Set(prev[group]);
+      if (nextGroup.has(value)) nextGroup.delete(value);
+      else nextGroup.add(value);
+      return { ...prev, [group]: nextGroup };
+    });
+  };
+
+  const filteredCaseStudy = useMemo(() => {
+    const hasServices = activeFilters.services.size > 0;
+    const hasIndustry = activeFilters.industry.size > 0;
+    const hasYear = activeFilters.year.size > 0;
+
+    if (!hasServices && !hasIndustry && !hasYear) return caseStudy;
+
+    return caseStudy.filter((p) => {
+      if (hasServices) {
+        const list = Array.isArray(p?.filtersServices) ? p.filtersServices : [];
+        if (!list.some((v) => activeFilters.services.has(String(v)))) return false;
+      }
+
+      if (hasIndustry) {
+        const list = Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : [];
+        if (!list.some((v) => activeFilters.industry.has(String(v)))) return false;
+      }
+
+      if (hasYear) {
+        const y = p?.filtersYear;
+        if (!activeFilters.year.has(String(y))) return false;
+      }
+
+      return true;
+    });
+  }, [activeFilters]);
+
+  const onApplyFilters = () => {
+    // Filter is already derived from state; this just closes the panel.
+    setIsFilterOpen(false);
+  };
+
+  const onResetFilters = () => {
+    setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
+  };
 
   const applyTextCounterRestState = (activeIdx, forward) => {
     for (let i = 0; i < items.length; i++) {
@@ -137,6 +209,9 @@ const WorkSection = ({ projects }) => {
 
     if (!isGridOpen) {
       el.scrollTop = 0;
+      // Reset filters whenever grid view opens
+      setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
+      setIsFilterOpen(false);
       // Make it effective immediately (avoid one "extra" wheel event)
       isGridOpenRef.current = true;
       // OPEN: bottom-collapsed -> fully visible
@@ -647,11 +722,11 @@ const WorkSection = ({ projects }) => {
           <GridButton title={"FILTER"} onClick={toggleFilter} className={"mt-0!"} />
         </div>
         <div className="flex flex-wrap justify-between px-20">
-          {items.map((project) => (
+          {filteredCaseStudy.map((project) => (
             <div key={project.slug} className='w-fit h-screen flex items-center justify-center'>
               <WorkCard
                 slug={project.slug}
-                title={project.name}
+                title={project.title}
                 image={project.coverImage}
                 video={project.microanimation}
               />
@@ -680,41 +755,67 @@ const WorkSection = ({ projects }) => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16">
-              <div className="text-white/70 text-sm tracking-wide">
+              <div className="text-heading text-sm tracking-wide">
                 Filter by:
               </div>
 
               <div>
-                <div className="text-white/50 text-xs tracking-wide mb-4">Services</div>
-                <ul className="space-y-2 text-sm text-white/80">
-                  <li className="hover:text-white cursor-pointer w-fit">Web Design</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Branding</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Fashion Design</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Web Development</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Interior Design</li>
+                <div className="text-desc text-xs tracking-wide mb-4">Services</div>
+                <ul className="filter-ul space-y-2 text-sm text-heading">
+                  {filterOptions.services.map((label) => (
+                    <li
+                      key={label}
+                      className={`hover:text-white cursor-pointer w-fit ${activeFilters.services.has(label) ? "active" : ""}`}
+                      onClick={() => toggleFilterItem("services", label)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("services", label);
+                      }}
+                    >
+                      {label}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
               <div>
-                <div className="text-white/50 text-xs tracking-wide mb-4">Industry</div>
-                <ul className="space-y-2 text-sm text-white/80">
-                  <li className="hover:text-white cursor-pointer w-fit">E-commerce</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Education</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Fashion</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Technology</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Architecture</li>
-                  <li className="hover:text-white cursor-pointer w-fit">Entertainment</li>
+                <div className="text-desc text-xs tracking-wide mb-4">Industry</div>
+                <ul className="filter-ul space-y-2 text-sm text-heading">
+                  {filterOptions.industry.map((label) => (
+                    <li
+                      key={label}
+                      className={`hover:text-white cursor-pointer w-fit ${activeFilters.industry.has(label) ? "active" : ""}`}
+                      onClick={() => toggleFilterItem("industry", label)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("industry", label);
+                      }}
+                    >
+                      {label}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
               <div>
-                <div className="text-white/50 text-xs tracking-wide mb-4">Year</div>
-                <ul className="space-y-2 text-sm text-white/80">
-                  <li className="hover:text-white cursor-pointer w-fit">2024</li>
-                  <li className="hover:text-white cursor-pointer w-fit">2023</li>
-                  <li className="hover:text-white cursor-pointer w-fit">2022</li>
-                  <li className="hover:text-white cursor-pointer w-fit">2021</li>
-                  <li className="hover:text-white cursor-pointer w-fit">2020</li>
+                <div className="text-desc text-xs tracking-wide mb-4">Year</div>
+                <ul className="filter-ul space-y-2 text-sm text-heading">
+                  {filterOptions.year.map((label) => (
+                    <li
+                      key={label}
+                      className={`hover:text-white cursor-pointer w-fit ${activeFilters.year.has(label) ? "active" : ""}`}
+                      onClick={() => toggleFilterItem("year", label)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("year", label);
+                      }}
+                    >
+                      {label}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -723,12 +824,14 @@ const WorkSection = ({ projects }) => {
               <button
                 type="button"
                 className="heading-md text-heading transition-colors cursor-pointer"
+                onClick={onApplyFilters}
               >
-                View {items.length} projects →
+                View {filteredCaseStudy.length} projects →
               </button>
               <button
                 type="button"
                 className="heading-md text-heading transition-colors cursor-pointer"
+                onClick={onResetFilters}
               >
                 Reset
               </button>

@@ -98,7 +98,7 @@ export default function Navbar() {
       // O shifts left by a third of its own width
       // Together they converge symmetrically toward the navbar center
       const pShift = pWidth;
-      const oShift = -(oWidth / 3);
+      const oShift = -(oWidth / 3.5);
 
       // 4. Build timeline
       scrollTl = gsap.timeline({
@@ -134,7 +134,7 @@ export default function Navbar() {
       // Phase 2 — P: move right + rise up
       scrollTl.to(
         refP.current,
-        { x: pShift, y: "-100%", ease: "power2.inOut", duration: 0.5 },
+        { x: pShift, y: "-80%", ease: "power2.inOut", duration: 0.5 },
         0.5
       );
 
