@@ -45,7 +45,7 @@ const InstagramSection = ({ caseStudies }) => {
     : [];
 
   return (
-    <section ref={rootRef} className="w-full bg-black text-white py-20 md:py-28">
+    <section ref={rootRef} className="w-full bg-black text-white py-20 md:py-28 ">
 
       {/* Header */}
       <div className="flex flex-col items-center justify-center mb-16 md:mb-20">
@@ -56,7 +56,7 @@ const InstagramSection = ({ caseStudies }) => {
       </div>
 
       {/* Container */}
-      <div className="px-4 sm:px-6 md:px-10 lg:px-28 xl:px-20">
+      <div className="px-4 sm:px-10 md:px-12 lg:px-20">
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 lg:gap-20">

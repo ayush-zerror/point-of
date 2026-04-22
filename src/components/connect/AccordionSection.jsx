@@ -13,7 +13,7 @@ const AccordionSection = ({ data, title }) => {
             <div
                 className="
           w-full
-          pl-6 sm:pl-12 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
+          px-4 sm:px-10  md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
           pr-6
         "
             >
@@ -50,11 +50,11 @@ const AccordionSection = ({ data, title }) => {
                             <div
                                 className={`
                   overflow-hidden transition-all duration-500 ease-in-out max-w-2xl
-                  ${activeIndex === index ? "max-h-[1000px] opacity-100 mt-8" : "max-h-0 opacity-0"}
+                  ${activeIndex === index ? "max-h-[1600px] opacity-100 mt-8" : "max-h-0 opacity-0 mt-0"}
                 `}
                             >
-                                {activeIndex === index && job.content ? (
-                                    <div className="space-y-6 para text-subheading">
+                                {job.content ? (
+                                    <div className="space-y-6 para text-subheading pointer-events-auto">
 
                                         {/* Meta */}
                                         <div className="uppercase space-y-1">
@@ -114,11 +114,11 @@ const AccordionSection = ({ data, title }) => {
                                         }} />
 
                                     </div>
-                                ) : activeIndex === index ? (
+                                ) : (
                                     <div className="para text-subheading">
                                         <p>{job.body ?? job.description}</p>
                                     </div>
-                                ) : null}
+                                )}
                             </div>
 
                         </div>

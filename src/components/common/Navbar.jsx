@@ -186,7 +186,7 @@ export default function Navbar() {
         className={`fixed top-0 left-0 w-full z-50 text-foreground ${pathname === "/work" ? "" : "nav-gradient"
           }`}
       >
-        <div className="relative z-30 flex items-center justify-between h-20 px-6 md:px-12">
+        <div className="relative z-30 flex items-center justify-between h-20 px-4 sm:px-10 md:px-12 lg:px-17">
           <div className="w-5" />
 
           <div className="absolute left-1/2 -translate-x-1/2">

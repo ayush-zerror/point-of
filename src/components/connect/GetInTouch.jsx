@@ -148,13 +148,13 @@ const GetInTouch = () => {
   return (
     <section className="min-h-screen md:h-screen w-full bg-foreground text-background">
       <div className="h-full flex items-center">
-        <div className="w-full px-4 sm:px-6 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem] md:pr-20 py-2">
+        <div className="w-full px-4 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem] md:pr-20 py-12 sm:py-14 md:py-2">
 
-          <h2 className="heading-xl mb-8">Get in touch</h2>
+          <h2 className="heading-xl mb-6 md:mb-8">Get in touch</h2>
 
           <form
             onSubmit={handleSubmit(onValidSubmit, onError)}
-            className="grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-16 gap-y-8 md:gap-y-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-16 gap-y-6 sm:gap-y-7 md:gap-y-6"
           >
             <FloatingInput label="Full Name" required {...register("fullName", { required: true })} />
             <FloatingInput label="Company"   {...register("company")} />
@@ -305,13 +305,13 @@ const GetInTouch = () => {
             />
           </form>
 
-          <div className="mt-8 md:mt-10">
+          <div className="mt-6 sm:mt-8 md:mt-10">
             <Button
               title={submitting ? "SUBMITTING..." : "SUBMIT"}
               color="black"
               onClick={handleSubmit(onValidSubmit, onError)}
             />
-            <p className="text-xs sm:text-sm text-gray-600 mt-4 md:mt-6">
+            <p className="text-xs sm:text-sm text-gray-600 mt-3 sm:mt-4 md:mt-6">
               By clicking connect you accept our{" "}
               <a href="/privacy" className="underline" title="Privacy Policy">
                 Privacy Policy
