@@ -69,14 +69,13 @@ const SelectedBrands = () => {
         Selected Brands
       </h2>
 
-      <div className="flex w-full flex-wrap">
+      <div className="grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-5">
         {brands.map((brand, index) => (
           <div
             key={index}
             ref={(el) => (itemRefs.current[index] = el)}
             className={[
-              "group relative h-[13vw] w-1/5 border-gray-300/40",
-              brand.border,
+              "group relative aspect-square border border-gray-300/40",
             ].join(" ")}
           >
             {/* Hover cover */}
@@ -94,7 +93,7 @@ const SelectedBrands = () => {
             <div
               className="
                 flex h-full w-full items-center justify-center
-                transition-all duration-[800ms]
+                transition-all duration-800
                 group-hover:opacity-0
               "
             >

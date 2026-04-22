@@ -118,14 +118,14 @@ const BrandsIndex = () => {
           {visibleData.map((item, index) => (
             <div
               key={`${item.brand}-${index}`}
-              className="border-b border-foreground md:border-none"
+              className="border-b border-desc md:border-none"
             >
               {/* Mobile */}
               <div className="flex items-center justify-between md:hidden py-3">
                 <span className="font-medium tracking-wide">{item.brand}</span>
                 <span className="text-sm opacity-70">{item.year}</span>
               </div>
-              <div className="text-sm text-muted-foreground md:hidden pb-3">
+              <div className="text-sm text-desc md:hidden pb-3">
                 {item.industry}
               </div>
 

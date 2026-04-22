@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useLayoutEffect, useRef, useState, useMemo } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -113,7 +113,38 @@ function OdometerStatNumber({ raw, active, className }) {
 
 /* ---------- Main ---------- */
 
-const StatsSection = () => {
+function StaticStatsSection() {
+  return (
+    <section className="relative z-10 w-full bg-background py-16 md:py-24 px-4 sm:px-8 md:px-20 lg:px-40">
+      <div className="w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 w-full">
+          {stats.map((item) => (
+            <div key={item.label} className="w-full">
+              <div className="flex items-baseline gap-3">
+                <h3 className="text-3xl sm:text-4xl tracking-[1px] font-heading font-medium leading-[1.1] text-heading">
+                  {item.number}
+                </h3>
+                <p className="heading-md text-heading">{item.label}</p>
+              </div>
+
+              <div className="mt-4 h-px w-full bg-foreground/20" />
+
+              <p className="para text-desc mt-4 max-w-[60ch]">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-14 md:mt-20">
+          <p className="heading-lg text-heading m-0 w-full max-w-none text-left leading-[1.45]">
+            {BOTTOM_COPY}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AnimatedStatsSection() {
   const sectionRef = useRef(null);
   const textRef = useRef(null);
 
@@ -180,7 +211,7 @@ const StatsSection = () => {
               <OdometerStatNumber
                 raw={item.number}
                 active={inView}
-                className="text-2xl md:text-4xl lg:text-[4rem] tracking-[1px] font-heading font-[500] leading-[1.3]"
+                className="text-2xl md:text-4xl lg:text-[4rem] tracking-[1px] font-heading font-medium leading-[1.3]"
               />
               <p className="heading-md text-heading mt-1">
                 {item.label}
@@ -217,6 +248,20 @@ const StatsSection = () => {
       </div>
     </section>
   );
+}
+
+const StatsSection = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => setIsDesktop(mq.matches);
+    onChange();
+    mq.addEventListener?.("change", onChange);
+    return () => mq.removeEventListener?.("change", onChange);
+  }, []);
+
+  return isDesktop ? <AnimatedStatsSection /> : <StaticStatsSection />;
 };
 
 export default StatsSection;
