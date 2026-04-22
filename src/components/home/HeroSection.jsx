@@ -75,7 +75,7 @@ const HeroSection = () => {
           alt="hero"
           width={1000}
           height={1000}
-          className="h-[220vh] w-full object-contain spin-slow"
+          className="w-full object-contain spin-slow h-[140vh] sm:h-[180vh] lg:h-[220vh]"
           priority
         />
       </div>
@@ -83,34 +83,30 @@ const HeroSection = () => {
       {/* GRADIENT */}
       <div className="absolute bottom-0 left-0 w-full h-[12vh] bg-linear-to-t from-background via-background/60 to-transparent pointer-events-none" />
       {/* CONTENT */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6">
         {/* First line */}
-        <h1 className="font-thin tracking-[0.5px] leading-[1.2] font-heading mb-2 text-3xl sm:text-4xl md:text-5xl lg:text-[2rem] xl:text-[2.2rem]">
-        What is the point of
+        <h1 className="font-thin tracking-[0.5px] leading-[1.2] font-heading mb-2 text-xl sm:text-4xl md:text-5xl lg:text-[2rem] xl:text-[2.2rem]">
+          What is the point of
         </h1>
 
         {/* Typing line */}
-          <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[3rem]">
-            <span className="relative inline-block">
-              {/* diffuse glow behind text */}
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 -z-10 blur-3xl opacity-35 mix-blend-screen transition-[color,opacity,filter] duration-700"
-                style={{ color: glowColor, filter: "blur(28px)" }}
-              >
-                {displayText || "\u00A0"}
-              </span>
-              <span
-                aria-hidden="true"
-                className="absolute inset-0 -z-10 blur-xl opacity-22 mix-blend-screen transition-[color,opacity,filter] duration-700"
-                style={{ color: glowColor, filter: "blur(14px)" }}
-              >
-                {displayText || "\u00A0"}
-              </span>
-              <span className="relative text-white">{displayText}</span>
+        <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-xl sm:text-6xl md:text-7xl lg:text-[3rem]">
+          <span className="relative inline-block">
+            <span
+              className="relative text-white wrap-break-word transition-[text-shadow] duration-700"
+              style={{
+                textShadow: `
+                  0 0 12px ${glowColor}55,
+                  0 0 28px ${glowColor}40,
+                  0 0 64px ${glowColor}2e
+                `,
+              }}
+            >
+              {displayText || "\u00A0"}
             </span>
-            <span className="ml-1 opacity-0">|</span>
-          </p>
+          </span>
+          <span className="ml-1 opacity-0">|</span>
+        </p>
       </div>
     </section>
   );

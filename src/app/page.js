@@ -6,6 +6,8 @@ import Expertise from '@/components/home/Expertise'
 import HeroSection from '@/components/home/HeroSection'
 import OurWork from '@/components/home/OurWork'
 import Showreel from '@/components/home/Showreel'
+import AccordionSection from '@/components/connect/AccordionSection'
+import { expertiseItems } from '@/helper/expertise-items'
 import React from 'react'
 
 export const metadata = {
@@ -31,10 +33,19 @@ const Home = () => {
       {/* Global circle2 — fixed, GSAP-controlled */}
       <div
         id="circle2"
-        className="fixed w-[200vw] h-[200vw] opacity-0 bg-heading rounded-full  pointer-events-none top-[80%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="hidden md:block fixed w-[200vw] h-[200vw] opacity-0 bg-heading rounded-full pointer-events-none top-[80%] left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
       <AboutStudio />
-      <Expertise />
+      {/* Mobile: replace Expertise with accordion */}
+      <div className="md:hidden">
+        <AccordionSection
+          title="Expertise"
+          data={expertiseItems.map((it) => ({ title: it.title, description: it.content }))}
+        />
+      </div>
+      <div className="hidden md:block">
+        <Expertise />
+      </div>
       <OurWork />
       <Showreel />
       <BrandsSection />

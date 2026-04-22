@@ -95,6 +95,7 @@ export default function OurWork() {
       if (arrow) gsap.set(arrow, { opacity: 0, scale: 0.4 });
       gsap.set(textEl, { opacity: 1 });
       gsap.set(underlineEl, { width: "100%", opacity: 1 });
+      if (centerDot) gsap.set(centerDot, { opacity: 0 });
 
       // One master timeline (horizontal slide → grow → hide text → dot scales)
       const tl = gsap.timeline({
@@ -117,6 +118,7 @@ export default function OurWork() {
         `>${0}`
       );
       if (centerDot) {
+        tl.to(centerDot, { opacity: 1, duration: 0.2, ease: "power2.out" }, "<");
         tl.to(
           centerDot,
           { width: 40, height: 40, duration: DUR_GROW, ease: "power2.out" },
@@ -191,12 +193,8 @@ export default function OurWork() {
   }, [maxTranslate]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative h-[300vh]"
-    >
+    <section ref={sectionRef} className="relative h-[300vh]">
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-
         {/* TRACK */}
         <div
           ref={trackRef}
@@ -204,17 +202,26 @@ export default function OurWork() {
         >
           {/* CARDS */}
           {posts.map((post, index) => (
-            <WorkCard key={index} slug={post.slug} title={post.title} image={post.coverImage} video={post.microanimation} />
+            <div
+              key={post.slug ?? index}
+              className="shrink-0 w-[85vw] max-w-[380px] sm:w-auto sm:max-w-none"
+            >
+              <WorkCard
+                slug={post.slug}
+                title={post.title}
+                image={post.coverImage}
+                video={post.microanimation}
+              />
+            </div>
           ))}
 
           {/* BUTTON */}
-          <div className="min-w-[300px] md:min-w-[400px] flex items-center justify-center ml-40">
+          <div className="min-w-[220px] sm:min-w-[300px] md:min-w-[400px] flex items-center justify-center ml-10 sm:ml-24 md:ml-40">
             <Link
               href="/work"
               className="group cursor-pointer flex items-center gap-3 text-sm font-semibold uppercase tracking-wide"
               title="View all work"
             >
-
               {/* BUTTON CIRCLE */}
               <span
                 ref={buttonCircleRef}
@@ -237,10 +244,7 @@ export default function OurWork() {
               </span>
 
               {/* TEXT */}
-              <span
-                ref={buttonTextRef}
-                className="relative whitespace-nowrap"
-              >
+              <span ref={buttonTextRef} className="relative whitespace-nowrap">
                 VIEW ALL WORK
                 <span
                   ref={buttonUnderlineRef}
@@ -251,8 +255,6 @@ export default function OurWork() {
             </Link>
           </div>
         </div>
-
-
       </div>
     </section>
   );

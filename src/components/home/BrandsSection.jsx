@@ -25,7 +25,7 @@ const BrandsSection = () => {
   const router = useRouter();
   return (
     <section className="w-full py-24 md:py-52 md:pb-20 bg-background relative">
-      <div className="max-w-5xl mx-auto px-6 md:px-0 flex flex-col">
+      <div className="max-w-5xl mx-auto px-4 md:px-0 flex flex-col">
         <p className="heading-xl text-desc">
           We partner with visionary entrepreneurs, industry leaders, &
           disruptive startups to build brands that spark change & drive global

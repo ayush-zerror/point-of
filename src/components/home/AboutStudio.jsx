@@ -17,8 +17,11 @@ const AboutStudio = () => {
   useLayoutEffect(() => {
     if (!sectionRef.current || !p1Ref.current || !p2Ref.current) return;
 
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
     const ctx = gsap.context(() => {
       const circle2 = document.querySelector("#circle2");
+
       const split1 = new SplitType(p1Ref.current, {
         types: "words",
         wordClass: "word",
@@ -31,11 +34,34 @@ const AboutStudio = () => {
 
       const words = gsap.utils.toArray(".word");
 
+      // Mobile: no circle animation. Just pin + bring words to opacity 1.
+      if (isMobile) {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "top -140%",
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+          },
+        }).to(words, {
+          opacity: 1,
+          stagger: 0.12,
+          ease: "none",
+        });
+
+        return () => {
+          split1.revert();
+          split2.revert();
+        };
+      }
+
+      // Desktop/Tablet: keep existing circle2 + pinned animation
       if (circle2) {
         gsap.set(circle2, { opacity: 0, x: 0, y: 0 });
       }
 
-      // Fade in circle
       gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -49,7 +75,6 @@ const AboutStudio = () => {
         duration: 1,
       });
 
-      // Main pinned animation
       gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -64,15 +89,12 @@ const AboutStudio = () => {
           opacity: 1,
           stagger: 0.15,
         })
-        .to(
-          circle2,
-          {
-            width: "20px",
-            height: "20px",
-            duration: 8,
-            autoRound: false,
-          },
-        );
+        .to(circle2, {
+          width: "20px",
+          height: "20px",
+          duration: 8,
+          autoRound: false,
+        });
 
 
       // cleanup splits inside context
@@ -89,7 +111,7 @@ const AboutStudio = () => {
     <section
       ref={sectionRef}
       id="page2"
-      className="w-full mix-blend-difference h-screen px-6 md:px-20 py-24 flex flex-col justify-center"
+      className="w-full mix-blend-difference h-screen px-4 md:px-20 py-24 flex flex-col justify-center"
     >
       <div className="mx-auto">
         <div className="max-w-5xl space-y-12">

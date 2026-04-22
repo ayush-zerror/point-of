@@ -7,38 +7,13 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { expertiseItems } from "@/helper/expertise-items";
 gsap.registerPlugin(ScrollTrigger);
 
-const items = [
-  {
-    title: "Branding",
-    slug: "branding",
-    content:
-      "We craft brand identities that are strategic, emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every touchpoint.",
-  },
-  {
-    title: "Website",
-    slug: "website",
-    content:
-      "We design and build high-performance websites that do more than just function—they embody your brand. From UX to development, every layer is crafted for clarity, usability, and expression across all devices, platforms, and user journeys.",
-  },
-  {
-    title: "Marketing",
-    slug: "marketing",
-    content:
-      "Our marketing services blend creativity, strategy, and digital innovation. We craft powerful campaigns that connect with your audience, drive measurable results, and position your brand to lead within its industry.",
-  },
-  {
-    title: "Print",
-    slug: "print",
-    content:
-      "From packaging to posters, we design printed materials that carry your brand with impact and clarity. Every piece is rooted in purpose—whether it's on a shelf, in hand, or at an event—ensuring consistent, thoughtful, and expressive communication.",
-  },
-];
-
-const LAST_IDX = items.length - 1;
+const LAST_IDX = expertiseItems.length - 1;
 
 export default function Expertise() {
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef(null);
   const bulletRefs = useRef([]);
   const bulletWrapRefs = useRef([]);
@@ -51,6 +26,14 @@ export default function Expertise() {
   // Tracks whether last bullet is currently fixed/traveling (blocks bullet cycling)
   const lastBulletIsFixed = useRef(false);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener?.("change", onChange);
+    return () => mq.removeEventListener?.("change", onChange);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
@@ -58,6 +41,7 @@ export default function Expertise() {
 
   // ── Accordion index from scroll ──
   useEffect(() => {
+    if (isMobile) return;
     return scrollYProgress.on("change", (v) => {
       if (v < 0.1) {
         setActiveIndex(-1);
@@ -65,7 +49,7 @@ export default function Expertise() {
         return;
       }
       const adjusted = (v - 0.1) / 0.9;
-      const rawIndex = Math.min(LAST_IDX, Math.floor(adjusted * items.length));
+      const rawIndex = Math.min(LAST_IDX, Math.floor(adjusted * expertiseItems.length));
       const prev = prevIndexRef.current;
       const next =
         prev === -1 ? rawIndex
@@ -75,7 +59,7 @@ export default function Expertise() {
       prevIndexRef.current = next;
       setActiveIndex(next);
     });
-  }, [scrollYProgress]);
+  }, [scrollYProgress, isMobile]);
 
   useEffect(() => {
     activeIndexRef.current = activeIndex;
@@ -83,6 +67,7 @@ export default function Expertise() {
 
   // ── Bullet scale cycling ──
   useEffect(() => {
+    if (isMobile) return;
     bulletRefs.current.forEach((b, i) => {
       if (!b) return;
       // Skip bullet 0 until circle has handed off
@@ -97,10 +82,11 @@ export default function Expertise() {
         overwrite: true,
       });
     });
-  }, [activeIndex]);
+  }, [activeIndex, isMobile]);
 
   // ── GSAP animations ──
   useLayoutEffect(() => {
+    if (isMobile) return;
     if (!ref.current) return;
 
     // Snapshot circle2 origin at mount — immutable
@@ -307,7 +293,9 @@ export default function Expertise() {
     }, ref);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <section id="page3" className="relative h-[300vh] cursor-default" ref={ref}>
@@ -326,7 +314,7 @@ export default function Expertise() {
 
           {/* RIGHT */}
           <div className="w-1/2 relative pl-6 flex flex-col justify-start gap-6">
-            {items.map((item, i) => {
+            {expertiseItems.map((item, i) => {
               const isActive = i === activeIndex;
               return (
                 <div key={i} className="relative border-b border-white/20 pb-6">
