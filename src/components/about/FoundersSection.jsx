@@ -42,7 +42,7 @@ const FoundersSection = ({ data }) => {
   return (
     <div ref={rootRef} className="w-full  py-20 sm:py-24 md:py-28">
       {/* Container */}
-      <div className="max-w-[1350px] mx-auto px-6 sm:px-10 md:px-14">
+      <div className="max-w-[1350px] mx-auto px-4 sm:px-10 md:px-14">
         <div className="flex flex-col md:flex-row md:justify-between gap-16 md:gap-24">
           
           {data.map((item, index) => (

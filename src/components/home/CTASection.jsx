@@ -23,7 +23,7 @@ const CTASection = ({
     >
       <div className="text-center flex flex-col items-center">
         {/* HEADING */}
-        <p className="heading-xl text-desc">{heading}</p>
+        <p className="heading-xl text-desc [&_br]:hidden sm:[&_br]:block">{heading}</p>
         {/* CTA */}
         <Button title={buttonTitle} onClick={handleButtonClick} />
       </div>

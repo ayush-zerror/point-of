@@ -8,7 +8,7 @@ const PlaceToWork = () => {
       {/* Wrapper */}
       <div
         className="w-full 
-          pl-6 sm:pl-12 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
+          px-4 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
           pr-6
           py-20 sm:py-24 md:py-28 lg:py-32"
       >

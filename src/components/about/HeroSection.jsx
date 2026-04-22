@@ -170,7 +170,7 @@ const HeroSection = ({
           height={1000}
           src={bgImage}
           alt={typeof title === "string" && title.trim() ? title : "Point Of background image"}
-          className={`absolute invert-0 inset-0 w-full h-full object-cover ${imgClass}`}
+          className={`absolute invert-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover object-center ${imgClass}`}
           priority
         />
       )}
