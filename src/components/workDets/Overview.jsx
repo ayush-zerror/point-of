@@ -60,7 +60,7 @@ const Overview = ({ caseStudy }) => {
                 height={1000}
                 alt={`${caseStudyTitle} — overview image ${index + 1}`}
                 src={src ?? ""}
-                className={`w-full object-cover ${single ? "h-1/2" : "h-full"}`}
+                className={`w-full object-cover ${single ? "h-full md:h-1/2" : "h-full"}`}
               />
             </div>
           );

@@ -45,7 +45,7 @@ const InstagramSection = ({ caseStudies }) => {
     : [];
 
   return (
-    <section ref={rootRef} className="w-full bg-black text-white py-20 md:py-28 ">
+    <section ref={rootRef} className="w-full overflow-hidden py-20 md:py-28 ">
 
       {/* Header */}
       <div className="flex flex-col items-center justify-center mb-16 md:mb-20">
