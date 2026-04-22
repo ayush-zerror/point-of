@@ -18,14 +18,15 @@ export default function WorkFilterPanel({
   return (
     <div
       ref={filterOverlayRef}
-      className="w-full h-screen flex items-end opacity-0 pointer-events-none bg-background/30 backdrop-blur-xs absolute top-0 left-0 z-40"
+      className="fixed inset-0 w-full h-dvh flex items-end opacity-0 pointer-events-none bg-background/30 backdrop-blur-xs z-60"
     >
       <div
         ref={filterPanelRef}
-        className="w-full h-1/2 relative bg-background will-change-transform"
+        className="w-full h-dvh md:h-1/2 relative bg-background will-change-transform"
+        data-lenis-prevent
       >
-        <div className="h-full w-full px-8 sm:px-12 lg:px-20 py-8 text-white">
-          <div className="absolute top-4 right-6 sm:right-10 lg:right-14">
+        <div className="h-full w-full p-6 sm:p-10 md:px-12 lg:px-20 md:py-8 text-white flex flex-col">
+          <div className="absolute top-3 right-1 sm:right-10 lg:right-14 z-10">
             <Hamburger
               size={20}
               toggled={isFilterOpen}
@@ -34,91 +35,95 @@ export default function WorkFilterPanel({
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16">
-            <div className="text-heading text-sm tracking-wide">Filter by:</div>
+          <div className="flex-1 overflow-y-auto overscroll-contain pr-1 pb-28 md:pb-0">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 md:gap-16">
+              <div className="text-heading text-sm tracking-wide">Filter by:</div>
 
-            <div>
-              <div className="text-desc text-xs tracking-wide mb-4">Services</div>
-              <ul className="filter-ul space-y-2 text-sm text-heading">
-                {filterOptions.services.map((label) => (
-                  <li
-                    key={label}
-                    className={`hover:text-white cursor-pointer w-fit ${
-                      activeFilters.services.has(label) ? "active" : ""
-                    }`}
-                    onClick={() => toggleFilterItem("services", label)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") toggleFilterItem("services", label);
-                    }}
-                  >
-                    {label}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div>
+                <div className="text-desc text-xs tracking-wide mb-4">Services</div>
+                <ul className="filter-ul space-y-2 text-sm text-heading">
+                  {filterOptions.services.map((label) => (
+                    <li
+                      key={label}
+                      className={`hover:text-white cursor-pointer w-fit ${
+                        activeFilters.services.has(label) ? "active" : ""
+                      }`}
+                      onClick={() => toggleFilterItem("services", label)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("services", label);
+                      }}
+                    >
+                      {label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <div>
-              <div className="text-desc text-xs tracking-wide mb-4">Industry</div>
-              <ul className="filter-ul space-y-2 text-sm text-heading">
-                {filterOptions.industry.map((label) => (
-                  <li
-                    key={label}
-                    className={`hover:text-white cursor-pointer w-fit ${
-                      activeFilters.industry.has(label) ? "active" : ""
-                    }`}
-                    onClick={() => toggleFilterItem("industry", label)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") toggleFilterItem("industry", label);
-                    }}
-                  >
-                    {label}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div>
+                <div className="text-desc text-xs tracking-wide mb-4">Industry</div>
+                <ul className="filter-ul space-y-2 text-sm text-heading">
+                  {filterOptions.industry.map((label) => (
+                    <li
+                      key={label}
+                      className={`hover:text-white cursor-pointer w-fit ${
+                        activeFilters.industry.has(label) ? "active" : ""
+                      }`}
+                      onClick={() => toggleFilterItem("industry", label)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("industry", label);
+                      }}
+                    >
+                      {label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <div>
-              <div className="text-desc text-xs tracking-wide mb-4">Year</div>
-              <ul className="filter-ul space-y-2 text-sm text-heading">
-                {filterOptions.year.map((label) => (
-                  <li
-                    key={label}
-                    className={`hover:text-white cursor-pointer w-fit ${
-                      activeFilters.year.has(label) ? "active" : ""
-                    }`}
-                    onClick={() => toggleFilterItem("year", label)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") toggleFilterItem("year", label);
-                    }}
-                  >
-                    {label}
-                  </li>
-                ))}
-              </ul>
+              <div>
+                <div className="text-desc text-xs tracking-wide mb-4">Year</div>
+                <ul className="filter-ul space-y-2 text-sm text-heading">
+                  {filterOptions.year.map((label) => (
+                    <li
+                      key={label}
+                      className={`hover:text-white cursor-pointer w-fit ${
+                        activeFilters.year.has(label) ? "active" : ""
+                      }`}
+                      onClick={() => toggleFilterItem("year", label)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("year", label);
+                      }}
+                    >
+                      {label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="absolute bottom-8 left-8 sm:left-12 lg:left-16 right-8 sm:right-12 lg:right-16 flex items-center justify-between">
-            <button
-              type="button"
-              className="heading-md text-heading transition-colors cursor-pointer"
-              onClick={onApply}
-            >
-              View {viewCount} projects →
-            </button>
-            <button
-              type="button"
-              className="heading-md text-heading transition-colors cursor-pointer"
-              onClick={onReset}
-            >
-              Reset
-            </button>
+          <div className="absolute md:static bottom-0 left-0 right-0">
+            <div className="px-4 sm:px-10 md:px-0 py-6 md:p-0 bg-background/90 backdrop-blur-sm md:bg-transparent md:backdrop-blur-0 flex items-center justify-between">
+              <button
+                type="button"
+                className="heading-md text-heading transition-colors cursor-pointer"
+                onClick={onApply}
+              >
+                View {viewCount} projects →
+              </button>
+              <button
+                type="button"
+                className="heading-md text-heading transition-colors cursor-pointer"
+                onClick={onReset}
+              >
+                Reset
+              </button>
+            </div>
           </div>
         </div>
       </div>

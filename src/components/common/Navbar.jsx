@@ -66,6 +66,9 @@ export default function Navbar() {
   // Scroll logo collapse
   useEffect(() => {
     if (!logoRef.current) return;
+    // The logo-collapse animation relies on desktop spacing/measurements.
+    // On small screens it can cause layout jitter, so we skip it.
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
 
     let scrollTl;
     let resizeObserver;
@@ -186,10 +189,31 @@ export default function Navbar() {
         className={`fixed top-0 left-0 w-full z-50 text-foreground ${pathname === "/work" ? "" : "nav-gradient"
           }`}
       >
-        <div className="relative z-30 flex items-center justify-between h-20 px-4 sm:px-10 md:px-12 lg:px-17">
-          <div className="w-5" />
+        <div className="relative z-30 flex items-center justify-between h-16 sm:h-20 px-1 sm:px-7 md:px-9 lg:px-17">
+          {/* Left spacer so hamburger doesn't shift center */}
+          <div className="w-10 sm:w-12 md:w-0" />
 
-          <div className="absolute left-1/2 -translate-x-1/2">
+          {/* Mobile/Tablet logo (single image, centered) */}
+          <div className="absolute left-1/2 -translate-x-1/2 md:hidden">
+            <Link
+              href="/"
+              className="flex items-center"
+              onClick={() => setMenuOpen(false)}
+              title="Go to homepage"
+            >
+              <Image
+                src="/logo/logo.png"
+                alt="Point Of"
+                width={140}
+                height={40}
+                priority
+                className="h-3 w-auto object-contain invert"
+              />
+            </Link>
+          </div>
+
+          {/* Desktop logo (animated, centered) */}
+          <div className="hidden md:block absolute left-1/2 -translate-x-1/2">
             <Link
               href="/"
               className="flex items-center"
@@ -204,7 +228,7 @@ export default function Navbar() {
                   alt="P"
                   width={180}
                   height={100}
-                  className="h-[18px] w-auto invert object-contain"
+                  className="h-4 sm:h-[18px] w-auto invert object-contain"
                   priority
                 />
                 <span className="absolute left-0 opacity-0 top-full mt-1 w-1 h-1 bg-heading inline-block rounded-full" />
@@ -221,7 +245,7 @@ export default function Navbar() {
                   alt="OINT"
                   width={180}
                   height={100}
-                  className="h-[18px] w-auto invert object-contain"
+                  className="h-4 sm:h-[18px] w-auto invert object-contain"
                   priority
                 />
               </div>
@@ -233,7 +257,7 @@ export default function Navbar() {
                   alt="O"
                   width={180}
                   height={100}
-                  className="h-[18px] w-auto invert object-contain"
+                  className="h-4 sm:h-[18px] w-auto invert object-contain"
                   priority
                 />
               </div>
@@ -245,7 +269,7 @@ export default function Navbar() {
                   alt="F"
                   width={180}
                   height={100}
-                  className="h-[18px] w-auto invert object-contain"
+                  className="h-4 sm:h-[18px] w-auto invert object-contain"
                   priority
                 />
               </div>

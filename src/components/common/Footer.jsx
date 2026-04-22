@@ -110,7 +110,7 @@ export default function Footer() {
             <div className="space-y-3  w-full sm:w-[260px] md:w-[300px]">
               <p className="font-medium">Don’t miss anything</p>
 
-              <div className="relative border-b border-neutral-500 pb-2">
+              <div className="relative border-b border-neutral-700 pb-2">
                 <input
                   type="email"
                   placeholder="Email*"

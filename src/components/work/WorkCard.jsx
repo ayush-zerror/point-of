@@ -6,7 +6,7 @@ const WorkCard = ({ slug, title, image, video }) => {
     return (
         <Link
             href={`/work/${slug}`}
-            className="work-card relative group block w-full min-w-0 md:min-w-[400px]"
+            className="work-card relative group block w-full min-w-0 md:w-[400px]"
             title={title}
         >
             <div className="absolute left-0 overflow-hidden z-10 top-2 md:-top-8">

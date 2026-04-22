@@ -730,7 +730,7 @@ const WorkSection = ({ projects }) => {
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
-            className="absolute left-4 right-4 top-[8%] sm:right-auto sm:left-8 sm:top-1/2 sm:-translate-y-1/2 md:left-12 lg:left-16 max-w-[min(460px,92vw)] sm:max-w-[min(500px,85vw)] text-center sm:text-left"
+            className="absolute left-4 right-4 top-[10%] sm:right-auto sm:left-8 sm:top-1/2 sm:-translate-y-1/2 md:left-12 lg:left-16 max-w-[min(460px,92vw)] sm:max-w-[min(500px,85vw)] text-left"
           >
             {(project.titles ?? [project.name]).map((title, ti) => (
               <div key={ti} className="overflow-hidden">
@@ -739,7 +739,7 @@ const WorkSection = ({ projects }) => {
                     if (!textRefs.current[i]) textRefs.current[i] = [];
                     textRefs.current[i][ti] = el;
                   }}
-                  className="text-white font-heading font-extralight tracking-[0.4px] leading-[1.08] text-[clamp(1.45rem,5.6vw,2.4rem)] sm:text-[clamp(1.85rem,5vw,3.4rem)]"
+                  className="text-white font-heading font-extralight tracking-[0.4px]  leading-[1.08] text-[clamp(1.45rem,5.6vw,2.4rem)] sm:text-[clamp(1.85rem,5vw,3.4rem)] whitespace-nowrap max-w-full overflow-hidden text-ellipsis"
                   style={{
                     display: "inline-block",
                     willChange: "transform, opacity",
