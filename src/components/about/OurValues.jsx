@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const circles = [
@@ -60,8 +60,53 @@ function CircleItem({ circle, index, scrollYProgress }) {
   );
 }
 
+function CircleItemStatic({ circle }) {
+  return (
+    <g>
+      <circle
+        cx={circle.cx}
+        cy={circle.cy}
+        r={circle.r}
+        fill="none"
+        stroke="currentColor"
+        strokeOpacity={0.6}
+        strokeWidth={2}
+        className="text-[#c0bfbf]"
+        style={{
+          transformOrigin: "center",
+          transformBox: "fill-box",
+          rotate: 90,
+        }}
+      />
+      <text
+        dy="15"
+        fill="#c0bfbf"
+        stroke="#0a0a0a"
+        strokeWidth={22}
+        fontSize="52"
+        letterSpacing={6}
+        paintOrder="stroke fill"
+        fontFamily="inherit"
+      >
+        <textPath href={`#${circle.pathId}`} startOffset="50%" textAnchor="middle">
+          {circle.label}
+        </textPath>
+      </text>
+    </g>
+  );
+}
+
 export default function OurValues() {
   const sectionRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener?.("change", onChange);
+    return () => mq.removeEventListener?.("change", onChange);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -69,13 +114,19 @@ export default function OurValues() {
   });
 
   return (
-    <section ref={sectionRef} className="relative h-[600vh]">
+    <section ref={sectionRef} className={isMobile ? "relative py-16" : "relative h-[600vh]"}>
 
       {/* Sticky wrapper */}
-      <div className="sticky top-0 flex h-[100svh] w-full items-end justify-center overflow-hidden">
+      <div
+        className={
+          isMobile
+            ? "flex w-full items-center pt-6 justify-center overflow-hidden"
+            : "sticky top-0 flex h-svh w-full items-center pt-6 justify-center overflow-hidden"
+        }
+      >
 
         {/* Heading: clamp scales smoothly across all screen sizes */}
-        <h2 className="absolute z-10 text-center heading-lg text-subheading  pointer-events-none  bottom-[12%] left-1/2 -translate-x-1/2  sm:bottom-[13%] md:bottom-[14%] lg:bottom-[15%]">
+        <h2 className="absolute z-10 text-center heading-lg text-subheading pointer-events-none bottom-[22%] left-1/2 -translate-x-1/2 sm:bottom-[13%] md:bottom-[14%] lg:bottom-[15%]">
           Our <br /> Values
         </h2>
 
@@ -86,7 +137,7 @@ export default function OurValues() {
             overflows horizontally on landscape phones or wide desktops
         */}
         <svg
-          className="w-[96vw] h-[96vw] sm:w-[min(90vh,90vw)] sm:h-[min(90vh,90vw)] flex-shrink-0 overflow-visible"
+          className="w-[96vw] h-[96vw] sm:w-[min(90vh,90vw)] sm:h-[min(90vh,90vw)] shrink-0 overflow-visible"
           viewBox="0 0 2100 2100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -97,14 +148,17 @@ export default function OurValues() {
             ))}
           </defs>
 
-          {circles.map((circle, i) => (
-            <CircleItem
-              key={circle.label}
-              circle={circle}
-              index={i}
-              scrollYProgress={scrollYProgress}
-            />
-          ))}
+          {isMobile
+            ? circles.map((circle) => <CircleItemStatic key={circle.pathId} circle={circle} />)
+            : circles.map((circle, i) => (
+                <CircleItem
+                  key={circle.label}
+                  circle={circle}
+                  index={i}
+                  scrollYProgress={scrollYProgress}
+                />
+              ))}
+
         </svg>
       </div>
     </section>
