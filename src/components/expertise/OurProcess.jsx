@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, {  useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import { useGSAP } from "@gsap/react";
 
 const OurProcess = () => {
   const sectionRef = useRef(null);
@@ -14,7 +15,7 @@ const OurProcess = () => {
   const dotRef = useRef(null);
   const textsRef = useRef([]);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (typeof window === "undefined") return;
     if (window.innerWidth <= 767) return;
 

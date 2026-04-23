@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -9,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const OurApproach = () => {
     const containerRef = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
         if (!containerRef.current) return;
 
         const aptl = gsap.timeline({
