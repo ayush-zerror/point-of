@@ -9,6 +9,14 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const toSlug = (value = "") =>
+  String(value)
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+
 const AreasOfExpertise = () => {
   const rootRef = useRef(null);
   const lineRef = useRef(null);
@@ -95,12 +103,15 @@ const AreasOfExpertise = () => {
 
                 <ul className="expertise-list space-y-2 text-sm sm:text-base">
                   {section.accordion.map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex w-fit gap-2 text-subheading cursor-pointer transition-[opacity,filter]"
-                    >
-                      <span>•</span>
-                      <span>{item.title}</span>
+                    <li key={i} className="flex w-fit">
+                      <Link
+                        href={`/expertise/${section.slug}#${toSlug(item.title)}`}
+                        className="flex w-fit gap-2 text-subheading cursor-pointer transition-[opacity,filter]"
+                        title={item.title}
+                      >
+                        <span>•</span>
+                        <span>{item.title}</span>
+                      </Link>
                     </li>
                   ))}
                 </ul>

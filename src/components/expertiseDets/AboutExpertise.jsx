@@ -1,11 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
 import Button from "../common/Button";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { expertiseDetails } from "@/helper/expertise-data";
+
+const toSlug = (value = "") =>
+  String(value)
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 
 const AboutExpertise = ({
   expertise = "Branding",
@@ -16,9 +24,62 @@ const AboutExpertise = ({
   currentSlug,
 } = {}) => {
   const [active, setActive] = useState(null);
+  const pendingScrollIdRef = useRef(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   const otherExpertise = expertiseDetails.filter((x) => x.slug !== currentSlug);
+
+  useEffect(() => {
+    const applyHash = () => {
+      const raw = window.location.hash || "";
+      const id = raw.replace(/^#/, "").trim();
+      if (!id) return;
+
+      const idx = (accordion ?? []).findIndex((x) => toSlug(x?.title) === id);
+      if (idx < 0) return;
+
+      pendingScrollIdRef.current = id;
+      setActive(idx);
+    };
+
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
+  }, [accordion]);
+
+  // Scroll to hash after client navigation (App Router: tied to pathname)
+  useEffect(() => {
+    const handleScrollToHash = () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          const el = document.querySelector(hash);
+          if (el) el.scrollIntoView({ block: "center" });
+        });
+      }, 10);
+    };
+
+    handleScrollToHash();
+  }, [pathname]);
+
+  // After we open the matching accordion, scroll to it.
+  useEffect(() => {
+    const id = pendingScrollIdRef.current;
+    if (!id) return;
+
+    const t = setTimeout(() => {
+      const el = document.getElementById(id);
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      pendingScrollIdRef.current = null;
+    }, 200);
+
+    return () => clearTimeout(t);
+  }, [active]);
+
+
 
   return (
     <section className="w-full  px-4 sm:px-10 md:px-16 lg:px-20 py-20 md:py-28">
@@ -51,9 +112,10 @@ const AboutExpertise = ({
           <div className="border-t border-white/20 mt-14">
             {accordion.map((item, index) => {
               const isOpen = active === index;
+              const id = toSlug(item?.title);
 
               return (
-                <div key={index} className="border-b border-white/20">
+                <div key={index} id={id} className="border-b border-white/20 scroll-mt-24">
                   
                   <button
                     onClick={() => setActive(isOpen ? null : index)}
