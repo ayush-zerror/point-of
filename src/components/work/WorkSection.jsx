@@ -8,266 +8,219 @@ import caseStudy from '../../helper/case-study';
 import WorkGridOverlay from "./WorkGridOverlay";
 import WorkFilterPanel from "./WorkFilterPanel";
 
-// clip-path constants — exact values from vanilla JS
-const CLIP_VISIBLE = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
-const CLIP_HIDDEN_TOP = "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)";        // collapses to top
-const CLIP_HIDDEN_BOTTOM = "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)"; // collapses to bottom
+const CLIP_VISIBLE       = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
+const CLIP_HIDDEN_TOP    = "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)";
+const CLIP_HIDDEN_BOTTOM = "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)";
+
+// BG scale/objectPosition states
+// DOWN: current exits  → scale 1, 50% 50% → 50% -20%  (drifts up)
+//       next  enters   → scale 1.5, 50% 20% → 50% 50%  (zooms out, settles)
+// UP:   current exits  → scale 1, 50% 50% → 50% 20%   (drifts down)
+//       next  enters   → scale 1.5, 50% -20% → 50% 50% (zooms out, settles)
+const BG_REST            = { scale: 1,   objectPosition: "50% 50%"  };
+const BG_EXIT_DOWN       = { scale: 1.5, objectPosition: "50% 20%" };
+const BG_ENTER_DOWN_FROM = { scale: 1.5, objectPosition: "50% 20%"  };
+const BG_EXIT_UP         = { scale: 1.5, objectPosition: "50% 20%"  };
+const BG_ENTER_UP_FROM   = { scale: 1.5, objectPosition: "50% 20%" };
+
+// Center scale/objectPosition states (same behavior as BG)
+const CTR_REST            = BG_REST;
+const CTR_EXIT_DOWN       = BG_EXIT_DOWN;
+const CTR_ENTER_DOWN_FROM = BG_ENTER_DOWN_FROM;
+const CTR_EXIT_UP         = BG_EXIT_UP;
+const CTR_ENTER_UP_FROM   = BG_ENTER_UP_FROM;
 
 const toSlug = (value = "") =>
-  String(value)
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+  String(value).toLowerCase().trim()
+    .replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-");
 
 
 const WorkSection = ({ projects }) => {
   const items = useMemo(
-    () =>
-      (projects ?? []).map((project) => ({
-        ...project,
-        slug:
-          project.slug ||
-          toSlug(project.name || (Array.isArray(project.titles) ? project.titles.join(" ") : "project")),
-      })),
+    () => (projects ?? []).map((project) => ({
+      ...project,
+      slug: project.slug || toSlug(project.name || (Array.isArray(project.titles) ? project.titles.join(" ") : "project")),
+    })),
     [projects]
   );
-  const containerRef = useRef(null);
-  const touchStartYRef = useRef(null);
-  const cooldownRef = useRef(0);
-  const isAnimatingRef = useRef(false);
+
+  const containerRef    = useRef(null);
+  const touchStartYRef  = useRef(null);
+  const cooldownRef     = useRef(0);
+  const isAnimatingRef  = useRef(false);
   const currentIndexRef = useRef(0);
-  const isGridOpenRef = useRef(false);
+  const isGridOpenRef   = useRef(false);
 
-  const bgRefs = useRef([]);      // background <img> refs
-  const centerRefs = useRef([]);  // center (child) <img> refs
-  const textRefs = useRef([]);    // array of arrays of title refs per slide
-  const descRefs = useRef([]);    // gist <p> refs per slide
-  const counterRefs = useRef([]); // counter <span> refs per slide
-  const gridListRef = useRef(null);
+  // clip-path lives on the WRAPPER div — separate from the img
+  const bgWrapRefs   = useRef([]);   // wrapper divs  (clip-path animated here)
+  const bgRefs       = useRef([]);   // <img> elements (scale + objectPosition animated here)
+  const centerRefs   = useRef([]);   // center wrapper divs (clip-path)
+  const centerImgRefs = useRef([]);  // center <img> elements (no extra anim needed)
+  const textRefs     = useRef([]);
+  const descRefs     = useRef([]);
+  const counterRefs  = useRef([]);
+  const gridListRef      = useRef(null);
   const filterOverlayRef = useRef(null);
-  const filterPanelRef = useRef(null);
+  const filterPanelRef   = useRef(null);
 
-  const [scrollDirection, setScrollDirection] = useState(null); // 'up' | 'down' | null
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isGridOpen, setIsGridOpen] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [activeIndex,   setActiveIndex]   = useState(0);
+  const [isGridOpen,    setIsGridOpen]    = useState(false);
+  const [isFilterOpen,  setIsFilterOpen]  = useState(false);
   const [activeFilters, setActiveFilters] = useState(() => ({
-    services: new Set(),
-    industry: new Set(),
-    year: new Set(),
+    services: new Set(), industry: new Set(), year: new Set(),
   }));
 
   const filterOptions = useMemo(() => {
     const uniq = (arr) => [...new Set(arr.filter(Boolean).map((v) => String(v).trim()).filter(Boolean))];
-
-    const services = uniq(caseStudy.flatMap((p) => (Array.isArray(p?.filtersServices) ? p.filtersServices : [])));
-    const industry = uniq(caseStudy.flatMap((p) => (Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : [])));
-    const years = uniq(caseStudy.map((p) => p?.filtersYear));
-
-    const sortedYears = years.sort((a, b) => {
-      const na = Number(a);
-      const nb = Number(b);
-      if (Number.isFinite(na) && Number.isFinite(nb)) return nb - na; // newest first
-      return b.localeCompare(a);
-    });
-
+    const services = uniq(caseStudy.flatMap((p) => Array.isArray(p?.filtersServices) ? p.filtersServices : []));
+    const industry = uniq(caseStudy.flatMap((p) => Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : []));
+    const years    = uniq(caseStudy.map((p) => p?.filtersYear))
+      .sort((a, b) => { const na = Number(a), nb = Number(b); return (isFinite(na) && isFinite(nb)) ? nb - na : b.localeCompare(a); });
     return {
       services: services.sort((a, b) => a.localeCompare(b)),
       industry: industry.sort((a, b) => a.localeCompare(b)),
-      year: sortedYears,
+      year: years,
     };
   }, []);
 
   const pad2 = (n) => String(n).padStart(2, "0");
 
-  useEffect(() => {
-    isGridOpenRef.current = isGridOpen;
-  }, [isGridOpen]);
+  useEffect(() => { isGridOpenRef.current = isGridOpen; }, [isGridOpen]);
 
+  // Filter panel animation
   useEffect(() => {
     const overlay = filterOverlayRef.current;
-    const panel = filterPanelRef.current;
+    const panel   = filterPanelRef.current;
     if (!overlay || !panel) return;
-
     const tl = gsap.timeline({ defaults: { overwrite: true } });
-
     if (isFilterOpen) {
-      // 1) overlay fades in, 2) panel slides up
       tl.set(panel, { yPercent: 100 });
-      tl.to(overlay, { opacity: 1, duration: 0.25, ease: "power2.out",
-        onComplete: () => gsap.set(overlay, { pointerEvents: "auto" }),
-       });
-      tl.to(panel, { yPercent: 0, duration: 0.55, ease: "power3.inOut" });
+      tl.to(overlay, { opacity: 1, duration: 0.25, ease: "power2.out", onComplete: () => gsap.set(overlay, { pointerEvents: "auto" }) });
+      tl.to(panel,   { yPercent: 0, duration: 0.55, ease: "power3.inOut" });
     } else {
-      // 1) panel slides down, 2) overlay fades out
       tl.set(panel, { yPercent: 0 });
-      tl.to(panel, { yPercent: 100, duration: 0.45, ease: "power3.inOut" });
-      tl.to(overlay, {
-        opacity: 0,
-        duration: 0.25,
-        ease: "power2.inOut",
-        onComplete: () => gsap.set(overlay, { pointerEvents: "none" }),
-      });
+      tl.to(panel,   { yPercent: 100, duration: 0.45, ease: "power3.inOut" });
+      tl.to(overlay, { opacity: 0,   duration: 0.25, ease: "power2.inOut", onComplete: () => gsap.set(overlay, { pointerEvents: "none" }) });
     }
-
     return () => tl.kill();
   }, [isFilterOpen]);
 
-  const toggleFilter = () => setIsFilterOpen((v) => !v);
-
+  const toggleFilter     = () => setIsFilterOpen((v) => !v);
   const toggleFilterItem = (group, value) => {
     setActiveFilters((prev) => {
-      const nextGroup = new Set(prev[group]);
-      if (nextGroup.has(value)) nextGroup.delete(value);
-      else nextGroup.add(value);
-      return { ...prev, [group]: nextGroup };
+      const next = new Set(prev[group]);
+      next.has(value) ? next.delete(value) : next.add(value);
+      return { ...prev, [group]: next };
     });
   };
 
   const filteredCaseStudy = useMemo(() => {
-    const hasServices = activeFilters.services.size > 0;
-    const hasIndustry = activeFilters.industry.size > 0;
-    const hasYear = activeFilters.year.size > 0;
-
-    if (!hasServices && !hasIndustry && !hasYear) return caseStudy;
-
+    const { services, industry, year } = activeFilters;
+    if (!services.size && !industry.size && !year.size) return caseStudy;
     return caseStudy.filter((p) => {
-      if (hasServices) {
-        const list = Array.isArray(p?.filtersServices) ? p.filtersServices : [];
-        if (!list.some((v) => activeFilters.services.has(String(v)))) return false;
-      }
-
-      if (hasIndustry) {
-        const list = Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : [];
-        if (!list.some((v) => activeFilters.industry.has(String(v)))) return false;
-      }
-
-      if (hasYear) {
-        const y = p?.filtersYear;
-        if (!activeFilters.year.has(String(y))) return false;
-      }
-
+      if (services.size && !( Array.isArray(p?.filtersServices) ? p.filtersServices : []).some((v) => services.has(String(v)))) return false;
+      if (industry.size && !( Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : []).some((v) => industry.has(String(v)))) return false;
+      if (year.size    && !year.has(String(p?.filtersYear))) return false;
       return true;
     });
   }, [activeFilters]);
 
-  const onApplyFilters = () => {
-    // Filter is already derived from state; this just closes the panel.
-    setIsFilterOpen(false);
-  };
+  const onApplyFilters = () => setIsFilterOpen(false);
+  const onResetFilters = () => setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
 
-  const onResetFilters = () => {
-    setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
-  };
-
+  // ── helpers ──────────────────────────────────────────────────
   const applyTextCounterRestState = (activeIdx, forward) => {
     for (let i = 0; i < items.length; i++) {
       const h1s = textRefs.current[i];
       if (h1s?.length) {
-        if (i === activeIdx) {
-          gsap.set(h1s, { rotate: 0, y: "0%", opacity: 1 });
-        } else {
-          gsap.set(h1s, {
-            rotate: forward ? 5 : -5,
-            y: forward ? "100%" : "-100%",
-            opacity: 0,
-          });
-        }
+        if (i === activeIdx) gsap.set(h1s, { rotate: 0, y: "0%", opacity: 1 });
+        else                 gsap.set(h1s, { rotate: forward ? 5 : -5, y: forward ? "100%" : "-100%", opacity: 0 });
       }
-
       const desc = descRefs.current[i];
       if (desc) {
-        if (i === activeIdx) {
-          gsap.set(desc, { y: "0%", opacity: 1 });
-        } else {
-          gsap.set(desc, { y: forward ? "100%" : "-100%", opacity: 0 });
-        }
+        if (i === activeIdx) gsap.set(desc, { y: "0%", opacity: 1 });
+        else                 gsap.set(desc, { y: forward ? "100%" : "-100%", opacity: 0 });
       }
-
       const cnt = counterRefs.current[i];
       if (cnt) {
-        if (i === activeIdx) {
-          gsap.set(cnt, { top: "0%", opacity: 0.7 });
-        } else {
-          gsap.set(cnt, { top: forward ? "100%" : "-100%", opacity: 0 });
-        }
+        if (i === activeIdx) gsap.set(cnt, { top: "0%", opacity: 0.7 });
+        else                 gsap.set(cnt, { top: forward ? "100%" : "-100%", opacity: 0 });
       }
     }
   };
 
+  const applyBgRestState = () => {
+    bgRefs.current.forEach((el) => {
+      if (el) gsap.set(el, { scale: BG_REST.scale, objectPosition: BG_REST.objectPosition });
+    });
+
+  };
+
+  const applyCenterRestState = () => {
+    centerImgRefs.current.forEach((el) => {
+      if (el) gsap.set(el, { scale: CTR_REST.scale, objectPosition: CTR_REST.objectPosition });
+    });
+  };
+
   useEffect(() => {
     if (!items.length) return;
-    // Initial state: first visible, rest staged for scroll DOWN.
     applyTextCounterRestState(0, true);
+    applyBgRestState();
+    applyCenterRestState();
   }, [items]);
 
+  // ── grid toggle ──────────────────────────────────────────────
   const toggleGridList = () => {
     const el = gridListRef.current;
     if (!el) return;
-
     if (!isGridOpen) {
       el.scrollTop = 0;
-      // Reset filters whenever grid view opens
       setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
       setIsFilterOpen(false);
-      // Make it effective immediately (avoid one "extra" wheel event)
       isGridOpenRef.current = true;
-      // OPEN: bottom-collapsed -> fully visible
-      gsap.fromTo(
-        el,
+      gsap.fromTo(el,
         { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM },
-        {
-          clipPath: CLIP_VISIBLE,
-          webkitClipPath: CLIP_VISIBLE,
-          duration: 0.6,
-          ease: "power3.inOut",
-        }
+        { clipPath: CLIP_VISIBLE,       webkitClipPath: CLIP_VISIBLE,       duration: 0.6, ease: "power3.inOut" }
       );
       setIsGridOpen(true);
     } else {
-      // Allow gallery scroll immediately on close click
       isGridOpenRef.current = false;
-      // CLOSE: fully visible -> top-collapsed
       gsap.to(el, {
-        clipPath: CLIP_HIDDEN_TOP,
-        webkitClipPath: CLIP_HIDDEN_TOP,
-        duration: 0.55,
-        ease: "power3.inOut",
-        onComplete: () => {
-          // reset so next open always starts from bottom
-          gsap.set(el, { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM });
-        },
+        clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP, duration: 0.55, ease: "power3.inOut",
+        onComplete: () => gsap.set(el, { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM }),
       });
       setIsGridOpen(false);
     }
   };
 
-  // Put BOTH "down" animations here so they run together.
+  // ── DOWN ─────────────────────────────────────────────────────
   const runDownAnimations = () => {
     if (isAnimatingRef.current) return null;
     const total = items.length;
     if (!total) return null;
 
     const current = currentIndexRef.current % total;
-    const next = (current + 1) % total;
+    const next    = (current + 1) % total;
 
-    const bgCurrent = bgRefs.current[current];
-    const bgNext = bgRefs.current[next];
-    const ctrCurrent = centerRefs.current[current];
-    const ctrNext = centerRefs.current[next];
-    if (!bgCurrent || !bgNext || !ctrCurrent || !ctrNext) return null;
+    const bgWrapCurrent = bgWrapRefs.current[current];
+    const bgWrapNext    = bgWrapRefs.current[next];
+    const bgCurrent     = bgRefs.current[current];
+    const bgNext        = bgRefs.current[next];
+    const ctrCurrent    = centerRefs.current[current];
+    const ctrNext       = centerRefs.current[next];
+    const ctrImgCurrent = centerImgRefs.current[current];
+    const ctrImgNext    = centerImgRefs.current[next];
+    if (!bgWrapCurrent || !bgWrapNext || !bgCurrent || !bgNext || !ctrCurrent || !ctrNext || !ctrImgCurrent || !ctrImgNext) return null;
 
     const h1sPrev = textRefs.current[current];
     const h1sNext = textRefs.current[next];
     const descPrev = descRefs.current[current];
     const descNext = descRefs.current[next];
-    const cntPrev = counterRefs.current[current];
-    const cntNext = counterRefs.current[next];
+    const cntPrev  = counterRefs.current[current];
+    const cntNext  = counterRefs.current[next];
 
-    // Ensure a clean starting state for this step
-    bgRefs.current.forEach((el, i) => {
+    // clip-path starting states — on wrappers
+    bgWrapRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.set(el, {
         clipPath: i === current ? CLIP_VISIBLE : CLIP_HIDDEN_BOTTOM,
@@ -275,9 +228,8 @@ const WorkSection = ({ projects }) => {
         zIndex: i === current ? 2 : 0,
       });
     });
-    gsap.set(bgNext, { zIndex: 1, clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM });
+    gsap.set(bgWrapNext, { zIndex: 1, clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM });
 
-    // Center layer (child): inactive waits hidden at TOP (ready to enter from top on down)
     centerRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.set(el, {
@@ -288,19 +240,24 @@ const WorkSection = ({ projects }) => {
     });
     gsap.set(ctrNext, { zIndex: 1, clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP });
 
-    // Prepare incoming text/counter (DOWN = forward)
+    // scale + objectPosition starting states — on images
+    gsap.set(bgCurrent, { scale: BG_REST.scale,            objectPosition: BG_REST.objectPosition });
+    gsap.set(bgNext,    { scale: BG_ENTER_DOWN_FROM.scale, objectPosition: BG_ENTER_DOWN_FROM.objectPosition });
+
+    // Center zoom + object-position (DOWN)
+    gsap.set(ctrImgCurrent, { scale: CTR_REST.scale,            objectPosition: CTR_REST.objectPosition });
+    gsap.set(ctrImgNext,    { scale: CTR_ENTER_DOWN_FROM.scale, objectPosition: CTR_ENTER_DOWN_FROM.objectPosition });
+
     if (h1sNext?.length) gsap.set(h1sNext, { rotate: 5, y: "100%", opacity: 0 });
     if (descNext) gsap.set(descNext, { y: "100%", opacity: 0 });
-    if (cntNext) gsap.set(cntNext, { top: "100%", opacity: 0 });
+    if (cntNext)  gsap.set(cntNext,  { top: "100%", opacity: 0 });
 
     isAnimatingRef.current = true;
     const tl = gsap.timeline({
       onComplete: () => {
         currentIndexRef.current = next;
         setActiveIndex(next);
-
-        // Rest state after every animation (including wrap):
-        bgRefs.current.forEach((el, i) => {
+        bgWrapRefs.current.forEach((el, i) => {
           if (!el) return;
           gsap.set(el, {
             clipPath: i === next ? CLIP_VISIBLE : CLIP_HIDDEN_BOTTOM,
@@ -308,8 +265,6 @@ const WorkSection = ({ projects }) => {
             zIndex: i === next ? 1 : 0,
           });
         });
-
-        // Center rest state after DOWN: inactive hidden at TOP
         centerRefs.current.forEach((el, i) => {
           if (!el) return;
           gsap.set(el, {
@@ -318,99 +273,71 @@ const WorkSection = ({ projects }) => {
             zIndex: i === next ? 1 : 0,
           });
         });
-
+        applyBgRestState();
+        applyCenterRestState();
         applyTextCounterRestState(next, true);
         isAnimatingRef.current = false;
       },
-      onInterrupt: () => {
-        isAnimatingRef.current = false;
-      },
+      onInterrupt: () => { isAnimatingRef.current = false; },
     });
 
-    tl.to(
-      bgCurrent,
-      { clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP, duration: 1 },
-      0
-    );
-    tl.to(
-      bgNext,
-      { clipPath: CLIP_VISIBLE, webkitClipPath: CLIP_VISIBLE, duration: 1 },
-      0
-    );
+    // clip-path on wrappers
+    tl.to(bgWrapCurrent, { clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP, duration: 1 }, 0);
+    tl.to(bgWrapNext,    { clipPath: CLIP_VISIBLE,    webkitClipPath: CLIP_VISIBLE,    duration: 1 }, 0);
+    tl.to(ctrCurrent,    { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM, duration: 1 }, 0);
+    tl.to(ctrNext,       { clipPath: CLIP_VISIBLE,       webkitClipPath: CLIP_VISIBLE,       duration: 1 }, 0);
 
-    // Center current exits to BOTTOM (opposite of BG)
-    tl.to(
-      ctrCurrent,
-      { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM, duration: 1 },
-      0
-    );
-    // Center next enters from TOP
-    tl.to(
-      ctrNext,
-      { clipPath: CLIP_VISIBLE, webkitClipPath: CLIP_VISIBLE, duration: 1 },
-      0
-    );
+    // scale + objectPosition on images
+    tl.to(bgCurrent, { scale: BG_EXIT_DOWN.scale, objectPosition: BG_EXIT_DOWN.objectPosition, duration: 1, ease: "power2.inOut" }, 0);
+    tl.to(bgNext,    { scale: BG_REST.scale,       objectPosition: BG_REST.objectPosition,      duration: 1, ease: "power2.inOut" }, 0);
 
-    // --- Text + gist + counter (DOWN) ---
+    tl.to(ctrImgCurrent, { scale: CTR_EXIT_DOWN.scale, objectPosition: CTR_EXIT_DOWN.objectPosition, duration: 1, ease: "power2.inOut" }, 0);
+    tl.to(ctrImgNext,    { scale: CTR_REST.scale,      objectPosition: CTR_REST.objectPosition,      duration: 1, ease: "power2.inOut" }, 0);
+
+    // text
     if (h1sPrev?.length) {
-      tl.to(
-        h1sPrev,
-        {
-          rotate: -5, y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out",
-          onComplete() { gsap.set(h1sPrev, { rotate: 5, y: "100%" }); },
-        },
-        0
-      );
+      tl.to(h1sPrev, { rotate: -5, y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out",
+        onComplete() { gsap.set(h1sPrev, { rotate: 5, y: "100%" }); } }, 0);
     }
-    if (h1sNext?.length) {
-      tl.to(h1sNext, { rotate: 0, y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
-    }
-    if (descPrev) {
-      tl.to(descPrev, { y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out" }, 0);
-    }
-    if (descNext) {
-      tl.to(descNext, { y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
-    }
+    if (h1sNext?.length) tl.to(h1sNext, { rotate: 0, y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+    if (descPrev)  tl.to(descPrev,  { y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out" }, 0);
+    if (descNext)  tl.to(descNext,  { y: "0%",    opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
     if (cntPrev) {
-      tl.to(
-        cntPrev,
-        {
-          top: "-100%", opacity: 0, duration: 0.8,
-          onComplete() { gsap.set(cntPrev, { top: "100%", opacity: 0 }); },
-        },
-        0
-      );
+      tl.to(cntPrev, { top: "-100%", opacity: 0, duration: 0.8,
+        onComplete() { gsap.set(cntPrev, { top: "100%", opacity: 0 }); } }, 0);
     }
-    if (cntNext) {
-      tl.to(cntNext, { top: "0%", opacity: 0.7, duration: 0.8 }, 0);
-    }
+    if (cntNext) tl.to(cntNext, { top: "0%", opacity: 0.7, duration: 0.8 }, 0);
 
     return tl;
   };
 
+  // ── UP ───────────────────────────────────────────────────────
   const runUpAnimations = () => {
     if (isAnimatingRef.current) return null;
     const total = items.length;
     if (!total) return null;
 
     const current = currentIndexRef.current % total;
-    const prev = (current - 1 + total) % total;
+    const prev    = (current - 1 + total) % total;
 
-    const bgCurrent = bgRefs.current[current];
-    const bgPrev = bgRefs.current[prev];
-    const ctrCurrent = centerRefs.current[current];
-    const ctrPrev = centerRefs.current[prev];
-    if (!bgCurrent || !bgPrev || !ctrCurrent || !ctrPrev) return null;
+    const bgWrapCurrent = bgWrapRefs.current[current];
+    const bgWrapPrev    = bgWrapRefs.current[prev];
+    const bgCurrent     = bgRefs.current[current];
+    const bgPrev        = bgRefs.current[prev];
+    const ctrCurrent    = centerRefs.current[current];
+    const ctrPrev       = centerRefs.current[prev];
+    const ctrImgCurrent = centerImgRefs.current[current];
+    const ctrImgPrev    = centerImgRefs.current[prev];
+    if (!bgWrapCurrent || !bgWrapPrev || !bgCurrent || !bgPrev || !ctrCurrent || !ctrPrev || !ctrImgCurrent || !ctrImgPrev) return null;
 
     const h1sPrev = textRefs.current[current];
     const h1sNext = textRefs.current[prev];
     const descPrev = descRefs.current[current];
     const descNext = descRefs.current[prev];
-    const cntPrev = counterRefs.current[current];
-    const cntNext = counterRefs.current[prev];
+    const cntPrev  = counterRefs.current[current];
+    const cntNext  = counterRefs.current[prev];
 
-    // Ensure a clean starting state for this step
-    bgRefs.current.forEach((el, i) => {
+    bgWrapRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.set(el, {
         clipPath: i === current ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
@@ -418,9 +345,8 @@ const WorkSection = ({ projects }) => {
         zIndex: i === current ? 2 : 0,
       });
     });
-    gsap.set(bgPrev, { zIndex: 1, clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP });
+    gsap.set(bgWrapPrev, { zIndex: 1, clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP });
 
-    // Center layer for UP: inactive waits hidden at BOTTOM
     centerRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.set(el, {
@@ -431,18 +357,23 @@ const WorkSection = ({ projects }) => {
     });
     gsap.set(ctrPrev, { zIndex: 1, clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM });
 
-    // Prepare incoming text/counter (UP = backward)
+    gsap.set(bgCurrent, { scale: BG_REST.scale,          objectPosition: BG_REST.objectPosition });
+    gsap.set(bgPrev,    { scale: BG_ENTER_UP_FROM.scale, objectPosition: BG_ENTER_UP_FROM.objectPosition });
+
+    // Center zoom + object-position (UP)
+    gsap.set(ctrImgCurrent, { scale: CTR_REST.scale,        objectPosition: CTR_REST.objectPosition });
+    gsap.set(ctrImgPrev,    { scale: CTR_ENTER_UP_FROM.scale, objectPosition: CTR_ENTER_UP_FROM.objectPosition });
+
     if (h1sNext?.length) gsap.set(h1sNext, { rotate: -5, y: "-100%", opacity: 0 });
     if (descNext) gsap.set(descNext, { y: "-100%", opacity: 0 });
-    if (cntNext) gsap.set(cntNext, { top: "-100%", opacity: 0 });
+    if (cntNext)  gsap.set(cntNext,  { top: "-100%", opacity: 0 });
 
     isAnimatingRef.current = true;
     const tl = gsap.timeline({
       onComplete: () => {
         currentIndexRef.current = prev;
         setActiveIndex(prev);
-
-        bgRefs.current.forEach((el, i) => {
+        bgWrapRefs.current.forEach((el, i) => {
           if (!el) return;
           gsap.set(el, {
             clipPath: i === prev ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
@@ -450,7 +381,6 @@ const WorkSection = ({ projects }) => {
             zIndex: i === prev ? 1 : 0,
           });
         });
-
         centerRefs.current.forEach((el, i) => {
           if (!el) return;
           gsap.set(el, {
@@ -459,161 +389,90 @@ const WorkSection = ({ projects }) => {
             zIndex: i === prev ? 1 : 0,
           });
         });
-
+        applyBgRestState();
+        applyCenterRestState();
         applyTextCounterRestState(prev, false);
         isAnimatingRef.current = false;
       },
-      onInterrupt: () => {
-        isAnimatingRef.current = false;
-      },
+      onInterrupt: () => { isAnimatingRef.current = false; },
     });
 
-    // BG current exits to BOTTOM
-    tl.to(
-      bgCurrent,
-      { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM, duration: 1 },
-      0
-    );
-    // BG prev enters from TOP
-    tl.to(
-      bgPrev,
-      { clipPath: CLIP_VISIBLE, webkitClipPath: CLIP_VISIBLE, duration: 1 },
-      0
-    );
+    tl.to(bgWrapCurrent, { clipPath: CLIP_HIDDEN_BOTTOM, webkitClipPath: CLIP_HIDDEN_BOTTOM, duration: 1 }, 0);
+    tl.to(bgWrapPrev,    { clipPath: CLIP_VISIBLE,       webkitClipPath: CLIP_VISIBLE,       duration: 1 }, 0);
+    tl.to(ctrCurrent,    { clipPath: CLIP_HIDDEN_TOP,    webkitClipPath: CLIP_HIDDEN_TOP,    duration: 1 }, 0);
+    tl.to(ctrPrev,       { clipPath: CLIP_VISIBLE,       webkitClipPath: CLIP_VISIBLE,       duration: 1 }, 0);
 
-    // Center current exits to TOP
-    tl.to(
-      ctrCurrent,
-      { clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP, duration: 1 },
-      0
-    );
-    // Center prev enters from BOTTOM
-    tl.to(
-      ctrPrev,
-      { clipPath: CLIP_VISIBLE, webkitClipPath: CLIP_VISIBLE, duration: 1 },
-      0
-    );
+    tl.to(bgCurrent, { scale: BG_EXIT_UP.scale, objectPosition: BG_EXIT_UP.objectPosition, duration: 1, ease: "power2.inOut" }, 0);
+    tl.to(bgPrev,    { scale: BG_REST.scale,     objectPosition: BG_REST.objectPosition,    duration: 1, ease: "power2.inOut" }, 0);
 
-    // --- Text + gist + counter (UP) ---
+    tl.to(ctrImgCurrent, { scale: CTR_EXIT_UP.scale, objectPosition: CTR_EXIT_UP.objectPosition, duration: 1, ease: "power2.inOut" }, 0);
+    tl.to(ctrImgPrev,    { scale: CTR_REST.scale,    objectPosition: CTR_REST.objectPosition,    duration: 1, ease: "power2.inOut" }, 0);
+
     if (h1sPrev?.length) {
-      tl.to(
-        h1sPrev,
-        {
-          rotate: 5, y: "100%", opacity: 0, duration: 0.8, ease: "power2.out",
-          onComplete() { gsap.set(h1sPrev, { rotate: -5, y: "-100%" }); },
-        },
-        0
-      );
+      tl.to(h1sPrev, { rotate: 5, y: "100%", opacity: 0, duration: 0.8, ease: "power2.out",
+        onComplete() { gsap.set(h1sPrev, { rotate: -5, y: "-100%" }); } }, 0);
     }
-    if (h1sNext?.length) {
-      tl.to(h1sNext, { rotate: 0, y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
-    }
-    if (descPrev) {
-      tl.to(descPrev, { y: "100%", opacity: 0, duration: 0.8, ease: "power2.out" }, 0);
-    }
-    if (descNext) {
-      tl.to(descNext, { y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
-    }
+    if (h1sNext?.length) tl.to(h1sNext, { rotate: 0, y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+    if (descPrev)  tl.to(descPrev,  { y: "100%",  opacity: 0, duration: 0.8, ease: "power2.out" }, 0);
+    if (descNext)  tl.to(descNext,  { y: "0%",    opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
     if (cntPrev) {
-      tl.to(
-        cntPrev,
-        {
-          top: "100%", opacity: 0, duration: 0.8,
-          onComplete() { gsap.set(cntPrev, { top: "-100%", opacity: 0 }); },
-        },
-        0
-      );
+      tl.to(cntPrev, { top: "100%", opacity: 0, duration: 0.8,
+        onComplete() { gsap.set(cntPrev, { top: "-100%", opacity: 0 }); } }, 0);
     }
-    if (cntNext) {
-      tl.to(cntNext, { top: "0%", opacity: 0.7, duration: 0.8 }, 0);
-    }
+    if (cntNext) tl.to(cntNext, { top: "0%", opacity: 0.7, duration: 0.8 }, 0);
 
     return tl;
   };
 
   const handleScrollDirection = (dir) => {
-    if (!dir) return;
-    if (isAnimatingRef.current) return;
-    if (isGridOpenRef.current) return;
-
-    setScrollDirection(dir);
-
-    if (dir === "up") {
-      runUpAnimations();
-      return;
-    }
-    if (dir === "down") {
-      runDownAnimations();
-      return;
-    }
+    if (!dir || isAnimatingRef.current || isGridOpenRef.current) return;
+    if (dir === "up")   runUpAnimations();
+    if (dir === "down") runDownAnimations();
   };
 
   useEffect(() => {
-    const el = containerRef.current;
+    const el     = containerRef.current;
     const gridEl = gridListRef.current;
     if (!el) return;
 
     const onWheel = (e) => {
-      // ✅ FIX: Guard BEFORE preventDefault so grid can scroll natively.
-      // When grid is open, return immediately — the event propagates normally
-      // to the grid element and it scrolls as expected.
       if (isGridOpenRef.current) return;
-
       const dy = e.deltaY;
       if (Math.abs(dy) < 8) return;
-
-      // Only call preventDefault when gallery is active (blocks page scroll)
       e.preventDefault();
-
       if (isAnimatingRef.current) return;
       if (Date.now() < cooldownRef.current) return;
       cooldownRef.current = Date.now() + 900;
       handleScrollDirection(dy > 0 ? "down" : "up");
     };
 
-    // ✅ FIX: Stop wheel events inside the grid from bubbling up to the
-    // container listener. Without this, even though we guard with
-    // isGridOpenRef, the container's { passive: false } registration
-    // can interfere with the grid's native scroll on some browsers.
-    const stopGridPropagation = (e) => {
-      e.stopPropagation();
-    };
+    const stopGridPropagation = (e) => { e.stopPropagation(); };
 
-    const onTouchStart = (e) => {
-      touchStartYRef.current = e.touches?.[0]?.clientY ?? null;
-    };
-
-    const onTouchEnd = (e) => {
+    const onTouchStart = (e) => { touchStartYRef.current = e.touches?.[0]?.clientY ?? null; };
+    const onTouchEnd   = (e) => {
       if (isGridOpenRef.current) return;
       const startY = touchStartYRef.current;
-      const endY = e.changedTouches?.[0]?.clientY;
+      const endY   = e.changedTouches?.[0]?.clientY;
       touchStartYRef.current = null;
-
       if (typeof startY !== 'number' || typeof endY !== 'number') return;
       const dy = endY - startY;
       if (Math.abs(dy) < 40) return;
-
       if (isAnimatingRef.current) return;
       if (Date.now() < cooldownRef.current) return;
       cooldownRef.current = Date.now() + 900;
-      // Swipe up = "down" in our naming (next slide)
       handleScrollDirection(dy < 0 ? "down" : "up");
     };
 
-    // passive: false needed so we can call preventDefault in gallery mode
-    el.addEventListener('wheel', onWheel, { passive: false });
-
-    // ✅ Grid wheel events stop here — never reach the container listener
-    gridEl?.addEventListener('wheel', stopGridPropagation, { passive: true });
-
-    el.addEventListener('touchstart', onTouchStart, { passive: true });
-    el.addEventListener('touchend', onTouchEnd, { passive: true });
+    el.addEventListener('wheel',      onWheel,              { passive: false });
+    gridEl?.addEventListener('wheel', stopGridPropagation,  { passive: true  });
+    el.addEventListener('touchstart', onTouchStart,         { passive: true  });
+    el.addEventListener('touchend',   onTouchEnd,           { passive: true  });
 
     return () => {
-      el.removeEventListener('wheel', onWheel);
+      el.removeEventListener('wheel',      onWheel);
       gridEl?.removeEventListener('wheel', stopGridPropagation);
       el.removeEventListener('touchstart', onTouchStart);
-      el.removeEventListener('touchend', onTouchEnd);
+      el.removeEventListener('touchend',   onTouchEnd);
     };
   }, []);
 
@@ -623,60 +482,81 @@ const WorkSection = ({ projects }) => {
       ref={containerRef}
       className="relative w-screen h-screen overflow-hidden touch-none select-none"
     >
+
       {/* ── Background slides ── */}
       <div className="absolute inset-0 z-0">
         {items.map((project, i) => (
-          <Image
-            width={1000}
-            height={1000}
-            key={`bg-${i}`}
-            src={project.coverImage}
-            alt={project.name}
-            className="absolute inset-0 w-full h-full object-cover"
-            ref={(el) => { bgRefs.current[i] = el; }}
+          // clip-path is on THIS wrapper div
+          <div
+            key={`bg-wrap-${i}`}
+            ref={(el) => { bgWrapRefs.current[i] = el; }}
+            className="absolute inset-0 overflow-hidden"
             style={{
               clipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_BOTTOM,
               WebkitClipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_BOTTOM,
-              willChange: "clip-path, transform",
+              willChange: "clip-path",
               zIndex: i === 0 ? 1 : 0,
-              filter: "brightness(35%)",
             }}
-          />
+          >
+            {/* scale + objectPosition is on THIS image */}
+            <Image
+              width={1920}
+              height={1080}
+              key={`bg-${i}`}
+              src={project.coverImage}
+              alt={project.name}
+              className="absolute inset-0 w-full h-full object-cover"
+              ref={(el) => { bgRefs.current[i] = el; }}
+              style={{
+                willChange: "transform, object-position",
+                scale: 1,
+                objectPosition: "50% 50%",
+                filter: "brightness(35%)",
+              }}
+            />
+          </div>
         ))}
       </div>
 
-      {/* ── Center foreground (inner-container) ── */}
+      {/* ── Center foreground ── */}
       <div
         className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[300px] md:min-w-[400px] aspect-square z-20 transition-opacity duration-300 ${isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
       >
-        <div className='w-full h-full overflow-hidden'>
+        <div className="w-full h-full overflow-hidden">
           {items.map((project, i) => (
+            // clip-path on this Link wrapper
             <Link
               key={`ctr-${i}`}
               href={`/work/${project.slug}`}
-              className={`absolute inset-0 block ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
+              ref={(el) => { centerRefs.current[i] = el; }}
+              className={`absolute inset-0 block overflow-hidden ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
               aria-label={`Open ${project.name}`}
               title={`Open ${project.name}`}
+              style={{
+                clipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
+                WebkitClipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
+                willChange: "clip-path",
+                zIndex: i === 0 ? 1 : 0,
+              }}
             >
               <Image
                 width={1000}
                 height={1000}
-                ref={(el) => { centerRefs.current[i] = el; }}
+                ref={(el) => { centerImgRefs.current[i] = el; }}
                 src={project.coverImage}
                 alt={project.name}
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{
-                  clipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
-                  WebkitClipPath: i === 0 ? CLIP_VISIBLE : CLIP_HIDDEN_TOP,
-                  willChange: "clip-path",
-                  zIndex: i === 0 ? 1 : 0,
+                  willChange: "transform, object-position",
+                  scale: 1,
+                  objectPosition: "50% 50%",
                 }}
               />
             </Link>
           ))}
         </div>
 
-        {/* ── Bottom bar: animated counter ── */}
+        {/* Counter bar */}
         <div
           className={`w-full flex items-center justify-between absolute top-full pt-4 left-0 transition-opacity duration-300 ${isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
         >
@@ -688,11 +568,7 @@ const WorkSection = ({ projects }) => {
                   key={`cnt-${i}`}
                   ref={(el) => { counterRefs.current[i] = el; }}
                   className="absolute right-0 text-white text-sm font-heading font-extralight tracking-[0.3px] leading-none tabular-nums"
-                  style={{
-                    top: i === 0 ? "0%" : "100%",
-                    opacity: i === 0 ? 0.7 : 0,
-                    willChange: "top, opacity",
-                  }}
+                  style={{ top: i === 0 ? "0%" : "100%", opacity: i === 0 ? 0.7 : 0, willChange: "top, opacity" }}
                 >
                   {pad2(i + 1)}
                 </span>
@@ -725,7 +601,7 @@ const WorkSection = ({ projects }) => {
         onReset={onResetFilters}
       />
 
-      {/* ── Side text (animated overlay) ── */}
+      {/* ── Side text ── */}
       <div className="absolute inset-0 z-10 pointer-events-none">
         {items.map((project, i) => (
           <div
@@ -739,7 +615,7 @@ const WorkSection = ({ projects }) => {
                     if (!textRefs.current[i]) textRefs.current[i] = [];
                     textRefs.current[i][ti] = el;
                   }}
-                  className="text-white font-heading font-extralight tracking-[0.4px]  leading-[1.08] text-[clamp(1.45rem,5.6vw,2.4rem)] sm:text-[clamp(1.85rem,5vw,3.4rem)] whitespace-nowrap max-w-full overflow-hidden text-ellipsis"
+                  className="text-white font-heading font-extralight tracking-[0.4px] leading-[1.08] text-[clamp(1.45rem,5.6vw,2.4rem)] sm:text-[clamp(1.85rem,5vw,3.4rem)] whitespace-nowrap max-w-full overflow-hidden text-ellipsis"
                   style={{
                     display: "inline-block",
                     willChange: "transform, opacity",
@@ -751,7 +627,6 @@ const WorkSection = ({ projects }) => {
                 </h2>
               </div>
             ))}
-
             <div className="overflow-hidden mt-2 sm:mt-3">
               <p
                 ref={(el) => { descRefs.current[i] = el; }}
@@ -768,6 +643,7 @@ const WorkSection = ({ projects }) => {
           </div>
         ))}
       </div>
+
     </div>
   );
 };
