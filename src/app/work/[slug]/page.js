@@ -2,7 +2,7 @@ import InstagramSection from '@/components/connect/InstagramSection'
 import HeroSection from '@/components/expertiseDets/HeroSection'
 import CaseStudyIntro from '@/components/workDets/CaseStudyIntro'
 import ImageToggleSection from '@/components/workDets/ImageToggleSection'
-import caseStudyData from '@/helper/case-study'
+import { getCaseStudies, getCaseStudyBySlug } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
 
   const resolvedParams = await Promise.resolve(params);
   const slug = normalizeSlug(resolvedParams?.slug);
-  const caseStudy = caseStudyData.find((c) => normalizeSlug(c?.slug) === slug);
+  const caseStudy = await getCaseStudyBySlug(slug);
   if (!caseStudy) return {};
 
   const title = `${caseStudy.title || "Case Study"}`;
@@ -63,12 +63,11 @@ const WorkDetail = async ({ params }) => {
     }
   };
 
-  const resolvedParams = await params;
+  const resolvedParams = await Promise.resolve(params);
   const slug = normalizeSlug(resolvedParams?.slug);
-  const caseStudy = caseStudyData.find((c) => normalizeSlug(c?.slug) === slug);
-  const otherCaseStudies = caseStudyData
-    .filter((c) => normalizeSlug(c?.slug) !== slug)
-    .slice(0, 3);
+  const caseStudy = await getCaseStudyBySlug(slug);
+  const all = await getCaseStudies();
+  const otherCaseStudies = (all ?? []).filter((c) => normalizeSlug(c?.slug) !== slug).slice(0, 3);
 
   if (!caseStudy) notFound()
 

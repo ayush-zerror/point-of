@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import GridButton from '../common/GridButton';
-import caseStudy from '../../helper/case-study';
 import WorkGridOverlay from "./WorkGridOverlay";
 import WorkFilterPanel from "./WorkFilterPanel";
 
@@ -72,16 +71,17 @@ const WorkSection = ({ projects }) => {
 
   const filterOptions = useMemo(() => {
     const uniq = (arr) => [...new Set(arr.filter(Boolean).map((v) => String(v).trim()).filter(Boolean))];
-    const services = uniq(caseStudy.flatMap((p) => Array.isArray(p?.filtersServices) ? p.filtersServices : []));
-    const industry = uniq(caseStudy.flatMap((p) => Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : []));
-    const years    = uniq(caseStudy.map((p) => p?.filtersYear))
+    const base = projects ?? [];
+    const services = uniq(base.flatMap((p) => Array.isArray(p?.filtersServices) ? p.filtersServices : []));
+    const industry = uniq(base.flatMap((p) => Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : []));
+    const years    = uniq(base.map((p) => p?.filtersYear))
       .sort((a, b) => { const na = Number(a), nb = Number(b); return (isFinite(na) && isFinite(nb)) ? nb - na : b.localeCompare(a); });
     return {
       services: services.sort((a, b) => a.localeCompare(b)),
       industry: industry.sort((a, b) => a.localeCompare(b)),
       year: years,
     };
-  }, []);
+  }, [projects]);
 
   const pad2 = (n) => String(n).padStart(2, "0");
 
@@ -116,14 +116,15 @@ const WorkSection = ({ projects }) => {
 
   const filteredCaseStudy = useMemo(() => {
     const { services, industry, year } = activeFilters;
-    if (!services.size && !industry.size && !year.size) return caseStudy;
-    return caseStudy.filter((p) => {
+    const base = projects ?? [];
+    if (!services.size && !industry.size && !year.size) return base;
+    return base.filter((p) => {
       if (services.size && !( Array.isArray(p?.filtersServices) ? p.filtersServices : []).some((v) => services.has(String(v)))) return false;
       if (industry.size && !( Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : []).some((v) => industry.has(String(v)))) return false;
       if (year.size    && !year.has(String(p?.filtersYear))) return false;
       return true;
     });
-  }, [activeFilters]);
+  }, [activeFilters, projects]);
 
   const onApplyFilters = () => setIsFilterOpen(false);
   const onResetFilters = () => setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });

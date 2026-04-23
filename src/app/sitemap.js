@@ -1,7 +1,7 @@
-import caseStudyData from "@/helper/case-study";
 import { expertiseDetails } from "@/helper/expertise-data";
+import { client } from "@/sanity/lib/client";
 
-export default function sitemap() {
+export default async function sitemap() {
   const base = "https://www.wearepointof.com";
   const now = new Date();
 
@@ -16,10 +16,8 @@ export default function sitemap() {
     "/legal",
   ];
 
-  const workRoutes = (caseStudyData ?? [])
-    .map((c) => c?.slug)
-    .filter(Boolean)
-    .map((slug) => `/work/${slug}`);
+  const slugs = await client.fetch(`*[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }`);
+  const workRoutes = (slugs ?? []).map((c) => c?.slug).filter(Boolean).map((slug) => `/work/${slug}`);
 
   const expertiseRoutes = (expertiseDetails ?? [])
     .map((e) => e?.slug)

@@ -8,6 +8,7 @@ import OurWork from '@/components/home/OurWork'
 import Showreel from '@/components/home/Showreel'
 import AccordionSection from '@/components/connect/AccordionSection'
 import { expertiseItems } from '@/helper/expertise-items'
+import { getCaseStudies } from '@/sanity/lib/queries'
 import React from 'react'
 
 export const metadata = {
@@ -26,7 +27,10 @@ export const metadata = {
   alternates: { canonical: "/" },
 };
 
-const Home = () => {
+const Home = async () => {
+  const all = await getCaseStudies();
+  const posts = (all ?? []).slice(0, 6);
+
   return (
     <>
       <HeroSection />
@@ -46,7 +50,7 @@ const Home = () => {
       <div className="hidden md:block">
         <Expertise />
       </div>
-      <OurWork />
+      <OurWork posts={posts} />
       <Showreel />
       <BrandsSection />
       <CTASection

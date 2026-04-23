@@ -3,7 +3,14 @@ const nextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: ["www.wearepointof.com","mir-s3-cdn-cf.behance.net","images.unsplash.com","framerusercontent.com","www.behance.net"],
+    remotePatterns: [
+      { protocol: "https", hostname: "www.wearepointof.com" },
+      { protocol: "https", hostname: "mir-s3-cdn-cf.behance.net" },
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "framerusercontent.com" },
+      { protocol: "https", hostname: "www.behance.net" },
+      { protocol: "https", hostname: "cdn.sanity.io" },
+    ],
   },
 };
 

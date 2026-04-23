@@ -10,13 +10,10 @@ import Image from "next/image";
 import WorkCard from "../work/WorkCard";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import caseStudyData from "@/helper/case-study";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const posts = (caseStudyData ?? []).slice(0, 6);
-
-export default function OurWork() {
+export default function OurWork({ posts = [] }) {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
   const buttonCircleRef = useRef(null);
@@ -201,7 +198,7 @@ export default function OurWork() {
           className="flex items-center gap-22 px-4 sm:px-10 md:px-16 lg:px-20"
         >
           {/* CARDS */}
-          {posts.map((post, index) => (
+          {(posts ?? []).map((post, index) => (
             <div
               key={post.slug ?? index}
               className="shrink-0 w-[85vw] max-w-[380px] sm:w-auto sm:max-w-none"

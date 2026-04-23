@@ -6,7 +6,7 @@ import React from 'react'
 import AccordionSection from '@/components/connect/AccordionSection'
 import { vacancies } from '@/helper/vacancies'
 import HashScrollToId from "@/components/common/HashScrollToId"
-import caseStudyData from "@/helper/case-study"
+import { getCaseStudies } from "@/sanity/lib/queries"
 
 export const metadata = {
   title: "Connect",
@@ -17,8 +17,9 @@ export const metadata = {
 
 
 
-const Connect = () => {
-  const caseStudies = (caseStudyData ?? []).slice(0, 3)
+const Connect = async () => {
+  const all = await getCaseStudies();
+  const caseStudies = (all ?? []).slice(0, 3)
   return (
     <>
       <HashScrollToId offset={100} />

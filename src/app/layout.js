@@ -116,7 +116,7 @@ export default function RootLayout({ children }) {
         <ToasterProvider />
         <Navbar />
         {children}
-        <FooterVisibility excludePath="/work" />
+        <FooterVisibility excludePaths={["/work", "/studio"]} />
       </body>
     </html>
   );

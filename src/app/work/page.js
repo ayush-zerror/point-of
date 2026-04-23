@@ -1,5 +1,5 @@
 import WorkSection from '@/components/work/WorkSection'
-import caseStudyData from '@/helper/case-study'
+import { getCaseStudies } from '@/sanity/lib/queries'
 import React from 'react'
 
 export const metadata = {
@@ -9,8 +9,9 @@ export const metadata = {
   alternates: { canonical: "/work" },
 };
 
-const Work = () => {
-  const projects = (caseStudyData ?? []).map((c) => {
+const Work = async () => {
+  const caseStudies = await getCaseStudies();
+  const projects = (caseStudies ?? []).map((c) => {
     const title = String(c?.title ?? "").trim();
     const words = title.split(/\s+/).filter(Boolean);
 
@@ -21,6 +22,9 @@ const Work = () => {
       gist: c?.gist ?? "",
       titles: words.length <= 1 ? [title] : [words[0], words.slice(1).join(" ")],
       microanimation: c?.microanimation,
+      filtersServices: c?.filtersServices ?? [],
+      filtersIndustry: c?.filtersIndustry ?? [],
+      filtersYear: c?.filtersYear ?? "",
     };
   });
 

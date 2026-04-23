@@ -3,7 +3,7 @@ import AboutExpertise from "@/components/expertiseDets/AboutExpertise";
 import HeroSection from "@/components/expertiseDets/HeroSection";
 import CTASection from "@/components/home/CTASection";
 import { expertiseDetails } from "@/helper/expertise-data";
-import caseStudyData from "@/helper/case-study";
+import { getCaseStudies } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -46,7 +46,8 @@ const ExpertiseDetails = async ({ params }) => {
   const data = expertiseDetails.find((item) => item.slug === slug);
   if (!data) notFound();
 
-  const caseStudies = (caseStudyData ?? []).slice(0, 3);
+  const all = await getCaseStudies();
+  const caseStudies = (all ?? []).slice(0, 3);
 
   return (
     <>

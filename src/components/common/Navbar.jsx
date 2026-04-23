@@ -21,6 +21,12 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // Hide navbar on excluded routes (e.g. Sanity Studio)
+  const excludePaths = ["/studio"];
+  if (pathname && excludePaths.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+    return null;
+  }
+
   const navRef = useRef(null);
   const tl = useRef(null);
   const refP = useRef(null);
