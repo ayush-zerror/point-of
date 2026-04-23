@@ -35,10 +35,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 }`}
                 title={item.name}
               >
-                <span className="nav-item  relative inline-block">
-                  {item.name}
-                  <span className="absolute left-0 -bottom-1 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-200 group-hover:scale-x-100" />
-                </span>
+                <span className="nav-item link-underline">{item.name}</span>
               </Link>
             ))}
           </nav>
@@ -64,7 +61,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
-                className="text-xs sm:text-sm text-foreground/50 hover:text-foreground cursor-pointer transition-colors duration-200"
+                className="link-underline text-xs sm:text-sm text-foreground/50 hover:text-foreground cursor-pointer transition-colors duration-200"
                 title={item.name}
               >
                 {item.name}

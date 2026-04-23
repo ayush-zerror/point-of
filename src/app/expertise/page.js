@@ -22,7 +22,7 @@ const Expertise = () => {
       <OurProcess />
       <OurApproach />
       <AccordionSection data={faqs} title="FAQ" />
-      <CTASection />
+      <CTASection graphic={true} />
     </>
   )
 }

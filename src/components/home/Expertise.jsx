@@ -331,12 +331,21 @@ export default function Expertise() {
 
                     <Link
                       href={`/expertise/${item.slug}`}
-                      className={`block text-left hover:text-heading cursor-pointer heading-lg transition-colors duration-300 ${isActive ? "text-subheading" : "text-desc"}`}
+                      className={`group block text-left hover:text-heading cursor-pointer heading-lg transition-colors duration-300 ${isActive ? "text-subheading" : "text-desc"}`}
                       title={item.title}
                     >
-                      {item.title}
+                      <span className="inline-flex items-center">
+                        <span>{item.title}</span>
+                        <span className="inline-flex items-center ml-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                          {/* Arrow: → */}
+                          <svg width="1em" height="1em" viewBox="0 0 20 20" fill="none" className="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.293 5.293a1 1 0 011.414 0l4.293 4.293a1 1 0 010 1.414l-4.293 4.293a1 1 0 01-1.414-1.414L13.586 11H4a1 1 0 110-2h9.586l-2.293-2.293a1 1 0 010-1.414z" fill="currentColor"/>
+                          </svg>
+                        </span>
+                      </span>
                     </Link>
                   </div>
+            
 
                   <motion.div
                     initial={false}

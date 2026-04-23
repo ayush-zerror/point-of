@@ -4,10 +4,12 @@ import { Check, Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState("idle"); // idle | success | error
+  const pathname = usePathname();
 
   useEffect(() => {
     if (newsletterStatus !== "success") return;
@@ -35,9 +37,9 @@ export default function Footer() {
   return (
     <footer className="w-full bg-background relative">
       <div className="px-4 sm:px-10 md:px-12 lg:px-20 mx-auto pt-12 md:pt-16 lg:pt-30 ">
-        
+
         <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-0">
-          
+
           {/* LOGO */}
           <div>
             <Link href="/" className="flex items-start" title="Go to homepage">
@@ -53,7 +55,7 @@ export default function Footer() {
 
           {/* 🔥 RIGHT SIDE WRAPPER */}
           <div className="flex flex-col sm:flex-row flex-wrap gap-10 sm:gap-16 md:flex-nowrap md:gap-12 lg:gap-28">
-            
+
             {/* NAV + SOCIAL (side-by-side on mobile) */}
             <div className="grid grid-cols-2 gap-10 sm:flex sm:flex-row sm:flex-wrap sm:gap-16 md:flex-nowrap md:gap-12 lg:gap-28">
               {/* NAV LINKS */}
@@ -68,7 +70,7 @@ export default function Footer() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block hover:opacity-60 transition"
+                    className={`link-underline block transition ${pathname.startsWith(item.href) ? "font-[600]" : "font-[500]"}`}
                     title={item.name}
                   >
                     {item.name}
@@ -97,7 +99,7 @@ export default function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block hover:opacity-60 transition"
+                    className="link-underline block transition font-[500]"
                     title={item.name}
                   >
                     {item.name}
@@ -108,7 +110,7 @@ export default function Footer() {
 
             {/* EMAIL SUBSCRIBE */}
             <div className="space-y-3  w-full sm:w-[260px] md:w-[300px]">
-              <p className="font-medium">Don’t miss anything</p>
+              <p className="para text-heading tracking-wide font-[500]">Don’t miss anything</p>
 
               <div className="relative border-b border-neutral-700 pb-2">
                 <input
@@ -149,10 +151,10 @@ export default function Footer() {
               ) : null}
 
               <div className="text-sm">
-                <p className="text-neutral-400">Partner with us</p>
+                <p className="text-desc mb-2">Partner with us</p>
                 <a
                   href="mailto:think@wearepointof.com"
-                  className="font-medium hover:underline"
+                  className="link-underline para text-heading tracking-wide font-[500]"
                   title="Email Point Of"
                 >
                   think@wearepointof.com
@@ -165,7 +167,7 @@ export default function Footer() {
 
         {/* DIVIDER */}
         <div className="border-t border-neutral-700 mt-10 md:mt-12 py-6 flex flex-row justify-between items-start md:items-center gap-4 text-sm">
-          
+
           <div className="flex flex-wrap gap-3 md:gap-4 text-neutral-400">
             <Link href="/privacy" className="hover:text-white transition" title="Privacy Policy">
               Privacy

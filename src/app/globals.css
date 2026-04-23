@@ -54,6 +54,18 @@ body {
   .para {
     @apply font-body font-normal text-base leading-normal tracking-[0.3px];
   }
+
+  /* Underline hover: width 0 -> 100% */
+  .link-underline {
+    @apply relative inline-block w-fit;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute left-0 -bottom-[2px] h-px w-0 bg-current transition-[width] duration-300 ease-out;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
 }
 
 

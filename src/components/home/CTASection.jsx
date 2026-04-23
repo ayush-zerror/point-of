@@ -2,6 +2,7 @@
 import React from "react";
 import Button from "../common/Button";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 const CTASection = ({
   heading = (
     <>
@@ -11,6 +12,7 @@ const CTASection = ({
     </>
   ),
   buttonTitle = "LET’S TALK",
+  graphic = false,
 } = {}) => {
   const router = useRouter();
   const handleButtonClick = () => {
@@ -26,7 +28,17 @@ const CTASection = ({
         <p className="heading-xl text-desc [&_br]:hidden sm:[&_br]:block">{heading}</p>
         {/* CTA */}
         <Button title={buttonTitle} onClick={handleButtonClick} />
+        {graphic && (
+        <Image
+          src="/expertise/graphic_expertise.webp"
+          alt="graphic_expertise"
+          width={1000}
+          height={1000}
+          className="W-56 h-56 object-contain mt-12 md:mt-16 lg:mt-30"
+        />
+        )}
       </div>
+
     </section>
   );
 };

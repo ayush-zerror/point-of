@@ -31,9 +31,9 @@ const AccordionSection = ({ data, title }) => {
                             <button
                                 type="button"
                                 onClick={() => toggle(index)}
-                                className="w-full flex items-center justify-between cursor-pointer group text-left"
+                                className="w-full flex items-center justify-between cursor-pointer group text-left group"
                             >
-                                <span className="heading-lg text-desc transition">
+                                <span className={`heading-lg text-desc transition group-hover:text-heading ${activeIndex === index ? "text-heading" : "text-desc"}`}>
                                     {job.title}
                                 </span>
 

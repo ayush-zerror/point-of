@@ -57,9 +57,9 @@ const AboutExpertise = ({
                   
                   <button
                     onClick={() => setActive(isOpen ? null : index)}
-                    className="w-full flex items-center justify-between py-6 md:py-8 text-left group"
+                    className="w-full flex items-center justify-between py-6 md:py-8 text-left group cursor-pointer"
                   >
-                    <span className="heading-lg text-desc transition">
+                    <span className={`heading-lg text-desc transition hover:text-heading ${isOpen ? "text-heading" : "text-desc"}`}>
                       {item.title}
                     </span>
 
