@@ -529,7 +529,7 @@ const WorkSection = ({ projects }) => {
               key={`ctr-${i}`}
               href={`/work/${project.slug}`}
               ref={(el) => { centerRefs.current[i] = el; }}
-              className={`absolute inset-0 block overflow-hidden ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
+              className={`absolute group inset-0 block overflow-hidden ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
               aria-label={`Open ${project.name}`}
               title={`Open ${project.name}`}
               style={{
@@ -552,6 +552,9 @@ const WorkSection = ({ projects }) => {
                   objectPosition: "50% 50%",
                 }}
               />
+              <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <video src={project.microanimation} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+              </div>
             </Link>
           ))}
         </div>
