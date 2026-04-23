@@ -115,7 +115,18 @@ const GetInTouch = () => {
     setSubmitting(true);
     const t = toast.loading("Submitting...");
     try {
-      console.log("GetInTouch submit payload:", payload);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        toast.error(data?.error || "Something went wrong. Please try again.", { id: t });
+        return;
+      }
+
       toast.success("Submitted successfully!", { id: t });
       handleReset();
     } catch {

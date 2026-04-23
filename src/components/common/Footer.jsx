@@ -8,7 +8,8 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [newsletterStatus, setNewsletterStatus] = useState("idle"); // idle | success | error
+  const [newsletterStatus, setNewsletterStatus] = useState("idle"); // idle | loading | success | error
+  const [newsletterError, setNewsletterError] = useState("");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -25,13 +26,36 @@ export default function Footer() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   };
 
-  const submitNewsletter = () => {
-    if (isValidEmail(newsletterEmail)) {
-      setNewsletterStatus("success");
-      // Minimal UX: keep the typed email, just show tick + message.
+  const submitNewsletter = async () => {
+    const email = String(newsletterEmail ?? "").trim();
+    setNewsletterError("");
+
+    if (!isValidEmail(email)) {
+      setNewsletterStatus("error");
+      setNewsletterError("Please enter a valid email");
       return;
     }
-    setNewsletterStatus("error");
+
+    try {
+      setNewsletterStatus("loading");
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setNewsletterStatus("error");
+        setNewsletterError(data?.error || "Something went wrong");
+        return;
+      }
+
+      setNewsletterStatus("success");
+    } catch {
+      setNewsletterStatus("error");
+      setNewsletterError("Network error. Please try again.");
+    }
   };
 
   return (
@@ -135,9 +159,15 @@ export default function Footer() {
                   className="absolute right-0 top-1/2 -translate-y-1/2"
                   aria-label="Subscribe to newsletter"
                   title="Subscribe"
+                  disabled={newsletterStatus === "loading"}
                 >
                   {newsletterStatus === "success" ? (
                     <Check className="w-5 h-5 text-green-400" />
+                  ) : newsletterStatus === "loading" ? (
+                    <span
+                      className="inline-block w-4 h-4 rounded-full border-2 border-neutral-400/30 border-t-neutral-200 animate-spin"
+                      aria-label="Loading"
+                    />
                   ) : (
                     <Send className="w-5 h-5 opacity-70" />
                   )}
@@ -147,7 +177,7 @@ export default function Footer() {
               {newsletterStatus === "success" ? (
                 <p className="text-xs text-green-400">Saved</p>
               ) : newsletterStatus === "error" ? (
-                <p className="text-xs text-red-400">Please enter a valid email</p>
+                <p className="text-xs text-red-400">{newsletterError || "Please enter a valid email"}</p>
               ) : null}
 
               <div className="text-sm">
