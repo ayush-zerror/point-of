@@ -6,7 +6,6 @@ const isHexColor = (v) => typeof v === "string" && /^#([0-9a-fA-F]{3}|[0-9a-fA-F
 
 const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassName }) => {
   const handleClick = (event) => {
-    // Forward the click event to the parent handler (if provided).
     if (typeof onClick === "function") onClick(event);
   };
 
@@ -32,18 +31,16 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
           strokeWidth="2"
           viewBox="0 0 24 24"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M5 12h14M13 6l6 6-6 6"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
         </svg>
       </span>
 
       {/* Text with animated underline */}
       <span
         style={textStyle}
-        className={`relative uppercase whitespace-nowrap ${useInline ? "" : `text-${color}`} ${textClassName ?? ""}`}
+        className={`relative uppercase whitespace-nowrap text-[11px] md:text-sm ${
+          useInline ? "" : `text-${color}`
+        } ${textClassName ?? ""}`}
       >
         {title}
         {/* Underline */}
@@ -57,31 +54,23 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
     </>
   );
 
+  const linkClass =
+    "cursor-pointer group flex mb-1 items-center gap-1.5 md:gap-2 font-semibold tracking-wide uppercase touch-manipulation";
+
   return (
-    <div className={`mt-10 z-20 relative ${className}`}>
+    <div className={`mt-6 md:mt-10 z-20 relative ${className ?? ""}`}>
       {href ? (
         href.startsWith("/") ? (
-          <Link
-            href={href}
-            className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase"
-            title={title}
-          >
+          <Link href={href} className={linkClass} title={title}>
             {inner}
           </Link>
         ) : (
-          <a
-            href={href}
-            className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase"
-            title={title}
-          >
+          <a href={href} className={linkClass} title={title}>
             {inner}
           </a>
         )
       ) : (
-        <button
-          onClick={handleClick}
-          className="cursor-pointer group flex mb-1 items-center gap-2 text-sm font-semibold tracking-wide uppercase"
-        >
+        <button onClick={handleClick} className={linkClass}>
           {inner}
         </button>
       )}
@@ -89,4 +78,4 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
   );
 };
 
-export default Button
+export default Button;
