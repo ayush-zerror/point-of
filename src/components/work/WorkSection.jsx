@@ -512,7 +512,7 @@ const WorkSection = ({ projects }) => {
                 willChange: "transform, object-position",
                 scale: 1,
                 objectPosition: "50% 50%",
-                filter: "brightness(35%)",
+                filter: "brightness(60%) blur(3px)",
               }}
             />
           </div>
