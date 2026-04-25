@@ -70,7 +70,7 @@ const GetInTouch = () => {
   const helpOtherRef     = useRef(null);
   const hearOtherRef     = useRef(null);
 
-  const { register, handleSubmit, control, watch, reset, setValue } = useForm({
+  const { register, handleSubmit, control, watch, reset, setValue, getValues } = useForm({
     defaultValues: {
       fullName: "", company: "", website: "", email: "",
       phone: "", industry: "", help: "", hear: "", brief: "",
@@ -149,8 +149,10 @@ const GetInTouch = () => {
     }
   };
 
-  const makeOtherBlur = (currentValue, setIsOther, field) => () => {
-    if (!String(currentValue || "").trim()) {
+  const makeOtherBlur = (setIsOther, field, rhfOnBlur) => (e) => {
+    rhfOnBlur?.(e);
+    const v = getValues(field);
+    if (!String(v || "").trim()) {
       setIsOther(false);
       setValue(field, "");
     }
@@ -230,7 +232,7 @@ const GetInTouch = () => {
                     }}
                     placeholder=" "
                     containerClass="w-full"
-                    inputClass="!w-full !border-0 !bg-transparent !outline-none !pt-5 !pb-2 !text-sm sm:!text-base"
+                    inputClass="!w-full !border-0 !bg-transparent !outline-none !para"
                     buttonClass="!border-0 !bg-transparent"
                     dropdownClass="!bg-white !text-black"
                   />
@@ -239,14 +241,21 @@ const GetInTouch = () => {
             </div>
 
             {/* ── Industry ── */}
-            {industryIsOther ? (
-              <FloatingInput
-                label="Select Your Industry" required
-                {...register("industry", { required: true })}
-                ref={industryOtherRef}
-                onBlur={makeOtherBlur(industryValue, setIndustryIsOther, "industry")}
-              />
-            ) : (
+            {industryIsOther ? (() => {
+              const industryReg = register("industry", { required: true });
+              return (
+                <FloatingInput
+                  label="Select Your Industry"
+                  required
+                  {...industryReg}
+                  ref={(el) => {
+                    industryReg.ref(el);
+                    industryOtherRef.current = el;
+                  }}
+                  onBlur={makeOtherBlur(setIndustryIsOther, "industry", industryReg.onBlur)}
+                />
+              );
+            })() : (
               <FloatingSelect
                 label="Select Your Industry" required
                 {...register("industry", { required: true })}
@@ -261,14 +270,21 @@ const GetInTouch = () => {
             )}
 
             {/* ── Help ── */}
-            {helpIsOther ? (
-              <FloatingInput
-                label="How can we help you" required
-                {...register("help", { required: true })}
-                ref={helpOtherRef}
-                onBlur={makeOtherBlur(helpValue, setHelpIsOther, "help")}
-              />
-            ) : (
+            {helpIsOther ? (() => {
+              const helpReg = register("help", { required: true });
+              return (
+                <FloatingInput
+                  label="How can we help you"
+                  required
+                  {...helpReg}
+                  ref={(el) => {
+                    helpReg.ref(el);
+                    helpOtherRef.current = el;
+                  }}
+                  onBlur={makeOtherBlur(setHelpIsOther, "help", helpReg.onBlur)}
+                />
+              );
+            })() : (
               <FloatingSelect
                 label="How can we help you" required
                 {...register("help", { required: true })}
@@ -286,14 +302,21 @@ const GetInTouch = () => {
             )}
 
             {/* ── Hear ── */}
-            {hearIsOther ? (
-              <FloatingInput
-                label="How did you hear about us?" required
-                {...register("hear", { required: true })}
-                ref={hearOtherRef}
-                onBlur={makeOtherBlur(hearValue, setHearIsOther, "hear")}
-              />
-            ) : (
+            {hearIsOther ? (() => {
+              const hearReg = register("hear", { required: true });
+              return (
+                <FloatingInput
+                  label="How did you hear about us?"
+                  required
+                  {...hearReg}
+                  ref={(el) => {
+                    hearReg.ref(el);
+                    hearOtherRef.current = el;
+                  }}
+                  onBlur={makeOtherBlur(setHearIsOther, "hear", hearReg.onBlur)}
+                />
+              );
+            })() : (
               <FloatingSelect
                 label="How did you hear about us?" required
                 {...register("hear", { required: true })}
