@@ -20,6 +20,8 @@ const toSlug = (value = "") =>
 const AreasOfExpertise = () => {
   const rootRef = useRef(null);
   const lineRef = useRef(null);
+  const imageWrapRef = useRef(null);
+  const headingRef = useRef(null);
 
   useLayoutEffect(() => {
     const root = rootRef.current;
@@ -27,6 +29,73 @@ const AreasOfExpertise = () => {
     if (!root || !line) return;
 
     const ctx = gsap.context(() => {
+      const imageWrap = imageWrapRef.current;
+      const heading = headingRef.current;
+
+      // Section enter animation: image + heading
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: root,
+          start: "top 50%",
+          toggleActions: "play none none reverse",
+        },
+      })
+        .fromTo(
+          imageWrap,
+          { y: -40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
+          0
+        )
+        .fromTo(
+          heading,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
+          0.05
+        );
+
+      // Each box animates as a unit (title + ul + li + button)
+      const boxes = gsap.utils.toArray(root.querySelectorAll("[data-expertise-box]"));
+      boxes.forEach((box) => {
+        const titleEl = box.querySelector("[data-box-title]");
+        const listEl = box.querySelector("ul.expertise-list");
+        const itemEls = listEl ? listEl.querySelectorAll("li") : [];
+        const buttonWrap = box.querySelector("[data-box-button]");
+
+        const tlBox = gsap.timeline({
+          scrollTrigger: {
+            trigger: box,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        tlBox
+          .fromTo(
+            titleEl,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+            0
+          )
+          .fromTo(
+            listEl,
+            { y: 22, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+            0.05
+          )
+          .fromTo(
+            itemEls,
+            { y: 12, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.03 },
+            0.1
+          )
+          .fromTo(
+            buttonWrap,
+            { y: 16, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
+            0.2
+          );
+      });
+
       gsap.fromTo(
         line,
         { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
@@ -60,7 +129,7 @@ const AreasOfExpertise = () => {
           <div className="hidden md:flex items-center justify-center absolute top-0 -left-[33.5%] h-full">
             <div className="flex flex-col items-center h-full">
               {/* Image */}
-              <div className="w-40 h-40 lg:w-46 lg:h-46 mb-6">
+              <div ref={imageWrapRef} className="w-40 h-40 lg:w-46 lg:h-46 mb-6">
                 <Image
                   width={1000}
                   height={1000}
@@ -83,20 +152,23 @@ const AreasOfExpertise = () => {
           </div>
 
           {/* Heading */}
-          <h2 className="heading-xl mb-10 sm:mb-12 md:mb-16 ">
+          <h2 ref={headingRef} className="heading-xl mb-10 sm:mb-12 md:mb-16 ">
           Areas of expertise
           </h2>
 
           {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 md:gap-16">
             {expertiseDetails.map((section, index) => (
-              <div key={index}>
+              <div key={index} data-expertise-box>
                 <Link
                   href={`/expertise/${section.slug}`}
                   className="inline-block"
                   title={section.title}
                 >
-                  <h3 className="uppercase heading-md text-subheading mb-3 sm:mb-4 md:mb-6 hover:opacity-80 transition-opacity duration-200">
+                  <h3
+                    data-box-title
+                    className="uppercase heading-md text-subheading mb-3 sm:mb-4 md:mb-6 hover:opacity-80 transition-opacity duration-200"
+                  >
                     {section.expertise}
                   </h3>
                 </Link>
@@ -116,7 +188,11 @@ const AreasOfExpertise = () => {
                   ))}
                 </ul>
 
-                <Link href={`/expertise/${section.slug}`} title={`Know more about ${section.expertise}`}>
+                <Link
+                  data-box-button
+                  href={`/expertise/${section.slug}`}
+                  title={`Know more about ${section.expertise}`}
+                >
                   <Button title="KNOW MORE" />
                 </Link>
               </div>

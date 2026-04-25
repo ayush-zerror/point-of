@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Button from '../common/Button'
 
-const AccordionSection = ({ data, title }) => {
+const AccordionSection = ({ data, title, description }) => {
     const [activeIndex, setActiveIndex] = useState(null);
 
     const toggle = (index) => {
@@ -18,12 +18,17 @@ const AccordionSection = ({ data, title }) => {
         "
             >
                 {/* Vacancies */}
-                <h3 className="heading-xl text-subheading mb-12">
+                <h3 className="heading-xl text-subheading ">
                     {title}
                 </h3>
+                {description && (
+                    <p className="para text-desc  mt-4 max-w-3xl">
+                        {description}
+                    </p>
+                )}
 
                 {/* Accordion (narrow width) */}
-                <div className="space-y-6 max-w-3xl">
+                <div className="space-y-6 max-w-3xl mt-12">
                     {data.map((job, index) => (
                         <div key={index} className="border-b border-white/20 pb-6">
 

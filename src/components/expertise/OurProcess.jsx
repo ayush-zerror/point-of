@@ -129,7 +129,7 @@ const OurProcess = () => {
           top: 0,
           left: 0,
           position: "fixed",
-          backgroundColor: "white",
+          backgroundColor: "#f2f2ee",
           zIndex: 999999,
           transition: "none",
           opacity: 0,
@@ -181,7 +181,7 @@ const OurProcess = () => {
                   dx="0"
                   dy="0"
                   stdDeviation="200"
-                  floodColor="#ffffff"
+                  floodColor="#f2f2ee"
                   floodOpacity="1"
                 />
               </filter>
@@ -195,11 +195,11 @@ const OurProcess = () => {
               >
                 <stop
                   offset="20%"
-                  style={{ stopColor: "white", stopOpacity: 0.5 }}
+                  style={{ stopColor: "#f2f2ee", stopOpacity: 0.5 }}
                 />
                 <stop
                   offset="70%"
-                  style={{ stopColor: "white", stopOpacity: 0 }}
+                  style={{ stopColor: "#f2f2ee", stopOpacity: 0 }}
                 />
               </radialGradient>
             </defs>
@@ -212,7 +212,7 @@ const OurProcess = () => {
                 stroke-miterlimit: 10;
                 stroke-linecap: round;
               }
-              .jp3 { fill: #FFFFFF; }
+              .jp3 { fill: #f2f2ee; }
               .jp4 {
                 fill: var(--color-heading);
               }

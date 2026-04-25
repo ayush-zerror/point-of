@@ -6,7 +6,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Spiral as Hamburger } from "hamburger-react";
 import FullscreenMenu from "./FullscreenMenu";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -282,7 +281,18 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <Hamburger toggled={menuOpen} toggle={setMenuOpen} size={20} />
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            className={`
+              w-3 h-3 sm:w-4.5 sm:h-4.5 rounded-full cursor-pointer
+              border-2 border-heading
+              transition-colors duration-200
+              hover:bg-heading hover:border-heading
+              ${menuOpen ? "bg-heading border-heading" : "bg-transparent"}
+            `}
+          />
         </div>
 
         <FullscreenMenu
