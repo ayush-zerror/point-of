@@ -121,8 +121,8 @@ const BrandsIndex = () => {
               className="border-b border-desc md:border-none"
             >
               {/* Mobile */}
-              <div className="flex items-center justify-between md:hidden py-3">
-                <span className="font-medium tracking-wide">{item.brand}</span>
+              <div className="flex items-center justify-between md:hidden py-2">
+                <span className="font-normal tracking-wide text-subheading">{item.brand}</span>
                 <span className="text-sm opacity-70">{item.year}</span>
               </div>
               <div className="text-sm text-desc md:hidden pb-3">
