@@ -72,7 +72,7 @@ export default function Footer() {
                 alt="Point Of logo"
                 width={120}
                 height={40}
-                className="h-12 sm:h-14 md:h-14 w-auto object-contain"
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain"
               />
             </Link>
           </div>

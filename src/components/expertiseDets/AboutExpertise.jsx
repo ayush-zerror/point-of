@@ -82,10 +82,10 @@ const AboutExpertise = ({
 
 
   return (
-    <section className="w-full  px-6 sm:px-10 md:px-16 lg:px-20 py-20 md:py-28">
+    <section className="w-full  px-6 sm:px-10 md:px-16 lg:px-20 py-6 md:py-28">
       
       {/* GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-stretch">
+      <div className="grid grid-cols-1 gap-4 md:gap-0 md:grid-cols-[40%_60%] items-stretch">
         
         {/* LEFT */}
         <div className="flex flex-col justify-between h-full">
@@ -94,7 +94,7 @@ const AboutExpertise = ({
           <h2 className="heading-xl text-heading">{expertise}</h2>
 
           {/* BUTTON AT BOTTOM */}
-          <div className="mt-10 md:mt-0">
+          <div className="hidden md:block mt-10 md:mt-0">
             <Button title={buttonTitle} onClick={() => {
               router.push(`/connect`);
             }} />
@@ -146,6 +146,16 @@ const AboutExpertise = ({
             })}
           </div>
 
+          {/* CTA (mobile first) */}
+          <div className="md:hidden flex justify-center">
+            <Button
+              title={buttonTitle}
+              onClick={() => {
+                router.push(`/connect`);
+              }}
+            />
+          </div>
+
           {/* Explore other expertise */}
           {otherExpertise.length > 0 && (
             <div className="">
@@ -161,7 +171,7 @@ const AboutExpertise = ({
                     <Link
                       key={x.slug}
                       href={`/expertise/${x.slug}`}
-                      className="group inline-flex items-center rounded-full border border-white/15 px-4 py-2 text-sm tracking-wide text-desc/90 transition-colors duration-200 hover:border-white/30 hover:bg-white/5"
+                      className="group inline-flex items-center rounded-full border border-white/15 px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm tracking-wide text-desc/90 transition-colors duration-200 hover:border-white/30 hover:bg-white/5"
                       title={x.expertise}
                     >
                       <span className="whitespace-nowrap">{x.expertise}</span>
