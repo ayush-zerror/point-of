@@ -102,7 +102,8 @@ const SelectedBrands = () => {
               height={100}
                 src={brand.logo}
                 alt={brand.name}
-                className="w-[38%] dark:invert"
+                sizes="(max-width: 640px) 30vw, (max-width: 768px) 20vw, 12vw"
+                className="w-[60%] sm:w-[45%] md:w-[38%] h-auto opacity-90 brightness-0 dark:brightness-100 dark:invert"
               />
             </div>
           </div>
