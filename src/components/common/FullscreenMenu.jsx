@@ -45,7 +45,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
             <Button
               title={"think@wearepointof.com"}
               href="mailto:think@wearepointof.com"
-              textClassName="text-base sm:text-2xl !lowercase !font-normal"
+              textClassName="!text-base sm:!text-2xl !lowercase !font-normal"
             />
           </div>
         </div>
