@@ -5,27 +5,25 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const logos = [
-  "https://framerusercontent.com/images/f5tEzCq9SEshAyPmvmHwFwDwRw.png?scale-down-to=512",
-  "https://framerusercontent.com/images/BL8goJzMhAaoO7CkplhamSYnPc.png?scale-down-to=512",
-  "https://framerusercontent.com/images/ivg3Oth8MzfKRnx1RBFZzP5duM.png?scale-down-to=512",
-  "https://framerusercontent.com/images/WVorucVaiyMByNUIs8xPRV9nOYg.png?scale-down-to=512",
-  "https://framerusercontent.com/images/O9u7FsWZdWhYyxmvj4tO7SwfRw8.svg",
-  "https://framerusercontent.com/images/0GGVO06ulbCq35T4OUvQ4UbB1w.png?scale-down-to=1024",
-  "https://framerusercontent.com/images/XTOQUwb6Lu4L0ChMsustBWlk.png",
-  "https://framerusercontent.com/images/f5tEzCq9SEshAyPmvmHwFwDwRw.png?scale-down-to=512",
-  "https://framerusercontent.com/images/BL8goJzMhAaoO7CkplhamSYnPc.png?scale-down-to=512",
-  "https://framerusercontent.com/images/ivg3Oth8MzfKRnx1RBFZzP5duM.png?scale-down-to=512",
-  "https://framerusercontent.com/images/WVorucVaiyMByNUIs8xPRV9nOYg.png?scale-down-to=512",
-  "https://framerusercontent.com/images/O9u7FsWZdWhYyxmvj4tO7SwfRw8.svg",
-  "https://framerusercontent.com/images/0GGVO06ulbCq35T4OUvQ4UbB1w.png?scale-down-to=1024",
-  "https://framerusercontent.com/images/XTOQUwb6Lu4L0ChMsustBWlk.png",
+  "/brands/Logos/JBL.png",
+  "/brands/Logos/Pepsi.png",
+  "/brands/Logos/Mokobara.png",
+  "/brands/Logos/Gaurav_Gupta.png",
+  "/brands/Logos/Goodrich_Maritime.png",
+  "/brands/Logos/Limelight_Diamonds.png",
+  "/brands/Logos/Label_Ritu_Kumar.png",
+  "/brands/Logos/Groww.png",
+  "/brands/Logos/Rage_Coffee.png",
+  "/brands/Logos/Good_Flipping_Burgers.png",
+  "/brands/Logos/Tripoto.png",
+  "/brands/Logos/kvar.png",
 ];
 
 const BrandsSection = () => {
   const router = useRouter();
   return (
     <section className="w-full py-24 md:py-52 md:pb-20 bg-background relative">
-      <div className="max-w-5xl mx-auto px-6 md:px-0 flex flex-col">
+      <div className="max-w-5xl mx-auto px- md:px-0 flex flex-col">
         <p className="heading-xl text-desc">
           We partner with visionary entrepreneurs, industry leaders, &
           disruptive startups to build brands that spark change & drive global
