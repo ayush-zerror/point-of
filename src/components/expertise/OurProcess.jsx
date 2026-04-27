@@ -383,7 +383,7 @@ const OurProcess = () => {
                   "We dig deep into your brand, business, and goals",
                   "to craft a thoughtful project roadmap.",
                 ],
-                x: 80,
+                x: 22,
               },
               {
                 transform: "matrix(1 0 0 1 744.5525 327.1489)",

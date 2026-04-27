@@ -10,6 +10,7 @@ export default function WorkGridOverlay({
   toggleFilter,
   projects,
 }) {
+  console.log(projects);
   const col3Map = ["lg:justify-start", "lg:justify-center", "lg:justify-end"];
   const col2Map = ["md:justify-start", "md:justify-end"];
   return (
@@ -39,7 +40,7 @@ export default function WorkGridOverlay({
           >
             <WorkCard
               slug={project.slug}
-              title={project.title}
+              title={project.name}
               image={project.coverImage}
               video={project.microanimation}
             />

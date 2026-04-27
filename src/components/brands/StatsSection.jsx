@@ -205,9 +205,9 @@ function AnimatedStatsSection() {
     >
       <div className="flex flex-col md:items-end w-full">
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 w-full">
           {stats.map((item, i) => (
-            <div key={i}>
+            <div key={i} className="min-w-0">
               <OdometerStatNumber
                 raw={item.number}
                 active={inView}
@@ -226,17 +226,17 @@ function AnimatedStatsSection() {
         </div>
 
         {/* Descriptions */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 w-full">
           {stats.map((item, i) => (
-            <p key={i} className="para text-desc max-w-[260px]">
+            <p key={i} className="para text-desc min-w-0">
               {item.desc}
             </p>
           ))}
         </div>
 
         {/* Bottom Text */}
-        <div className="mt-16 md:mt-30 w-full grid grid-cols-1 md:grid-cols-4 gap-x-10 md:gap-x-20 min-w-0">
-          <div className="md:col-start-2 md:col-span-3 min-w-0 overflow-visible [&_.line]:block [font-kerning:none]">
+        <div className="mt-16 md:mt-30 w-full grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 min-w-0">
+          <div className="col-span-2 md:col-start-2 md:col-span-3 min-w-0 overflow-visible [&_.line]:block [font-kerning:none]">
             <p
               ref={textRef}
               className="heading-lg text-heading m-0 w-full max-w-none text-left leading-[1.45]"

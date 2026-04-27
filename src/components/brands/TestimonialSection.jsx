@@ -30,7 +30,7 @@ const TestimonialSection = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center p-0 sm:p-10 md:p-20 max-w-5xl w-full mx-auto">
 
                 {/* LEFT IMAGE */}
-                <div className="w-full max-w-xs sm:max-w-sm">
+                <div className="w-full max-w-xs sm:max-w-sm relative group">
                   <Image
                     width={1000}
                     height={1000}
@@ -38,6 +38,11 @@ const TestimonialSection = () => {
                     alt={item.name}
                     className="w-full aspect-square object-cover"
                   />
+                  {item.microanimation && (
+                    <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <video src={item.microanimation} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                  )}
                 </div>
 
                 {/* RIGHT CONTENT */}
