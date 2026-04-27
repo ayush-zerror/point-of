@@ -19,7 +19,7 @@ const Experience = ({ data }) => {
 
       {/* Content Wrapper */}
       <div className="relative z-10 h-full flex items-center">
-        <div className="w-full max-w-[1000px] px-4 sm:px-10  md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120 pr-6 py-20 sm:py-24 md:py-28 lg:py-32 space-y-16 sm:space-y-20">
+        <div className="w-full max-w-[1000px] px-6 sm:px-10  md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120 pr-6 py-20 sm:py-24 md:py-28 lg:py-32 space-y-16 sm:space-y-20">
           {data.map((item, index) => (
             <div key={index}>
               <h2 className="heading-lg text-subheading mb-4">

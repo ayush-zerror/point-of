@@ -111,7 +111,7 @@ const AboutStudio = () => {
     <section
       ref={sectionRef}
       id="page2"
-      className="w-full mix-blend-difference h-screen px-4 md:px-20 py-24 flex flex-col justify-center"
+      className="w-full mix-blend-difference h-screen px-6 md:px-20 py-24 flex flex-col justify-center"
     >
       <div className="mx-auto">
         <div className="max-w-5xl space-y-12">

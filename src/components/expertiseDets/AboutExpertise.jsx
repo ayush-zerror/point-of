@@ -82,7 +82,7 @@ const AboutExpertise = ({
 
 
   return (
-    <section className="w-full  px-4 sm:px-10 md:px-16 lg:px-20 py-20 md:py-28">
+    <section className="w-full  px-6 sm:px-10 md:px-16 lg:px-20 py-20 md:py-28">
       
       {/* GRID */}
       <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-stretch">

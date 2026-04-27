@@ -19,7 +19,7 @@ const Expertise = () => {
     <>
       <HeroSection />
       <AreasOfExpertise />
-      <div className="w-full px-4 sm:px-10 md:px-16 lg:px-20 pt-12 z-20 pointer-events-none">
+      <div className="w-full px-6 sm:px-10 md:px-16 lg:px-20 pt-12 z-20 pointer-events-none">
         <h2 className="heading-xl text-heading">How we work</h2>
         <p className="para text-desc mt-4 max-w-2xl">
           Every engagement follows the same disciplined process — from the

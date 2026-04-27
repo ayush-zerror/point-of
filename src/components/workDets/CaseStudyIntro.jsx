@@ -8,7 +8,7 @@ export default function CaseStudyIntro({ caseStudy }) {
   const services = Array.isArray(caseStudy?.services) ? caseStudy.services : [];
 
   return (
-    <section className="w-full bg-black text-white px-4 sm:px-10 md:px-12 lg:px-20 py-20 md:py-28">
+    <section className="w-full bg-black text-white px-6 sm:px-10 md:px-12 lg:px-20 py-20 md:py-28">
       
       {/* SAME GRID STRUCTURE */}
       <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start">

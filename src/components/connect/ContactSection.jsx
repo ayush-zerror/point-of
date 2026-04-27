@@ -44,7 +44,7 @@ const ContactSection = () => {
       <div className="h-auto md:sticky md:top-0 md:h-screen z-10">
         <section id="contact-section" className="min-h-screen md:h-screen w-full relative">
           <div className="h-full flex items-center">
-            <div className="w-full px-4 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120 md:pr-6">
+            <div className="w-full px-6 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120 md:pr-6">
 
               {/* Scroll-animated vertical line */}
               <div

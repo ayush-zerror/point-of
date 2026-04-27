@@ -24,14 +24,14 @@ export default function WorkGridOverlay({
       }}
       data-lenis-prevent
     >
-      <div className="w-full flex items-center justify-between fixed bottom-0 left-0 z-30 px-4 sm:px-10 md:px-20 pb-6 sm:pb-10 md:pb-10">
+      <div className="w-full flex items-center justify-between fixed bottom-0 left-0 z-30 px-6 sm:px-10 md:px-20 pb-6 sm:pb-10 md:pb-10">
         <GridButton title={"GALLERY VIEW"} onClick={toggleGridList} className={"mt-0!"} />
         <GridButton title={"FILTER"} onClick={toggleFilter} className={"mt-0!"} />
       </div>
 
 
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 sm:px-10 md:px-20 pt-20 sm:pt-24 md:pt-0 pb-24 sm:pb-28 md:pb-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-6 sm:px-10 md:px-20 pt-20 sm:pt-24 md:pt-0 pb-24 sm:pb-28 md:pb-0">
         {projects.map((project, index) => (
           <div
             key={project.slug}

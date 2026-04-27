@@ -195,7 +195,7 @@ export default function OurWork({ posts = [] }) {
         {/* TRACK */}
         <div
           ref={trackRef}
-          className="flex items-center gap-22 px-4 sm:px-10 md:px-16 lg:px-20"
+          className="flex items-center gap-22 px-6 sm:px-10 md:px-16 lg:px-20"
         >
           {/* CARDS */}
           {(posts ?? []).map((post, index) => (

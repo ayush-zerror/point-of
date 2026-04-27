@@ -31,7 +31,7 @@ const HeroSection = () => {
   return (
       <div
       ref={sectionRef}
-      className="w-full h-auto lg:h-screen px-4 sm:px-6 md:px-10 lg:px-0 pt-20 sm:pt-24 md:pt-24 lg:pt-0 pb-6 md:pb-10 lg:pb-0 overflow-hidden"
+      className="w-full h-auto lg:h-screen px-6 sm:px-6 md:px-10 lg:px-0 pt-20 sm:pt-24 md:pt-24 lg:pt-0 pb-6 md:pb-10 lg:pb-0 overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setShowCursor(true)}
       onMouseLeave={() => setShowCursor(false)}

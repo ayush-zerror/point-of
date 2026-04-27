@@ -58,7 +58,7 @@ const BrandsIndex = () => {
   };
 
   return (
-    <section className="w-full py-16 md:py-24 px-4 sm:px-8 md:px-20">
+    <section className="w-full py-16 md:py-24 px-6 sm:px-8 md:px-20">
       <div className="w-full">
 
         {/* Showcase image overlay */}

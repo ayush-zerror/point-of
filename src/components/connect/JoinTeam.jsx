@@ -11,7 +11,7 @@ const JoinTeam = () => {
       <div
         className="
           w-full
-          px-4 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
+          px-6 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
           pr-6
         "
       >

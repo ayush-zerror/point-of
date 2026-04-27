@@ -181,7 +181,7 @@ const HeroSection = ({
           ref={contentRef}
           className="
             w-full relative
-            px-4 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
+            px-6 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
             pr-6
             py-12 sm:py-16 pt-36 sm:pt-40 md:pb-20 lg:pb-28 xl:pb-40 md:pt-0
           "

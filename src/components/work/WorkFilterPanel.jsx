@@ -108,7 +108,7 @@ export default function WorkFilterPanel({
           </div>
 
           <div className="absolute md:static bottom-0 left-0 right-0">
-            <div className="px-4 sm:px-10 md:px-0 py-6 md:p-0 bg-background/90 backdrop-blur-sm md:bg-transparent md:backdrop-blur-0 flex items-center justify-between">
+            <div className="px-6 sm:px-10 md:px-0 py-6 md:p-0 bg-background/90 backdrop-blur-sm md:bg-transparent md:backdrop-blur-0 flex items-center justify-between">
               <button
                 type="button"
                 className="heading-md text-heading transition-colors cursor-pointer"

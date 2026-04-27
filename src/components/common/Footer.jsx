@@ -60,7 +60,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-background relative">
-      <div className="px-4 sm:px-10 md:px-12 lg:px-20 mx-auto pt-12 md:pt-16 lg:pt-30 ">
+      <div className="px-6 sm:px-10 md:px-12 lg:px-20 mx-auto pt-12 md:pt-16 lg:pt-30 ">
 
         <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-0">
 

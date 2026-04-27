@@ -194,7 +194,7 @@ export default function Navbar() {
         className={`fixed top-0 left-0 w-full z-50 text-foreground ${pathname === "/work" ? "" : "nav-gradient"
           }`}
       >
-        <div className="relative z-30 flex items-center justify-between h-16 sm:h-20 px-1 sm:px-7 md:px-9 lg:px-17">
+        <div className="relative z-30 flex items-center justify-between h-16 sm:h-20 px-6 sm:px-10 md:px-12 lg:px-20">
           {/* Left spacer so hamburger doesn't shift center */}
           <div className="w-10 sm:w-12 md:w-0" />
 

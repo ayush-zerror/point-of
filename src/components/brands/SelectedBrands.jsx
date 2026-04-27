@@ -64,7 +64,7 @@ const SelectedBrands = () => {
   }, []);
 
   return (
-    <section className="min-h-screen w-full py-16 md:py-24 px-4 sm:px-8 md:px-20">
+    <section className="min-h-screen w-full py-16 md:py-24 px-6 sm:px-8 md:px-20">
       <h2 className="mb-10 md:mb-12 heading-xl text-subheading">
         Selected Brands
       </h2>

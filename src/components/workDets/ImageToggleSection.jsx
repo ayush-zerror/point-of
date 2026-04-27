@@ -21,7 +21,7 @@ export default function ImageToggleSection({ caseStudy }) {
   return (
     <section
       ref={sectionRef}
-      className="w-full  px-4 sm:px-10 md:px-12 lg:px-20"
+      className="w-full  px-6 sm:px-10 md:px-12 lg:px-20"
     >
       {/* CONDITIONAL RENDER */}
       {active === "full" ? (

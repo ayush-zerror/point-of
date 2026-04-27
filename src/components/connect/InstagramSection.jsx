@@ -56,7 +56,7 @@ const InstagramSection = ({ caseStudies }) => {
       </div>
 
       {/* Container */}
-      <div className="px-4 sm:px-10 md:px-12 lg:px-20">
+      <div className="px-6 sm:px-10 md:px-12 lg:px-20">
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 lg:gap-20">

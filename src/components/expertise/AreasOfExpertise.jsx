@@ -120,7 +120,7 @@ const AreasOfExpertise = () => {
       <div
         className="
           relative w-full
-          px-4 sm:px-6 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
+          px-6 sm:px-6 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
           md:pr-6
         "
       >
