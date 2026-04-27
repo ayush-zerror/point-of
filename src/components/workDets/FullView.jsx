@@ -58,7 +58,7 @@ const FullView = ({ caseStudy }) => {
       </div>
 
       {/* CONTENT */}
-      <div className="grid grid-cols-1 md:grid-cols-[40%_60%]">
+      <div className="grid grid-cols-1 gap-4 md:gap-0 md:grid-cols-[40%_60%]">
         {/* LEFT */}
         <div>
           <p className="text-sm font-semibold text-subheading">

@@ -116,7 +116,7 @@ const AreasOfExpertise = () => {
     return () => ctx.revert();
   }, []);
   return (
-    <section ref={rootRef} className="w-full  py-16 md:py-28">
+    <section ref={rootRef} className="w-full  py-6 md:py-28">
       <div
         className="
           relative w-full

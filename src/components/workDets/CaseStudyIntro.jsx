@@ -8,20 +8,20 @@ export default function CaseStudyIntro({ caseStudy }) {
   const services = Array.isArray(caseStudy?.services) ? caseStudy.services : [];
 
   return (
-    <section className="w-full bg-black text-white px-6 sm:px-10 md:px-12 lg:px-20 py-20 md:py-28">
+    <section className="w-full px-6 sm:px-10 md:px-12 lg:px-20 py-6 sm:py-16 md:py-20">
       
       {/* SAME GRID STRUCTURE */}
-      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-10 md:gap-14">
         
         {/* LEFT */}
         <div className="flex flex-col justify-between h-full">
           
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             <h2 className="heading-xl text-heading font-normal">
               {title}
             </h2>
 
-            <p className="heading-md text-desc">
+            <p className="heading-md text-desc leading-snug">
               {location?.toUpperCase?.() ? location.toUpperCase() : location}
             </p>
           </div>
@@ -29,7 +29,7 @@ export default function CaseStudyIntro({ caseStudy }) {
         </div>
 
         {/* RIGHT */}
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-7 md:space-y-8">
           
           <h3 className="heading-xl text-subheading">
             {gist}
