@@ -209,13 +209,13 @@ export default function Showreel() {
       <div
         ref={videoWrapRef}
         
-        className="w-full h-full overflow-hidden"
+        className="w-full overflow-hidden h-auto md:h-full aspect-video md:aspect-auto"
         style={{  transformOrigin: "center center", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%) scale(1) rotateY(0deg) rotateX(0deg)" }}
       >
         <video
           ref={videoElRef}
           src="/home/showreel.mp4"
-          className="w-full h-full object-cover"
+          className="w-full h-auto md:h-full object-cover"
           muted={isMuted}
           loop
           playsInline
@@ -236,7 +236,8 @@ export default function Showreel() {
             alt="sticker"
             width={200}
             height={200}
-            className="absolute top-10 left-10 rotate-[-10deg]"
+            sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px"
+            className="absolute top-6 left-4 sm:top-10 sm:left-8 lg:left-10 rotate-[-10deg] w-24 sm:w-32 md:w-40 lg:w-48 h-auto"
           />
 
           <Image
@@ -244,7 +245,8 @@ export default function Showreel() {
             alt="sticker"
             width={200}
             height={200}
-            className="absolute bottom-10 right-10 rotate-10"
+            sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px"
+            className="absolute bottom-6 right-4 sm:bottom-10 sm:right-8 lg:right-10 rotate-10 w-24 sm:w-32 md:w-40 lg:w-48 h-auto"
           />
         </div>
 
@@ -255,7 +257,8 @@ export default function Showreel() {
             alt="sticker"
             width={200}
             height={200}
-            className="absolute top-10 left-28 -rotate-6"
+            sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px"
+            className="absolute top-6 left-4 sm:top-10 sm:left-16 lg:left-28 -rotate-6 w-24 sm:w-32 md:w-40 lg:w-48 h-auto"
           />
 
           <Image
@@ -263,7 +266,8 @@ export default function Showreel() {
             alt="sticker"
             width={200}
             height={200}
-            className="absolute bottom-10 right-10 rotate-[8deg]"
+            sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px"
+            className="absolute bottom-6 right-4 sm:bottom-10 sm:right-8 lg:right-10 rotate-[8deg] w-24 sm:w-32 md:w-40 lg:w-48 h-auto"
           />
         </div>
 
@@ -274,7 +278,8 @@ export default function Showreel() {
             alt="sticker"
             width={200}
             height={200}
-            className="absolute top-10 left-10 -rotate-12"
+            sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px"
+            className="absolute top-6 left-4 sm:top-10 sm:left-8 lg:left-10 -rotate-12 w-24 sm:w-32 md:w-40 lg:w-48 h-auto"
           />
 
           <Image
@@ -282,7 +287,8 @@ export default function Showreel() {
             alt="sticker"
             width={200}
             height={200}
-            className="absolute bottom-10 right-10 rotate-12"
+            sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px"
+            className="absolute bottom-6 right-4 sm:bottom-10 sm:right-8 lg:right-10 rotate-12 w-24 sm:w-32 md:w-40 lg:w-48 h-auto"
           />
         </div>
 
