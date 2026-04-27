@@ -16,7 +16,7 @@ import { testimonials } from "@/helper/testimonials";
 
 const TestimonialSection = () => {
   return (
-    <section className="w-full py-16 md:py-24 px-0 sm:px-8 md:px-20">
+    <section className="w-full py-16 md:py-24 px-6 sm:px-8 md:px-20">
       <div className="w-full cursor-grab">
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}
@@ -27,7 +27,7 @@ const TestimonialSection = () => {
         >
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center p-6 sm:p-10 md:p-20 max-w-5xl w-full mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center p-0 sm:p-10 md:p-20 max-w-5xl w-full mx-auto">
 
                 {/* LEFT IMAGE */}
                 <div className="w-full max-w-xs sm:max-w-sm">
