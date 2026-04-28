@@ -34,7 +34,7 @@ export default function WorkGridOverlay({
       </div>
 
 
-
+ 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-6 sm:px-10 md:px-20 pt-20 sm:pt-24 md:pt-0 pb-24 sm:pb-28 md:pb-0">
         {projects.map((project, index) => (
           <div

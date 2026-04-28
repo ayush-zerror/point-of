@@ -32,16 +32,18 @@ const OurApproach = () => {
                     { opacity: 0 },
                     { opacity: 1, duration: 0.2 }
                 )
+                .set(".apr-circle1", { opacity: 1 })
                 .fromTo(
                     "#step-three",
                     { backgroundColor: "transparent" },
-                    { backgroundColor: "#ffffff2f" }
+                    { backgroundColor: "var(--light-line)", duration: 0.25 }
                
                 )
+                .to({}, { duration: 0.35 })
                 .fromTo(
-                    ".apr-circle1",
-                    { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb" },
-                    { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb", duration: 0.3 },
+                    ".apr-circle1, .apr-circle1-inner",
+                    { backgroundColor: "var(--light-line)", borderColor: "var(--light-line)" },
+                    { backgroundColor: "var(--secondary)", borderColor: "var(--secondary)", duration: 0.3 },
                     "a"
                 )
                 .fromTo(
@@ -66,8 +68,8 @@ const OurApproach = () => {
                 )
                 .fromTo(
                     ".apr-circle2",
-                    { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb" },
-                    { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb", duration: 0.2, delay: 0.5 },
+                    { backgroundColor: "var(--light-line)", borderColor: "var(--light-line)" },
+                    { backgroundColor: "var(--secondary)", borderColor: "var(--secondary)", duration: 0.2, delay: 0.5 },
                     "b"
                 )
                 .to(".apr-circle1-inner", { opacity: 0 }, "b")
@@ -87,8 +89,8 @@ const OurApproach = () => {
                 )
                 .fromTo(
                     ".apr-circle3",
-                    { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb" },
-                    { backgroundColor: "#cbcbcb", borderColor: "#cbcbcb", duration: 0.2, delay: 0.5 },
+                    { backgroundColor: "var(--light-line)", borderColor: "var(--light-line)" },
+                    { backgroundColor: "var(--secondary)", borderColor: "var(--secondary)", duration: 0.2, delay: 0.5 },
                     "c"
                 )
 
@@ -101,10 +103,16 @@ const OurApproach = () => {
                 )
                 .fromTo(
                     "#step-three",
-                    { backgroundColor: "#cbcbcb" },
+                    { backgroundColor: "var(--light-line)" },
                     { backgroundColor: "transparent", duration: 0.5 },
                     "d"
-                );
+                )
+                .set(".aprCir", {
+                    borderColor: "var(--secondary)",
+                    borderStyle: "solid",
+                    borderWidth: 1,
+                    opacity: 1,
+                }, "d");
 
             // ── CENTER BLOOM ─────────────────────────────────────────
             const page4 = document.querySelector("#page4");
@@ -115,36 +123,26 @@ const OurApproach = () => {
             const centerX = page4Rect.left + page4Rect.width / 2 + window.scrollX;
             const centerY = page4Rect.top + page4Rect.height / 2 + window.scrollY;
 
-            const targetDiameterPx = window.innerWidth * 0.3;
-            const r = targetDiameterPx / 2;
-            const side = r * 0.6;
-            const h = (Math.sqrt(3) / 2) * side;
-            const yShift = r * 0.03;
-
             const offsets = [
-                { x: -side / 2, y: -h / 3 + yShift },
-                { x: side / 2, y: -h / 3 + yShift },
-                { x: 0, y: (2 * h) / 3 + yShift },
+                { x: -80, y: -40 },
+                { x: 80, y: -40 },
+                { x: 0, y: 80 },
             ];
 
             circles.forEach((circle, i) => {
+                const rect = circle.getBoundingClientRect();
+                const circleX = rect.left + circle.offsetWidth / 2 + window.scrollX;
+                const circleY = rect.top + circle.offsetHeight / 2 + window.scrollY;
+
                 aptl.to(
                     circle,
                     {
-                        position: "fixed",
-                        left: "50%",
-                        top: "50%",
-                        right: "auto",
-                        bottom: "auto",
-                        marginLeft: 0,
-                        marginTop: 0,
-                        xPercent: -50,
-                        yPercent: -50,
-                        x: offsets[i].x,
-                        y: offsets[i].y,
+                        x: centerX - circleX + offsets[i].x,
+                        y: centerY - circleY + offsets[i].y,
                         width: "30vw",
                         height: "30vw",
                         backgroundColor: "transparent",
+                        transform: "translate(-50%, -50%)",
                         duration: 0.8,
                         ease: "power2.out",
                         delay: 0.5,
@@ -229,15 +227,15 @@ const OurApproach = () => {
                                 marginTop: -12.5,
                                 width: 25,
                                 height: 25,
-                                backgroundColor: "#cbcbcb",
-                                border: "1px solid #cbcbcb",
+                                backgroundColor: "var(--light-line)",
+                                border: "1px solid var(--light-line)",
                             }}
                         >
                             <div
                                 className="apr-circle1-inner h-full w-full rounded-full"
                                 style={{
-                                    backgroundColor: "#cbcbcb",
-                                    border: "1px solid #cbcbcb",
+                                    backgroundColor: "var(--light-line)",
+                                    border: "1px solid var(--light-line)",
                                 }}
                             />
                         </div>
@@ -252,28 +250,28 @@ const OurApproach = () => {
                                 marginTop: -12.5,
                                 width: 25,
                                 height: 25,
-                                backgroundColor: "#cbcbcb",
-                                border: "1px solid #cbcbcb",
+                                backgroundColor: "var(--light-line)",
+                                border: "1px solid var(--light-line)",
                             }}
                         />
 
-                        {/* Circle 3 — right: 0, vertically centered */}
+                        {/* Circle 3 — left-based positioning keeps the GSAP bloom aligned */}
                         <div
                             className="aprCir apr-circle3 absolute rounded-full origin-center"
                             style={{
-                                right: 0,
+                                left: "calc(100% - 25px)",
                                 top: "50%",
                                 marginTop: -12.5,
                                 width: 25,
                                 height: 25,
-                                backgroundColor: "#cbcbcb",
-                                border: "1px solid #cbcbcb",
+                                backgroundColor: "var(--light-line)",
+                                border: "1px solid var(--light-line)",
                             }}
                         />
 
                         <div
                             className="step-loader-bar absolute left-0 top-0 h-full"
-                            style={{ width: "0%", backgroundColor: "#cbcbcb" }}
+                            style={{ width: "0%", backgroundColor: "var(--secondary)" }}
                         />
                     </div>
 
