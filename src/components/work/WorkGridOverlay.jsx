@@ -10,7 +10,6 @@ export default function WorkGridOverlay({
   toggleFilter,
   projects,
 }) {
-  console.log(projects);
   const col3Map = ["lg:justify-start", "lg:justify-center", "lg:justify-end"];
   const col2Map = ["md:justify-start", "md:justify-end"];
   return (
@@ -25,6 +24,10 @@ export default function WorkGridOverlay({
       }}
       data-lenis-prevent
     >
+      {/* Gradient strips */}
+      <div className="nav-gradient pointer-events-none fixed inset-x-0 top-0 z-20 h-24" />
+      <div className="nav-gradient nav-gradient-reverse pointer-events-none fixed inset-x-0 bottom-0 z-20 h-24" />
+
       <div className="w-full flex items-center justify-between fixed bottom-0 left-0 z-30 px-6 sm:px-10 md:px-20 pb-6 sm:pb-10 md:pb-10">
         <GridButton title={"GALLERY VIEW"} onClick={toggleGridList} className={"mt-0!"} />
         <GridButton title={"FILTER"} onClick={toggleFilter} className={"mt-0!"} />
