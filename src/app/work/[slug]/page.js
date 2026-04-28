@@ -2,6 +2,7 @@ import InstagramSection from '@/components/connect/InstagramSection'
 import HeroSection from '@/components/expertiseDets/HeroSection'
 import CaseStudyIntro from '@/components/workDets/CaseStudyIntro'
 import ImageToggleSection from '@/components/workDets/ImageToggleSection'
+import NavbarReveal from '@/components/common/NavbarReveal'
 import { getCaseStudies, getCaseStudyBySlug } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import React from 'react'
@@ -73,6 +74,7 @@ const WorkDetail = async ({ params }) => {
 
   return (
     <>
+      <NavbarReveal />
       <HeroSection src={caseStudy.coverImage} />
       <CaseStudyIntro caseStudy={caseStudy} />
       <ImageToggleSection caseStudy={caseStudy} />

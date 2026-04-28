@@ -1,11 +1,16 @@
 "use client";
 import gsap from 'gsap';
+import Flip from "gsap/Flip";
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { flushSync } from "react-dom";
 import GridButton from '../common/GridButton';
 import WorkGridOverlay from "./WorkGridOverlay";
 import WorkFilterPanel from "./WorkFilterPanel";
+
+gsap.registerPlugin(Flip);
 
 const CLIP_VISIBLE       = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
 const CLIP_HIDDEN_TOP    = "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)";
@@ -35,6 +40,7 @@ const toSlug = (value = "") =>
 
 
 const WorkSection = ({ projects }) => {
+  const router = useRouter();
   const items = useMemo(
     () => (projects ?? []).map((project) => ({
       ...project,
@@ -49,6 +55,7 @@ const WorkSection = ({ projects }) => {
   const isAnimatingRef  = useRef(false);
   const currentIndexRef = useRef(0);
   const isGridOpenRef   = useRef(false);
+  const centerWrapperRef = useRef(null);
 
   // clip-path lives on the WRAPPER div — separate from the img
   const bgWrapRefs   = useRef([]);   // wrapper divs  (clip-path animated here)
@@ -65,9 +72,64 @@ const WorkSection = ({ projects }) => {
   const [activeIndex,   setActiveIndex]   = useState(0);
   const [isGridOpen,    setIsGridOpen]    = useState(false);
   const [isFilterOpen,  setIsFilterOpen]  = useState(false);
+  const [expandingIndex, setExpandingIndex] = useState(null);
   const [activeFilters, setActiveFilters] = useState(() => ({
     services: new Set(), industry: new Set(), year: new Set(),
   }));
+
+  const handleCenterCardClick = (e, index, slug) => {
+    // Let default browser behavior work for new-tab / modified clicks.
+    if (
+      e.button !== 0 ||
+      e.metaKey ||
+      e.ctrlKey ||
+      e.shiftKey ||
+      e.altKey
+    ) {
+      return;
+    }
+
+    // Only run the fullscreen Flip on lg+ screens.
+    // On smaller screens, keep default link navigation.
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      return;
+    }
+
+    e.preventDefault();
+    if (expandingIndex !== null) return;
+
+    const href = `/work/${slug}`;
+    const el = centerWrapperRef.current;
+    if (!el) {
+      router.push(href);
+      return;
+    }
+
+    const navEl = document.getElementById("site-nav");
+    if (navEl) {
+      gsap.to(navEl, {
+        opacity: 0,
+        y: -30,
+        duration: 0.35,
+        ease: "power2.out",
+        overwrite: true,
+        pointerEvents: "none",
+      });
+    }
+
+    // IMPORTANT: animate the OUTER wrapper to avoid "fixed inside transformed parent" issues.
+    gsap.set(el, { transformOrigin: "50% 50%" });
+    const state = Flip.getState(el);
+    flushSync(() => setExpandingIndex(index));
+
+    Flip.from(state, {
+      duration: 0.8,
+      ease: "power3.inOut",
+      absolute: true,
+      transformOrigin: "50% 50%",
+      onComplete: () => router.push(href),
+    });
+  };
 
   const filterOptions = useMemo(() => {
     const uniq = (arr) => [...new Set(arr.filter(Boolean).map((v) => String(v).trim()).filter(Boolean))];
@@ -521,16 +583,28 @@ const WorkSection = ({ projects }) => {
 
       {/* ── Center foreground ── */}
       <div
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[300px] md:min-w-[400px] aspect-square z-20 transition-opacity duration-300 ${isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+        ref={centerWrapperRef}
+        className={`min-w-[300px] md:min-w-[400px] aspect-square z-20 transition-opacity duration-300 ${
+          isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+        } ${
+          expandingIndex !== null
+            ? "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[999] w-screen h-screen bg-neutral-900"
+            : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        }`}
       >
-        <div className="w-full h-full overflow-hidden">
+        <div id="center-foreground" className="w-full h-full overflow-hidden">
           {items.map((project, i) => (
             // clip-path on this Link wrapper
             <Link
               key={`ctr-${i}`}
               href={`/work/${project.slug}`}
               ref={(el) => { centerRefs.current[i] = el; }}
-              className={`absolute group inset-0 block overflow-hidden ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`}
+              onClick={(e) => handleCenterCardClick(e, i, project.slug)}
+              className={`absolute inset-0 block overflow-hidden ${
+                expandingIndex !== null
+                  ? "pointer-events-none"
+                  : `group ${i === activeIndex ? "pointer-events-auto" : "pointer-events-none"}`
+              }`}
               aria-label={`Open ${project.name}`}
               title={`Open ${project.name}`}
               style={{

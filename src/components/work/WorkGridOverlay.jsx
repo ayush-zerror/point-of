@@ -46,6 +46,7 @@ export default function WorkGridOverlay({
               title={project.name}
               image={project.coverImage}
               video={project.microanimation}
+              enableFlipTransition
             />
           </div>
         ))}
