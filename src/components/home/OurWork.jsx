@@ -241,7 +241,7 @@ export default function OurWork({ posts = [] }) {
               </span>
 
               {/* TEXT */}
-              <span ref={buttonTextRef} className="relative whitespace-nowrap">
+              <span ref={buttonTextRef} className="relative whitespace-nowrap text-[11px] md:text-sm">
                 VIEW ALL WORK
                 <span
                   ref={buttonUnderlineRef}
