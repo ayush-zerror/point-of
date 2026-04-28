@@ -37,7 +37,7 @@ const Home = async () => {
       {/* Global circle2 — fixed, GSAP-controlled */}
       <div
         id="circle2"
-        className="hidden md:block bg-heading fixed w-1.5 h-1.5 opacity-0 rounded-full pointer-events-none top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="hidden md:block fixed w-[200vw] h-[200vw] opacity-0 bg-heading rounded-full pointer-events-none top-[80%] left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
       <AboutStudio />
       {/* Mobile: replace Expertise with accordion */}
