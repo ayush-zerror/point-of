@@ -218,7 +218,7 @@ export default function Expertise() {
         onEnterBack: () => {
           // Scrolling back up — hide travel circle.
           // Restore circle2 to screen center X + lastDot's Y so it overlays
-          // exactly where AboutStudio left it (not wrap0 which has a different Y).
+          // exactly where AboutStudio left it.
           if (travelCircle) gsap.set(travelCircle, { opacity: 0 });
 
           if (circle2) {
@@ -260,6 +260,18 @@ export default function Expertise() {
 
       let fromCenter = { x: 0, y: 0, ready: false };
 
+      const setTravelCircleAtLastWrap = () => {
+        const r = lastWrap.getBoundingClientRect();
+        gsap.set(travelCircle, {
+          left: r.left + r.width / 2,
+          top: r.top + r.height / 2,
+          scale: 1,
+          opacity: 1,
+        });
+        setActiveIndex(LAST_IDX);
+        prevIndexRef.current = LAST_IDX;
+      };
+
       const captureFrom = () => {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
@@ -285,6 +297,8 @@ export default function Expertise() {
 
         onEnterBack: () => {
           captureFrom();
+          setActiveIndex(LAST_IDX);
+          prevIndexRef.current = LAST_IDX;
         },
 
         onUpdate: (self) => {
@@ -303,13 +317,7 @@ export default function Expertise() {
 
         onLeaveBack: () => {
           fromCenter.ready = false;
-          // Snap back to last wrap position
-          const r = lastWrap.getBoundingClientRect();
-          gsap.set(travelCircle, {
-            left: r.left + r.width / 2,
-            top: r.top + r.height / 2,
-            opacity: 1,
-          });
+          setTravelCircleAtLastWrap();
         },
 
         onLeave: () => {
@@ -324,16 +332,47 @@ export default function Expertise() {
 
       // ── 3. Travel circle shrink + centerDot fade in ──
       const centerDot = document.querySelector("#centerDot");
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: ref.current,
-          start: "bottom 25%",
-          end: "bottom top",
-          scrub: 1,
+      ScrollTrigger.create({
+        trigger: ref.current,
+        start: "bottom 25%",
+        end: "bottom top",
+        scrub: 1,
+        onEnterBack: () => {
+          gsap.set(travelCircle, {
+            left: window.innerWidth * 0.5,
+            top: window.innerHeight * 0.5,
+            scale: 0,
+            opacity: 1,
+          });
+          setActiveIndex(LAST_IDX);
+          prevIndexRef.current = LAST_IDX;
+          if (centerDot) gsap.set(centerDot, { opacity: 0 });
         },
-      })
-        .to(travelCircle, { scale: 0, ease: "none" }, "a")
-        .to(centerDot, { opacity: 1,  ease: "none" }, "a");
+        onUpdate: (self) => {
+          if (self.direction < 0) {
+            gsap.set(travelCircle, {
+              left: window.innerWidth * 0.5,
+              top: window.innerHeight * 0.5,
+              scale: 1 - self.progress,
+              opacity: 1,
+            });
+            if (centerDot) gsap.set(centerDot, { opacity: 0 });
+            return;
+          }
+
+          gsap.set(travelCircle, {
+            scale: 1 - self.progress,
+            opacity: 1,
+          });
+          if (centerDot) {
+            gsap.set(centerDot, { opacity: self.progress });
+          }
+        },
+        onLeave: () => {
+          gsap.set(travelCircle, { scale: 0, opacity: 1 });
+          if (centerDot) gsap.set(centerDot, { opacity: 1 });
+        },
+      });
 
     }, ref);
 
@@ -343,7 +382,7 @@ export default function Expertise() {
   if (isMobile) return null;
 
   return (
-    <section id="page3" className="relative h-[300vh] cursor-default" ref={ref}>
+    <section id="page3" className="relative h-[300vh] bg-background cursor-default" ref={ref}>
       {/* Single traveling circle — absolutely positioned fixed in viewport */}
       <div
         ref={travelCircleRef}

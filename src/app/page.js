@@ -34,10 +34,10 @@ const Home = async () => {
   return (
     <>
       <HeroSection />
-      {/* Global circle2 — fixed, GSAP-controlled */}
+      {/* Global handoff circle — fixed, GSAP-controlled */}
       <div
         id="circle2"
-        className="hidden md:block fixed w-[200vw] h-[200vw] opacity-0 bg-heading rounded-full pointer-events-none top-[80%] left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="hidden md:block fixed h-5 w-5 opacity-0 bg-heading rounded-full pointer-events-none left-0 top-0 z-20"
       />
       <AboutStudio />
       {/* Mobile: replace Expertise with accordion */}
