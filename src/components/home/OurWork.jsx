@@ -222,7 +222,7 @@ export default function OurWork({ posts = [] }) {
               {/* BUTTON CIRCLE */}
               <span
                 ref={buttonCircleRef}
-                className="relative flex items-center justify-center rounded-full bg-white"
+                className="relative flex items-center justify-center rounded-full"
               >
                 <svg
                   ref={buttonArrowRef}
