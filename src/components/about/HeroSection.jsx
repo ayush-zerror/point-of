@@ -104,16 +104,54 @@ const HeroSection = ({
   enableTextParallax = false,
 }) => {
   const rootRef = useRef(null);
+  const bgWrapRef = useRef(null);
   const bgRef = useRef(null);
   const contentRef = useRef(null);
+  const headlineRef = useRef(null);
+  const ctaRef = useRef(null);
 
   useEffect(() => {
     if (!rootRef.current) return;
 
     const root = rootRef.current;
+    const bgWrap = bgWrapRef.current;
     const bg = bgRef.current;
+    const cleanupFns = [];
 
     const ctx = gsap.context(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const introItems = [
+        root.querySelector("#clock-container"),
+        headlineRef.current,
+        ctaRef.current,
+      ].filter(Boolean);
+
+      if (reduceMotion) {
+        gsap.set([bgWrap, ...introItems], { autoAlpha: 1, clearProps: "transform" });
+      } else {
+        const introTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        if (bgWrap) {
+          introTl.fromTo(
+            bgWrap,
+            { autoAlpha: 0, scale: 1.06 },
+            { autoAlpha: 1, scale: 1, duration: 1.2 }
+          );
+        }
+
+        introTl.fromTo(
+          introItems,
+          { autoAlpha: 0, y: 36 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.9,
+            stagger: 0.12,
+          },
+          bgWrap ? "-=0.65" : 0
+        );
+      }
+
       // Content parallax on scroll (optional)
       if (enableTextParallax && contentRef.current) {
         gsap.to(contentRef.current, {
@@ -149,13 +187,16 @@ const HeroSection = ({
         };
 
         root.addEventListener("mousemove", handleMouseMove);
-        return () => root.removeEventListener("mousemove", handleMouseMove);
+        cleanupFns.push(() => root.removeEventListener("mousemove", handleMouseMove));
       }
     }, rootRef);
 
     requestAnimationFrame(() => ScrollTrigger.refresh());
-    return () => ctx.revert();
-  }, [bgImage]);
+    return () => {
+      cleanupFns.forEach((cleanup) => cleanup());
+      ctx.revert();
+    };
+  }, [bgImage, enableBgParallax, enableTextParallax]);
 
   return (
     <div
@@ -164,15 +205,20 @@ const HeroSection = ({
     >
       {/* Background Image */}
       {bgImage && (
-        <Image
-          ref={bgRef}
-          width={1000}
-          height={1000}
-          src={bgImage}
-          alt={typeof title === "string" && title.trim() ? title : "Point Of background image"}
-          className={`absolute invert-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover object-center ${imgClass}`}
-          priority
-        />
+        <div
+          ref={bgWrapRef}
+          className="absolute invert-0 top-1/2 left-1/2 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+        >
+          <Image
+            ref={bgRef}
+            width={1000}
+            height={1000}
+            src={bgImage}
+            alt={typeof title === "string" && title.trim() ? title : "Point Of background image"}
+            className={`w-full h-full object-cover object-center ${imgClass}`}
+            priority
+          />
+        </div>
       )}
 
       {/* Content */}
@@ -191,11 +237,16 @@ const HeroSection = ({
             <Clock clockCountry={clockCountry} clockTimeZone={clockTimeZone} />
           )}
 
-          <h2 className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px] [&_br]:hidden sm:[&_br]:block">
+          <h2
+            ref={headlineRef}
+            className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px] [&_br]:hidden sm:[&_br]:block"
+          >
             {title}
           </h2>
 
-          <Button title={btntitle} onClick={onClick} href={href} />
+          <div ref={ctaRef}>
+            <Button title={btntitle} onClick={onClick} href={href} />
+          </div>
         </div>
       </div>
     </div>

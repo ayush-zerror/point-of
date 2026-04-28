@@ -33,6 +33,7 @@ const Connect = async () => {
           </>
         }
         btntitle={"CONNECT"}
+        href="/connect#join-our-team"
       />
       <ContactSection />
       <JoinTeam />
