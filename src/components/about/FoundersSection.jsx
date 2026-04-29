@@ -2,11 +2,11 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Button from "../common/Button";
 import Image from "next/image";
 import ArrowButton from "../common/ArrowButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,7 +50,13 @@ const FoundersSection = ({ data }) => {
               key={index}
               className="w-full max-w-[520px] mx-auto md:mx-0"
             >
-              <div className="w-full aspect-square overflow-hidden mb-8">
+              <motion.div
+                className="w-full aspect-square overflow-hidden mb-8"
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.35 }}
+              >
                 <div
                   ref={(el) => { mediaRefs.current[index] = el; }}
                   className="w-full h-full will-change-transform"
@@ -63,13 +69,13 @@ const FoundersSection = ({ data }) => {
                     className={`w-full h-full object-cover ${item.objectPosition}`}
                   />
                 </div>
-              </div>
+              </motion.div>
 
-              <h3 className="heading-lg !font-[300] text-subheading mb-3">
+              <h3 className="heading-lg font-light! text-subheading mb-3">
                 {item.name}
               </h3>
 
-              <p className="text-xs sm:text-sm uppercase tracking-[1px] heading-lg !font-[500] text-subheading mb-4">
+              <p className="text-xs sm:text-sm uppercase tracking-[1px] heading-lg font-medium! text-subheading mb-4">
                 {item.role}
               </p>
 
