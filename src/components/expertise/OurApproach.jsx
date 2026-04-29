@@ -324,7 +324,7 @@ const OurApproach = () => {
             </div>
 
             {/* ─── MOBILE / TABLET ─── */}
-            <div className="approach-mobile w-full px-6 py-[14vw]">
+            <div className="approach-mobile w-full px-6 md:px-12 py-[14vw]">
                 <h2 className="heading-xl mb-[12vw] text-heading">Our Approach</h2>
 
                 {/* Card 1 — Strategy */}

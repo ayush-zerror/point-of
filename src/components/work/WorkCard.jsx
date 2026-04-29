@@ -75,7 +75,7 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false }) =
     return (
       <Link
         href={href}
-        className="work-card relative group block w-full min-w-0 md:w-[400px]"
+        className="work-card relative group block w-full min-w-0 md:w-full lg:w-[400px]"
         title={title}
         aria-label={title}
       >
@@ -115,8 +115,8 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false }) =
       onClick={handleClick}
       className={`work-card block min-w-0 ${
         isExpanding
-          ? "fixed inset-0 z-[999] w-screen h-screen bg-neutral-900"
-          : "group relative w-full md:w-[400px]"
+          ? "fixed inset-0 z-999 w-screen h-screen bg-neutral-900"
+          : "group relative w-full md:w-full lg:w-[400px]"
       }`}
       title={title}
       aria-label={title}

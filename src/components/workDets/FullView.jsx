@@ -45,7 +45,7 @@ const FullView = ({ caseStudy }) => {
   return (
     <section className="w-full space-y-20 md:space-y-28">
       {/* IMAGE */}
-      <div ref={heroWrapRef} className="relative w-full h-auto md:h-screen overflow-hidden">
+      <div ref={heroWrapRef} className="relative w-full h-auto md:h-auto lg:h-screen overflow-hidden">
         <div ref={heroMediaRef} className="w-full h-full will-change-transform">
           <Image
             width={1000}

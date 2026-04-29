@@ -126,7 +126,7 @@ export default function OurValues() {
       >
 
         {/* Heading: clamp scales smoothly across all screen sizes */}
-        <h2 className="absolute z-10 text-center heading-lg text-subheading pointer-events-none bottom-[22%] left-1/2 -translate-x-1/2 sm:bottom-[13%] md:bottom-[14%] lg:bottom-[15%]">
+        <h2 className="absolute z-10 text-center heading-lg text-subheading pointer-events-none bottom-[22%] left-1/2 -translate-x-1/2 sm:bottom-[13%] md:bottom-[26%] lg:bottom-[15%]">
           Our <br /> Values
         </h2>
 

@@ -16,7 +16,7 @@ import { testimonials } from "@/helper/testimonials";
 
 const TestimonialSection = () => {
   return (
-    <section className="w-full py-16 md:py-24 px-6 sm:px-8 md:px-20">
+    <section className="w-full py-16 md:py-24 sm:px-10 md:px-12 lg:px-20">
       <div className="w-full cursor-grab">
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}

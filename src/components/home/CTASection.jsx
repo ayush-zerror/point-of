@@ -81,7 +81,7 @@ const CTASection = ({
           alt="graphic_expertise"
           width={1000}
           height={1000}
-          className="w-26 h-26 sm:w-40 sm:h-40 md:w-56 md:h-56 object-contain mt-12 sm:mt-12 md:mt-16 lg:mt-20 will-change-transform"
+          className="w-26 h-26 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain mt-12 sm:mt-12 md:mt-16 lg:mt-20 will-change-transform"
         />
         )}
       </div>

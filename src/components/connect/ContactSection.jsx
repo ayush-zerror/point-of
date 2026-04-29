@@ -44,13 +44,13 @@ const ContactSection = () => {
       <div className="h-auto md:sticky md:top-0 md:h-screen z-10">
         <section id="contact-section" className="min-h-screen md:h-screen w-full relative">
           <div className="h-full flex items-center">
-            <div className="w-full px-6 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120 md:pr-6">
+            <div className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-120 md:pr-6">
 
               {/* Scroll-animated vertical line */}
               <div
                 ref={lineRef}
                 style={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
-                className="hidden md:block w-px h-82 z-30 bg-linear-to-b from-transparent to-foreground absolute top-4 -translate-y-1/2 md:left-[30.2rem]"
+                className="hidden md:block w-px h-82 z-30 bg-linear-to-b from-transparent to-foreground absolute top-4 -translate-y-1/2 md:left-12 lg:left-[30.2rem]"
               >
                 <span className="w-[3px] h-[3px] bg-foreground rounded-full absolute bottom-0 left-1/2 -translate-x-1/2" />
               </div>

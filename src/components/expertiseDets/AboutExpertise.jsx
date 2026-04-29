@@ -82,10 +82,10 @@ const AboutExpertise = ({
 
 
   return (
-    <section className="w-full  px-6 sm:px-10 md:px-16 lg:px-20 py-6 md:py-28">
+    <section className="w-full px-6 sm:px-10 lg:px-20 py-6 lg:py-28">
       
       {/* GRID */}
-      <div className="grid grid-cols-1 gap-4 md:gap-0 md:grid-cols-[40%_60%] items-stretch">
+      <div className="grid grid-cols-1 gap-4 lg:gap-0 lg:grid-cols-[40%_60%] items-stretch">
         
         {/* LEFT */}
         <div className="flex flex-col justify-between h-full">
@@ -94,7 +94,7 @@ const AboutExpertise = ({
           <h2 className="heading-xl text-heading">{expertise}</h2>
 
           {/* BUTTON AT BOTTOM */}
-          <div className="hidden md:block mt-10 md:mt-0">
+          <div className="hidden lg:block mt-10 lg:mt-0">
             <Button title={buttonTitle} onClick={() => {
               router.push(`/connect`);
             }} />
@@ -119,7 +119,7 @@ const AboutExpertise = ({
                   
                   <button
                     onClick={() => setActive(isOpen ? null : index)}
-                    className="w-full flex items-center justify-between py-6 md:py-8 text-left group cursor-pointer"
+                    className="w-full flex items-center justify-between py-6 lg:py-8 text-left group cursor-pointer"
                   >
                     <span className={`heading-lg text-desc transition hover:text-heading ${isOpen ? "text-heading" : "text-desc"}`}>
                       {item.title}
@@ -147,7 +147,7 @@ const AboutExpertise = ({
           </div>
 
           {/* CTA (mobile first) */}
-          <div className="md:hidden flex justify-center">
+          <div className="lg:hidden flex justify-center">
             <Button
               title={buttonTitle}
               onClick={() => {

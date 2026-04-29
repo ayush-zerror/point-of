@@ -111,7 +111,7 @@ export default function ShowcaseGrid({ caseStudy }) {
         ) : null}
 
         {/* TEXT BOX */}
-        <div className="flex flex-col justify-center bg-black text-white pr-6 md:pr-14">
+        <div className="flex flex-col justify-center bg-black text-white pr-6 md:pr-0 lg:pr-14">
           <p className="text-sm font-semibold text-subheading mb-4">
             CREATIVE CONCEPT
           </p>

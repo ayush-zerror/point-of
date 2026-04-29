@@ -584,7 +584,7 @@ const WorkSection = ({ projects }) => {
       {/* ── Center foreground ── */}
       <div
         ref={centerWrapperRef}
-        className={`min-w-[300px] md:min-w-[400px] aspect-square z-20 transition-opacity duration-300 ${
+        className={`min-w-[300px] md:min-w-[350px] lg:min-w-[400px] aspect-square z-20 transition-opacity duration-300 ${
           isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         } ${
           expandingIndex !== null

@@ -116,17 +116,17 @@ const AreasOfExpertise = () => {
     return () => ctx.revert();
   }, []);
   return (
-    <section ref={rootRef} className="w-full  py-6 md:py-28">
+    <section ref={rootRef} className="w-full py-6 lg:py-28">
       <div
         className="
           relative w-full
-          px-6 sm:px-6 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
-          md:pr-6
+          px-6 sm:px-6 md:px-12 lg:pl-48 xl:pl-80 2xl:pl-120
+          lg:pr-6
         "
       >
         <div className="max-w-5xl relative">
           {/* LEFT GRAPHIC (desktop only) */}
-          <div className="hidden md:flex items-center justify-center absolute top-0 -left-[33.5%] h-full">
+          <div className="hidden lg:flex items-center justify-center absolute top-0 -left-[33.5%] h-full">
             <div className="flex flex-col items-center h-full">
               {/* Image */}
               <div ref={imageWrapRef} className="w-40 h-40 lg:w-46 lg:h-46 mb-6">
@@ -152,12 +152,12 @@ const AreasOfExpertise = () => {
           </div>
 
           {/* Heading */}
-          <h2 ref={headingRef} className="heading-xl mb-10 sm:mb-12 md:mb-16 ">
+          <h2 ref={headingRef} className="heading-xl mb-10 sm:mb-12 lg:mb-16 ">
           Areas of expertise
           </h2>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 md:gap-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10 lg:gap-16">
             {expertiseDetails.map((section, index) => (
               <div key={index} data-expertise-box>
                 <Link
@@ -167,7 +167,7 @@ const AreasOfExpertise = () => {
                 >
                   <h3
                     data-box-title
-                    className="uppercase heading-md text-subheading mb-3 sm:mb-4 md:mb-6 hover:opacity-80 transition-opacity duration-200"
+                    className="uppercase heading-md text-subheading mb-3 sm:mb-4 lg:mb-6 hover:opacity-80 transition-opacity duration-200"
                   >
                     {section.expertise}
                   </h3>

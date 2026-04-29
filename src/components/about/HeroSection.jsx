@@ -67,7 +67,7 @@ const Clock = ({ clockCountry, clockTimeZone }) => {
   return (
     <div
       id="clock-container"
-      className="absolute -top-60 left-98 h-48 w-48 rounded-full"
+      className="absolute md:-top-80 lg:-top-60 md:left-12 lg:left-98 h-48 w-48 rounded-full"
     >
       <Image
         src="/contact/clock.png"
@@ -227,9 +227,9 @@ const HeroSection = ({
           ref={contentRef}
           className="
             w-full relative
-            px-6 sm:px-10 md:pl-28 lg:pl-48 xl:pl-80 2xl:pl-120
+            px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-120
             pr-6
-            py-12 sm:py-16 pt-36 sm:pt-40 md:pb-20 lg:pb-28 xl:pb-40 md:pt-0
+            py-12 sm:py-16 pt-36 sm:pt-40 md:pb-52 lg:pb-28 xl:pb-40 md:pt-0
           "
         >
           {/* Clock — mounted only when needed */}

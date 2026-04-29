@@ -44,7 +44,7 @@ const GridSection = ({ title, intro, btntitle, data }) => {
   return (
     <div className="w-full py-16 sm:py-20 md:py-28 lg:py-32">
       {/* Container */}
-      <div className="max-w-[1350px] mx-auto px-6 sm:px-8 md:px-14">
+      <div className="max-w-[1350px] mx-auto px-6 sm:px-8 md:px-12 lg:px-14">
         
         {/* Heading */}
         {title && (
