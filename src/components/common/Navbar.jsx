@@ -18,6 +18,7 @@ export default function Navbar() {
   ];
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [landingActive, setLandingActive] = useState(false);
   const pathname = usePathname();
 
   // Hide navbar on excluded routes (e.g. Sanity Studio)
@@ -25,6 +26,25 @@ export default function Navbar() {
   if (pathname && excludePaths.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
     return null;
   }
+
+  // Home landing: keep navbar hidden until the hero landing overlay finishes.
+  useEffect(() => {
+    if (!pathname) return;
+    setLandingActive(pathname === "/");
+
+    const onDone = () => setLandingActive(false);
+    window.addEventListener("hero-landing:done", onDone);
+
+    // Safety fallback (in case the event is not fired for some reason).
+    const fallback = window.setTimeout(() => {
+      if (pathname === "/") setLandingActive(false);
+    }, 2000);
+
+    return () => {
+      window.removeEventListener("hero-landing:done", onDone);
+      window.clearTimeout(fallback);
+    };
+  }, [pathname]);
 
   const navRef = useRef(null);
   const tl = useRef(null);
@@ -192,8 +212,9 @@ export default function Navbar() {
     <>
       <nav
         id="site-nav"
-        className={`fixed top-0 left-0 w-full z-50 text-foreground ${pathname === "/work" ? "" : "nav-gradient"
-          }`}
+        className={`fixed top-0 left-0 w-full z-50 text-foreground transition-opacity duration-200 ease-out ${
+          pathname === "/work" ? "" : "nav-gradient"
+        } ${landingActive ? "opacity-0 pointer-events-none" : "opacity-100"}`}
       >
         <div className="relative z-30 flex items-center justify-between h-16 sm:h-20 px-6 sm:px-10 md:px-12 lg:px-20">
           {/* Left spacer so hamburger doesn't shift center */}
