@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import gsap from "gsap";
 import Button from "../common/Button";
@@ -19,38 +19,73 @@ const CLIP_TOP   = "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)";
 const BrandsIndex = () => {
   const [showAll, setShowAll] = useState(false);
   const [sortKey, setSortKey] = useState("year"); // year | brand | industry
-  const [sortDir, setSortDir] = useState("desc"); // year default: newest first
+  const [sortDir, setSortDir] = useState("asc"); // year default: chronological
   const [viewMode, setViewMode] = useState("list"); // list | year | industry
   const showcaseRef = useRef(null);
-  const defaultSortRef = useRef({ sortKey: "year", sortDir: "desc" });
+  const defaultSortRef = useRef({ sortKey: "year", sortDir: "asc" });
+
+  const [selectedIndustry, setSelectedIndustry] = useState("All");
+  const [industryOpen, setIndustryOpen] = useState(false);
+  const industryDropdownRef = useRef(null);
+  const industries = useMemo(() => {
+    const set = new Set(
+      rows.map((r) => String(r.industry ?? "").trim() || "Other")
+    );
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!industryDropdownRef.current?.contains(event.target)) {
+        setIndustryOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") setIndustryOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   const sortedRows = useMemo(() => {
     const dir = sortDir === "asc" ? 1 : -1;
     const copy = [...rows];
 
     copy.sort((a, b) => {
-      if (sortKey === "year") {
-        const byYear = (Number(a.year) - Number(b.year)) * dir;
-        if (byYear !== 0) return byYear;
-        return String(a.brand).localeCompare(String(b.brand));
-      }
+      // Chronological by year is always primary (as requested).
+      const byYear = (Number(a.year) - Number(b.year)) * dir;
+      if (byYear !== 0) return byYear;
 
+      // Secondary ordering depends on the selected key.
       if (sortKey === "brand") {
-        const byBrand = String(a.brand).localeCompare(String(b.brand)) * dir;
-        if (byBrand !== 0) return byBrand;
-        return (Number(a.year) - Number(b.year)) * -1;
+        return String(a.brand).localeCompare(String(b.brand)) * dir;
       }
 
-      // industry
-      const byIndustry = String(a.industry).localeCompare(String(b.industry)) * dir;
-      if (byIndustry !== 0) return byIndustry;
-      return (Number(a.year) - Number(b.year)) * -1;
+      if (sortKey === "industry") {
+        return String(a.industry).localeCompare(String(b.industry)) * dir;
+      }
+
+      // sortKey === "year": keep it stable by brand name
+      return String(a.brand).localeCompare(String(b.brand)) * dir;
     });
 
     return copy;
   }, [sortDir, sortKey]);
 
-  const filteredRows = sortedRows;
+  const filteredRows = useMemo(() => {
+    if (!selectedIndustry || selectedIndustry === "All") return sortedRows;
+    return sortedRows.filter((r) => {
+      const ind = String(r.industry ?? "").trim() || "Other";
+      return ind === selectedIndustry;
+    });
+  }, [selectedIndustry, sortedRows]);
 
   const visibleRows = useMemo(() => {
     return showAll ? filteredRows : filteredRows.slice(0, 20);
@@ -67,7 +102,7 @@ const BrandsIndex = () => {
     }
     const years = Array.from(map.keys())
       .filter(Boolean)
-      .sort((a, b) => Number(b) - Number(a)); // newest first
+      .sort((a, b) => Number(a) - Number(b)); // chronological
 
     return years.map((year) => ({ year, items: map.get(year) ?? [] }));
   }, [visibleRows]);
@@ -83,7 +118,7 @@ const BrandsIndex = () => {
     const inds = Array.from(map.keys()).sort((a, b) => a.localeCompare(b));
     return inds.map((industry) => ({
       industry,
-      items: (map.get(industry) ?? []).slice().sort((a, b) => Number(b.year) - Number(a.year)),
+      items: (map.get(industry) ?? []).slice().sort((a, b) => Number(a.year) - Number(b.year)),
     }));
   }, [visibleRows]);
 
@@ -159,6 +194,98 @@ const BrandsIndex = () => {
             <p className="para text-desc">
               A partial record of who we've worked with and what we've worked on.
             </p>
+          </div>
+
+          {/* Industry filter (single-select) */}
+          <div
+            ref={industryDropdownRef}
+            className="relative w-full sm:w-auto"
+          >
+            <button
+              type="button"
+              onClick={() => setIndustryOpen((prev) => !prev)}
+              className="group flex w-full cursor-pointer sm:w-[260px] items-center justify-between gap-6 border-b border-desc/60 pb-2 text-left tracking-[1.5px] text-xs font-heading text-subheading transition-colors hover:text-heading"
+              aria-haspopup="listbox"
+              aria-expanded={industryOpen}
+            >
+              <span className="flex items-center gap-3 min-w-0">
+                <span className="text-desc whitespace-nowrap para">Industry :</span>
+                <span className="truncate text-heading para">
+                  {selectedIndustry === "All" ? "All industries" : selectedIndustry}
+                </span>
+              </span>
+
+              <motion.span
+                animate={{ rotate: industryOpen ? 180 : 0 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="shrink-0 text-heading"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 4.5L6 8L10 4.5"
+                    stroke="currentColor"
+                    strokeWidth="1.25"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </motion.span>
+            </button>
+
+            <AnimatePresence>
+              {industryOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute right-0 top-full z-30 mt-3 w-full sm:w-[260px] border border-desc/40 bg-background/95 backdrop-blur-sm"
+                >
+                  <ul className="max-h-72 overflow-y-auto py-3" data-lenis-prevent>
+                    {["All", ...industries].map((ind) => {
+                      const isActive = selectedIndustry === ind;
+                      const label = ind === "All" ? "All industries" : ind;
+
+                      return (
+                        <li key={ind}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedIndustry(ind);
+                              setIndustryOpen(false);
+                              setViewMode("list");
+                              setSortKey("year");
+                              setSortDir("asc");
+                              setShowAll(false);
+                            }}
+                            className={`w-full px-4 py-2 text-left cursor-pointer  para transition-colors ${
+                              isActive
+                                ? "text-heading"
+                                : "text-subheading hover:text-heading"
+                            }`}
+                          >
+                            <span className="inline-flex items-center gap-2">
+                              <span
+                                className={`h-1 w-1 rounded-full ${
+                                  isActive ? "bg-heading opacity-100" : "bg-heading opacity-0"
+                                }`}
+                              />
+                              {label}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 
@@ -240,7 +367,7 @@ const BrandsIndex = () => {
                 if (viewMode !== "year") {
                   setViewMode("year");
                   setSortKey("year");
-                  setSortDir("desc");
+                setSortDir("asc");
                   return;
                 }
                 // second click resets back to normal list view (default sort)
