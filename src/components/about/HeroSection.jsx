@@ -67,7 +67,7 @@ const Clock = ({ clockCountry, clockTimeZone }) => {
   return (
     <div
       id="clock-container"
-      className="absolute md:-top-80 lg:-top-60 md:left-12 lg:left-98 h-48 w-48 rounded-full"
+      className="absolute hidden md:block md:-top-80 lg:-top-60 md:left-12 lg:left-98 h-48 w-48 rounded-full"
     >
       <Image
         src="/contact/clock.png"
