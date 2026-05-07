@@ -171,7 +171,7 @@ const AboutExpertise = ({
                     <Link
                       key={x.slug}
                       href={`/expertise/${x.slug}`}
-                      className="group inline-flex items-center rounded-full border border-white/15 px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm tracking-wide text-desc/90 transition-colors duration-200 hover:border-white/30 hover:bg-white/5"
+                      className="group inline-flex items-center rounded-full border border-white/15 px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm tracking-wide text-heading hover:text-black  transition-colors duration-200 hover:border-white/30 hover:bg-white"
                       title={x.expertise}
                     >
                       <span className="whitespace-nowrap">{x.expertise}</span>

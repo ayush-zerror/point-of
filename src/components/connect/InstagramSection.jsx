@@ -1,72 +1,83 @@
-
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Button from "../common/Button";
-import WorkCard from "../work/WorkCard";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ArrowButton from "../common/ArrowButton";
-
-gsap.registerPlugin(ScrollTrigger);
+import WorkCard from "../work/WorkCard";
 
 const InstagramSection = ({ caseStudies }) => {
-  const rootRef = useRef(null);
-  const cardRefs = useRef([]);
+  const marqueeInnerRef = useRef(null);
 
   useEffect(() => {
-    if (!rootRef.current) return;
+    const inner = marqueeInnerRef.current;
+    if (!inner) return;
 
-    const ctx = gsap.context(() => {
-      const cards = cardRefs.current.filter(Boolean);
-      if (!cards.length) return;
+    let xPos = 0;
+    let rafId;
+    const speed = 0.8;
+    let singleSetWidth = 0;
 
-      gsap.set(cards, { x: 60, opacity: 0 });
+    const init = () => {
+      singleSetWidth = inner.scrollWidth / 4;
 
-      gsap.to(cards, {
-        x: 0,
-        opacity: 1,
-        duration: 0.9,
-        ease: "power3.out",
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top 40%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    }, rootRef);
+      const tick = () => {
+        xPos -= speed;
+        if (Math.abs(xPos) >= singleSetWidth) {
+          xPos = 0;
+        }
+        inner.style.transform = `translate3d(${xPos}px, 0, 0)`;
+        rafId = requestAnimationFrame(tick);
+      };
 
-    return () => ctx.revert();
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const frameId = requestAnimationFrame(init);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      cancelAnimationFrame(rafId);
+    };
   }, [caseStudies]);
 
-  const posts = Array.isArray(caseStudies)
-    ? caseStudies.slice(0, 3)
-    : [];
+  const posts = Array.isArray(caseStudies) ? caseStudies : [];
+  const duplicated = [...posts, ...posts, ...posts, ...posts];
 
   return (
-    <section ref={rootRef} className="w-full overflow-hidden py-20 md:py-28 ">
+    <section className="w-full overflow-hidden py-20 md:py-28 bg-background">
 
       {/* Header */}
-      <div className="flex flex-col items-center justify-center mb-16 md:mb-20">
-        <h2 className="heading-lg text-subheading">
-          @wearepointof
-        </h2>
-        <ArrowButton title={"FOLLOW"} link={"https://www.instagram.com/wearepointof/"} /> 
+      <div className="flex flex-col items-center justify-center mb-10 md:mb-16">
+        <h2 className="heading-lg text-subheading">@wearepointof</h2>
+        <ArrowButton
+          title={"FOLLOW"}
+          link={"https://www.instagram.com/wearepointof/"}
+        />
       </div>
 
-      {/* Container */}
-      <div className="px-6 sm:px-10 md:px-12 lg:px-20">
-
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 lg:gap-20">
-          {posts.map((post, index) => (
-            <div key={post.slug ?? index} ref={(el) => { cardRefs.current[index] = el; }}>
-              <WorkCard slug={post.slug} title={post.title} image={post.coverImage} video={post.microanimation} />
+      {/* Marquee */}
+      <div className="w-full overflow-hidden">
+        <div
+          ref={marqueeInnerRef}
+          className="flex w-max will-change-transform gap-6 sm:gap-10 md:gap-12 lg:gap-20"
+          style={{ transform: "translate3d(0,0,0)" }}
+        >
+          {duplicated.map((post, index) => (
+            <div
+              key={`instagram-${index}`}
+              className="flex-shrink-0 pt-10 w-[70vw] sm:w-[45vw] md:w-[35vw] lg:w-[400px]"
+            >
+              <WorkCard
+                slug={post.slug}
+                title={post.title}
+                image={post.coverImage}
+                video={post.microanimation}
+                className="!w-full lg:!w-full"
+              />
             </div>
           ))}
         </div>
       </div>
+
     </section>
   );
 };

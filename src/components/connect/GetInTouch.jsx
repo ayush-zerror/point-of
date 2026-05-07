@@ -347,7 +347,7 @@ const GetInTouch = () => {
             />
             <p className="text-xs sm:text-sm text-gray-600 mt-3 sm:mt-4 md:mt-6">
               By clicking connect you accept our{" "}
-              <a href="/privacy" className="underline" title="Privacy Policy">
+              <a href="/privacy" target="_blank" className="underline" title="Privacy Policy">
                 Privacy Policy
               </a>
               <br />

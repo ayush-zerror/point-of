@@ -5,7 +5,7 @@ import { GoogleAuth } from "google-auth-library";
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
-const spreadsheetId = process.env.NEXT_PUBLIC_SUBSCRIBE_SPREADSHEET_ID;
+const spreadsheetId = "1NRAYWWJ83u5G7n2pD-XJr9eSMK9EqHxfZtsMGGFMh5c";
 
 function getAuth() {
   const clientEmail = process.env.NEXT_PUBLIC_CLIENT_EMAIL;

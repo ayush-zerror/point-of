@@ -19,7 +19,7 @@ export const metadata = {
 
 const Connect = async () => {
   const all = await getCaseStudies();
-  const caseStudies = (all ?? []).slice(0, 3)
+  const caseStudies = (all ?? []).slice(0, 5)
   return (
     <>
       <HashScrollToId offset={100} />

@@ -10,7 +10,7 @@ import Flip from "gsap/Flip";
 
 gsap.registerPlugin(Flip);
 
-const WorkCard = ({ slug, title, image, video, enableFlipTransition = false }) => {
+const WorkCard = ({ slug, title, image, video, enableFlipTransition = false, className = "" }) => {
   const router = useRouter();
   const cardRef = useRef(null);
   const [isExpanding, setIsExpanding] = useState(false);
@@ -20,7 +20,6 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false }) =
   const handleClick = (e) => {
     if (!enableFlipTransition) return;
 
-    // Let default browser behavior work for new-tab / modified clicks.
     if (
       e.button !== 0 ||
       e.metaKey ||
@@ -31,8 +30,6 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false }) =
       return;
     }
 
-    // Only run the fullscreen Flip on lg+ screens.
-    // On smaller screens, keep default link navigation.
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       return;
     }
@@ -75,12 +72,12 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false }) =
     return (
       <Link
         href={href}
-        className="work-card relative group block w-full min-w-0 md:w-full lg:w-[400px]"
+        className={`work-card relative group block w-full min-w-0 md:w-full lg:w-[400px] ${className}`}
         title={title}
         aria-label={title}
       >
-        <div className="absolute left-0 overflow-hidden z-10 top-2 md:-top-8">
-          <span className="inline-block origin-left translate-y-full rotate-10 group-hover:translate-y-0 group-hover:rotate-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base tracking-wide">
+        <div className="absolute left-0 overflow-hidden z-10 -top-8">
+          <span className="inline-block origin-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base tracking-wide translate-y-0 rotate-0 lg:translate-y-full lg:rotate-10 lg:group-hover:translate-y-0 lg:group-hover:rotate-0">
             {title}
           </span>
         </div>
@@ -116,13 +113,13 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false }) =
       className={`work-card block min-w-0 ${
         isExpanding
           ? "fixed inset-0 z-999 w-screen h-screen bg-neutral-900"
-          : "group relative w-full md:w-full lg:w-[400px]"
+          : `group relative w-full md:w-full lg:w-[400px] ${className}`
       }`}
       title={title}
       aria-label={title}
     >
-      <div className="absolute left-0 overflow-hidden z-10 top-2 md:-top-8">
-        <span className="inline-block origin-left translate-y-full rotate-10 group-hover:translate-y-0 group-hover:rotate-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base tracking-wide">
+      <div className="absolute left-0 overflow-hidden z-10 -top-8">
+        <span className="inline-block origin-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base tracking-wide translate-y-0 rotate-0 lg:translate-y-full lg:rotate-10 lg:group-hover:translate-y-0 lg:group-hover:rotate-0">
           {title}
         </span>
       </div>

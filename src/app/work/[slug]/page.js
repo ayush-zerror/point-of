@@ -1,4 +1,3 @@
-import InstagramSection from '@/components/connect/InstagramSection'
 import HeroSection from '@/components/expertiseDets/HeroSection'
 import CaseStudyIntro from '@/components/workDets/CaseStudyIntro'
 import ImageToggleSection from '@/components/workDets/ImageToggleSection'
@@ -6,6 +5,7 @@ import NavbarReveal from '@/components/common/NavbarReveal'
 import { getCaseStudies, getCaseStudyBySlug } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import React from 'react'
+import RelatedWork from '@/components/connect/RelatedWork'
 
 export async function generateMetadata({ params }) {
   const normalizeSlug = (value) => {
@@ -78,7 +78,7 @@ const WorkDetail = async ({ params }) => {
       <HeroSection src={caseStudy.coverImage} />
       <CaseStudyIntro caseStudy={caseStudy} />
       <ImageToggleSection caseStudy={caseStudy} />
-      <InstagramSection caseStudies={otherCaseStudies} />
+      <RelatedWork caseStudies={otherCaseStudies} />
     </>
   )
 }

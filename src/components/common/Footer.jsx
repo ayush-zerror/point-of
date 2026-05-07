@@ -169,7 +169,7 @@ export default function Footer() {
                       aria-label="Loading"
                     />
                   ) : (
-                    <Send className="w-5 h-5 opacity-70" />
+                    <Send className="c w-5 h-5 opacity-70" />
                   )}
                 </button>
               </div>
@@ -207,9 +207,11 @@ export default function Footer() {
               Legal
             </Link>
           </div>
-
           <p className="text-neutral-400">
-            © {new Date().getFullYear()} Point Of
+            © Point Of {new Date().getFullYear()}
+          </p>
+          <p className="text-neutral-400">
+            Made with intention.
           </p>
         </div>
 

@@ -17,11 +17,10 @@ export default function NotFound() {
           </h2>
 
           <p className="mt-4 para text-desc mx-auto max-w-2xl">
-            The link might be broken, or the page may have moved. Here are a few quick ways to get
-            back on track.
+            The link might be broken, or the page may have moved.
           </p>
 
-       
+
         </div>
       </div>
 

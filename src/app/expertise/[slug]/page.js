@@ -1,11 +1,12 @@
-import InstagramSection from "@/components/connect/InstagramSection";
+import React from "react";
+import RelatedWork from "@/components/connect/RelatedWork";
 import AboutExpertise from "@/components/expertiseDets/AboutExpertise";
 import HeroSection from "@/components/expertiseDets/HeroSection";
 import CTASection from "@/components/home/CTASection";
 import { expertiseDetails } from "@/helper/expertise-data";
 import { getCaseStudies } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
-import React from "react";
+import InstagramSection from "@/components/connect/InstagramSection";
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await Promise.resolve(params);
@@ -59,6 +60,7 @@ const ExpertiseDetails = async ({ params }) => {
         accordion={data.accordion}
         currentSlug={data.slug}
       />
+      <RelatedWork caseStudies={caseStudies} related={true}/>
       <CTASection heading={data.ctaTitle} buttonTitle={data.ctaButton} />
       <InstagramSection caseStudies={caseStudies} />
     </>

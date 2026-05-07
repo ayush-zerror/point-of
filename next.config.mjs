@@ -10,6 +10,9 @@ const nextConfig = {
       { protocol: "https", hostname: "framerusercontent.com" },
       { protocol: "https", hostname: "www.behance.net" },
       { protocol: "https", hostname: "cdn.sanity.io" },
+      { protocol: "https", hostname: "instagram.fbho1-1.fna.fbcdn.net" },
+      { protocol: "https", hostname: "instagram.fbho1-4.fna.fbcdn.net" },
+      { protocol: "https", hostname: "instagram.fbho1-3.fna.fbcdn.net" },
     ],
   },
 };

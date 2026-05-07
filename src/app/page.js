@@ -10,6 +10,7 @@ import AccordionSection from '@/components/connect/AccordionSection'
 import { expertiseItems } from '@/helper/expertise-items'
 import { getCaseStudies } from '@/sanity/lib/queries'
 import React from 'react'
+import InstagramSection from '@/components/connect/InstagramSection'
 
 export const metadata = {
   title: "Point Of — Global Brand & Strategic Design Consultancy",
@@ -29,7 +30,7 @@ export const metadata = {
 
 const Home = async () => {
   const all = await getCaseStudies();
-  const posts = (all ?? []).slice(0, 6);
+  const posts = (all ?? []).slice(0, 5);
 
   return (
     <>
@@ -60,6 +61,7 @@ const Home = async () => {
         </>}
         buttonTitle={"Let's find yours"}
       />
+       {/* <InstagramSection caseStudies={posts} /> */}
       {/* Center dot — always fixed at viewport center across all pages */}
       <CenterDot />
     </>
