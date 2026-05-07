@@ -42,9 +42,30 @@ const FoundersSection = ({ data }) => {
   return (
     <div ref={rootRef} className="w-full  py-20 sm:py-24 md:py-28">
       {/* Container */}
+      <div className="w-full  overflow-hidden">
+        {/* Wrapper */}
+        <div
+          className="w-full 
+          px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
+          pr-6
+          pb-20 sm:pb-24 md:pb-28 lg:pb-32
+          "
+        >
+
+          <h2
+            className="heading-xl text-subheading mb-6"
+          >
+            Two minds. One vision
+          </h2>
+
+          <p className="heading-lg text-desc max-w-[900px]">
+            Point Of was built by two people who see the same problem differently — which is exactly why it works.
+          </p>
+        </div>
+      </div>
       <div className="max-w-[1350px] mx-auto px-6 sm:px-10 md:px-14">
         <div className="flex flex-col md:flex-row md:justify-between gap-16 md:gap-12 lg:gap-24">
-          
+
           {data.map((item, index) => (
             <div
               key={index}

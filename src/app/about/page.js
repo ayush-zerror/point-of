@@ -3,9 +3,10 @@ import Experience from "@/components/about/Experience";
 import FoundersSection from "@/components/about/FoundersSection";
 import GridSection from "@/components/about/GridSection";
 import HeroSection from "@/components/about/HeroSection";
-import PlaceToWork from "@/components/about/PlaceToWork";
 import OurValues from "@/components/about/OurValues";
 import CTASection from "@/components/home/CTASection";
+import StudioConsultancy from "@/components/about/StudioConsultancy";
+import OfficesSection from "@/components/about/OfficesSection";
 
 export const metadata = {
   title: "About",
@@ -117,20 +118,20 @@ const transformData = [
 
 const cultureValues = [
   {
-    title: "Move as One Team",
-    desc: "We work as one—strategists, designers, and creators aligned around shared intent. Every project is built on seamless collaboration, where diverse perspectives come together to create something unified and meaningful.",
+    title: "Question First.",
+    desc: "We set the problem before we solve it. The best design decisions come from understanding what the work needs to do — before deciding what it should look like.",
   },
   {
-    title: "Build Strong Bonds",
-    desc: "We believe the best work grows from trust. By building lasting relationships—with each other and with our partners—we create space for open dialogue, shared vision, and design that makes a difference.",
+    title: "Stay in the Room.",
+    desc: "We're in it for what comes after. The brands we work with know our investment doesn't end at handoff — it compounds.",
   },
   {
-    title: "Champion Customers",
-    desc: "Our focus is always on the people we create for. We listen deeply, design thoughtfully, and deliver work that not only meets expectations but elevates them—driving real value for our partners and their audiences.",
+    title: "Make it Mean Something.",
+    desc: "We build with purpose — socially, culturally, commercially. Work that resonates beyond its brief and holds up beyond its moment.",
   },
   {
-    title: "Hold High Expectations",
-    desc: "We hold ourselves to the highest standards of craft and clarity. Every detail, decision, and design reflects our belief that excellence isn’t a target—it’s a responsibility we bring to every collaboration.",
+    title: "Keep Evolving.",
+    desc: "Curiosity is not a value we list. It is how we work — unlearning what no longer serves, and staying restless enough to find what does.",
   },
 ];
 
@@ -153,16 +154,16 @@ const Studio = () => {
         enableTextParallax={true}
       />
       <Experience data={experienceData} />
-      <PlaceToWork />
-      <FoundersSection data={foundersData} />
-
+      <StudioConsultancy />
+      <OurValues />
       <GridSection
         title="How we transform brands?"
         intro="Six ways we think about work — and what we do to brands that are ready for change."
         data={transformData}
       />
-      <OurValues />
-
+      <FoundersSection data={foundersData} />
+      {/* Offices (dark strip) */}
+      <OfficesSection />
       <GridSection
         title={
           <>
