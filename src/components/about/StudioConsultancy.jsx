@@ -1,8 +1,54 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef } from "react";
 
 const StudioConsultancy = () => {
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            leftRef.current?.classList.add("animate-in-left");
+            rightRef.current?.classList.add("animate-in-right");
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="w-full overflow-hidden">
+      <style>{`
+        .slide-left {
+          opacity: 0;
+          transform: translateX(-60px);
+          transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                      transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .slide-right {
+          opacity: 0;
+          transform: translateX(60px);
+          transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                      transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .animate-in-left {
+          opacity: 1 !important;
+          transform: translateX(0) !important;
+        }
+        .animate-in-right {
+          opacity: 1 !important;
+          transform: translateX(0) !important;
+        }
+      `}</style>
+
       <div className="px-6 sm:px-10 md:px-12 lg:px-20 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] py-20 sm:py-24 md:py-28 lg:py-32">
 
         {/* Intro heading */}
@@ -11,10 +57,10 @@ const StudioConsultancy = () => {
         </h2>
 
         {/* Two columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
+        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
 
-          {/* Studio */}
-          <div className="flex flex-col gap-4">
+          {/* Studio — slides in from left */}
+          <div ref={leftRef} className="slide-left flex flex-col gap-4">
             <h3 className="heading-lg text-heading">
               The Studio
             </h3>
@@ -24,8 +70,8 @@ const StudioConsultancy = () => {
             </p>
           </div>
 
-          {/* Consultancy */}
-          <div className="flex flex-col gap-4">
+          {/* Consultancy — slides in from right */}
+          <div ref={rightRef} className="slide-right flex flex-col gap-4">
             <h3 className="heading-lg text-heading">
               The Consultancy
             </h3>

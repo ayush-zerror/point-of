@@ -61,7 +61,7 @@ const Home = async () => {
         </>}
         buttonTitle={"Let's find yours"}
       />
-       {/* <InstagramSection caseStudies={posts} /> */}
+       <InstagramSection caseStudies={posts} />
       {/* Center dot — always fixed at viewport center across all pages */}
       <CenterDot />
     </>
