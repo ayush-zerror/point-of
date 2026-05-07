@@ -22,20 +22,32 @@ export const metadata = {
 const Studio = () => {
   return (
     <>
-      <HeroSection
-        bgImage="/about/studio-bg.webp"
-        title={
-          <>
-            We craft brands that connect, <br />
-            captivate, and resonate. <br />
-            Creating the future of branding.
-          </>
-        }
-        btntitle={"OUR BRANDS"}
-        href="/brands"
-        enableBgParallax={true}
-        enableTextParallax={true}
-      />
+     <HeroSection
+  bgImage="/about/studio-bg.webp"
+  title={
+    <>
+      <span className="block">
+        <span className="font-thin">Point of </span>
+        <span className="">origin.</span>
+      </span>
+      <span className="block">
+        <span className="font-thin">Point of </span>
+        <span className="">difference.</span>
+      </span>
+      <span className="block">
+        <span className="font-thin">Point of </span>
+        <span className="italic">no return.</span>
+      </span>
+      <span className="block max-w-4xl">
+        We are Point Of — a creative consultancy built to shape brands from their first idea to everything that comes after.
+      </span>
+    </>
+  }
+  btntitle={"OUR BRANDS"}
+  href="/brands"
+  enableBgParallax={true}
+  enableTextParallax={true}
+/>
       <Experience data={experienceData} />
       <StudioConsultancy />
       <OurValues />

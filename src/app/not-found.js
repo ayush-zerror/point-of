@@ -17,7 +17,7 @@ export default function NotFound() {
           </h2>
 
           <p className="mt-4 para text-desc mx-auto max-w-2xl">
-            The link might be broken, or the page may have moved.
+          The page you were looking for doesn’t exist. You may have mistyped the address or the page may have moved.
           </p>
 
 
