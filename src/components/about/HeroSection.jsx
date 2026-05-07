@@ -19,11 +19,9 @@ const Clock = ({ clockCountry, clockTimeZone }) => {
   const [timeZone, setTimeZone] = useState(clockTimeZone || "Asia/Kolkata");
   const [now, setNow] = useState(Date.now);
 
-  /* sync props → state */
   useEffect(() => { setCountry(clockCountry || "India"); }, [clockCountry]);
   useEffect(() => { setTimeZone(clockTimeZone || "Asia/Kolkata"); }, [clockTimeZone]);
 
-  /* geo-IP fallback (only when both props are absent) */
   useEffect(() => {
     if (clockCountry || clockTimeZone) return;
     let cancelled = false;
@@ -41,7 +39,6 @@ const Clock = ({ clockCountry, clockTimeZone }) => {
     return () => { cancelled = true; };
   }, [clockCountry, clockTimeZone]);
 
-  /* tick every second */
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
@@ -102,35 +99,42 @@ const HeroSection = ({
   showClock = false,
   enableBgParallax = false,
   enableTextParallax = false,
+  /* Pass an array of line configs to enable staggered reveal:
+     lines = [
+       { prefix: "Point of ", word: "origin.", italic: false },
+       { prefix: "Point of ", word: "difference.", italic: false },
+       { prefix: "Point of ", word: "no return.", italic: true, extraDelay: 0.2 },
+       { body: "We are Point Of — …", italic: false },   // plain body line
+     ]
+  */
+  lines = null,
 }) => {
-  const rootRef = useRef(null);
-  const bgWrapRef = useRef(null);
-  const bgRef = useRef(null);
-  const contentRef = useRef(null);
-  const headlineRef = useRef(null);
-  const ctaRef = useRef(null);
+  const rootRef      = useRef(null);
+  const bgWrapRef    = useRef(null);
+  const bgRef        = useRef(null);
+  const contentRef   = useRef(null);
+  const headlineRef  = useRef(null);
+  const ctaRef       = useRef(null);
+  const lineRefs     = useRef([]);
 
   useEffect(() => {
     if (!rootRef.current) return;
 
-    const root = rootRef.current;
-    const bgWrap = bgWrapRef.current;
-    const bg = bgRef.current;
+    const root    = rootRef.current;
+    const bgWrap  = bgWrapRef.current;
+    const bg      = bgRef.current;
     const cleanupFns = [];
 
     const ctx = gsap.context(() => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const introItems = [
-        root.querySelector("#clock-container"),
-        headlineRef.current,
-        ctaRef.current,
-      ].filter(Boolean);
+
+      const introTl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       if (reduceMotion) {
-        gsap.set([bgWrap, ...introItems], { autoAlpha: 1, clearProps: "transform" });
+        const all = [bgWrap, headlineRef.current, ctaRef.current, ...lineRefs.current].filter(Boolean);
+        gsap.set(all, { autoAlpha: 1, clearProps: "transform" });
       } else {
-        const introTl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
+        // 1. Background fade + scale-in
         if (bgWrap) {
           introTl.fromTo(
             bgWrap,
@@ -139,17 +143,54 @@ const HeroSection = ({
           );
         }
 
-        introTl.fromTo(
-          introItems,
-          { autoAlpha: 0, y: 36 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.12,
-          },
-          bgWrap ? "-=0.65" : 0
-        );
+        // 2a. Staggered lines (when `lines` prop is used)
+        if (lines && lineRefs.current.length) {
+          const lineEls = lineRefs.current.filter(Boolean);
+          lineEls.forEach((el, i) => {
+            const cfg = lines[i];
+            const delay = cfg?.extraDelay ?? 0;
+            introTl.fromTo(
+              el,
+              { autoAlpha: 0, y: 28 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.75,
+                delay,
+                ease: "power3.out",
+              },
+              // each line starts 0.3s after the previous, offset from bg end
+              bgWrap ? `-=0.5` : i === 0 ? 0 : "-=0.45"
+            );
+          });
+
+          // CTA after all lines
+          introTl.fromTo(
+            ctaRef.current,
+            { autoAlpha: 0, y: 20 },
+            { autoAlpha: 1, y: 0, duration: 0.6 },
+            "-=0.3"
+          );
+        } else {
+          // 2b. Original single-block headline + CTA
+          const introItems = [
+            root.querySelector("#clock-container"),
+            headlineRef.current,
+            ctaRef.current,
+          ].filter(Boolean);
+
+          introTl.fromTo(
+            introItems,
+            { autoAlpha: 0, y: 36 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.9,
+              stagger: 0.12,
+            },
+            bgWrap ? "-=0.65" : 0
+          );
+        }
       }
 
       // Content parallax on scroll (optional)
@@ -164,7 +205,6 @@ const HeroSection = ({
             end: "top -100%",
             scrub: 0.8,
             invalidateOnRefresh: true,
-            // markers: true,
           },
         });
       }
@@ -196,7 +236,7 @@ const HeroSection = ({
       cleanupFns.forEach((cleanup) => cleanup());
       ctx.revert();
     };
-  }, [bgImage, enableBgParallax, enableTextParallax]);
+  }, [bgImage, enableBgParallax, enableTextParallax, lines]);
 
   return (
     <div
@@ -232,19 +272,44 @@ const HeroSection = ({
             py-12 sm:py-16 pt-36 sm:pt-40 md:pb-52 lg:pb-28 xl:pb-40 md:pt-0
           "
         >
-          {/* Clock — mounted only when needed */}
           {showClock && (
             <Clock clockCountry={clockCountry} clockTimeZone={clockTimeZone} />
           )}
 
-          <h2
-            ref={headlineRef}
-            className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px] [&_br]:hidden sm:[&_br]:block"
-          >
-            {title}
-          </h2>
+          {/* ── Staggered lines mode ── */}
+          {lines ? (
+            <h2 className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px]">
+              {lines.map((line, i) => (
+                <span
+                  key={i}
+                  ref={(el) => { lineRefs.current[i] = el; }}
+                  className="block"
+                  style={{ opacity: 0 }} // GSAP takes over immediately
+                >
+                  {line.body ? (
+                    // Plain prose line (e.g. the tagline sentence)
+                    <span className={line.italic ? "italic" : ""}>{line.body}</span>
+                  ) : (
+                    // "Point of ___" line
+                    <>
+                      <span className="font-thin">{line.prefix}</span>
+                      <span className={line.italic ? "italic" : ""}>{line.word}</span>
+                    </>
+                  )}
+                </span>
+              ))}
+            </h2>
+          ) : (
+            /* ── Original freeform title mode ── */
+            <h2
+              ref={headlineRef}
+              className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px] [&_br]:hidden sm:[&_br]:block"
+            >
+              {title}
+            </h2>
+          )}
 
-          <div ref={ctaRef}>
+          <div ref={ctaRef} style={lines ? { opacity: 0 } : {}}>
             <Button title={btntitle} onClick={onClick} href={href} />
           </div>
         </div>

@@ -17,32 +17,26 @@ export const metadata = {
   alternates: { canonical: "/about" },
 };
 
-
+/*
+  lines config — drives the staggered reveal in HeroSection.
+  Each entry becomes one <span class="block"> animated 0.3s apart.
+  extraDelay on "no return." adds a beat of emphasis before it lands.
+*/
+const heroLines = [
+  { prefix: "Point of ", word: "origin."      },
+  { prefix: "Point of ", word: "difference."  },
+  { prefix: "Point of ", word: "no return.", italic: true, extraDelay: 0.15 },
+  {
+    body: "We are Point Of — a creative consultancy built to shape brands from their first idea to everything that comes after.",
+  },
+];
 
 const Studio = () => {
   return (
     <>
       <HeroSection
         bgImage="/about/studio-bg.webp"
-        title={
-          <>
-            <span className="block">
-              <span className="font-thin">Point of </span>
-              <span className="">origin.</span>
-            </span>
-            <span className="block">
-              <span className="font-thin">Point of </span>
-              <span className="">difference.</span>
-            </span>
-            <span className="block">
-              <span className="font-thin">Point of </span>
-              <span className="italic">no return.</span>
-            </span>
-            <span className="block max-w-4xl">
-              We are Point Of — a creative consultancy built to shape brands from their first idea to everything that comes after.
-            </span>
-          </>
-        }
+        lines={heroLines}
         btntitle={"OUR BRANDS"}
         href="/brands"
         enableBgParallax={true}
@@ -57,7 +51,6 @@ const Studio = () => {
         data={transformData}
       />
       <FoundersSection data={foundersData} />
-      {/* Offices (dark strip) */}
       <OfficesSection />
       <GridSection
         title={
