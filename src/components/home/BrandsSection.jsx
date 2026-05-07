@@ -5,18 +5,31 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const logos = [
-  "/brands/Logos/JBL.png",
-  "/brands/Logos/Pepsi.png",
-  "/brands/Logos/Mokobara.png",
-  "/brands/Logos/Gaurav_Gupta.png",
-  "/brands/Logos/Goodrich_Maritime.png",
-  "/brands/Logos/Limelight_Diamonds.png",
-  "/brands/Logos/Label_Ritu_Kumar.png",
-  "/brands/Logos/Groww.png",
-  "/brands/Logos/Rage_Coffee.png",
-  "/brands/Logos/Good_Flipping_Burgers.png",
-  "/brands/Logos/Tripoto.png",
-  "/brands/Logos/kvar.png",
+  { name: "Being Human", src: "/brands/Logos/balanced-assets/Being_Human.png", width: 109, height: 78 },
+  { name: "Casa Carigar", src: "/brands/Logos/balanced-assets/casa-carigar.png", width: 210, height: 78 },
+  { name: "Charagh Din", src: "/brands/Logos/balanced-assets/Charagh_Din.png", width: 181, height: 78 },
+  { name: "Chhaya Jain", src: "/brands/Logos/balanced-assets/chhaya-jain.png", width: 230, height: 44 },
+  { name: "Gaurav Gupta", src: "/brands/Logos/balanced-assets/Gaurav_Gupta.png", width: 230, height: 58 },
+  { name: "Good Flipping Burgers", src: "/brands/Logos/balanced-assets/Good_Flipping_Burgers.png", width: 229, height: 78 },
+  { name: "Goodrich Maritime", src: "/brands/Logos/balanced-assets/Goodrich_Maritime.png", width: 230, height: 62 },
+  { name: "Groww", src: "/brands/Logos/balanced-assets/Groww.png", width: 230, height: 60 },
+  { name: "House of Namah", src: "/brands/Logos/balanced-assets/House_of_Namah.png", width: 230, height: 58 },
+  { name: "IDFC First Bank", src: "/brands/Logos/balanced-assets/IDFC_First_Bank.png", width: 230, height: 62 },
+  { name: "Inega Talent", src: "/brands/Logos/balanced-assets/Inega_Talent.png", width: 230, height: 63 },
+  { name: "JBL", src: "/brands/Logos/balanced-assets/JBL.png", width: 141, height: 78 },
+  { name: "KVAR", src: "/brands/Logos/balanced-assets/kvar.png", width: 176, height: 78 },
+  { name: "Label Ritu Kumar", src: "/brands/Logos/balanced-assets/Label_Ritu_Kumar.png", width: 162, height: 78 },
+  { name: "Limelight Diamonds", src: "/brands/Logos/balanced-assets/Limelight_Diamonds.png", width: 230, height: 34 },
+  { name: "Mokobara", src: "/brands/Logos/balanced-assets/Mokobara.png", width: 230, height: 34 },
+  { name: "Orca Dive Club", src: "/brands/Logos/balanced-assets/Orca_Dive_Club.png", width: 91, height: 78 },
+  { name: "Pepsi", src: "/brands/Logos/balanced-assets/Pepsi.png", width: 203, height: 78 },
+  { name: "Rage Coffee", src: "/brands/Logos/balanced-assets/Rage_Coffee.png", width: 162, height: 78 },
+  { name: "Salman Khan Films", src: "/brands/Logos/balanced-assets/Salman_Khan_Films.png", width: 183, height: 78 },
+  { name: "Skechers", src: "/brands/Logos/balanced-assets/Skechers.png", width: 230, height: 24 },
+  { name: "Talwalkers", src: "/brands/Logos/balanced-assets/Talwalkers.png", width: 86, height: 78 },
+  { name: "TOD's", src: "/brands/Logos/balanced-assets/TODs.png", width: 230, height: 67 },
+  { name: "Tripoto", src: "/brands/Logos/balanced-assets/Tripoto.png", width: 230, height: 65 },
+  { name: "Voltas", src: "/brands/Logos/balanced-assets/Voltas.png", width: 230, height: 42 },
 ];
 
 const BrandsSection = () => {
@@ -36,18 +49,23 @@ const BrandsSection = () => {
           <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-background to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-background to-transparent" />
 
-          <div className="flex w-max animate-[marquee_30s_linear_infinite] items-center gap-24 md:gap-32 pr-24 md:pr-32 will-change-transform">
-            {[...logos, ...logos].map((src, idx) => (
+          {/* Changes: gap-24 md:gap-32 → gap-12 md:gap-16 | pr-24 md:pr-32 → pr-12 md:pr-16 | 30s → 50s | h-24 md:h-28 → h-16 md:h-20 | min-w reduced */}
+          <div className="flex w-max animate-[marquee_50s_linear_infinite] items-center gap-12 md:gap-16 pr-12 md:pr-16 will-change-transform">
+            {[...logos, ...logos].map((logo, idx) => (
               <div
-                key={`${src}-${idx}`}
-                className="h-20 w-20 md:h-24 md:w-24 flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
+                key={`${logo.src}-${idx}`}
+                className="h-10 min-w-[6rem] md:h-12 md:min-w-[10rem] flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
               >
                 <Image
-                  width={100}
-                  height={100}
-                  src={src}
-                  alt={`Brand logo ${idx + 1}`}
-                  className="max-h-full max-w-full object-contain grayscale brightness-0 invert"
+                  width={logo.width}
+                  height={logo.height}
+                  src={logo.src}
+                  alt={`${logo.name} logo`}
+                  className="h-auto object-contain"
+                  style={{
+                    width: `clamp(${Math.round(logo.width * 0.35)}px, ${Math.round(logo.width / 28)}rem, ${Math.round(logo.width * 0.5)}px)`,
+                    maxHeight: `${Math.round(logo.height * 0.5)}px`,
+                  }}
                 />
               </div>
             ))}
