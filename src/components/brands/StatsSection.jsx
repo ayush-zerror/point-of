@@ -15,22 +15,22 @@ const stats = [
   {
     number: "130+",
     label: "Brands",
-    desc: "Trusted by over 130 brands across industries to craft clarity through design.",
+    desc: "Brands across industries — from first-time founders to established names.",
   },
   {
     number: "350+",
     label: "Projects",
-    desc: "From startups to legacy icons, our projects have redefined how brands connect and grow.",
+    desc: "Projects spanning brand strategy, identity, digital, and campaigns.",
   },
   {
     number: "11+",
     label: "Countries",
-    desc: "Our collaborations span eleven countries, connecting brands across the USA, Europe, Asia, and the Middle East.",
+    desc: "Countries across 5 continents — Asia, Europe, the Americas, Africa, the Middle East.",
   },
   {
     number: "5+",
     label: "Years",
-    desc: "Over five years of shaping brands that endure, adapt, and inspire.",
+    desc: "Years building brands that adapt, endure, and stay culturally relevant.",
   },
 ];
 

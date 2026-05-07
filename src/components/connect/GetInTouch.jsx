@@ -159,7 +159,7 @@ const GetInTouch = () => {
   };
 
   return (
-    <section className="min-h-screen  md:h-screen w-full bg-foreground text-background">
+    <section id="get-in-touch" className="min-h-screen  md:h-screen w-full bg-foreground text-background">
       <div className="h-full flex items-center">
         <div className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] md:pr-12 lg:pr-20 py-12 sm:py-14 md:py-2">
 
