@@ -115,31 +115,111 @@ function OdometerStatNumber({ raw, active, className }) {
 
 function StaticStatsSection() {
   return (
-    <section className="relative z-10 w-full bg-background py-16 sm:py-20 md:py-28 lg:py-32 px-6 sm:px-8 md:px-12 lg:px-40">
-      <div className="w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 w-full">
-          {stats.map((item) => (
-            <div key={item.label} className="w-full">
+    <section className="relative z-10 w-full overflow-hidden bg-background px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-28 lg:px-40 lg:py-32">
+      <motion.div
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{
+          duration: 1,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="w-full"
+      >
+        <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2 md:gap-14">
+          {stats.map((item, index) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                delay: index * 0.12,
+                duration: 0.9,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="w-full"
+            >
               <div className="flex items-baseline gap-3">
-                <h3 className="text-3xl sm:text-4xl tracking-[1px] font-heading font-medium leading-[1.1] text-heading">
-                  {item.number}
-                </h3>
-                <p className="heading-md text-heading">{item.label}</p>
+                {/* Number */}
+                <div className="overflow-hidden">
+                  <motion.h3
+                    initial={{ y: "100%" }}
+                    whileInView={{ y: "0%" }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: 0.1 + index * 0.1,
+                      duration: 1,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="text-3xl font-heading font-medium leading-[1.1] tracking-[1px] text-heading sm:text-4xl"
+                  >
+                    {item.number}
+                  </motion.h3>
+                </div>
+
+                {/* Label */}
+                <motion.p
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: 0.2 + index * 0.1,
+                    duration: 0.8,
+                  }}
+                  className="heading-md text-heading"
+                >
+                  {item.label}
+                </motion.p>
               </div>
 
-              <div className="mt-4 h-px w-full bg-foreground/20" />
+              {/* Divider */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.25 + index * 0.08,
+                  duration: 1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="mt-4 h-px w-full origin-left bg-foreground/20"
+              />
 
-              <p className="para text-desc mt-4 max-w-[60ch]">{item.desc}</p>
-            </div>
+              {/* Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.35 + index * 0.1,
+                  duration: 0.8,
+                }}
+                className="para mt-4 max-w-[60ch] text-desc"
+              >
+                {item.desc}
+              </motion.p>
+            </motion.div>
           ))}
         </div>
 
-        <div className="mt-14 md:mt-20">
-          <p className="heading-lg text-heading m-0 w-full max-w-none text-left leading-[1.45]">
+        {/* Bottom Copy */}
+        <motion.div
+          initial={{ opacity: 0, y: 70 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{
+            delay: 0.35,
+            duration: 1,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="mt-14 md:mt-20"
+        >
+          <p className="heading-lg m-0 w-full max-w-none text-left leading-[1.45] text-heading">
             {BOTTOM_COPY}
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
