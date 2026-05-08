@@ -66,7 +66,7 @@ const CTASection = ({
   }
   return (
     <section
-      className="w-full bg-background relative min-h-[50vh] flex items-center justify-center px-6 
+      className="w-full bg-background relative flex items-center justify-center px-6 py-16 sm:py-20 md:py-28 lg:py-32
       "
     >
       <div className="text-center flex flex-col items-center">

@@ -46,7 +46,7 @@ const OfficesSection = () => {
   }, []);
 
   return (
-    <section className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] py-20 sm:py-24 md:py-28 lg:py-32">
+    <section className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] py-16 sm:py-20 md:py-28 lg:py-32">
       <style>{`
         .slide-up {
           opacity: 0;

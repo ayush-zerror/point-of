@@ -115,7 +115,7 @@ function OdometerStatNumber({ raw, active, className }) {
 
 function StaticStatsSection() {
   return (
-    <section className="relative z-10 w-full bg-background py-16 md:py-24 px-6 sm:px-8 md:px-12 lg:px-40">
+    <section className="relative z-10 w-full bg-background py-16 sm:py-20 md:py-28 lg:py-32 px-6 sm:px-8 md:px-12 lg:px-40">
       <div className="w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 w-full">
           {stats.map((item) => (

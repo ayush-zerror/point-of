@@ -43,7 +43,7 @@ const InstagramSection = ({ caseStudies }) => {
   const duplicated = [...posts, ...posts, ...posts, ...posts];
 
   return (
-    <section className="w-full overflow-hidden py-20 md:py-28 bg-background">
+    <section className="w-full overflow-hidden py-20 bg-background">
 
       {/* Header */}
       <div className="flex flex-col items-center justify-center mb-10 md:mb-16">

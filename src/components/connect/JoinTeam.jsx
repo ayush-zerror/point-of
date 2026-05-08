@@ -7,7 +7,7 @@ const JoinTeam = () => {
 
 
   return (
-    <section id="join-our-team" className="w-full pt-24">
+    <section id="join-our-team" className="w-full pt-16 sm:pt-20 md:pt-28 lg:pt-32">
       <div
         className="
           w-full

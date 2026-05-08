@@ -9,7 +9,7 @@ const AccordionSection = ({ data, title, description }) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
     return (
-        <section className="w-full py-24">
+        <section className="w-full py-16 sm:py-20 md:py-28 lg:py-32">
             <div
                 className="
           w-full

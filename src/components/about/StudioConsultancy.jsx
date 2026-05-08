@@ -49,7 +49,7 @@ const StudioConsultancy = () => {
         }
       `}</style>
 
-      <div className="px-6 sm:px-10 md:px-12 lg:px-20 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] py-20 sm:py-24 md:py-28 lg:py-32">
+      <div className="px-6 sm:px-10 md:px-12 lg:px-20 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] py-16 sm:py-20 md:py-28 lg:py-32">
 
         {/* Intro heading */}
         <h2 className="heading-xl text-heading mb-16 md:mb-20 max-w-4xl">

@@ -40,7 +40,7 @@ const FoundersSection = ({ data }) => {
   }, []);
 
   return (
-    <div ref={rootRef} className="w-full  py-20 sm:py-24 md:py-28">
+    <div ref={rootRef} className="w-full  py-16 sm:py-20 md:py-28 lg:py-32">
       {/* Container */}
       <div className="w-full  overflow-hidden">
         {/* Wrapper */}
