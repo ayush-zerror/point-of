@@ -50,7 +50,7 @@ const ContactSection = () => {
               <div
                 ref={lineRef}
                 style={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
-                className="w-px h-82 z-30 bg-linear-to-b from-transparent to-foreground absolute -top-50 sm:top-4 -translate-y-1/2 md:left-12 lg:left-[30.2rem]"
+                className="w-px h-50 sm:h-72 z-30 bg-linear-to-b from-transparent to-foreground absolute -top-32 sm:top-3 -translate-y-1/2 md:left-12 lg:left-[30.2rem]"
               >
                 <span className="w-[3px] h-[3px] bg-foreground rounded-full absolute bottom-0 left-1/2 -translate-x-1/2" />
               </div>
