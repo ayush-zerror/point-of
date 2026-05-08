@@ -31,7 +31,7 @@ const Expertise = () => {
       <OurProcess />
       <OurApproach />
       <AccordionSection data={faqs} title="FAQ" description="Questions we hear often. Answered directly." />
-      <CTASection graphic={true} />
+      <CTASection graphic={true} br={true}/>
     </>
   )
 }

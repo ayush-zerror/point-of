@@ -13,6 +13,7 @@ const CTASection = ({
   ),
   buttonTitle = "LET’S TALK",
   graphic = false,
+  br = false,
 } = {}) => {
   const router = useRouter();
   const graphicRef = useRef(null);
@@ -71,7 +72,7 @@ const CTASection = ({
     >
       <div className="text-center flex flex-col items-center">
         {/* HEADING */}
-        <p className="heading-xl text-desc [&_br]:hidden sm:[&_br]:block">{heading}</p>
+        <p className={`heading-xl text-desc ${!br ? '[&_br]:hidden':'' } sm:[&_br]:block`}>{heading}</p>
         {/* CTA */}
         <Button title={buttonTitle} onClick={handleButtonClick} />
         {graphic && (
