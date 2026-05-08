@@ -196,9 +196,9 @@ export default function Footer() {
         </div>
 
         {/* DIVIDER */}
-        <div className="border-t border-neutral-700 mt-10 md:mt-12 py-6 flex flex-row justify-between items-start md:items-center gap-4 text-sm">
+        <div className="border-t border-neutral-700 mt-10 md:mt-12 py-6 flex flex-row flex-wrap justify-between items-start md:items-center gap-4 text-sm">
 
-          <div className="flex flex-wrap gap-3 md:gap-4 text-neutral-400">
+          <div className="w-full sm:w-auto flex flex-wrap gap-3 md:gap-4 text-neutral-400">
             <Link href="/privacy" className="hover:text-white transition" title="Privacy Policy">
               Privacy
             </Link>

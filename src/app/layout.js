@@ -87,6 +87,10 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: "#000000",
+};
+
 const headingFont = localFont({
   src: [
     { path: "../../public/fonts/TWKLausanne-100.woff2", weight: "100" },
