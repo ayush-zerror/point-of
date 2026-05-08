@@ -15,6 +15,7 @@ const AboutStudio = () => {
   const p2Ref = useRef(null);
   const buttonWrapRef = useRef(null);
   const router = useRouter();
+
   useLayoutEffect(() => {
     if (!sectionRef.current || !p1Ref.current || !p2Ref.current) return;
 
@@ -35,20 +36,18 @@ const AboutStudio = () => {
 
       const words = gsap.utils.toArray(".word");
 
-      // Mobile: no circle animation. Just pin + bring words to opacity 1.
+      // ── MOBILE: no pin, auto height, words animate as you scroll ──────────
       if (isMobile) {
         gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top top",
-            end: "top -140%",
+            start: "top 80%",
+            end: "bottom 20%",
             scrub: 1,
-            pin: true,
-            anticipatePin: 1,
           },
         }).to(words, {
           opacity: 1,
-          stagger: 0.12,
+          stagger: 0.1,
           ease: "none",
         });
 
@@ -58,6 +57,7 @@ const AboutStudio = () => {
         };
       }
 
+      // ── DESKTOP: pinned with circle handoff animation ──────────────────────
       const buttonLink = buttonWrapRef.current?.querySelector("a, button");
       const buttonDot = buttonLink?.children?.[0];
       const buttonText = buttonLink?.children?.[1];
@@ -176,28 +176,26 @@ const AboutStudio = () => {
           ease: "none",
         });
 
-
-      // cleanup splits inside context
       return () => {
         split1.revert();
         split2.revert();
       };
     }, sectionRef);
 
-    return () => ctx.revert(); // 🔥 cleans GSAP + ScrollTrigger properly
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
       id="page2"
-      className="w-full mix-blend-difference h-screen px-6 md:px-20 py-24 flex flex-col justify-center"
+      className="w-full mix-blend-difference px-6 py-6 md:px-20 md:py-24 flex flex-col justify-center md:h-screen"
     >
       <div className="mx-auto">
         <div className="max-w-5xl space-y-12">
           <p
             ref={p1Ref}
-            className="relative z-12  heading-xl [font-kerning:none]"
+            className="relative z-12 heading-xl [font-kerning:none]"
           >
             Point Of is an independent consultancy based in Mumbai, rethinking
             how brands connect with culture and people.
@@ -205,7 +203,7 @@ const AboutStudio = () => {
 
           <p
             ref={p2Ref}
-            className="relative z-12  heading-xl [font-kerning:none]"
+            className="relative z-12 heading-xl [font-kerning:none]"
           >
             We work at the intersection of design, strategy, and
             technology—crafting identities that balance innovation with timeless
