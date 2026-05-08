@@ -193,7 +193,7 @@ const TestimonialSection = () => {
           .testimonial-swiper .swiper-button-next {
             width: 20px;
             height: 20px;
-            top: 100px; /* half of ~200px */
+            top: 135px; /* half of ~200px */
           }
 
           .testimonial-swiper .swiper-button-prev {
@@ -214,7 +214,7 @@ const TestimonialSection = () => {
         @media (min-width: 381px) and (max-width: 600px) {
           .testimonial-swiper .swiper-button-prev,
           .testimonial-swiper .swiper-button-next {
-            top: 135px; /* half of ~260px */
+            top: 130px; /* half of ~260px */
           }
 
           .testimonial-swiper .swiper-button-prev {
