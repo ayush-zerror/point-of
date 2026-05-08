@@ -74,7 +74,7 @@ const RelatedWork = ({ caseStudies, other = true, related = false }) => {
       <div className="px-6 sm:px-10 md:px-12 lg:px-20">
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 lg:gap-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 md:gap-10 lg:gap-20">
           {posts.map((post, index) => (
             <div key={post.slug ?? index} ref={(el) => { cardRefs.current[index] = el; }}>
               <WorkCard slug={post.slug} title={post.title} image={post.coverImage} video={post.microanimation} />
