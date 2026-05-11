@@ -1,5 +1,13 @@
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
-export const structure = (S) =>
+import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
+
+export const structure = (S, context) =>
   S.list()
-    .title('Content')
-    .items(S.documentTypeListItems())
+    .title('Dashboard')
+    .items([
+      orderableDocumentListDeskItem({
+        type: "caseStudy",
+        title: "Case Studies",
+        S,
+        context,
+      }),
+    ])

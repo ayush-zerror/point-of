@@ -16,7 +16,9 @@ export default async function sitemap() {
     "/legal",
   ];
 
-  const slugs = await client.fetch(`*[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }`);
+  const slugs = await client.fetch(
+    `*[_type == "caseStudy" && defined(slug.current)] | order(orderRank asc) { "slug": slug.current }`
+  );
   const workRoutes = (slugs ?? []).map((c) => c?.slug).filter(Boolean).map((slug) => `/work/${slug}`);
 
   const expertiseRoutes = (expertiseDetails ?? [])

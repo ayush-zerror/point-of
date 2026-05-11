@@ -14,6 +14,7 @@ import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
 
 export default defineConfig({
+  title: 'Point Of',
   basePath: '/studio',
   projectId,
   dataset,

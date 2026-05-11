@@ -1,3 +1,4 @@
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 import { defineField, defineType } from "sanity";
 
 const required = (Rule, label = "This field") => Rule.required().error(`${label} is required`);
@@ -6,7 +7,9 @@ export const caseStudy = defineType({
   name: "caseStudy",
   title: "Case Study",
   type: "document",
+  orderings: [orderRankOrdering],
   fields: [
+    orderRankField({ type: 'caseStudy' }),
     defineField({
       name: "slug",
       title: "Slug",

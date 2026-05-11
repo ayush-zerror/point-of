@@ -21,9 +21,9 @@ const CASE_STUDY_FIELDS = /* groq */ `
 `;
 
 export async function getCaseStudies() {
-  const query = /* groq */ `*[_type == "caseStudy"] | order(_createdAt desc) { ${CASE_STUDY_FIELDS} }`;
+  const query = /* groq */ `*[_type == "caseStudy"] | order(orderRank asc) { ${CASE_STUDY_FIELDS} }`;
   const res = await sanityFetch({ query });
-  return res?.data.reverse() ?? res ?? [];
+  return res?.data ?? res ?? [];
 }
 
 export async function getCaseStudyBySlug(slug) {
