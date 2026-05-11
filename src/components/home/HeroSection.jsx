@@ -301,12 +301,12 @@ useEffect(() => {
         transition={{ duration: 0.75, ease: "easeOut", delay: 0.05 }}
       >
         {/* First line */}
-        <h1 className="font-thin tracking-[0.5px] leading-[1.2] font-heading mb-2 text-xl sm:text-4xl md:text-5xl lg:text-[2rem] xl:text-[2.2rem]">
+        <h1 className="font-thin tracking-[0.5px] leading-[1.2] font-heading mb-2 text-xl sm:text-4xl md:text-3xl lg:text-[2rem] xl:text-[2.2rem]">
           What is the point of
         </h1>
 
         {/* Typing line */}
-        <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-xl sm:text-6xl md:text-7xl lg:text-[3rem]">
+        <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-xl sm:text-6xl md:text-3xl lg:text-[3rem]">
           <span className="relative inline-block">
             <span
               className="relative text-white wrap-break-word transition-[text-shadow] duration-700"

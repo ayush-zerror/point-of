@@ -588,7 +588,7 @@ const WorkSection = ({ projects }) => {
           isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         } ${
           expandingIndex !== null
-            ? "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[999] w-screen h-screen bg-neutral-900"
+            ? "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-999 w-screen h-screen bg-neutral-900"
             : "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         }`}
       >
@@ -684,7 +684,7 @@ const WorkSection = ({ projects }) => {
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
-            className="absolute left-4 right-4 top-[10%] sm:right-auto sm:left-8 sm:top-1/2 sm:-translate-y-1/2 md:left-12 lg:left-16 max-w-[min(460px,92vw)] sm:max-w-[min(500px,85vw)] text-left"
+            className="absolute left-4 right-4 top-[10%] sm:right-auto sm:left-8 sm:top-1/2 sm:-translate-y-1/2 md:left-12 md:top-[10%] md:translate-y-0 lg:left-16 lg:top-1/2 lg:-translate-y-1/2 max-w-[min(460px,92vw)] sm:max-w-[min(500px,85vw)] text-left"
           >
             {(project.titles ?? [project.name]).map((title, ti) => (
               <div key={ti} className="overflow-hidden">

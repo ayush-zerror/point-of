@@ -27,7 +27,7 @@ const TestimonialSection = () => {
         >
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-14 items-center max-w-5xl mx-auto px-2 sm:px-6 md:px-10 lg:px-0 pb-6 sm:pb-8 md:pb-20">
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-14 items-center max-w-5xl mx-auto px-2 sm:px-6 md:px-10 lg:px-0 pb-6 sm:pb-8 md:pb-20">
                 {/*
                   pb-16 on md+ = 64px gap between card bottom and progress bar on desktop
                   pb-8  on sm  = room for arrows beside image on tablet
@@ -35,7 +35,7 @@ const TestimonialSection = () => {
                 */}
 
                 {/* LEFT IMAGE */}
-                <div className="w-full flex justify-center md:justify-start">
+                <div className="w-full flex justify-center lg:justify-start">
                   <div className="w-full max-w-[220px] xs:max-w-[260px] sm:max-w-[320px] md:max-w-sm relative group overflow-hidden">
                     <Image
                       width={1000}
@@ -61,7 +61,7 @@ const TestimonialSection = () => {
                 </div>
 
                 {/* RIGHT CONTENT */}
-                <div className="max-w-xl text-center md:text-left">
+                <div className="max-w-xl text-center lg:text-left">
                   <h3 className="heading-lg text-subheading mb-2 sm:mb-3">
                     {item.name}
                   </h3>
@@ -74,7 +74,7 @@ const TestimonialSection = () => {
                     {item.text}
                   </p>
 
-                  <div className="flex justify-center md:justify-start">
+                  <div className="flex justify-center lg:justify-start">
                     <Button title={item.brand} />
                   </div>
                 </div>

@@ -11,7 +11,7 @@ export default function CaseStudyIntro({ caseStudy }) {
     <section className="w-full px-6 sm:px-10 md:px-12 lg:px-20 py-6 sm:py-16 md:py-20">
       
       {/* SAME GRID STRUCTURE */}
-      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-10 md:gap-14">
+      <div className="grid grid-cols-1 md:grid-cols-[40%_60%] items-start gap-10 md:gap-0">
         
         {/* LEFT */}
         <div className="flex flex-col justify-between h-full">

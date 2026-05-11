@@ -10,7 +10,7 @@ export const metadata = {
 
 const Privacy = () => {
   return (
-    <div className="min-h-screen  px-6 sm:px-10 md:px-12 lg:px-20 pt-32 ">
+    <div className="min-h-screen  px-6 sm:px-10 md:px-12 lg:px-20 pt-32">
       <div className="pb-16 border-b border-neutral-700">
         <div className="max-w-3xl mx-auto">
 

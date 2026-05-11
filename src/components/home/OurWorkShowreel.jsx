@@ -323,7 +323,7 @@ export default function OurWorkShowreel({ posts = [] }) {
           {(posts ?? []).map((post, index) => (
             <div
               key={post.slug ?? index}
-              className="work-card shrink-0 w-[85vw]  max-w-[380px] sm:w-auto sm:max-w-none"
+              className="work-card shrink-0 w-[85vw] max-w-[380px] sm:w-[320px] sm:max-w-none md:w-[360px] lg:w-[400px]"
             >
               <WorkCard
                 slug={post.slug}

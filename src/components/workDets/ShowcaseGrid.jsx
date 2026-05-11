@@ -110,37 +110,41 @@ export default function ShowcaseGrid({ caseStudy }) {
           </div>
         ) : null}
 
-        {/* TEXT BOX */}
-        <div className="flex flex-col justify-center bg-black text-white pr-6 md:pr-0 lg:pr-14">
-          <p className="text-sm font-semibold text-subheading mb-4">
-            CREATIVE CONCEPT
-          </p>
+        {/* CREATIVE CONCEPT (stack on md, row again on lg+) */}
+        <div className="md:col-span-2 grid grid-cols-1 gap-6 md:gap-10 lg:grid-cols-2">
+          {/* TEXT BOX */}
+          <div className="flex flex-col justify-center bg-black text-white pr-6 md:pr-0 lg:pr-14">
+            <p className="text-sm font-semibold text-subheading mb-4">
+              CREATIVE CONCEPT
+            </p>
 
-          <h3 className="heading-xl text-subheading mb-6">
-            {caseStudy?.creativeConcept?.title ?? ""}
-          </h3>
+            <h3 className="heading-xl text-subheading mb-6">
+              {caseStudy?.creativeConcept?.title ?? ""}
+            </h3>
 
-          <p className="para text-desc max-w-md">
-            {caseStudy?.creativeConcept?.description ?? ""}
-          </p>
-          <ArrowButton
-            title={"DETAILED CASE-STUDY"}
-            onClick={openBehance}
-          />
-        </div>
-        {/* 3 */}
-        <div className="w-full aspect-4/5 overflow-hidden">
-          <div
-            ref={(el) => { mediaRefs.current[2] = el; }}
-            className="w-full h-full will-change-transform"
-          >
-            <Image
-              width={1000}
-              height={1000}
-              src={middleImage}
-              alt={`${caseStudyTitle} — showcase image ${topCollapsed ? 2 : 3}`}
-              className="w-full h-full object-cover"
+            <p className="para text-desc max-w-md md:w-full md:max-w-none lg:w-auto lg:max-w-md">
+              {caseStudy?.creativeConcept?.description ?? ""}
+            </p>
+            <ArrowButton
+              title={"DETAILED CASE-STUDY"}
+              onClick={openBehance}
             />
+          </div>
+
+          {/* 3 */}
+          <div className="w-full aspect-4/5 overflow-hidden">
+            <div
+              ref={(el) => { mediaRefs.current[2] = el; }}
+              className="w-full h-full will-change-transform"
+            >
+              <Image
+                width={1000}
+                height={1000}
+                src={middleImage}
+                alt={`${caseStudyTitle} — showcase image ${topCollapsed ? 2 : 3}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
 

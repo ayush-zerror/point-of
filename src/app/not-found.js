@@ -7,7 +7,7 @@ import Button from "@/components/common/Button";
 
 export default function NotFound() {
   return (
-    <main className="h-[80vh] overflow-hidden bg-background px-6 text-foreground sm:px-10 md:px-20">
+    <main className="h-[85vh] overflow-hidden bg-background px-6 sm:px-10 md:px-12 lg:px-20 text-foreground">
       <div className="flex h-full items-center justify-center border-b border-neutral-700 text-center">
         <motion.div
           initial={{ opacity: 0, y: 80, scale: 0.96 }}

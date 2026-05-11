@@ -14,25 +14,25 @@ const Overview = ({ caseStudy }) => {
 
   const layouts = {
     4: [
-      { grid: "md:col-span-2 md:row-span-2", single: false },
-      { grid: "md:col-span-2 md:row-span-2", single: false },
-      { grid: "md:col-span-2 md:row-span-2", single: false },
-      { grid: "md:col-span-2 md:row-span-2", single: false },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
     ],
     5: [
-      { grid: "md:col-span-2 md:row-span-2", single: false },
-      { grid: "md:col-span-2 md:row-span-2", single: false },
-      { grid: "md:col-span-2 md:row-span-2", single: false },
-      { grid: "md:row-span-2", single: true },
-      { grid: "md:row-span-2", single: true },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
+      { grid: "lg:row-span-2", single: true },
+      { grid: "lg:row-span-2", single: true },
     ],
     6: [
-      { grid: "md:row-span-2", single: true },
-      { grid: "md:row-span-2", single: true },
-      { grid: "md:col-span-2 md:row-span-2", single: false },
-      { grid: "md:col-span-2 md:row-span-2", single: false },
-      { grid: "md:row-span-2", single: true },
-      { grid: "md:row-span-2", single: true },
+      { grid: "lg:row-span-2", single: true },
+      { grid: "lg:row-span-2", single: true },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
+      { grid: "lg:col-span-2 lg:row-span-2", single: false },
+      { grid: "lg:row-span-2", single: true },
+      { grid: "lg:row-span-2", single: true },
     ],
   };
 
@@ -45,7 +45,8 @@ const Overview = ({ caseStudy }) => {
           grid
           grid-cols-1
           sm:grid-cols-2
-          md:grid-cols-4
+          md:grid-cols-2
+          lg:grid-cols-4
           gap-4 md:gap-6
           md:auto-rows-[220px]
           lg:auto-rows-[250px]
@@ -60,7 +61,7 @@ const Overview = ({ caseStudy }) => {
                 height={1000}
                 alt={`${caseStudyTitle} — overview image ${index + 1}`}
                 src={src ?? ""}
-                className={`w-full object-cover ${single ? "h-full md:h-1/2" : "h-full"}`}
+                className={`w-full object-cover ${single ? "h-full lg:h-1/2" : "h-full"}`}
               />
             </div>
           );

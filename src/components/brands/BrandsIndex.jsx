@@ -159,7 +159,7 @@ const BrandsIndex = () => {
   };
 
   return (
-    <section className="w-full py-16 sm:py-20 md:py-28 lg:py-32 md:py-24 px-6 sm:px-10 md:px-12 lg:px-20">
+    <section className="w-full py-16 sm:py-20 md:py-28 lg:py-32 px-6 sm:px-10 md:px-12 lg:px-20">
       <div className="w-full">
 
         {/* Showcase image overlay */}
@@ -185,7 +185,7 @@ const BrandsIndex = () => {
         </div>
 
         {/* Heading + Filter (aligned to end) */}
-        <div className="mb-8 md:mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div className="mb-8 md:mb-10 flex flex-col gap-5 md:flex-col md:items-start md:justify-start lg:flex-row lg:items-end lg:justify-between">
           <div>
             <h2 className="heading-xl text-subheading mb-2 md:mb-4">
               Brands Index{" "}
