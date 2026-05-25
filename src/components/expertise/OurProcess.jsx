@@ -550,7 +550,8 @@ const OurProcess = () => {
 
           <style>{`
             .jp4 { fill: var(--color-heading); }
-            .jp6 { fill: var(--color-desc); }
+            .jp6 { fill: var(--color-desc) !important;
+            }
           `}</style>
 
           {/* Snake Path */}

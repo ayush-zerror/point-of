@@ -129,6 +129,7 @@ export default function ShowcaseGrid({ caseStudy }) {
               title={"DETAILED CASE-STUDY"}
               onClick={openBehance}
             />
+            
           </div>
 
           {/* 3 */}
