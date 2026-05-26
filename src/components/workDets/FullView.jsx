@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import ShowcaseGrid from "./ShowcaseGrid";
-import Image from "next/image";
+import CaseStudyMedia from "./CaseStudyMedia";
+import { getCaseStudyAssets, hasCaseStudyAssets } from "./caseStudyAssets";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -35,11 +36,9 @@ const FullView = ({ caseStudy }) => {
     return () => ctx.revert();
   }, []);
 
-  const fullViewAssets = Array.isArray(caseStudy?.fullViewAssets)
-    ? caseStudy.fullViewAssets
-    : [];
-
-  const heroImage = fullViewAssets?.[0] ?? caseStudy?.coverImage ?? "";
+  const assets = getCaseStudyAssets(caseStudy);
+  const hasAssets = hasCaseStudyAssets(caseStudy);
+  const heroImage = hasAssets ? (assets[0] ?? "") : "";
   const caseStudyTitle = caseStudy?.title || caseStudy?.name || "Case study";
 
   return (
@@ -47,9 +46,7 @@ const FullView = ({ caseStudy }) => {
       {/* IMAGE */}
       <div ref={heroWrapRef} className="relative w-full h-auto md:h-auto lg:h-screen overflow-hidden">
         <div ref={heroMediaRef} className="w-full h-full will-change-transform">
-          <Image
-            width={1000}
-            height={1000}
+          <CaseStudyMedia
             src={heroImage}
             alt={`${caseStudyTitle} — hero image`}
             className="w-full h-full object-cover"

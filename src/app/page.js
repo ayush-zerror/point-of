@@ -8,7 +8,6 @@ import AccordionSection from '@/components/connect/AccordionSection'
 import { expertiseItems } from '@/helper/expertise-items'
 import { getCaseStudies } from '@/sanity/lib/queries'
 import React from 'react'
-import InstagramSection from '@/components/connect/InstagramSection'
 import OurWorkShowreel from '@/components/home/OurWorkShowreel'
 
 export const metadata = {
@@ -61,7 +60,6 @@ const Home = async () => {
         </>}
         buttonTitle={"Let's find yours"}
       />
-       <InstagramSection caseStudies={posts} />
       {/* Center dot — always fixed at viewport center across all pages */}
       <CenterDot />
     </>

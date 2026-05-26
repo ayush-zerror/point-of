@@ -4,13 +4,19 @@ import AboutExpertise from "@/components/expertiseDets/AboutExpertise";
 import HeroSection from "@/components/expertiseDets/HeroSection";
 import CTASection from "@/components/home/CTASection";
 import { expertiseDetails } from "@/helper/expertise-data";
+import { getCaseStudiesForExpertise } from "@/helper/expertise-case-studies";
 import { getCaseStudies } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import InstagramSection from "@/components/connect/InstagramSection";
 
+export const dynamicParams = true;
+
+export function generateStaticParams() {
+  return expertiseDetails.map((item) => ({ slug: item.slug }));
+}
+
 export async function generateMetadata({ params }) {
-  const resolvedParams = await Promise.resolve(params);
-  const slug = resolvedParams?.slug;
+  const { slug } = await params;
   const data = expertiseDetails.find((item) => item.slug === slug);
   if (!data) return {};
 
@@ -40,15 +46,13 @@ export async function generateMetadata({ params }) {
 }
 
 const ExpertiseDetails = async ({ params }) => {
-  // Next can provide `params` synchronously or as a promise (depending on version/config).
-  const resolvedParams = await Promise.resolve(params);
-  const slug = resolvedParams?.slug;
+  const { slug } = await params;
 
   const data = expertiseDetails.find((item) => item.slug === slug);
   if (!data) notFound();
 
   const all = await getCaseStudies();
-  const caseStudies = (all ?? []).slice(0, 3);
+  const caseStudies = getCaseStudiesForExpertise(slug, all);
 
   return (
     <>

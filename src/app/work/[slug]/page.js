@@ -2,23 +2,33 @@ import HeroSection from '@/components/expertiseDets/HeroSection'
 import CaseStudyIntro from '@/components/workDets/CaseStudyIntro'
 import ImageToggleSection from '@/components/workDets/ImageToggleSection'
 import NavbarReveal from '@/components/common/NavbarReveal'
-import { getCaseStudies, getCaseStudyBySlug } from '@/sanity/lib/queries'
+import { getCaseStudies, getCaseStudyBySlug, getCaseStudySlugs } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import RelatedWork from '@/components/connect/RelatedWork'
 
-export async function generateMetadata({ params }) {
-  const normalizeSlug = (value) => {
-    const raw = typeof value === "string" ? value : String(value ?? "");
-    try {
-      return decodeURIComponent(raw).trim().toLowerCase();
-    } catch {
-      return raw.trim().toLowerCase();
-    }
-  };
+export const dynamicParams = true;
 
-  const resolvedParams = await Promise.resolve(params);
-  const slug = normalizeSlug(resolvedParams?.slug);
+export async function generateStaticParams() {
+  const caseStudies = await getCaseStudySlugs();
+  return (caseStudies ?? [])
+    .map((c) => c?.slug)
+    .filter(Boolean)
+    .map((slug) => ({ slug }));
+}
+
+const normalizeSlug = (value) => {
+  const raw = typeof value === "string" ? value : String(value ?? "");
+  try {
+    return decodeURIComponent(raw).trim().toLowerCase();
+  } catch {
+    return raw.trim().toLowerCase();
+  }
+};
+
+export async function generateMetadata({ params }) {
+  const { slug: slugParam } = await params;
+  const slug = normalizeSlug(slugParam);
   const caseStudy = await getCaseStudyBySlug(slug);
   if (!caseStudy) return {};
 
@@ -55,17 +65,8 @@ export async function generateMetadata({ params }) {
 }
 
 const WorkDetail = async ({ params }) => {
-  const normalizeSlug = (value) => {
-    const raw = typeof value === "string" ? value : String(value ?? "");
-    try {
-      return decodeURIComponent(raw).trim().toLowerCase();
-    } catch {
-      return raw.trim().toLowerCase();
-    }
-  };
-
-  const resolvedParams = await Promise.resolve(params);
-  const slug = normalizeSlug(resolvedParams?.slug);
+  const { slug: slugParam } = await params;
+  const slug = normalizeSlug(slugParam);
   const caseStudy = await getCaseStudyBySlug(slug);
   const all = await getCaseStudies();
   const otherCaseStudies = (all ?? []).filter((c) => normalizeSlug(c?.slug) !== slug).slice(0, 3);

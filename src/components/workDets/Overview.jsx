@@ -1,42 +1,42 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
 import OverviewSection from "./OverviewSection";
+import CaseStudyMedia from "./CaseStudyMedia";
+import { getCaseStudyAssets, hasCaseStudyAssets } from "./caseStudyAssets";
+
+const layouts = {
+  4: [
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+  ],
+  5: [
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+    { grid: "lg:row-span-2", single: true },
+    { grid: "lg:row-span-2", single: true },
+  ],
+  6: [
+    { grid: "lg:row-span-2", single: true },
+    { grid: "lg:row-span-2", single: true },
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+    { grid: "lg:col-span-2 lg:row-span-2", single: false },
+    { grid: "lg:row-span-2", single: true },
+    { grid: "lg:row-span-2", single: true },
+  ],
+};
 
 const Overview = ({ caseStudy }) => {
-  const overviewAssets = Array.isArray(caseStudy?.overviewAssets)
-    ? caseStudy.overviewAssets
-    : [];
+  const assets = getCaseStudyAssets(caseStudy);
+  const hasAssets = hasCaseStudyAssets(caseStudy);
   const caseStudyTitle = caseStudy?.title || caseStudy?.name || "Case study";
 
-  const count = overviewAssets.length;
-
-  const layouts = {
-    4: [
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-    ],
-    5: [
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-      { grid: "lg:row-span-2", single: true },
-      { grid: "lg:row-span-2", single: true },
-    ],
-    6: [
-      { grid: "lg:row-span-2", single: true },
-      { grid: "lg:row-span-2", single: true },
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-      { grid: "lg:col-span-2 lg:row-span-2", single: false },
-      { grid: "lg:row-span-2", single: true },
-      { grid: "lg:row-span-2", single: true },
-    ],
-  };
-
+  const count = hasAssets ? assets.length : 4;
   const gridClasses = layouts[count] ?? layouts[4];
+  const slots = hasAssets ? assets : Array.from({ length: 4 }, () => "");
 
   return (
     <section className="w-full">
@@ -52,15 +52,13 @@ const Overview = ({ caseStudy }) => {
           lg:auto-rows-[250px]
         "
       >
-        {overviewAssets.map((src, index) => {
-          const { grid, single } = gridClasses[index];
+        {slots.map((src, index) => {
+          const { grid, single } = gridClasses[index] ?? gridClasses[0];
           return (
             <div key={index} className={`overflow-hidden ${grid}`}>
-              <Image
-                width={1000}
-                height={1000}
+              <CaseStudyMedia
+                src={src}
                 alt={`${caseStudyTitle} — overview image ${index + 1}`}
-                src={src ?? ""}
                 className={`w-full object-cover ${single ? "h-full lg:h-1/2" : "h-full"}`}
               />
             </div>

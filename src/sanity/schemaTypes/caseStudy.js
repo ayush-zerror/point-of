@@ -141,8 +141,8 @@ export const caseStudy = defineType({
     }),
 
     defineField({
-      name: "fullViewAssets",
-      title: "Full view assets",
+      name: "assets",
+      title: "Assets",
       type: "array",
       of: [
         {
@@ -151,27 +151,12 @@ export const caseStudy = defineType({
         },
       ],
       validation: (Rule) =>
-        required(Rule, "Full view assets")
-          .min(4)
-          .max(6)
-          .error("Upload min 4 and max 6 images"),
-    }),
-
-    defineField({
-      name: "overviewAssets",
-      title: "Overview assets",
-      type: "array",
-      of: [
-        {
-          type: "image",
-          options: { hotspot: true },
-        },
-      ],
-      validation: (Rule) =>
-        required(Rule, "Overview assets")
-          .min(4)
-          .max(6)
-          .error("Upload min 4 and max 6 images"),
+        Rule.custom((items) => {
+          if (!items || items.length === 0) return true;
+          if (items.length < 4) return "If you add assets, upload at least 4 images";
+          if (items.length > 6) return "Upload at most 6 images";
+          return true;
+        }),
     }),
 
     defineField({
