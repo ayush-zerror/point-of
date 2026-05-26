@@ -50,6 +50,7 @@ const FullView = ({ caseStudy }) => {
             src={heroImage}
             alt={`${caseStudyTitle} — hero image`}
             className="w-full h-full object-cover"
+            priority
           />
         </div>
       </div>

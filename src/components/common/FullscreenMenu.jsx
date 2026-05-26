@@ -4,6 +4,12 @@ import React from "react";
 import Link from "next/link";
 import Button from "./Button";
 
+function isNavActive(pathname, href) {
+  if (!pathname || !href) return false;
+  if (pathname === href) return true;
+  return href !== "/" && pathname.startsWith(`${href}/`);
+}
+
 const FullscreenMenu = React.forwardRef(function FullscreenMenu(
   { pathname, setMenuOpen, socialLinks },
   ref
@@ -11,7 +17,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
   return (
     <div
       ref={ref}
-      className="fixed inset-0 bg-background text-foreground overflow-hidden flex items-end"
+      className="fixed inset-0 bg-foreground text-background overflow-hidden flex items-end"
       style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)" }}
     >
       <div className="w-full flex flex-col h-dvh px-6 sm:px-10 md:px-12 lg:px-20 pt-24 pb-10 md:py-24 overflow-y-auto overscroll-contain">
@@ -25,19 +31,24 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
               { name: "Expertise", href: "/expertise" },
               { name: "Brands", href: "/brands" },
               { name: "Connect", href: "/connect" },
-            ].map((item) => (
+            ].map((item) => {
+              const isActive = isNavActive(pathname, item.href);
+              return (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className={`group block w-fit heading-xl uppercase font-heading font-extralight tracking-tight cursor-pointer transition-transform duration-200 hover:translate-x-2 ${
-                  pathname === item.href ? "text-heading" : "text-desc"
+                className={`group block w-fit heading-xl uppercase font-heading font-extralight tracking-tight cursor-pointer transition-[transform,color,opacity] duration-200 hover:translate-x-2 ${
+                  isActive
+                    ? "text-background opacity-100"
+                    : "text-gray-600 opacity-100 hover:text-background"
                 }`}
                 title={item.name}
               >
                 <span className="nav-item link-underline">{item.name}</span>
               </Link>
-            ))}
+            );
+            })}
           </nav>
 
           {/* EMAIL BUTTON */}
@@ -45,13 +56,14 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
             <Button
               title={"think@wearepointof.com"}
               href="mailto:think@wearepointof.com"
+              color="#000000"
               textClassName="!text-base sm:!text-2xl !lowercase !font-normal"
             />
           </div>
         </div>
 
         {/* BOTTOM */}
-        <div className="nav-item border-t border-foreground/20 pt-5 md:pt-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-4 shrink-0">
+        <div className="nav-item border-t border-gray-400 pt-5 md:pt-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-4 shrink-0">
           {/* SOCIAL LINKS */}
           <div className="flex flex-wrap gap-4 sm:gap-12">
             {(socialLinks ?? []).map((item) => (
@@ -61,7 +73,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
-                className="link-underline text-xs sm:text-sm text-foreground/50 hover:text-foreground cursor-pointer transition-colors duration-200"
+                className="link-underline text-xs sm:text-sm text-background opacity-100 hover:text-background cursor-pointer transition-colors duration-200"
                 title={item.name}
               >
                 {item.name}
@@ -82,7 +94,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 onClick={() => setMenuOpen(false)}
                 title={item.label}
               >
-                <Button title={item.label} className="mt-0!" />
+                <Button title={item.label} color="#000000" className="mt-0!" />
               </Link>
             ))}
           </div>
@@ -93,4 +105,3 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
 });
 
 export default FullscreenMenu;
-

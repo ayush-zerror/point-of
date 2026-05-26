@@ -6,6 +6,7 @@ import Navbar from "@/components/common/Navbar";
 import FooterVisibility from "@/components/common/FooterVisibility";
 import localFont from "next/font/local";
 import ToasterProvider from "@/components/common/ToasterProvider";
+import { SanityLive } from "@/sanity/lib/live";
 
 export const metadata = {
   metadataBase: new URL("https://www.wearepointof.com"),
@@ -120,6 +121,7 @@ export default function RootLayout({ children }) {
         <ToasterProvider />
         <Navbar />
         {children}
+        <SanityLive />
         <FooterVisibility excludePaths={["/work", "/studio"]} />
       </body>
     </html>

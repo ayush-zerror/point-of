@@ -18,8 +18,11 @@ export default function Navbar() {
   ];
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoLight, setLogoLight] = useState(true);
   const [landingActive, setLandingActive] = useState(false);
   const pathname = usePathname();
+  const menuOpenRef = useRef(false);
+  const logoDelayRef = useRef(null);
 
   // Hide navbar on excluded routes (e.g. Sanity Studio)
   const excludePaths = ["/studio"];
@@ -76,16 +79,34 @@ export default function Navbar() {
       );
   }, []);
 
-  // Menu open/close
+  const logoImgClass = (sizeClass) =>
+    `${sizeClass} w-auto object-contain transition-[filter,opacity] duration-500 ease-in-out ${
+      logoLight ? "invert" : ""
+    }`;
+
+  menuOpenRef.current = menuOpen;
+
+  // Logo + toggle: white default → black on open → white near end of close
   useEffect(() => {
     if (!tl.current) return;
+
+    logoDelayRef.current?.kill();
+    logoDelayRef.current = null;
+
     if (menuOpen) {
+      setLogoLight(false);
       tl.current.timeScale(1).play();
       document.body.style.overflow = "hidden";
     } else {
+      const reverseDuration = tl.current.duration() / 1.8;
+      logoDelayRef.current = gsap.delayedCall(reverseDuration * 0.75, () => {
+        if (!menuOpenRef.current) setLogoLight(true);
+      });
       tl.current.timeScale(1.8).reverse();
       document.body.style.overflow = "auto";
     }
+
+    return () => logoDelayRef.current?.kill();
   }, [menuOpen]);
 
   // Scroll logo collapse
@@ -234,7 +255,7 @@ export default function Navbar() {
                 width={140}
                 height={40}
                 priority
-                className="h-3 w-auto object-contain invert"
+                className={logoImgClass("h-3")}
               />
             </Link>
           </div>
@@ -255,10 +276,14 @@ export default function Navbar() {
                   alt="P"
                   width={180}
                   height={100}
-                  className="h-4 sm:h-[18px] w-auto invert object-contain"
+                  className={logoImgClass("h-4 sm:h-[18px]")}
                   priority
                 />
-                <span className="absolute left-0 opacity-0 top-full mt-1 w-1 h-1 bg-heading inline-block rounded-full" />
+                <span
+                  className={`absolute left-0 opacity-0 top-full mt-1 w-1 h-1 inline-block rounded-full transition-colors duration-500 ease-in-out ${
+                    logoLight ? "bg-heading" : "bg-background"
+                  }`}
+                />
               </div>
 
               {/* OINT — fades then collapses */}
@@ -272,7 +297,7 @@ export default function Navbar() {
                   alt="OINT"
                   width={180}
                   height={100}
-                  className="h-4 sm:h-[18px] w-auto invert object-contain"
+                  className={logoImgClass("h-4 sm:h-[18px]")}
                   priority
                 />
               </div>
@@ -284,7 +309,7 @@ export default function Navbar() {
                   alt="O"
                   width={180}
                   height={100}
-                  className="h-4 sm:h-[18px] w-auto invert object-contain"
+                  className={logoImgClass("h-4 sm:h-[18px]")}
                   priority
                 />
               </div>
@@ -296,7 +321,7 @@ export default function Navbar() {
                   alt="F"
                   width={180}
                   height={100}
-                  className="h-4 sm:h-[18px] w-auto invert object-contain"
+                  className={logoImgClass("h-4 sm:h-[18px]")}
                   priority
                 />
               </div>
@@ -309,10 +334,12 @@ export default function Navbar() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             className={`
               w-3 h-3 sm:w-4.5 sm:h-4.5 rounded-full cursor-pointer
-              border-2 border-heading
-              transition-colors duration-200
-              hover:bg-heading hover:border-heading
-              ${menuOpen ? "bg-heading border-heading" : "bg-transparent"}
+              border-2 transition-[background-color,border-color] duration-500 ease-in-out
+              ${
+                logoLight
+                  ? "border-heading bg-transparent hover:bg-heading hover:border-heading"
+                  : "border-background bg-background hover:bg-background hover:border-background"
+              }
             `}
           />
         </div>
