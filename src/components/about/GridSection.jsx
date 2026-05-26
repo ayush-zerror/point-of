@@ -83,15 +83,13 @@ const GridSection = ({ title, intro, btntitle, data }) => {
                 cardsRef.current[index] = el;
               }}
             >
-              {/* Video */}
-              {item.video && (
+              {/* Image */}
+              {item.image && (
                 <div className="w-12 sm:w-14 md:w-16 lg:w-18 aspect-square mb-3 sm:mb-4 overflow-hidden">
-                  <video
-                    src={item.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+                  <img
+                    src={item.image}
+                    alt=""
+                    aria-hidden="true"
                     className="w-full h-full object-cover"
                   />
                 </div>

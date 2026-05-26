@@ -1,4 +1,4 @@
-import BrandsIndex from '@/components/brands/BrandsIndex'
+// import BrandsIndex from '@/components/brands/BrandsIndex'
 import SelectedBrands from '@/components/brands/SelectedBrands'
 import StatsSection from '@/components/brands/StatsSection'
 import TestimonialSection from '@/components/brands/TestimonialSection'
@@ -59,7 +59,7 @@ const Brnads = () => {
       />
       <StatsSection />
       <SelectedBrands />
-      <BrandsIndex />
+      {/* <BrandsIndex /> */}
       <TestimonialSection />
       <GridSection
         title={

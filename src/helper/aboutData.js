@@ -48,7 +48,7 @@ export const transformData = [
           We give brands the tools, language, and confidence to stand on their own.
         </>
       ),
-      video: "/about/1.mp4",
+      image: "/about/1.gif",
     },
     {
       title: "Originate",
@@ -58,7 +58,7 @@ export const transformData = [
   
         </>
       ),
-      video: "/about/2.mp4",
+      image: "/about/2.gif",
     },
     {
       title: "Optimization",
@@ -67,7 +67,7 @@ export const transformData = [
           We sharpen what exists. Better decisions, cleaner systems, less friction.
         </>
       ),
-      video: "/about/3.mp4",
+      image: "/about/3.gif",
     },
     {
       title: "Pivot",
@@ -76,7 +76,7 @@ export const transformData = [
           We help brands move when staying still is the greater risk.
         </>
       ),
-      video: "/about/4.mp4",
+      image: "/about/4.gif",
     },
     {
       title: "Reposition",
@@ -85,7 +85,7 @@ export const transformData = [
           We reframe how a brand is seen — in the market, in culture, in people's minds.
         </>
       ),
-      video: "/about/5.mp4",
+      image: "/about/5.gif",
     },
     {
       title: "Propel",
@@ -94,7 +94,7 @@ export const transformData = [
           We accelerate brands that are ready to lead their category.
         </>
       ),
-      video: "/about/6.mp4",
+      image: "/about/6.gif",
     },
   ];
   
