@@ -244,7 +244,7 @@ useEffect(() => {
               width={180}
               height={100}
               priority
-              className="h-[18px] w-auto invert object-contain"
+              className="h-[18px] lg:h-[16px] xl:h-[18px] w-auto invert object-contain"
             />
             <Image
               src="/logo/oint.png"
@@ -252,7 +252,7 @@ useEffect(() => {
               width={180}
               height={100}
               priority
-              className="h-[18px] w-auto invert object-contain"
+              className="h-[18px] lg:h-[16px] xl:h-[18px] w-auto invert object-contain"
             />
             <Image
               src="/logo/o.png"
@@ -260,7 +260,7 @@ useEffect(() => {
               width={180}
               height={100}
               priority
-              className="h-[18px] w-auto invert object-contain"
+              className="h-[18px] lg:h-[16px] xl:h-[18px] w-auto invert object-contain"
             />
             <Image
               src="/logo/f.png"
@@ -268,7 +268,7 @@ useEffect(() => {
               width={180}
               height={100}
               priority
-              className="h-[18px] w-auto invert object-contain"
+              className="h-[18px] lg:h-[16px] xl:h-[18px] w-auto invert object-contain"
             />
           </div>
         </motion.div>
@@ -306,7 +306,7 @@ useEffect(() => {
         </h1>
 
         {/* Typing line */}
-        <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-xl sm:text-6xl md:text-3xl lg:text-[3rem]">
+        <p className="font-medium leading-none tracking-[1px] uppercase font-heading text-xl sm:text-6xl md:text-3xl lg:text-[2.7rem] xl:text-[3rem]">
           <span className="relative inline-block">
             <span
               className="relative text-white wrap-break-word transition-[text-shadow] duration-700"

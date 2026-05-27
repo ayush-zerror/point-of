@@ -36,7 +36,7 @@ const BrandsSection = () => {
   const router = useRouter();
   return (
     <section className="w-full py-24 md:py-52 md:pb-20 bg-background relative">
-      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-0 flex flex-col">
+      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-14 xl:px-0 flex flex-col">
         <h2 className="heading-xl text-heading mb-4">Our partnerships</h2>
         <p className="heading-xl text-desc">
         The brands that trusted us first — and kept coming back.

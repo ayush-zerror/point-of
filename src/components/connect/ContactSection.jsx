@@ -50,7 +50,7 @@ const ContactSection = () => {
               <div
                 ref={lineRef}
                 style={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
-                className="w-px h-50 sm:h-72 z-30 bg-linear-to-b from-transparent to-foreground absolute -top-32 sm:top-3 -translate-y-1/2 md:left-12 lg:left-[30.2rem]"
+                className="w-px h-50 sm:h-72 lg:h-50 xl:h-72 z-30 bg-linear-to-b from-transparent to-foreground absolute -top-32 sm:top-3 lg:-top-4 xl:top-3 -translate-y-1/2 md:left-12 lg:left-[12rem] xl:left-[30.2rem]"
               >
                 <span className="w-[3px] h-[3px] bg-foreground rounded-full absolute bottom-0 left-1/2 -translate-x-1/2" />
               </div>
@@ -64,7 +64,7 @@ const ContactSection = () => {
               </div>
 
               {/* Bottom Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
                 <div>
                   <h3 className="heading-md text-subheading mb-3 md:mb-4">Contact</h3>
                   <p className="para text-desc mb-2">(+91) 91679 91888</p>

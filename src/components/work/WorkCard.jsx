@@ -72,7 +72,7 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false, cla
     return (
       <Link
         href={href}
-        className={`work-card relative group block w-full min-w-0 md:w-full lg:w-[400px] ${className}`}
+        className={`work-card relative group block w-full min-w-0 md:w-full lg:w-[270px] xl:w-[400px] ${className}`}
         title={title}
         aria-label={title}
       >
@@ -113,7 +113,7 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false, cla
       className={`work-card block min-w-0 ${
         isExpanding
           ? "fixed inset-0 z-999 w-screen h-screen bg-neutral-900"
-          : `group relative w-full md:w-full lg:w-[400px] ${className}`
+          : `group relative w-full md:w-full lg:w-[270px] xl:w-[400px] ${className}`
       }`}
       title={title}
       aria-label={title}

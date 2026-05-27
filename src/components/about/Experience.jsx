@@ -138,8 +138,8 @@ const Experience = ({ data }) => {
       <div className="relative z-10 h-full flex items-center">
         <div className="w-full md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-120 px-6 sm:px-10 py-16 sm:py-20 md:py-28 lg:py-32">
 
-          {/* ── MOBILE layout ── */}
-          <div className="flex flex-col space-y-8 md:hidden">
+          {/* ── MOBILE-style layout (up to lg). Desktop starts at xl ── */}
+          <div className="flex flex-col space-y-8 xl:hidden">
 
             {/* Year */}
             <span
@@ -175,10 +175,13 @@ const Experience = ({ data }) => {
               130+ brands. 3 offices. One point of view.
             </h2>
 
-            {/* Stats — single column on mobile */}
-            <div className="grid grid-cols-1 gap-0">
+            {/* Stats — stacked by default, row on lg (still mobile-style section) */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-10">
               {stats.map((stat) => (
-                <div key={stat.name} className="border-t border-white/15 pt-6 pb-6">
+                <div
+                  key={stat.name}
+                  className="border-t border-white/15 pt-6 pb-6 lg:border-t-0 lg:pt-0 lg:pb-0"
+                >
                   <div className="heading-lg text-subheading leading-none">{stat.num}</div>
                   <div className="para text-heading mt-2 mb-2">{stat.name}</div>
                   <div className="para text-desc">{stat.desc}</div>
@@ -189,7 +192,7 @@ const Experience = ({ data }) => {
           </div>
 
           {/* ── DESKTOP layout ── */}
-          <div className="relative hidden md:block">
+          <div className="relative hidden xl:block">
 
             {/* LEFT PANEL: outside the content box via right-full */}
             <div className="absolute top-0 bottom-0 right-full hidden md:flex flex-row items-stretch pr-6 lg:pr-10">

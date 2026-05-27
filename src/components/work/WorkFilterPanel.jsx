@@ -25,7 +25,7 @@ export default function WorkFilterPanel({
         className="w-full h-dvh md:h-[80vh] relative bg-background will-change-transform"
         data-lenis-prevent
       >
-        <div className="h-full w-full p-6 sm:p-10 md:px-12 lg:px-16 xl:px-20 md:py-8 text-white flex flex-col">
+        <div className="h-full w-full p-6 sm:p-10 md:px-12 lg:px-14 xl:px-20 md:py-8 text-white flex flex-col">
           <div className="absolute top-3 right-1 sm:right-10 lg:right-14 z-10">
             <Hamburger
               size={20}

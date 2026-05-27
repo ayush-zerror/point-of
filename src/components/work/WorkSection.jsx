@@ -194,21 +194,27 @@ const WorkSection = ({ projects }) => {
   const onResetFilters = () => setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
 
   // ── helpers ──────────────────────────────────────────────────
+  const isLgUp = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(min-width: 1024px)").matches;
+
   const getTitleEls = (index) => {
     const stored = (textRefs.current[index] ?? []).filter(Boolean);
     if (!stored.length) return [];
 
-    const isMdUp =
-      typeof window !== "undefined" &&
-      window.matchMedia("(min-width: 768px)").matches;
-
-    if (isMdUp) {
+    if (isLgUp()) {
       const desktopEls = stored.slice(1);
       return desktopEls.length ? desktopEls : stored.slice(0, 1);
     }
 
     return stored[0] ? [stored[0]] : [];
   };
+
+  const getTitleTransformOrigin = () =>
+    isLgUp() ? TITLE_TRANSFORM_ORIGIN : "center center";
+
+  const getDescTransformOrigin = () =>
+    isLgUp() ? "left center" : "center center";
 
   const applyTextCounterRestState = (activeIdx, forward) => {
     for (let i = 0; i < items.length; i++) {
@@ -219,21 +225,32 @@ const WorkSection = ({ projects }) => {
             rotate: 0,
             y: "0%",
             opacity: 1,
-            transformOrigin: TITLE_TRANSFORM_ORIGIN,
+            transformOrigin: getTitleTransformOrigin(),
           });
         } else {
           gsap.set(h1s, {
             rotate: forward ? 5 : -5,
             y: forward ? "100%" : "-100%",
             opacity: 0,
-            transformOrigin: TITLE_TRANSFORM_ORIGIN,
+            transformOrigin: getTitleTransformOrigin(),
           });
         }
       }
       const desc = descRefs.current[i];
       if (desc) {
-        if (i === activeIdx) gsap.set(desc, { y: "0%", opacity: 1 });
-        else                 gsap.set(desc, { y: forward ? "100%" : "-100%", opacity: 0 });
+        if (i === activeIdx) {
+          gsap.set(desc, {
+            y: "0%",
+            opacity: 1,
+            transformOrigin: getDescTransformOrigin(),
+          });
+        } else {
+          gsap.set(desc, {
+            y: forward ? "100%" : "-100%",
+            opacity: 0,
+            transformOrigin: getDescTransformOrigin(),
+          });
+        }
       }
       const cnt = counterRefs.current[i];
       if (cnt) {
@@ -262,7 +279,7 @@ const WorkSection = ({ projects }) => {
     applyBgRestState();
     applyCenterRestState();
 
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const onBreakpointChange = () => {
       applyTextCounterRestState(currentIndexRef.current, true);
       ScrollTrigger.refresh();
@@ -355,7 +372,7 @@ const WorkSection = ({ projects }) => {
         rotate: 5,
         y: "100%",
         opacity: 0,
-        transformOrigin: TITLE_TRANSFORM_ORIGIN,
+        transformOrigin: getTitleTransformOrigin(),
       });
     }
     if (descNext) gsap.set(descNext, { y: "100%", opacity: 0 });
@@ -413,12 +430,12 @@ const WorkSection = ({ projects }) => {
           opacity: 0,
           duration: 0.8,
           ease: "power2.out",
-          transformOrigin: TITLE_TRANSFORM_ORIGIN,
+          transformOrigin: getTitleTransformOrigin(),
           onComplete() {
             gsap.set(h1sPrev, {
               rotate: 5,
               y: "100%",
-              transformOrigin: TITLE_TRANSFORM_ORIGIN,
+              transformOrigin: getTitleTransformOrigin(),
             });
           },
         },
@@ -434,7 +451,7 @@ const WorkSection = ({ projects }) => {
           opacity: 1,
           duration: 0.8,
           ease: "power2.out",
-          transformOrigin: TITLE_TRANSFORM_ORIGIN,
+          transformOrigin: getTitleTransformOrigin(),
         },
         0
       );
@@ -508,7 +525,7 @@ const WorkSection = ({ projects }) => {
         rotate: -5,
         y: "-100%",
         opacity: 0,
-        transformOrigin: TITLE_TRANSFORM_ORIGIN,
+        transformOrigin: getTitleTransformOrigin(),
       });
     }
     if (descNext) gsap.set(descNext, { y: "-100%", opacity: 0 });
@@ -563,12 +580,12 @@ const WorkSection = ({ projects }) => {
           opacity: 0,
           duration: 0.8,
           ease: "power2.out",
-          transformOrigin: TITLE_TRANSFORM_ORIGIN,
+          transformOrigin: getTitleTransformOrigin(),
           onComplete() {
             gsap.set(h1sPrev, {
               rotate: -5,
               y: "-100%",
-              transformOrigin: TITLE_TRANSFORM_ORIGIN,
+              transformOrigin: getTitleTransformOrigin(),
             });
           },
         },
@@ -584,7 +601,7 @@ const WorkSection = ({ projects }) => {
           opacity: 1,
           duration: 0.8,
           ease: "power2.out",
-          transformOrigin: TITLE_TRANSFORM_ORIGIN,
+          transformOrigin: getTitleTransformOrigin(),
         },
         0
       );
@@ -697,7 +714,7 @@ const WorkSection = ({ projects }) => {
       {/* ── Center foreground ── */}
       <div
         ref={centerWrapperRef}
-        className={`min-w-[300px] md:min-w-[350px] lg:min-w-[400px] aspect-square z-20 transition-opacity duration-300 ${
+        className={`min-w-[300px] md:min-w-[350px] lg:min-w-[270px] xl:min-w-[400px] aspect-square z-20 transition-opacity duration-300 ${
           isGridOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         } ${
           expandingIndex !== null
@@ -797,20 +814,20 @@ const WorkSection = ({ projects }) => {
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
-            className="absolute left-5 right-5 top-16 sm:left-10 sm:right-8 sm:top-20 md:left-14 md:top-[11%] lg:left-20 lg:top-1/2 lg:-translate-y-1/2 w-[min(460px,calc(100vw-2.5rem))] sm:w-[min(500px,42vw)] min-w-0 flex flex-col items-start text-left"
+            className="absolute left-4 right-4 top-16 sm:top-20 md:top-[11%] max-lg:items-center max-lg:text-center lg:left-16 lg:right-auto xl:left-20 lg:top-1/2 lg:-translate-y-1/2 lg:items-start lg:text-left w-full max-lg:max-w-none lg:w-[min(500px,42vw)] min-w-0 flex flex-col"
           >
-            <div className="w-full min-w-0 flex flex-col">
-              {/* Below md: full case study name on one line */}
-              <div className="md:hidden w-full min-w-0 overflow-hidden pl-1.5 -ml-1.5 pr-2 pb-[0.12em]">
+            <div className="w-full min-w-0 flex flex-col max-lg:items-center">
+              {/* Below lg: full name, one line, centered */}
+              <div className="lg:hidden w-full max-w-[min(92vw,520px)] min-w-0 overflow-hidden px-2 pb-[0.12em]">
                 <h2
                   ref={(el) => {
                     if (!textRefs.current[i]) textRefs.current[i] = [];
                     textRefs.current[i][0] = el;
                   }}
-                  className="block w-full min-w-0 text-white font-heading font-extralight tracking-[0.4px] leading-[1.22] text-[clamp(1.45rem,5.6vw,2.4rem)] origin-left py-px whitespace-nowrap truncate"
+                  className="block w-full min-w-0 heading-xl text-heading text-center py-px whitespace-nowrap truncate"
                   style={{
                     willChange: "transform, opacity",
-                    transformOrigin: TITLE_TRANSFORM_ORIGIN,
+                    transformOrigin: "center center",
                     transform:
                       i === 0
                         ? "rotate(0deg) translateY(0%)"
@@ -822,8 +839,8 @@ const WorkSection = ({ projects }) => {
                 </h2>
               </div>
 
-              {/* md+: split title across lines */}
-              <div className="hidden md:flex md:flex-col w-full min-w-0">
+              {/* lg+: split title across lines */}
+              <div className="hidden lg:flex lg:flex-col w-full min-w-0">
                 {(project.titles ?? [project.name]).map((title, ti) => (
                   <div
                     key={ti}
@@ -834,10 +851,10 @@ const WorkSection = ({ projects }) => {
                         if (!textRefs.current[i]) textRefs.current[i] = [];
                         textRefs.current[i][ti + 1] = el;
                       }}
-                      className="block w-full min-w-0 text-white font-heading font-extralight tracking-[0.4px] leading-[1.22] text-[clamp(1.45rem,5.6vw,2.4rem)] sm:text-[clamp(1.85rem,5vw,3.4rem)] origin-left py-px"
+                      className="block w-full min-w-0 heading-xl text-heading  origin-left py-px"
                       style={{
                         willChange: "transform, opacity",
-                        transformOrigin: TITLE_TRANSFORM_ORIGIN,
+                        transformOrigin: getTitleTransformOrigin(),
                         transform:
                           i === 0
                             ? "rotate(0deg) translateY(0%)"
@@ -852,15 +869,14 @@ const WorkSection = ({ projects }) => {
               </div>
             </div>
 
-            <div className="w-full overflow-hidden mt-2 sm:mt-3 pb-1 pl-px">
+            <div className="w-full max-lg:max-w-[min(92vw,520px)] overflow-hidden mt-1 pb-1 max-lg:px-2 max-lg:mx-auto lg:pl-px">
               <p
                 ref={(el) => {
                   descRefs.current[i] = el;
                 }}
-                className="block w-full text-white/60 font-heading font-extralight leading-[1.7] tracking-[0.15px] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch] origin-left py-px"
+                className="block w-full text-white/60 font-heading font-extralight leading-[1.7] tracking-[0.15px] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch] max-lg:mx-auto max-lg:text-center lg:max-w-[46ch] py-px"
                 style={{
                   willChange: "transform, opacity",
-                  transformOrigin: "left center",
                   transform: i === 0 ? "translateY(0%)" : "translateY(100%)",
                   opacity: i === 0 ? 1 : 0,
                 }}

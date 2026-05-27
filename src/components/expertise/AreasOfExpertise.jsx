@@ -126,7 +126,7 @@ const AreasOfExpertise = () => {
       >
         <div className="max-w-5xl relative">
           {/* LEFT GRAPHIC (desktop only) */}
-          <div className="hidden lg:flex items-center justify-center absolute top-0 -left-[33.5%] h-full">
+          <div className="hidden xl:flex items-center justify-center absolute top-0 -left-[33.5%] h-full">
             <div className="flex flex-col items-center h-full">
               {/* Image */}
               <div ref={imageWrapRef} className="w-40 h-40 lg:w-46 lg:h-46 mb-6">

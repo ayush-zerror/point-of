@@ -60,7 +60,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-background relative">
-      <div className="px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20 mx-auto pt-10 md:pt-16 lg:pt-20 ">
+      <div className="px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 mx-auto pt-10 md:pt-16 lg:pt-20 ">
 
         <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-0">
 
@@ -72,7 +72,7 @@ export default function Footer() {
                 alt="Point Of logo"
                 width={120}
                 height={40}
-                className="h-10 sm:h-12 md:h-11 lg:h-14 w-auto object-contain"
+                className="h-10 sm:h-12 md:h-11 lg:h-12 xl:h-14 w-auto object-contain"
               />
             </Link>
           </div>

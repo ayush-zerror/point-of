@@ -84,7 +84,7 @@ const RelatedWork = ({ caseStudies, other = true, related = false }) => {
       </div>
 
       {/* Container */}
-      <div className="px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
+      <div className="px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20">
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 md:gap-10 lg:gap-20">

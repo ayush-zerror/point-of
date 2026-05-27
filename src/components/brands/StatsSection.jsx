@@ -281,7 +281,7 @@ function AnimatedStatsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-10  w-full bg-background py-16 md:py-24 px-6 sm:px-8 md:px-40"
+      className="relative z-10  w-full bg-background py-16 md:py-24 px-6 sm:px-8 md:px-40 lg:px-14 xl:px-40"
     >
       <div className="flex flex-col md:items-end w-full">
         {/* Stats */}
