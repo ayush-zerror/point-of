@@ -237,7 +237,7 @@ export default function Navbar() {
           pathname === "/work" ? "" : "nav-gradient"
         } ${landingActive ? "opacity-0 pointer-events-none" : "opacity-100"}`}
       >
-        <div className="relative z-30 flex items-center justify-between h-16 sm:h-20 px-6 sm:px-10 md:px-12 lg:px-20">
+        <div className="relative z-30 flex items-center justify-between h-16 sm:h-20 px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
           {/* Left spacer so hamburger doesn't shift center */}
           <div className="w-10 sm:w-12 md:w-0" />
 
