@@ -22,7 +22,7 @@ export default function WorkFilterPanel({
     >
       <div
         ref={filterPanelRef}
-        className="w-full h-dvh md:h-1/2 relative bg-background will-change-transform"
+        className="w-full h-dvh md:h-[80vh] relative bg-background will-change-transform"
         data-lenis-prevent
       >
         <div className="h-full w-full p-6 sm:p-10 md:px-12 lg:px-20 md:py-8 text-white flex flex-col">
