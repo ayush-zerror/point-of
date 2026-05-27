@@ -7,6 +7,7 @@ import ArrowButton from "../common/ArrowButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import { IMAGE_PLACEHOLDER_BG } from "@/components/workDets/imagePlaceholder";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,7 +73,7 @@ const FoundersSection = ({ data }) => {
               className="w-full max-w-[520px] mx-auto md:mx-0"
             >
               <motion.div
-                className="w-full aspect-square overflow-hidden mb-8"
+                className={`w-full aspect-square overflow-hidden mb-8 ${IMAGE_PLACEHOLDER_BG}`}
                 initial={{ opacity: 0, scale: 0.96 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
