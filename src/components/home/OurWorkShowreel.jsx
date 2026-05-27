@@ -121,7 +121,7 @@ export default function OurWorkShowreel({ posts = [] }) {
     const DUR_SHOWREEL_CENTER  = 1.5;
     const DOT_SCALE_SIZE       = 50;
 
-    const isMobile = window.innerWidth < 768;
+    const useMobileShowreel = window.innerWidth < 1024;
 
     const ctx = gsap.context(() => {
       // ── Initial states ──
@@ -138,7 +138,7 @@ export default function OurWorkShowreel({ posts = [] }) {
       });
 
       // Showreel video wrap initial
-      if (isMobile) {
+      if (useMobileShowreel) {
         gsap.set(videoWrap, {
           transform: "translate(-50%,-50%) scale(4.5) rotateY(0deg) rotateX(0deg)",
         });
@@ -222,7 +222,7 @@ export default function OurWorkShowreel({ posts = [] }) {
 
 
       // ── Showreel animations (mirror original component's timeline) ──
-      if (isMobile) {
+      if (useMobileShowreel) {
         tl.to(videoWrap, {
           transform: "translate(-50%,-50%) scale(0.9) rotateY(0deg) rotateX(0deg)",
           duration: 2,
@@ -425,7 +425,7 @@ export default function OurWorkShowreel({ posts = [] }) {
           {/* VIDEO */}
           <div
             ref={videoWrapRef}
-            className="aspect-video h-auto w-full overflow-hidden md:h-full md:aspect-auto"
+            className="aspect-video h-auto w-full overflow-hidden lg:h-full lg:aspect-auto"
             style={{
               transformOrigin: "center center",
               position: "absolute",
@@ -437,7 +437,7 @@ export default function OurWorkShowreel({ posts = [] }) {
             <video
               ref={videoElRef}
               src="/home/showreel.mp4"
-              className="h-auto w-full object-cover md:h-full"
+              className="h-auto w-full object-cover lg:h-full"
               muted={isMuted}
               loop
               playsInline
