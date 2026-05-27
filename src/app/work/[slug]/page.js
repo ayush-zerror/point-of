@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
 
   const title = `${caseStudy.title || "Case Study"}`;
   const description = String(caseStudy.gist || "Case study by Point Of.").trim();
-  const image = caseStudy.coverImage || "/og.jpg";
+  const image = caseStudy.coverImage || "/pointof-og.png";
   const keywords = [
     "Point Of",
     "Case study",

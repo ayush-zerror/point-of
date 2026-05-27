@@ -54,7 +54,7 @@ export const metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/favicon.jpg",
+        url: "/pointof-og.png",
         width: 1200,
         height: 630,
         alt: "Point Of",
@@ -79,7 +79,7 @@ export const metadata = {
       "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
     images: [
       {
-        url: "/favicon.jpg",
+        url: "/pointof-og.png",
         width: 1200,
         height: 630,
         alt: "Point Of",

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
 
   const title = data.title || "Expertise";
   const description = String(data.description || "Expertise by Point Of.").trim();
-  const image = data.banner || "/og.jpg";
+  const image = data.banner || "/pointof-og.png";
   const keywords = ["Point Of", "Expertise", data.expertise, data.title, "Brand strategy", "Design"].filter(Boolean);
 
   return {
@@ -34,13 +34,13 @@ export async function generateMetadata({ params }) {
       title,
       description,
       url: `/expertise/${data.slug}`,
-      images: [{ url: `/${image}` }],
+      images: [{ url: image.startsWith("/") ? image : `/${image}` }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [`/${image}`],
+      images: [image.startsWith("/") ? image : `/${image}`],
     },
   };
 }
