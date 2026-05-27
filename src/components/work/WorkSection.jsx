@@ -814,7 +814,7 @@ const WorkSection = ({ projects }) => {
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
-            className="absolute left-4 right-4 top-16 sm:top-20 md:top-[11%] max-lg:items-center max-lg:text-center lg:left-16 lg:right-auto xl:left-20 lg:top-1/2 lg:-translate-y-1/2 lg:items-start lg:text-left w-full max-lg:max-w-none lg:w-[min(500px,42vw)] min-w-0 flex flex-col"
+            className="absolute left-0 right-0 top-24 sm:top-20 md:top-[11%] max-lg:items-center max-lg:text-center lg:left-16 lg:right-auto xl:left-20 lg:top-1/2 lg:-translate-y-1/2 lg:items-start lg:text-left w-full max-lg:max-w-none lg:w-[min(500px,42vw)] min-w-0 flex flex-col"
           >
             <div className="w-full min-w-0 flex flex-col max-lg:items-center">
               {/* Below lg: full name, one line, centered */}
