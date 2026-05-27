@@ -46,7 +46,7 @@ const Studio = () => {
       <StudioConsultancy />
       <OurValues />
       <GridSection
-        title="How we transform brands?"
+        title="How we transform brands"
         intro="Six ways we think about work — and what we do to brands that are ready for change."
         data={transformData}
       />

@@ -4,6 +4,23 @@ import Link from "next/link";
 
 const isHexColor = (v) => typeof v === "string" && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v);
 
+const isDarkFill = (color) => {
+  const c = String(color ?? "").toLowerCase();
+  if (c === "black" || c === "#000" || c === "#000000") return true;
+  if (!isHexColor(c)) return false;
+  const hex = c.replace("#", "");
+  const full =
+    hex.length === 3
+      ? hex.split("").map((ch) => ch + ch).join("")
+      : hex.length === 8
+        ? hex.slice(0, 6)
+        : hex;
+  const r = parseInt(full.slice(0, 2), 16);
+  const g = parseInt(full.slice(2, 4), 16);
+  const b = parseInt(full.slice(4, 6), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.45;
+};
+
 const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassName }) => {
   const handleClick = (event) => {
     if (typeof onClick === "function") onClick(event);
@@ -13,6 +30,7 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
   const circleStyle = useInline ? { backgroundColor: color } : undefined;
   const textStyle = useInline ? { color } : undefined;
   const underlineStyle = useInline ? { backgroundColor: color } : undefined;
+  const arrowOnFillClass = isDarkFill(color) ? "text-foreground" : "text-background";
 
   const inner = (
     <>
@@ -25,7 +43,7 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
       >
         {/* Arrow */}
         <svg
-          className={`w-3 h-3 ${useInline ? "text-background" : `text-${color === "black" ? "foreground" : "background"}`} opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100`}
+          className={`w-3 h-3 ${arrowOnFillClass} opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100`}
           fill="none"
           stroke="currentColor"
           strokeWidth="2"

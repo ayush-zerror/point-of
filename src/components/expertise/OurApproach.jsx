@@ -28,7 +28,7 @@ const OurApproach = () => {
             aptl
                 // STEP 1
                 .fromTo(
-                    "#page4 > h2, .apr-circle2, .apr-circle3",
+                    "#page4 > h2, .approach-intro, .apr-circle2, .apr-circle3",
                     { opacity: 0 },
                     { opacity: 1, duration: 0.2 }
                 )
@@ -96,7 +96,7 @@ const OurApproach = () => {
 
                 // STEP 4
                 .fromTo(
-                    "#approach-content h5, #page4 > h2, .step-loader-bar",
+                    "#approach-content h5, #page4 > h2, .approach-intro, .step-loader-bar",
                     { opacity: 1 },
                     { opacity: 0, duration: 0.5 },
                     "d"
@@ -210,7 +210,12 @@ const OurApproach = () => {
                 ref={containerRef}
                 className="approach-desktop relative z-8 h-screen w-full flex-col justify-center px-[6vw] py-[2.3vw]"
             >
-                <h2 className="heading-xl mb-[6vw] text-heading">Our Approach</h2>
+                <h2 className="heading-xl mb-4 text-heading">Our Approach</h2>
+                <p className="approach-intro para text-desc max-w-2xl mb-[6vw]">
+                  We work across three dimensions simultaneously — because strategy
+                  without design is a document, and design without technology
+                  doesn&apos;t scale.
+                </p>
 
                 <div id="approach-wrap" className="w-full">
                     <div
@@ -325,7 +330,12 @@ const OurApproach = () => {
 
             {/* ─── MOBILE / TABLET ─── */}
             <div className="approach-mobile w-full px-6 md:px-12 py-[14vw]">
-                <h2 className="heading-xl mb-[12vw] text-heading">Our Approach</h2>
+                <h2 className="heading-xl mb-4 text-heading">Our Approach</h2>
+                <p className="para text-desc max-w-2xl mb-[10vw]">
+                  We work across three dimensions simultaneously — because strategy
+                  without design is a document, and design without technology
+                  doesn&apos;t scale.
+                </p>
 
                 {/* Card 1 — Strategy */}
                 <div className="approach-card-mobile mb-[12vw]" style={{ opacity: 0 }}>
