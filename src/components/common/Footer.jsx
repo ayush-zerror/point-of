@@ -94,7 +94,7 @@ export default function Footer() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`link-underline block transition ${pathname.startsWith(item.href) ? "font-[600]" : "font-[500]"}`}
+                    className={`link-underline block transition ${pathname.startsWith(item.href) ? "font-semibold" : "font-medium"}`}
                     title={item.name}
                   >
                     {item.name}
@@ -123,7 +123,7 @@ export default function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="link-underline block transition font-[500]"
+                    className="link-underline block transition font-medium"
                     title={item.name}
                   >
                     {item.name}
@@ -134,7 +134,7 @@ export default function Footer() {
 
             {/* EMAIL SUBSCRIBE */}
             <div className="space-y-3  w-full sm:w-[260px] md:w-[300px]">
-              <p className="para text-heading tracking-wide font-[500]">Don’t miss anything</p>
+              <p className="para text-heading tracking-wide font-medium">Don’t miss anything</p>
 
               <div className="relative border-b border-neutral-700 pb-2">
                 <input
@@ -184,10 +184,19 @@ export default function Footer() {
                 <p className="text-desc mb-2">Partner with us</p>
                 <a
                   href="mailto:think@wearepointof.com"
-                  className="link-underline para text-heading tracking-wide font-[500]"
+                  className="link-underline para text-heading tracking-wide font-medium"
                   title="Email Point Of"
                 >
                   think@wearepointof.com
+                </a>
+                <a
+                  href="https://tidycal.com/piran"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline para text-heading tracking-wide font-medium block mt-2"
+                  title="Schedule a call"
+                >
+                  Schedule a call
                 </a>
               </div>
             </div>
@@ -212,6 +221,9 @@ export default function Footer() {
           </p>
           <p className="text-neutral-400">
             Made with intention.
+          </p>
+          <p className="text-neutral-400">
+            Designed and Developed by Team Point Of.
           </p>
         </div>
 
