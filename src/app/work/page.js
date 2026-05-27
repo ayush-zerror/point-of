@@ -14,13 +14,17 @@ const Work = async () => {
   const projects = (caseStudies ?? []).map((c) => {
     const title = String(c?.title ?? "").trim();
     const words = title.split(/\s+/).filter(Boolean);
+    const displayTitle = title || String(c?.slug ?? "Project");
 
     return {
       coverImage: c?.coverImage,
-      name: title || String(c?.slug ?? "Project"),
+      name: displayTitle,
       slug: c?.slug,
       gist: c?.gist ?? "",
-      titles: words.length <= 1 ? [title] : [words[0], words.slice(1).join(" ")],
+      titles:
+        words.length <= 1
+          ? [displayTitle]
+          : [words[0], words.slice(1).join(" ")],
       microanimation: c?.microanimation,
       filtersServices: c?.filtersServices ?? [],
       filtersIndustry: c?.filtersIndustry ?? [],

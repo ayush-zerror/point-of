@@ -34,6 +34,8 @@ const CTR_ENTER_DOWN_FROM = BG_ENTER_DOWN_FROM;
 const CTR_EXIT_UP         = BG_EXIT_UP;
 const CTR_ENTER_UP_FROM   = BG_ENTER_UP_FROM;
 
+const TITLE_TRANSFORM_ORIGIN = "left center";
+
 const toSlug = (value = "") =>
   String(value).toLowerCase().trim()
     .replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-");
@@ -192,12 +194,41 @@ const WorkSection = ({ projects }) => {
   const onResetFilters = () => setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
 
   // ── helpers ──────────────────────────────────────────────────
+  const getTitleEls = (index) => {
+    const stored = (textRefs.current[index] ?? []).filter(Boolean);
+    if (!stored.length) return [];
+
+    const isMdUp =
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 768px)").matches;
+
+    if (isMdUp) {
+      const desktopEls = stored.slice(1);
+      return desktopEls.length ? desktopEls : stored.slice(0, 1);
+    }
+
+    return stored[0] ? [stored[0]] : [];
+  };
+
   const applyTextCounterRestState = (activeIdx, forward) => {
     for (let i = 0; i < items.length; i++) {
-      const h1s = textRefs.current[i];
+      const h1s = getTitleEls(i);
       if (h1s?.length) {
-        if (i === activeIdx) gsap.set(h1s, { rotate: 0, y: "0%", opacity: 1 });
-        else                 gsap.set(h1s, { rotate: forward ? 5 : -5, y: forward ? "100%" : "-100%", opacity: 0 });
+        if (i === activeIdx) {
+          gsap.set(h1s, {
+            rotate: 0,
+            y: "0%",
+            opacity: 1,
+            transformOrigin: TITLE_TRANSFORM_ORIGIN,
+          });
+        } else {
+          gsap.set(h1s, {
+            rotate: forward ? 5 : -5,
+            y: forward ? "100%" : "-100%",
+            opacity: 0,
+            transformOrigin: TITLE_TRANSFORM_ORIGIN,
+          });
+        }
       }
       const desc = descRefs.current[i];
       if (desc) {
@@ -230,6 +261,14 @@ const WorkSection = ({ projects }) => {
     applyTextCounterRestState(0, true);
     applyBgRestState();
     applyCenterRestState();
+
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onBreakpointChange = () => {
+      applyTextCounterRestState(currentIndexRef.current, true);
+      ScrollTrigger.refresh();
+    };
+    mq.addEventListener("change", onBreakpointChange);
+    return () => mq.removeEventListener("change", onBreakpointChange);
   }, [items]);
 
   // ── grid toggle ──────────────────────────────────────────────
@@ -275,8 +314,8 @@ const WorkSection = ({ projects }) => {
     const ctrImgNext    = centerImgRefs.current[next];
     if (!bgWrapCurrent || !bgWrapNext || !bgCurrent || !bgNext || !ctrCurrent || !ctrNext || !ctrImgCurrent || !ctrImgNext) return null;
 
-    const h1sPrev = textRefs.current[current];
-    const h1sNext = textRefs.current[next];
+    const h1sPrev = getTitleEls(current);
+    const h1sNext = getTitleEls(next);
     const descPrev = descRefs.current[current];
     const descNext = descRefs.current[next];
     const cntPrev  = counterRefs.current[current];
@@ -311,7 +350,14 @@ const WorkSection = ({ projects }) => {
     gsap.set(ctrImgCurrent, { scale: CTR_REST.scale,            objectPosition: CTR_REST.objectPosition });
     gsap.set(ctrImgNext,    { scale: CTR_ENTER_DOWN_FROM.scale, objectPosition: CTR_ENTER_DOWN_FROM.objectPosition });
 
-    if (h1sNext?.length) gsap.set(h1sNext, { rotate: 5, y: "100%", opacity: 0 });
+    if (h1sNext?.length) {
+      gsap.set(h1sNext, {
+        rotate: 5,
+        y: "100%",
+        opacity: 0,
+        transformOrigin: TITLE_TRANSFORM_ORIGIN,
+      });
+    }
     if (descNext) gsap.set(descNext, { y: "100%", opacity: 0 });
     if (cntNext)  gsap.set(cntNext,  { top: "100%", opacity: 0 });
 
@@ -359,10 +405,40 @@ const WorkSection = ({ projects }) => {
 
     // text
     if (h1sPrev?.length) {
-      tl.to(h1sPrev, { rotate: -5, y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out",
-        onComplete() { gsap.set(h1sPrev, { rotate: 5, y: "100%" }); } }, 0);
+      tl.to(
+        h1sPrev,
+        {
+          rotate: -5,
+          y: "-100%",
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          transformOrigin: TITLE_TRANSFORM_ORIGIN,
+          onComplete() {
+            gsap.set(h1sPrev, {
+              rotate: 5,
+              y: "100%",
+              transformOrigin: TITLE_TRANSFORM_ORIGIN,
+            });
+          },
+        },
+        0
+      );
     }
-    if (h1sNext?.length) tl.to(h1sNext, { rotate: 0, y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+    if (h1sNext?.length) {
+      tl.to(
+        h1sNext,
+        {
+          rotate: 0,
+          y: "0%",
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          transformOrigin: TITLE_TRANSFORM_ORIGIN,
+        },
+        0
+      );
+    }
     if (descPrev)  tl.to(descPrev,  { y: "-100%", opacity: 0, duration: 0.8, ease: "power2.out" }, 0);
     if (descNext)  tl.to(descNext,  { y: "0%",    opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
     if (cntPrev) {
@@ -393,8 +469,8 @@ const WorkSection = ({ projects }) => {
     const ctrImgPrev    = centerImgRefs.current[prev];
     if (!bgWrapCurrent || !bgWrapPrev || !bgCurrent || !bgPrev || !ctrCurrent || !ctrPrev || !ctrImgCurrent || !ctrImgPrev) return null;
 
-    const h1sPrev = textRefs.current[current];
-    const h1sNext = textRefs.current[prev];
+    const h1sPrev = getTitleEls(current);
+    const h1sNext = getTitleEls(prev);
     const descPrev = descRefs.current[current];
     const descNext = descRefs.current[prev];
     const cntPrev  = counterRefs.current[current];
@@ -427,7 +503,14 @@ const WorkSection = ({ projects }) => {
     gsap.set(ctrImgCurrent, { scale: CTR_REST.scale,        objectPosition: CTR_REST.objectPosition });
     gsap.set(ctrImgPrev,    { scale: CTR_ENTER_UP_FROM.scale, objectPosition: CTR_ENTER_UP_FROM.objectPosition });
 
-    if (h1sNext?.length) gsap.set(h1sNext, { rotate: -5, y: "-100%", opacity: 0 });
+    if (h1sNext?.length) {
+      gsap.set(h1sNext, {
+        rotate: -5,
+        y: "-100%",
+        opacity: 0,
+        transformOrigin: TITLE_TRANSFORM_ORIGIN,
+      });
+    }
     if (descNext) gsap.set(descNext, { y: "-100%", opacity: 0 });
     if (cntNext)  gsap.set(cntNext,  { top: "-100%", opacity: 0 });
 
@@ -472,10 +555,40 @@ const WorkSection = ({ projects }) => {
     tl.to(ctrImgPrev,    { scale: CTR_REST.scale,    objectPosition: CTR_REST.objectPosition,    duration: 1, ease: "power2.inOut" }, 0);
 
     if (h1sPrev?.length) {
-      tl.to(h1sPrev, { rotate: 5, y: "100%", opacity: 0, duration: 0.8, ease: "power2.out",
-        onComplete() { gsap.set(h1sPrev, { rotate: -5, y: "-100%" }); } }, 0);
+      tl.to(
+        h1sPrev,
+        {
+          rotate: 5,
+          y: "100%",
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          transformOrigin: TITLE_TRANSFORM_ORIGIN,
+          onComplete() {
+            gsap.set(h1sPrev, {
+              rotate: -5,
+              y: "-100%",
+              transformOrigin: TITLE_TRANSFORM_ORIGIN,
+            });
+          },
+        },
+        0
+      );
     }
-    if (h1sNext?.length) tl.to(h1sNext, { rotate: 0, y: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+    if (h1sNext?.length) {
+      tl.to(
+        h1sNext,
+        {
+          rotate: 0,
+          y: "0%",
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          transformOrigin: TITLE_TRANSFORM_ORIGIN,
+        },
+        0
+      );
+    }
     if (descPrev)  tl.to(descPrev,  { y: "100%",  opacity: 0, duration: 0.8, ease: "power2.out" }, 0);
     if (descNext)  tl.to(descNext,  { y: "0%",    opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
     if (cntPrev) {
@@ -679,38 +792,75 @@ const WorkSection = ({ projects }) => {
         onReset={onResetFilters}
       />
 
-      {/* ── Side text ── */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
+      {/* ── Side text: heading(s) first, gist second ── */}
+      <div className="absolute inset-0 z-10 pointer-events-none overflow-visible">
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
-            className="absolute left-4 right-4 top-[10%] sm:right-auto sm:left-8 sm:top-1/2 sm:-translate-y-1/2 md:left-12 md:top-[10%] md:translate-y-0 lg:left-16 lg:top-1/2 lg:-translate-y-1/2 max-w-[min(460px,92vw)] sm:max-w-[min(500px,85vw)] text-left"
+            className="absolute left-5 right-5 top-16 sm:left-10 sm:right-8 sm:top-20 md:left-14 md:top-[11%] lg:left-20 lg:top-1/2 lg:-translate-y-1/2 w-[min(460px,calc(100vw-2.5rem))] sm:w-[min(500px,42vw)] min-w-0 flex flex-col items-start text-left"
           >
-            {(project.titles ?? [project.name]).map((title, ti) => (
-              <div key={ti} className="overflow-hidden">
+            <div className="w-full min-w-0 flex flex-col">
+              {/* Below md: full case study name on one line */}
+              <div className="md:hidden w-full min-w-0 overflow-hidden pl-1.5 -ml-1.5 pr-2 pb-[0.12em]">
                 <h2
                   ref={(el) => {
                     if (!textRefs.current[i]) textRefs.current[i] = [];
-                    textRefs.current[i][ti] = el;
+                    textRefs.current[i][0] = el;
                   }}
-                  className="text-white font-heading font-extralight tracking-[0.4px] leading-[1.08] text-[clamp(1.45rem,5.6vw,2.4rem)] sm:text-[clamp(1.85rem,5vw,3.4rem)] whitespace-nowrap max-w-full overflow-hidden text-ellipsis"
+                  className="block w-full min-w-0 text-white font-heading font-extralight tracking-[0.4px] leading-[1.22] text-[clamp(1.45rem,5.6vw,2.4rem)] origin-left py-px whitespace-nowrap truncate"
                   style={{
-                    display: "inline-block",
                     willChange: "transform, opacity",
-                    transform: i === 0 ? "rotate(0deg) translateY(0%)" : "rotate(5deg) translateY(100%)",
+                    transformOrigin: TITLE_TRANSFORM_ORIGIN,
+                    transform:
+                      i === 0
+                        ? "rotate(0deg) translateY(0%)"
+                        : "rotate(5deg) translateY(100%)",
                     opacity: i === 0 ? 1 : 0,
                   }}
                 >
-                  {title}
+                  {project.name}
                 </h2>
               </div>
-            ))}
-            <div className="overflow-hidden mt-2 sm:mt-3">
+
+              {/* md+: split title across lines */}
+              <div className="hidden md:flex md:flex-col w-full min-w-0">
+                {(project.titles ?? [project.name]).map((title, ti) => (
+                  <div
+                    key={ti}
+                    className="w-full min-w-0 overflow-hidden pl-1.5 -ml-1.5 pr-2 pb-[0.12em]"
+                  >
+                    <h2
+                      ref={(el) => {
+                        if (!textRefs.current[i]) textRefs.current[i] = [];
+                        textRefs.current[i][ti + 1] = el;
+                      }}
+                      className="block w-full min-w-0 text-white font-heading font-extralight tracking-[0.4px] leading-[1.22] text-[clamp(1.45rem,5.6vw,2.4rem)] sm:text-[clamp(1.85rem,5vw,3.4rem)] origin-left py-px"
+                      style={{
+                        willChange: "transform, opacity",
+                        transformOrigin: TITLE_TRANSFORM_ORIGIN,
+                        transform:
+                          i === 0
+                            ? "rotate(0deg) translateY(0%)"
+                            : "rotate(5deg) translateY(100%)",
+                        opacity: i === 0 ? 1 : 0,
+                      }}
+                    >
+                      {title}
+                    </h2>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="w-full overflow-hidden mt-2 sm:mt-3 pb-1 pl-px">
               <p
-                ref={(el) => { descRefs.current[i] = el; }}
-                className="text-white/60 font-heading font-extralight leading-[1.55] tracking-[0.15px] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch]"
+                ref={(el) => {
+                  descRefs.current[i] = el;
+                }}
+                className="block w-full text-white/60 font-heading font-extralight leading-[1.7] tracking-[0.15px] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch] origin-left py-px"
                 style={{
                   willChange: "transform, opacity",
+                  transformOrigin: "left center",
                   transform: i === 0 ? "translateY(0%)" : "translateY(100%)",
                   opacity: i === 0 ? 1 : 0,
                 }}
