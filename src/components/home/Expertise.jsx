@@ -13,6 +13,8 @@ gsap.registerPlugin(ScrollTrigger);
 const LAST_IDX = expertiseItems.length - 1;
 // Match the Framer Motion accordion transition duration
 const ACCORDION_DURATION_MS = 400;
+const EXPERTISE_SCROLL_START = 0.12;
+const EXPERTISE_SCROLL_END = 0.82;
 
 export default function Expertise() {
   const [isMobile, setIsMobile] = useState(false);
@@ -24,6 +26,7 @@ export default function Expertise() {
   const prevIndexRef = useRef(-1);
   const router = useRouter();
   const moveTimerRef = useRef(null);   // debounce timer for accordion settle
+  const isBottomHandoffRef = useRef(false);
 
   // The one traveling circle — positioned fixed, moved via GSAP
   const travelCircleRef = useRef(null);
@@ -48,12 +51,17 @@ export default function Expertise() {
   useEffect(() => {
     if (isMobile) return;
     return scrollYProgress.on("change", (v) => {
-      if (v < 0.1) {
+      if (isBottomHandoffRef.current) return;
+
+      if (v < EXPERTISE_SCROLL_START) {
         setActiveIndex(-1);
         prevIndexRef.current = -1;
         return;
       }
-      const adjusted = (v - 0.1) / 0.9;
+      const adjusted = Math.min(
+        0.999,
+        Math.max(0, (v - EXPERTISE_SCROLL_START) / (EXPERTISE_SCROLL_END - EXPERTISE_SCROLL_START))
+      );
       const rawIndex = Math.min(LAST_IDX, Math.floor(adjusted * expertiseItems.length));
       const prev = prevIndexRef.current;
       const next =
@@ -77,6 +85,7 @@ export default function Expertise() {
     if (isMobile) return;
     const circle = travelCircleRef.current;
     if (!circle) return;
+    if (isBottomHandoffRef.current) return;
     if (activeIndex < 0) return; // handled by circle2 handoff
 
     // Cancel any previous pending move + kill in-progress tweens so
@@ -100,8 +109,8 @@ export default function Expertise() {
         left: targetX,
         top: targetY,
         opacity: 1,
-        duration: 0.35,
-        ease: "power2.out",
+        duration: 0.5,
+        ease: "power3.out",
         overwrite: true,
       });
     }, ACCORDION_DURATION_MS);
@@ -292,10 +301,12 @@ export default function Expertise() {
 
         onEnter: () => {
           if (activeIndexRef.current !== LAST_IDX) return;
+          isBottomHandoffRef.current = true;
           captureFrom();
         },
 
         onEnterBack: () => {
+          isBottomHandoffRef.current = true;
           captureFrom();
           setActiveIndex(LAST_IDX);
           prevIndexRef.current = LAST_IDX;
@@ -316,12 +327,14 @@ export default function Expertise() {
         },
 
         onLeaveBack: () => {
+          isBottomHandoffRef.current = false;
           fromCenter.ready = false;
           setTravelCircleAtLastWrap();
         },
 
         onLeave: () => {
           if (activeIndexRef.current !== LAST_IDX) return;
+          isBottomHandoffRef.current = true;
           gsap.set(travelCircle, {
             left: window.innerWidth * 0.5,
             top: window.innerHeight * 0.5,
@@ -338,6 +351,7 @@ export default function Expertise() {
         end: "bottom top",
         scrub: 1,
         onEnterBack: () => {
+          isBottomHandoffRef.current = true;
           gsap.set(travelCircle, {
             left: window.innerWidth * 0.5,
             top: window.innerHeight * 0.5,
@@ -350,6 +364,7 @@ export default function Expertise() {
         },
         onUpdate: (self) => {
           if (self.direction < 0) {
+            isBottomHandoffRef.current = true;
             gsap.set(travelCircle, {
               left: window.innerWidth * 0.5,
               top: window.innerHeight * 0.5,
@@ -360,6 +375,8 @@ export default function Expertise() {
             return;
           }
 
+          isBottomHandoffRef.current = true;
+
           gsap.set(travelCircle, {
             scale: 1 - self.progress,
             opacity: 1,
@@ -369,6 +386,7 @@ export default function Expertise() {
           }
         },
         onLeave: () => {
+          isBottomHandoffRef.current = true;
           gsap.set(travelCircle, { scale: 0, opacity: 1 });
           if (centerDot) gsap.set(centerDot, { opacity: 1 });
         },
@@ -382,7 +400,7 @@ export default function Expertise() {
   if (isMobile) return null;
 
   return (
-    <section id="page3" className="relative h-[300vh] bg-background cursor-default" ref={ref}>
+    <section id="page3" className="relative h-[400vh] bg-background cursor-default" ref={ref}>
       {/* Single traveling circle — absolutely positioned fixed in viewport */}
       <div
         ref={travelCircleRef}

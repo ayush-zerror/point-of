@@ -104,8 +104,8 @@ const AboutStudio = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "top -140%",
-          scrub: 1,
+          end: "top -180%",
+          scrub: 1.4,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
