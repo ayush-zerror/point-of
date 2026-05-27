@@ -54,12 +54,16 @@ const Overview = ({ caseStudy }) => {
       >
         {slots.map((src, index) => {
           const { grid, single } = gridClasses[index] ?? gridClasses[0];
+          const wrapperClassName = single
+            ? "w-full h-full lg:h-1/2"
+            : "w-full h-full min-h-full";
           return (
             <div key={index} className={`overflow-hidden ${grid}`}>
               <CaseStudyMedia
                 src={src}
                 alt={`${caseStudyTitle} — overview image ${index + 1}`}
-                className={`w-full object-cover ${single ? "h-full lg:h-1/2" : "h-full"}`}
+                wrapperClassName={wrapperClassName}
+                className="w-full h-full object-cover"
               />
             </div>
           );

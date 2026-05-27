@@ -43,7 +43,7 @@ const HeroSection = ({ src, alt = "Hero image" }) => {
       className="w-full h-auto lg:h-screen px-6 sm:px-6 md:px-10 lg:px-0 pt-20 sm:pt-24 md:pt-24 lg:pt-0 pb-6 md:pb-10 lg:pb-0 overflow-hidden"
     >
       <div
-        className={`relative w-full h-full min-h-[240px] overflow-hidden will-change-transform ${IMAGE_PLACEHOLDER_BG}`}
+        className={`relative w-full h-full  overflow-hidden will-change-transform ${IMAGE_PLACEHOLDER_BG}`}
         ref={mediaRef}
       >
         {src ? (

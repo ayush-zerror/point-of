@@ -2,10 +2,13 @@
 
 import { IMAGE_PLACEHOLDER_BG } from "./imagePlaceholder";
 
-export default function AssetPlaceholder({ className = "" }) {
+export default function AssetPlaceholder({
+  className = "",
+  wrapperClassName = "w-full h-full min-h-full",
+}) {
   return (
     <div
-      className={`w-full h-full min-h-full ${IMAGE_PLACEHOLDER_BG} ${className}`}
+      className={`${IMAGE_PLACEHOLDER_BG} ${wrapperClassName} ${className}`}
       role="img"
       aria-label="Image placeholder"
     />

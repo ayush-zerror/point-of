@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Button from "../common/Button";
 import WorkCard from "../work/WorkCard";
 import gsap from "gsap";
@@ -10,9 +10,26 @@ import ArrowButton from "../common/ArrowButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function pickRandomN(items, n) {
+  const pool = [...items];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, n);
+}
+
 const RelatedWork = ({ caseStudies, other = true, related = false }) => {
   const rootRef = useRef(null);
   const cardRefs = useRef([]);
+
+  const posts = useMemo(() => {
+    const list = Array.isArray(caseStudies) ? caseStudies : [];
+    if (other && !related) {
+      return pickRandomN(list, Math.min(3, list.length));
+    }
+    return list.slice(0, 3);
+  }, [caseStudies, other, related]);
 
   useEffect(() => {
     if (!rootRef.current) return;
@@ -38,11 +55,7 @@ const RelatedWork = ({ caseStudies, other = true, related = false }) => {
     }, rootRef);
 
     return () => ctx.revert();
-  }, [caseStudies]);
-
-  const posts = Array.isArray(caseStudies)
-    ? caseStudies.slice(0, 3)
-    : [];
+  }, [posts]);
 
   return (
     <section ref={rootRef} className="w-full overflow-hidden py-20 md:py-28 ">

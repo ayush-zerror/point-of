@@ -69,7 +69,9 @@ const WorkDetail = async ({ params }) => {
   const slug = normalizeSlug(slugParam);
   const caseStudy = await getCaseStudyBySlug(slug);
   const all = await getCaseStudies();
-  const otherCaseStudies = (all ?? []).filter((c) => normalizeSlug(c?.slug) !== slug).slice(0, 3);
+  const otherCaseStudies = (all ?? []).filter(
+    (c) => normalizeSlug(c?.slug) !== slug
+  );
 
   if (!caseStudy) notFound()
 
