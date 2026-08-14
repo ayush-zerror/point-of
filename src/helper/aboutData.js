@@ -61,7 +61,7 @@ export const transformData = [
       image: "/about/2.gif",
     },
     {
-      title: "Optimization",
+      title: "Optimise",
       desc: (
         <>
           We sharpen what exists. Better decisions, cleaner systems, less friction.

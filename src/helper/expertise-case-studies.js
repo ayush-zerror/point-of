@@ -1,6 +1,6 @@
 /** Case study slugs shown on each expertise detail page (order preserved). */
 export const EXPERTISE_CASE_STUDY_SLUGS = {
-  website: ["wealth-fusion", "casa-carigar", "moheim"],
+  website: ["wealthfusion", "casa-carigar", "moheim"],
   branding: ["jadau", "whitehues", "sooka-interiors"],
   print: ["contigo-tequila", "vedanta-academy", "kvar-design"],
   marketing: ["t-swirl", "the-pantry-mumbai", "label-ritu-kumar"],

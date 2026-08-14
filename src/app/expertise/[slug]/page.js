@@ -66,7 +66,7 @@ const ExpertiseDetails = async ({ params }) => {
       />
       <RelatedWork caseStudies={caseStudies} related={true}/>
       <CTASection heading={data.ctaTitle} buttonTitle={data.ctaButton} />
-      <InstagramSection caseStudies={caseStudies} />
+      {/* <InstagramSection caseStudies={caseStudies} /> */}
     </>
   );
 };
