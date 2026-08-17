@@ -72,9 +72,9 @@ const OfficesSection = () => {
 
       {/* Body copy */}
       <p className="para text-desc max-w-3xl mb-20 md:mb-28 lg:mb-32">
-        Our home base is in Worli, Mumbai — a neighbourhood carrying the memory of the city's mill district while becoming one of its most forward-thinking addresses. The water is close. The energy is particular. The skyline is etched — an interplay of industrial grit and ambition. It is the kind of place that makes you think differently about what you are building and who you are building it for.
+        Our home base is in Worli, Mumbai—a neighbourhood carrying the memory of the city's mill district while becoming one of its most forward-thinking addresses. The water is close. The energy is particular. The skyline is etched—an interplay of industrial grit and ambition. It is the kind of place that makes you think differently about what you are building and who you are building it for.
         <br /><br />
-        We work from Barcelona and Austin too — two cities chosen for what they add, not just where they are. Different latitudes. Different creative cultures. The same standard. One point of view.
+        We work from Barcelona and Austin too—two cities chosen for what they add, not just where they are. Different latitudes. Different creative cultures. The same standard. One point of view.
       </p>
 
       {/* City strips */}

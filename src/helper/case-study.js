@@ -13,12 +13,12 @@ const caseStudy = [
 
         challenge: {
             title: "How do you make a Mexican spirit feel native to India?",
-            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures — without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
+            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures—without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
         },
 
         creativeConcept: {
             title: "The spirit of shared celebration",
-            description: `We positioned Contigo as the spirit of shared celebration, shared rituals, drawing parallels between Mexican fiestas and Indian festivals— the warmth of family, the boldness of flavour, the joy of coming together. The visual identity merges agave field tones with the vibrancy of Indian textile traditions. Every bottle tells a story of two cultures meeting, not one absorbing the other. The result is a tequila that doesn't choose between cultures but brings them together, creating something entirely new while respecting what makes each special.`,
+            description: `We positioned Contigo as the spirit of shared celebration, shared rituals, drawing parallels between Mexican fiestas and Indian festivals—the warmth of family, the boldness of flavour, the joy of coming together. The visual identity merges agave field tones with the vibrancy of Indian textile traditions. Every bottle tells a story of two cultures meeting, not one absorbing the other. The result is a tequila that doesn't choose between cultures but brings them together, creating something entirely new while respecting what makes each special.`,
         },
         behanceLink: "https://www.behance.net/gallery/203085493/Contigo-Brand-Identity-Packaging",
 
@@ -62,7 +62,7 @@ const caseStudy = [
 
         challenge: {
             title: "How do you make a Mexican spirit feel native to India?",
-            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures — without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
+            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures—without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
         },
 
         creativeConcept: {
@@ -109,7 +109,7 @@ const caseStudy = [
 
         challenge: {
             title: "How do you make a Mexican spirit feel native to India?",
-            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures — without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
+            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures—without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
         },
 
         creativeConcept: {
@@ -156,7 +156,7 @@ const caseStudy = [
 
         challenge: {
             title: "How do you make a Mexican spirit feel native to India?",
-            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures — without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
+            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures—without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
         },
 
         creativeConcept: {
@@ -203,7 +203,7 @@ const caseStudy = [
 
         challenge: {
             title: "How do you make a Mexican spirit feel native to India?",
-            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures — without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
+            description: `The challenge was building an authentic premium tequila brand that could compete with established global names while telling a genuinely cross-cultural story. We needed to navigate complex regulations, appeal to Indian palates and celebration traditions, and create packaging that felt true to both cultures—without exoticising either, whilst maintaining the craftsmanship and quality expected from premium spirit. The brand had to educate a new market about tequila culture that felt familiar and welcoming.`,
         },
 
         creativeConcept: {

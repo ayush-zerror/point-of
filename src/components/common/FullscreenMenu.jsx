@@ -17,7 +17,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
   return (
     <div
       ref={ref}
-      className="fixed inset-0 bg-foreground text-background overflow-hidden flex items-end"
+      className="fixed inset-0 z-40 bg-secondary text-background overflow-hidden flex items-end"
       style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)" }}
     >
       <div className="w-full flex flex-col h-dvh px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 pt-24 pb-10 md:py-24 overflow-y-auto overscroll-contain">

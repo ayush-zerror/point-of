@@ -161,10 +161,108 @@ body {
   }
 }
 
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .react-tel-input .selected-flag:hover,
 .react-tel-input .selected-flag:focus {
   background-color: transparent !important;
+}
+
+.phone-field .react-tel-input {
+  position: relative !important;
+  width: 100% !important;
+}
+
+.phone-field .react-tel-input .form-control {
+  height: auto !important;
+  min-height: 0 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  padding-top: 0.85rem !important;
+  padding-bottom: 0.85rem !important;
+  padding-left: 52px !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.phone-field.is-active .react-tel-input .form-control {
+  padding-top: 1.25rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+@media (min-width: 640px) {
+  .phone-field .react-tel-input .form-control {
+    font-size: 1rem !important;
+  }
+}
+
+.phone-field .react-tel-input .flag-dropdown {
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100% !important;
+  background-color: transparent !important;
+  border: 0 !important;
+}
+
+.phone-field .react-tel-input .selected-flag {
+  width: 52px !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+  padding: 0.85rem 0 0.85rem 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px;
+}
+
+.phone-field.is-active .react-tel-input .selected-flag {
+  padding: 1.25rem 0 0.5rem 8px !important;
+}
+
+.phone-field .react-tel-input .selected-flag .flag,
+.phone-field .react-tel-input .selected-flag .arrow {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+.react-tel-input .country-list {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.react-tel-input .country-list .search {
+  padding: 8px !important;
+  position: relative;
+}
+
+.react-tel-input .search-emoji {
+  display: none !important;
+}
+
+.react-tel-input .search-box {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  padding-left: 10px !important;
+  border: 1px solid #d4d4d4 !important;
+  outline: none !important;
+  color: #111 !important;
+  background: #fff !important;
 }
 
 .word {

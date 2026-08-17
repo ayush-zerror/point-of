@@ -13,7 +13,6 @@ const AboutStudio = () => {
   const sectionRef = useRef(null);
   const p1Ref = useRef(null);
   const p2Ref = useRef(null);
-  const buttonWrapRef = useRef(null);
   const router = useRouter();
 
   useLayoutEffect(() => {
@@ -34,7 +33,10 @@ const AboutStudio = () => {
         wordClass: "word",
       });
 
-      const words = gsap.utils.toArray(".word");
+      const words = gsap.utils.toArray([
+        ...(p1Ref.current?.querySelectorAll?.(".word") || []),
+        ...(p2Ref.current?.querySelectorAll?.(".word") || []),
+      ]);
 
       // ── MOBILE: no pin, auto height, words animate as you scroll ──────────
       if (isMobile) {
@@ -57,44 +59,19 @@ const AboutStudio = () => {
         };
       }
 
-      // ── DESKTOP: pinned with circle handoff animation ──────────────────────
-      const buttonLink = buttonWrapRef.current?.querySelector("a, button");
-      const buttonDot = buttonLink?.children?.[0];
-      const buttonText = buttonLink?.children?.[1];
-
-      const getButtonHandoff = () => {
-        const dotRect = buttonDot?.getBoundingClientRect();
-        const textRect = buttonText?.getBoundingClientRect();
-
-        if (!dotRect || !textRect) {
-          return {
-            textShiftX: 0,
-            dotStartX: window.innerWidth * 0.5,
-            dotStartY: window.innerHeight * 0.5,
-            dotSize: 8,
-          };
-        }
-
-        const textShiftX = dotRect.left - textRect.left;
-
-        return {
-          textShiftX,
-          dotStartX: dotRect.left + textRect.width + 14,
-          dotStartY: dotRect.top + dotRect.height / 2,
-          dotSize: dotRect.width,
-        };
-      };
-
+      // ── DESKTOP: full-size circle at bottom center, pin, then shrink to a dot
       if (circle2) {
         gsap.set(circle2, {
           position: "fixed",
-          left: () => getButtonHandoff().dotStartX,
-          top: () => getButtonHandoff().dotStartY,
-          width: () => getButtonHandoff().dotSize,
-          height: () => getButtonHandoff().dotSize,
+          left: "50%",
+          top: "80%",
           xPercent: -50,
           yPercent: -50,
-          scale: 0,
+          x: 0,
+          y: 0,
+          width: "200vw",
+          height: "200vw",
+          scale: 1,
           opacity: 0,
           autoRound: false,
         });
@@ -103,77 +80,35 @@ const AboutStudio = () => {
       gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
+          start: "top 20%",
+          end: "top 0%",
+          scrub: 1,
+        },
+      }).to(circle2, {
+        opacity: 1,
+        ease: "power2.out",
+        duration: 1,
+      });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
           start: "top top",
-          end: "top -180%",
-          scrub: 1.4,
+          end: "top -140%",
+          scrub: 1,
           pin: true,
           anticipatePin: 1,
-          invalidateOnRefresh: true,
         },
       })
         .to(words, {
           opacity: 1,
           stagger: 0.15,
         })
-        .set(
-          circle2,
-          {
-            left: () => getButtonHandoff().dotStartX,
-            top: () => getButtonHandoff().dotStartY,
-            width: () => getButtonHandoff().dotSize,
-            height: () => getButtonHandoff().dotSize,
-            scale: 0,
-            opacity: 0,
-          },
-          "handoff"
-        )
-        .to(
-          buttonDot,
-          {
-            scale: 0,
-            opacity: 0,
-            transformOrigin: "50% 50%",
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "handoff"
-        )
-        .to(
-          buttonText,
-          {
-            x: () => getButtonHandoff().textShiftX,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "handoff"
-        )
-        .to(
-          circle2,
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.45,
-            ease: "power2.out",
-            autoRound: false,
-          },
-          "handoff+=0.35"
-        )
-        .to(
-          circle2,
-          {
-            left: () => window.innerWidth * 0.5,
-            top: () => getButtonHandoff().dotStartY,
-            width: 20,
-            height: 20,
-            duration: 1.2,
-            ease: "power2.inOut",
-            autoRound: false,
-          },
-          "handoff+=0.8"
-        )
         .to(circle2, {
-          duration: 0.35,
-          ease: "none",
+          width: "20px",
+          height: "20px",
+          duration: 8,
+          autoRound: false,
         });
 
       return () => {
@@ -211,14 +146,12 @@ const AboutStudio = () => {
           </p>
         </div>
 
-        <div ref={buttonWrapRef}>
-          <Button
-            title={"Explore our Work"}
-            onClick={() => {
-              router.push("/about");
-            }}
-          />
-        </div>
+        <Button
+          title={"Explore our Work"}
+          onClick={() => {
+            router.push("/about");
+          }}
+        />
       </div>
     </section>
   );

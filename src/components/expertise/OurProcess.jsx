@@ -15,7 +15,7 @@ const OurProcess = () => {
   const dotRef = useRef(null);
   const textsRef = useRef([]);
 
-  // Mobile refs — outer wrap for exit tween; inner group for motionPath only (avoids transform fights)
+  // Mobile refs—outer wrap for exit tween; inner group for motionPath only (avoids transform fights)
   const mobileCircleWrapRef = useRef(null);
   const mobileCircleGroupRef = useRef(null);
   const mobileCircleRef = useRef(null);
@@ -29,7 +29,7 @@ const OurProcess = () => {
 
     const mm = gsap.matchMedia();
 
-    // lg (1024px) and up: wide desktop journey — unchanged behavior
+    // lg (1024px) and up: wide desktop journey—unchanged behavior
     mm.add("(min-width: 1024px)", () => {
       const ctx = gsap.context(() => {
         const pathScroller = sectionRef.current;
@@ -125,7 +125,7 @@ const OurProcess = () => {
       return () => ctx.revert();
     });
 
-    // < lg: phones + tablets — vertical scroll path (not the wide desktop canvas)
+    // < lg: phones + tablets—vertical scroll path (not the wide desktop canvas)
     mm.add("(max-width: 1023px)", () => {
       const onLoadRefresh = () => ScrollTrigger.refresh();
       const ctx = gsap.context(() => {
@@ -565,7 +565,7 @@ const OurProcess = () => {
             strokeLinecap="round"
           />
 
-          {/* Step 1 — Discovery */}
+          {/* Step 1—Discovery */}
           <g className="step" data-step="1" ref={(el) => (mobileStepsRef.current[0] = el)}>
             <text x="300" y="235.704" className="jp2 jp4 heading-lg text-heading fill-current">Discovery</text>
             <text x="300" y="278.31" className="jp2 jp5 jp6 text-desc! para fill-current">We dive deep into your brand,</text>
@@ -574,7 +574,7 @@ const OurProcess = () => {
             <text x="300" y="393.243" className="jp2 jp5 jp6 text-desc! para fill-current">that aligns with your goals.</text>
           </g>
 
-          {/* Step 2 — Strategy */}
+          {/* Step 2—Strategy */}
           <g className="step" data-step="2" ref={(el) => (mobileStepsRef.current[1] = el)}>
             <text x="109" y="650.159" className="jp2 jp4 heading-lg text-heading fill-current">Strategy</text>
             <text x="109" y="692.765" className="jp2 jp5 jp6 text-desc! para fill-current">We align brand strategy with</text>
@@ -583,7 +583,7 @@ const OurProcess = () => {
             <text x="109" y="807.698" className="jp2 jp5 jp6 text-desc! para fill-current">creative clarity.</text>
           </g>
 
-          {/* Step 3 — Creative Development */}
+          {/* Step 3—Creative Development */}
           <g className="step" data-step="3" ref={(el) => (mobileStepsRef.current[2] = el)}>
             <text x="270" y="1068.1" className="jp2 jp4 heading-lg text-heading fill-current">Creative Development</text>
             <text x="270" y="1110.7" className="jp2 jp5 jp6 text-desc! para fill-current">We explore design references,</text>
@@ -592,7 +592,7 @@ const OurProcess = () => {
             <text x="270" y="1225.64" className="jp2 jp5 jp6 text-desc! para fill-current">direction.</text>
           </g>
 
-          {/* Step 4 — Design & Refine */}
+          {/* Step 4—Design & Refine */}
           <g className="step" data-step="4" ref={(el) => (mobileStepsRef.current[3] = el)}>
             <text x="109" y="1459.33" className="jp2 jp4 heading-lg text-heading fill-current">Design &amp; Refine</text>
             <text x="109" y="1501.94" className="jp2 jp5 jp6 text-desc! para fill-current">We design, present concepts,</text>
@@ -601,7 +601,7 @@ const OurProcess = () => {
             <text x="109" y="1616.87" className="jp2 jp5 jp6 text-desc! para fill-current">feedback.</text>
           </g>
 
-          {/* Step 5 — Optimisation & Handoff */}
+          {/* Step 5—Optimisation & Handoff */}
           <g className="step" data-step="5" ref={(el) => (mobileStepsRef.current[4] = el)}>
             <text x="290" y="1800.65" className="jp2 jp4 heading-lg text-heading fill-current">Optimisation &amp; Handoff</text>
             <text x="290" y="1843.25" className="jp2 jp5 jp6 text-desc! para fill-current">We package up final assets,</text>
@@ -610,7 +610,7 @@ const OurProcess = () => {
             <text x="290" y="1958.19" className="jp2 jp5 jp6 text-desc! para fill-current">to scale.</text>
           </g>
 
-          {/* Step 6 — Media Production */}
+          {/* Step 6—Media Production */}
           <g className="step" data-step="6" ref={(el) => (mobileStepsRef.current[5] = el)}>
             <text x="50" y="2141.96" className="jp2 jp4 heading-lg text-heading fill-current">Media Production</text>
             <text x="50" y="2184.57" className="jp2 jp5 jp6 text-desc! para fill-current">Production that captures</text>
@@ -619,7 +619,7 @@ const OurProcess = () => {
             <text x="50" y="2299.5" className="jp2 jp5 jp6 text-desc! para fill-current">and engagement across platforms.</text>
           </g>
 
-          {/* Step 7 — Support */}
+          {/* Step 7—Support */}
           <g className="step" data-step="7" ref={(el) => (mobileStepsRef.current[6] = el)}>
             <text x="274" y="2709.66" className="jp2 jp4 heading-lg text-heading fill-current">Support</text>
             <text x="274" y="2752.27" className="jp2 jp5 jp6 text-desc! para fill-current">Need more? We offer ongoing</text>

@@ -37,7 +37,7 @@ export default function CenterDot() {
       const size = e.detail.size;
 
       if (size <= 8) {
-        // Showreel scrolled back to start — hand control back to idle
+        // Showreel scrolled back to start—hand control back to idle
         modeRef.current = "idle";
         dotRef.current.style.transition =
           "width 0.5s cubic-bezier(0.22,1,0.36,1), height 0.5s cubic-bezier(0.22,1,0.36,1)";
@@ -45,7 +45,7 @@ export default function CenterDot() {
         dotRef.current.style.height = "8px";
       } else {
         modeRef.current = "showreel";
-        // No transition — follows scroll exactly
+        // No transition—follows scroll exactly
         dotRef.current.style.transition = "none";
         dotRef.current.style.width = `${size}px`;
         dotRef.current.style.height = `${size}px`;

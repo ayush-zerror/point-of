@@ -11,11 +11,11 @@ import { SanityLive } from "@/sanity/lib/live";
 export const metadata = {
   metadataBase: new URL("https://www.wearepointof.com"),
   title: {
-    default: "Point Of — Global Brand & Strategic Design Consultancy",
-    template: "%s — Point Of",
+    default: "Point Of—Global Brand & Strategic Design Consultancy",
+    template: "%s—Point Of",
   },
   description:
-    "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+    "An independent consultancy based in Mumbai, working globally—rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
   keywords: [
     "Point Of",
     "Brand strategy",
@@ -48,9 +48,9 @@ export const metadata = {
     type: "website",
     siteName: "Point Of",
     url: "/",
-    title: "Point Of — Where brands are made, shaped, and set in motion",
+    title: "Point Of—Where brands are made, shaped, and set in motion",
     description:
-      "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+      "An independent consultancy based in Mumbai, working globally—rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
     locale: "en_US",
     images: [
       {
@@ -74,9 +74,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Point Of — Where brands are made, shaped, and set in motion",
+    title: "Point Of—Where brands are made, shaped, and set in motion",
     description:
-      "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+      "An independent consultancy based in Mumbai, working globally—rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
     images: [
       {
         url: "/pointof-og.png",

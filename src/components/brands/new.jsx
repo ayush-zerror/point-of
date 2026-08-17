@@ -207,7 +207,7 @@ const StatsSection = () => {
 
         </div>
 
-        {/* Line fill — width driven by ScrollTrigger timeline */}
+        {/* Line fill—width driven by ScrollTrigger timeline */}
         <div className="relative my-12 md:my-8 h-px w-full overflow-hidden bg-foreground/15">
           <div className="line-fill h-full w-0 bg-foreground" />
         </div>

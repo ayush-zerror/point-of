@@ -11,9 +11,9 @@ import React from 'react'
 import OurWorkShowreel from '@/components/home/OurWorkShowreel'
 
 export const metadata = {
-  title: "Point Of — Global Brand & Strategic Design Consultancy",
+  title: "Point Of—Global Brand & Strategic Design Consultancy",
   description:
-    "An independent consultancy based in Mumbai, working globally — rethinking how brands engage with culture and people. Design, strategy, and technology. Building for India and beyond.",
+    "An independent brand consultancy working globally at the intersection of design, strategy, and culture.",
   keywords: [
     "Point Of",
     "Brand strategy",
@@ -33,10 +33,10 @@ const Home = async () => {
   return (
     <>
       <HeroSection />
-      {/* Global handoff circle — fixed, GSAP-controlled */}
+      {/* Global circle—fixed at bottom center, GSAP-controlled */}
       <div
         id="circle2"
-        className="hidden md:block fixed h-5 w-5 opacity-0 bg-heading rounded-full pointer-events-none left-0 top-0 z-20"
+        className="hidden md:block fixed w-[200vw] h-[200vw] opacity-0 bg-secondary rounded-full pointer-events-none top-[80%] left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
       <AboutStudio />
       {/* Mobile: replace Expertise with accordion */}
@@ -60,7 +60,7 @@ const Home = async () => {
         </>}
         buttonTitle={"Let's find yours"}
       />
-      {/* Center dot — always fixed at viewport center across all pages */}
+      {/* Center dot—always fixed at viewport center across all pages */}
       <CenterDot />
     </>
   )

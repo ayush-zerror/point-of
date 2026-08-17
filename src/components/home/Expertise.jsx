@@ -11,24 +11,25 @@ import { expertiseItems } from "@/helper/expertise-items";
 gsap.registerPlugin(ScrollTrigger);
 
 const LAST_IDX = expertiseItems.length - 1;
-// Match the Framer Motion accordion transition duration
-const ACCORDION_DURATION_MS = 400;
-const EXPERTISE_SCROLL_START = 0.12;
+const EXPERTISE_SCROLL_START = 0.02;
 const EXPERTISE_SCROLL_END = 0.82;
 
 export default function Expertise() {
   const [isMobile, setIsMobile] = useState(false);
   const ref = useRef(null);
-  const bulletWrapRefs = useRef([]);   // position anchors (invisible divs)
-  const titleRefs = useRef([]);         // title elements — for accurate Y center
+  const bulletWrapRefs = useRef([]);
+  const itemDotRefs = useRef([]);
+  const titleRefs = useRef([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const activeIndexRef = useRef(-1);
   const prevIndexRef = useRef(-1);
   const router = useRouter();
-  const moveTimerRef = useRef(null);   // debounce timer for accordion settle
   const isBottomHandoffRef = useRef(false);
+  const introDoneRef = useRef(false);
+  const skipDotAnimRef = useRef(false);
+  const [bottomHandoff, setBottomHandoff] = useState(false);
 
-  // The one traveling circle — positioned fixed, moved via GSAP
+  // Used only after the last item—travels to viewport center
   const travelCircleRef = useRef(null);
 
   useEffect(() => {
@@ -36,10 +37,7 @@ export default function Expertise() {
     const onChange = () => setIsMobile(mq.matches);
     onChange();
     mq.addEventListener?.("change", onChange);
-    return () => {
-      mq.removeEventListener?.("change", onChange);
-      if (moveTimerRef.current) clearTimeout(moveTimerRef.current);
-    };
+    return () => mq.removeEventListener?.("change", onChange);
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -47,15 +45,22 @@ export default function Expertise() {
     offset: ["start start", "end end"],
   });
 
-  // ── Accordion index from scroll ──
   useEffect(() => {
     if (isMobile) return;
     return scrollYProgress.on("change", (v) => {
       if (isBottomHandoffRef.current) return;
 
+      // Don't open Branding until the AboutStudio dot has arrived and swapped.
+      if (!introDoneRef.current) {
+        if (activeIndexRef.current !== -1) setActiveIndex(-1);
+        return;
+      }
+
       if (v < EXPERTISE_SCROLL_START) {
-        setActiveIndex(-1);
-        prevIndexRef.current = -1;
+        if (activeIndexRef.current !== 0) {
+          setActiveIndex(0);
+          prevIndexRef.current = 0;
+        }
         return;
       }
       const adjusted = Math.min(
@@ -78,45 +83,14 @@ export default function Expertise() {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
 
-  // ── Move the travel circle ONLY after accordion has fully opened ──
-  // Wait ACCORDION_DURATION_MS so layout is settled, then do one clean move.
-  // No intermediate position = no bounce.
   useEffect(() => {
-    if (isMobile) return;
-    const circle = travelCircleRef.current;
-    if (!circle) return;
-    if (isBottomHandoffRef.current) return;
-    if (activeIndex < 0) return; // handled by circle2 handoff
+    if (!skipDotAnimRef.current) return;
+    const id = requestAnimationFrame(() => {
+      skipDotAnimRef.current = false;
+    });
+    return () => cancelAnimationFrame(id);
+  }, [activeIndex]);
 
-    // Cancel any previous pending move + kill in-progress tweens so
-    // the circle holds its current position while waiting
-    if (moveTimerRef.current) clearTimeout(moveTimerRef.current);
-    gsap.killTweensOf(circle, "left,top");
-
-    const wrap = bulletWrapRefs.current[activeIndex];
-    const title = titleRefs.current[activeIndex];
-    if (!wrap || !title) return;
-
-    // Single deferred move — fires only after accordion animation completes
-    moveTimerRef.current = setTimeout(() => {
-      const wrapRect = wrap.getBoundingClientRect();
-      const titleRect = title.getBoundingClientRect();
-
-      const targetX = wrapRect.left + wrapRect.width / 2;
-      const targetY = titleRect.top + titleRect.height / 2;
-
-      gsap.to(circle, {
-        left: targetX,
-        top: targetY,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power3.out",
-        overwrite: true,
-      });
-    }, ACCORDION_DURATION_MS);
-  }, [activeIndex, isMobile]);
-
-  // ── GSAP animations — circle2 handoff + last bullet travel to center ──
   useLayoutEffect(() => {
     if (isMobile) return;
     if (!ref.current) return;
@@ -124,171 +98,157 @@ export default function Expertise() {
     const circle2 = document.querySelector("#circle2");
     const travelCircle = travelCircleRef.current;
 
-    // Travel circle starts hidden
-    if (travelCircle) gsap.set(travelCircle, { opacity: 0 });
+    if (travelCircle) gsap.set(travelCircle, { opacity: 0, scale: 1 });
 
     const ctx = gsap.context(() => {
-
-      // ── 1. circle2 morphs into the travel circle at bullet0 ──
-      // forwardOrigin is captured LAZILY on first onUpdate (not at mount)
-      // so it always reflects circle2's true position at scroll-entry time,
-      // regardless of what AboutStudio's GSAP timeline did to it.
       let forwardOrigin = null;
 
+      const aboutStudioDotOrigin = () => ({
+        x: window.innerWidth * 0.5,
+        y: window.innerHeight * 0.8,
+      });
+
+      const getItemTarget = (index) => {
+        const wrap = bulletWrapRefs.current[index];
+        const title = titleRefs.current[index];
+        if (!wrap) return null;
+        const wrapRect = wrap.getBoundingClientRect();
+        const titleRect = title?.getBoundingClientRect();
+        return {
+          x: wrapRect.left + wrapRect.width / 2,
+          y: titleRect
+            ? titleRect.top + titleRect.height / 2
+            : wrapRect.top + wrapRect.height / 2,
+        };
+      };
+
+      const placeCircle2 = (x, y, opacity = 1) => {
+        if (!circle2) return;
+        gsap.set(circle2, {
+          position: "fixed",
+          left: x,
+          top: y,
+          xPercent: -50,
+          yPercent: -50,
+          width: 20,
+          height: 20,
+          scale: 1,
+          zIndex: 30,
+          autoRound: false,
+          opacity,
+        });
+      };
+
+      const restoreCircle2ToAboutStudio = () => {
+        const origin = aboutStudioDotOrigin();
+        placeCircle2(origin.x, origin.y, 1);
+        if (circle2) gsap.set(circle2, { zIndex: 0 });
+      };
+
+      const hideItemDot = (index) => {
+        const dot = itemDotRefs.current[index];
+        if (dot) gsap.set(dot, { scale: 0, transformOrigin: "50% 50%" });
+      };
+
+      const showItemDot = (index) => {
+        const dot = itemDotRefs.current[index];
+        if (dot) gsap.set(dot, { scale: 1, transformOrigin: "50% 50%" });
+      };
+
+      // ── 1. Incoming dot travels to Branding (items stay closed). On arrival,
+      //     swap instantly onto Branding's own dot, then open the item.
       ScrollTrigger.create({
         trigger: ref.current,
-        start: "top 95%",
+        start: "top 85%",
         end: "top top",
         scrub: 1,
         invalidateOnRefresh: true,
 
         onRefresh: () => {
-          // On resize/invalidate, reset so next onEnter re-captures fresh coords.
-          forwardOrigin = null;
+          forwardOrigin = aboutStudioDotOrigin();
         },
 
         onEnter: () => {
-          // Capture circle2's real position the moment the user enters this zone.
-          // At this point AboutStudio has finished animating it to the dot center.
+          introDoneRef.current = false;
+          setActiveIndex(-1);
+          hideItemDot(0);
+          forwardOrigin = aboutStudioDotOrigin();
           if (circle2) {
-            const r = circle2.getBoundingClientRect();
-            forwardOrigin = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
-          }
-        },
-
-        onEnterBack: () => {
-          // Re-capture the TRUE resting position of circle2 (= lastDot center)
-          // NOT from circle2 itself which may be mid-animation.
-          const lastDot = document.querySelector("[data-last-dot]");
-          if (lastDot) {
-            const r = lastDot.getBoundingClientRect();
-            forwardOrigin = { x: window.innerWidth / 2, y: r.top + r.height / 2 };
-          } else if (circle2) {
             const r = circle2.getBoundingClientRect();
             forwardOrigin = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
           }
         },
 
         onUpdate: (self) => {
-          if (!circle2 || !travelCircle) return;
-          // If we somehow hit onUpdate before onEnter (scrub edge case), capture now.
-          if (!forwardOrigin) {
-            const r = circle2.getBoundingClientRect();
-            forwardOrigin = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
-          }
-          const p = self.progress;
+          if (!circle2) return;
+          if (!forwardOrigin) forwardOrigin = aboutStudioDotOrigin();
 
-          const wrap0 = bulletWrapRefs.current[0];
-          if (!wrap0) return;
-          const r = wrap0.getBoundingClientRect();
-          const toX = r.left + r.width / 2;
-          const toY = r.top + r.height / 2;
+          const target = getItemTarget(0);
+          if (!target) return;
 
-          const moveP = Math.min(p / 0.8, 1);
-
-          // circle2 travels from its captured origin toward bullet0
-          gsap.set(circle2, {
-            position: "fixed",
-            left: forwardOrigin.x + (toX - forwardOrigin.x) * moveP,
-            top: forwardOrigin.y + (toY - forwardOrigin.y) * moveP,
-            xPercent: -50,
-            yPercent: -50,
-            autoRound: false,
-            opacity: 1,
-          });
-
-          // As circle2 arrives, fade it out and fade travel circle in
-          const fadeP = Math.max(0, (p - 0.8) / 0.2);
-          gsap.set(circle2, { opacity: 1 - fadeP });
-
-          // Position travel circle at bullet0 and fade it in
-          gsap.set(travelCircle, {
-            left: toX,
-            top: toY,
-            opacity: fadeP,
-          });
+          // Travel at full opacity—no fade, no item dot yet.
+          placeCircle2(
+            forwardOrigin.x + (target.x - forwardOrigin.x) * self.progress,
+            forwardOrigin.y + (target.y - forwardOrigin.y) * self.progress,
+            1
+          );
         },
 
         onLeave: () => {
-          // circle2 disappears, travel circle fully visible at bullet0
-          if (circle2) gsap.set(circle2, { opacity: 0, left: -9999, top: -9999 });
-          const wrap0 = bulletWrapRefs.current[0];
-          if (wrap0 && travelCircle) {
-            const r = wrap0.getBoundingClientRect();
-            gsap.set(travelCircle, {
-              left: r.left + r.width / 2,
-              top: r.top + r.height / 2,
-              opacity: 1,
-            });
-          }
+          const target = getItemTarget(0);
+          if (target) placeCircle2(target.x, target.y, 1);
+
+          // Same paint: hide traveler and snap Branding's dot on — one continuous dot.
+          skipDotAnimRef.current = true;
+          showItemDot(0);
+          if (circle2) gsap.set(circle2, { opacity: 0, left: -9999, top: -9999, zIndex: 0 });
+
+          introDoneRef.current = true;
+          prevIndexRef.current = 0;
           setActiveIndex(0);
         },
 
         onEnterBack: () => {
-          // Scrolling back up — hide travel circle.
-          // Restore circle2 to screen center X + lastDot's Y so it overlays
-          // exactly where AboutStudio left it.
-          if (travelCircle) gsap.set(travelCircle, { opacity: 0 });
-
-          if (circle2) {
-            // Try to read lastDot position from AboutStudio via a data attribute
-            // or fall back to forwardOrigin which was captured on the way down.
-            const lastDot = document.querySelector("[data-last-dot]");
-            if (lastDot) {
-              const r = lastDot.getBoundingClientRect();
-              gsap.set(circle2, {
-                position: "fixed",
-                left: window.innerWidth / 2,
-                top: r.top + r.height / 2,
-                xPercent: -50,
-                yPercent: -50,
-                opacity: 1,
-                autoRound: false,
-              });
-            } else if (forwardOrigin) {
-              gsap.set(circle2, {
-                position: "fixed",
-                left: forwardOrigin.x,
-                top: forwardOrigin.y,
-                xPercent: -50,
-                yPercent: -50,
-                opacity: 1,
-                autoRound: false,
-              });
-            }
-          }
-
+          introDoneRef.current = false;
+          skipDotAnimRef.current = true;
+          const target = getItemTarget(0);
+          hideItemDot(0);
+          if (target) placeCircle2(target.x, target.y, 1);
           setActiveIndex(-1);
           prevIndexRef.current = -1;
         },
+
+        onLeaveBack: () => {
+          restoreCircle2ToAboutStudio();
+        },
       });
 
-      // ── 2. Travel circle moves to viewport center on last item ──
+      // ── 2. After last item, travel circle moves to viewport center ──
       const lastWrap = bulletWrapRefs.current[LAST_IDX];
       if (!lastWrap || !travelCircle) return;
 
       let fromCenter = { x: 0, y: 0, ready: false };
 
-      const setTravelCircleAtLastWrap = () => {
-        const r = lastWrap.getBoundingClientRect();
-        gsap.set(travelCircle, {
-          left: r.left + r.width / 2,
-          top: r.top + r.height / 2,
-          scale: 1,
-          opacity: 1,
-        });
-        setActiveIndex(LAST_IDX);
-        prevIndexRef.current = LAST_IDX;
-      };
-
       const captureFrom = () => {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            const r = lastWrap.getBoundingClientRect();
-            fromCenter.x = r.left + r.width / 2;
-            fromCenter.y = r.top + r.height / 2;
+            const target = getItemTarget(LAST_IDX);
+            if (!target) return;
+            fromCenter.x = target.x;
+            fromCenter.y = target.y;
             fromCenter.ready = true;
           });
+        });
+      };
+
+      const placeTravelAtLastItem = () => {
+        const target = getItemTarget(LAST_IDX);
+        if (!target) return;
+        gsap.set(travelCircle, {
+          left: target.x,
+          top: target.y,
+          scale: 1,
+          opacity: 1,
         });
       };
 
@@ -302,18 +262,21 @@ export default function Expertise() {
         onEnter: () => {
           if (activeIndexRef.current !== LAST_IDX) return;
           isBottomHandoffRef.current = true;
+          setBottomHandoff(true);
           captureFrom();
+          placeTravelAtLastItem();
         },
 
         onEnterBack: () => {
           isBottomHandoffRef.current = true;
+          setBottomHandoff(true);
           captureFrom();
           setActiveIndex(LAST_IDX);
           prevIndexRef.current = LAST_IDX;
         },
 
         onUpdate: (self) => {
-          if (activeIndexRef.current !== LAST_IDX) return;
+          if (activeIndexRef.current !== LAST_IDX && !isBottomHandoffRef.current) return;
           if (!fromCenter.ready) return;
 
           const toX = window.innerWidth * 0.5;
@@ -328,13 +291,17 @@ export default function Expertise() {
 
         onLeaveBack: () => {
           isBottomHandoffRef.current = false;
+          setBottomHandoff(false);
           fromCenter.ready = false;
-          setTravelCircleAtLastWrap();
+          if (travelCircle) gsap.set(travelCircle, { opacity: 0 });
+          setActiveIndex(LAST_IDX);
+          prevIndexRef.current = LAST_IDX;
         },
 
         onLeave: () => {
-          if (activeIndexRef.current !== LAST_IDX) return;
+          if (activeIndexRef.current !== LAST_IDX && !isBottomHandoffRef.current) return;
           isBottomHandoffRef.current = true;
+          setBottomHandoff(true);
           gsap.set(travelCircle, {
             left: window.innerWidth * 0.5,
             top: window.innerHeight * 0.5,
@@ -352,6 +319,7 @@ export default function Expertise() {
         scrub: 1,
         onEnterBack: () => {
           isBottomHandoffRef.current = true;
+          setBottomHandoff(true);
           gsap.set(travelCircle, {
             left: window.innerWidth * 0.5,
             top: window.innerHeight * 0.5,
@@ -365,6 +333,7 @@ export default function Expertise() {
         onUpdate: (self) => {
           if (self.direction < 0) {
             isBottomHandoffRef.current = true;
+            setBottomHandoff(true);
             gsap.set(travelCircle, {
               left: window.innerWidth * 0.5,
               top: window.innerHeight * 0.5,
@@ -376,6 +345,7 @@ export default function Expertise() {
           }
 
           isBottomHandoffRef.current = true;
+          setBottomHandoff(true);
 
           gsap.set(travelCircle, {
             scale: 1 - self.progress,
@@ -387,11 +357,11 @@ export default function Expertise() {
         },
         onLeave: () => {
           isBottomHandoffRef.current = true;
+          setBottomHandoff(true);
           gsap.set(travelCircle, { scale: 0, opacity: 1 });
           if (centerDot) gsap.set(centerDot, { opacity: 1 });
         },
       });
-
     }, ref);
 
     return () => ctx.revert();
@@ -401,7 +371,6 @@ export default function Expertise() {
 
   return (
     <section id="page3" className="relative h-[400vh] bg-background cursor-default" ref={ref}>
-      {/* Single traveling circle — absolutely positioned fixed in viewport */}
       <div
         ref={travelCircleRef}
         style={{
@@ -409,17 +378,17 @@ export default function Expertise() {
           width: 20,
           height: 20,
           borderRadius: "50%",
-          backgroundColor: "var(--color-heading, #fff)",
+          backgroundColor: "var(--color-secondary, #E8E8E1)",
           transform: "translate(-50%, -50%)",
           pointerEvents: "none",
           opacity: 0,
+          zIndex: 0,
         }}
       />
 
       <div className="sticky top-0 h-screen flex items-start">
         <div className="w-full px-4 sm:px-10 md:px-16 lg:px-20 mx-auto pt-[22vh] pb-12 flex">
 
-          {/* LEFT */}
           <div className="w-1/2 flex flex-col justify-between">
             <h2 className="heading-xl text-heading">Expertise</h2>
             <div>
@@ -429,18 +398,29 @@ export default function Expertise() {
             </div>
           </div>
 
-          {/* RIGHT */}
           <div className="w-1/2 relative pl-6 flex flex-col justify-start gap-6">
             {expertiseItems.map((item, i) => {
               const isActive = i === activeIndex;
+              const showDot = isActive && !(bottomHandoff && i === LAST_IDX);
               return (
                 <div key={i} className="relative border-b border-white/20 pb-6">
                   <div className="relative">
-                    {/* Invisible anchor — X position for the traveling circle */}
                     <div
                       ref={(el) => (bulletWrapRefs.current[i] = el)}
                       className="absolute -left-8.5 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none"
-                    />
+                    >
+                      <motion.div
+                        ref={(el) => (itemDotRefs.current[i] = el)}
+                        initial={false}
+                        animate={{ scale: showDot ? 1 : 0 }}
+                        transition={
+                          skipDotAnimRef.current
+                            ? { duration: 0 }
+                            : { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
+                        }
+                        className="h-full w-full origin-center rounded-full bg-secondary"
+                      />
+                    </div>
 
                     <Link
                       ref={(el) => (titleRefs.current[i] = el)}

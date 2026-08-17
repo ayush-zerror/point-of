@@ -9,13 +9,13 @@ import SplitType from "split-type";
 gsap.registerPlugin(ScrollTrigger);
 
 const BOTTOM_COPY =
-  "From global technology companies to independent artists and cultural institutions — we've helped launch brands, campaigns, digital experiences, and ideas that needed to exist in the world.";
+  "From global technology companies to independent artists and cultural institutions—we've helped launch brands, campaigns, digital experiences, and ideas that needed to exist in the world.";
 
 const stats = [
   {
     number: "130+",
     label: "Brands",
-    desc: "Brands across industries — from first-time founders to established names.",
+    desc: "Brands across industries—from first-time founders to established names.",
   },
   {
     number: "350+",
@@ -25,7 +25,7 @@ const stats = [
   {
     number: "11+",
     label: "Countries",
-    desc: "Countries across 5 continents — Asia, Europe, the Americas, Africa, the Middle East.",
+    desc: "Countries across 5 continents—Asia, Europe, the Americas, Africa, the Middle East.",
   },
   {
     number: "5+",

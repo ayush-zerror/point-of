@@ -47,7 +47,7 @@ const PlaceToWork = () => {
           </h2>
 
           <p className="heading-lg text-desc max-w-[900px]">
-            Point Of was built by two people who see the same problem differently — which is exactly why it works.
+            Point Of was built by two people who see the same problem differently—which is exactly why it works.
           </p>
         </div>
       </div>

@@ -19,7 +19,24 @@ function getAuth() {
   });
 }
 
-const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value ?? "").trim());
+const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(String(value ?? "").trim());
+
+const isValidWebsite = (value) => {
+  const raw = String(value ?? "").trim();
+  if (!raw) return true;
+  const url = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    const { hostname } = new URL(url);
+    return /^(localhost|([a-z0-9-]+\.)+[a-z]{2,})$/i.test(hostname);
+  } catch {
+    return false;
+  }
+};
+
+const isValidPhone = (value) => {
+  const digits = String(value ?? "").replace(/\D/g, "");
+  return digits.length >= 10 && digits.length <= 15;
+};
 
 export async function POST(request) {
   try {
@@ -42,7 +59,6 @@ export async function POST(request) {
       !payload.fullName ||
       !payload.email ||
       !payload.phone ||
-      !payload.industry ||
       !payload.help ||
       !payload.hear ||
       !payload.brief
@@ -51,7 +67,15 @@ export async function POST(request) {
     }
 
     if (!isValidEmail(payload.email)) {
-      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+      return NextResponse.json({ error: "Enter a valid email (needs an @ and a domain)" }, { status: 400 });
+    }
+
+    if (!isValidWebsite(payload.website)) {
+      return NextResponse.json({ error: "Enter a valid website (e.g. example.com)" }, { status: 400 });
+    }
+
+    if (!isValidPhone(payload.phone)) {
+      return NextResponse.json({ error: "Enter a valid phone number" }, { status: 400 });
     }
 
     if (!spreadsheetId) {

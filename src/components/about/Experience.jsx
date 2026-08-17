@@ -165,17 +165,17 @@ const Experience = ({ data }) => {
               </p>
               <p className="para text-desc max-w-[560px] mt-4">
                 Born in Mumbai, grown across three continents. Six years of building a consultancy
-                that doesn't just create brands — it grows with them. From the first naming session
+                that doesn't just create brands—it grows with them. From the first naming session
                 to the hundredth campaign, we stay in the room.
               </p>
             </div>
 
             {/* Today */}
             <h2 className="heading-lg text-subheading max-w-[480px]">
-              130+ brands. 3 offices. One point of view.
+              130+ brands. 3 offices. One Point Of view.
             </h2>
 
-            {/* Stats — stacked by default, row on lg (still mobile-style section) */}
+            {/* Stats—stacked by default, row on lg (still mobile-style section) */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:gap-10">
               {stats.map((stat) => (
                 <div
@@ -246,7 +246,7 @@ const Experience = ({ data }) => {
                 </p>
                 <p className="para text-desc max-w-[560px] mt-4">
                   Born in Mumbai, grown across three continents. Six years of building a consultancy
-                  that doesn't just create brands — it grows with them. From the first naming session
+                  that doesn't just create brands—it grows with them. From the first naming session
                   to the hundredth campaign, we stay in the room.
                 </p>
               </div>
@@ -254,7 +254,7 @@ const Experience = ({ data }) => {
               {/* Today label */}
               <div ref={todayContentRef} style={{ opacity: 0 }}>
                 <h2 className="heading-lg text-subheading mt-2 max-w-[480px]">
-                  130+ brands. 3 offices. One point of view.
+                  130+ brands. 3 offices. One Point Of view.
                 </h2>
               </div>
 

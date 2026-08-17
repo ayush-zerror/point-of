@@ -53,31 +53,31 @@ const StudioConsultancy = () => {
 
         {/* Intro heading */}
         <h2 className="heading-xl text-heading mb-16 md:mb-20 max-w-4xl">
-          We work with brands at two distinct moments — and across everything in between.
+          We work with brands at two distinct moments—and across everything in between.
         </h2>
 
         {/* Two columns */}
         <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24">
 
-          {/* Studio — slides in from left */}
+          {/* Studio—slides in from left */}
           <div ref={leftRef} className="slide-left flex flex-col gap-4">
             <h3 className="heading-lg text-heading">
               The Studio
             </h3>
             <span className="text-sm text-desc tracking-wide">0→1 (Foundation)</span>
             <p className="para text-desc">
-              This is where brands are born. We take an idea — sometimes just a conviction and a name — and build it into something real. Strategy, positioning, identity, digital, print. The full creative foundation, built to hold weight from day one.
+              This is where brands are born. We take an idea—sometimes just a conviction and a name—and build it into something real. Strategy, positioning, identity, digital, print. The full creative foundation, built to hold weight from day one.
             </p>
           </div>
 
-          {/* Consultancy — slides in from right */}
+          {/* Consultancy—slides in from right */}
           <div ref={rightRef} className="slide-right flex flex-col gap-4">
             <h3 className="heading-lg text-heading">
               The Consultancy
             </h3>
             <span className="text-sm text-desc tracking-wide">1→100 (Growth)</span>
             <p className="para text-desc">
-              This is where brands grow. Once the foundation is set, we stay in — as creative partner, strategic counsel, and fractional CMO. Brand strategy, media production, social, campaigns, events, performance. Whatever the brand needs to scale, we're already in the room.
+              This is where brands grow. Once the foundation is set, we stay in—as creative partner, strategic counsel, and fractional CMO. Brand strategy, media production, social, campaigns, events, performance. Whatever the brand needs to scale, we're already in the room.
             </p>
           </div>
 

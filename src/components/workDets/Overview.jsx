@@ -61,7 +61,7 @@ const Overview = ({ caseStudy }) => {
             <div key={index} className={`overflow-hidden ${grid}`}>
               <CaseStudyMedia
                 src={src}
-                alt={`${caseStudyTitle} — overview image ${index + 1}`}
+                alt={`${caseStudyTitle}—overview image ${index + 1}`}
                 wrapperClassName={wrapperClassName}
                 className="w-full h-full object-cover"
               />

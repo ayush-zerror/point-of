@@ -8,10 +8,10 @@ export const vacancies = [
       description:
         "We’re looking for a Visual Designer with a keen eye for aesthetics and a passion for turning strategy into compelling design. You’ll craft visual systems, layouts, and brand experiences that connect meaning and emotion across print, digital, and motion.",
       about:
-        "You think in shapes, colors, and stories. You’re detail-obsessed but conceptually driven — someone who can translate ideas into visuals that feel timeless yet modern. You care about design craft as much as clarity and communication.",
+        "You think in shapes, colors, and stories. You’re detail-obsessed but conceptually driven—someone who can translate ideas into visuals that feel timeless yet modern. You care about design craft as much as clarity and communication.",
       work: [
         "Create and develop brand identities, layouts, and digital assets.",
-        "Design for both print and digital platforms — from social to web to packaging.",
+        "Design for both print and digital platforms—from social to web to packaging.",
         "Work closely with strategists and creative directors to translate brand concepts visually.",
         "Build and refine design systems and guidelines for consistent application.",
         "Contribute to creative ideation, presentations, and storytelling.",
@@ -26,7 +26,7 @@ export const vacancies = [
       skills:
         "Adobe Creative Cloud (Illustrator, Photoshop, InDesign), Figma, After Effects (plus), Google Workspace, AI research tools.",
       culture:
-        "At Point Of, design is where strategy meets emotion. If you love crafting visuals that tell stories, build identities, and shape culture — this is your place to create, grow, and belong.",
+        "At Point Of, design is where strategy meets emotion. If you love crafting visuals that tell stories, build identities, and shape culture—this is your place to create, grow, and belong.",
     },
   },
 
@@ -55,7 +55,7 @@ export const vacancies = [
         "Degree in marketing, communications, or design preferred.",
       ],
       skills: "Google Workspace, Figma, Miro, Notion, Slides/Keynote, AI research tools.",
-      culture: "At Point Of, we build brands that shape culture. If you think strategically, write clearly, and care deeply about creativity, we’d love to hear your point of view.",
+      culture: "At Point Of, we build brands that shape culture. If you think strategically, write clearly, and care deeply about creativity, we’d love to hear your Point Of view.",
     },
   },
 

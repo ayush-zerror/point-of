@@ -293,17 +293,17 @@ export default function OurWorkShowreel({ posts = [] }) {
       style={{ height: "650vh" }}
     >
       {/* ═══════════════════════════════════════════════════════════════
-          OUR WORK — sticky scene
+          OUR WORK—sticky scene
       ═══════════════════════════════════════════════════════════════ */}
       <div
         ref={ourWorkRef}
-        className="sticky top-0 h-screen flex items-center overflow-hidden"
+        className="sticky top-0 z-10 h-screen flex items-center overflow-hidden"
       >
         {/* Center growing dot (positioned absolutely at viewport center) */}
         <div
           ref={centerDotRef}
           id="centerDot"
-          className="pointer-events-none absolute z-40 rounded-full bg-white"
+          className="pointer-events-none absolute z-0 rounded-full bg-secondary"
           style={{
             top: "50%",
             left: "50%",
@@ -376,7 +376,7 @@ export default function OurWorkShowreel({ posts = [] }) {
         </div>
 
         {/* ═════════════════════════════════════════════════════════════
-            SHOWREEL — clip-path panel layered on top of OurWork scene,
+            SHOWREEL—clip-path panel layered on top of OurWork scene,
             revealed via clip-path wipe from bottom to top
         ═════════════════════════════════════════════════════════════ */}
         <div

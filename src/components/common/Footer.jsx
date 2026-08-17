@@ -216,14 +216,8 @@ export default function Footer() {
               Legal
             </Link>
           </div>
-          <p className="text-neutral-400">
-            © Point Of {new Date().getFullYear()}
-          </p>
-          <p className="text-neutral-400">
-            Made with intention.
-          </p>
-          <p className="text-neutral-400">
-            Designed and Developed by Team Point Of.
+          <p className="text-neutral-400 scale-90">
+          © {new Date().getFullYear()} built by Point Of
           </p>
         </div>
 

@@ -18,7 +18,7 @@ export const metadata = {
 };
 
 /*
-  lines config — drives the staggered reveal in HeroSection.
+  lines config—drives the staggered reveal in HeroSection.
   Each entry becomes one <span class="block"> animated 0.3s apart.
   extraDelay on "no return." adds a beat of emphasis before it lands.
 */
@@ -27,7 +27,7 @@ const heroLines = [
   { prefix: "Point of ", word: "difference."  },
   { prefix: "Point of ", word: "no return.", italic: true, extraDelay: 0.15 },
   {
-    body: "We are Point Of — a creative consultancy built to shape brands from their first idea to everything that comes after.",
+    body: "We are Point Of—a creative consultancy built to shape brands from their first idea to everything that comes after.",
   },
 ];
 
@@ -47,7 +47,7 @@ const Studio = () => {
       <OurValues />
       <GridSection
         title="How we transform brands"
-        intro="Six ways we think about work — and what we do to brands that are ready for change."
+        intro="Six ways we think about work—and what we do to brands that are ready for change."
         data={transformData}
       />
       <FoundersSection data={foundersData} />

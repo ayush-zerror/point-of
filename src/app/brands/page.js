@@ -9,7 +9,7 @@ import React from 'react'
 export const metadata = {
   title: "Brands",
   description:
-    "Selected brand partners and work by Point Of — strategy, identity, and digital experiences.",
+    "Selected brand partners and work by Point Of—strategy, identity, and digital experiences.",
   keywords: ["Point Of", "Brands", "Brand partners", "Brand identity", "Design studio", "Consultancy"],
   alternates: { canonical: "/brands" },
 };

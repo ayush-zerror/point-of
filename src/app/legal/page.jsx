@@ -17,7 +17,7 @@ const Legal = () => {
           {/* Heading */}
           <div className="mb-12">
             <h2 className="heading-xl text-heading">
-              LEGAL
+              Legal
             </h2>
           </div>
 

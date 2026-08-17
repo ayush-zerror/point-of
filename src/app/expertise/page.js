@@ -9,7 +9,7 @@ import React from 'react'
 
 export const metadata = {
   title: "Expertise",
-  description: "Brand strategy, design, and digital expertise — how Point Of works.",
+  description: "Brand strategy, design, and digital expertise—how Point Of works.",
   keywords: ["Point Of", "Expertise", "Brand strategy", "Visual identity", "Web design", "Web development"],
   alternates: { canonical: "/expertise" },
 };
@@ -22,7 +22,7 @@ const Expertise = () => {
       <div className="w-full px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 pt-16 sm:pt-20 md:pt-28 lg:pt-32 z-20 pointer-events-none">
         <h2 className="heading-xl text-heading">How we work</h2>
         <p className="para text-desc mt-4 max-w-2xl">
-          Every engagement follows the same disciplined process — from the
+          Every engagement follows the same disciplined process—from the
           first conversation to the final handoff. Clear stages. Collaborative
           at every step.
         </p>

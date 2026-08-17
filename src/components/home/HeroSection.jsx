@@ -302,7 +302,7 @@ useEffect(() => {
       >
         {/* First line */}
         <h1 className="font-thin tracking-[0.5px] leading-[1.2] font-heading mb-2 text-xl sm:text-4xl md:text-3xl lg:text-[2rem] xl:text-[2.2rem]">
-          What is the point of
+          What is the Point Of
         </h1>
 
         {/* Typing line */}

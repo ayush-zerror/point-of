@@ -24,7 +24,7 @@ export default function NotFound() {
             transition={{ delay: 0.15, duration: 0.8 }}
             className="text-xs uppercase tracking-[0.22em] text-foreground/60 sm:text-sm"
           >
-            404 — page not found
+            404—page not found
           </motion.span>
 
           <motion.h2

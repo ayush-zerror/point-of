@@ -94,7 +94,9 @@ export default function Navbar() {
     logoDelayRef.current = null;
 
     if (menuOpen) {
-      setLogoLight(false);
+      // Home uses mix-blend-difference on the bar, so white logos invert
+      // automatically against the light menu. Other pages still flip to black.
+      if (pathname !== "/") setLogoLight(false);
       tl.current.timeScale(1).play();
       document.body.style.overflow = "hidden";
     } else {
@@ -159,35 +161,35 @@ export default function Navbar() {
         },
       });
 
-      // // Phase 1 — fade OINT + F out
+      // // Phase 1—fade OINT + F out
       // scrollTl.to(
       //   [refOINT.current, refF.current],
       //   { opacity: 0, ease: "power2.out", duration: 0.5 },
       //   0
       // );
 
-      // Phase 2 — collapse OINT width
+      // Phase 2—collapse OINT width
       scrollTl.to(
         refOINT.current,
         { width: 0, opacity: 0, ease: "power2.inOut", duration: 0.5 },
         0.5
       );
 
-      // Phase 2 — collapse F width
+      // Phase 2—collapse F width
       scrollTl.to(
         refF.current,
         { width: 0, opacity: 0, ease: "power2.inOut", duration: 0.5 },
         0.5
       );
 
-      // Phase 2 — P: move right + rise up
+      // Phase 2—P: move right + rise up
       scrollTl.to(
         refP.current,
         { x: pShift, y: "-80%", ease: "power2.inOut", duration: 0.5 },
         0.5
       );
 
-      // Phase 2 — dot under P fades in
+      // Phase 2—dot under P fades in
       if (span) {
         scrollTl.to(
           span,
@@ -196,7 +198,7 @@ export default function Navbar() {
         );
       }
 
-      // Phase 2 — O: nudge left to close the gap
+      // Phase 2—O: nudge left to close the gap
       scrollTl.to(
         refO.current,
         { x: oShift, ease: "power2.inOut", duration: 0.5 },
@@ -235,7 +237,9 @@ export default function Navbar() {
         id="site-nav"
         className={`fixed top-0 left-0 w-full z-50 text-foreground transition-opacity duration-200 ease-out ${
           pathname === "/work" ? "" : "nav-gradient"
-        } ${landingActive ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+        } ${pathname === "/" ? "mix-blend-difference" : ""} ${
+          landingActive ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
       >
         <div className="relative z-30 flex items-center justify-between h-16 sm:h-20 px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20">
           {/* Left spacer so hamburger doesn't shift center */}
@@ -286,7 +290,7 @@ export default function Navbar() {
                 />
               </div>
 
-              {/* OINT — fades then collapses */}
+              {/* OINT—fades then collapses */}
               <div
                 ref={refOINT}
                 className="shrink-0 overflow-hidden"
@@ -314,7 +318,7 @@ export default function Navbar() {
                 />
               </div>
 
-              {/* F — fades then collapses */}
+              {/* F—fades then collapses */}
               <div ref={refF} className="shrink-0 overflow-hidden">
                 <Image
                   src="/logo/f.png"
@@ -344,13 +348,13 @@ export default function Navbar() {
           />
         </div>
 
-        <FullscreenMenu
-          ref={navRef}
-          pathname={pathname}
-          setMenuOpen={setMenuOpen}
-          socialLinks={socialLinks}
-        />
       </nav>
+      <FullscreenMenu
+        ref={navRef}
+        pathname={pathname}
+        setMenuOpen={setMenuOpen}
+        socialLinks={socialLinks}
+      />
     </>
   );
 }

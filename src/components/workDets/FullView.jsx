@@ -48,7 +48,7 @@ const FullView = ({ caseStudy }) => {
         <div ref={heroMediaRef} className="w-full h-full will-change-transform">
           <CaseStudyMedia
             src={heroImage}
-            alt={`${caseStudyTitle} — hero image`}
+            alt={`${caseStudyTitle}—hero image`}
             className="w-full h-full object-cover"
             priority
           />

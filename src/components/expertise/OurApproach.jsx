@@ -212,7 +212,7 @@ const OurApproach = () => {
             >
                 <h2 className="heading-xl mb-4 text-heading">Our Approach</h2>
                 <p className="approach-intro para text-desc max-w-2xl mb-[6vw]">
-                  We work across three dimensions simultaneously — because strategy
+                  We work across three dimensions simultaneously—because strategy
                   without design is a document, and design without technology
                   doesn&apos;t scale.
                 </p>
@@ -223,7 +223,7 @@ const OurApproach = () => {
                         className="relative mb-[4vw] h-[2px] w-[72%]"
                         style={{ backgroundColor: "transparent" }}
                     >
-                        {/* Circle 1 — left: 0, vertically centered with negative margin */}
+                        {/* Circle 1—left: 0, vertically centered with negative margin */}
                         <div
                             className="aprCir apr-circle1 absolute rounded-full origin-center"
                             style={{
@@ -245,7 +245,7 @@ const OurApproach = () => {
                             />
                         </div>
 
-                        {/* Circle 2 — centered, marginLeft instead of -translateX-1/2 */}
+                        {/* Circle 2—centered, marginLeft instead of -translateX-1/2 */}
                         <div
                             className="aprCir apr-circle2 absolute rounded-full origin-center"
                             style={{
@@ -260,7 +260,7 @@ const OurApproach = () => {
                             }}
                         />
 
-                        {/* Circle 3 — left-based positioning keeps the GSAP bloom aligned */}
+                        {/* Circle 3—left-based positioning keeps the GSAP bloom aligned */}
                         <div
                             className="aprCir apr-circle3 absolute rounded-full origin-center"
                             style={{
@@ -332,12 +332,12 @@ const OurApproach = () => {
             <div className="approach-mobile w-full px-6 md:px-12 py-[14vw]">
                 <h2 className="heading-xl mb-4 text-heading">Our Approach</h2>
                 <p className="para text-desc max-w-2xl mb-[10vw]">
-                  We work across three dimensions simultaneously — because strategy
+                  We work across three dimensions simultaneously—because strategy
                   without design is a document, and design without technology
                   doesn&apos;t scale.
                 </p>
 
-                {/* Card 1 — Strategy */}
+                {/* Card 1—Strategy */}
                 <div className="approach-card-mobile mb-[12vw]" style={{ opacity: 0 }}>
                     <div className="mb-[5vw] flex items-center gap-3">
                         <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#cbcbcb", flexShrink: 0 }} />
@@ -357,7 +357,7 @@ const OurApproach = () => {
                     </h5>
                 </div>
 
-                {/* Card 2 — Design */}
+                {/* Card 2—Design */}
                 <div className="approach-card-mobile mb-[12vw]" style={{ opacity: 0 }}>
                     <div className="mb-[5vw] flex items-center gap-3">
                         <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#cbcbcb", flexShrink: 0 }} />
@@ -376,7 +376,7 @@ const OurApproach = () => {
                     </h5>
                 </div>
 
-                {/* Card 3 — Technology */}
+                {/* Card 3—Technology */}
                 <div className="approach-card-mobile" style={{ opacity: 0 }}>
                     <div className="mb-[5vw] flex items-center gap-3">
                         <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#cbcbcb", flexShrink: 0 }} />

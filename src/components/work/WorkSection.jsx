@@ -59,7 +59,7 @@ const WorkSection = ({ projects }) => {
   const isGridOpenRef   = useRef(false);
   const centerWrapperRef = useRef(null);
 
-  // clip-path lives on the WRAPPER div — separate from the img
+  // clip-path lives on the WRAPPER div—separate from the img
   const bgWrapRefs   = useRef([]);   // wrapper divs  (clip-path animated here)
   const bgRefs       = useRef([]);   // <img> elements (scale + objectPosition animated here)
   const centerRefs   = useRef([]);   // center wrapper divs (clip-path)
@@ -338,7 +338,7 @@ const WorkSection = ({ projects }) => {
     const cntPrev  = counterRefs.current[current];
     const cntNext  = counterRefs.current[next];
 
-    // clip-path starting states — on wrappers
+    // clip-path starting states—on wrappers
     bgWrapRefs.current.forEach((el, i) => {
       if (!el) return;
       gsap.set(el, {
@@ -359,7 +359,7 @@ const WorkSection = ({ projects }) => {
     });
     gsap.set(ctrNext, { zIndex: 1, clipPath: CLIP_HIDDEN_TOP, webkitClipPath: CLIP_HIDDEN_TOP });
 
-    // scale + objectPosition starting states — on images
+    // scale + objectPosition starting states—on images
     gsap.set(bgCurrent, { scale: BG_REST.scale,            objectPosition: BG_REST.objectPosition });
     gsap.set(bgNext,    { scale: BG_ENTER_DOWN_FROM.scale, objectPosition: BG_ENTER_DOWN_FROM.objectPosition });
 

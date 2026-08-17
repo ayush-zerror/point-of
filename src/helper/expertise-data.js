@@ -4,7 +4,7 @@ export const expertiseDetails = [
         expertise: "Branding",
         banner: "/expertise/cover-branding.webp",
         title: "Purposeful, distinctive brands rooted in strategy, storytelling, and design.",
-        description: "From positioning to identity system — the full strategic foundation, crafting identities that are strategic, emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every platform.",
+        description: "From positioning to identity system—the full strategic foundation, crafting identities that are strategic, emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every platform.",
         ctaTitle: <>Building something that <br/> deserves to be remembered?</>,
         ctaButton: "Let's build it together",
         accordion: [
@@ -39,7 +39,7 @@ export const expertiseDetails = [
         expertise: "Website",
         banner: "/expertise/cover-website.webp",
         title: "Scalable websites that combine brand clarity with seamless digital functionality.",
-        description: "From audit to launch — digital platforms built for brand and performance. We design and build websites that do more than just function—they embody your brand. From UX to development, every layer is crafted for clarity, usability, and expression across all devices, platforms, and user journeys.",
+        description: "From audit to launch—digital platforms built for brand and performance. We design and build websites that do more than just function—they embody your brand. From UX to development, every layer is crafted for clarity, usability, and expression across all devices, platforms, and user journeys.",
         ctaTitle: <>Ready to make your <br/> digital presence do more?</>,
         ctaButton: "Start the conversation",
         accordion: [
@@ -74,7 +74,7 @@ export const expertiseDetails = [
         expertise: "Marketing",
         banner: "/expertise/cover-marketing.webp",
         title: "Crafting data-driven marketing strategies that amplify your brand’s reach, growth and impact.",
-        description: "From content to campaign — strategy-led, measurable, built to compound. Our marketing services blend creativity, and digital innovation into powerful campaigns that connect with your audience, drive measurable results, and position your brand to lead within its industry.",
+        description: "From content to campaign—strategy-led, measurable, built to compound. Our marketing services blend creativity, and digital innovation into powerful campaigns that connect with your audience, drive measurable results, and position your brand to lead within its industry.",
         ctaTitle: <>Have an audience worth reaching? <br/> Let's reach them properly.</>,
         ctaButton: "Start the conversation",
         accordion: [

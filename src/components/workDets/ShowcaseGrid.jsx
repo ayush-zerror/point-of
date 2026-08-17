@@ -82,13 +82,13 @@ export default function ShowcaseGrid({ caseStudy }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
         {/* 1 */}
         <div className={`w-full overflow-hidden ${topCollapsed ? "md:col-span-2 aspect-video" : "aspect-square"}`}>
-          {media(topLeft, `${caseStudyTitle} — showcase image 1`, 0)}
+          {media(topLeft, `${caseStudyTitle}—showcase image 1`, 0)}
         </div>
 
         {/* 2 */}
         {!topCollapsed ? (
           <div className="w-full aspect-square overflow-hidden">
-            {media(topRight, `${caseStudyTitle} — showcase image 2`, 1)}
+            {media(topRight, `${caseStudyTitle}—showcase image 2`, 1)}
           </div>
         ) : null}
 
@@ -115,7 +115,7 @@ export default function ShowcaseGrid({ caseStudy }) {
           <div className="w-full aspect-4/5 overflow-hidden">
             {media(
               middleImage,
-              `${caseStudyTitle} — showcase image ${topCollapsed ? 2 : 3}`,
+              `${caseStudyTitle}—showcase image ${topCollapsed ? 2 : 3}`,
               2
             )}
           </div>
@@ -124,16 +124,16 @@ export default function ShowcaseGrid({ caseStudy }) {
         {/* 4 */}
         {count === 3 ? (
           <div className="w-full md:col-span-2 aspect-video overflow-hidden">
-            {media(bottomFullForThree, `${caseStudyTitle} — showcase image 4`, 3)}
+            {media(bottomFullForThree, `${caseStudyTitle}—showcase image 4`, 3)}
           </div>
         ) : count >= 4 ? (
           bottomCollapsed ? (
             <div className="w-full md:col-span-2 aspect-video overflow-hidden">
-              {media(bottomRight, `${caseStudyTitle} — showcase image 4`, 3)}
+              {media(bottomRight, `${caseStudyTitle}—showcase image 4`, 3)}
             </div>
           ) : (
             <div className="w-full aspect-square overflow-hidden">
-              {media(bottomLeft, `${caseStudyTitle} — showcase image 4`, 3)}
+              {media(bottomLeft, `${caseStudyTitle}—showcase image 4`, 3)}
             </div>
           )
         ) : null}
@@ -141,7 +141,7 @@ export default function ShowcaseGrid({ caseStudy }) {
         {/* 5 */}
         {count === 5 ? (
           <div className="w-full aspect-square overflow-hidden">
-            {media(bottomRight, `${caseStudyTitle} — showcase image 5`, 4)}
+            {media(bottomRight, `${caseStudyTitle}—showcase image 5`, 4)}
           </div>
         ) : null}
       </div>

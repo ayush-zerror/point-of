@@ -104,7 +104,7 @@ const HeroSection = ({
        { prefix: "Point of ", word: "origin.", italic: false },
        { prefix: "Point of ", word: "difference.", italic: false },
        { prefix: "Point of ", word: "no return.", italic: true, extraDelay: 0.2 },
-       { body: "We are Point Of — …", italic: false },   // plain body line
+       { body: "We are Point Of—…", italic: false },   // plain body line
      ]
   */
   lines = null,

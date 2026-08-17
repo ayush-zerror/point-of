@@ -17,7 +17,7 @@ const Privacy = () => {
           {/* Heading */}
           <div className="mb-12">
             <h2 className="heading-xl text-subheading">
-              PRIVACY POLICY
+            Privacy Policy
             </h2>
           </div>
 

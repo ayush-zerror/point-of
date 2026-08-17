@@ -127,7 +127,7 @@ const BrandsIndex = () => {
     return showcaseRef.current.querySelectorAll(".show")[index] ?? null;
   };
 
-  // mouseenter — exact vanilla logic
+  // mouseenter—exact vanilla logic
   const handleBrandEnter = (index) => {
     const slide = getSlide(index);
     if (!slide) return;
@@ -138,7 +138,7 @@ const BrandsIndex = () => {
     });
   };
 
-  // mouseleave — exact vanilla logic
+  // mouseleave—exact vanilla logic
   const handleBrandLeave = (index) => {
     const slide = getSlide(index);
     if (!slide) return;
