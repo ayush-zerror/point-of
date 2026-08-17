@@ -79,7 +79,22 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
     <div className={`mt-6 md:mt-10 z-20 relative ${className ?? ""}`}>
       {href ? (
         href.startsWith("/") ? (
-          <Link href={href} className={linkClass} title={title}>
+          <Link
+            href={href}
+            scroll={!href.includes("#")}
+            className={linkClass}
+            title={title}
+            onClick={() => {
+              const hashIndex = href.indexOf("#");
+              if (hashIndex !== -1 && href.slice(hashIndex + 1)) {
+                try {
+                  sessionStorage.setItem("scroll-to-id", href.slice(hashIndex + 1));
+                } catch {
+                  /* ignore */
+                }
+              }
+            }}
+          >
             {inner}
           </Link>
         ) : (

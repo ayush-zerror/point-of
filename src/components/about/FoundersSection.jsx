@@ -59,9 +59,7 @@ const FoundersSection = ({ data }) => {
             Two minds. One vision
           </h2>
 
-          <p className="heading-lg text-desc max-w-[900px]">
-            Point Of was built by two people who see the same problem differently—which is exactly why it works.
-          </p>
+          <p className="heading-lg text-desc max-w-[900px]">Point Of was built by two people who see the same problem differently. Which is exactly why it works.</p>
         </div>
       </div>
       <div className="max-w-[1350px] mx-auto px-6 sm:px-10 md:px-14">

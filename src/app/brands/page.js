@@ -54,7 +54,7 @@ const Brnads = () => {
           </>
         }
         btntitle={"See how we work"}
-        href="/expertise"
+        href="/expertise#how-we-work"
         enableTextParallax={true}
       />
       <StatsSection />

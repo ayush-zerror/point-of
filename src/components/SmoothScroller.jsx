@@ -13,11 +13,17 @@ export default function SmoothScroller() {
   const lenis = useRef(null);
   const pathname = usePathname();
 
-  // Reset scroll on route change
+  // Reset to top on route change unless a hash target should be scrolled to
   useEffect(() => {
-    if (lenis.current) {
-      lenis.current.scrollTo(0, { immediate: true });
+    if (!lenis.current) return;
+    if (typeof window === "undefined") return;
+    if (window.location.hash) return;
+    try {
+      if (sessionStorage.getItem("scroll-to-id")) return;
+    } catch {
+      /* ignore */
     }
+    lenis.current.scrollTo(0, { immediate: true });
   }, [pathname]);
 
   useLayoutEffect(() => {
@@ -38,6 +44,7 @@ export default function SmoothScroller() {
       touchMultiplier: 1.5,
       infinite: false,
     });
+    window.__lenis = lenis.current;
 
     // Keep ScrollTrigger in sync with Lenis
     lenis.current.on("scroll", ScrollTrigger.update);
@@ -60,6 +67,7 @@ export default function SmoothScroller() {
       unsubscribe();
       ro.disconnect();
 
+      if (window.__lenis === lenis.current) window.__lenis = null;
       if (lenis.current) {
         lenis.current.off("scroll", ScrollTrigger.update);
         lenis.current.destroy();

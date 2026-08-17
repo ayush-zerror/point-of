@@ -31,7 +31,7 @@ const brands = [
   { name: "Tripoto", logo: "/brands/Logos/balanced-assets/Tripoto.png" },
   { name: "KVAR", logo: "/brands/Logos/balanced-assets/kvar.png" },
   { name: "Chhaya Jain", logo: "/brands/Logos/balanced-assets/chhaya-jain.png" },
-  { name: "Inega (Talent)", logo: "/brands/Logos/balanced-assets/Inega_Talent.png" },
+  { name: "Inega", logo: "/brands/Logos/balanced-assets/Inega_Talent.png" },
   { name: "Orca Dive Club", logo: "/brands/Logos/balanced-assets/Orca_Dive_Club.png" },
 ];
 
@@ -76,6 +76,7 @@ const SelectedBrands = () => {
             ref={(el) => (itemRefs.current[index] = el)}
             className={[
               "group relative aspect-square border border-gray-300/40",
+              brand.name === "Orca Dive Club" ? "max-sm:hidden" : "",
             ].join(" ")}
           >
             {/* Hover cover */}

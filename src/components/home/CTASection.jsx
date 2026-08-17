@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import Button from "../common/Button";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 const CTASection = ({
   heading = (
@@ -14,8 +13,8 @@ const CTASection = ({
   buttonTitle = "LET’S TALK",
   graphic = false,
   br = false,
+  href = "/connect",
 } = {}) => {
-  const router = useRouter();
   const graphicRef = useRef(null);
 
   useEffect(() => {
@@ -62,9 +61,6 @@ const CTASection = ({
     };
   }, [graphic]);
 
-  const handleButtonClick = () => {
-    router.push("/connect");
-  }
   return (
     <section
       className="w-full bg-background relative flex items-center justify-center px-6 py-16 sm:py-20 md:py-28 lg:py-32
@@ -74,7 +70,7 @@ const CTASection = ({
         {/* HEADING */}
         <p className={`heading-xl text-desc ${!br ? '[&_br]:hidden':'' } sm:[&_br]:block`}>{heading}</p>
         {/* CTA */}
-        <Button title={buttonTitle} onClick={handleButtonClick} />
+        <Button title={buttonTitle} href={href} />
         {graphic && (
         <Image
           ref={graphicRef}

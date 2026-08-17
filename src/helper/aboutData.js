@@ -45,7 +45,7 @@ export const transformData = [
       title: "Empower",
       desc: (
         <>
-          We give brands the tools, language, and confidence to stand on their own.
+         We give brands the tools, language, and confidence to stand on their own.
         </>
       ),
       image: "/about/1.gif",
@@ -54,8 +54,7 @@ export const transformData = [
       title: "Originate",
       desc: (
         <>
-          We build from nothing—finding the idea at the root that makes everything else make sense.
-  
+          We build from nothing, finding the idea at the root that makes everything else make sense.
         </>
       ),
       image: "/about/2.gif",
@@ -73,7 +72,7 @@ export const transformData = [
       title: "Pivot",
       desc: (
         <>
-          We help brands move when staying still is the greater risk.
+         We help brands move when staying still is the greater risk.
         </>
       ),
       image: "/about/4.gif",
@@ -82,7 +81,7 @@ export const transformData = [
       title: "Reposition",
       desc: (
         <>
-          We reframe how a brand is seen—in the market, in culture, in people's minds.
+          We reframe how a brand is seen. In the market, in culture, in people's minds.
         </>
       ),
       image: "/about/5.gif",
@@ -91,7 +90,7 @@ export const transformData = [
       title: "Propel",
       desc: (
         <>
-          We accelerate brands that are ready to lead their category.
+         We accelerate brands ready to lead their category.
         </>
       ),
       image: "/about/6.gif",

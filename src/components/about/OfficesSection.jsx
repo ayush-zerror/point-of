@@ -46,7 +46,7 @@ const OfficesSection = () => {
   }, []);
 
   return (
-    <section className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] py-16 sm:py-20 md:py-28 lg:py-32">
+    <section className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] md:pr-[max(3.5rem,calc((100%-1350px)/2+3.5rem))] py-16 sm:py-20 md:py-28 lg:py-32">
       <style>{`
         .slide-up {
           opacity: 0;
@@ -62,19 +62,14 @@ const OfficesSection = () => {
 
       {/* Section heading */}
       <h2 className="heading-xl text-heading max-w-2xl mb-10 md:mb-12">
-        Three cities. One studio.
+        Global presence.
       </h2>
-
-      {/* City names */}
-      <h3 className="heading-lg text-heading mb-6 md:mb-8">
-        Mumbai · Barcelona · Austin.
-      </h3>
 
       {/* Body copy */}
       <p className="para text-desc max-w-3xl mb-20 md:mb-28 lg:mb-32">
-        Our home base is in Worli, Mumbai—a neighbourhood carrying the memory of the city's mill district while becoming one of its most forward-thinking addresses. The water is close. The energy is particular. The skyline is etched—an interplay of industrial grit and ambition. It is the kind of place that makes you think differently about what you are building and who you are building it for.
+        Our home is Worli, Mumbai. A neighbourhood that carries the memory of the city's mill district while becoming one of its most forward-thinking addresses.
         <br /><br />
-        We work from Barcelona and Austin too—two cities chosen for what they add, not just where they are. Different latitudes. Different creative cultures. The same standard. One point of view.
+        We work from Barcelona and Austin too. Two cities chosen for what they add, not just where they are. Different latitudes, different creative cultures, the same standard. One point of view.
       </p>
 
       {/* City strips */}

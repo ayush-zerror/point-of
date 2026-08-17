@@ -7,7 +7,6 @@ import { expertiseDetails } from "@/helper/expertise-data";
 import { getCaseStudiesForExpertise } from "@/helper/expertise-case-studies";
 import { getCaseStudies } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
-import InstagramSection from "@/components/connect/InstagramSection";
 
 export const dynamicParams = true;
 
@@ -65,8 +64,7 @@ const ExpertiseDetails = async ({ params }) => {
         currentSlug={data.slug}
       />
       <RelatedWork caseStudies={caseStudies} related={true}/>
-      <CTASection heading={data.ctaTitle} buttonTitle={data.ctaButton} />
-      {/* <InstagramSection caseStudies={caseStudies} /> */}
+      <CTASection heading={data.ctaTitle} buttonTitle={data.ctaButton} href="/connect#get-in-touch" />
     </>
   );
 };

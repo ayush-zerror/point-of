@@ -22,6 +22,7 @@ const TestimonialSection = () => {
         <Swiper
           modules={[Pagination, Navigation]}
           slidesPerView={1}
+          loop
           pagination={{ type: "progressbar" }}
           navigation
           className="testimonial-swiper"
