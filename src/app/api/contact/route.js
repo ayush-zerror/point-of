@@ -4,6 +4,7 @@ import { sheets_v4 } from "@googleapis/sheets";
 import { GoogleAuth } from "google-auth-library";
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
+import { isValidEmail } from "@/helper/validateEmail";
 
 const spreadsheetId = "1buyz7v9_CG9o3O9yMKHkREcfJWTIVOv8rZ7SpyslEss";
 
@@ -18,8 +19,6 @@ function getAuth() {
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 }
-
-const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(String(value ?? "").trim());
 
 const isValidWebsite = (value) => {
   const raw = String(value ?? "").trim();
@@ -67,7 +66,7 @@ export async function POST(request) {
     }
 
     if (!isValidEmail(payload.email)) {
-      return NextResponse.json({ error: "Enter a valid email (needs an @ and a domain)" }, { status: 400 });
+      return NextResponse.json({ error: "Please enter a valid email" }, { status: 400 });
     }
 
     if (!isValidWebsite(payload.website)) {

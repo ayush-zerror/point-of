@@ -22,7 +22,7 @@ export default function WorkFilterPanel({
     >
       <div
         ref={filterPanelRef}
-        className="w-full h-dvh md:h-[80vh] relative bg-background will-change-transform"
+        className="w-full h-dvh md:h-[55vh] relative bg-background will-change-transform"
         data-lenis-prevent
       >
         <div className="h-full w-full p-6 sm:p-10 md:px-12 lg:px-14 xl:px-20 md:py-8 text-white flex flex-col">
@@ -36,7 +36,7 @@ export default function WorkFilterPanel({
           </div>
 
           <div className="flex-1 overflow-y-auto overscroll-contain pr-1 pb-28 md:pb-0">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 md:gap-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-16">
               <div className="text-heading text-sm tracking-wide">Filter by:</div>
 
               <div>
@@ -75,28 +75,6 @@ export default function WorkFilterPanel({
                       tabIndex={0}
                       onKeyDown={(e) => {
                         if (e.key === "Enter" || e.key === " ") toggleFilterItem("industry", label);
-                      }}
-                    >
-                      {label}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <div className="text-desc text-xs tracking-wide mb-4">Year</div>
-                <ul className="filter-ul space-y-2 text-sm text-heading">
-                  {filterOptions.year.map((label) => (
-                    <li
-                      key={label}
-                      className={`hover:text-white cursor-pointer w-fit ${
-                        activeFilters.year.has(label) ? "active" : ""
-                      }`}
-                      onClick={() => toggleFilterItem("year", label)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") toggleFilterItem("year", label);
                       }}
                     >
                       {label}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { isValidEmail } from "@/helper/validateEmail";
 
 export default function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
@@ -20,11 +21,6 @@ export default function Footer() {
     }, 6000);
     return () => clearTimeout(t);
   }, [newsletterStatus]);
-
-  const isValidEmail = (value) => {
-    const v = String(value ?? "").trim();
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  };
 
   const submitNewsletter = async () => {
     const email = String(newsletterEmail ?? "").trim();
@@ -136,26 +132,42 @@ export default function Footer() {
             <div className="space-y-3  w-full sm:w-[260px] md:w-[300px]">
               <p className="para text-heading tracking-wide font-medium">Don’t miss anything</p>
 
-              <div className="relative border-b border-neutral-700 pb-2">
+              <form
+                noValidate
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  submitNewsletter();
+                }}
+                className={`relative border-b pb-2 ${
+                  newsletterStatus === "error" ? "border-red-400" : "border-neutral-700"
+                }`}
+              >
                 <input
                   type="email"
+                  name="email"
+                  autoComplete="email"
+                  inputMode="email"
                   placeholder="Email*"
                   value={newsletterEmail}
                   onChange={(e) => {
                     setNewsletterEmail(e.target.value);
-                    if (newsletterStatus !== "idle") setNewsletterStatus("idle");
+                    if (newsletterStatus !== "idle") {
+                      setNewsletterStatus("idle");
+                      setNewsletterError("");
+                    }
                   }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      submitNewsletter();
+                  onBlur={() => {
+                    const email = String(newsletterEmail ?? "").trim();
+                    if (!email) return;
+                    if (!isValidEmail(email)) {
+                      setNewsletterStatus("error");
+                      setNewsletterError("Please enter a valid email");
                     }
                   }}
                   className="w-full bg-transparent outline-none py-2 pr-10 text-sm md:text-base placeholder:text-neutral-500"
                 />
                 <button
-                  type="button"
-                  onClick={submitNewsletter}
+                  type="submit"
                   className="absolute right-0 top-1/2 -translate-y-1/2"
                   aria-label="Subscribe to newsletter"
                   title="Subscribe"
@@ -169,13 +181,13 @@ export default function Footer() {
                       aria-label="Loading"
                     />
                   ) : (
-                    <Send className="c w-5 h-5 opacity-70" />
+                    <Send className="c w-5 h-5 cursor-pointer opacity-70" />
                   )}
                 </button>
-              </div>
+              </form>
 
               {newsletterStatus === "success" ? (
-                <p className="text-xs text-green-400">Saved</p>
+                <p className="text-xs text-green-600">Subscribed</p>
               ) : newsletterStatus === "error" ? (
                 <p className="text-xs text-red-400">{newsletterError || "Please enter a valid email"}</p>
               ) : null}

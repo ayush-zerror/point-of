@@ -59,6 +59,7 @@ const Home = async () => {
           We are the studio that finds it, builds it, <br /> and stays for what comes next.
         </>}
         buttonTitle={"Let's find yours"}
+        href="/connect#get-in-touch"
       />
       {/* Center dot—always fixed at viewport center across all pages */}
       <CenterDot />

@@ -76,7 +76,7 @@ const WorkSection = ({ projects }) => {
   const [isFilterOpen,  setIsFilterOpen]  = useState(false);
   const [expandingIndex, setExpandingIndex] = useState(null);
   const [activeFilters, setActiveFilters] = useState(() => ({
-    services: new Set(), industry: new Set(), year: new Set(),
+    services: new Set(), industry: new Set(),
   }));
 
   const handleCenterCardClick = (e, index, slug) => {
@@ -138,12 +138,9 @@ const WorkSection = ({ projects }) => {
     const base = projects ?? [];
     const services = uniq(base.flatMap((p) => Array.isArray(p?.filtersServices) ? p.filtersServices : []));
     const industry = uniq(base.flatMap((p) => Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : []));
-    const years    = uniq(base.map((p) => p?.filtersYear))
-      .sort((a, b) => { const na = Number(a), nb = Number(b); return (isFinite(na) && isFinite(nb)) ? nb - na : b.localeCompare(a); });
     return {
       services: services.sort((a, b) => a.localeCompare(b)),
       industry: industry.sort((a, b) => a.localeCompare(b)),
-      year: years,
     };
   }, [projects]);
 
@@ -172,6 +169,10 @@ const WorkSection = ({ projects }) => {
   const toggleFilter     = () => setIsFilterOpen((v) => !v);
   const toggleFilterItem = (group, value) => {
     setActiveFilters((prev) => {
+      if (group === "industry") {
+        const isOn = prev.industry.has(value);
+        return { ...prev, industry: isOn ? new Set() : new Set([value]) };
+      }
       const next = new Set(prev[group]);
       next.has(value) ? next.delete(value) : next.add(value);
       return { ...prev, [group]: next };
@@ -179,19 +180,18 @@ const WorkSection = ({ projects }) => {
   };
 
   const filteredCaseStudy = useMemo(() => {
-    const { services, industry, year } = activeFilters;
+    const { services, industry } = activeFilters;
     const base = projects ?? [];
-    if (!services.size && !industry.size && !year.size) return base;
+    if (!services.size && !industry.size) return base;
     return base.filter((p) => {
       if (services.size && !( Array.isArray(p?.filtersServices) ? p.filtersServices : []).some((v) => services.has(String(v)))) return false;
       if (industry.size && !( Array.isArray(p?.filtersIndustry) ? p.filtersIndustry : []).some((v) => industry.has(String(v)))) return false;
-      if (year.size    && !year.has(String(p?.filtersYear))) return false;
       return true;
     });
   }, [activeFilters, projects]);
 
   const onApplyFilters = () => setIsFilterOpen(false);
-  const onResetFilters = () => setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
+  const onResetFilters = () => setActiveFilters({ services: new Set(), industry: new Set() });
 
   // ── helpers ──────────────────────────────────────────────────
   const isLgUp = () =>
@@ -294,7 +294,7 @@ const WorkSection = ({ projects }) => {
     if (!el) return;
     if (!isGridOpen) {
       el.scrollTop = 0;
-      setActiveFilters({ services: new Set(), industry: new Set(), year: new Set() });
+      setActiveFilters({ services: new Set(), industry: new Set() });
       setIsFilterOpen(false);
       isGridOpenRef.current = true;
       gsap.fromTo(el,

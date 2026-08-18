@@ -4,6 +4,7 @@ import { sheets_v4 } from "@googleapis/sheets";
 import { GoogleAuth } from "google-auth-library";
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
+import { isValidEmail } from "@/helper/validateEmail";
 
 const spreadsheetId = "1NRAYWWJ83u5G7n2pD-XJr9eSMK9EqHxfZtsMGGFMh5c";
 
@@ -28,7 +29,11 @@ export async function POST(request) {
     const email = String(body?.email ?? "").trim();
 
     if (!email) {
-      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+      return NextResponse.json({ error: "Please enter a valid email" }, { status: 400 });
+    }
+
+    if (!isValidEmail(email)) {
+      return NextResponse.json({ error: "Please enter a valid email" }, { status: 400 });
     }
 
     if (!spreadsheetId) {

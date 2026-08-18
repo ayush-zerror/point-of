@@ -7,9 +7,7 @@ import "react-phone-input-2/lib/style.css";
 import toast from "react-hot-toast";
 import { Controller, useForm } from "react-hook-form";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
-
-const isValidEmail = (value) => EMAIL_RE.test(String(value ?? "").trim());
+import { isValidEmail } from "@/helper/validateEmail";
 
 const isValidWebsite = (value) => {
   const raw = String(value ?? "").trim();
@@ -254,7 +252,7 @@ const GetInTouch = () => {
               {...register("email", {
                 required: "Email is required",
                 validate: (value) =>
-                  isValidEmail(value) || "Enter a valid email (needs an @ and a domain)",
+                  isValidEmail(value) || "Please enter a valid email",
               })}
             />
 
