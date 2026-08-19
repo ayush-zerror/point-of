@@ -255,7 +255,7 @@ const HeroSection = ({
             height={1000}
             src={bgImage}
             alt={typeof title === "string" && title.trim() ? title : "Point Of background image"}
-            className={`w-full h-full object-cover object-center ${imgClass}`}
+            className={`max-w-none shrink-0 w-full h-full object-cover object-center ${imgClass}`}
             priority
           />
         </div>
