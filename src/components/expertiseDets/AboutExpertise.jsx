@@ -87,7 +87,9 @@ const AboutExpertise = ({
         
         {/* LEFT */}
         <div>
-          <h2 className="heading-xl text-heading">{expertise}</h2>
+          <h2 className="heading-xl text-[26px] md:text-[34px] lg:text-[42px] xl:text-[3.25rem] text-heading">
+            {expertise}
+          </h2>
         </div>
 
         {/* RIGHT */}
