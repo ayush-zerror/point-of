@@ -116,7 +116,7 @@ export async function POST(request) {
 
     const mailFrom = "hello@zerrorstudios.com";
     const mailPass = "byaqczanjvrarkan";
-    const mailTo = "ayush.zerror@gmail.com";
+    const mailTo = "piran@wearepointof.com";
 
     if (mailFrom && mailPass && mailTo) {
       const transport = nodemailer.createTransport({
