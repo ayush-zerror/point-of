@@ -29,7 +29,7 @@ const TestimonialSection = () => {
         >
           {testimonials.map((item) => (
             <SwiperSlide key={item.slug}>
-              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-14 items-center max-w-5xl mx-auto px-2 sm:px-6 md:px-10 lg:px-0 pb-6 sm:pb-8 md:pb-20">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-14 items-center max-w-5xl mx-auto px-0 md:px-10 lg:px-0 pb-6 sm:pb-8 md:pb-20">
                 {/*
                   pb-16 on md+ = 64px gap between card bottom and progress bar on desktop
                   pb-8  on sm  = room for arrows beside image on tablet
@@ -37,10 +37,10 @@ const TestimonialSection = () => {
                 */}
 
                 {/* LEFT IMAGE */}
-                <div className="w-full flex justify-center lg:justify-start">
+                <div className="w-full flex justify-start">
                   <Link
                     href={`/work/${item.slug}`}
-                    className="w-full max-w-[220px] xs:max-w-[260px] sm:max-w-[320px] md:max-w-sm relative group overflow-hidden block"
+                    className="w-full max-w-none lg:max-w-sm relative group overflow-hidden block"
                     title={`View ${item.brand} case study`}
                   >
                     <Image
@@ -67,7 +67,7 @@ const TestimonialSection = () => {
                 </div>
 
                 {/* RIGHT CONTENT */}
-                <div className="max-w-xl text-center lg:text-left">
+                <div className="w-full max-w-none lg:max-w-xl text-left">
                   <h3 className="heading-lg text-subheading mb-2 sm:mb-3">
                     {item.name}
                   </h3>
@@ -80,7 +80,7 @@ const TestimonialSection = () => {
                     {item.text}
                   </p>
 
-                  <div className="flex justify-center lg:justify-start">
+                  <div className="flex justify-start">
                     <Button
                       title={item.brand}
                       href={`/work/${item.slug}`}
@@ -141,28 +141,19 @@ const TestimonialSection = () => {
           cursor: not-allowed;
         }
 
-        /* ── Mobile (<768px): arrows beside image ─────── */
-        @media (max-width: 767px) {
+        /* ── Mobile (<1024px): arrows on the full-width image ── */
+        @media (max-width: 1023px) {
 
-          /* ── Base mobile arrow styles ─── */
           .testimonial-swiper .swiper-button-prev,
           .testimonial-swiper .swiper-button-next {
-            /* No circle, no background, no border */
             background: none !important;
             border: none !important;
             border-radius: 0 !important;
             backdrop-filter: none !important;
-
             width: 24px;
             height: 24px;
             opacity: 0.7;
-
-            /*
-              Image is centered. On small phones image = 220px → half = 110px.
-              Arrows are vertically centered at the image midpoint = top 110px.
-              Override per breakpoint below.
-            */
-            top: 110px;
+            top: calc((100vw - 3rem) / 2);
             transform: translateY(-50%);
             transition: opacity 0.2s ease;
           }
@@ -181,73 +172,12 @@ const TestimonialSection = () => {
             color: white;
           }
 
-          /*
-            Horizontal position:
-            Arrow sits just outside the image edge with a small gap (8px).
-            calc(50% - half-image - arrow-width - gap)
-            Small phones: image = 220px → half = 110px
-          */
           .testimonial-swiper .swiper-button-prev {
-            left: 4px !important;
+            left: 8px !important;
           }
 
           .testimonial-swiper .swiper-button-next {
-            right: 4px !important;
-          }
-        }
-
-        /* ── Very small phones (≤380px): image ≈200px ─── */
-        @media (max-width: 380px) {
-          .testimonial-swiper .swiper-button-prev,
-          .testimonial-swiper .swiper-button-next {
-            width: 20px;
-            height: 20px;
-            top: 135px; /* half of ~200px */
-          }
-
-          .testimonial-swiper .swiper-button-prev {
-            left: calc(50% - 100px - 20px - 6px);
-          }
-
-          .testimonial-swiper .swiper-button-next {
-            right: calc(50% - 100px - 20px - 6px);
-          }
-
-          .testimonial-swiper .swiper-button-prev::after,
-          .testimonial-swiper .swiper-button-next::after {
-            font-size: 9px;
-          }
-        }
-
-        /* ── Medium phones (401px–600px): image ≈260px ── */
-        @media (min-width: 381px) and (max-width: 600px) {
-          .testimonial-swiper .swiper-button-prev,
-          .testimonial-swiper .swiper-button-next {
-            top: 130px; /* half of ~260px */
-          }
-
-          .testimonial-swiper .swiper-button-prev {
-            left: calc(50% - 130px - 24px - 8px);
-          }
-
-          .testimonial-swiper .swiper-button-next {
-            right: calc(50% - 130px - 24px - 8px);
-          }
-        }
-
-        /* ── Large phones / portrait tablet (601px–767px): image ≈320px ── */
-        @media (min-width: 601px) and (max-width: 767px) {
-          .testimonial-swiper .swiper-button-prev,
-          .testimonial-swiper .swiper-button-next {
-            top: 160px; /* half of ~320px */
-          }
-
-          .testimonial-swiper .swiper-button-prev {
-            left: calc(50% - 160px - 24px - 8px);
-          }
-
-          .testimonial-swiper .swiper-button-next {
-            right: calc(50% - 160px - 24px - 8px);
+            right: 8px !important;
           }
         }
       `}</style>
