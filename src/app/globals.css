@@ -349,12 +349,29 @@ input:-webkit-autofill:active{
 
 
 
+#get-in-touch {
+  color-scheme: light;
+}
+
+#get-in-touch input,
+#get-in-touch textarea {
+  color: #111;
+  caret-color: #111;
+}
+
 #get-in-touch input:-webkit-autofill,
-#get-in-touch input:-webkit-autofill:hover, 
-#get-in-touch input:-webkit-autofill:focus, 
-#get-in-touch input:-webkit-autofill:active{
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #000000;
-    transition: background-color 5000s ease-in-out 0s;
-    box-shadow: inset 0 0 20px 20px transparent;
+#get-in-touch input:-webkit-autofill:hover,
+#get-in-touch input:-webkit-autofill:focus,
+#get-in-touch input:-webkit-autofill:active,
+#get-in-touch textarea:-webkit-autofill,
+#get-in-touch textarea:-webkit-autofill:hover,
+#get-in-touch textarea:-webkit-autofill:focus,
+#get-in-touch textarea:-webkit-autofill:active {
+  -webkit-text-fill-color: #111 !important;
+  caret-color: #111 !important;
+  color: #111 !important;
+  -webkit-background-clip: border-box;
+  box-shadow: 0 0 0 1000px #e8e8e1 inset !important;
+  background-color: #e8e8e1 !important;
+  transition: background-color 9999s ease-out 0s;
 }

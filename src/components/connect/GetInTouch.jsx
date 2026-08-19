@@ -21,8 +21,23 @@ const isValidWebsite = (value) => {
   }
 };
 
+const HELP_OPTIONS = ["Branding", "Website", "Marketing", "Print", "Other"];
+const HEAR_OPTIONS = [
+  "Google / Search Engine",
+  "Social Media (LinkedIn, Behance, Instagram)",
+  "Friend or Family Referral",
+  "Business / Professional Referral",
+  "Event or Conference",
+  "Other",
+];
+
 const FieldError = ({ message }) =>
   message ? <p className="mt-1.5 text-xs text-red-600">{message}</p> : null;
+
+const FLOAT_LABEL =
+  "pointer-events-none absolute left-0 leading-none text-[14px] sm:text-[16px] text-gray-600 transition-[translate,font-size] duration-300 ease-out";
+const FLOAT_LABEL_ACTIVE =
+  "peer-focus:translate-y-[calc(-50%-1.25rem)] peer-focus:text-[12px] sm:peer-focus:text-[12px] peer-[&:not(:placeholder-shown)]:translate-y-[calc(-50%-1.25rem)] peer-[&:not(:placeholder-shown)]:text-[12px] sm:peer-[&:not(:placeholder-shown)]:text-[12px]";
 
 /* ─── FloatingInput ─── */
 const FloatingInput = React.forwardRef(({ label, required, className = "", error, ...props }, ref) => (
@@ -32,9 +47,9 @@ const FloatingInput = React.forwardRef(({ label, required, className = "", error
         {...props}
         ref={ref}
         placeholder=" "
-        className={`peer w-full bg-transparent outline-none pt-5 pb-2 text-sm sm:text-base ${className}`}
+        className={`peer w-full bg-transparent outline-none pt-5 pb-2 text-sm sm:text-base text-black caret-black ${className}`}
       />
-      <label className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 text-sm sm:text-base text-gray-600 transition-all duration-200 peer-focus:top-1 peer-focus:translate-y-0 peer-focus:text-xs peer-[&:not(:placeholder-shown)]:top-1 peer-[&:not(:placeholder-shown)]:translate-y-0 peer-[&:not(:placeholder-shown)]:text-sm">
+      <label className={`${FLOAT_LABEL} top-1/2 translate-y-[-50%] ${FLOAT_LABEL_ACTIVE}`}>
         {label}{required ? "*" : ""}
       </label>
     </div>
@@ -51,9 +66,9 @@ const FloatingTextarea = React.forwardRef(({ label, required, className = "", er
         {...props}
         ref={ref}
         placeholder=" "
-        className="peer w-full bg-transparent outline-none pt-5 pb-2 text-sm sm:text-base resize-none"
+        className="peer w-full bg-transparent outline-none pt-5 pb-2 text-sm sm:text-base text-black caret-black resize-none"
       />
-      <label className="pointer-events-none absolute left-0 top-4 text-sm sm:text-base text-gray-600 transition-all duration-200 peer-focus:top-1 peer-focus:text-xs peer-[&:not(:placeholder-shown)]:top-1 peer-[&:not(:placeholder-shown)]:text-xs">
+      <label className={`${FLOAT_LABEL} top-5 translate-y-0 peer-focus:translate-y-[-1.5rem] peer-focus:text-[12px] sm:peer-focus:text-[12px] peer-[&:not(:placeholder-shown)]:translate-y-[-1.5rem] peer-[&:not(:placeholder-shown)]:text-[12px] sm:peer-[&:not(:placeholder-shown)]:text-[12px]`}>
         {label}{required ? "*" : ""}
       </label>
     </div>
@@ -63,36 +78,101 @@ const FloatingTextarea = React.forwardRef(({ label, required, className = "", er
 FloatingTextarea.displayName = "FloatingTextarea";
 
 /* ─── FloatingSelect ─── */
-const FloatingSelect = React.forwardRef(({ label, required, children, error, value, ...props }, ref) => {
+const FloatingSelect = ({ label, required, options = [], error, value, onChange, onBlur, name }) => {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
   const hasValue = Boolean(value);
+  const labelUp = open || hasValue;
   const placeholder = `${label}${required ? "*" : ""}`;
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (e) => {
+      if (!rootRef.current?.contains(e.target)) setOpen(false);
+    };
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  const pick = (next) => {
+    onChange?.(next);
+    setOpen(false);
+  };
+
   return (
-    <div className="relative">
+    <div ref={rootRef} className={`relative ${open ? "z-30" : "z-10"}`}>
       <div className={`relative border-b ${error ? "border-red-500" : "border-gray-400"}`}>
-        {hasValue ? (
-          <label className="pointer-events-none absolute left-0 top-1 text-xs text-gray-600">
-            {placeholder}
-          </label>
-        ) : null}
-        <select
-          {...props}
-          ref={ref}
-          value={value ?? ""}
-          className={`w-full bg-transparent outline-none pb-2 text-sm sm:text-base ${
-            hasValue ? "pt-5" : "pt-5 text-gray-600"
+        <button
+          type="button"
+          name={name}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-label={placeholder}
+          onClick={() => setOpen((v) => !v)}
+          onBlur={onBlur}
+          className="flex w-full cursor-pointer items-center justify-between gap-3 bg-transparent pt-5 pb-2.5 text-left outline-none"
+        >
+          <span className={`min-w-0 truncate text-sm sm:text-base leading-[1.35] ${hasValue ? "text-background" : "text-transparent"}`}>
+            {value || placeholder}
+          </span>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden
+            className={`shrink-0 text-gray-600 transition-transform duration-300 ease-out ${open ? "rotate-180" : ""}`}
+          >
+            <path d="M2 4.5L6 8L10 4.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <label
+          className={`${FLOAT_LABEL} top-1/2 ${
+            labelUp
+              ? "translate-y-[calc(-50%-1.25rem)] text-[12px]"
+              : "translate-y-[-50%]"
           }`}
         >
-          <option value="" disabled>
-            {placeholder}
-          </option>
-          {children}
-        </select>
+          {placeholder}
+        </label>
       </div>
+
+      {open ? (
+        <ul
+          role="listbox"
+          data-lenis-prevent
+          className="absolute left-0 right-0 top-full z-50 mt-1 max-h-52 overflow-y-auto border border-gray-400 bg-secondary py-1 shadow-[0_12px_32px_rgba(0,0,0,0.12)]"
+        >
+          {options.map((opt) => {
+            const isActive = value === opt;
+            return (
+              <li key={opt} role="option" aria-selected={isActive}>
+                <button
+                  type="button"
+                  onClick={() => pick(opt)}
+                  className={`w-full cursor-pointer px-3 py-2.5 text-left text-sm sm:text-base transition-colors ${
+                    isActive ? "bg-black/10 text-background" : "text-background/80 hover:bg-black/5 hover:text-background"
+                  }`}
+                >
+                  {opt}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+
       <FieldError message={error} />
     </div>
   );
-});
-FloatingSelect.displayName = "FloatingSelect";
+};
 
 /* ─── Main ─── */
 const GetInTouch = () => {
@@ -118,6 +198,13 @@ const GetInTouch = () => {
 
   const helpValue     = watch("help");
   const hearValue     = watch("hear");
+
+  if (!helpIsOther) {
+    register("help", { required: "Please tell us how we can help" });
+  }
+  if (!hearIsOther) {
+    register("hear", { required: "Please tell us how you heard about us" });
+  }
 
   useEffect(() => { if (helpIsOther)     helpOtherRef.current?.focus();     }, [helpIsOther]);
   useEffect(() => { if (hearIsOther)     hearOtherRef.current?.focus();     }, [hearIsOther]);
@@ -198,8 +285,7 @@ const GetInTouch = () => {
   };
 
   /* ─── Shared select-to-other toggle factory ─── */
-  const makeSelectChange = (field, setIsOther) => (e) => {
-    const v = e.target.value;
+  const makeSelectChange = (field, setIsOther) => (v) => {
     if (v === "Other") {
       setValue(field, "", { shouldValidate: false });
       setIsOther(true);
@@ -264,10 +350,10 @@ const GetInTouch = () => {
             >
               <div className={`relative border-b ${errors.phone ? "border-red-500" : "border-gray-400"}`}>
               <label
-                className={`pointer-events-none absolute z-10 transition-all duration-200 ${
+                className={`pointer-events-none absolute z-10 leading-none text-gray-600 transition-[translate,left,font-size] duration-300 ease-out ${
                   phoneFocused || phoneHasTypedDigits
-                    ? "left-0 top-1 translate-y-0 text-xs sm:text-sm text-gray-600"
-                    : "left-24 top-1/2 -translate-y-1/2 text-sm sm:text-base text-gray-600"
+                    ? "left-0 top-1/2 translate-y-[calc(-50%-1.25rem)] text-[12px]"
+                    : "left-24 top-1/2 translate-y-[-50%] text-[14px] sm:text-[16px]"
                 }`}
               >
                 Phone Number*
@@ -366,18 +452,13 @@ const GetInTouch = () => {
               );
             })() : (
               <FloatingSelect
-                label="How can we help you" required
+                label="How can we help you"
+                required
                 error={errors.help?.message}
                 value={helpValue}
-                {...register("help", { required: "Please tell us how we can help" })}
+                options={HELP_OPTIONS}
                 onChange={makeSelectChange("help", setHelpIsOther)}
-              >
-                <option value="Branding">Branding</option>
-                <option value="Website">Website</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Print">Print</option>
-                <option value="Other">Other</option>
-              </FloatingSelect>
+              />
             )}
 
             {/* ── Hear ── */}
@@ -398,19 +479,13 @@ const GetInTouch = () => {
               );
             })() : (
               <FloatingSelect
-                label="How did you hear about us?" required
+                label="How did you hear about us?"
+                required
                 error={errors.hear?.message}
                 value={hearValue}
-                {...register("hear", { required: "Please tell us how you heard about us" })}
+                options={HEAR_OPTIONS}
                 onChange={makeSelectChange("hear", setHearIsOther)}
-              >
-                <option value="Google / Search Engine">Google / Search Engine</option>
-                <option value="Social Media (LinkedIn,Behance, Instagram)">Social Media (LinkedIn, Behance, Instagram)</option>
-                <option value="Friend or Family Referral">Friend or Family Referral</option>
-                <option value="Business / Professional Referral">Business / Professional Referral</option>
-                <option value="Event or Conference">Event or Conference</option>
-                <option value="Other">Other</option>
-              </FloatingSelect>
+              />
             )}
 
             <FloatingTextarea
