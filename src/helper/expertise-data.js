@@ -4,7 +4,7 @@ export const expertiseDetails = [
         expertise: "Branding",
         banner: "/expertise/cover-branding.webp",
         title: "Purposeful, distinctive brands rooted in strategy, storytelling, and design.",
-        description: "From positioning to identity system—the full strategic foundation, crafting identities that are strategic, emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every platform.",
+        description: "From positioning to identity system—the full strategic foundation, crafting identities that are emotionally resonant, and built to last. From research and positioning to visual systems and tone of voice, we help businesses stand out and stay consistent across every platform.",
         ctaTitle: <>Building something that <br/> deserves to be remembered?</>,
         ctaButton: "Let's build it together",
         accordion: [

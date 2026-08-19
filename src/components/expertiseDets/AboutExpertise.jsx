@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Plus } from "lucide-react";
-import Button from "../common/Button";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { expertiseDetails } from "@/helper/expertise-data";
 
@@ -25,7 +24,6 @@ const AboutExpertise = ({
 } = {}) => {
   const [active, setActive] = useState(null);
   const pendingScrollIdRef = useRef(null);
-  const router = useRouter();
   const pathname = usePathname();
 
   const otherExpertise = expertiseDetails.filter((x) => x.slug !== currentSlug);
@@ -85,20 +83,11 @@ const AboutExpertise = ({
     <section className="w-full px-6 sm:px-10 lg:px-14 xl:px-20 py-16 sm:py-20 md:py-28 lg:py-32">
       
       {/* GRID */}
-      <div className="grid grid-cols-1 gap-4 lg:gap-0 lg:grid-cols-[40%_60%] items-stretch">
+      <div className="grid grid-cols-1 gap-4 lg:gap-0 lg:grid-cols-[40%_60%] items-start">
         
         {/* LEFT */}
-        <div className="flex flex-col justify-between h-full">
-          
-          {/* TOP CONTENT */}
+        <div>
           <h2 className="heading-xl text-heading">{expertise}</h2>
-
-          {/* BUTTON AT BOTTOM */}
-          <div className="hidden lg:block mt-10 lg:mt-0">
-            <Button title={buttonTitle} onClick={() => {
-              router.push(`/connect`);
-            }} />
-          </div>
         </div>
 
         {/* RIGHT */}
@@ -133,58 +122,53 @@ const AboutExpertise = ({
                   </button>
 
                   <div
-                    className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      isOpen ? "max-h-72 pb-6" : "max-h-0"
+                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                     }`}
                   >
-                    <p className="para text-desc max-w-xl">
-                      {item.content}
-                    </p>
+                    <div className="overflow-hidden min-h-0">
+                      <p className="para text-desc max-w-xl pb-6">
+                        {item.content}
+                      </p>
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
-
-          {/* CTA (mobile first) */}
-          <div className="lg:hidden flex justify-center">
-            <Button
-              title={buttonTitle}
-              onClick={() => {
-                router.push(`/connect`);
-              }}
-            />
-          </div>
-
-          {/* Explore other expertise */}
-          {otherExpertise.length > 0 && (
-            <div className="">
-              <div className="flex flex-col sm:flex-row sm:items-center  gap-4 pt-8">
-                <div>
-                  <p className="para text-subheading">
-                    Explore our other expertise :
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2 sm:justify-end">
-                  {otherExpertise.map((x) => (
-                    <Link
-                      key={x.slug}
-                      href={`/expertise/${x.slug}`}
-                      className="group inline-flex items-center rounded-full border border-white/15 px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm tracking-wide text-heading hover:text-black  transition-colors duration-200 hover:border-white/30 hover:bg-white"
-                      title={x.expertise}
-                    >
-                      <span className="whitespace-nowrap">{x.expertise}</span>
-                      <span className="ml-2 opacity-60 transition-opacity duration-200 group-hover:opacity-100">
-                        →
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:gap-0 lg:grid-cols-[40%_60%] items-baseline pt-10 lg:pt-14">
+        <Link
+          href="/connect"
+          className="group inline-flex items-baseline gap-1.5 md:gap-2 uppercase whitespace-nowrap text-[11px] md:text-sm font-semibold tracking-wide leading-none text-[#c0bfbf]"
+          title={buttonTitle}
+        >
+          <span className="inline-block w-2 h-2 shrink-0 self-center rounded-full bg-[#c0bfbf] transition-all duration-300 group-hover:w-5 group-hover:h-5" />
+          <span className="relative">
+            {buttonTitle}
+            <span className="absolute pointer-events-none right-0 -bottom-1 h-px w-full bg-[#c0bfbf] transition-all duration-300 group-hover:w-0" />
+          </span>
+        </Link>
+
+        {otherExpertise.length > 0 && (
+          <div className="flex flex-wrap items-baseline gap-x-6 gap-y-3">
+            <span className="uppercase whitespace-nowrap text-[11px] md:text-sm font-semibold tracking-wide leading-none text-desc">
+              Explore
+            </span>
+            {otherExpertise.map((x) => (
+              <Link
+                key={x.slug}
+                href={`/expertise/${x.slug}`}
+                className="uppercase whitespace-nowrap text-[11px] md:text-sm font-semibold tracking-wide leading-none text-[#c0bfbf] hover:text-heading transition-colors duration-200"
+                title={x.expertise}
+              >
+                {x.expertise}
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

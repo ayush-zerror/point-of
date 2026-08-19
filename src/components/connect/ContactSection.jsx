@@ -70,8 +70,8 @@ const ContactSection = () => {
               </div>
 
               {/* Bottom Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 sm:gap-10 md:gap-12">
-                <div>
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-8 sm:gap-12 md:gap-14 lg:gap-16 xl:gap-20 [&_.para]:text-[13px] [&_.para]:md:text-sm [&_.para]:lg:text-sm [&_.para]:xl:text-base">
+                <div className="w-fit">
                   <h3 className="heading-md text-subheading mb-3 md:mb-4">Contact</h3>
                   <a
                     href="https://wa.me/919167991888"
@@ -97,40 +97,40 @@ const ContactSection = () => {
                   href="https://maps.app.goo.gl/kT1qQH69GXNvwQqB6"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block"
+                  className="group block w-fit"
                   title="Open Mumbai office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Mumbai, India</h3>
-                  <p className="para text-desc">Vaswani Chambers,</p>
-                  <p className="para text-desc">Dr Annie Besant Rd, Worli,</p>
-                  <p className="para text-desc">Mumbai, MH 400030</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Vaswani Chambers,</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Dr Annie Besant Rd, Worli,</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Mumbai, MH 400030</p>
                 </a>
 
                 <a
                   href="https://maps.app.goo.gl/Fqe7dUF8b8McqXdt6"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block"
+                  className="group block w-fit"
                   title="Open Barcelona office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Barcelona, Spain</h3>
-                  <p className="para text-desc">Carrer de Girona 179,</p>
-                  <p className="para text-desc">Eixample, Barcelona</p>
-                  <p className="para text-desc">Catalunya 08037</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Carrer de Girona 179,</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Eixample, Barcelona</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Catalunya 08037</p>
                 </a>
 
                 <a
                   href="https://maps.app.goo.gl/bAnZraZc83nM5eLB7"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block"
+                  className="group block w-fit"
                   title="Open Austin office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Austin, USA</h3>
-                  <p className="para text-desc">Point Of Action LLC</p>
-                  <p className="para text-desc">701 Tillery Street</p>
-                  <p className="para text-desc">Unit 12, Suite 1996</p>
-                  <p className="para text-desc">Austin TX 78702</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Point Of Action LLC</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">701 Tillery Street</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Unit 12, Suite 1996</p>
+                  <p className="para text-desc transition-colors duration-200 group-hover:text-heading">Austin TX 78702</p>
                 </a>
               </div>
 

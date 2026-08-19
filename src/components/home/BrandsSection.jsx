@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Button from "../common/Button";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const logos = [
@@ -33,7 +32,6 @@ const logos = [
 ];
 
 const BrandsSection = () => {
-  const router = useRouter();
   return (
     <section className="w-full py-24 md:py-52 md:pb-20 bg-background relative">
       <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-14 xl:px-0 flex flex-col">
@@ -50,11 +48,11 @@ const BrandsSection = () => {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-background to-transparent" />
 
           {/* Changes: gap-24 md:gap-32 → gap-12 md:gap-16 | pr-24 md:pr-32 → pr-12 md:pr-16 | 30s → 50s | h-24 md:h-28 → h-16 md:h-20 | min-w reduced */}
-          <div className="flex w-max animate-[marquee_50s_linear_infinite] items-center gap-12 md:gap-16 pr-12 md:pr-16 will-change-transform">
+          <div className="flex w-max animate-[marquee_50s_linear_infinite] items-center gap-28 md:gap-36 pr-28 md:pr-36 will-change-transform">
             {[...logos, ...logos].map((logo, idx) => (
               <div
                 key={`${logo.src}-${idx}`}
-                className="h-10 min-w-[6rem] md:h-12 md:min-w-[10rem] flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
+                className="h-10 md:h-12 w-fit shrink-0 flex items-center opacity-80 hover:opacity-100 transition-opacity"
               >
                 <Image
                   width={logo.width}
@@ -73,9 +71,7 @@ const BrandsSection = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <Button title={"See all our brands"} className={"!mt-0"} onClick={() => {
-          router.push("/brands");
-        }} />
+        <Button title={"See all our brands"} className={"!mt-0"} href="/brands" />
       </div>
     </section>
   );
