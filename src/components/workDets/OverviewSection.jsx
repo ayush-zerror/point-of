@@ -16,7 +16,7 @@ const OverviewSection = ({ caseStudy }) => {
                 {/* Row A */}
                 <div className="grid grid-cols-1 md:grid-cols-1 md:gap-8 lg:grid-cols-2 gap-6 lg:gap-24 items-start">
                     <div className="text-white/60">
-                        <p className="para text-subheading">(A) Project Challenge</p>
+                        <p className="para text-subheading">(A) Challenge</p>
                     </div>
                     <div className="para text-desc w-full max-w-none">
                         <p>{caseStudy?.challenge?.description ?? ""}</p>
@@ -26,7 +26,7 @@ const OverviewSection = ({ caseStudy }) => {
                 {/* Row B */}
                 <div className="grid grid-cols-1 md:grid-cols-1 md:gap-8 lg:grid-cols-2 gap-6 lg:gap-24 items-start">
                     <div className="text-white/60">
-                        <p className="para text-subheading">(B) Creative Concept</p>
+                        <p className="para text-subheading">(B) Concept</p>
                     </div>
                     <div className="para text-desc w-full max-w-none">
                         <p>{caseStudy?.creativeConcept?.description ?? ""}</p>

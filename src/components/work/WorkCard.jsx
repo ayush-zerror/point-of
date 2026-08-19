@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import gsap from "gsap";
-import Flip from "gsap/Flip";
+import Flip from "gsap/src/Flip";
 
 gsap.registerPlugin(Flip);
 

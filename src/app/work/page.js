@@ -13,7 +13,6 @@ const Work = async () => {
   const caseStudies = await getCaseStudies();
   const projects = (caseStudies ?? []).map((c) => {
     const title = String(c?.title ?? "").trim();
-    const words = title.split(/\s+/).filter(Boolean);
     const displayTitle = title || String(c?.slug ?? "Project");
 
     return {
@@ -21,10 +20,6 @@ const Work = async () => {
       name: displayTitle,
       slug: c?.slug,
       gist: c?.gist ?? "",
-      titles:
-        words.length <= 1
-          ? [displayTitle]
-          : [words[0], words.slice(1).join(" ")],
       microanimation: c?.microanimation,
       filtersServices: c?.filtersServices ?? [],
       filtersIndustry: c?.filtersIndustry ?? [],

@@ -96,7 +96,7 @@ export default function ShowcaseGrid({ caseStudy }) {
         <div className="md:col-span-2 grid grid-cols-1 gap-6 md:gap-10 lg:grid-cols-2">
           <div className="flex flex-col justify-center bg-black text-white pr-6 md:pr-0 lg:pr-14">
             <p className="text-sm font-semibold text-subheading mb-4">
-              CREATIVE CONCEPT
+              CONCEPT
             </p>
 
             <h3 className="heading-xl text-subheading mb-6">
