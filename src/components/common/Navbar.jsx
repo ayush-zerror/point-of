@@ -20,9 +20,17 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoLight, setLogoLight] = useState(true);
   const [landingActive, setLandingActive] = useState(false);
+  const [showNavGradient, setShowNavGradient] = useState(true);
   const pathname = usePathname();
   const menuOpenRef = useRef(false);
+  const overLightSectionRef = useRef(false);
   const logoDelayRef = useRef(null);
+  const gradientDelayRef = useRef(null);
+
+  const applyNavTheme = (invert) => {
+    setLogoLight(!invert);
+    setShowNavGradient(!invert);
+  };
 
   // Hide navbar on excluded routes (e.g. Sanity Studio)
   const excludePaths = ["/studio"];
@@ -86,29 +94,81 @@ export default function Navbar() {
 
   menuOpenRef.current = menuOpen;
 
-  // Logo + toggle: white default → black on open → white near end of close
+  // Invert navbar over light sections (e.g. Get in touch).
+  useEffect(() => {
+    const sections = gsap.utils.toArray("[data-nav-invert]");
+    if (!sections.length) {
+      overLightSectionRef.current = false;
+      if (!menuOpenRef.current) applyNavTheme(false);
+      return;
+    }
+
+    const active = new Set();
+    const sync = () => {
+      const invert = active.size > 0;
+      overLightSectionRef.current = invert;
+      if (!menuOpenRef.current) applyNavTheme(invert);
+    };
+
+    const triggers = sections.map((section, index) =>
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 72",
+        end: "bottom 72",
+        onEnter: () => {
+          active.add(index);
+          sync();
+        },
+        onEnterBack: () => {
+          active.add(index);
+          sync();
+        },
+        onLeave: () => {
+          active.delete(index);
+          sync();
+        },
+        onLeaveBack: () => {
+          active.delete(index);
+          sync();
+        },
+      })
+    );
+
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+
+    return () => {
+      triggers.forEach((trigger) => trigger.kill());
+    };
+  }, [pathname]);
+
+  // Use a dark navbar treatment against the light fullscreen menu,
+  // then restore based on the section under the navbar after close.
   useEffect(() => {
     if (!tl.current) return;
 
     logoDelayRef.current?.kill();
+    gradientDelayRef.current?.kill();
     logoDelayRef.current = null;
+    gradientDelayRef.current = null;
 
     if (menuOpen) {
-      // Home uses mix-blend-difference on the bar, so white logos invert
-      // automatically against the light menu. Other pages still flip to black.
-      if (pathname !== "/") setLogoLight(false);
+      applyNavTheme(true);
       tl.current.timeScale(1).play();
       document.body.style.overflow = "hidden";
     } else {
       const reverseDuration = tl.current.duration() / 1.8;
-      logoDelayRef.current = gsap.delayedCall(reverseDuration * 0.75, () => {
-        if (!menuOpenRef.current) setLogoLight(true);
+      const restoreDelay = reverseDuration * 0.6;
+      logoDelayRef.current = gsap.delayedCall(restoreDelay, () => {
+        if (!menuOpenRef.current) applyNavTheme(overLightSectionRef.current);
       });
       tl.current.timeScale(1.8).reverse();
       document.body.style.overflow = "auto";
     }
 
-    return () => logoDelayRef.current?.kill();
+    return () => {
+      logoDelayRef.current?.kill();
+      gradientDelayRef.current?.kill();
+    };
   }, [menuOpen]);
 
   // Scroll logo collapse
@@ -236,7 +296,7 @@ export default function Navbar() {
       <nav
         id="site-nav"
         className={`fixed top-0 left-0 w-full z-50 text-foreground transition-opacity duration-200 ease-out ${
-          pathname === "/work" ? "" : "nav-gradient"
+          pathname === "/work" || !showNavGradient ? "" : "nav-gradient"
         } ${pathname === "/" ? "mix-blend-difference" : ""} ${
           landingActive ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}

@@ -59,9 +59,7 @@ const GridSection = ({ title, intro, btntitle, data }) => {
               </p>
             ) : null}
 
-            {btntitle && <Button title={btntitle} onClick={() => {
-              router.push("/connect");
-            }} />}
+            {btntitle && <Button title={btntitle} href={"/connect"} />}
           </div>
         )}
 

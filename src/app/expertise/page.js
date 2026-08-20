@@ -20,11 +20,11 @@ export const metadata = {
 const Expertise = () => {
   return (
     <>
-      <HashScrollToId offset={100} />
+      <HashScrollToId />
       <HeroSection />
       <AreasOfExpertise />
-      <div id="how-we-work" className="w-full px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 pt-16 sm:pt-20 md:pt-28 lg:pt-32 z-20 pointer-events-none scroll-mt-24">
-        <h2 className="heading-xl text-heading">How we work</h2>
+      <div className="w-full px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 pt-16 sm:pt-20 md:pt-28 lg:pt-32 z-20 pointer-events-none scroll-mt-24">
+        <h2 id="how-we-work" className="heading-xl text-heading">How we work</h2>
         <p className="para text-desc mt-4 max-w-2xl">
           Every engagement follows the same disciplined process—from the
           first conversation to the final handoff. Clear stages. Collaborative

@@ -7,16 +7,10 @@ const JoinTeam = () => {
 
 
   return (
-    <section id="join-our-team" className="w-full pt-16 sm:pt-20 md:pt-28 lg:pt-32">
-      <div
-        className="
-          w-full
-          px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
-          pr-6
-        "
-      >
+    <section className="w-full pt-16 sm:pt-20 md:pt-28 lg:pt-32">
+      <div className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] pr-6">
         {/* Heading */}
-        <h2 className="heading-xl text-subheading mb-8">
+        <h2 id="join-our-team" className="heading-xl text-subheading mb-8">
           Join Our Team
         </h2>
 

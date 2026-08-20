@@ -22,7 +22,7 @@ const Connect = async () => {
   const caseStudies = (all ?? []).slice(0, 5)
   return (
     <>
-      <HashScrollToId offset={100} />
+      <HashScrollToId />
       <HeroSection
         showClock={true}
         title={

@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { handleHashLinkClick } from "@/helper/scrollToHash";
 
 const isHexColor = (v) => typeof v === "string" && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v);
 
@@ -22,6 +24,7 @@ const isDarkFill = (color) => {
 };
 
 const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassName }) => {
+  const router = useRouter();
   const handleClick = (event) => {
     if (typeof onClick === "function") onClick(event);
   };
@@ -85,40 +88,11 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
             className={linkClass}
             title={title}
             onClick={(e) => {
-              const hashIndex = href.indexOf("#");
-              if (hashIndex === -1) return;
-
-              const id = href.slice(hashIndex + 1);
-              if (!id) return;
-
-              const path = href.startsWith("#") ? "" : href.slice(0, hashIndex);
-              const samePage =
-                !path ||
-                (typeof window !== "undefined" && path === window.location.pathname);
-
-              if (samePage) {
-                e.preventDefault();
-                const el = document.getElementById(id);
-                if (!el) return;
-                const offset = 100;
-                if (window.__lenis) {
-                  window.__lenis.scrollTo(el, { offset: -offset, duration: 1.15 });
-                } else {
-                  const top =
-                    el.getBoundingClientRect().top + window.scrollY - offset;
-                  window.scrollTo({ top, behavior: "smooth" });
-                }
-                if (window.location.hash !== `#${id}`) {
-                  window.history.pushState(null, "", `#${id}`);
-                }
-                return;
-              }
-
-              try {
-                sessionStorage.setItem("scroll-to-id", id);
-              } catch {
-                /* ignore */
-              }
+              handleHashLinkClick(e, href, {
+                onNavigate: (path) => {
+                  if (path) router.push(path);
+                },
+              });
             }}
           >
             {inner}

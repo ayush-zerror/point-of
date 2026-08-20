@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { HASH_SCROLL_OFFSET, scrollToHashTarget } from "@/helper/scrollToHash";
 
 function getTargetId() {
   if (typeof window === "undefined") return "";
@@ -14,32 +15,13 @@ function getTargetId() {
   }
 }
 
-function scrollToHash(offset = 0) {
-  if (typeof window === "undefined") return false;
-
+function scrollToHash(offset = HASH_SCROLL_OFFSET) {
   const id = getTargetId();
   if (!id) return false;
-
-  const el = document.getElementById(id);
-  if (!el) return false;
-
-  const lenis = window.__lenis;
-  if (lenis) {
-    lenis.scrollTo(el, { offset: -offset, duration: 1.15 });
-  } else {
-    const top = el.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: "smooth" });
-  }
-
-  try {
-    sessionStorage.removeItem("scroll-to-id");
-  } catch {
-    /* ignore */
-  }
-  return true;
+  return scrollToHashTarget(id, { offset });
 }
 
-export default function HashScrollToId({ offset = 0 } = {}) {
+export default function HashScrollToId({ offset = HASH_SCROLL_OFFSET } = {}) {
   const pathname = usePathname();
 
   useEffect(() => {

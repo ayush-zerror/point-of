@@ -2,7 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Button from "./Button";
+import { handleHashLinkClick } from "@/helper/scrollToHash";
 
 function isNavActive(pathname, href) {
   if (!pathname || !href) return false;
@@ -14,6 +16,8 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
   { pathname, setMenuOpen, socialLinks },
   ref
 ) {
+  const router = useRouter();
+
   return (
     <div
       ref={ref}
@@ -91,7 +95,15 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
               <Link
                 key={item.label}
                 href={item.href}
-                onClick={() => setMenuOpen(false)}
+                scroll={!item.href.includes("#")}
+                onClick={(e) => {
+                  handleHashLinkClick(e, item.href, {
+                    onNavigate: (path) => {
+                      setMenuOpen(false);
+                      if (path) router.push(path);
+                    },
+                  });
+                }}
                 title={item.label}
               >
                 <Button title={item.label} color="#000000" className="mt-0!" />

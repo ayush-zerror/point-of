@@ -67,7 +67,7 @@ const Brnads = () => {
           Working on something that <br /> needs clearer thinking?
           </>
         }
-        btntitle={"Start a Project page"}
+        btntitle={"Start a Project"}
         data={cultureValues}
       />
     </>
