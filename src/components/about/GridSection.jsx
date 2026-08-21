@@ -88,7 +88,7 @@ const GridSection = ({ title, intro, btntitle, data }) => {
                     src={item.image}
                     alt=""
                     aria-hidden="true"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover mix-blend-multiply"
                   />
                 </div>
               )}

@@ -48,7 +48,7 @@ export const transformData = [
          We give brands the tools, language, and confidence to stand on their own.
         </>
       ),
-      image: "/about/1.gif",
+      image: "/about/1gif.gif",
     },
     {
       title: "Originate",
@@ -57,7 +57,7 @@ export const transformData = [
           We build from nothing, finding the idea at the root that makes everything else make sense.
         </>
       ),
-      image: "/about/2.gif",
+      image: "/about/2gif.gif",
     },
     {
       title: "Optimise",
@@ -66,7 +66,7 @@ export const transformData = [
           We sharpen what exists. Better decisions, cleaner systems, less friction.
         </>
       ),
-      image: "/about/3.gif",
+      image: "/about/3gif.gif",
     },
     {
       title: "Pivot",
@@ -75,7 +75,7 @@ export const transformData = [
          We help brands move when staying still is the greater risk.
         </>
       ),
-      image: "/about/4.gif",
+      image: "/about/4gif.gif",
     },
     {
       title: "Reposition",
@@ -84,7 +84,7 @@ export const transformData = [
           We reframe how a brand is seen. In the market, in culture, in people's minds.
         </>
       ),
-      image: "/about/5.gif",
+      image: "/about/5gif.gif",
     },
     {
       title: "Propel",
@@ -93,7 +93,7 @@ export const transformData = [
          We accelerate brands ready to lead their category.
         </>
       ),
-      image: "/about/6.gif",
+      image: "/about/6gif.gif",
     },
   ];
   
