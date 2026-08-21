@@ -188,6 +188,10 @@ const WorkSection = ({ projects }) => {
   const onResetFilters = () => setActiveFilters({ services: new Set(), industry: new Set() });
 
   // ── helpers ──────────────────────────────────────────────────
+  const isSmUp = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(min-width: 640px)").matches;
+
   const isLgUp = () =>
     typeof window !== "undefined" &&
     window.matchMedia("(min-width: 1024px)").matches;
@@ -195,11 +199,12 @@ const WorkSection = ({ projects }) => {
   const getTitleEls = (index) =>
     (textRefs.current[index] ?? []).filter(Boolean);
 
+  // Left on mobile + desktop; centered on tablet only.
   const getTitleTransformOrigin = () =>
-    isLgUp() ? TITLE_TRANSFORM_ORIGIN : "center center";
+    isLgUp() || !isSmUp() ? TITLE_TRANSFORM_ORIGIN : "center center";
 
   const getDescTransformOrigin = () =>
-    isLgUp() ? "left center" : "center center";
+    isLgUp() || !isSmUp() ? "left center" : "center center";
 
   const applyTextCounterRestState = (activeIdx, forward) => {
     for (let i = 0; i < items.length; i++) {
@@ -268,13 +273,18 @@ const WorkSection = ({ projects }) => {
     applyBgRestState();
     applyCenterRestState();
 
-    const mq = window.matchMedia("(min-width: 1024px)");
+    const mqLg = window.matchMedia("(min-width: 1024px)");
+    const mqSm = window.matchMedia("(min-width: 640px)");
     const onBreakpointChange = () => {
       applyTextCounterRestState(currentIndexRef.current, true);
       ScrollTrigger.refresh();
     };
-    mq.addEventListener("change", onBreakpointChange);
-    return () => mq.removeEventListener("change", onBreakpointChange);
+    mqLg.addEventListener("change", onBreakpointChange);
+    mqSm.addEventListener("change", onBreakpointChange);
+    return () => {
+      mqLg.removeEventListener("change", onBreakpointChange);
+      mqSm.removeEventListener("change", onBreakpointChange);
+    };
   }, [items]);
 
   // ── grid toggle ──────────────────────────────────────────────
@@ -674,7 +684,7 @@ const WorkSection = ({ projects }) => {
   return (
     <div
       ref={containerRef}
-      className="relative w-screen h-screen overflow-hidden touch-none select-none"
+      className="relative w-screen h-svh overflow-hidden touch-none select-none"
     >
 
       <WorkBackgroundSlides
@@ -722,17 +732,17 @@ const WorkSection = ({ projects }) => {
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
-            className="absolute left-0 right-0 top-24 sm:top-20 md:top-[11%] max-lg:items-center max-lg:text-center max-lg:max-h-[calc(50%-min(42vw,11rem)-1.5rem)] max-lg:overflow-hidden lg:left-16 lg:right-auto xl:left-20 lg:top-1/2 lg:-translate-y-1/2 lg:items-start lg:text-left w-full max-lg:max-w-none lg:w-[min(500px,calc(50vw-135px-5.5rem))] xl:w-[min(500px,calc(50vw-200px-7rem))] min-w-0 flex flex-col"
+            className="absolute left-0 right-0 top-24 sm:top-20 md:top-[11%] items-start text-left sm:items-center sm:text-center max-lg:max-h-[calc(50%-min(42vw,11rem)-1.5rem)] max-lg:overflow-hidden lg:left-16 lg:right-auto xl:left-20 lg:top-1/2 lg:-translate-y-1/2 lg:items-start lg:text-left w-full max-lg:max-w-none lg:w-[min(500px,calc(50vw-135px-5.5rem))] xl:w-[min(500px,calc(50vw-200px-7rem))] min-w-0 flex flex-col"
           >
 
-            <div className="w-full min-w-0 flex flex-col max-lg:items-center lg:items-stretch lg:text-left">
+            <div className="w-full min-w-0 flex flex-col items-start sm:items-center lg:items-stretch lg:text-left">
               {/* Title — extra buffer so bold glyph edges don't clip */}
-              <div className="w-full max-lg:max-w-[min(92vw,520px)] min-w-0 overflow-hidden max-lg:px-2 pb-[0.12em] lg:pl-4">
+              <div className="w-full max-w-[300px] mx-auto sm:max-w-[min(92vw,520px)] min-w-0 overflow-hidden px-0 sm:px-2 pb-[0.12em] lg:max-w-none lg:mx-0 lg:pl-4">
                 <h2
                   ref={(el) => {
                     textRefs.current[i] = [el];
                   }}
-                  className="m-0 block w-full min-w-0 heading-xl text-heading text-center lg:text-left py-px break-words"
+                  className="m-0 block w-full min-w-0 heading-xl text-heading text-left sm:text-center lg:text-left py-px break-words"
                   style={{
                     willChange: "transform, opacity",
                     transformOrigin: getTitleTransformOrigin(),
@@ -748,12 +758,12 @@ const WorkSection = ({ projects }) => {
               </div>
 
               {/* Description */}
-              <div className="w-full max-lg:max-w-[min(92vw,520px)] overflow-hidden mt-1 pb-1 max-lg:px-2 max-lg:mx-auto lg:pl-4">
+              <div className="w-full max-w-[300px] mx-auto sm:max-w-[min(92vw,520px)] overflow-hidden mt-1 pb-1 px-0 sm:px-2 lg:max-w-none lg:mx-0 lg:pl-4">
                 <p
                   ref={(el) => {
                     descRefs.current[i] = el;
                   }}
-                  className="m-0 block w-full text-white/60 font-heading font-extralight leading-[1.7] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch] text-center lg:text-left lg:max-w-none py-px"
+                  className="m-0 block w-full text-white/60 font-heading font-extralight leading-[1.7] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch] text-left sm:text-center lg:text-left lg:max-w-none py-px"
                   style={{
                     willChange: "transform, opacity",
                     transform: i === 0 ? "translate(0px, 0%)" : "translate(0px, 100%)",

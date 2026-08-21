@@ -48,7 +48,7 @@ const GridSection = ({ title, intro, btntitle, data }) => {
         
         {/* Heading */}
         {title && (
-          <div className="text-center mb-12 sm:mb-16 md:mb-20 flex flex-col items-center">
+          <div className="text-left mb-12 sm:mb-16 md:mb-20 flex flex-col items-start sm:text-center sm:items-center">
             <h2 className="heading-xl text-subheading max-w-3xl">
               {title}
             </h2>

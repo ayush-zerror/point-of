@@ -61,10 +61,10 @@ const RelatedWork = ({ caseStudies, other = true, related = false }) => {
     <section ref={rootRef} className="w-full overflow-hidden py-20 md:py-28 ">
 
       {/* Header */}
-      <div className="flex flex-col items-center justify-center mb-16 md:mb-20">
+      <div className="flex flex-col items-start justify-center px-6 mb-16 sm:items-center sm:px-10 md:px-12 lg:px-14 xl:px-20 md:mb-20">
        {
          other && (
-          <h2 className="heading-xl text-subheading">
+          <h2 className="heading-xl text-subheading text-left sm:text-center">
          {related ? "Related Projects" : "Other Projects"}
        </h2>
        )
@@ -72,7 +72,7 @@ const RelatedWork = ({ caseStudies, other = true, related = false }) => {
         {
           !other && (
             <>
-              <h2 className="heading-lg text-subheading">@wearepointof</h2>
+              <h2 className="heading-lg text-subheading text-left sm:text-center">@wearepointof</h2>
 
               <ArrowButton
                 title={"FOLLOW"}

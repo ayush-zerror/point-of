@@ -66,7 +66,7 @@ const CTASection = ({
       className="w-full bg-background relative flex items-center justify-center px-6 py-16 sm:py-20 md:py-28 lg:py-32
       "
     >
-      <div className="text-center flex flex-col items-center">
+      <div className="w-full text-left flex flex-col items-start sm:w-auto sm:text-center sm:items-center">
         {/* HEADING */}
         <p className={`heading-xl text-desc ${!br ? '[&_br]:hidden':'' } sm:[&_br]:block`}>{heading}</p>
         {/* CTA */}
