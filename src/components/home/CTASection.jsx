@@ -21,7 +21,7 @@ const CTASection = ({
     if (!graphic) return;
     if (typeof window === "undefined") return;
     // Desktop-only to avoid touch jank.
-    if (window.innerWidth < 1024) return;
+    if (window.innerWidth < 1280) return;
 
     const el = graphicRef.current;
     if (!el) return;
@@ -63,8 +63,7 @@ const CTASection = ({
 
   return (
     <section
-      className="w-full bg-background relative flex items-center justify-center px-6 py-16 sm:py-20 md:py-28 lg:py-32
-      "
+      className="w-full bg-background relative flex items-center justify-center px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 py-16 sm:py-20 md:py-28 lg:py-32"
     >
       <div className="w-full text-left flex flex-col items-start sm:w-auto sm:text-center sm:items-center">
         {/* HEADING */}
@@ -78,7 +77,7 @@ const CTASection = ({
           alt="graphic_expertise"
           width={1000}
           height={1000}
-          className="w-26 h-26 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain mt-12 sm:mt-12 md:mt-16 lg:mt-20 will-change-transform"
+          className="w-26 h-26 sm:w-40 sm:h-40 md:w-48 md:h-48 xl:w-56 xl:h-56 object-contain mt-12 sm:mt-12 md:mt-16 xl:mt-20 will-change-transform"
         />
         )}
       </div>

@@ -33,7 +33,7 @@ export default function Expertise() {
   const travelCircleRef = useRef(null);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
+    const mq = window.matchMedia("(max-width: 1279px)");
     const onChange = () => setIsMobile(mq.matches);
     onChange();
     mq.addEventListener?.("change", onChange);
@@ -387,7 +387,7 @@ export default function Expertise() {
       />
 
       <div className="sticky top-0 h-screen flex items-start">
-        <div className="w-full px-4 sm:px-10 md:px-16 lg:px-20 mx-auto pt-[22vh] pb-12 flex">
+        <div className="w-full px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 mx-auto pt-[22vh] pb-12 flex">
 
           <div className="w-1/2 flex flex-col justify-between">
             <h2 className="heading-xl text-heading">Expertise</h2>

@@ -29,8 +29,8 @@ const OurProcess = () => {
 
     const mm = gsap.matchMedia();
 
-    // lg (1024px) and up: wide desktop journey—unchanged behavior
-    mm.add("(min-width: 1024px)", () => {
+    // xl (1280px) and up: wide desktop journey—unchanged behavior
+    mm.add("(min-width: 1280px)", () => {
       const ctx = gsap.context(() => {
         const pathScroller = sectionRef.current;
         const panel = svgContainerRef.current;
@@ -125,8 +125,8 @@ const OurProcess = () => {
       return () => ctx.revert();
     });
 
-    // < lg: phones + tablets—vertical scroll path (not the wide desktop canvas)
-    mm.add("(max-width: 1023px)", () => {
+    // < xl: phones + tablets (incl. iPad Pro)—vertical scroll path
+    mm.add("(max-width: 1279px)", () => {
       const onLoadRefresh = () => ScrollTrigger.refresh();
       const ctx = gsap.context(() => {
         const circle = mobileCircleRef.current;
@@ -140,7 +140,7 @@ const OurProcess = () => {
 
         const isTablet =
           typeof window !== "undefined" &&
-          window.matchMedia("(min-width: 768px) and (max-width: 1023px)").matches;
+          window.matchMedia("(min-width: 768px) and (max-width: 1279px)").matches;
         const scrubMotion = isTablet ? 0.32 : 0.25;
         const scrubPin = isTablet ? 0.42 : 0.35;
         const pinEnd = isTablet ? "+=165%" : "+=150%";
@@ -294,11 +294,11 @@ const OurProcess = () => {
         <style>{`
           .our-process-desktop { display: none !important; }
           .our-process-mobile  { display: block !important; }
-          @media (min-width: 1024px) {
+          @media (min-width: 1280px) {
             .our-process-desktop { display: block !important; }
             .our-process-mobile  { display: none !important; }
           }
-          @media (min-width: 768px) and (max-width: 1023px) {
+          @media (min-width: 768px) and (max-width: 1279px) {
             .our-process-scroll-svg-wrap {
               max-width: min(92vw, 920px);
               margin-left: auto;

@@ -87,9 +87,9 @@ const WorkSection = ({ projects }) => {
       return;
     }
 
-    // Only run the fullscreen Flip on lg+ screens.
-    // On smaller screens, keep default link navigation.
-    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+    // Only run the fullscreen Flip on xl+ screens.
+    // On smaller screens (incl. iPad Pro), keep default link navigation.
+    if (typeof window !== "undefined" && window.innerWidth < 1280) {
       return;
     }
 

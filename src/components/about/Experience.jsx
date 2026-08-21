@@ -94,7 +94,7 @@ const Experience = () => {
 
   return (
     <div ref={sectionRef} className="relative w-full">
-      <div className="w-full md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-120 px-6 sm:px-10 py-16 sm:py-20 md:py-28 lg:py-32">
+      <div className="w-full md:pl-12 xl:pl-80 2xl:pl-120 px-6 sm:px-10 py-16 sm:py-20 md:py-28 lg:py-32">
         <div ref={tickerRef}>
 
         {/* Mobile */}

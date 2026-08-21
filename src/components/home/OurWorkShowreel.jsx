@@ -121,7 +121,7 @@ export default function OurWorkShowreel({ posts = [] }) {
     const DUR_SHOWREEL_CENTER  = 1.5;
     const DOT_SCALE_SIZE       = 50;
 
-    const useMobileShowreel = window.innerWidth < 1024;
+    const useMobileShowreel = window.innerWidth < 1280;
 
     const ctx = gsap.context(() => {
       // ── Initial states ──
@@ -317,13 +317,13 @@ export default function OurWorkShowreel({ posts = [] }) {
         {/* TRACK */}
         <div
           ref={trackRef}
-          className="flex items-center z-50 relative gap-22 px-6 sm:px-10 md:px-16 lg:px-20"
+          className="flex items-center z-50 relative gap-22 px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20"
         >
           {/* CARDS */}
           {(posts ?? []).map((post, index) => (
             <div
               key={post.slug ?? index}
-              className="work-card shrink-0 w-[85vw] max-w-[380px] sm:w-[320px] sm:max-w-none md:w-[360px] lg:w-[270px] xl:w-[400px]"
+              className="work-card shrink-0 w-[85vw] max-w-[380px] sm:w-[320px] sm:max-w-none xl:w-[400px]"
             >
               <WorkCard
                 slug={post.slug}
@@ -335,7 +335,7 @@ export default function OurWorkShowreel({ posts = [] }) {
           ))}
 
           {/* VIEW ALL WORK BUTTON */}
-          <div className="min-w-[220px] sm:min-w-[300px] md:min-w-[400px] flex items-center justify-center ml-10 sm:ml-24 md:ml-40">
+          <div className="min-w-[220px] sm:min-w-[300px] xl:min-w-[400px] flex items-center justify-center ml-10 sm:ml-24 xl:ml-40">
             <Link
               href="/work"
               className="group cursor-pointer flex items-center gap-3 text-sm font-semibold uppercase tracking-wide"
@@ -425,7 +425,7 @@ export default function OurWorkShowreel({ posts = [] }) {
           {/* VIDEO */}
           <div
             ref={videoWrapRef}
-            className="aspect-video h-auto w-full overflow-hidden lg:h-full lg:aspect-auto"
+            className="aspect-video h-auto w-full overflow-hidden xl:h-full xl:aspect-auto"
             style={{
               transformOrigin: "center center",
               position: "absolute",
@@ -437,7 +437,7 @@ export default function OurWorkShowreel({ posts = [] }) {
             <video
               ref={videoElRef}
               src="/home/showreel.mp4"
-              className="h-auto w-full object-cover lg:h-full"
+              className="h-auto w-full object-cover xl:h-full"
               muted={isMuted}
               loop
               playsInline
@@ -453,20 +453,20 @@ export default function OurWorkShowreel({ posts = [] }) {
           >
             {/* Panel 1 */}
             <div className="relative flex h-screen items-center justify-center">
-              <Image src="https://www.wearepointof.com/home/sticker1.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px" className="absolute top-6 left-4 h-auto w-24 rotate-[-10deg] sm:top-10 sm:left-8 sm:w-32 md:w-40 lg:left-10 lg:w-48" />
-              <Image src="https://www.wearepointof.com/home/sticker2.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px" className="absolute right-4 bottom-6 h-auto w-24 rotate-10 sm:right-8 sm:bottom-10 sm:w-32 md:w-40 lg:right-10 lg:w-48" />
+              <Image src="https://www.wearepointof.com/home/sticker1.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1279px) 140px, 200px" className="absolute top-6 left-4 h-auto w-24 rotate-[-10deg] sm:top-10 sm:left-8 sm:w-32 md:w-40 xl:left-10 xl:w-48" />
+              <Image src="https://www.wearepointof.com/home/sticker2.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1279px) 140px, 200px" className="absolute right-4 bottom-6 h-auto w-24 rotate-10 sm:right-8 sm:bottom-10 sm:w-32 md:w-40 xl:right-10 xl:w-48" />
             </div>
 
             {/* Panel 2 */}
             <div className="relative flex h-screen items-center justify-center">
-              <Image src="https://www.wearepointof.com/home/sticker3.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px" className="absolute top-6 left-4 h-auto w-24 -rotate-6 sm:top-10 sm:left-16 sm:w-32 md:w-40 lg:left-28 lg:w-48" />
-              <Image src="https://www.wearepointof.com/home/sticker4.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px" className="absolute right-4 bottom-6 h-auto w-24 rotate-[8deg] sm:right-8 sm:bottom-10 sm:w-32 md:w-40 lg:right-10 lg:w-48" />
+              <Image src="https://www.wearepointof.com/home/sticker3.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1279px) 140px, 200px" className="absolute top-6 left-4 h-auto w-24 -rotate-6 sm:top-10 sm:left-16 sm:w-32 md:w-40 xl:left-28 xl:w-48" />
+              <Image src="https://www.wearepointof.com/home/sticker4.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1279px) 140px, 200px" className="absolute right-4 bottom-6 h-auto w-24 rotate-[8deg] sm:right-8 sm:bottom-10 sm:w-32 md:w-40 xl:right-10 xl:w-48" />
             </div>
 
             {/* Panel 3 */}
             <div className="relative flex h-screen items-center justify-center">
-              <Image src="https://www.wearepointof.com/home/sticker5.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px" className="absolute top-6 left-4 h-auto w-24 -rotate-12 sm:top-10 sm:left-8 sm:w-32 md:w-40 lg:left-10 lg:w-48" />
-              <Image src="https://www.wearepointof.com/home/sticker6.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1024px) 140px, 200px" className="absolute right-4 bottom-6 h-auto w-24 rotate-12 sm:right-8 sm:bottom-10 sm:w-32 md:w-40 lg:right-10 lg:w-48" />
+              <Image src="https://www.wearepointof.com/home/sticker5.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1279px) 140px, 200px" className="absolute top-6 left-4 h-auto w-24 -rotate-12 sm:top-10 sm:left-8 sm:w-32 md:w-40 xl:left-10 xl:w-48" />
+              <Image src="https://www.wearepointof.com/home/sticker6.png" alt="sticker" width={200} height={200} sizes="(max-width: 640px) 96px, (max-width: 1279px) 140px, 200px" className="absolute right-4 bottom-6 h-auto w-24 rotate-12 sm:right-8 sm:bottom-10 sm:w-32 md:w-40 xl:right-10 xl:w-48" />
             </div>
           </div>
         </div>

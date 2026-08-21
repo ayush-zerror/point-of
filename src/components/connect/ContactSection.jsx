@@ -44,13 +44,13 @@ const ContactSection = () => {
       <div className="h-auto md:sticky md:top-0 md:h-screen z-10">
         <section id="contact-section" className="md:h-screen w-full relative">
           <div className="h-full flex items-center">
-            <div className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-120 md:pr-6  pb-16 sm:pb-20">
+            <div className="w-full px-6 sm:px-10 md:pl-12 xl:pl-80 2xl:pl-120 md:pr-6 pb-16 sm:pb-20">
 
               {/* Scroll-animated vertical line */}
               <div
                 ref={lineRef}
                 style={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
-                className="w-px h-50 sm:h-72 lg:h-50 xl:h-72 z-30 bg-linear-to-b from-transparent to-foreground absolute -top-32 sm:top-3 lg:-top-4 xl:top-3 -translate-y-1/2 md:left-12 lg:left-[12rem] xl:left-[30.2rem]"
+                className="w-px h-50 sm:h-72 xl:h-72 z-30 bg-linear-to-b from-transparent to-foreground absolute -top-32 sm:top-3 xl:top-3 -translate-y-1/2 md:left-12 xl:left-80 2xl:left-[30rem]"
               >
                 <span className="w-[3px] h-[3px] bg-foreground rounded-full absolute bottom-0 left-1/2 -translate-x-1/2" />
               </div>
@@ -70,8 +70,8 @@ const ContactSection = () => {
               </div>
 
               {/* Bottom Grid */}
-              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-8 sm:gap-12 md:gap-14 lg:gap-16 xl:gap-20 [&_.para]:text-[13px] [&_.para]:md:text-sm [&_.para]:lg:text-sm [&_.para]:xl:text-base">
-                <div className="w-fit">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 sm:gap-12 md:gap-14 lg:gap-16 xl:gap-20 w-full [&_.para]:text-[13px] [&_.para]:md:text-sm [&_.para]:lg:text-sm [&_.para]:xl:text-base">
+                <div className="w-full min-w-0">
                   <h3 className="heading-md text-subheading mb-3 md:mb-4">Contact</h3>
                   <a
                     href="https://wa.me/919167991888"
@@ -97,7 +97,7 @@ const ContactSection = () => {
                   href="https://maps.app.goo.gl/kT1qQH69GXNvwQqB6"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block w-fit"
+                  className="group block w-full min-w-0"
                   title="Open Mumbai office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Mumbai, India</h3>
@@ -110,7 +110,7 @@ const ContactSection = () => {
                   href="https://maps.app.goo.gl/Fqe7dUF8b8McqXdt6"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block w-fit"
+                  className="group block w-full min-w-0"
                   title="Open Barcelona office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Barcelona, Spain</h3>
@@ -123,7 +123,7 @@ const ContactSection = () => {
                   href="https://maps.app.goo.gl/bAnZraZc83nM5eLB7"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block w-fit"
+                  className="group block w-full min-w-0"
                   title="Open Austin office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Austin, USA</h3>

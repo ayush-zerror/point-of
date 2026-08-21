@@ -69,14 +69,14 @@ const SelectedBrands = () => {
         Selected Brands
       </h2>
 
-      <div className="grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5">
+      <div className="grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-4 xl:grid-cols-5">
         {brands.map((brand, index) => (
           <div
             key={index}
             ref={(el) => (itemRefs.current[index] = el)}
             className={[
               "group relative aspect-square border border-gray-300/40",
-              brand.name === "Orca Dive Club" ? "max-sm:hidden" : "",
+              brand.name === "Orca Dive Club" ? "max-xl:hidden" : "",
             ].join(" ")}
           >
             {/* Hover cover */}

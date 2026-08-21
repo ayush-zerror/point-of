@@ -74,7 +74,7 @@ useEffect(() => {
 
   lockScroll();
 
-  const isMobile = window.innerWidth < 768;
+  const isMobile = window.innerWidth < 1280;
   setCenterLogoScale(isMobile ? 1.7 : 1.95);
   setCenterLogoTopPx(isMobile ? 24 : 32);
 
@@ -224,8 +224,8 @@ useEffect(() => {
           }
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Mobile: match navbar single logo */}
-          <div className="md:hidden">
+          {/* Mobile / tablet / iPad Pro: match navbar single logo */}
+          <div className="xl:hidden">
             <Image
               src="/logo/logo.png"
               alt="Point Of"
@@ -237,14 +237,14 @@ useEffect(() => {
           </div>
 
           {/* Desktop: match navbar's P + OINT + O + F assets */}
-          <div className="hidden md:flex items-center gap-0">
+          <div className="hidden xl:flex items-center gap-0">
             <Image
               src="/logo/p.png"
               alt="P"
               width={180}
               height={100}
               priority
-              className="h-[18px] lg:h-[16px] xl:h-[18px] w-auto invert object-contain"
+              className="h-[18px] w-auto invert object-contain"
             />
             <Image
               src="/logo/oint.png"
@@ -252,7 +252,7 @@ useEffect(() => {
               width={180}
               height={100}
               priority
-              className="h-[18px] lg:h-[16px] xl:h-[18px] w-auto invert object-contain"
+              className="h-[18px] w-auto invert object-contain"
             />
             <Image
               src="/logo/o.png"
@@ -260,7 +260,7 @@ useEffect(() => {
               width={180}
               height={100}
               priority
-              className="h-[18px] lg:h-[16px] xl:h-[18px] w-auto invert object-contain"
+              className="h-[18px] w-auto invert object-contain"
             />
             <Image
               src="/logo/f.png"
@@ -268,7 +268,7 @@ useEffect(() => {
               width={180}
               height={100}
               priority
-              className="h-[18px] lg:h-[16px] xl:h-[18px] w-auto invert object-contain"
+              className="h-[18px] w-auto invert object-contain"
             />
           </div>
         </motion.div>
@@ -286,7 +286,7 @@ useEffect(() => {
           alt="hero"
           width={1000}
           height={1000}
-          className="w-full object-contain spin-slow h-[140vh] sm:h-[180vh] lg:h-[220vh]"
+          className="w-full object-contain spin-slow h-[140vh] sm:h-[180vh] xl:h-[220vh]"
           priority
         />
       </motion.div>
@@ -295,7 +295,7 @@ useEffect(() => {
       <div className="absolute bottom-0 left-0 w-full h-[12vh] bg-linear-to-t from-background via-background/60 to-transparent pointer-events-none" />
       {/* CONTENT */}
       <motion.div
-        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6"
+        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20"
         initial={{ opacity: 0, y: 24 }}
         animate={startTyping ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
         transition={{ duration: 0.75, ease: "easeOut", delay: 0.05 }}

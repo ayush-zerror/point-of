@@ -17,7 +17,7 @@ import { testimonials } from "@/helper/testimonials";
 
 const TestimonialSection = () => {
   return (
-    <section className="w-full py-14 sm:py-16 md:py-24 px-6 sm:px-10 md:px-12  lg:px-20 overflow-hidden">
+    <section className="w-full py-14 sm:py-16 md:py-24 px-6 sm:px-10 md:px-12 xl:px-20 overflow-hidden">
       <div className="w-full cursor-grab">
         <Swiper
           modules={[Pagination, Navigation]}
@@ -29,7 +29,7 @@ const TestimonialSection = () => {
         >
           {testimonials.map((item) => (
             <SwiperSlide key={item.slug}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-14 items-center max-w-5xl mx-auto px-0 md:px-10 lg:px-0 pb-6 sm:pb-8 md:pb-20">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-14 items-center max-w-5xl mx-auto px-0 md:px-10 xl:px-0 pb-6 sm:pb-8 md:pb-20">
                 {/*
                   pb-16 on md+ = 64px gap between card bottom and progress bar on desktop
                   pb-8  on sm  = room for arrows beside image on tablet

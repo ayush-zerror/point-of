@@ -115,7 +115,7 @@ function OdometerStatNumber({ raw, active, className }) {
 
 function StaticStatsSection() {
   return (
-    <section className="relative z-10 w-full overflow-hidden bg-background px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-28 lg:px-40 lg:py-32">
+    <section className="relative z-10 w-full overflow-hidden bg-background px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-28 xl:px-40 xl:py-32">
       <motion.div
         initial={{ opacity: 0, y: 80 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -291,7 +291,7 @@ function AnimatedStatsSection() {
               <OdometerStatNumber
                 raw={item.number}
                 active={inView}
-                className="text-2xl md:text-4xl lg:text-[4rem] tracking-[1px] font-heading font-medium leading-[1.3]"
+                className="text-2xl md:text-4xl xl:text-[4rem] tracking-[1px] font-heading font-medium leading-[1.3]"
               />
               <p className="heading-md text-heading mt-1">
                 {item.label}
@@ -334,7 +334,7 @@ const StatsSection = () => {
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
+    const mq = window.matchMedia("(min-width: 1280px)");
     const onChange = () => setIsDesktop(mq.matches);
     onChange();
     mq.addEventListener?.("change", onChange);

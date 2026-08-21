@@ -13,8 +13,8 @@ const OurApproach = () => {
     useGSAP(() => {
         if (!containerRef.current) return;
 
-        // ─── DESKTOP only ───
-        if (window.innerWidth > 1024) {
+        // ─── DESKTOP only (xl+) ───
+        if (window.innerWidth >= 1280) {
             const aptl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#page4",
@@ -170,8 +170,8 @@ const OurApproach = () => {
             });
         }
 
-        // ─── MOBILE / TABLET: fade-up each card on scroll ───
-        if (window.innerWidth <= 1024) {
+        // ─── MOBILE / TABLET (incl. iPad Pro): fade-up each card on scroll ───
+        if (window.innerWidth < 1280) {
             gsap.utils.toArray(".approach-card-mobile").forEach((card) => {
                 gsap.fromTo(
                     card,
@@ -198,7 +198,7 @@ const OurApproach = () => {
             <style>{`
                 .approach-desktop { display: flex; }
                 .approach-mobile  { display: none;  }
-                @media (max-width: 1024px) {
+                @media (max-width: 1279px) {
                     .approach-desktop { display: none  !important; }
                     .approach-mobile  { display: block !important; }
                 }

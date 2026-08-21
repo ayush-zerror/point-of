@@ -2,27 +2,34 @@
 import React, { useState } from 'react'
 import Button from '../common/Button'
 
-const AccordionSection = ({ data, title, description }) => {
+const AccordionSection = ({ data, title, description, padding = "editorial" }) => {
     const [activeIndex, setActiveIndex] = useState(null);
 
     const toggle = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
+
+    // Match Footer horizontal rhythm on home; keep editorial gutter on Connect/Expertise.
+    const padClass =
+      padding === "footer"
+        ? "px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20"
+        : "px-6 sm:px-10 md:pl-12 xl:pl-80 2xl:pl-120 pr-6";
+
     return (
         <section className="w-full py-16 sm:py-20 md:py-28 lg:py-32">
-            <div className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-120 pr-6">
+            <div className={`w-full ${padClass}`}>
                 {/* Vacancies */}
                 <h3 className="heading-xl text-subheading ">
                     {title}
                 </h3>
                 {description && (
-                    <p className="para text-desc  mt-4 max-w-3xl">
+                    <p className="para text-desc  mt-4 max-w-none xl:max-w-3xl">
                         {description}
                     </p>
                 )}
 
-                {/* Accordion (narrow width) */}
-                <div className="space-y-6 max-w-3xl mt-12">
+                {/* Accordion */}
+                <div className="space-y-6 max-w-none xl:max-w-3xl mt-12">
                     {data.map((job, index) => (
                         <div key={index} className="border-b border-white/20 pb-6">
 
@@ -47,7 +54,7 @@ const AccordionSection = ({ data, title, description }) => {
 
                             {/* Smooth Content */}
                             <div
-                                className={`overflow-hidden transition-all duration-500 ease-in-out max-w-2xl ${activeIndex === index ? "max-h-[1600px] opacity-100 mt-8" : "max-h-0 opacity-0 mt-0"}`}
+                                className={`overflow-hidden transition-all duration-500 ease-in-out max-w-none xl:max-w-2xl ${activeIndex === index ? "max-h-[1600px] opacity-100 mt-8" : "max-h-0 opacity-0 mt-0"}`}
                             >
                                 {job.content ? (
                                     <div className="space-y-6 para text-subheading pointer-events-auto">

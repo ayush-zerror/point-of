@@ -120,8 +120,8 @@ const AreasOfExpertise = () => {
       <div
         className="
           relative w-full
-          px-6 sm:px-6 md:px-12 lg:pl-48 xl:pl-80 2xl:pl-120
-          lg:pr-6
+          px-6 sm:px-6 md:px-12 xl:pl-80 2xl:pl-120
+          xl:pr-6
         "
       >
         <div className="max-w-5xl relative">

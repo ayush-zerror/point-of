@@ -64,7 +64,7 @@ const InstagramSection = ({ caseStudies }) => {
           {duplicated.map((post, index) => (
             <div
               key={`instagram-${index}`}
-              className="flex-shrink-0 pt-10 w-[70vw] sm:w-[45vw] md:w-[35vw] lg:w-[270px] xl:w-[400px]"
+              className="flex-shrink-0 pt-10 w-[70vw] sm:w-[45vw] md:w-[35vw] xl:w-[270px] 2xl:w-[400px]"
             >
               <WorkCard
                 slug={post.slug}

@@ -47,7 +47,7 @@ const FoundersSection = ({ data }) => {
         {/* Wrapper */}
         <div
           className="w-full 
-          px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem]
+          px-6 sm:px-10 md:pl-12 xl:pl-48 2xl:pl-[30rem]
           pr-6
           pb-20 sm:pb-24 md:pb-28 lg:pb-32
           "

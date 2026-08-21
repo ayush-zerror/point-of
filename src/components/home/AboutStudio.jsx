@@ -18,7 +18,7 @@ const AboutStudio = () => {
   useLayoutEffect(() => {
     if (!sectionRef.current || !p1Ref.current || !p2Ref.current) return;
 
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const isMobile = window.matchMedia("(max-width: 1279px)").matches;
 
     const ctx = gsap.context(() => {
       const circle2 = document.querySelector("#circle2");
@@ -124,7 +124,7 @@ const AboutStudio = () => {
     <section
       ref={sectionRef}
       id="page2"
-      className="w-full mix-blend-difference px-6 py-6 md:px-20 md:py-24 flex flex-col justify-center md:h-screen"
+      className="w-full mix-blend-difference px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 py-6 sm:py-10 md:py-16 lg:py-20 xl:py-24 flex flex-col justify-center xl:h-screen"
     >
       <div className="mx-auto">
         <div className="max-w-5xl space-y-12">

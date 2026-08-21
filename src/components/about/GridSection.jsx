@@ -18,22 +18,21 @@ const GridSection = ({ title, intro, btntitle, data }) => {
     if (!cards.length || !gridRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        cards,
-        { y: 48, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "power3.out",
-          stagger: 0.12,
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
+      gsap.set(cards, { opacity: 0, y: 36 });
+
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        ease: "power3.out",
+        // 2×3 reading order: each card 0.1s after the previous
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: "top 78%",
+          toggleActions: "play none none none",
+        },
+      });
 
       requestAnimationFrame(() => ScrollTrigger.refresh());
     }, gridRef);
@@ -63,12 +62,12 @@ const GridSection = ({ title, intro, btntitle, data }) => {
           </div>
         )}
 
-        {/* Grid */}
+        {/* Grid — 6 cards: 2×3 on lg+; 4 cards stay 2×2 */}
         <div
           ref={gridRef}
           className={`
             grid grid-cols-1 
-            ${isFour ? "sm:grid-cols-2 lg:grid-cols-2 lg:gap-x-32" : "sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-24"}
+            ${isFour ? "sm:grid-cols-2 lg:gap-x-32" : "sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-24"}
             gap-y-12 sm:gap-y-16 md:gap-y-20 lg:gap-y-24
             gap-x-6 sm:gap-x-10 md:gap-x-16 
           `}
@@ -76,12 +75,13 @@ const GridSection = ({ title, intro, btntitle, data }) => {
           {data.map((item, index) => (
             <div
               key={index}
-              className="w-full"
+              className="w-full will-change-transform"
               ref={(el) => {
                 cardsRef.current[index] = el;
               }}
+              style={{ opacity: 0 }}
             >
-              {/* Image */}
+              {/* Image / GIF */}
               {item.image && (
                 <div className="w-12 sm:w-14 md:w-16 lg:w-18 aspect-square mb-3 sm:mb-4 overflow-hidden">
                   <img

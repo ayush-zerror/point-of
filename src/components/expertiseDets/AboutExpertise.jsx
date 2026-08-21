@@ -141,7 +141,7 @@ const AboutExpertise = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:gap-0 lg:grid-cols-[40%_60%] items-baseline pt-10 lg:pt-14">
+      <div className="grid grid-cols-1 gap-10 sm:gap-12 lg:gap-0 lg:grid-cols-[40%_60%] items-baseline pt-10 lg:pt-14">
         <Link
           href="/connect"
           className="group inline-flex items-baseline gap-1.5 md:gap-2 uppercase whitespace-nowrap text-[11px] md:text-sm font-semibold tracking-wide leading-none text-[#c0bfbf]"

@@ -64,7 +64,7 @@ const Clock = ({ clockCountry, clockTimeZone }) => {
   return (
     <div
       id="clock-container"
-      className="absolute -top-16 md:-top-80 lg:-top-60 left-6 md:left-12 lg:left-28 xl:left-98 h-32 w-32 sm:h-48 sm:w-48 rounded-full"
+      className="absolute -top-16 md:-top-80 xl:-top-60 left-6 md:left-12 xl:left-98 h-32 w-32 sm:h-48 sm:w-48 rounded-full"
     >
       <Image
         src="/contact/clock.png"
@@ -265,7 +265,7 @@ const HeroSection = ({
       <div className="relative z-10 h-full flex items-center md:items-end">
         <div
           ref={contentRef}
-          className="w-full relative px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-120 pr-6 py-12 sm:py-16 pt-36 sm:pt-40 md:pb-52 lg:pb-28 xl:pb-40 md:pt-0"
+          className="w-full relative px-6 sm:px-10 md:pl-12 xl:pl-80 2xl:pl-120 pr-6 py-12 sm:py-16 pt-36 sm:pt-40 md:pb-52 xl:pb-28 2xl:pb-40 md:pt-0"
         >
           {showClock && (
             <Clock clockCountry={clockCountry} clockTimeZone={clockTimeZone} />
@@ -273,7 +273,7 @@ const HeroSection = ({
 
           {/* ── Staggered lines mode ── */}
           {lines ? (
-            <h2 className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px]">
+            <h2 className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] xl:max-w-[900px]">
               {lines.map((line, i) => (
                 <span
                   key={i}
@@ -298,7 +298,7 @@ const HeroSection = ({
             /* ── Original freeform title mode ── */
             <h2
               ref={headlineRef}
-              className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] lg:max-w-[900px] [&_br]:hidden sm:[&_br]:block"
+              className="heading-xl text-subheading max-w-[90%] sm:max-w-[80%] md:max-w-[700px] xl:max-w-[900px] [&_br]:hidden sm:[&_br]:block"
             >
               {title}
             </h2>

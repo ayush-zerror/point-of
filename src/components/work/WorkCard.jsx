@@ -30,7 +30,7 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false, cla
       return;
     }
 
-    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+    if (typeof window !== "undefined" && window.innerWidth < 1280) {
       return;
     }
 

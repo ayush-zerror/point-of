@@ -44,7 +44,7 @@ const Brnads = () => {
   return (
     <>
       <HeroSection
-        imgClass="!max-w-none shrink-0 !h-[150vh] !w-auto md:!h-[150vw] md:!w-[150vw] spin-slow"
+        imgClass="!max-w-none shrink-0 !h-[150vh] !w-auto xl:!h-[150vw] xl:!w-[150vw] spin-slow"
         bgImage="/brands/brand-bg.jpg"
         title={
           <>

@@ -33,45 +33,43 @@ const logos = [
 
 const BrandsSection = () => {
   return (
-    <section className="w-full py-24 md:py-52 md:pb-20 bg-background relative">
-      <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-14 xl:px-0 flex flex-col">
+    <section className="w-full pt-24 md:pt-36 lg:pt-44 xl:pt-52 pb-24 md:pb-36 lg:pb-44 xl:pb-20 bg-background relative">
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 flex flex-col items-start">
         <h2 className="heading-xl text-heading mb-4">Our partnerships</h2>
         <p className="heading-xl text-desc">
           Brands we have had the privilege of building with.
         </p>
+        <Button title={"See all our brands"} className={"!mt-6 sm:!mt-8"} href="/brands" />
       </div>
 
-      {/* Logo marquee (full width) */}
-      <div className="w-full py-10 md:py-16">
+      {/* Logo marquee — top gap matches space above the heading */}
+      <div className="w-full pt-24 md:pt-36 lg:pt-44 xl:pt-52">
         <div className="relative w-full overflow-hidden">
           <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-linear-to-r from-background to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-linear-to-l from-background to-transparent" />
 
           {/* Changes: gap-24 md:gap-32 → gap-12 md:gap-16 | pr-24 md:pr-32 → pr-12 md:pr-16 | 30s → 50s | h-24 md:h-28 → h-16 md:h-20 | min-w reduced */}
-          <div className="flex w-max animate-[marquee_50s_linear_infinite] items-center gap-28 md:gap-36 pr-28 md:pr-36 will-change-transform">
+          <div className="flex w-max animate-[marquee_50s_linear_infinite] items-center gap-12 sm:gap-28 md:gap-36 pr-12 sm:pr-28 md:pr-36 will-change-transform">
             {[...logos, ...logos].map((logo, idx) => (
               <div
                 key={`${logo.src}-${idx}`}
-                className="h-10 md:h-12 w-fit shrink-0 flex items-center opacity-80 hover:opacity-100 transition-opacity"
+                className="h-7 sm:h-10 md:h-12 w-fit shrink-0 flex items-center opacity-80 hover:opacity-100 transition-opacity"
               >
                 <Image
                   width={logo.width}
                   height={logo.height}
                   src={logo.src}
                   alt={`${logo.name} logo`}
-                  className="h-auto object-contain"
+                  className="h-full w-auto max-w-[4.5rem] sm:max-w-none object-contain"
                   style={{
                     width: `clamp(${Math.round(logo.width * 0.35)}px, ${Math.round(logo.width / 28)}rem, ${Math.round(logo.width * 0.5)}px)`,
-                    maxHeight: `${Math.round(logo.height * 0.5)}px`,
+                    maxHeight: "100%",
                   }}
                 />
               </div>
             ))}
           </div>
         </div>
-      </div>
-      <div className="flex justify-center">
-        <Button title={"See all our brands"} className={"!mt-0"} href="/brands" />
       </div>
     </section>
   );

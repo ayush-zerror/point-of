@@ -42,10 +42,10 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden px-4 pt-20 pb-4 sm:px-6 sm:pt-24 sm:pb-6 md:px-10 md:pt-24 md:pb-8 lg:h-screen lg:px-0 lg:pt-0 lg:pb-0">
+    <section className="relative w-full overflow-hidden px-4 pt-20 pb-4 sm:px-6 sm:pt-24 sm:pb-6 md:px-10 md:pt-24 md:pb-8 xl:h-screen xl:px-0 xl:pt-0 xl:pb-0">
       
       {/* Video Wrapper */}
-      <div className="relative overflow-hidden lg:h-full">
+      <div className="relative overflow-hidden xl:h-full">
         
         {/* Video */}
         <video
@@ -55,13 +55,13 @@ const HeroSection = () => {
           loop
           muted
           playsInline
-          className="h-auto w-full object-cover lg:h-full"
+          className="h-auto w-full object-cover xl:h-full"
         />
 
 
 
         {/* Bottom Controls */}
-        <div className="absolute inset-x-0 bottom-0 z-20 flex justify-end p-4 sm:p-4 md:p-4 md:py-4 lg:p-6 lg:py-6">
+        <div className="absolute inset-x-0 bottom-0 z-20 flex justify-end p-4 sm:p-4 md:p-4 md:py-4 xl:p-6 xl:py-6">
           
           {/* Controls Wrapper */}
           <div className="flex items-center gap-2 sm:gap-3">

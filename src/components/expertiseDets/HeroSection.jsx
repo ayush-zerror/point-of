@@ -40,7 +40,7 @@ const HeroSection = ({ src, alt = "Hero image" }) => {
   return (
     <section
       ref={sectionRef}
-      className="w-full h-auto lg:h-screen px-6 sm:px-6 md:px-10 lg:px-0 pt-20 sm:pt-24 md:pt-24 lg:pt-0 pb-6 md:pb-10 lg:pb-0 overflow-hidden"
+      className="w-full h-auto xl:h-screen px-6 sm:px-6 md:px-10 xl:px-0 pt-20 sm:pt-24 md:pt-24 xl:pt-0 pb-6 md:pb-10 xl:pb-0 overflow-hidden"
     >
       <div
         className={`relative w-full h-full  overflow-hidden will-change-transform ${IMAGE_PLACEHOLDER_BG}`}
@@ -54,7 +54,7 @@ const HeroSection = ({ src, alt = "Hero image" }) => {
             height={900}
             priority
             onLoadingComplete={() => setLoaded(true)}
-            className={`w-full h-full object-cover object-center transition-opacity duration-300 ${
+            className={`w-full h-auto xl:h-full object-cover object-center transition-opacity duration-300 ${
               loaded ? "opacity-100" : "opacity-0"
             }`}
           />

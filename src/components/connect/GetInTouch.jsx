@@ -309,7 +309,7 @@ const GetInTouch = () => {
       className="min-h-screen  md:h-screen w-full bg-secondary text-background"
     >
       <div className="h-full flex items-center">
-        <div className="w-full px-6 sm:px-10 md:pl-12 lg:pl-48 xl:pl-80 2xl:pl-[30rem] md:pr-12 lg:pr-20 py-16 sm:py-20 md:py-2">
+        <div className="w-full px-6 sm:px-10 md:pl-12 xl:pl-48 2xl:pl-[30rem] md:pr-12 xl:pr-20 py-16 sm:py-20 md:py-2">
 
           <h2 id="get-in-touch" className="heading-xl mb-6 md:mb-8">Get in touch</h2>
 

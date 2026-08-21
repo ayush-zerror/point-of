@@ -23,9 +23,9 @@ const Expertise = () => {
       <HashScrollToId />
       <HeroSection />
       <AreasOfExpertise />
-      <div className="w-full px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 pt-16 sm:pt-20 md:pt-28 lg:pt-32 z-20 pointer-events-none scroll-mt-24">
+      <div className="w-full px-6 sm:px-10 md:px-12 xl:px-14 2xl:px-20 pt-16 sm:pt-20 md:pt-28 lg:pt-32 z-20 pointer-events-none scroll-mt-24">
         <h2 id="how-we-work" className="heading-xl text-heading">How we work</h2>
-        <p className="para text-desc mt-4 max-w-2xl">
+        <p className="para text-desc mt-4 max-w-none xl:max-w-2xl">
           Every engagement follows the same disciplined process—from the
           first conversation to the final handoff. Clear stages. Collaborative
           at every step.
