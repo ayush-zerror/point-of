@@ -21,53 +21,55 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
   return (
     <div
       ref={ref}
-      className="fixed inset-0 z-40 bg-secondary text-background overflow-hidden flex items-end"
+      className="fixed inset-0 z-40 bg-secondary text-background overflow-hidden flex items-stretch"
       style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0 0%)" }}
     >
       <div className="w-full flex flex-col h-dvh px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 pt-24 pb-10 md:py-24 overflow-y-auto overscroll-contain">
-        {/* TOP */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 md:gap-12 mb-10 md:mb-16 flex-1 min-h-0">
-          {/* NAV LINKS */}
-          <nav className="flex flex-col gap-3 sm:gap-4 md:gap-5">
-            {[
-              { name: "About", href: "/about" },
-              { name: "Work", href: "/work" },
-              { name: "Expertise", href: "/expertise" },
-              { name: "Brands", href: "/brands" },
-              { name: "Connect", href: "/connect" },
-            ].map((item) => {
-              const isActive = isNavActive(pathname, item.href);
-              return (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className={`group block w-fit heading-xl uppercase font-heading font-extralight tracking-tight cursor-pointer transition-[transform,color,opacity] duration-200 hover:translate-x-2 ${
-                  isActive
-                    ? "text-background opacity-100"
-                    : "text-gray-600 opacity-100 hover:text-background"
-                }`}
-                title={item.name}
-              >
-                <span className="nav-item link-underline">{item.name}</span>
-              </Link>
-            );
-            })}
-          </nav>
+        {/* TOP — links stay top; email at bottom through iPad Pro, beside from xl */}
+        <div className="flex flex-1 min-h-0 mb-10 md:mb-16 flex-col">
+          <div className="flex flex-1 xl:flex-none flex-col items-start gap-8 xl:flex-row xl:items-end xl:justify-between xl:gap-12">
+            {/* NAV LINKS */}
+            <nav className="flex flex-col gap-3 sm:gap-4 md:gap-5 shrink-0">
+              {[
+                { name: "About", href: "/about" },
+                { name: "Work", href: "/work" },
+                { name: "Expertise", href: "/expertise" },
+                { name: "Brands", href: "/brands" },
+                { name: "Connect", href: "/connect" },
+              ].map((item) => {
+                const isActive = isNavActive(pathname, item.href);
+                return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`group block w-fit heading-xl uppercase font-heading font-extralight tracking-tight cursor-pointer transition-[transform,color,opacity] duration-200 hover:translate-x-2 ${
+                    isActive
+                      ? "text-background opacity-100"
+                      : "text-gray-600 opacity-100 hover:text-background"
+                  }`}
+                  title={item.name}
+                >
+                  <span className="nav-item link-underline">{item.name}</span>
+                </Link>
+              );
+              })}
+            </nav>
 
-          {/* EMAIL BUTTON */}
-          <div className="nav-item shrink-0">
-            <Button
-              title={"think@wearepointof.com"}
-              href="mailto:think@wearepointof.com"
-              color="#000000"
-              textClassName="!text-base sm:!text-2xl !lowercase !font-normal"
-            />
+            {/* EMAIL BUTTON */}
+            <div className="nav-item shrink-0 self-start mt-auto xl:mt-0 xl:self-auto">
+              <Button
+                title={"think@wearepointof.com"}
+                href="mailto:think@wearepointof.com"
+                color="#000000"
+                textClassName="!text-base sm:!text-2xl !lowercase !font-normal"
+              />
+            </div>
           </div>
         </div>
 
         {/* BOTTOM */}
-        <div className="nav-item border-t border-gray-400 pt-5 md:pt-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-4 shrink-0">
+        <div className="nav-item border-t border-gray-400 pt-5 md:pt-7 flex flex-row flex-wrap items-center justify-between gap-x-4 gap-y-5 shrink-0">
           {/* SOCIAL LINKS */}
           <div className="flex flex-wrap gap-4 sm:gap-12">
             {(socialLinks ?? []).map((item) => (
@@ -86,7 +88,7 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
           </div>
 
           {/* CTA BUTTONS */}
-          <div className="flex items-center gap-4 sm:gap-6 md:gap-12">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-12">
             {[
               { label: "SHOWREEL", href: "/expertise" },
               { label: "CAREERS", href: "/connect#join-our-team" },
