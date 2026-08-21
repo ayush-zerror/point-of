@@ -125,41 +125,44 @@ export default function OurValues() {
         }
       >
 
-        {/* Heading: clamp scales smoothly across all screen sizes */}
-        <h2 className="absolute z-10 text-center heading-lg text-subheading pointer-events-none bottom-[22%] left-1/2 -translate-x-1/2 sm:bottom-[13%] md:bottom-[24%] lg:bottom-[15%]">
-          Our <br /> Values
-        </h2>
-
         {/*
-          SVG sizing strategy:
-          - Mobile (portrait): fill 96vw wide, height matches (square)
-          - sm+: constrain to the smaller of 90vh or 90vw so it never
-            overflows horizontally on landscape phones or wide desktops
+          Heading + SVG share one sized box so "Our Values" stays
+          centered in the innermost circle on every aspect ratio
+          (incl. iPad Pro), not relative to the viewport.
         */}
-        <svg
-          className="w-[96vw] h-[96vw] sm:w-[min(90vh,90vw)] sm:h-[min(90vh,90vw)] shrink-0 overflow-visible"
-          viewBox="0 0 2100 2100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            {circles.map((c) => (
-              <path key={c.pathId} id={c.pathId} d={c.path} />
-            ))}
-          </defs>
+        <div className="relative w-[96vw] h-[96vw] sm:w-[min(90vh,90vw)] sm:h-[min(90vh,90vw)] shrink-0">
+          {/*
+            Innermost circle center is at y=1650 in a 2100 viewBox
+            → ~21.4% from the bottom of the SVG.
+          */}
+          <h2 className="absolute z-10 text-center heading-lg text-subheading pointer-events-none left-1/2 bottom-[9%] sm:bottom-[13%] lg:bottom-[12%] xl:bottom-[8%] -translate-x-1/2 -translate-y-1/2">
+            Our <br /> Values
+          </h2>
 
-          {isMobile
-            ? circles.map((circle) => <CircleItemStatic key={circle.pathId} circle={circle} />)
-            : circles.map((circle, i) => (
-                <CircleItem
-                  key={circle.label}
-                  circle={circle}
-                  index={i}
-                  scrollYProgress={scrollYProgress}
-                />
+          <svg
+            className="h-full w-full overflow-visible"
+            viewBox="0 0 2100 2100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              {circles.map((c) => (
+                <path key={c.pathId} id={c.pathId} d={c.path} />
               ))}
+            </defs>
 
-        </svg>
+            {isMobile
+              ? circles.map((circle) => <CircleItemStatic key={circle.pathId} circle={circle} />)
+              : circles.map((circle, i) => (
+                  <CircleItem
+                    key={circle.label}
+                    circle={circle}
+                    index={i}
+                    scrollYProgress={scrollYProgress}
+                  />
+                ))}
+          </svg>
+        </div>
       </div>
     </section>
   );

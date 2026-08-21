@@ -70,8 +70,8 @@ const ContactSection = () => {
               </div>
 
               {/* Bottom Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 sm:gap-12 md:gap-14 lg:gap-16 xl:gap-20 w-full [&_.para]:text-[13px] [&_.para]:md:text-sm [&_.para]:lg:text-sm [&_.para]:xl:text-base">
-                <div className="w-full min-w-0">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-8 sm:gap-12 md:gap-14 lg:gap-16 xl:gap-20 [&_.para]:text-[13px] [&_.para]:md:text-sm [&_.para]:lg:text-sm [&_.para]:xl:text-base">
+                <div className="w-fit">
                   <h3 className="heading-md text-subheading mb-3 md:mb-4">Contact</h3>
                   <a
                     href="https://wa.me/919167991888"
@@ -97,7 +97,7 @@ const ContactSection = () => {
                   href="https://maps.app.goo.gl/kT1qQH69GXNvwQqB6"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block w-full min-w-0"
+                  className="group block w-fit"
                   title="Open Mumbai office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Mumbai, India</h3>
@@ -110,7 +110,7 @@ const ContactSection = () => {
                   href="https://maps.app.goo.gl/Fqe7dUF8b8McqXdt6"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block w-full min-w-0"
+                  className="group block w-fit"
                   title="Open Barcelona office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Barcelona, Spain</h3>
@@ -123,7 +123,7 @@ const ContactSection = () => {
                   href="https://maps.app.goo.gl/bAnZraZc83nM5eLB7"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block w-full min-w-0"
+                  className="group block w-fit"
                   title="Open Austin office in Google Maps"
                 >
                   <h3 className="heading-md text-subheading mb-3 md:mb-4 transition-colors duration-200 group-hover:text-heading">Austin, USA</h3>
