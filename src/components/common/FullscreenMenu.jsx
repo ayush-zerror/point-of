@@ -99,9 +99,12 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 href={item.href}
                 scroll={!item.href.includes("#")}
                 onClick={(e) => {
+                  // Always close immediately; hash links will be handled by
+                  // `handleHashLinkClick` and navigate via `router.push`.
+                  setMenuOpen(false);
+
                   handleHashLinkClick(e, item.href, {
                     onNavigate: (path) => {
-                      setMenuOpen(false);
                       if (path) router.push(path);
                     },
                   });

@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react'
+import { Plus } from "lucide-react";
 import Button from '../common/Button'
 
 const AccordionSection = ({ data, title, description, padding = "editorial" }) => {
@@ -29,35 +30,39 @@ const AccordionSection = ({ data, title, description, padding = "editorial" }) =
                 )}
 
                 {/* Accordion */}
-                <div className="space-y-6 max-w-none xl:max-w-3xl mt-12">
-                    {data.map((job, index) => (
-                        <div key={index} className="border-b border-white/20 pb-6">
+                <div className="border-t border-white/20 max-w-none xl:max-w-3xl mt-12">
+                    {data.map((job, index) => {
+                        const isOpen = activeIndex === index;
+
+                        return (
+                        <div key={index} className="border-b border-white/20">
 
                             {/* Header */}
                             <button
                                 type="button"
                                 onClick={() => toggle(index)}
-                                className="w-full flex items-center justify-between cursor-pointer group text-left group"
+                                className="w-full flex items-center justify-between py-6 lg:py-8 cursor-pointer group text-left"
                             >
-                                <span className={`heading-lg text-desc transition group-hover:text-heading ${activeIndex === index ? "text-heading" : "text-desc"}`}>
+                                <span className={`heading-lg text-desc transition group-hover:text-heading ${isOpen ? "text-heading" : "text-desc"}`}>
                                     {job.title}
                                 </span>
 
-                                {/* Rotating + */}
-                                <span
-                                    className={`text-2xl transition-transform duration-300 ${activeIndex === index ? "rotate-45 " : ""
-                                        }`}
-                                >
-                                    +
-                                </span>
+                                <Plus
+                                    className={`w-5 h-5 shrink-0 transition-transform duration-300 ${
+                                        isOpen ? "rotate-45" : ""
+                                    }`}
+                                />
                             </button>
 
-                            {/* Smooth Content */}
+                            {/* Content */}
                             <div
-                                className={`overflow-hidden transition-all duration-500 ease-in-out max-w-none xl:max-w-2xl ${activeIndex === index ? "max-h-[1600px] opacity-100 mt-8" : "max-h-0 opacity-0 mt-0"}`}
+                                className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                                }`}
                             >
+                                <div className="overflow-hidden min-h-0">
                                 {job.content ? (
-                                    <div className="space-y-6 para text-subheading pointer-events-auto">
+                                    <div className="space-y-6 para-acc text-desc pointer-events-auto max-w-none xl:max-w-2xl pb-6">
 
                                         {/* Meta */}
                                         <div className="uppercase space-y-1">
@@ -118,14 +123,16 @@ const AccordionSection = ({ data, title, description, padding = "editorial" }) =
 
                                     </div>
                                 ) : (
-                                    <div className="para text-subheading">
+                                    <div className="para-acc text-desc max-w-none xl:max-w-2xl pb-6">
                                         <p>{job.body ?? job.description}</p>
                                     </div>
                                 )}
+                                </div>
                             </div>
 
                         </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </section >

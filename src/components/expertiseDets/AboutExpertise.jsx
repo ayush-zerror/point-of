@@ -129,7 +129,7 @@ const AboutExpertise = ({
                     }`}
                   >
                     <div className="overflow-hidden min-h-0">
-                      <p className="para text-desc max-w-xl pb-6">
+                      <p className="para-acc text-desc max-w-xl pb-6">
                         {item.content}
                       </p>
                     </div>

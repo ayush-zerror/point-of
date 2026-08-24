@@ -75,6 +75,14 @@ body {
     lg:text-[16px]
     xl:text-[18px];
   }
+
+  .para-acc {
+    @apply font-body font-normal leading-[1.6] tracking-[0.3px]
+    text-[13px]
+    md:text-sm
+    lg:text-[14px]
+    xl:text-[18px];
+  }
   /* Underline hover: width 0 -> 100% */
   .link-underline {
     @apply relative inline-block w-fit;

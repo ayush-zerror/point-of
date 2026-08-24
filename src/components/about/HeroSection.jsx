@@ -262,10 +262,10 @@ const HeroSection = ({
       )}
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center md:items-end">
+      <div className="relative z-10 h-full flex items-center xl:items-end">
         <div
           ref={contentRef}
-          className="w-full relative px-6 sm:px-10 md:pl-12 xl:pl-80 2xl:pl-120 pr-6 py-12 sm:py-16 pt-36 sm:pt-40 md:pb-52 xl:pb-28 2xl:pb-40 md:pt-0"
+          className="w-full relative px-6 sm:px-10 md:px-12 xl:pl-80 2xl:pl-120 xl:pr-6 pt-36 sm:pt-40 md:pt-0 md:pb-0 xl:pb-28 2xl:pb-40"
         >
           {showClock && (
             <Clock clockCountry={clockCountry} clockTimeZone={clockTimeZone} />
