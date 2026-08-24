@@ -40,13 +40,13 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
       {/* Circle */}
       <span
         style={circleStyle}
-        className={`relative flex items-center justify-center w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 group-hover:w-4 group-hover:h-4 sm:group-hover:w-5 sm:group-hover:h-5 ${
+        className={`relative flex items-center justify-center w-2 h-2 rounded-full transition-all duration-300 group-hover:w-5 group-hover:h-5 ${
           useInline ? "" : `bg-${color}`
         }`}
       >
         {/* Arrow */}
         <svg
-          className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${arrowOnFillClass} opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100`}
+          className={`w-3 h-3 ${arrowOnFillClass} opacity-0 scale-50 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100`}
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -59,7 +59,7 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
       {/* Text with animated underline */}
       <span
         style={textStyle}
-        className={`relative uppercase whitespace-nowrap text-[9px] sm:text-[11px] md:text-sm ${
+        className={`relative uppercase whitespace-nowrap text-[11px] md:text-sm ${
           useInline ? "" : `text-${color}`
         } ${textClassName ?? ""}`}
       >
@@ -76,10 +76,10 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
   );
 
   const linkClass =
-    "cursor-pointer group flex mb-1 items-center gap-1 sm:gap-1.5 md:gap-2 font-semibold tracking-wide uppercase touch-manipulation";
+    "cursor-pointer group flex mb-1 items-center gap-1.5 md:gap-2 font-semibold tracking-wide uppercase touch-manipulation";
 
   return (
-    <div className={`mt-5 sm:mt-6 md:mt-10 z-20 relative ${className ?? ""}`}>
+    <div className={`mt-6 md:mt-10 z-20 relative ${className ?? ""}`}>
       {href ? (
         href.startsWith("/") ? (
           <Link

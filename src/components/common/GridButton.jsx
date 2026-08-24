@@ -23,26 +23,26 @@ const GridButton = ({ title, onClick, color = "#c0bfbf", className, textClassNam
       {/* Icon + ring */}
       <span
         style={iconStyle}
-        className={`relative flex items-center justify-center w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 flex-shrink-0 ${
+        className={`relative flex items-center justify-center w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0 ${
           useInline ? "" : `text-${color}`
         }`}
       >
         <span
-          className={`absolute w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 rounded-full border opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+          className={`absolute w-2 h-2 md:w-2.5 md:h-2.5 rounded-full border opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
             useInline ? "" : `border-${color}`
           }`}
           style={useInline ? { borderColor: color } : undefined}
         />
         {isFilterButton ? (
-          <RiEqualizer3Line className="relative w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-4 md:h-4 transition-opacity duration-300 group-hover:opacity-0" />
+          <RiEqualizer3Line className="relative w-2.5 h-2.5 md:w-4 md:h-4 transition-opacity duration-300 group-hover:opacity-0" />
         ) : isGalleryButton ? (
-          <LuGalleryVertical className="relative w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-4 md:h-4 transition-opacity duration-300 group-hover:opacity-0" />
+          <LuGalleryVertical className="relative w-2.5 h-2.5 md:w-4 md:h-4 transition-opacity duration-300 group-hover:opacity-0" />
         ) : (
           <svg
             viewBox="0 0 9 13"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="relative w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3 transition-opacity duration-300 group-hover:opacity-0"
+            className="relative w-2.5 h-2.5 md:w-3 md:h-3 transition-opacity duration-300 group-hover:opacity-0"
           >
             <g>
               <path d="M0.296875 5.73439C0.494792 5.53972 0.729167 5.44238 1 5.44238C1.27083 5.44238 1.50521 5.53972 1.70313 5.73439C1.90104 5.92906 2 6.1596 2 6.42599C2 6.67189 1.90104 6.8973 1.70313 7.10222C1.50521 7.30714 1.27604 7.4096 1.01563 7.4096C0.744792 7.4096 0.505208 7.31226 0.296875 7.11759C0.0989582 6.92292 -5.55499e-08 6.69238 -4.37114e-08 6.42599C-3.18729e-08 6.1596 0.0989585 5.92906 0.296875 5.73439Z" fill="currentColor" />
@@ -59,7 +59,7 @@ const GridButton = ({ title, onClick, color = "#c0bfbf", className, textClassNam
       {/* Text */}
       <span
         style={textStyle}
-        className={`relative uppercase whitespace-nowrap text-[9px] sm:text-[11px] md:text-sm ${
+        className={`relative uppercase whitespace-nowrap text-[11px] md:text-sm ${
           useInline ? "" : `text-${color}`
         } ${textClassName ?? ""}`}
       >
@@ -69,11 +69,11 @@ const GridButton = ({ title, onClick, color = "#c0bfbf", className, textClassNam
   );
 
   return (
-    <div className={`mt-5 sm:mt-6 md:mt-10 z-20 relative ${className ?? ""}`}>
+    <div className={`mt-6 md:mt-10 z-20 relative ${className ?? ""}`}>
       <button
         type="button"
         onClick={handleClick}
-        className="cursor-pointer group flex mb-1 items-center gap-1 sm:gap-1.5 md:gap-2 font-semibold tracking-wide uppercase touch-manipulation"
+        className="cursor-pointer group flex mb-1 items-center gap-1.5 md:gap-2 font-semibold tracking-wide uppercase touch-manipulation"
       >
         {inner}
       </button>
