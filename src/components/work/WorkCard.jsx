@@ -77,7 +77,7 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false, cla
         aria-label={title}
       >
         <div className="absolute left-0 overflow-hidden z-10 -top-8">
-          <span className="inline-block origin-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base tracking-wide translate-y-0 rotate-0 lg:translate-y-full lg:rotate-10 lg:group-hover:translate-y-0 lg:group-hover:rotate-0">
+          <span className="inline-block origin-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base xl:text-lg tracking-wide translate-y-0 rotate-0 lg:translate-y-full lg:rotate-10 lg:group-hover:translate-y-0 lg:group-hover:rotate-0">
             {title}
           </span>
         </div>
@@ -119,7 +119,7 @@ const WorkCard = ({ slug, title, image, video, enableFlipTransition = false, cla
       aria-label={title}
     >
       <div className="absolute left-0 overflow-hidden z-10 -top-8">
-        <span className="inline-block origin-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base tracking-wide translate-y-0 rotate-0 lg:translate-y-full lg:rotate-10 lg:group-hover:translate-y-0 lg:group-hover:rotate-0">
+        <span className="inline-block origin-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] text-white text-sm md:text-base xl:text-lg tracking-wide translate-y-0 rotate-0 lg:translate-y-full lg:rotate-10 lg:group-hover:translate-y-0 lg:group-hover:rotate-0">
           {title}
         </span>
       </div>
