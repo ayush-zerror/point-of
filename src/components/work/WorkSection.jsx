@@ -750,7 +750,7 @@ const WorkSection = ({ projects }) => {
                   ref={(el) => {
                     descRefs.current[i] = el;
                   }}
-                  className="m-0 block w-full text-white/60 font-heading font-extralight leading-[1.7] text-xs sm:text-sm md:text-base max-w-[42ch] sm:max-w-[46ch] text-left lg:max-w-none py-px"
+                  className="m-0 block w-full text-white/60 para max-w-[42ch] sm:max-w-[46ch] text-left lg:max-w-none py-px"
                   style={{
                     willChange: "transform, opacity",
                     transform: i === 0 ? "translate(0px, 0%)" : "translate(0px, 100%)",
