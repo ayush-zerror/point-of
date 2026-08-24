@@ -305,7 +305,7 @@ const OurProcess = () => {
               margin-right: auto;
             }
             #svg-mobile .our-process-scroll-path {
-              stroke-width: 22;
+              stroke-width: 12;
             }
             #svg-mobile g.step > text:nth-of-type(1) {
               font-size: 36px;
@@ -314,10 +314,10 @@ const OurProcess = () => {
               font-size: 22px;
             }
             #svg-mobile .our-process-scroll-dot {
-              r: 14;
+              r: 9;
             }
             #svg-mobile .our-process-scroll-glow {
-              r: 180;
+              r: 120;
             }
           }
         `}</style>
