@@ -1,5 +1,6 @@
 "use client";
 import { RiEqualizer3Line } from "@remixicon/react";
+import { LuGalleryVertical } from "react-icons/lu";
 import React from "react";
 
 const isHexColor = (v) => typeof v === "string" && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v);
@@ -9,9 +10,9 @@ const GridButton = ({ title, onClick, color = "#c0bfbf", className, textClassNam
     if (typeof onClick === "function") onClick(event);
   };
 
-  const isFilterButton = String(title ?? "")
-    .trim()
-    .toLowerCase() === "filter";
+  const normalizedTitle = String(title ?? "").trim().toLowerCase();
+  const isFilterButton = normalizedTitle === "filter";
+  const isGalleryButton = normalizedTitle === "gallery view";
 
   const useInline = isHexColor(color);
   const iconStyle = useInline ? { color } : undefined;
@@ -33,7 +34,9 @@ const GridButton = ({ title, onClick, color = "#c0bfbf", className, textClassNam
           style={useInline ? { borderColor: color } : undefined}
         />
         {isFilterButton ? (
-          <RiEqualizer3Line    className="relative w-2.5 h-2.5 md:w-4 md:h-4 transition-opacity duration-300 group-hover:opacity-0" />
+          <RiEqualizer3Line className="relative w-2.5 h-2.5 md:w-4 md:h-4 transition-opacity duration-300 group-hover:opacity-0" />
+        ) : isGalleryButton ? (
+          <LuGalleryVertical className="relative w-2.5 h-2.5 md:w-4 md:h-4 transition-opacity duration-300 group-hover:opacity-0" />
         ) : (
           <svg
             viewBox="0 0 9 13"
