@@ -224,6 +224,14 @@ body {
   border: 0 !important;
 }
 
+.phone-field:has(.flag-dropdown.open) {
+  z-index: 50;
+}
+
+.phone-field .react-tel-input .flag-dropdown.open {
+  z-index: 50 !important;
+}
+
 .phone-field .react-tel-input .selected-flag {
   width: 52px !important;
   height: 100% !important;
@@ -238,18 +246,32 @@ body {
   padding: 1.25rem 0 0.5rem 8px !important;
 }
 
-.phone-field .react-tel-input .selected-flag .flag,
-.phone-field .react-tel-input .selected-flag .arrow {
+.phone-field .react-tel-input .selected-flag .flag{
   position: static !important;
   top: auto !important;
   left: auto !important;
   margin: 0 !important;
   transform: none !important;
+/* 
+  */
+}
+
+.phone-field .react-tel-input .selected-flag .arrow {
+  position: relative;
+  top: 50%;
+  margin-top: -2px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 4px solid #555;
 }
 
 .react-tel-input .country-list {
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  z-index: 60 !important;
 }
 
 .react-tel-input .country-list .search {

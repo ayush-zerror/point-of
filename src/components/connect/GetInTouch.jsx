@@ -348,7 +348,7 @@ const GetInTouch = () => {
             {/* ── Phone ── */}
             <div
               ref={phoneFieldRef}
-              className={`phone-field relative${phoneFocused || phoneHasTypedDigits ? " is-active" : ""}`}
+              className={`phone-field relative z-20${phoneFocused || phoneHasTypedDigits ? " is-active" : ""}`}
               data-lenis-prevent
             >
               <div className={`relative border-b ${errors.phone ? "border-red-500" : "border-gray-400"}`}>
@@ -426,8 +426,8 @@ const GetInTouch = () => {
                     searchClass="!text-black !bg-white"
                     containerClass="w-full"
                     inputClass="!w-full !h-auto !border-0 !bg-transparent !outline-none !shadow-none !text-sm sm:!text-base"
-                    buttonClass="!border-0 !bg-transparent"
-                    dropdownClass="!bg-white !text-black"
+                    dropdownClass="!bg-white !text-black !z-[60]"
+                    buttonClass="!border-0 !bg-transparent !z-[50]"
                   />
                 )}
               />
