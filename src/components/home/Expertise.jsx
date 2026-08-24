@@ -11,8 +11,8 @@ import { expertiseItems } from "@/helper/expertise-items";
 gsap.registerPlugin(ScrollTrigger);
 
 const LAST_IDX = expertiseItems.length - 1;
-const EXPERTISE_SCROLL_START = 0.02;
-const EXPERTISE_SCROLL_END = 0.82;
+const EXPERTISE_SCROLL_START = 0.06;
+const EXPERTISE_SCROLL_END = 0.88;
 
 export default function Expertise() {
   const [isMobile, setIsMobile] = useState(false);
@@ -159,9 +159,9 @@ export default function Expertise() {
       //     swap instantly onto Branding's own dot, then open the item.
       ScrollTrigger.create({
         trigger: ref.current,
-        start: "top 85%",
+        start: "top 70%",
         end: "top top",
-        scrub: 1,
+        scrub: 1.4,
         invalidateOnRefresh: true,
 
         onRefresh: () => {
@@ -370,7 +370,7 @@ export default function Expertise() {
   if (isMobile) return null;
 
   return (
-    <section id="page3" className="relative h-[400vh] bg-background cursor-default" ref={ref}>
+    <section id="page3" className="relative h-[560vh] bg-background cursor-default" ref={ref}>
       <div
         ref={travelCircleRef}
         style={{
@@ -416,7 +416,7 @@ export default function Expertise() {
                         transition={
                           skipDotAnimRef.current
                             ? { duration: 0 }
-                            : { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
+                            : { duration: 0.75, ease: [0.22, 1, 0.36, 1] }
                         }
                         className="h-full w-full origin-center rounded-full bg-secondary"
                       />
@@ -442,7 +442,7 @@ export default function Expertise() {
                   <motion.div
                     initial={false}
                     animate={{ height: isActive ? "auto" : 0, opacity: isActive ? 1 : 0 }}
-                    transition={{ duration: 0.4 }}
+                    transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
                     className="overflow-hidden"
                   >
                     <p className="para text-desc mt-4 max-w-xl">{item.content}</p>

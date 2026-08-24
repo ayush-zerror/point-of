@@ -59,7 +59,7 @@ const AboutStudio = () => {
         };
       }
 
-      // ── DESKTOP: full-size circle at bottom center, pin, then shrink to a dot
+      // ── DESKTOP: full-size circle at bottom center, pin, shrink while sticky, then hand off ──
       if (circle2) {
         gsap.set(circle2, {
           position: "fixed",
@@ -74,15 +74,35 @@ const AboutStudio = () => {
           scale: 1,
           opacity: 0,
           autoRound: false,
+          zIndex: 0,
         });
       }
+
+      const snapCircleSmall = () => {
+        if (!circle2) return;
+        gsap.set(circle2, {
+          position: "fixed",
+          left: "50%",
+          top: "80%",
+          xPercent: -50,
+          yPercent: -50,
+          x: 0,
+          y: 0,
+          width: 20,
+          height: 20,
+          scale: 1,
+          opacity: 1,
+          autoRound: false,
+          zIndex: 0,
+        });
+      };
 
       gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 20%",
           end: "top 0%",
-          scrub: 1,
+          scrub: 0.5,
         },
       }).to(circle2, {
         opacity: 1,
@@ -90,26 +110,46 @@ const AboutStudio = () => {
         duration: 1,
       });
 
+      // Pin: 1) text fill → 2) slow shrink → 3) hold small while still sticky
       gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "top -140%",
-          scrub: 1,
+          end: "+=360%",
+          scrub: 1.1,
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onLeave: snapCircleSmall,
+          onEnterBack: () => {
+            if (circle2) {
+              gsap.set(circle2, {
+                left: "50%",
+                top: "80%",
+                xPercent: -50,
+                yPercent: -50,
+                opacity: 1,
+                zIndex: 0,
+              });
+            }
+          },
         },
       })
         .to(words, {
           opacity: 1,
-          stagger: 0.15,
+          stagger: 0.1,
+          duration: 1,
+          ease: "none",
         })
+        // Longer shrink + smooth ease so it feels slow after text fill
         .to(circle2, {
-          width: "20px",
-          height: "20px",
-          duration: 8,
+          width: 20,
+          height: 20,
+          duration: 3.2,
+          ease: "power1.inOut",
           autoRound: false,
-        });
+        })
+        .to({}, { duration: 0.7 });
 
       return () => {
         split1.revert();
