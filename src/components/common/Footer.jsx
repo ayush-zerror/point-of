@@ -228,8 +228,8 @@ export default function Footer() {
               Legal
             </Link>
           </div>
-          <p className="text-neutral-400 scale-90">
-          © {new Date().getFullYear()} built by Point Of
+          <p className="w-full sm:w-auto text-left text-neutral-400 text-[0.8125rem] sm:text-sm">
+            © {new Date().getFullYear()} built by Point Of
           </p>
         </div>
 

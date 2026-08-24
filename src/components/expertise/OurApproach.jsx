@@ -9,12 +9,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 const OurApproach = () => {
     const containerRef = useRef(null);
+    const mobileTrackRef = useRef(null);
+    const mobileProgressRef = useRef(null);
+    const mobileDotRefs = useRef([]);
 
     useGSAP(() => {
-        if (!containerRef.current) return;
-
         // ─── DESKTOP only (xl+) ───
         if (window.innerWidth >= 1280) {
+            if (!containerRef.current) return;
             const aptl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#page4",
@@ -170,11 +172,69 @@ const OurApproach = () => {
             });
         }
 
-        // ─── MOBILE / TABLET (incl. iPad Pro): fade-up each card on scroll ───
+        // ─── MOBILE / TABLET (incl. iPad Pro): vertical progress + card fades ───
         if (window.innerWidth < 1280) {
-            gsap.utils.toArray(".approach-card-mobile").forEach((card) => {
+            const track = mobileTrackRef.current;
+            const progress = mobileProgressRef.current;
+            const trackBg = track?.querySelector(".approach-mobile-track-bg");
+            const dots = mobileDotRefs.current.filter(Boolean);
+            const cards = gsap.utils.toArray(".approach-card-mobile");
+
+            if (track && progress && trackBg && dots.length >= 2) {
+                const layoutRail = () => {
+                    const trackRect = track.getBoundingClientRect();
+                    const first = dots[0].getBoundingClientRect();
+                    const last = dots[dots.length - 1].getBoundingClientRect();
+                    const top =
+                        first.top + first.height / 2 - trackRect.top;
+                    const bottom =
+                        last.top + last.height / 2 - trackRect.top;
+                    const height = Math.max(bottom - top, 0);
+
+                    gsap.set([trackBg, progress], {
+                        top,
+                        height,
+                        left: first.left + first.width / 2 - trackRect.left,
+                    });
+                };
+
+                layoutRail();
+                gsap.set(progress, { scaleY: 0, transformOrigin: "top center" });
+                gsap.set(dots, { backgroundColor: "#5a5a5a" });
+                // First dot starts filled
+                gsap.set(dots[0], { backgroundColor: "#E8E8E1" });
+
+                gsap.to(progress, {
+                    scaleY: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: dots[0],
+                        endTrigger: dots[dots.length - 1],
+                        start: "center 65%",
+                        end: "center 65%",
+                        scrub: 0.4,
+                        invalidateOnRefresh: true,
+                        onRefresh: layoutRail,
+                        onUpdate: (self) => {
+                            const p = self.progress;
+                            // Fill each dot when the bar reaches it (0 → 1st, 0.5 → 2nd, 1 → 3rd)
+                            dots.forEach((dot, i) => {
+                                const threshold = i / (dots.length - 1);
+                                gsap.set(dot, {
+                                    backgroundColor:
+                                        p >= threshold - 0.01 ? "#E8E8E1" : "#5a5a5a",
+                                });
+                            });
+                        },
+                    },
+                });
+            }
+
+            cards.forEach((card) => {
+                const content = card.querySelector(".approach-card-mobile-content");
+                if (!content) return;
                 gsap.fromTo(
-                    card,
+                    content,
                     { opacity: 0, y: 40 },
                     {
                         opacity: 1,
@@ -329,7 +389,7 @@ const OurApproach = () => {
             </div>
 
             {/* ─── MOBILE / TABLET ─── */}
-            <div className="approach-mobile w-full px-6 md:px-12 py-[14vw]">
+            <div className="approach-mobile w-full px-6 sm:px-10 md:px-12 py-[14vw]">
                 <h2 className="heading-xl mb-4 text-heading">Our Approach</h2>
                 <p className="para text-desc max-w-2xl mb-[10vw]">
                   We work across three dimensions simultaneously—because strategy
@@ -337,63 +397,94 @@ const OurApproach = () => {
                   doesn&apos;t scale.
                 </p>
 
-                {/* Card 1—Strategy */}
-                <div className="approach-card-mobile mb-[12vw]" style={{ opacity: 0 }}>
-                    <div className="mb-[5vw] flex items-center gap-3">
-                        <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#cbcbcb", flexShrink: 0 }} />
-                        <div style={{ flex: 1, height: 1, backgroundColor: "#cbcbcb", opacity: 0.25 }} />
-                        <span className="para text-desc" style={{ opacity: 0.45, fontSize: "clamp(11px,3vw,13px)" }}>01</span>
-                    </div>
-                    <h2 className="heading-md mb-[4vw] w-fit">Strategy</h2>
-                    <h5 className="para mb-[3vw] text-desc">
-                        We collaborate closely to uncover your brand's vision,
-                        audience, and market position—building a strategy that
-                        drives real results.
-                    </h5>
-                    <h5 className="para2a para text-desc">
-                        By the end, you'll have a clear roadmap to grow your
-                        brand—whether it's industry disruption or becoming a
-                        household name.
-                    </h5>
-                </div>
+                <div ref={mobileTrackRef} className="relative">
+                    {/* Vertical track — height set in JS from 1st → 3rd dot only */}
+                    <div
+                        className="approach-mobile-track-bg pointer-events-none absolute w-px -translate-x-1/2"
+                        style={{ backgroundColor: "rgba(203,203,203,0.25)" }}
+                        aria-hidden="true"
+                    />
+                    {/* Progress fill — stops at the 3rd dot */}
+                    <div
+                        ref={mobileProgressRef}
+                        className="pointer-events-none absolute w-px origin-top -translate-x-1/2"
+                        style={{
+                            backgroundColor: "var(--secondary, #E8E8E1)",
+                            transform: "scaleY(0)",
+                        }}
+                        aria-hidden="true"
+                    />
 
-                {/* Card 2—Design */}
-                <div className="approach-card-mobile mb-[12vw]" style={{ opacity: 0 }}>
-                    <div className="mb-[5vw] flex items-center gap-3">
-                        <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#cbcbcb", flexShrink: 0 }} />
-                        <div style={{ flex: 1, height: 1, backgroundColor: "#cbcbcb", opacity: 0.25 }} />
-                        <span className="para text-desc" style={{ opacity: 0.45, fontSize: "clamp(11px,3vw,13px)" }}>02</span>
+                    {/* Card 1—Strategy */}
+                    <div className="approach-card-mobile relative mb-[12vw] flex gap-5">
+                        <div className="relative z-10 flex w-3 shrink-0 justify-center pt-1">
+                            <span
+                                ref={(el) => { mobileDotRefs.current[0] = el; }}
+                                className="block h-2.5 w-2.5 rounded-full"
+                                style={{ backgroundColor: "#5a5a5a" }}
+                            />
+                        </div>
+                        <div className="approach-card-mobile-content min-w-0 flex-1" style={{ opacity: 0 }}>
+                            <h2 className="heading-md mb-[4vw] w-fit">Strategy</h2>
+                            <h5 className="para mb-[3vw] text-desc">
+                                We collaborate closely to uncover your brand&apos;s vision,
+                                audience, and market position—building a strategy that
+                                drives real results.
+                            </h5>
+                            <h5 className="para2a para text-desc">
+                                By the end, you&apos;ll have a clear roadmap to grow your
+                                brand—whether it&apos;s industry disruption or becoming a
+                                household name.
+                            </h5>
+                        </div>
                     </div>
-                    <h2 className="heading-md mb-[4vw] w-fit">Design</h2>
-                    <h5 className="para mb-[3vw] text-desc">
-                        Our bold, purpose-driven designs are crafted to make an
-                        impact. From typography to color, everything is chosen to
-                        communicate clearly and beautifully.
-                    </h5>
-                    <h5 className="para2a para text-desc">
-                        We bring balance, clarity, and intention together to help
-                        your brand stand out—and connect beyond first impressions.
-                    </h5>
-                </div>
 
-                {/* Card 3—Technology */}
-                <div className="approach-card-mobile" style={{ opacity: 0 }}>
-                    <div className="mb-[5vw] flex items-center gap-3">
-                        <div style={{ width: 10, height: 10, borderRadius: "50%", backgroundColor: "#cbcbcb", flexShrink: 0 }} />
-                        <div style={{ flex: 1, height: 1, backgroundColor: "#cbcbcb", opacity: 0.25 }} />
-                        <span className="para text-desc" style={{ opacity: 0.45, fontSize: "clamp(11px,3vw,13px)" }}>03</span>
+                    {/* Card 2—Design */}
+                    <div className="approach-card-mobile relative mb-[12vw] flex gap-5">
+                        <div className="relative z-10 flex w-3 shrink-0 justify-center pt-1">
+                            <span
+                                ref={(el) => { mobileDotRefs.current[1] = el; }}
+                                className="block h-2.5 w-2.5 rounded-full"
+                                style={{ backgroundColor: "#5a5a5a" }}
+                            />
+                        </div>
+                        <div className="approach-card-mobile-content min-w-0 flex-1" style={{ opacity: 0 }}>
+                            <h2 className="heading-md mb-[4vw] w-fit">Design</h2>
+                            <h5 className="para mb-[3vw] text-desc">
+                                Our bold, purpose-driven designs are crafted to make an
+                                impact. From typography to color, everything is chosen to
+                                communicate clearly and beautifully.
+                            </h5>
+                            <h5 className="para2a para text-desc">
+                                We bring balance, clarity, and intention together to help
+                                your brand stand out—and connect beyond first impressions.
+                            </h5>
+                        </div>
                     </div>
-                    <h2 className="heading-md mb-[4vw] w-fit">Technology</h2>
-                    <h5 className="para mb-[3vw] text-desc">
-                        Beyond aesthetics, we focus on how your brand performs
-                        across platforms—crafting seamless, intelligent experiences
-                        that adapt in real time.
-                    </h5>
-                    <h5 className="para2a para text-desc">
-                        Guided by design and powered by AI, every interaction is
-                        built for clarity, consistency, and connection across
-                        screens, spaces, and systems.
-                    </h5>
+
+                    {/* Card 3—Technology */}
+                    <div className="approach-card-mobile relative flex gap-5">
+                        <div className="relative z-10 flex w-3 shrink-0 justify-center pt-1">
+                            <span
+                                ref={(el) => { mobileDotRefs.current[2] = el; }}
+                                className="block h-2.5 w-2.5 rounded-full"
+                                style={{ backgroundColor: "#5a5a5a" }}
+                            />
+                        </div>
+                        <div className="approach-card-mobile-content min-w-0 flex-1" style={{ opacity: 0 }}>
+                            <h2 className="heading-md mb-[4vw] w-fit">Technology</h2>
+                            <h5 className="para mb-[3vw] text-desc">
+                                Beyond aesthetics, we focus on how your brand performs
+                                across platforms—crafting seamless, intelligent experiences
+                                that adapt in real time.
+                            </h5>
+                            <h5 className="para2a para text-desc">
+                                Guided by design and powered by AI, every interaction is
+                                built for clarity, consistency, and connection across
+                                screens, spaces, and systems.
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

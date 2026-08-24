@@ -89,8 +89,10 @@ export default function Navbar() {
 
   const logoImgClass = (sizeClass) =>
     `${sizeClass} w-auto object-contain transition-[filter,opacity] duration-500 ease-in-out ${
-      logoLight ? "invert" : ""
+      menuOpen || !logoLight ? "" : "invert"
     }`;
+
+  const darkNavTreatment = menuOpen || !logoLight;
 
   menuOpenRef.current = menuOpen;
 
@@ -297,7 +299,7 @@ export default function Navbar() {
         id="site-nav"
         className={`fixed top-0 left-0 w-full z-50 text-foreground transition-opacity duration-200 ease-out ${
           pathname === "/work" || !showNavGradient ? "" : "nav-gradient"
-        } ${pathname === "/" ? "mix-blend-difference" : ""} ${
+        } ${pathname === "/" && !menuOpen ? "mix-blend-difference" : ""} ${
           landingActive ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
@@ -345,7 +347,7 @@ export default function Navbar() {
                 />
                 <span
                   className={`absolute left-0 opacity-0 top-full mt-1 w-1 h-1 inline-block rounded-full transition-colors duration-500 ease-in-out ${
-                    logoLight ? "bg-heading" : "bg-background"
+                    darkNavTreatment ? "bg-background" : "bg-heading"
                   }`}
                 />
               </div>
@@ -400,9 +402,9 @@ export default function Navbar() {
               w-3 h-3 sm:w-4.5 sm:h-4.5 rounded-full cursor-pointer
               border-2 transition-[background-color,border-color] duration-500 ease-in-out
               ${
-                logoLight
-                  ? "border-heading bg-transparent hover:bg-heading hover:border-heading"
-                  : "border-background bg-background hover:bg-background hover:border-background"
+                darkNavTreatment
+                  ? "border-background bg-background hover:bg-background hover:border-background"
+                  : "border-heading bg-transparent hover:bg-heading hover:border-heading"
               }
             `}
           />

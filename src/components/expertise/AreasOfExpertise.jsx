@@ -31,92 +31,94 @@ const AreasOfExpertise = () => {
     const ctx = gsap.context(() => {
       const imageWrap = imageWrapRef.current;
       const heading = headingRef.current;
+      const isDesktop = window.innerWidth >= 1280;
 
-      // Section enter animation: image + heading
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start: "top 50%",
-          toggleActions: "play none none reverse",
-        },
-      })
-        .fromTo(
-          imageWrap,
-          { y: -40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
-          0
-        )
-        .fromTo(
-          heading,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
-          0.05
-        );
-
-      // Each box animates as a unit (title + ul + li + button)
-      const boxes = gsap.utils.toArray(root.querySelectorAll("[data-expertise-box]"));
-      boxes.forEach((box) => {
-        const titleEl = box.querySelector("[data-box-title]");
-        const listEl = box.querySelector("ul.expertise-list");
-        const itemEls = listEl ? listEl.querySelectorAll("li") : [];
-        const buttonWrap = box.querySelector("[data-box-button]");
-
-        const tlBox = gsap.timeline({
+      // Text / graphic reveals — desktop only (avoid hiding already-visible content on iPad & below)
+      if (isDesktop) {
+        gsap.timeline({
           scrollTrigger: {
-            trigger: box,
-            start: "top 85%",
+            trigger: root,
+            start: "top 50%",
             toggleActions: "play none none reverse",
           },
-        });
-
-        tlBox
+        })
           .fromTo(
-            titleEl,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+            imageWrap,
+            { y: -40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
             0
           )
           .fromTo(
-            listEl,
-            { y: 22, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+            heading,
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
             0.05
-          )
-          .fromTo(
-            itemEls,
-            { y: 12, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.03 },
-            0.1
-          )
-          .fromTo(
-            buttonWrap,
-            { y: 16, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
-            0.2
           );
-      });
 
-      gsap.fromTo(
-        line,
-        { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
-        {
-          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          duration: 1.5,
-          ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: root,
-            start: "top 10%",
-            end: "top -40%",
-            scrub: 0.3,
-          },
-        }
-      );
+        const boxes = gsap.utils.toArray(root.querySelectorAll("[data-expertise-box]"));
+        boxes.forEach((box) => {
+          const titleEl = box.querySelector("[data-box-title]");
+          const listEl = box.querySelector("ul.expertise-list");
+          const itemEls = listEl ? listEl.querySelectorAll("li") : [];
+          const buttonWrap = box.querySelector("[data-box-button]");
+
+          const tlBox = gsap.timeline({
+            scrollTrigger: {
+              trigger: box,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          });
+
+          tlBox
+            .fromTo(
+              titleEl,
+              { y: 20, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+              0
+            )
+            .fromTo(
+              listEl,
+              { y: 22, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
+              0.05
+            )
+            .fromTo(
+              itemEls,
+              { y: 12, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.03 },
+              0.1
+            )
+            .fromTo(
+              buttonWrap,
+              { y: 16, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
+              0.2
+            );
+        });
+
+        gsap.fromTo(
+          line,
+          { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
+          {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            duration: 1.5,
+            ease: "power2.inOut",
+            scrollTrigger: {
+              trigger: root,
+              start: "top 10%",
+              end: "top -40%",
+              scrub: 0.3,
+            },
+          }
+        );
+      }
     }, root);
 
     return () => ctx.revert();
   }, []);
   return (
-    <section ref={rootRef} className="w-full py-16 sm:py-20 md:py-28 lg:py-32">
+    <section ref={rootRef} className="w-full pt-8 pb-16 sm:pt-10 sm:pb-20 md:pt-12 md:pb-24 lg:pt-14 lg:pb-28 xl:py-32">
       <div
         className="
           relative w-full
