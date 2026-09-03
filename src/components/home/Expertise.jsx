@@ -27,6 +27,8 @@ export default function Expertise() {
   const isBottomHandoffRef = useRef(false);
   const introDoneRef = useRef(false);
   const skipDotAnimRef = useRef(false);
+  const parkedOnFirstRef = useRef(false);
+  const [parkedOnFirst, setParkedOnFirst] = useState(false);
   const [bottomHandoff, setBottomHandoff] = useState(false);
 
   // Used only after the last item—travels to viewport center
@@ -84,6 +86,54 @@ export default function Expertise() {
   }, [activeIndex]);
 
   useEffect(() => {
+    parkedOnFirstRef.current = parkedOnFirst;
+  }, [parkedOnFirst]);
+
+  // Keep the same #circle2 on Branding; hide only when moving past the first item.
+  useEffect(() => {
+    if (isMobile) return;
+    const circle2 = document.querySelector("#circle2");
+    if (!circle2) return;
+
+    if (parkedOnFirst && activeIndex > 0) {
+      gsap.set(circle2, { opacity: 0, zIndex: 0 });
+      parkedOnFirstRef.current = false;
+      setParkedOnFirst(false);
+      return;
+    }
+
+    if (
+      introDoneRef.current &&
+      activeIndex === 0 &&
+      !parkedOnFirst &&
+      !isBottomHandoffRef.current
+    ) {
+      const wrap = bulletWrapRefs.current[0];
+      const title = titleRefs.current[0];
+      if (!wrap) return;
+      const wrapRect = wrap.getBoundingClientRect();
+      const titleRect = title?.getBoundingClientRect();
+      gsap.set(circle2, {
+        position: "fixed",
+        left: wrapRect.left + wrapRect.width / 2,
+        top: titleRect
+          ? titleRect.top + titleRect.height / 2
+          : wrapRect.top + wrapRect.height / 2,
+        xPercent: -50,
+        yPercent: -50,
+        width: 20,
+        height: 20,
+        scale: 1,
+        opacity: 1,
+        zIndex: 40,
+        autoRound: false,
+      });
+      parkedOnFirstRef.current = true;
+      setParkedOnFirst(true);
+    }
+  }, [activeIndex, parkedOnFirst, isMobile]);
+
+  useEffect(() => {
     if (!skipDotAnimRef.current) return;
     const id = requestAnimationFrame(() => {
       skipDotAnimRef.current = false;
@@ -133,7 +183,7 @@ export default function Expertise() {
           width: 20,
           height: 20,
           scale: 1,
-          zIndex: 30,
+          zIndex: 40,
           autoRound: false,
           opacity,
         });
@@ -141,8 +191,20 @@ export default function Expertise() {
 
       const restoreCircle2ToAboutStudio = () => {
         const origin = aboutStudioDotOrigin();
-        placeCircle2(origin.x, origin.y, 1);
-        if (circle2) gsap.set(circle2, { zIndex: 0 });
+        if (!circle2) return;
+        gsap.set(circle2, {
+          position: "fixed",
+          left: origin.x,
+          top: origin.y,
+          xPercent: -50,
+          yPercent: -50,
+          width: 20,
+          height: 20,
+          scale: 1,
+          opacity: 1,
+          zIndex: 0,
+          autoRound: false,
+        });
       };
 
       const hideItemDot = (index) => {
@@ -150,18 +212,24 @@ export default function Expertise() {
         if (dot) gsap.set(dot, { scale: 0, transformOrigin: "50% 50%" });
       };
 
-      const showItemDot = (index) => {
-        const dot = itemDotRefs.current[index];
-        if (dot) gsap.set(dot, { scale: 1, transformOrigin: "50% 50%" });
+      const parkOnBranding = () => {
+        if (introDoneRef.current) return;
+        const target = getItemTarget(0);
+        if (target) placeCircle2(target.x, target.y, 1);
+        hideItemDot(0);
+        introDoneRef.current = true;
+        parkedOnFirstRef.current = true;
+        prevIndexRef.current = 0;
+        setParkedOnFirst(true);
+        setActiveIndex(0);
       };
 
-      // ── 1. Incoming dot travels to Branding (items stay closed). On arrival,
-      //     swap instantly onto Branding's own dot, then open the item.
+      // ── 1. Same #circle2 travels onto Branding — never hide mid-flight.
       ScrollTrigger.create({
         trigger: ref.current,
-        start: "top 70%",
+        start: "top bottom",
         end: "top top",
-        scrub: 1.4,
+        scrub: 0.9,
         invalidateOnRefresh: true,
 
         onRefresh: () => {
@@ -170,47 +238,47 @@ export default function Expertise() {
 
         onEnter: () => {
           introDoneRef.current = false;
+          parkedOnFirstRef.current = false;
+          setParkedOnFirst(false);
           setActiveIndex(-1);
           hideItemDot(0);
           forwardOrigin = aboutStudioDotOrigin();
           if (circle2) {
             const r = circle2.getBoundingClientRect();
-            forwardOrigin = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+            if (r.width > 0 && r.height > 0) {
+              forwardOrigin = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+            }
+            gsap.set(circle2, { opacity: 1, zIndex: 40 });
           }
         },
 
         onUpdate: (self) => {
           if (!circle2) return;
+          if (introDoneRef.current && self.progress >= 1) return;
           if (!forwardOrigin) forwardOrigin = aboutStudioDotOrigin();
 
           const target = getItemTarget(0);
           if (!target) return;
 
-          // Travel at full opacity—no fade, no item dot yet.
+          hideItemDot(0);
           placeCircle2(
             forwardOrigin.x + (target.x - forwardOrigin.x) * self.progress,
             forwardOrigin.y + (target.y - forwardOrigin.y) * self.progress,
             1
           );
+
+          if (self.progress >= 0.995) parkOnBranding();
         },
 
         onLeave: () => {
-          const target = getItemTarget(0);
-          if (target) placeCircle2(target.x, target.y, 1);
-
-          // Same paint: hide traveler and snap Branding's dot on — one continuous dot.
-          skipDotAnimRef.current = true;
-          showItemDot(0);
-          if (circle2) gsap.set(circle2, { opacity: 0, left: -9999, top: -9999, zIndex: 0 });
-
-          introDoneRef.current = true;
-          prevIndexRef.current = 0;
-          setActiveIndex(0);
+          parkOnBranding();
         },
 
         onEnterBack: () => {
           introDoneRef.current = false;
+          parkedOnFirstRef.current = false;
           skipDotAnimRef.current = true;
+          setParkedOnFirst(false);
           const target = getItemTarget(0);
           hideItemDot(0);
           if (target) placeCircle2(target.x, target.y, 1);
@@ -220,6 +288,9 @@ export default function Expertise() {
 
         onLeaveBack: () => {
           restoreCircle2ToAboutStudio();
+          introDoneRef.current = false;
+          parkedOnFirstRef.current = false;
+          setParkedOnFirst(false);
         },
       });
 
@@ -370,7 +441,7 @@ export default function Expertise() {
   if (isMobile) return null;
 
   return (
-    <section id="page3" className="relative h-[560vh] bg-background cursor-default" ref={ref}>
+    <div id="page3" className="relative h-[560vh] bg-background cursor-default" ref={ref}>
       <div
         ref={travelCircleRef}
         style={{
@@ -386,7 +457,7 @@ export default function Expertise() {
         }}
       />
 
-      <div className="sticky top-0 h-screen flex items-start">
+      <div className="sticky top-0 h-screen flex items-start overflow-visible">
         <div className="w-full px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 mx-auto pt-[22vh] pb-12 flex">
 
           <div className="w-1/2 flex flex-col justify-between">
@@ -401,7 +472,10 @@ export default function Expertise() {
           <div className="w-1/2 relative pl-6 flex flex-col justify-start gap-6">
             {expertiseItems.map((item, i) => {
               const isActive = i === activeIndex;
-              const showDot = isActive && !(bottomHandoff && i === LAST_IDX);
+              const showDot =
+                isActive &&
+                !(bottomHandoff && i === LAST_IDX) &&
+                !(i === 0 && parkedOnFirst);
               return (
                 <div key={i} className="relative border-b border-white/20 pb-6">
                   <div className="relative">
@@ -454,6 +528,6 @@ export default function Expertise() {
 
         </div>
       </div>
-    </section>
+    </div>
   );
 }

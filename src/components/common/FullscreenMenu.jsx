@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import gsap from "gsap";
 import Button from "./Button";
 import { handleHashLinkClick } from "@/helper/scrollToHash";
 
@@ -12,11 +13,24 @@ function isNavActive(pathname, href) {
   return href !== "/" && pathname.startsWith(`${href}/`);
 }
 
+const HOVER_X = 12;
+
 const FullscreenMenu = React.forwardRef(function FullscreenMenu(
   { pathname, setMenuOpen, socialLinks },
   ref
 ) {
   const router = useRouter();
+  const linkRefs = useRef([]);
+
+  const animateLinkX = (el, x) => {
+    if (!el) return;
+    gsap.to(el, {
+      x,
+      duration: 0.65,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+  };
 
   return (
     <div
@@ -36,23 +50,30 @@ const FullscreenMenu = React.forwardRef(function FullscreenMenu(
                 { name: "Expertise", href: "/expertise" },
                 { name: "Brands", href: "/brands" },
                 { name: "Connect", href: "/connect" },
-              ].map((item) => {
+              ].map((item, i) => {
                 const isActive = isNavActive(pathname, item.href);
                 return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`group block w-fit heading-xl uppercase font-heading font-extralight tracking-tight cursor-pointer transition-[transform,color,opacity] duration-200 hover:translate-x-2 ${
-                    isActive
-                      ? "text-background opacity-100"
-                      : "text-gray-600 opacity-100 hover:text-background"
-                  }`}
-                  title={item.name}
-                >
-                  <span className="nav-item link-underline">{item.name}</span>
-                </Link>
-              );
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    ref={(el) => {
+                      linkRefs.current[i] = el;
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                    onMouseEnter={() => animateLinkX(linkRefs.current[i], HOVER_X)}
+                    onMouseLeave={() => animateLinkX(linkRefs.current[i], 0)}
+                    onFocus={() => animateLinkX(linkRefs.current[i], HOVER_X)}
+                    onBlur={() => animateLinkX(linkRefs.current[i], 0)}
+                    className={`group block w-fit heading-xl uppercase font-heading font-extralight tracking-tight cursor-pointer will-change-transform transition-colors duration-500 ease-out ${
+                      isActive
+                        ? "text-background opacity-100"
+                        : "text-gray-600 opacity-100 hover:text-background"
+                    }`}
+                    title={item.name}
+                  >
+                    <span className="nav-item link-underline">{item.name}</span>
+                  </Link>
+                );
               })}
             </nav>
 

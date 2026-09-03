@@ -44,7 +44,7 @@ export default function CaseStudyIntro({ caseStudy }) {
             {services.map((service) => (
               <button
                 key={service}
-                className="border border-white/20 px-6 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition"
+                className="border border-white/20 px-6 py-3 text-sm tracking-wide transition-[background-color,color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-white hover:text-black hover:border-white"
               >
                 {String(service).toUpperCase()}
               </button>

@@ -93,7 +93,8 @@ const AboutStudio = () => {
           scale: 1,
           opacity: 1,
           autoRound: false,
-          zIndex: 0,
+          // Above Expertise bg so the dot never vanishes between sections
+          zIndex: 40,
         });
       };
 
@@ -120,6 +121,10 @@ const AboutStudio = () => {
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onRefresh: (self) => {
+            if (self.pin) self.pin.style.overflow = "visible";
+            if (self.pin?.parentNode) self.pin.parentNode.style.overflow = "visible";
+          },
           onLeave: snapCircleSmall,
           onEnterBack: () => {
             if (circle2) {
@@ -141,7 +146,6 @@ const AboutStudio = () => {
           duration: 1,
           ease: "none",
         })
-        // Longer shrink + smooth ease so it feels slow after text fill
         .to(circle2, {
           width: 20,
           height: 20,
@@ -161,16 +165,16 @@ const AboutStudio = () => {
   }, []);
 
   return (
-    <section
+    <div
       ref={sectionRef}
       id="page2"
-      className="w-full mix-blend-difference px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 py-6 sm:py-10 md:py-16 lg:py-20 xl:py-24 flex flex-col justify-center xl:h-screen"
+      className="relative w-full mix-blend-difference px-6 sm:px-10 md:px-12 lg:px-14 xl:px-20 py-6 sm:py-10 md:py-16 lg:py-20 xl:py-24 flex flex-col justify-center xl:h-screen"
     >
       <div className="mx-auto">
         <div className="max-w-5xl space-y-12">
           <p
             ref={p1Ref}
-            className="relative z-12 heading-xl [font-kerning:none]"
+            className="relative z-12 heading-xl text-heading [font-kerning:none]"
           >
             Point Of is an independent consultancy based in Mumbai, rethinking
             how brands connect with culture and people.
@@ -178,7 +182,7 @@ const AboutStudio = () => {
 
           <p
             ref={p2Ref}
-            className="relative z-12 heading-xl [font-kerning:none]"
+            className="relative z-12 heading-xl text-heading [font-kerning:none]"
           >
             We work at the intersection of design, strategy, and
             technology—crafting identities that balance innovation with timeless
@@ -193,7 +197,7 @@ const AboutStudio = () => {
           }}
         />
       </div>
-    </section>
+    </div>
   );
 };
 
