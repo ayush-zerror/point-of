@@ -27,6 +27,13 @@ const OurApproach = () => {
                 },
             });
 
+            // First circle is already brand-filled when the section enters
+            gsap.set(".apr-circle1, .apr-circle1-inner", {
+                opacity: 1,
+                backgroundColor: "#776C3F",
+                borderColor: "#776C3F",
+            });
+
             aptl
                 // STEP 1
                 .fromTo(
@@ -34,20 +41,12 @@ const OurApproach = () => {
                     { opacity: 0 },
                     { opacity: 1, duration: 0.2 }
                 )
-                .set(".apr-circle1", { opacity: 1 })
                 .fromTo(
                     "#step-three",
                     { backgroundColor: "transparent" },
                     { backgroundColor: "var(--light-line)", duration: 0.25 }
-               
                 )
                 .to({}, { duration: 0.35 })
-                .fromTo(
-                    ".apr-circle1, .apr-circle1-inner",
-                    { backgroundColor: "var(--light-line)", borderColor: "var(--light-line)" },
-                    { backgroundColor: "var(--secondary)", borderColor: "var(--secondary)", duration: 0.3 },
-                    "a"
-                )
                 .fromTo(
                     ".approach1",
                     { opacity: 0, y: 50 },
@@ -71,7 +70,7 @@ const OurApproach = () => {
                 .fromTo(
                     ".apr-circle2",
                     { backgroundColor: "var(--light-line)", borderColor: "var(--light-line)" },
-                    { backgroundColor: "var(--secondary)", borderColor: "var(--secondary)", duration: 0.2, delay: 0.5 },
+                    { backgroundColor: "#776C3F", borderColor: "#776C3F", duration: 0.2, delay: 0.5 },
                     "b"
                 )
                 .to(".apr-circle1-inner", { opacity: 0 }, "b")
@@ -92,7 +91,7 @@ const OurApproach = () => {
                 .fromTo(
                     ".apr-circle3",
                     { backgroundColor: "var(--light-line)", borderColor: "var(--light-line)" },
-                    { backgroundColor: "var(--secondary)", borderColor: "var(--secondary)", duration: 0.2, delay: 0.5 },
+                    { backgroundColor: "#776C3F", borderColor: "#776C3F", duration: 0.2, delay: 0.5 },
                     "c"
                 )
 
@@ -110,10 +109,17 @@ const OurApproach = () => {
                     "d"
                 )
                 .set(".aprCir", {
-                    borderColor: "var(--secondary)",
+                    borderColor: "#776C3F",
                     borderStyle: "solid",
                     borderWidth: 1,
+                    backgroundColor: "transparent",
                     opacity: 1,
+                    scale: 1,
+                }, "d")
+                .set(".apr-circle1-inner", {
+                    opacity: 0,
+                    backgroundColor: "transparent",
+                    borderColor: "transparent",
                 }, "d");
 
             // ── CENTER BLOOM ─────────────────────────────────────────
@@ -133,18 +139,26 @@ const OurApproach = () => {
 
             circles.forEach((circle, i) => {
                 const rect = circle.getBoundingClientRect();
-                const circleX = rect.left + circle.offsetWidth / 2 + window.scrollX;
-                const circleY = rect.top + circle.offsetHeight / 2 + window.scrollY;
+                const circleX = rect.left + rect.width / 2 + window.scrollX;
+                const circleY = rect.top + rect.height / 2 + window.scrollY;
 
+                // Width/height grow (keeps 1px border thin). xPercent/yPercent
+                // keep the pie centered while the box expands.
                 aptl.to(
                     circle,
                     {
-                        x: centerX - circleX + offsets[i].x,
-                        y: centerY - circleY + offsets[i].y,
+                        x: centerX - circleX + offsets[i].x + rect.width / 2,
+                        y: centerY - circleY + offsets[i].y + rect.height / 2,
+                        xPercent: -50,
+                        yPercent: -50,
                         width: "30vw",
                         height: "30vw",
+                        marginTop: 0,
+                        marginLeft: 0,
                         backgroundColor: "transparent",
-                        transform: "translate(-50%, -50%)",
+                        borderColor: "#776C3F",
+                        borderStyle: "solid",
+                        borderWidth: 1,
                         duration: 0.8,
                         ease: "power2.out",
                         delay: 0.5,
@@ -202,7 +216,7 @@ const OurApproach = () => {
                 gsap.set(progress, { scaleY: 0, transformOrigin: "top center" });
                 gsap.set(dots, { backgroundColor: "#5a5a5a" });
                 // First dot starts filled
-                gsap.set(dots[0], { backgroundColor: "#E8E8E1" });
+                gsap.set(dots[0], { backgroundColor: "#776C3F" });
 
                 gsap.to(progress, {
                     scaleY: 1,
@@ -222,7 +236,7 @@ const OurApproach = () => {
                                 const threshold = i / (dots.length - 1);
                                 gsap.set(dot, {
                                     backgroundColor:
-                                        p >= threshold - 0.01 ? "#E8E8E1" : "#5a5a5a",
+                                        p >= threshold - 0.01 ? "#776C3F" : "#5a5a5a",
                                 });
                             });
                         },
@@ -292,15 +306,15 @@ const OurApproach = () => {
                                 marginTop: -12.5,
                                 width: 25,
                                 height: 25,
-                                backgroundColor: "var(--light-line)",
-                                border: "1px solid var(--light-line)",
+                                backgroundColor: "#776C3F",
+                                border: "1px solid #776C3F",
                             }}
                         >
                             <div
                                 className="apr-circle1-inner h-full w-full rounded-full"
                                 style={{
-                                    backgroundColor: "var(--light-line)",
-                                    border: "1px solid var(--light-line)",
+                                    backgroundColor: "#776C3F",
+                                    border: "1px solid #776C3F",
                                 }}
                             />
                         </div>
@@ -336,7 +350,7 @@ const OurApproach = () => {
 
                         <div
                             className="step-loader-bar absolute left-0 top-0 h-full"
-                            style={{ width: "0%", backgroundColor: "var(--secondary)" }}
+                            style={{ width: "0%", backgroundColor: "#776C3F" }}
                         />
                     </div>
 
@@ -409,7 +423,7 @@ const OurApproach = () => {
                         ref={mobileProgressRef}
                         className="pointer-events-none absolute w-px origin-top -translate-x-1/2"
                         style={{
-                            backgroundColor: "var(--secondary, #E8E8E1)",
+                            backgroundColor: "#776C3F",
                             transform: "scaleY(0)",
                         }}
                         aria-hidden="true"

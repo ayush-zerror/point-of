@@ -119,13 +119,7 @@ const AreasOfExpertise = () => {
   }, []);
   return (
     <section ref={rootRef} className="w-full pt-8 pb-16 sm:pt-10 sm:pb-20 md:pt-12 md:pb-24 lg:pt-14 lg:pb-28 xl:py-32">
-      <div
-        className="
-          relative w-full
-          px-6 sm:px-6 md:px-12 xl:pl-80 2xl:pl-120
-          xl:pr-6
-        "
-      >
+      <div className="relative w-full px-6 sm:px-6 md:px-12 xl:pl-80 2xl:pl-120 xl:pr-6">
         <div className="max-w-5xl relative">
           {/* LEFT GRAPHIC (desktop only) */}
           <div className="hidden xl:flex items-center justify-center absolute top-0 -left-[33.5%] h-full">
