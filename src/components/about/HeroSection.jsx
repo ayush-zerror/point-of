@@ -10,6 +10,7 @@ import Button from "../common/Button";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import GradientBlinds from "../GradientBlinds";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,6 +100,7 @@ const HeroSection = ({
   showClock = false,
   enableBgParallax = false,
   enableTextParallax = false,
+  useGradientBlinds = false,
   /* Pass an array of line configs to enable staggered reveal:
      lines = [
        { prefix: "Point of ", word: "origin.", italic: false },
@@ -241,13 +243,36 @@ const HeroSection = ({
   return (
     <div
       ref={rootRef}
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-svh w-full overflow-hidden"
     >
-      {/* Background Image */}
-      {bgImage && (
+      {/* Full-bleed hero background */}
+      {useGradientBlinds ? (
         <div
           ref={bgWrapRef}
-          className="absolute invert-0 top-1/2 left-1/2 flex h-full w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+          className="pointer-events-auto absolute inset-0 z-0 h-full w-full bg-black"
+        >
+          <GradientBlinds
+            className="h-full w-full min-h-full min-w-full"
+            gradientColors={["#C4B87A", "#A89B55", "#8F8348", "#776C3F"]}
+            angle={0}
+            noise={0.025}
+            blindCount={44}
+            blindMinWidth={8}
+            spotlightRadius={0.3}
+            spotlightSoftness={0.7}
+            spotlightOpacity={1}
+            mouseDampening={0.22}
+            distortAmount={0}
+            shineDirection="left"
+            mixBlendMode="normal"
+            cornerGlow
+            mouseDarken
+          />
+        </div>
+      ) : bgImage ? (
+        <div
+          ref={bgWrapRef}
+          className="absolute inset-0 z-0 flex h-full w-full items-center justify-center"
         >
           <Image
             ref={bgRef}
@@ -259,16 +284,18 @@ const HeroSection = ({
             priority
           />
         </div>
-      )}
+      ) : null}
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex items-center xl:items-end">
+      {/* Content — pass mouse through so GradientBlinds stays interactive */}
+      <div className="pointer-events-none relative z-10 h-full flex items-center xl:items-end">
         <div
           ref={contentRef}
           className="w-full relative px-6 sm:px-10 md:px-12 xl:pl-80 2xl:pl-120 xl:pr-6 pt-36 sm:pt-40 md:pt-0 md:pb-0 xl:pb-28 2xl:pb-40"
         >
           {showClock && (
-            <Clock clockCountry={clockCountry} clockTimeZone={clockTimeZone} />
+            <div className="pointer-events-auto">
+              <Clock clockCountry={clockCountry} clockTimeZone={clockTimeZone} />
+            </div>
           )}
 
           {/* ── Staggered lines mode ── */}
@@ -304,11 +331,17 @@ const HeroSection = ({
             </h2>
           )}
 
-          <div ref={ctaRef} style={lines ? { opacity: 0 } : {}}>
+          <div ref={ctaRef} className="pointer-events-auto" style={lines ? { opacity: 0 } : {}}>
             <Button title={btntitle} onClick={onClick} href={href} />
           </div>
         </div>
       </div>
+
+      {/* Bottom fade — same as navbar gradient (flipped) */}
+      <div
+        className="nav-gradient nav-gradient-reverse pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-24 sm:h-28 md:h-32"
+        aria-hidden="true"
+      />
     </div>
   );
 };

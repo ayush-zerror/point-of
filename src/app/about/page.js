@@ -26,11 +26,10 @@ const Studio = () => {
   return (
     <>
       <HeroSection
-        bgImage="/about/studio-bg.webp"
+        useGradientBlinds
         lines={heroLines}
         btntitle={"OUR BRANDS"}
         href="/brands"
-        enableBgParallax={true}
         enableTextParallax={true}
       />
       <Experience data={experienceData} />
