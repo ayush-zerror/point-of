@@ -10,4 +10,10 @@ export const structure = (S, context) =>
         S,
         context,
       }),
+      S.listItem()
+        .title("Account Requests")
+        .schemaType("accountRequest")
+        .child(
+          S.documentTypeList("accountRequest").title("Account Requests")
+        ),
     ])

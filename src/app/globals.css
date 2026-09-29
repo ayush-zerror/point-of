@@ -405,3 +405,20 @@ input:-webkit-autofill:active{
   background-color: #e8e8e1 !important;
   transition: background-color 9999s ease-out 0s;
 }
+
+#brand-partners-form {
+  color-scheme: dark;
+}
+
+section:has(#brand-partners-form) form input:-webkit-autofill,
+section:has(#brand-partners-form) form input:-webkit-autofill:hover,
+section:has(#brand-partners-form) form input:-webkit-autofill:focus,
+section:has(#brand-partners-form) form input:-webkit-autofill:active {
+  -webkit-text-fill-color: #f2f2ee !important;
+  caret-color: #f2f2ee !important;
+  color: #f2f2ee !important;
+  -webkit-background-clip: border-box;
+  box-shadow: 0 0 0 1000px #000 inset !important;
+  background-color: #000 !important;
+  transition: background-color 9999s ease-out 0s;
+}

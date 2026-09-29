@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const GridSection = ({ title, intro, btntitle, data }) => {
+const GridSection = ({ title, intro, btntitle, data, href = "/connect#get-in-touch" }) => {
   const isFour = data.length === 4;
   const router = useRouter();
   const cardsRef = useRef([]);
@@ -58,7 +58,7 @@ const GridSection = ({ title, intro, btntitle, data }) => {
               </p>
             ) : null}
 
-            {btntitle && <Button title={btntitle} href={"/connect"} />}
+            {btntitle && <Button title={btntitle} href={href} />}
           </div>
         )}
 
