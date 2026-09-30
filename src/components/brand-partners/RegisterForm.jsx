@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Button from "../common/Button";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -9,6 +10,7 @@ import toast from "react-hot-toast";
 import { Controller, useForm } from "react-hook-form";
 import { isValidEmail } from "@/helper/validateEmail";
 import { FieldError, FloatingInput, FloatingPasswordInput } from "./FormFields";
+import AuthBackground from "./AuthBackground";
 
 const PASSWORD_MIN = 8;
 
@@ -67,7 +69,6 @@ const RegisterForm = () => {
     }
 
     setSubmitting(true);
-    setSubmitted(false);
     const t = toast.loading("Submitting...");
 
     try {
@@ -89,10 +90,7 @@ const RegisterForm = () => {
         return;
       }
 
-      toast.success(
-        data?.message || "Request submitted, please wait for approval",
-        { id: t }
-      );
+      toast.dismiss(t);
       reset();
       setPhoneFocused(false);
       setPhoneHasTypedDigits(false);
@@ -117,9 +115,31 @@ const RegisterForm = () => {
     toast.error(first ? formErrors[first].message : "Please fill all required fields.");
   };
 
+  if (submitted) {
+    return (
+      <section className="relative min-h-screen w-full overflow-hidden bg-black text-foreground">
+        <AuthBackground />
+        <motion.div
+          className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center sm:px-10 md:px-12"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, ease: "easeOut", delay: 0.1 }}
+          role="status"
+        >
+          <h2 className="heading-xl mb-4 max-w-2xl">Thank you</h2>
+          <p className="max-w-md text-sm leading-relaxed text-desc sm:text-base">
+            Your request has been submitted. Please wait for approval — we&apos;ll
+            email you once your partner account is ready.
+          </p>
+        </motion.div>
+      </section>
+    );
+  }
+
   return (
-    <section className="min-h-screen w-full bg-background text-foreground">
-      <div className="flex min-h-screen items-center justify-center px-6 py-24 sm:px-10 sm:py-28 md:px-12">
+    <section className="relative min-h-screen w-full overflow-hidden bg-black text-foreground">
+      <AuthBackground />
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-24 sm:px-10 sm:py-28 md:px-12">
         <div className="w-full max-w-3xl">
           <h2 id="brand-partners-form" className="heading-xl mb-3 md:mb-4">
             Brand partners
@@ -309,14 +329,6 @@ const RegisterForm = () => {
               title={submitting ? "SUBMITTING..." : "CREATE ACCOUNT"}
               onClick={handleSubmit(onValidSubmit, onError)}
             />
-            {submitted ? (
-              <p
-                role="status"
-                className="mt-5 max-w-lg text-sm leading-relaxed text-green-400 opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards] sm:text-base"
-              >
-                Request submitted, please wait for approval.
-              </p>
-            ) : null}
             <p className="mt-3 text-xs text-desc sm:mt-4 sm:text-sm md:mt-6">
               Already have an account?{" "}
               <Link href="/login" className="font-medium text-foreground">

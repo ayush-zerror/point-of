@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import ApprovalEmailInfo from "../components/ApprovalEmailInfo";
 
 export const accountRequest = defineType({
   name: "accountRequest",
@@ -64,11 +65,17 @@ export const accountRequest = defineType({
         }),
     }),
     defineField({
+      name: "approvalEmailInfo",
+      title: "Approval email",
+      type: "string",
+      readOnly: true,
+      components: { input: ApprovalEmailInfo },
+    }),
+    defineField({
       name: "emailSent",
       title: "Email Sent",
       type: "boolean",
-      description:
-        "Set automatically after the approval email is sent. You do not need to turn this on manually.",
+      hidden: true,
       initialValue: false,
       readOnly: true,
     }),
@@ -78,11 +85,16 @@ export const accountRequest = defineType({
       title: "name",
       subtitle: "email",
       status: "status",
+      emailSent: "emailSent",
     },
-    prepare({ title, subtitle, status }) {
+    prepare({ title, subtitle, status, emailSent }) {
+      const bits = [subtitle, status];
+      if (status === "approved") {
+        bits.push(emailSent ? "email sent" : "email pending");
+      }
       return {
         title: title || "Untitled",
-        subtitle: `${subtitle || ""}${status ? ` · ${status}` : ""}`,
+        subtitle: bits.filter(Boolean).join(" · "),
       };
     },
   },

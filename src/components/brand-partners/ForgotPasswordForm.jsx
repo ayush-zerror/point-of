@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { isValidEmail } from "@/helper/validateEmail";
 import { FloatingInput } from "./FormFields";
+import AuthBackground from "./AuthBackground";
 
 const ForgotPasswordForm = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -57,8 +58,9 @@ const ForgotPasswordForm = () => {
   };
 
   return (
-    <section className="min-h-screen w-full bg-background text-foreground">
-      <div className="flex min-h-screen items-center justify-center px-6 py-24 sm:px-10 sm:py-28 md:px-12">
+    <section className="relative min-h-screen w-full overflow-hidden bg-black text-foreground">
+      <AuthBackground />
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-24 sm:px-10 sm:py-28 md:px-12">
         <div className="w-full max-w-md">
           <h2 id="brand-partners-form" className="heading-xl mb-3 md:mb-4">
             Forgot password

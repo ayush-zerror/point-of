@@ -12,7 +12,7 @@ import {structureTool} from 'sanity/structure'
 import {apiVersion, dataset, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
-import {SendApprovalEmailAction} from './src/sanity/actions/SendApprovalEmailAction'
+import {ResendApprovalEmailAction} from './src/sanity/actions/SendApprovalEmailAction'
 
 export default defineConfig({
   title: 'Point Of',
@@ -24,7 +24,7 @@ export default defineConfig({
   document: {
     actions: (prev, context) => {
       if (context.schemaType !== 'accountRequest') return prev
-      return [...prev, SendApprovalEmailAction]
+      return [...prev, ResendApprovalEmailAction]
     },
   },
   plugins: [

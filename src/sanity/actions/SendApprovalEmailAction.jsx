@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 /**
- * Studio action: send approval email after publishing an approved request.
- * Needed for local/dev because Sanity cloud webhooks cannot reach localhost.
+ * Shows only when approved + Notion link exist and email has not been sent.
+ * Use after publish if the automatic email did not go out.
  */
-export function SendApprovalEmailAction(props) {
+export function ResendApprovalEmailAction(props) {
   const { id, type, draft, published, onComplete } = props;
   const [busy, setBusy] = useState(false);
 
@@ -17,11 +17,11 @@ export function SendApprovalEmailAction(props) {
   if (doc.emailSent === true) return null;
 
   return {
-    label: busy ? "Sending email…" : "Send approval email",
+    label: busy ? "Sending…" : "Resend approval email",
     disabled: busy || Boolean(draft),
     title: draft
-      ? "Publish the document first, then send the email"
-      : "Email the user their Notion link and login URL",
+      ? "Publish first, then resend the approval email"
+      : "Send the Notion link and login email to the user",
     onHandle: async () => {
       if (busy) return;
       setBusy(true);
@@ -57,7 +57,7 @@ export function SendApprovalEmailAction(props) {
         }
 
         window.alert(
-          "Approval email sent. Reload the document if Email Sent still looks unchecked."
+          "Approval email sent to the user. You can close this and reload the document to refresh the status text."
         );
         onComplete?.();
       } catch {
