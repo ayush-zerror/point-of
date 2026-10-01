@@ -79,6 +79,18 @@ export const accountRequest = defineType({
       initialValue: false,
       readOnly: true,
     }),
+    defineField({
+      name: "passwordResetToken",
+      title: "Password Reset Token",
+      type: "string",
+      hidden: true,
+    }),
+    defineField({
+      name: "passwordResetExpires",
+      title: "Password Reset Expires",
+      type: "datetime",
+      hidden: true,
+    }),
   ],
   preview: {
     select: {

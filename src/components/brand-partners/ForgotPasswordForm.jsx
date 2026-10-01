@@ -31,7 +31,7 @@ const ForgotPasswordForm = () => {
     const t = toast.loading("Sending reset link...");
 
     try {
-      const res = await fetch("/api/brand-partners/forgot-password", {
+      const res = await fetch("/api/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: values.email.trim() }),
@@ -98,7 +98,8 @@ const ForgotPasswordForm = () => {
                 role="status"
                 className="mt-5 max-w-lg text-sm leading-relaxed text-green-400 opacity-0 animate-[fadeSlideIn_0.5s_ease-out_forwards] sm:text-base"
               >
-                If an account exists for that email, a reset link will be sent.
+                If an account exists for that email, a reset link has been sent.
+                Check your inbox and follow the link to set a new password.
               </p>
             ) : null}
             <p className="mt-3 text-xs text-desc sm:mt-4 sm:text-sm md:mt-6">
