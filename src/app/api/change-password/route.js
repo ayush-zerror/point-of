@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import sanityServer from "@/lib/sanity-server";
+import { env } from "@/config/env";
 
 export const runtime = "nodejs";
 
@@ -13,7 +14,7 @@ async function getSessionUserId() {
   const token = cookieStore.get("session")?.value;
   if (!token) return null;
 
-  const secret = process.env.NEXT_PUBLIC_JWT_SECRET;
+  const secret = env.jwt.secret;
   if (!secret) return null;
 
   try {

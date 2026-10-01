@@ -119,7 +119,7 @@ const FloatingSelect = ({ label, required, options = [], error, value, onChange,
           onBlur={onBlur}
           className="flex w-full cursor-pointer items-center justify-between gap-3 bg-transparent pt-5 pb-2.5 text-left outline-none"
         >
-          <span className={`min-w-0 truncate text-sm sm:text-base leading-[1.35] ${hasValue ? "text-background" : "text-transparent"}`}>
+          <span className={`min-w-0 truncate text-sm sm:text-base leading-[1.35] ${hasValue ? "text-black" : "text-transparent"}`}>
             {value || placeholder}
           </span>
           <svg
@@ -148,7 +148,7 @@ const FloatingSelect = ({ label, required, options = [], error, value, onChange,
         <ul
           role="listbox"
           data-lenis-prevent
-          className="absolute left-0 right-0 top-full z-50 mt-1 max-h-52 overflow-y-auto border border-gray-400 bg-secondary py-1 shadow-[0_12px_32px_rgba(0,0,0,0.12)]"
+          className="absolute left-0 right-0 top-full z-50 mt-1 max-h-52 overflow-y-auto border border-gray-400 bg-white py-1 shadow-[0_12px_32px_rgba(0,0,0,0.12)]"
         >
           {options.map((opt) => {
             const isActive = value === opt;
@@ -157,8 +157,8 @@ const FloatingSelect = ({ label, required, options = [], error, value, onChange,
                 <button
                   type="button"
                   onClick={() => pick(opt)}
-                  className={`w-full cursor-pointer px-3 py-2.5 text-left text-sm sm:text-base transition-colors ${
-                    isActive ? "bg-black/10 text-background" : "text-background/80 hover:bg-black/5 hover:text-background"
+                  className={`w-full cursor-pointer px-3 py-2.5 text-left text-sm sm:text-base text-black transition-colors ${
+                    isActive ? "bg-black/10" : "hover:bg-black/5"
                   }`}
                 >
                   {opt}
@@ -174,6 +174,8 @@ const FloatingSelect = ({ label, required, options = [], error, value, onChange,
   );
 };
 
+const DEFAULT_PHONE_DIAL = "91";
+
 /* ─── Main ─── */
 const GetInTouch = () => {
   const [submitting, setSubmitting]               = useState(false);
@@ -186,12 +188,12 @@ const GetInTouch = () => {
   const helpOtherRef     = useRef(null);
   const hearOtherRef     = useRef(null);
   const phoneFieldRef    = useRef(null);
-  const phoneDialRef     = useRef("91");
+  const phoneDialRef     = useRef(DEFAULT_PHONE_DIAL);
 
   const { register, handleSubmit, control, watch, reset, setValue, getValues, formState: { errors } } = useForm({
     defaultValues: {
       fullName: "", company: "", website: "", email: "",
-      phone: "", industry: "", help: "", hear: "", brief: "",
+      phone: DEFAULT_PHONE_DIAL, industry: "", help: "", hear: "", brief: "",
     },
     mode: "onSubmit",
   });
@@ -228,7 +230,19 @@ const GetInTouch = () => {
   }, []);
 
   const handleReset = () => {
-    reset();
+    const dial = phoneDialRef.current || DEFAULT_PHONE_DIAL;
+    phoneDialRef.current = dial;
+    reset({
+      fullName: "",
+      company: "",
+      website: "",
+      email: "",
+      phone: dial,
+      industry: "",
+      help: "",
+      hear: "",
+      brief: "",
+    });
     setHelpIsOther(false);
     setHearIsOther(false);
     setPhoneFocused(false);
@@ -305,6 +319,7 @@ const GetInTouch = () => {
 
   return (
     <section
+    id="get-in-touch-form"
       data-nav-invert
       className="min-h-screen  md:h-screen w-full bg-secondary text-background"
     >

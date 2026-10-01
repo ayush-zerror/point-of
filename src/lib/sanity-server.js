@@ -1,14 +1,15 @@
 import { createClient } from "@sanity/client";
+import { env } from "@/config/env";
 
 /**
  * Sanity write client — server-only.
  * Never import from client components.
  */
 const sanityServer = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  token: process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN,
-  apiVersion: "2024-01-01",
+  projectId: env.sanity.projectId,
+  dataset: env.sanity.dataset,
+  token: env.sanity.writeToken,
+  apiVersion: env.sanity.apiVersion,
   useCdn: false,
 });
 

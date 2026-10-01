@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { env } from "@/config/env";
 
 export async function POST() {
   try {
@@ -7,7 +8,7 @@ export async function POST() {
     cookieStore.set("session", "", {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: env.isProd,
       path: "/",
       maxAge: 0,
     });

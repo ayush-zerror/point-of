@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { SignJWT } from "jose";
 import { cookies } from "next/headers";
 import sanityServer from "@/lib/sanity-server";
+import { env } from "@/config/env";
 
 export const runtime = "nodejs";
 
@@ -64,7 +65,7 @@ export async function POST(request) {
       );
     }
 
-    const secret = process.env.NEXT_PUBLIC_JWT_SECRET;
+    const secret = env.jwt.secret;
     if (!secret) {
       return NextResponse.json(
         { error: "Internal Server Error" },
@@ -82,7 +83,7 @@ export async function POST(request) {
     cookieStore.set("session", token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: env.isProd,
       path: "/",
       maxAge: COOKIE_MAX_AGE,
     });

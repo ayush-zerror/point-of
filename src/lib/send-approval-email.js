@@ -1,5 +1,6 @@
 import { sendMail } from "@/lib/mailer";
 import sanityServer from "@/lib/sanity-server";
+import { env } from "@/config/env";
 
 /**
  * Load an account request and send the approval email if eligible.
@@ -57,9 +58,7 @@ export async function sendApprovalEmailForId(id) {
     return { ok: false, status: 400, error: "User email is missing" };
   }
 
-  const siteUrl = (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.wearepointof.com"
-  ).replace(/\/$/, "");
+  const siteUrl = env.siteUrl;
   const loginUrl = `${siteUrl}/login`;
   const displayName = String(doc.name || "there").trim();
   const firstName = displayName.split(/\s+/)[0] || "there";

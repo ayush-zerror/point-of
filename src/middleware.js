@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
+import { env } from "@/config/env";
 
 export async function middleware(request) {
   const token = request.cookies.get("session")?.value;
@@ -8,7 +9,7 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  const secret = process.env.NEXT_PUBLIC_JWT_SECRET;
+  const secret = env.jwt.secret;
   if (!secret) {
     return NextResponse.redirect(new URL("/login", request.url));
   }

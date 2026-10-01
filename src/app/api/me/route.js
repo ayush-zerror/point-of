@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import sanityServer from "@/lib/sanity-server";
+import { env } from "@/config/env";
 
 export const runtime = "nodejs";
 
@@ -14,7 +15,7 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const secret = process.env.NEXT_PUBLIC_JWT_SECRET;
+    const secret = env.jwt.secret;
     if (!secret) {
       return NextResponse.json(
         { error: "Internal Server Error" },

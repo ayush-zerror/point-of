@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import { sendApprovalEmailForId } from "@/lib/send-approval-email";
+import { env } from "@/config/env";
 
 export const runtime = "nodejs";
 
@@ -8,7 +9,7 @@ export async function POST(req) {
   try {
     const rawBody = await req.text();
     const signature = req.headers.get(SIGNATURE_HEADER_NAME) || "";
-    const secret = process.env.NEXT_PUBLIC_SANITY_WEBHOOK_SECRET;
+    const secret = env.sanity.webhookSecret;
 
     if (!secret) {
       return NextResponse.json(

@@ -1,20 +1,21 @@
 import nodemailer from "nodemailer";
+import { env } from "@/config/env";
 
 /**
- * Shared mailer — same Gmail service/auth style as the contact form.
+ * Shared mailer — Gmail service/auth from env config.
  * Server-only: never import from client components.
  */
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.NEXT_PUBLIC_MAIL_EMAIL_ADDRESS,
-    pass: process.env.NEXT_PUBLIC_MAIL_PASSWORD,
+    user: env.mail.from,
+    pass: env.mail.password,
   },
 });
 
 export async function sendMail({ to, subject, html, text }) {
-  const from = process.env.NEXT_PUBLIC_MAIL_EMAIL_ADDRESS;
-  if (!from || !process.env.NEXT_PUBLIC_MAIL_PASSWORD) {
+  const from = env.mail.from;
+  if (!from || !env.mail.password) {
     throw new Error("Mail credentials missing");
   }
 

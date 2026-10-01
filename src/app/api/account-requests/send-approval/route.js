@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendApprovalEmailForId } from "@/lib/send-approval-email";
+import { env } from "@/config/env";
 
 export const runtime = "nodejs";
 
@@ -11,7 +12,7 @@ export const runtime = "nodejs";
 export async function POST(request) {
   try {
     const auth = request.headers.get("authorization") || "";
-    const secret = process.env.NEXT_PUBLIC_SANITY_WEBHOOK_SECRET;
+    const secret = env.sanity.webhookSecret;
     const expected = secret ? `Bearer ${secret}` : "";
 
     if (!secret || auth !== expected) {

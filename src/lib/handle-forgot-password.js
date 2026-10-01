@@ -1,6 +1,7 @@
 import { randomBytes } from "crypto";
 import { NextResponse } from "next/server";
 import { isValidEmail } from "@/helper/validateEmail";
+import { env } from "@/config/env";
 import sanityServer from "@/lib/sanity-server";
 import { sendPasswordResetEmail } from "@/lib/send-password-reset-email";
 
@@ -45,10 +46,7 @@ export async function handleForgotPassword(request) {
       })
       .commit();
 
-    const siteUrl = (
-      process.env.NEXT_PUBLIC_SITE_URL || "https://www.wearepointof.com"
-    ).replace(/\/$/, "");
-    const resetUrl = `${siteUrl}/reset-password?token=${encodeURIComponent(token)}`;
+    const resetUrl = `${env.siteUrl}/reset-password?token=${encodeURIComponent(token)}`;
 
     await sendPasswordResetEmail({
       to: user.email,
