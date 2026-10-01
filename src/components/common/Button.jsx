@@ -98,7 +98,13 @@ const Button = ({ title, onClick, href, color = "#c0bfbf", className, textClassN
             {inner}
           </Link>
         ) : (
-          <a href={href} className={linkClass} title={title}>
+          <a
+            href={href}
+            className={linkClass}
+            title={title}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {inner}
           </a>
         )
