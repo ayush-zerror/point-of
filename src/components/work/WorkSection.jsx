@@ -719,7 +719,7 @@ const WorkSection = ({ projects }) => {
         {items.map((project, i) => (
           <div
             key={`text-${i}`}
-            className="absolute left-0 right-0 top-24 sm:top-20 md:top-[11%] items-start text-left max-lg:max-h-[calc(50%-min(42vw,11rem)-1.5rem)] max-lg:overflow-hidden lg:left-16 lg:right-auto xl:left-20 lg:top-1/2 lg:-translate-y-1/2 lg:items-start lg:text-left w-full max-lg:max-w-none lg:w-[min(500px,calc(50vw-135px-5.5rem))] xl:w-[min(500px,calc(50vw-200px-7rem))] min-w-0 flex flex-col"
+            className="absolute left-0 right-0 top-24 sm:top-20 md:top-[11%] items-start text-left max-lg:max-h-[calc(50%-min(42vw,11rem)-0.5rem)] max-lg:overflow-hidden max-lg:justify-end lg:left-16 lg:right-auto xl:left-20 lg:top-1/2 lg:-translate-y-1/2 lg:items-start lg:text-left w-full max-lg:max-w-none lg:w-[min(500px,calc(50vw-135px-5.5rem))] xl:w-[min(500px,calc(50vw-200px-7rem))] min-w-0 flex flex-col"
           >
 
             <div className="w-full min-w-0 flex flex-col items-start lg:items-stretch lg:text-left">
@@ -745,7 +745,7 @@ const WorkSection = ({ projects }) => {
               </div>
 
               {/* Description */}
-              <div className="w-full max-w-[300px] md:max-w-[350px] mx-auto overflow-hidden mt-1 pb-1 px-0 lg:max-w-none lg:mx-0 lg:pl-4">
+              <div className="w-full max-w-[300px] md:max-w-[350px] mx-auto overflow-hidden mt-0 sm:mt-1 pb-1 px-0 lg:max-w-none lg:mx-0 lg:pl-4">
                 <p
                   ref={(el) => {
                     descRefs.current[i] = el;
