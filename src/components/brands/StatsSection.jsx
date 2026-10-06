@@ -13,7 +13,7 @@ const BOTTOM_COPY =
 
 const stats = [
   {
-    number: "130+",
+    number: "170+",
     label: "Brands",
     desc: "Brands across industries, from first-time founders to established names.",
   },
