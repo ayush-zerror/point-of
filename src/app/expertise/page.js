@@ -35,7 +35,7 @@ const Expertise = () => {
       <OurProcess />
       <OurApproach />
       <GridSection
-        title="How we transform brands"
+        title="How we transform brands?"
         intro="Six ways we think about work, and what we do for brands ready for change."
         data={transformData}
       />

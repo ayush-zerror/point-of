@@ -8,31 +8,31 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 const brands = [
-  { name: "Sketchers", logo: "/brands/Logos/balanced-assets/Skechers.png" },
-  { name: "TODs", logo: "/brands/Logos/balanced-assets/TODs.png" },
-  { name: "Voltas", logo: "/brands/Logos/balanced-assets/Voltas.png" },
-  { name: "JBL", logo: "/brands/Logos/balanced-assets/JBL.png" },
-  { name: "PEPSI", logo: "/brands/Logos/balanced-assets/Pepsi.png" },
-  { name: "Being Human", logo: "/brands/Logos/balanced-assets/Being_Human.png" },
-  { name: "Mokobara", logo: "/brands/Logos/balanced-assets/Mokobara.png" },
-  { name: "Gaurav Gupta", logo: "/brands/Logos/balanced-assets/Gaurav_Gupta.png" },
-  { name: "IDFC First Bank", logo: "/brands/Logos/balanced-assets/IDFC_First_Bank.png" },
-  { name: "Goodrich Maritime", logo: "/brands/Logos/balanced-assets/Goodrich_Maritime.png" },
-  { name: "Limelight Diamonds", logo: "/brands/Logos/balanced-assets/Limelight_Diamonds.png" },
-  { name: "Salman Khan Films", logo: "/brands/Logos/balanced-assets/Salman_Khan_Films.png" },
-  { name: "Label Ritu Kumar", logo: "/brands/Logos/balanced-assets/Label_Ritu_Kumar.png" },
-  { name: "House of Namah", logo: "/brands/Logos/balanced-assets/House_of_Namah.png" },
-  { name: "Casa Carigar", logo: "/brands/Logos/balanced-assets/casa-carigar.png" },
-  { name: "Groww", logo: "/brands/Logos/balanced-assets/Groww.png" },
-  { name: "Rage Coffee", logo: "/brands/Logos/balanced-assets/Rage_Coffee.png" },
-  { name: "Good Flipping Burgers", logo: "/brands/Logos/balanced-assets/Good_Flipping_Burgers.png" },
-  { name: "Talwalkers", logo: "/brands/Logos/balanced-assets/Talwalkers.png" },
-  { name: "Charagh Din", logo: "/brands/Logos/balanced-assets/Charagh_Din.png" },
-  { name: "Tripoto", logo: "/brands/Logos/balanced-assets/Tripoto.png" },
-  { name: "KVAR", logo: "/brands/Logos/balanced-assets/kvar.png" },
-  { name: "Chhaya Jain", logo: "/brands/Logos/balanced-assets/chhaya-jain.png" },
-  { name: "Inega", logo: "/brands/Logos/balanced-assets/Inega_Talent.png" },
-  { name: "Orca Dive Club", logo: "/brands/Logos/balanced-assets/Orca_Dive_Club.png" },
+  { name: "Sketchers", logo: "/brands/Logos/balanced-assets/Skechers.svg" },
+  { name: "TODs", logo: "/brands/Logos/balanced-assets/TODs.svg" },
+  { name: "Voltas", logo: "/brands/Logos/balanced-assets/Voltas.svg" },
+  { name: "JBL", logo: "/brands/Logos/balanced-assets/JBL.svg" },
+  { name: "PEPSI", logo: "/brands/Logos/balanced-assets/Pepsi.svg" },
+  { name: "Being Human", logo: "/brands/Logos/balanced-assets/Being Human.svg" },
+  { name: "Mokobara", logo: "/brands/Logos/balanced-assets/Mokobara.svg" },
+  { name: "Gaurav Gupta", logo: "/brands/Logos/balanced-assets/Gaurav Gupta.svg" },
+  { name: "IDFC First Bank", logo: "/brands/Logos/balanced-assets/IDFC FIRST Bank.svg" },
+  { name: "Goodrich Maritime", logo: "/brands/Logos/balanced-assets/Goodrich Maritime.svg" },
+  { name: "Limelight Diamonds", logo: "/brands/Logos/balanced-assets/Limelight Diamonds.svg" },
+  { name: "Salman Khan Films", logo: "/brands/Logos/balanced-assets/Salman Khan Films.svg" },
+  { name: "Label Ritu Kumar", logo: "/brands/Logos/balanced-assets/Label Ritu Kumar.svg" },
+  { name: "House of Namah", logo: "/brands/Logos/balanced-assets/House of Namah.svg" },
+  { name: "Casa Carigar", logo: "/brands/Logos/balanced-assets/Casa Carigar.svg" },
+  { name: "Groww", logo: "/brands/Logos/balanced-assets/Groww.svg" },
+  { name: "Rage Coffee", logo: "/brands/Logos/balanced-assets/Rage Coffee.svg" },
+  { name: "Good Flipping Burgers", logo: "/brands/Logos/balanced-assets/Good Flippin Burgers.svg" },
+  { name: "Talwalkers", logo: "/brands/Logos/balanced-assets/Talwalkars.svg" },
+  { name: "Charagh Din", logo: "/brands/Logos/balanced-assets/Charagh Din.svg" },
+  { name: "Tripoto", logo: "/brands/Logos/balanced-assets/Tripoto.svg" },
+  { name: "KVAR", logo: "/brands/Logos/balanced-assets/KVAR.svg" },
+  { name: "Chhaya Jain", logo: "/brands/Logos/balanced-assets/Chhaya Jain.svg" },
+  { name: "Inega", logo: "/brands/Logos/balanced-assets/INEGA Talent.svg" },
+  { name: "Orca Dive Club", logo: "/brands/Logos/balanced-assets/Orca Dive Club.svg" },
 ];
 
 const SelectedBrands = () => {
@@ -104,7 +104,7 @@ const SelectedBrands = () => {
                 src={brand.logo}
                 alt={brand.name}
                 sizes="(max-width: 640px) 30vw, (max-width: 768px) 20vw, 12vw"
-                className="w-[60%] sm:w-[45%] md:w-[38%] h-auto"
+                className="w-full h-auto"
               />
             </div>
           </div>

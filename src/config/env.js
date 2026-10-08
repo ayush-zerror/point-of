@@ -48,7 +48,8 @@ export const env = {
   },
 
   mail: {
-    from: required(
+    /** Real mailbox used for SMTP auth (not the alias) */
+    user: required(
       "NEXT_PUBLIC_MAIL_EMAIL_ADDRESS",
       process.env.NEXT_PUBLIC_MAIL_EMAIL_ADDRESS
     ),
@@ -56,6 +57,18 @@ export const env = {
       "NEXT_PUBLIC_MAIL_PASSWORD",
       process.env.NEXT_PUBLIC_MAIL_PASSWORD
     ),
+    /**
+     * Visible From header — alias display name/address.
+     * Gmail only keeps this address if it is added under
+     * Settings → Accounts → Send mail as for mail.user.
+     * Falls back to the real mailbox if unset.
+     */
+    from:
+      process.env.NEXT_PUBLIC_EMAIL_FROM ||
+      required(
+        "NEXT_PUBLIC_MAIL_EMAIL_ADDRESS",
+        process.env.NEXT_PUBLIC_MAIL_EMAIL_ADDRESS
+      ),
     /** Inbox for contact + newsletter notifications */
     recipient: required(
       "NEXT_PUBLIC_RECIPENT_EMAIL_ADDRESS",

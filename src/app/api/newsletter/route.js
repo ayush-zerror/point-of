@@ -87,7 +87,7 @@ export async function POST(request) {
 
     const mailTo = env.mail.recipient;
 
-    if (env.mail.from && env.mail.password && mailTo) {
+    if (env.mail.user && env.mail.password && mailTo) {
       await sendMail({
         to: mailTo,
         subject: "New Newsletter Subscription",
