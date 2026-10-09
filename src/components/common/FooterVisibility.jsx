@@ -7,7 +7,12 @@ export default function FooterVisibility({ excludePaths = ["/work"] }) {
   const pathname = usePathname();
 
   if (!pathname) return null;
-  if ((excludePaths ?? []).some((p) => pathname === p)) return null;
+  if (
+    (excludePaths ?? []).some(
+      (p) => pathname === p || pathname.startsWith(`${p}/`)
+    )
+  )
+    return null;
 
   return <Footer />;
 }

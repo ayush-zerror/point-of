@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * This configuration is used to for the Sanity Studio that’s mounted on the `\src\app\studio\[[...tool]]\page.jsx` route
+ * This configuration is used for the Sanity Studio mounted on the `\src\app\admin\[[...tool]]\page.jsx` route
  */
 
 import {visionTool} from '@sanity/vision'
@@ -16,7 +16,7 @@ import {ResendApprovalEmailAction} from './src/sanity/actions/SendApprovalEmailA
 
 export default defineConfig({
   title: 'Point Of',
-  basePath: '/studio',
+  basePath: '/admin',
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder

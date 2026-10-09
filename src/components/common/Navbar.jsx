@@ -33,7 +33,7 @@ export default function Navbar() {
   };
 
   // Hide navbar on excluded routes (e.g. Sanity Studio)
-  const excludePaths = ["/studio"];
+  const excludePaths = ["/admin"];
   if (pathname && excludePaths.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
     return null;
   }

@@ -122,7 +122,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <SanityLive />
-        <FooterVisibility excludePaths={["/work", "/studio"]} />
+        <FooterVisibility excludePaths={["/work", "/admin"]} />
       </body>
     </html>
   );

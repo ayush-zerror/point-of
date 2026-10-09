@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { env } from "@/config/env";
+import { sanityRevalidateSecret } from "../env";
 
 /**
  * Shows only when approved + Notion link exist and email has not been sent.
@@ -28,7 +28,7 @@ export function ResendApprovalEmailAction(props) {
       setBusy(true);
 
       try {
-        const secret = env.sanity.webhookSecret;
+        const secret = sanityRevalidateSecret;
         const res = await fetch("/api/account-requests/send-approval", {
           method: "POST",
           headers: {

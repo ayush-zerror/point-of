@@ -194,9 +194,16 @@ export default function Footer() {
 
               <div className="text-sm">
                 <p className="text-desc mb-2">Partner with us</p>
+                <Link
+                  href="/brand-partners"
+                  className="link-underline para text-heading tracking-wide font-medium block"
+                  title="Brand Partners"
+                >
+                  Brand Partners
+                </Link>
                 <a
                   href="mailto:think@wearepointof.com"
-                  className="link-underline para text-heading tracking-wide font-medium"
+                  className="link-underline para text-heading tracking-wide font-medium block mt-2"
                   title="Email Point Of"
                 >
                   think@wearepointof.com
