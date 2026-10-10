@@ -142,7 +142,7 @@ const RegisterForm = () => {
       <div className="relative z-10 flex min-h-screen items-center justify-center px-6 py-24 sm:px-10 sm:py-28 md:px-12">
         <div className="w-full max-w-3xl">
           <h2 id="brand-partners-form" className="heading-xl mb-3 md:mb-4">
-            Brand partners
+            Brand Partners
           </h2>
           <p className="mb-8 max-w-xl text-sm text-desc sm:text-base md:mb-10">
             Create an account to access partner resources and updates.

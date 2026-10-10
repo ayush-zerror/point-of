@@ -197,9 +197,9 @@ export default function Footer() {
                 <Link
                   href="/brand-partners"
                   className="link-underline para text-heading tracking-wide font-medium block"
-                  title="Brand Partners"
+                  title="Brand Partners Access"
                 >
-                  Brand Partners
+                  Brand Partners Access
                 </Link>
                 <a
                   href="mailto:think@wearepointof.com"
